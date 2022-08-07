@@ -24,7 +24,7 @@ message RecorderToPlugNmeet {
   string room_sid = 7;
   string recorder_id = 8;
   string file_path = 9;
-  uint64 file_size = 10;
+  float file_size = 10;
 }
 
 message FromParentToChild {
