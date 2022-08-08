@@ -1,0 +1,108 @@
+syntax = "proto3";
+package plugnmeet;
+
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+
+import "plugnmeet_gen_token.proto";
+import "github.com/envoyproxy/protoc-gen-validate@v0.6.7/validate/validate.proto";
+import "github.com/livekit/protocol@v1.0.0/livekit_models.proto";
+
+message CreateRoomReq {
+  string room_id = 1 [(validate.rules).string = {
+    pattern:   "^[a-zA-Z0-9-_.:]+$",
+  }];
+  optional uint32 empty_timeout = 2 [(validate.rules).uint32.gt = 0];
+  optional uint32 max_participants = 3 [(validate.rules).uint32.gt = 0];
+  RoomMetadata metadata = 4;
+}
+
+message RoomMetadata {
+  string room_title = 1 [(validate.rules).string.min_len = 1];
+  optional string welcome_message = 2;
+  bool is_recording = 3 [(validate.rules).bool.const = false];
+  bool is_active_rtmp = 4 [(validate.rules).bool.const = false];
+  string parent_room_id = 5;
+  bool is_breakout_room = 6;
+  string webhook_url = 7;
+  uint64 started_at = 8;
+  RoomCreateFeatures room_features = 9;
+  LockSettings default_lock_settings = 10;
+}
+
+message RoomCreateFeatures {
+  bool allow_webcams = 1;
+  bool mute_on_start = 2;
+  bool allow_screen_share = 3;
+  bool allow_recording = 4;
+  bool allow_rtmp = 5;
+  bool allow_view_other_webcams = 6;
+  bool allow_view_other_users_list = 7;
+  bool admin_only_webcams = 8;
+  bool allow_polls = 9;
+  optional uint64 room_duration = 10;
+  ChatFeatures chat_features = 11;
+  SharedNotePadFeatures shared_note_pad_features = 12;
+  WhiteboardFeatures whiteboard_features = 13;
+  ExternalMediaPlayerFeatures external_media_player_features = 14;
+  WaitingRoomFeatures waiting_room_features = 15;
+  BreakoutRoomFeatures breakout_room_features = 16;
+  DisplayExternalLinkFeatures display_external_link_features = 17;
+}
+
+message ChatFeatures {
+  bool allow_chat = 1;
+  bool allow_file_upload = 2;
+  repeated string allowed_file_types = 3;
+  optional uint64 max_file_size = 4;
+}
+
+message SharedNotePadFeatures {
+  bool allowed_shared_note_pad = 1;
+  bool is_active = 2 [(validate.rules).bool.const = false];
+  bool visible = 3 [(validate.rules).bool.const = false];
+  string node_id = 4 [(validate.rules).string.const = ""];
+  string host = 5 [(validate.rules).string.const = ""];
+  string note_pad_id = 6 [(validate.rules).string.const = ""];
+  string read_only_pad_id = 7 [(validate.rules).string.const = ""];
+}
+
+message WhiteboardFeatures {
+  bool allowed_whiteboard = 1;
+  bool visible = 2 [(validate.rules).bool.const = false];
+  string preload_file = 3;
+  string whiteboard_file_id = 4 [(validate.rules).string.const = ""];
+  string file_name = 5 [(validate.rules).string.const = ""];
+  string file_path = 6 [(validate.rules).string.const = ""];
+  uint32 total_pages = 7;
+}
+
+message ExternalMediaPlayerFeatures {
+  bool allowed_external_media_player = 1;
+  bool is_active = 2 [(validate.rules).bool.const = false];
+  optional string shared_by = 3 [(validate.rules).string.const = ""];
+  optional string url = 4 [(validate.rules).string.const = ""];
+}
+
+message WaitingRoomFeatures {
+  bool   is_active = 1;
+  string waiting_room_msg = 2;
+}
+
+message BreakoutRoomFeatures {
+  bool is_allow = 1;
+  bool is_active = 2 [(validate.rules).bool.const = false];
+  uint32 allowed_number_rooms = 3;
+}
+
+message DisplayExternalLinkFeatures {
+  bool is_allow = 1;
+  bool is_active = 2 [(validate.rules).bool.const = false];
+  optional string link = 3;
+  optional string shared_by = 4;
+}
+
+message CreateRoomRes {
+  bool status = 1;
+  string msg = 2;
+  livekit.Room room_info = 3;
+}

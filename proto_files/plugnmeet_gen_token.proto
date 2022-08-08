@@ -1,0 +1,50 @@
+syntax = "proto3";
+package plugnmeet;
+
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+
+import "github.com/envoyproxy/protoc-gen-validate@v0.6.7/validate/validate.proto";
+
+message GenerateTokenReq {
+  string room_id = 1 [(validate.rules).string = {
+    pattern:   "^[a-zA-Z0-9-_.:]+$",
+  }];
+  UserInfo user_info = 2;
+}
+
+message UserInfo {
+  string name = 1 [(validate.rules).string.min_len = 0];
+  string user_id = 2 [(validate.rules).string = {
+    pattern:   "^[a-zA-Z0-9-_.:]+$",
+  }];
+  bool is_admin = 3;
+  bool is_hidden = 4;
+  UserMetadata user_metadata = 5;
+}
+
+message UserMetadata {
+  optional string profile_pic = 1 [(validate.rules).string.uri = true];
+  bool is_admin = 2;
+  bool is_presenter = 3 [(validate.rules).bool.const = false];
+  bool raised_hand = 4 [(validate.rules).bool.const = false];
+  bool wait_for_approval = 5 [(validate.rules).bool.const = false];
+  LockSettings lock_settings = 6;
+}
+
+message LockSettings {
+  optional bool lock_microphone = 1;
+  optional bool lock_webcam = 2;
+  optional bool lock_screen_sharing = 3;
+  optional bool lock_chat = 4;
+  optional bool lock_chat_send_message = 5;
+  optional bool lock_chat_file_share = 6;
+  optional bool lock_private_chat = 7;
+  optional bool lock_whiteboard = 8;
+  optional bool lock_shared_notepad = 9;
+}
+
+message GenerateTokenRes {
+  bool status = 1;
+  string msg = 2;
+  optional string token = 3;
+}
