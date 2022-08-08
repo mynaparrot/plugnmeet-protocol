@@ -1,0 +1,57 @@
+syntax = "proto3";
+package plugnmeet;
+
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+
+import "github.com/envoyproxy/protoc-gen-validate@v0.6.7/validate/validate.proto";
+import "github.com/livekit/protocol@v1.0.0/livekit_models.proto";
+
+message GetActiveRoomInfoReq {
+  string room_id = 1 [(validate.rules).string = {
+    pattern:   "^[a-zA-Z0-9-_.:]+$",
+  }];
+}
+
+message ActiveRoomInfoRes {
+  bool status = 1;
+  string msg = 2;
+  optional ActiveRoomInfo room_info = 3;
+  repeated livekit.ParticipantInfo participants_info = 4;
+}
+
+message ActiveRoomInfo {
+  string room_title = 1;
+  string room_id = 2;
+  string sid = 3;
+  int64 joined_participants = 4;
+  int32 is_running = 5;
+  int32 is_recording = 6;
+  int32 is_active_rtmp = 7;
+  string webhook_url = 8;
+  int32 is_breakout_room = 9;
+  string parent_room_id = 10;
+  int64 creation_time = 11;
+  string metadata = 12;
+}
+
+message RoomEndReq {
+  string room_id = 1 [(validate.rules).string = {
+    pattern:   "^[a-zA-Z0-9-_.:]+$",
+  }];
+}
+
+message RoomEndRes {
+  bool status = 1;
+  string msg = 2;
+}
+
+message IsRoomActiveReq {
+  string room_id = 1 [(validate.rules).string = {
+    pattern:   "^[a-zA-Z0-9-_.:]+$",
+  }];
+}
+
+message IsRoomActiveRes {
+  bool status = 1;
+  string msg = 2;
+}
