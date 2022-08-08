@@ -655,3 +655,111 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = LockSettingsValidationError{}
+
+// Validate checks the field values on GenerateTokenRes with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GenerateTokenRes) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GenerateTokenRes with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GenerateTokenResMultiError, or nil if none found.
+func (m *GenerateTokenRes) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GenerateTokenRes) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	// no validation rules for Msg
+
+	if m.Token != nil {
+		// no validation rules for Token
+	}
+
+	if len(errors) > 0 {
+		return GenerateTokenResMultiError(errors)
+	}
+
+	return nil
+}
+
+// GenerateTokenResMultiError is an error wrapping multiple validation errors
+// returned by GenerateTokenRes.ValidateAll() if the designated constraints
+// aren't met.
+type GenerateTokenResMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GenerateTokenResMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GenerateTokenResMultiError) AllErrors() []error { return m }
+
+// GenerateTokenResValidationError is the validation error returned by
+// GenerateTokenRes.Validate if the designated constraints aren't met.
+type GenerateTokenResValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GenerateTokenResValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GenerateTokenResValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GenerateTokenResValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GenerateTokenResValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GenerateTokenResValidationError) ErrorName() string { return "GenerateTokenResValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GenerateTokenResValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGenerateTokenRes.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GenerateTokenResValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GenerateTokenResValidationError{}

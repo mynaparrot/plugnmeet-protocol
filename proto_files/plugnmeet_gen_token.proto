@@ -42,3 +42,9 @@ message LockSettings {
   optional bool lock_whiteboard = 8;
   optional bool lock_shared_notepad = 9;
 }
+
+message GenerateTokenRes {
+  bool status = 1;
+  string msg = 2;
+  optional string token = 3;
+}

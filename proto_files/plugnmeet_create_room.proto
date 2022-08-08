@@ -5,6 +5,7 @@ option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
 import "plugnmeet_gen_token.proto";
 import "validate/validate.proto";
+import "livekit_models.proto";
 
 message CreateRoomReq {
   string room_id = 1 [(validate.rules).string = {
@@ -98,4 +99,10 @@ message DisplayExternalLinkFeatures {
   bool is_active = 2 [(validate.rules).bool.const = false];
   optional string link = 3;
   optional string shared_by = 4;
+}
+
+message CreateRoomRes {
+  bool status = 1;
+  string msg = 2;
+  livekit.Room room_info = 3;
 }
