@@ -13,7 +13,7 @@ message CreateRoomReq {
   }];
   optional uint32 empty_timeout = 2 [(validate.rules).uint32.gt = 0];
   optional uint32 max_participants = 3 [(validate.rules).uint32.gt = 0];
-  RoomMetadata metadata = 4;
+  RoomMetadata metadata = 4 [(validate.rules).any.required = true];
 }
 
 message RoomMetadata {
@@ -25,7 +25,7 @@ message RoomMetadata {
   bool is_breakout_room = 6;
   string webhook_url = 7;
   uint64 started_at = 8;
-  RoomCreateFeatures room_features = 9;
+  RoomCreateFeatures room_features = 9 [(validate.rules).any.required = true];
   LockSettings default_lock_settings = 10;
 }
 

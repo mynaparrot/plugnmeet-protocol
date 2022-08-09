@@ -68,33 +68,19 @@ func (m *CreateRoomReq) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if all {
-		switch v := interface{}(m.GetMetadata()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, CreateRoomReqValidationError{
-					field:  "Metadata",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, CreateRoomReqValidationError{
-					field:  "Metadata",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
+	if m.GetMetadata() == nil {
+		err := CreateRoomReqValidationError{
+			field:  "Metadata",
+			reason: "value is required",
 		}
-	} else if v, ok := interface{}(m.GetMetadata()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return CreateRoomReqValidationError{
-				field:  "Metadata",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
+		if !all {
+			return err
 		}
+		errors = append(errors, err)
+	}
+
+	if a := m.GetMetadata(); a != nil {
+
 	}
 
 	if m.EmptyTimeout != nil {
@@ -270,33 +256,19 @@ func (m *RoomMetadata) validate(all bool) error {
 
 	// no validation rules for StartedAt
 
-	if all {
-		switch v := interface{}(m.GetRoomFeatures()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, RoomMetadataValidationError{
-					field:  "RoomFeatures",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, RoomMetadataValidationError{
-					field:  "RoomFeatures",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
+	if m.GetRoomFeatures() == nil {
+		err := RoomMetadataValidationError{
+			field:  "RoomFeatures",
+			reason: "value is required",
 		}
-	} else if v, ok := interface{}(m.GetRoomFeatures()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return RoomMetadataValidationError{
-				field:  "RoomFeatures",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
+		if !all {
+			return err
 		}
+		errors = append(errors, err)
+	}
+
+	if a := m.GetRoomFeatures(); a != nil {
+
 	}
 
 	if all {

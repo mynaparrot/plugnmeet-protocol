@@ -68,33 +68,19 @@ func (m *GenerateTokenReq) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if all {
-		switch v := interface{}(m.GetUserInfo()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GenerateTokenReqValidationError{
-					field:  "UserInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GenerateTokenReqValidationError{
-					field:  "UserInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
+	if m.GetUserInfo() == nil {
+		err := GenerateTokenReqValidationError{
+			field:  "UserInfo",
+			reason: "value is required",
 		}
-	} else if v, ok := interface{}(m.GetUserInfo()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GenerateTokenReqValidationError{
-				field:  "UserInfo",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
+		if !all {
+			return err
 		}
+		errors = append(errors, err)
+	}
+
+	if a := m.GetUserInfo(); a != nil {
+
 	}
 
 	if len(errors) > 0 {
@@ -225,33 +211,19 @@ func (m *UserInfo) validate(all bool) error {
 
 	// no validation rules for IsHidden
 
-	if all {
-		switch v := interface{}(m.GetUserMetadata()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UserInfoValidationError{
-					field:  "UserMetadata",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UserInfoValidationError{
-					field:  "UserMetadata",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
+	if m.GetUserMetadata() == nil {
+		err := UserInfoValidationError{
+			field:  "UserMetadata",
+			reason: "value is required",
 		}
-	} else if v, ok := interface{}(m.GetUserMetadata()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UserInfoValidationError{
-				field:  "UserMetadata",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
+		if !all {
+			return err
 		}
+		errors = append(errors, err)
+	}
+
+	if a := m.GetUserMetadata(); a != nil {
+
 	}
 
 	if len(errors) > 0 {

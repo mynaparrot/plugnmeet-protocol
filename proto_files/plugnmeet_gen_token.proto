@@ -9,7 +9,7 @@ message GenerateTokenReq {
   string room_id = 1 [(validate.rules).string = {
     pattern:   "^[a-zA-Z0-9-_.:]+$",
   }];
-  UserInfo user_info = 2;
+  UserInfo user_info = 2 [(validate.rules).any.required = true];
 }
 
 message UserInfo {
@@ -19,7 +19,7 @@ message UserInfo {
   }];
   bool is_admin = 3;
   bool is_hidden = 4;
-  UserMetadata user_metadata = 5;
+  UserMetadata user_metadata = 5 [(validate.rules).any.required = true];
 }
 
 message UserMetadata {
