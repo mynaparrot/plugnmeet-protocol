@@ -7,9 +7,7 @@ import "github.com/envoyproxy/protoc-gen-validate@v0.6.7/validate/validate.proto
 import "github.com/livekit/protocol@v1.0.0/livekit_models.proto";
 
 message GetActiveRoomInfoReq {
-  string room_id = 1 [(validate.rules).string = {
-    pattern:   "^[a-zA-Z0-9-_.:]+$",
-  }];
+  string room_id = 1 [(validate.rules).any.required = true];
 }
 
 message ActiveRoomInfoRes {
@@ -35,9 +33,7 @@ message ActiveRoomInfo {
 }
 
 message RoomEndReq {
-  string room_id = 1 [(validate.rules).string = {
-    pattern:   "^[a-zA-Z0-9-_.:]+$",
-  }];
+  string room_id = 1 [(validate.rules).any.required = true];
 }
 
 message RoomEndRes {
@@ -46,9 +42,7 @@ message RoomEndRes {
 }
 
 message IsRoomActiveReq {
-  string room_id = 1 [(validate.rules).string = {
-    pattern:   "^[a-zA-Z0-9-_.:]+$",
-  }];
+  string room_id = 1 [(validate.rules).any.required = true];
 }
 
 message IsRoomActiveRes {

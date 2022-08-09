@@ -1,0 +1,13 @@
+syntax = "proto3";
+package plugnmeet;
+
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+
+import "plugnmeet_recorder.proto";
+
+message RecordingReq {
+  RecordingTasks task = 1;
+  string sid = 2;
+  optional string rtmp_url = 3;
+  optional string custom_design = 4;
+}

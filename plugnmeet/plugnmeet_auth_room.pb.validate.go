@@ -57,15 +57,19 @@ func (m *GetActiveRoomInfoReq) validate(all bool) error {
 
 	var errors []error
 
-	if !_GetActiveRoomInfoReq_RoomId_Pattern.MatchString(m.GetRoomId()) {
+	if m.GetRoomId() == nil {
 		err := GetActiveRoomInfoReqValidationError{
 			field:  "RoomId",
-			reason: "value does not match regex pattern \"^[a-zA-Z0-9-_.:]+$\"",
+			reason: "value is required",
 		}
 		if !all {
 			return err
 		}
 		errors = append(errors, err)
+	}
+
+	if a := m.GetRoomId(); a != nil {
+
 	}
 
 	if len(errors) > 0 {
@@ -147,8 +151,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetActiveRoomInfoReqValidationError{}
-
-var _GetActiveRoomInfoReq_RoomId_Pattern = regexp.MustCompile("^[a-zA-Z0-9-_.:]+$")
 
 // Validate checks the field values on ActiveRoomInfoRes with the rules defined
 // in the proto definition for this message. If any rules are violated, the
@@ -469,15 +471,19 @@ func (m *RoomEndReq) validate(all bool) error {
 
 	var errors []error
 
-	if !_RoomEndReq_RoomId_Pattern.MatchString(m.GetRoomId()) {
+	if m.GetRoomId() == nil {
 		err := RoomEndReqValidationError{
 			field:  "RoomId",
-			reason: "value does not match regex pattern \"^[a-zA-Z0-9-_.:]+$\"",
+			reason: "value is required",
 		}
 		if !all {
 			return err
 		}
 		errors = append(errors, err)
+	}
+
+	if a := m.GetRoomId(); a != nil {
+
 	}
 
 	if len(errors) > 0 {
@@ -556,8 +562,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = RoomEndReqValidationError{}
-
-var _RoomEndReq_RoomId_Pattern = regexp.MustCompile("^[a-zA-Z0-9-_.:]+$")
 
 // Validate checks the field values on RoomEndRes with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
@@ -684,15 +688,19 @@ func (m *IsRoomActiveReq) validate(all bool) error {
 
 	var errors []error
 
-	if !_IsRoomActiveReq_RoomId_Pattern.MatchString(m.GetRoomId()) {
+	if m.GetRoomId() == nil {
 		err := IsRoomActiveReqValidationError{
 			field:  "RoomId",
-			reason: "value does not match regex pattern \"^[a-zA-Z0-9-_.:]+$\"",
+			reason: "value is required",
 		}
 		if !all {
 			return err
 		}
 		errors = append(errors, err)
+	}
+
+	if a := m.GetRoomId(); a != nil {
+
 	}
 
 	if len(errors) > 0 {
@@ -772,8 +780,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = IsRoomActiveReqValidationError{}
-
-var _IsRoomActiveReq_RoomId_Pattern = regexp.MustCompile("^[a-zA-Z0-9-_.:]+$")
 
 // Validate checks the field values on IsRoomActiveRes with the rules defined
 // in the proto definition for this message. If any rules are violated, the

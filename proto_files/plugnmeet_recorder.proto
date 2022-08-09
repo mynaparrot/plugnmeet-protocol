@@ -53,6 +53,8 @@ enum RecordingTasks {
   END_RTMP = 5;
   
   RECORDING_PROCEEDED = 6;
+  
+  STOP = 7;
 }
 
 message StartRecorderChildArgs {
