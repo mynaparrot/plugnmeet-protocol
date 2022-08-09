@@ -3,13 +3,10 @@ package plugnmeet;
 
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
-import "github.com/envoyproxy/protoc-gen-validate@v0.6.7/validate/validate.proto";
 import "github.com/livekit/protocol@v1.0.0/livekit_models.proto";
 
 message GetActiveRoomInfoReq {
-  string room_id = 1 [(validate.rules).string = {
-    pattern:   "^[a-zA-Z0-9-_.:]+$",
-  }];
+  string room_id = 1;
 }
 
 message ActiveRoomInfoRes {
@@ -35,9 +32,7 @@ message ActiveRoomInfo {
 }
 
 message RoomEndReq {
-  string room_id = 1 [(validate.rules).string = {
-    pattern:   "^[a-zA-Z0-9-_.:]+$",
-  }];
+  string room_id = 1;
 }
 
 message RoomEndRes {
@@ -46,9 +41,7 @@ message RoomEndRes {
 }
 
 message IsRoomActiveReq {
-  string room_id = 1 [(validate.rules).string = {
-    pattern:   "^[a-zA-Z0-9-_.:]+$",
-  }];
+  string room_id = 1;
 }
 
 message IsRoomActiveRes {
