@@ -3,7 +3,7 @@ package plugnmeet;
 
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
-import "github.com/livekit/protocol@v1.0.0/livekit_models.proto";
+import "livekit_models.proto";
 
 message CommonNotifyEvent {
   optional string event = 1;
@@ -11,8 +11,8 @@ message CommonNotifyEvent {
   optional livekit.ParticipantInfo participant = 3;
   optional RecordingInfoEvent recording_info = 4;
   optional livekit.TrackInfo track = 6;
-  optional string id = 7;
-  optional int64 created_at = 8;
+  optional string id = 9;
+  optional int64 created_at = 10;
 }
 
 message NotifyEventRoom {

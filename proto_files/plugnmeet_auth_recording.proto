@@ -3,7 +3,7 @@ package plugnmeet;
 
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
-import "github.com/envoyproxy/protoc-gen-validate@v0.6.7/validate/validate.proto";
+import "validate/validate.proto";
 
 message FetchRecordingsReq {
   repeated string room_ids = 1;

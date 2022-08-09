@@ -3,7 +3,7 @@ package plugnmeet;
 
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
-import "github.com/livekit/protocol@v1.0.0/livekit_models.proto";
+import "livekit_models.proto";
 
 message GetActiveRoomInfoReq {
   string room_id = 1;
