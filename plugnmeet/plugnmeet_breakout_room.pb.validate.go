@@ -429,3 +429,610 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = BreakoutRoomUserValidationError{}
+
+// Validate checks the field values on IncreaseBreakoutRoomDurationReq with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *IncreaseBreakoutRoomDurationReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on IncreaseBreakoutRoomDurationReq with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// IncreaseBreakoutRoomDurationReqMultiError, or nil if none found.
+func (m *IncreaseBreakoutRoomDurationReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *IncreaseBreakoutRoomDurationReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for BreakoutRoomId
+
+	// no validation rules for Duration
+
+	// no validation rules for RoomId
+
+	if len(errors) > 0 {
+		return IncreaseBreakoutRoomDurationReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// IncreaseBreakoutRoomDurationReqMultiError is an error wrapping multiple
+// validation errors returned by IncreaseBreakoutRoomDurationReq.ValidateAll()
+// if the designated constraints aren't met.
+type IncreaseBreakoutRoomDurationReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m IncreaseBreakoutRoomDurationReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m IncreaseBreakoutRoomDurationReqMultiError) AllErrors() []error { return m }
+
+// IncreaseBreakoutRoomDurationReqValidationError is the validation error
+// returned by IncreaseBreakoutRoomDurationReq.Validate if the designated
+// constraints aren't met.
+type IncreaseBreakoutRoomDurationReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e IncreaseBreakoutRoomDurationReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e IncreaseBreakoutRoomDurationReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e IncreaseBreakoutRoomDurationReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e IncreaseBreakoutRoomDurationReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e IncreaseBreakoutRoomDurationReqValidationError) ErrorName() string {
+	return "IncreaseBreakoutRoomDurationReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e IncreaseBreakoutRoomDurationReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sIncreaseBreakoutRoomDurationReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = IncreaseBreakoutRoomDurationReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = IncreaseBreakoutRoomDurationReqValidationError{}
+
+// Validate checks the field values on BroadcastBreakoutRoomMsgReq with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BroadcastBreakoutRoomMsgReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BroadcastBreakoutRoomMsgReq with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BroadcastBreakoutRoomMsgReqMultiError, or nil if none found.
+func (m *BroadcastBreakoutRoomMsgReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BroadcastBreakoutRoomMsgReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Msg
+
+	// no validation rules for RoomId
+
+	if len(errors) > 0 {
+		return BroadcastBreakoutRoomMsgReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// BroadcastBreakoutRoomMsgReqMultiError is an error wrapping multiple
+// validation errors returned by BroadcastBreakoutRoomMsgReq.ValidateAll() if
+// the designated constraints aren't met.
+type BroadcastBreakoutRoomMsgReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BroadcastBreakoutRoomMsgReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BroadcastBreakoutRoomMsgReqMultiError) AllErrors() []error { return m }
+
+// BroadcastBreakoutRoomMsgReqValidationError is the validation error returned
+// by BroadcastBreakoutRoomMsgReq.Validate if the designated constraints
+// aren't met.
+type BroadcastBreakoutRoomMsgReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BroadcastBreakoutRoomMsgReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BroadcastBreakoutRoomMsgReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BroadcastBreakoutRoomMsgReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BroadcastBreakoutRoomMsgReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BroadcastBreakoutRoomMsgReqValidationError) ErrorName() string {
+	return "BroadcastBreakoutRoomMsgReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BroadcastBreakoutRoomMsgReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBroadcastBreakoutRoomMsgReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BroadcastBreakoutRoomMsgReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BroadcastBreakoutRoomMsgReqValidationError{}
+
+// Validate checks the field values on JoinBreakoutRoomReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *JoinBreakoutRoomReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on JoinBreakoutRoomReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// JoinBreakoutRoomReqMultiError, or nil if none found.
+func (m *JoinBreakoutRoomReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *JoinBreakoutRoomReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for BreakoutRoomId
+
+	// no validation rules for UserId
+
+	// no validation rules for RoomId
+
+	// no validation rules for IsAdmin
+
+	if len(errors) > 0 {
+		return JoinBreakoutRoomReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// JoinBreakoutRoomReqMultiError is an error wrapping multiple validation
+// errors returned by JoinBreakoutRoomReq.ValidateAll() if the designated
+// constraints aren't met.
+type JoinBreakoutRoomReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m JoinBreakoutRoomReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m JoinBreakoutRoomReqMultiError) AllErrors() []error { return m }
+
+// JoinBreakoutRoomReqValidationError is the validation error returned by
+// JoinBreakoutRoomReq.Validate if the designated constraints aren't met.
+type JoinBreakoutRoomReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e JoinBreakoutRoomReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e JoinBreakoutRoomReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e JoinBreakoutRoomReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e JoinBreakoutRoomReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e JoinBreakoutRoomReqValidationError) ErrorName() string {
+	return "JoinBreakoutRoomReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e JoinBreakoutRoomReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sJoinBreakoutRoomReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = JoinBreakoutRoomReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = JoinBreakoutRoomReqValidationError{}
+
+// Validate checks the field values on EndBreakoutRoomReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *EndBreakoutRoomReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on EndBreakoutRoomReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// EndBreakoutRoomReqMultiError, or nil if none found.
+func (m *EndBreakoutRoomReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *EndBreakoutRoomReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for BreakoutRoomId
+
+	// no validation rules for RoomId
+
+	if len(errors) > 0 {
+		return EndBreakoutRoomReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// EndBreakoutRoomReqMultiError is an error wrapping multiple validation errors
+// returned by EndBreakoutRoomReq.ValidateAll() if the designated constraints
+// aren't met.
+type EndBreakoutRoomReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m EndBreakoutRoomReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m EndBreakoutRoomReqMultiError) AllErrors() []error { return m }
+
+// EndBreakoutRoomReqValidationError is the validation error returned by
+// EndBreakoutRoomReq.Validate if the designated constraints aren't met.
+type EndBreakoutRoomReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EndBreakoutRoomReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EndBreakoutRoomReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EndBreakoutRoomReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EndBreakoutRoomReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EndBreakoutRoomReqValidationError) ErrorName() string {
+	return "EndBreakoutRoomReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e EndBreakoutRoomReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEndBreakoutRoomReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EndBreakoutRoomReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EndBreakoutRoomReqValidationError{}
+
+// Validate checks the field values on BreakoutRoomRes with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *BreakoutRoomRes) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BreakoutRoomRes with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BreakoutRoomResMultiError, or nil if none found.
+func (m *BreakoutRoomRes) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BreakoutRoomRes) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	// no validation rules for Msg
+
+	for idx, item := range m.GetRooms() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, BreakoutRoomResValidationError{
+						field:  fmt.Sprintf("Rooms[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, BreakoutRoomResValidationError{
+						field:  fmt.Sprintf("Rooms[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return BreakoutRoomResValidationError{
+					field:  fmt.Sprintf("Rooms[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.Token != nil {
+		// no validation rules for Token
+	}
+
+	if m.Room != nil {
+
+		if all {
+			switch v := interface{}(m.GetRoom()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, BreakoutRoomResValidationError{
+						field:  "Room",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, BreakoutRoomResValidationError{
+						field:  "Room",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetRoom()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return BreakoutRoomResValidationError{
+					field:  "Room",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return BreakoutRoomResMultiError(errors)
+	}
+
+	return nil
+}
+
+// BreakoutRoomResMultiError is an error wrapping multiple validation errors
+// returned by BreakoutRoomRes.ValidateAll() if the designated constraints
+// aren't met.
+type BreakoutRoomResMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BreakoutRoomResMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BreakoutRoomResMultiError) AllErrors() []error { return m }
+
+// BreakoutRoomResValidationError is the validation error returned by
+// BreakoutRoomRes.Validate if the designated constraints aren't met.
+type BreakoutRoomResValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BreakoutRoomResValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BreakoutRoomResValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BreakoutRoomResValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BreakoutRoomResValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BreakoutRoomResValidationError) ErrorName() string { return "BreakoutRoomResValidationError" }
+
+// Error satisfies the builtin error interface
+func (e BreakoutRoomResValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBreakoutRoomRes.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BreakoutRoomResValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BreakoutRoomResValidationError{}

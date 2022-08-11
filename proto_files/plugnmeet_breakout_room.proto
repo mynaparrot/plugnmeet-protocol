@@ -25,3 +25,34 @@ message BreakoutRoomUser {
   string name = 2;
   bool joined = 3;
 }
+
+message IncreaseBreakoutRoomDurationReq {
+  string breakout_room_id = 1;
+  uint64 duration = 2;
+  string room_id = 3;
+}
+
+message BroadcastBreakoutRoomMsgReq {
+  string msg = 1;
+  string room_id = 3;
+}
+
+message JoinBreakoutRoomReq {
+  string breakout_room_id = 1;
+  string user_id = 2;
+  string room_id = 3;
+  bool is_admin = 4;
+}
+
+message EndBreakoutRoomReq {
+  string breakout_room_id = 1;
+  string room_id = 3;
+}
+
+message BreakoutRoomRes {
+  bool status = 1;
+  string msg = 2;
+  optional string token = 3; // join token
+  optional BreakoutRoom room = 4; // for my breakout room
+  repeated BreakoutRoom rooms = 5; // rooms list
+}
