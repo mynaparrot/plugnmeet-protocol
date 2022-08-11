@@ -11,9 +11,9 @@ require (
 require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/twitchtv/twirp v8.1.2+incompatible // indirect
-	golang.org/x/net v0.0.0-20220225172249-27dd8689420f // indirect
-	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
+	golang.org/x/net v0.0.0-20220809184613-07c6da5e1ced // indirect
+	golang.org/x/sys v0.0.0-20220808155132-1c4a2a72c664 // indirect
 	golang.org/x/text v0.3.7 // indirect
-	google.golang.org/genproto v0.0.0-20200825200019-8632dd797987 // indirect
+	google.golang.org/genproto v0.0.0-20220810155839-1856144b1d9c // indirect
 	google.golang.org/grpc v1.48.0 // indirect
 )
