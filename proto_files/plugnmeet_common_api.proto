@@ -114,3 +114,13 @@ message ChangeEtherpadStatusReq {
   string room_id = 1;
   bool is_active = 2;
 }
+
+message ApproveWaitingUsersReq {
+  string room_id = 1;
+  string user_id = 2;
+}
+
+message UpdateWaitingRoomMessageReq {
+  string room_id = 1;
+  string msg = 2;
+}

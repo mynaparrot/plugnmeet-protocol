@@ -1574,3 +1574,216 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ChangeEtherpadStatusReqValidationError{}
+
+// Validate checks the field values on ApproveWaitingUsersReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ApproveWaitingUsersReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ApproveWaitingUsersReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ApproveWaitingUsersReqMultiError, or nil if none found.
+func (m *ApproveWaitingUsersReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ApproveWaitingUsersReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomId
+
+	// no validation rules for UserId
+
+	if len(errors) > 0 {
+		return ApproveWaitingUsersReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// ApproveWaitingUsersReqMultiError is an error wrapping multiple validation
+// errors returned by ApproveWaitingUsersReq.ValidateAll() if the designated
+// constraints aren't met.
+type ApproveWaitingUsersReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ApproveWaitingUsersReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ApproveWaitingUsersReqMultiError) AllErrors() []error { return m }
+
+// ApproveWaitingUsersReqValidationError is the validation error returned by
+// ApproveWaitingUsersReq.Validate if the designated constraints aren't met.
+type ApproveWaitingUsersReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ApproveWaitingUsersReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ApproveWaitingUsersReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ApproveWaitingUsersReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ApproveWaitingUsersReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ApproveWaitingUsersReqValidationError) ErrorName() string {
+	return "ApproveWaitingUsersReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ApproveWaitingUsersReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sApproveWaitingUsersReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ApproveWaitingUsersReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ApproveWaitingUsersReqValidationError{}
+
+// Validate checks the field values on UpdateWaitingRoomMessageReq with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateWaitingRoomMessageReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateWaitingRoomMessageReq with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateWaitingRoomMessageReqMultiError, or nil if none found.
+func (m *UpdateWaitingRoomMessageReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateWaitingRoomMessageReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomId
+
+	// no validation rules for Msg
+
+	if len(errors) > 0 {
+		return UpdateWaitingRoomMessageReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateWaitingRoomMessageReqMultiError is an error wrapping multiple
+// validation errors returned by UpdateWaitingRoomMessageReq.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateWaitingRoomMessageReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateWaitingRoomMessageReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateWaitingRoomMessageReqMultiError) AllErrors() []error { return m }
+
+// UpdateWaitingRoomMessageReqValidationError is the validation error returned
+// by UpdateWaitingRoomMessageReq.Validate if the designated constraints
+// aren't met.
+type UpdateWaitingRoomMessageReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateWaitingRoomMessageReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateWaitingRoomMessageReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateWaitingRoomMessageReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateWaitingRoomMessageReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateWaitingRoomMessageReqValidationError) ErrorName() string {
+	return "UpdateWaitingRoomMessageReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateWaitingRoomMessageReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateWaitingRoomMessageReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateWaitingRoomMessageReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateWaitingRoomMessageReqValidationError{}
