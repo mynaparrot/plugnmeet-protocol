@@ -1060,40 +1060,6 @@ func (m *PollResponse) validate(all bool) error {
 
 	}
 
-	for idx, item := range m.GetStats() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, PollResponseValidationError{
-						field:  fmt.Sprintf("Stats[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, PollResponseValidationError{
-						field:  fmt.Sprintf("Stats[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return PollResponseValidationError{
-					field:  fmt.Sprintf("Stats[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
 	if m.PollId != nil {
 		// no validation rules for PollId
 	}
@@ -1106,12 +1072,78 @@ func (m *PollResponse) validate(all bool) error {
 		// no validation rules for Voted
 	}
 
+	if m.Stats != nil {
+
+		if all {
+			switch v := interface{}(m.GetStats()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PollResponseValidationError{
+						field:  "Stats",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PollResponseValidationError{
+						field:  "Stats",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStats()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PollResponseValidationError{
+					field:  "Stats",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if m.TotalPolls != nil {
 		// no validation rules for TotalPolls
 	}
 
 	if m.TotalRunning != nil {
 		// no validation rules for TotalRunning
+	}
+
+	if m.PollResponsesResult != nil {
+
+		if all {
+			switch v := interface{}(m.GetPollResponsesResult()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PollResponseValidationError{
+						field:  "PollResponsesResult",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PollResponseValidationError{
+						field:  "PollResponsesResult",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetPollResponsesResult()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PollResponseValidationError{
+					field:  "PollResponsesResult",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if len(errors) > 0 {
