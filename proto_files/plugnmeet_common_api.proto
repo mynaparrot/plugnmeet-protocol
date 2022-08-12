@@ -84,3 +84,15 @@ message ExternalMediaPlayerReq {
   string room_id = 4;
   string user_id = 5;
 }
+
+enum ExternalDisplayLinkTask {
+  START_EXTERNAL_LINK = 0;
+  STOP_EXTERNAL_LINK = 1;
+}
+
+message ExternalDisplayLinkReq {
+  ExternalDisplayLinkTask task = 1;
+  optional string url = 2;
+  string room_id = 4;
+  string user_id = 5;
+}

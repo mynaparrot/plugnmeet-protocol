@@ -1136,3 +1136,115 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ExternalMediaPlayerReqValidationError{}
+
+// Validate checks the field values on ExternalDisplayLinkReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ExternalDisplayLinkReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ExternalDisplayLinkReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ExternalDisplayLinkReqMultiError, or nil if none found.
+func (m *ExternalDisplayLinkReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ExternalDisplayLinkReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Task
+
+	// no validation rules for RoomId
+
+	// no validation rules for UserId
+
+	if m.Url != nil {
+		// no validation rules for Url
+	}
+
+	if len(errors) > 0 {
+		return ExternalDisplayLinkReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// ExternalDisplayLinkReqMultiError is an error wrapping multiple validation
+// errors returned by ExternalDisplayLinkReq.ValidateAll() if the designated
+// constraints aren't met.
+type ExternalDisplayLinkReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ExternalDisplayLinkReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ExternalDisplayLinkReqMultiError) AllErrors() []error { return m }
+
+// ExternalDisplayLinkReqValidationError is the validation error returned by
+// ExternalDisplayLinkReq.Validate if the designated constraints aren't met.
+type ExternalDisplayLinkReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExternalDisplayLinkReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExternalDisplayLinkReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExternalDisplayLinkReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExternalDisplayLinkReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExternalDisplayLinkReqValidationError) ErrorName() string {
+	return "ExternalDisplayLinkReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ExternalDisplayLinkReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExternalDisplayLinkReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExternalDisplayLinkReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExternalDisplayLinkReqValidationError{}
