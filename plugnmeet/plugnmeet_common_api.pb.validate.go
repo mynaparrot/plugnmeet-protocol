@@ -1787,3 +1787,117 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UpdateWaitingRoomMessageReqValidationError{}
+
+// Validate checks the field values on UpdateUserLockSettingsReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateUserLockSettingsReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateUserLockSettingsReq with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateUserLockSettingsReqMultiError, or nil if none found.
+func (m *UpdateUserLockSettingsReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateUserLockSettingsReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomSid
+
+	// no validation rules for RoomId
+
+	// no validation rules for UserId
+
+	// no validation rules for Service
+
+	// no validation rules for Direction
+
+	// no validation rules for RequestedUserId
+
+	if len(errors) > 0 {
+		return UpdateUserLockSettingsReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateUserLockSettingsReqMultiError is an error wrapping multiple validation
+// errors returned by UpdateUserLockSettingsReq.ValidateAll() if the
+// designated constraints aren't met.
+type UpdateUserLockSettingsReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateUserLockSettingsReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateUserLockSettingsReqMultiError) AllErrors() []error { return m }
+
+// UpdateUserLockSettingsReqValidationError is the validation error returned by
+// UpdateUserLockSettingsReq.Validate if the designated constraints aren't met.
+type UpdateUserLockSettingsReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateUserLockSettingsReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateUserLockSettingsReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateUserLockSettingsReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateUserLockSettingsReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateUserLockSettingsReqValidationError) ErrorName() string {
+	return "UpdateUserLockSettingsReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateUserLockSettingsReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateUserLockSettingsReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateUserLockSettingsReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateUserLockSettingsReqValidationError{}
