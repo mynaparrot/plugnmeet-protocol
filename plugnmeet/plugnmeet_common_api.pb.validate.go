@@ -1248,3 +1248,329 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ExternalDisplayLinkReqValidationError{}
+
+// Validate checks the field values on CreateEtherpadSessionRes with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateEtherpadSessionRes) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateEtherpadSessionRes with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateEtherpadSessionResMultiError, or nil if none found.
+func (m *CreateEtherpadSessionRes) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateEtherpadSessionRes) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	// no validation rules for Msg
+
+	if m.PadId != nil {
+		// no validation rules for PadId
+	}
+
+	if m.ReadonlyPadId != nil {
+		// no validation rules for ReadonlyPadId
+	}
+
+	if len(errors) > 0 {
+		return CreateEtherpadSessionResMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateEtherpadSessionResMultiError is an error wrapping multiple validation
+// errors returned by CreateEtherpadSessionRes.ValidateAll() if the designated
+// constraints aren't met.
+type CreateEtherpadSessionResMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateEtherpadSessionResMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateEtherpadSessionResMultiError) AllErrors() []error { return m }
+
+// CreateEtherpadSessionResValidationError is the validation error returned by
+// CreateEtherpadSessionRes.Validate if the designated constraints aren't met.
+type CreateEtherpadSessionResValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateEtherpadSessionResValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateEtherpadSessionResValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateEtherpadSessionResValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateEtherpadSessionResValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateEtherpadSessionResValidationError) ErrorName() string {
+	return "CreateEtherpadSessionResValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateEtherpadSessionResValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateEtherpadSessionRes.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateEtherpadSessionResValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateEtherpadSessionResValidationError{}
+
+// Validate checks the field values on CleanEtherpadReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *CleanEtherpadReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CleanEtherpadReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CleanEtherpadReqMultiError, or nil if none found.
+func (m *CleanEtherpadReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CleanEtherpadReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomId
+
+	// no validation rules for NodeId
+
+	// no validation rules for PadId
+
+	if len(errors) > 0 {
+		return CleanEtherpadReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// CleanEtherpadReqMultiError is an error wrapping multiple validation errors
+// returned by CleanEtherpadReq.ValidateAll() if the designated constraints
+// aren't met.
+type CleanEtherpadReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CleanEtherpadReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CleanEtherpadReqMultiError) AllErrors() []error { return m }
+
+// CleanEtherpadReqValidationError is the validation error returned by
+// CleanEtherpadReq.Validate if the designated constraints aren't met.
+type CleanEtherpadReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CleanEtherpadReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CleanEtherpadReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CleanEtherpadReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CleanEtherpadReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CleanEtherpadReqValidationError) ErrorName() string { return "CleanEtherpadReqValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CleanEtherpadReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCleanEtherpadReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CleanEtherpadReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CleanEtherpadReqValidationError{}
+
+// Validate checks the field values on ChangeEtherpadStatusReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ChangeEtherpadStatusReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ChangeEtherpadStatusReq with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ChangeEtherpadStatusReqMultiError, or nil if none found.
+func (m *ChangeEtherpadStatusReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ChangeEtherpadStatusReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomId
+
+	// no validation rules for IsActive
+
+	if len(errors) > 0 {
+		return ChangeEtherpadStatusReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// ChangeEtherpadStatusReqMultiError is an error wrapping multiple validation
+// errors returned by ChangeEtherpadStatusReq.ValidateAll() if the designated
+// constraints aren't met.
+type ChangeEtherpadStatusReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ChangeEtherpadStatusReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ChangeEtherpadStatusReqMultiError) AllErrors() []error { return m }
+
+// ChangeEtherpadStatusReqValidationError is the validation error returned by
+// ChangeEtherpadStatusReq.Validate if the designated constraints aren't met.
+type ChangeEtherpadStatusReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ChangeEtherpadStatusReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ChangeEtherpadStatusReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ChangeEtherpadStatusReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ChangeEtherpadStatusReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ChangeEtherpadStatusReqValidationError) ErrorName() string {
+	return "ChangeEtherpadStatusReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ChangeEtherpadStatusReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sChangeEtherpadStatusReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ChangeEtherpadStatusReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ChangeEtherpadStatusReqValidationError{}

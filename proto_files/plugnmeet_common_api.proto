@@ -96,3 +96,21 @@ message ExternalDisplayLinkReq {
   string room_id = 4;
   string user_id = 5;
 }
+
+message CreateEtherpadSessionRes {
+  bool status = 1;
+  string msg = 2;
+  optional string pad_id = 3;
+  optional string readonly_pad_id = 4;
+}
+
+message CleanEtherpadReq {
+  string room_id = 1;
+  string node_id = 2;
+  string pad_id = 3;
+}
+
+message ChangeEtherpadStatusReq {
+  string room_id = 1;
+  bool is_active = 2;
+}
