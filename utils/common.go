@@ -1,8 +1,10 @@
 package utils
 
 import (
+	"github.com/gofiber/fiber/v2"
 	"github.com/livekit/protocol/livekit"
 	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
+	"google.golang.org/protobuf/proto"
 )
 
 func PrepareCommonWebhookNotifyEvent(event *livekit.WebhookEvent) *plugnmeet.CommonNotifyEvent {
@@ -24,4 +26,26 @@ func PrepareCommonWebhookNotifyEvent(event *livekit.WebhookEvent) *plugnmeet.Com
 		Id:          &event.Id,
 		CreatedAt:   &event.CreatedAt,
 	}
+}
+
+func SendCommonResponse(c *fiber.Ctx, s bool, m string) error {
+	res := &plugnmeet.CommonResponse{
+		Status: s,
+		Msg:    m,
+	}
+	marshal, err := proto.Marshal(res)
+	if err != nil {
+		return err
+	}
+	c.Set("Content-Type", "application/protobuf")
+	return c.Send(marshal)
+}
+
+func SendProtoResponse(c *fiber.Ctx, res proto.Message) error {
+	marshal, err := proto.Marshal(res)
+	if err != nil {
+		return err
+	}
+	c.Set("Content-Type", "application/protobuf")
+	return c.Send(marshal)
 }

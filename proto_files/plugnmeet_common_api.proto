@@ -1,0 +1,20 @@
+syntax = "proto3";
+package plugnmeet;
+
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+
+message CommonResponse {
+  bool status = 1;
+  string msg = 2;
+}
+
+message VerifyTokenReq {
+  optional bool is_production = 1;
+}
+
+message VerifyTokenRes {
+  bool status = 1;
+  string msg = 2;
+  optional string livekit_host = 3;
+  optional string token = 4;
+}
