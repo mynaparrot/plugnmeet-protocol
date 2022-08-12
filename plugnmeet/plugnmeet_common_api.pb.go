@@ -517,6 +517,69 @@ func (x *RoomEndAPIReq) GetRoomId() string {
 	return ""
 }
 
+type ChangeVisibilityRes struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	RoomId            string `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	VisibleNotepad    *bool  `protobuf:"varint,2,opt,name=visible_notepad,json=visibleNotepad,proto3,oneof" json:"visible_notepad,omitempty"`
+	VisibleWhiteBoard *bool  `protobuf:"varint,3,opt,name=visible_white_board,json=visibleWhiteBoard,proto3,oneof" json:"visible_white_board,omitempty"`
+}
+
+func (x *ChangeVisibilityRes) Reset() {
+	*x = ChangeVisibilityRes{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plugnmeet_common_api_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ChangeVisibilityRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChangeVisibilityRes) ProtoMessage() {}
+
+func (x *ChangeVisibilityRes) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_common_api_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChangeVisibilityRes.ProtoReflect.Descriptor instead.
+func (*ChangeVisibilityRes) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ChangeVisibilityRes) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
+func (x *ChangeVisibilityRes) GetVisibleNotepad() bool {
+	if x != nil && x.VisibleNotepad != nil {
+		return *x.VisibleNotepad
+	}
+	return false
+}
+
+func (x *ChangeVisibilityRes) GetVisibleWhiteBoard() bool {
+	if x != nil && x.VisibleWhiteBoard != nil {
+		return *x.VisibleWhiteBoard
+	}
+	return false
+}
+
 var File_plugnmeet_common_api_proto protoreflect.FileDescriptor
 
 var file_plugnmeet_common_api_proto_rawDesc = []byte{
@@ -584,7 +647,19 @@ var file_plugnmeet_common_api_proto_rawDesc = []byte{
 	0x09, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x69, 0x73, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x22, 0x28,
 	0x0a, 0x0d, 0x52, 0x6f, 0x6f, 0x6d, 0x45, 0x6e, 0x64, 0x41, 0x50, 0x49, 0x52, 0x65, 0x71, 0x12,
 	0x17, 0x0a, 0x07, 0x72, 0x6f, 0x6f, 0x6d, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x06, 0x72, 0x6f, 0x6f, 0x6d, 0x49, 0x64, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68,
+	0x52, 0x06, 0x72, 0x6f, 0x6f, 0x6d, 0x49, 0x64, 0x22, 0xbd, 0x01, 0x0a, 0x13, 0x43, 0x68, 0x61,
+	0x6e, 0x67, 0x65, 0x56, 0x69, 0x73, 0x69, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x52, 0x65, 0x73,
+	0x12, 0x17, 0x0a, 0x07, 0x72, 0x6f, 0x6f, 0x6d, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x06, 0x72, 0x6f, 0x6f, 0x6d, 0x49, 0x64, 0x12, 0x2c, 0x0a, 0x0f, 0x76, 0x69, 0x73,
+	0x69, 0x62, 0x6c, 0x65, 0x5f, 0x6e, 0x6f, 0x74, 0x65, 0x70, 0x61, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x08, 0x48, 0x00, 0x52, 0x0e, 0x76, 0x69, 0x73, 0x69, 0x62, 0x6c, 0x65, 0x4e, 0x6f, 0x74,
+	0x65, 0x70, 0x61, 0x64, 0x88, 0x01, 0x01, 0x12, 0x33, 0x0a, 0x13, 0x76, 0x69, 0x73, 0x69, 0x62,
+	0x6c, 0x65, 0x5f, 0x77, 0x68, 0x69, 0x74, 0x65, 0x5f, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x08, 0x48, 0x01, 0x52, 0x11, 0x76, 0x69, 0x73, 0x69, 0x62, 0x6c, 0x65, 0x57,
+	0x68, 0x69, 0x74, 0x65, 0x42, 0x6f, 0x61, 0x72, 0x64, 0x88, 0x01, 0x01, 0x42, 0x12, 0x0a, 0x10,
+	0x5f, 0x76, 0x69, 0x73, 0x69, 0x62, 0x6c, 0x65, 0x5f, 0x6e, 0x6f, 0x74, 0x65, 0x70, 0x61, 0x64,
+	0x42, 0x16, 0x0a, 0x14, 0x5f, 0x76, 0x69, 0x73, 0x69, 0x62, 0x6c, 0x65, 0x5f, 0x77, 0x68, 0x69,
+	0x74, 0x65, 0x5f, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68,
 	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6d, 0x79, 0x6e, 0x61, 0x70, 0x61, 0x72, 0x72, 0x6f,
 	0x74, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74, 0x2d, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x63, 0x6f, 0x6c, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74, 0x62, 0x06,
@@ -603,7 +678,7 @@ func file_plugnmeet_common_api_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_common_api_proto_rawDescData
 }
 
-var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_plugnmeet_common_api_proto_goTypes = []interface{}{
 	(*CommonResponse)(nil),       // 0: plugnmeet.CommonResponse
 	(*VerifyTokenReq)(nil),       // 1: plugnmeet.VerifyTokenReq
@@ -612,10 +687,11 @@ var file_plugnmeet_common_api_proto_goTypes = []interface{}{
 	(*RemoveParticipantReq)(nil), // 4: plugnmeet.RemoveParticipantReq
 	(*DataMessageReq)(nil),       // 5: plugnmeet.DataMessageReq
 	(*RoomEndAPIReq)(nil),        // 6: plugnmeet.RoomEndAPIReq
-	(DataMsgBodyType)(0),         // 7: plugnmeet.DataMsgBodyType
+	(*ChangeVisibilityRes)(nil),  // 7: plugnmeet.ChangeVisibilityRes
+	(DataMsgBodyType)(0),         // 8: plugnmeet.DataMsgBodyType
 }
 var file_plugnmeet_common_api_proto_depIdxs = []int32{
-	7, // 0: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
+	8, // 0: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -714,16 +790,29 @@ func file_plugnmeet_common_api_proto_init() {
 				return nil
 			}
 		}
+		file_plugnmeet_common_api_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ChangeVisibilityRes); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_plugnmeet_common_api_proto_msgTypes[1].OneofWrappers = []interface{}{}
 	file_plugnmeet_common_api_proto_msgTypes[2].OneofWrappers = []interface{}{}
+	file_plugnmeet_common_api_proto_msgTypes[7].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_plugnmeet_common_api_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
