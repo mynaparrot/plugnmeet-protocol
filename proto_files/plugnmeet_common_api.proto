@@ -71,3 +71,16 @@ message SwitchPresenterReq {
   string room_id = 3;
   string Requested_user_id = 4;
 }
+
+enum ExternalMediaPlayerTask {
+  START_PLAYBACK = 0;
+  END_PLAYBACK = 1;
+}
+
+message ExternalMediaPlayerReq {
+  ExternalMediaPlayerTask task = 1;
+  optional string url = 2;
+  optional double seek_to = 3;
+  string room_id = 4;
+  string user_id = 5;
+}

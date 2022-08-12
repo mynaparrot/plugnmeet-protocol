@@ -1020,3 +1020,119 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SwitchPresenterReqValidationError{}
+
+// Validate checks the field values on ExternalMediaPlayerReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ExternalMediaPlayerReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ExternalMediaPlayerReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ExternalMediaPlayerReqMultiError, or nil if none found.
+func (m *ExternalMediaPlayerReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ExternalMediaPlayerReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Task
+
+	// no validation rules for RoomId
+
+	// no validation rules for UserId
+
+	if m.Url != nil {
+		// no validation rules for Url
+	}
+
+	if m.SeekTo != nil {
+		// no validation rules for SeekTo
+	}
+
+	if len(errors) > 0 {
+		return ExternalMediaPlayerReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// ExternalMediaPlayerReqMultiError is an error wrapping multiple validation
+// errors returned by ExternalMediaPlayerReq.ValidateAll() if the designated
+// constraints aren't met.
+type ExternalMediaPlayerReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ExternalMediaPlayerReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ExternalMediaPlayerReqMultiError) AllErrors() []error { return m }
+
+// ExternalMediaPlayerReqValidationError is the validation error returned by
+// ExternalMediaPlayerReq.Validate if the designated constraints aren't met.
+type ExternalMediaPlayerReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExternalMediaPlayerReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExternalMediaPlayerReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExternalMediaPlayerReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExternalMediaPlayerReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExternalMediaPlayerReqValidationError) ErrorName() string {
+	return "ExternalMediaPlayerReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ExternalMediaPlayerReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExternalMediaPlayerReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExternalMediaPlayerReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExternalMediaPlayerReqValidationError{}

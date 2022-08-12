@@ -66,6 +66,52 @@ func (SwitchPresenterTask) EnumDescriptor() ([]byte, []int) {
 	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{0}
 }
 
+type ExternalMediaPlayerTask int32
+
+const (
+	ExternalMediaPlayerTask_START_PLAYBACK ExternalMediaPlayerTask = 0
+	ExternalMediaPlayerTask_END_PLAYBACK   ExternalMediaPlayerTask = 1
+)
+
+// Enum value maps for ExternalMediaPlayerTask.
+var (
+	ExternalMediaPlayerTask_name = map[int32]string{
+		0: "START_PLAYBACK",
+		1: "END_PLAYBACK",
+	}
+	ExternalMediaPlayerTask_value = map[string]int32{
+		"START_PLAYBACK": 0,
+		"END_PLAYBACK":   1,
+	}
+)
+
+func (x ExternalMediaPlayerTask) Enum() *ExternalMediaPlayerTask {
+	p := new(ExternalMediaPlayerTask)
+	*p = x
+	return p
+}
+
+func (x ExternalMediaPlayerTask) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ExternalMediaPlayerTask) Descriptor() protoreflect.EnumDescriptor {
+	return file_plugnmeet_common_api_proto_enumTypes[1].Descriptor()
+}
+
+func (ExternalMediaPlayerTask) Type() protoreflect.EnumType {
+	return &file_plugnmeet_common_api_proto_enumTypes[1]
+}
+
+func (x ExternalMediaPlayerTask) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ExternalMediaPlayerTask.Descriptor instead.
+func (ExternalMediaPlayerTask) EnumDescriptor() ([]byte, []int) {
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{1}
+}
+
 type CommonResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -697,6 +743,85 @@ func (x *SwitchPresenterReq) GetRequestedUserId() string {
 	return ""
 }
 
+type ExternalMediaPlayerReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Task   ExternalMediaPlayerTask `protobuf:"varint,1,opt,name=task,proto3,enum=plugnmeet.ExternalMediaPlayerTask" json:"task,omitempty"`
+	Url    *string                 `protobuf:"bytes,2,opt,name=url,proto3,oneof" json:"url,omitempty"`
+	SeekTo *float64                `protobuf:"fixed64,3,opt,name=seek_to,json=seekTo,proto3,oneof" json:"seek_to,omitempty"`
+	RoomId string                  `protobuf:"bytes,4,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	UserId string                  `protobuf:"bytes,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+}
+
+func (x *ExternalMediaPlayerReq) Reset() {
+	*x = ExternalMediaPlayerReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plugnmeet_common_api_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ExternalMediaPlayerReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExternalMediaPlayerReq) ProtoMessage() {}
+
+func (x *ExternalMediaPlayerReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_common_api_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExternalMediaPlayerReq.ProtoReflect.Descriptor instead.
+func (*ExternalMediaPlayerReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ExternalMediaPlayerReq) GetTask() ExternalMediaPlayerTask {
+	if x != nil {
+		return x.Task
+	}
+	return ExternalMediaPlayerTask_START_PLAYBACK
+}
+
+func (x *ExternalMediaPlayerReq) GetUrl() string {
+	if x != nil && x.Url != nil {
+		return *x.Url
+	}
+	return ""
+}
+
+func (x *ExternalMediaPlayerReq) GetSeekTo() float64 {
+	if x != nil && x.SeekTo != nil {
+		return *x.SeekTo
+	}
+	return 0
+}
+
+func (x *ExternalMediaPlayerReq) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
+func (x *ExternalMediaPlayerReq) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
 var File_plugnmeet_common_api_proto protoreflect.FileDescriptor
 
 var file_plugnmeet_common_api_proto_rawDesc = []byte{
@@ -787,13 +912,30 @@ var file_plugnmeet_common_api_proto_rawDesc = []byte{
 	0x6f, 0x6f, 0x6d, 0x49, 0x64, 0x12, 0x2a, 0x0a, 0x11, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
 	0x65, 0x64, 0x5f, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x0f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x65, 0x64, 0x55, 0x73, 0x65, 0x72, 0x49,
-	0x64, 0x2a, 0x2e, 0x0a, 0x13, 0x53, 0x77, 0x69, 0x74, 0x63, 0x68, 0x50, 0x72, 0x65, 0x73, 0x65,
-	0x6e, 0x74, 0x65, 0x72, 0x54, 0x61, 0x73, 0x6b, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x52, 0x4f, 0x4d,
-	0x4f, 0x54, 0x45, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x44, 0x45, 0x4d, 0x4f, 0x54, 0x45, 0x10,
-	0x01, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
-	0x6d, 0x79, 0x6e, 0x61, 0x70, 0x61, 0x72, 0x72, 0x6f, 0x74, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x6e,
-	0x6d, 0x65, 0x65, 0x74, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x2f, 0x70, 0x6c,
-	0x75, 0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x64, 0x22, 0xcb, 0x01, 0x0a, 0x16, 0x45, 0x78, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x4d, 0x65,
+	0x64, 0x69, 0x61, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x52, 0x65, 0x71, 0x12, 0x36, 0x0a, 0x04,
+	0x74, 0x61, 0x73, 0x6b, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x22, 0x2e, 0x70, 0x6c, 0x75,
+	0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74, 0x2e, 0x45, 0x78, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x4d,
+	0x65, 0x64, 0x69, 0x61, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x54, 0x61, 0x73, 0x6b, 0x52, 0x04,
+	0x74, 0x61, 0x73, 0x6b, 0x12, 0x15, 0x0a, 0x03, 0x75, 0x72, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x48, 0x00, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x88, 0x01, 0x01, 0x12, 0x1c, 0x0a, 0x07, 0x73,
+	0x65, 0x65, 0x6b, 0x5f, 0x74, 0x6f, 0x18, 0x03, 0x20, 0x01, 0x28, 0x01, 0x48, 0x01, 0x52, 0x06,
+	0x73, 0x65, 0x65, 0x6b, 0x54, 0x6f, 0x88, 0x01, 0x01, 0x12, 0x17, 0x0a, 0x07, 0x72, 0x6f, 0x6f,
+	0x6d, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x6f, 0x6f, 0x6d,
+	0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x42, 0x06, 0x0a, 0x04, 0x5f,
+	0x75, 0x72, 0x6c, 0x42, 0x0a, 0x0a, 0x08, 0x5f, 0x73, 0x65, 0x65, 0x6b, 0x5f, 0x74, 0x6f, 0x2a,
+	0x2e, 0x0a, 0x13, 0x53, 0x77, 0x69, 0x74, 0x63, 0x68, 0x50, 0x72, 0x65, 0x73, 0x65, 0x6e, 0x74,
+	0x65, 0x72, 0x54, 0x61, 0x73, 0x6b, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x52, 0x4f, 0x4d, 0x4f, 0x54,
+	0x45, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x44, 0x45, 0x4d, 0x4f, 0x54, 0x45, 0x10, 0x01, 0x2a,
+	0x3f, 0x0a, 0x17, 0x45, 0x78, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x4d, 0x65, 0x64, 0x69, 0x61,
+	0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x54, 0x61, 0x73, 0x6b, 0x12, 0x12, 0x0a, 0x0e, 0x53, 0x54,
+	0x41, 0x52, 0x54, 0x5f, 0x50, 0x4c, 0x41, 0x59, 0x42, 0x41, 0x43, 0x4b, 0x10, 0x00, 0x12, 0x10,
+	0x0a, 0x0c, 0x45, 0x4e, 0x44, 0x5f, 0x50, 0x4c, 0x41, 0x59, 0x42, 0x41, 0x43, 0x4b, 0x10, 0x01,
+	0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6d,
+	0x79, 0x6e, 0x61, 0x70, 0x61, 0x72, 0x72, 0x6f, 0x74, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x6e, 0x6d,
+	0x65, 0x65, 0x74, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x2f, 0x70, 0x6c, 0x75,
+	0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -808,29 +950,32 @@ func file_plugnmeet_common_api_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_common_api_proto_rawDescData
 }
 
-var file_plugnmeet_common_api_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_plugnmeet_common_api_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_plugnmeet_common_api_proto_goTypes = []interface{}{
-	(SwitchPresenterTask)(0),     // 0: plugnmeet.SwitchPresenterTask
-	(*CommonResponse)(nil),       // 1: plugnmeet.CommonResponse
-	(*VerifyTokenReq)(nil),       // 2: plugnmeet.VerifyTokenReq
-	(*VerifyTokenRes)(nil),       // 3: plugnmeet.VerifyTokenRes
-	(*MuteUnMuteTrackReq)(nil),   // 4: plugnmeet.MuteUnMuteTrackReq
-	(*RemoveParticipantReq)(nil), // 5: plugnmeet.RemoveParticipantReq
-	(*DataMessageReq)(nil),       // 6: plugnmeet.DataMessageReq
-	(*RoomEndAPIReq)(nil),        // 7: plugnmeet.RoomEndAPIReq
-	(*ChangeVisibilityRes)(nil),  // 8: plugnmeet.ChangeVisibilityRes
-	(*SwitchPresenterReq)(nil),   // 9: plugnmeet.SwitchPresenterReq
-	(DataMsgBodyType)(0),         // 10: plugnmeet.DataMsgBodyType
+	(SwitchPresenterTask)(0),       // 0: plugnmeet.SwitchPresenterTask
+	(ExternalMediaPlayerTask)(0),   // 1: plugnmeet.ExternalMediaPlayerTask
+	(*CommonResponse)(nil),         // 2: plugnmeet.CommonResponse
+	(*VerifyTokenReq)(nil),         // 3: plugnmeet.VerifyTokenReq
+	(*VerifyTokenRes)(nil),         // 4: plugnmeet.VerifyTokenRes
+	(*MuteUnMuteTrackReq)(nil),     // 5: plugnmeet.MuteUnMuteTrackReq
+	(*RemoveParticipantReq)(nil),   // 6: plugnmeet.RemoveParticipantReq
+	(*DataMessageReq)(nil),         // 7: plugnmeet.DataMessageReq
+	(*RoomEndAPIReq)(nil),          // 8: plugnmeet.RoomEndAPIReq
+	(*ChangeVisibilityRes)(nil),    // 9: plugnmeet.ChangeVisibilityRes
+	(*SwitchPresenterReq)(nil),     // 10: plugnmeet.SwitchPresenterReq
+	(*ExternalMediaPlayerReq)(nil), // 11: plugnmeet.ExternalMediaPlayerReq
+	(DataMsgBodyType)(0),           // 12: plugnmeet.DataMsgBodyType
 }
 var file_plugnmeet_common_api_proto_depIdxs = []int32{
-	10, // 0: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
+	12, // 0: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
 	0,  // 1: plugnmeet.SwitchPresenterReq.task:type_name -> plugnmeet.SwitchPresenterTask
-	2,  // [2:2] is the sub-list for method output_type
-	2,  // [2:2] is the sub-list for method input_type
-	2,  // [2:2] is the sub-list for extension type_name
-	2,  // [2:2] is the sub-list for extension extendee
-	0,  // [0:2] is the sub-list for field type_name
+	1,  // 2: plugnmeet.ExternalMediaPlayerReq.task:type_name -> plugnmeet.ExternalMediaPlayerTask
+	3,  // [3:3] is the sub-list for method output_type
+	3,  // [3:3] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_common_api_proto_init() }
@@ -948,17 +1093,30 @@ func file_plugnmeet_common_api_proto_init() {
 				return nil
 			}
 		}
+		file_plugnmeet_common_api_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ExternalMediaPlayerReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_plugnmeet_common_api_proto_msgTypes[1].OneofWrappers = []interface{}{}
 	file_plugnmeet_common_api_proto_msgTypes[2].OneofWrappers = []interface{}{}
 	file_plugnmeet_common_api_proto_msgTypes[7].OneofWrappers = []interface{}{}
+	file_plugnmeet_common_api_proto_msgTypes[9].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_plugnmeet_common_api_proto_rawDesc,
-			NumEnums:      1,
-			NumMessages:   9,
+			NumEnums:      2,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
