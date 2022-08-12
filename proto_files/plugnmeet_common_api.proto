@@ -59,3 +59,15 @@ message ChangeVisibilityRes {
   optional bool visible_notepad = 2;
   optional bool visible_white_board = 3;
 }
+
+enum SwitchPresenterTask {
+  PROMOTE = 0;
+  DEMOTE = 1;
+}
+
+message SwitchPresenterReq {
+  SwitchPresenterTask task = 1;
+  string user_id = 2;
+  string room_id = 3;
+  string Requested_user_id = 4;
+}

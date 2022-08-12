@@ -910,3 +910,113 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ChangeVisibilityResValidationError{}
+
+// Validate checks the field values on SwitchPresenterReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SwitchPresenterReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SwitchPresenterReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SwitchPresenterReqMultiError, or nil if none found.
+func (m *SwitchPresenterReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SwitchPresenterReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Task
+
+	// no validation rules for UserId
+
+	// no validation rules for RoomId
+
+	// no validation rules for RequestedUserId
+
+	if len(errors) > 0 {
+		return SwitchPresenterReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// SwitchPresenterReqMultiError is an error wrapping multiple validation errors
+// returned by SwitchPresenterReq.ValidateAll() if the designated constraints
+// aren't met.
+type SwitchPresenterReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SwitchPresenterReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SwitchPresenterReqMultiError) AllErrors() []error { return m }
+
+// SwitchPresenterReqValidationError is the validation error returned by
+// SwitchPresenterReq.Validate if the designated constraints aren't met.
+type SwitchPresenterReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SwitchPresenterReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SwitchPresenterReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SwitchPresenterReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SwitchPresenterReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SwitchPresenterReqValidationError) ErrorName() string {
+	return "SwitchPresenterReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SwitchPresenterReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSwitchPresenterReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SwitchPresenterReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SwitchPresenterReqValidationError{}

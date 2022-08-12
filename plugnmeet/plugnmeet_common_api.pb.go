@@ -20,6 +20,52 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type SwitchPresenterTask int32
+
+const (
+	SwitchPresenterTask_PROMOTE SwitchPresenterTask = 0
+	SwitchPresenterTask_DEMOTE  SwitchPresenterTask = 1
+)
+
+// Enum value maps for SwitchPresenterTask.
+var (
+	SwitchPresenterTask_name = map[int32]string{
+		0: "PROMOTE",
+		1: "DEMOTE",
+	}
+	SwitchPresenterTask_value = map[string]int32{
+		"PROMOTE": 0,
+		"DEMOTE":  1,
+	}
+)
+
+func (x SwitchPresenterTask) Enum() *SwitchPresenterTask {
+	p := new(SwitchPresenterTask)
+	*p = x
+	return p
+}
+
+func (x SwitchPresenterTask) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SwitchPresenterTask) Descriptor() protoreflect.EnumDescriptor {
+	return file_plugnmeet_common_api_proto_enumTypes[0].Descriptor()
+}
+
+func (SwitchPresenterTask) Type() protoreflect.EnumType {
+	return &file_plugnmeet_common_api_proto_enumTypes[0]
+}
+
+func (x SwitchPresenterTask) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SwitchPresenterTask.Descriptor instead.
+func (SwitchPresenterTask) EnumDescriptor() ([]byte, []int) {
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{0}
+}
+
 type CommonResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -580,6 +626,77 @@ func (x *ChangeVisibilityRes) GetVisibleWhiteBoard() bool {
 	return false
 }
 
+type SwitchPresenterReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Task            SwitchPresenterTask `protobuf:"varint,1,opt,name=task,proto3,enum=plugnmeet.SwitchPresenterTask" json:"task,omitempty"`
+	UserId          string              `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	RoomId          string              `protobuf:"bytes,3,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	RequestedUserId string              `protobuf:"bytes,4,opt,name=Requested_user_id,json=RequestedUserId,proto3" json:"Requested_user_id,omitempty"`
+}
+
+func (x *SwitchPresenterReq) Reset() {
+	*x = SwitchPresenterReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plugnmeet_common_api_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SwitchPresenterReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SwitchPresenterReq) ProtoMessage() {}
+
+func (x *SwitchPresenterReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_common_api_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SwitchPresenterReq.ProtoReflect.Descriptor instead.
+func (*SwitchPresenterReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *SwitchPresenterReq) GetTask() SwitchPresenterTask {
+	if x != nil {
+		return x.Task
+	}
+	return SwitchPresenterTask_PROMOTE
+}
+
+func (x *SwitchPresenterReq) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *SwitchPresenterReq) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
+func (x *SwitchPresenterReq) GetRequestedUserId() string {
+	if x != nil {
+		return x.RequestedUserId
+	}
+	return ""
+}
+
 var File_plugnmeet_common_api_proto protoreflect.FileDescriptor
 
 var file_plugnmeet_common_api_proto_rawDesc = []byte{
@@ -659,11 +776,24 @@ var file_plugnmeet_common_api_proto_rawDesc = []byte{
 	0x68, 0x69, 0x74, 0x65, 0x42, 0x6f, 0x61, 0x72, 0x64, 0x88, 0x01, 0x01, 0x42, 0x12, 0x0a, 0x10,
 	0x5f, 0x76, 0x69, 0x73, 0x69, 0x62, 0x6c, 0x65, 0x5f, 0x6e, 0x6f, 0x74, 0x65, 0x70, 0x61, 0x64,
 	0x42, 0x16, 0x0a, 0x14, 0x5f, 0x76, 0x69, 0x73, 0x69, 0x62, 0x6c, 0x65, 0x5f, 0x77, 0x68, 0x69,
-	0x74, 0x65, 0x5f, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6d, 0x79, 0x6e, 0x61, 0x70, 0x61, 0x72, 0x72, 0x6f,
-	0x74, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74, 0x2d, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x63, 0x6f, 0x6c, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x65, 0x5f, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x22, 0xa6, 0x01, 0x0a, 0x12, 0x53, 0x77, 0x69,
+	0x74, 0x63, 0x68, 0x50, 0x72, 0x65, 0x73, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x12,
+	0x32, 0x0a, 0x04, 0x74, 0x61, 0x73, 0x6b, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1e, 0x2e,
+	0x70, 0x6c, 0x75, 0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74, 0x2e, 0x53, 0x77, 0x69, 0x74, 0x63, 0x68,
+	0x50, 0x72, 0x65, 0x73, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x54, 0x61, 0x73, 0x6b, 0x52, 0x04, 0x74,
+	0x61, 0x73, 0x6b, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07,
+	0x72, 0x6f, 0x6f, 0x6d, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72,
+	0x6f, 0x6f, 0x6d, 0x49, 0x64, 0x12, 0x2a, 0x0a, 0x11, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x65, 0x64, 0x5f, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x0f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x65, 0x64, 0x55, 0x73, 0x65, 0x72, 0x49,
+	0x64, 0x2a, 0x2e, 0x0a, 0x13, 0x53, 0x77, 0x69, 0x74, 0x63, 0x68, 0x50, 0x72, 0x65, 0x73, 0x65,
+	0x6e, 0x74, 0x65, 0x72, 0x54, 0x61, 0x73, 0x6b, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x52, 0x4f, 0x4d,
+	0x4f, 0x54, 0x45, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x44, 0x45, 0x4d, 0x4f, 0x54, 0x45, 0x10,
+	0x01, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
+	0x6d, 0x79, 0x6e, 0x61, 0x70, 0x61, 0x72, 0x72, 0x6f, 0x74, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x6e,
+	0x6d, 0x65, 0x65, 0x74, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x2f, 0x70, 0x6c,
+	0x75, 0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -678,25 +808,29 @@ func file_plugnmeet_common_api_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_common_api_proto_rawDescData
 }
 
-var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_plugnmeet_common_api_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_plugnmeet_common_api_proto_goTypes = []interface{}{
-	(*CommonResponse)(nil),       // 0: plugnmeet.CommonResponse
-	(*VerifyTokenReq)(nil),       // 1: plugnmeet.VerifyTokenReq
-	(*VerifyTokenRes)(nil),       // 2: plugnmeet.VerifyTokenRes
-	(*MuteUnMuteTrackReq)(nil),   // 3: plugnmeet.MuteUnMuteTrackReq
-	(*RemoveParticipantReq)(nil), // 4: plugnmeet.RemoveParticipantReq
-	(*DataMessageReq)(nil),       // 5: plugnmeet.DataMessageReq
-	(*RoomEndAPIReq)(nil),        // 6: plugnmeet.RoomEndAPIReq
-	(*ChangeVisibilityRes)(nil),  // 7: plugnmeet.ChangeVisibilityRes
-	(DataMsgBodyType)(0),         // 8: plugnmeet.DataMsgBodyType
+	(SwitchPresenterTask)(0),     // 0: plugnmeet.SwitchPresenterTask
+	(*CommonResponse)(nil),       // 1: plugnmeet.CommonResponse
+	(*VerifyTokenReq)(nil),       // 2: plugnmeet.VerifyTokenReq
+	(*VerifyTokenRes)(nil),       // 3: plugnmeet.VerifyTokenRes
+	(*MuteUnMuteTrackReq)(nil),   // 4: plugnmeet.MuteUnMuteTrackReq
+	(*RemoveParticipantReq)(nil), // 5: plugnmeet.RemoveParticipantReq
+	(*DataMessageReq)(nil),       // 6: plugnmeet.DataMessageReq
+	(*RoomEndAPIReq)(nil),        // 7: plugnmeet.RoomEndAPIReq
+	(*ChangeVisibilityRes)(nil),  // 8: plugnmeet.ChangeVisibilityRes
+	(*SwitchPresenterReq)(nil),   // 9: plugnmeet.SwitchPresenterReq
+	(DataMsgBodyType)(0),         // 10: plugnmeet.DataMsgBodyType
 }
 var file_plugnmeet_common_api_proto_depIdxs = []int32{
-	8, // 0: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	10, // 0: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
+	0,  // 1: plugnmeet.SwitchPresenterReq.task:type_name -> plugnmeet.SwitchPresenterTask
+	2,  // [2:2] is the sub-list for method output_type
+	2,  // [2:2] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_common_api_proto_init() }
@@ -802,6 +936,18 @@ func file_plugnmeet_common_api_proto_init() {
 				return nil
 			}
 		}
+		file_plugnmeet_common_api_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SwitchPresenterReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_plugnmeet_common_api_proto_msgTypes[1].OneofWrappers = []interface{}{}
 	file_plugnmeet_common_api_proto_msgTypes[2].OneofWrappers = []interface{}{}
@@ -811,13 +957,14 @@ func file_plugnmeet_common_api_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_plugnmeet_common_api_proto_rawDesc,
-			NumEnums:      0,
-			NumMessages:   8,
+			NumEnums:      1,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_plugnmeet_common_api_proto_goTypes,
 		DependencyIndexes: file_plugnmeet_common_api_proto_depIdxs,
+		EnumInfos:         file_plugnmeet_common_api_proto_enumTypes,
 		MessageInfos:      file_plugnmeet_common_api_proto_msgTypes,
 	}.Build()
 	File_plugnmeet_common_api_proto = out.File
