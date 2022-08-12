@@ -18,3 +18,12 @@ message VerifyTokenRes {
   optional string livekit_host = 3;
   optional string token = 4;
 }
+
+message MuteUnMuteTrackReq {
+  string sid = 1;
+  string room_id = 2;
+  string user_id = 3;
+  string track_sid = 4;
+  bool muted = 5;
+  string Requested_user_id = 6;
+}
