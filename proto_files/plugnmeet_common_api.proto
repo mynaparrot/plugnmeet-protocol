@@ -27,3 +27,11 @@ message MuteUnMuteTrackReq {
   bool muted = 5;
   string Requested_user_id = 6;
 }
+
+message RemoveParticipantReq {
+  string sid = 1;
+  string room_id = 2;
+  string user_id = 3;
+  string msg = 4;
+  bool block_user = 5;
+}
