@@ -470,6 +470,53 @@ func (x *DataMessageReq) GetIsAdmin() bool {
 	return false
 }
 
+type RoomEndAPIReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	RoomId string `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+}
+
+func (x *RoomEndAPIReq) Reset() {
+	*x = RoomEndAPIReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plugnmeet_common_api_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RoomEndAPIReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RoomEndAPIReq) ProtoMessage() {}
+
+func (x *RoomEndAPIReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_common_api_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RoomEndAPIReq.ProtoReflect.Descriptor instead.
+func (*RoomEndAPIReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *RoomEndAPIReq) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
 var File_plugnmeet_common_api_proto protoreflect.FileDescriptor
 
 var file_plugnmeet_common_api_proto_rawDesc = []byte{
@@ -534,11 +581,14 @@ var file_plugnmeet_common_api_proto_rawDesc = []byte{
 	0x73, 0x74, 0x65, 0x64, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x73, 0x65,
 	0x6e, 0x64, 0x5f, 0x74, 0x6f, 0x18, 0x08, 0x20, 0x03, 0x28, 0x09, 0x52, 0x06, 0x73, 0x65, 0x6e,
 	0x64, 0x54, 0x6f, 0x12, 0x19, 0x0a, 0x08, 0x69, 0x73, 0x5f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x18,
-	0x09, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x69, 0x73, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x42, 0x34,
-	0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6d, 0x79, 0x6e,
-	0x61, 0x70, 0x61, 0x72, 0x72, 0x6f, 0x74, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x6e, 0x6d, 0x65, 0x65,
-	0x74, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x6e,
-	0x6d, 0x65, 0x65, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x09, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x69, 0x73, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x22, 0x28,
+	0x0a, 0x0d, 0x52, 0x6f, 0x6f, 0x6d, 0x45, 0x6e, 0x64, 0x41, 0x50, 0x49, 0x52, 0x65, 0x71, 0x12,
+	0x17, 0x0a, 0x07, 0x72, 0x6f, 0x6f, 0x6d, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x06, 0x72, 0x6f, 0x6f, 0x6d, 0x49, 0x64, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68,
+	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6d, 0x79, 0x6e, 0x61, 0x70, 0x61, 0x72, 0x72, 0x6f,
+	0x74, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74, 0x2d, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x63, 0x6f, 0x6c, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -553,7 +603,7 @@ func file_plugnmeet_common_api_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_common_api_proto_rawDescData
 }
 
-var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_plugnmeet_common_api_proto_goTypes = []interface{}{
 	(*CommonResponse)(nil),       // 0: plugnmeet.CommonResponse
 	(*VerifyTokenReq)(nil),       // 1: plugnmeet.VerifyTokenReq
@@ -561,10 +611,11 @@ var file_plugnmeet_common_api_proto_goTypes = []interface{}{
 	(*MuteUnMuteTrackReq)(nil),   // 3: plugnmeet.MuteUnMuteTrackReq
 	(*RemoveParticipantReq)(nil), // 4: plugnmeet.RemoveParticipantReq
 	(*DataMessageReq)(nil),       // 5: plugnmeet.DataMessageReq
-	(DataMsgBodyType)(0),         // 6: plugnmeet.DataMsgBodyType
+	(*RoomEndAPIReq)(nil),        // 6: plugnmeet.RoomEndAPIReq
+	(DataMsgBodyType)(0),         // 7: plugnmeet.DataMsgBodyType
 }
 var file_plugnmeet_common_api_proto_depIdxs = []int32{
-	6, // 0: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
+	7, // 0: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -651,6 +702,18 @@ func file_plugnmeet_common_api_proto_init() {
 				return nil
 			}
 		}
+		file_plugnmeet_common_api_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RoomEndAPIReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_plugnmeet_common_api_proto_msgTypes[1].OneofWrappers = []interface{}{}
 	file_plugnmeet_common_api_proto_msgTypes[2].OneofWrappers = []interface{}{}
@@ -660,7 +723,7 @@ func file_plugnmeet_common_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_plugnmeet_common_api_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -49,3 +49,7 @@ message DataMessageReq {
   repeated string send_to = 8;
   bool is_admin = 9;
 }
+
+message RoomEndAPIReq {
+  string room_id = 1;
+}
