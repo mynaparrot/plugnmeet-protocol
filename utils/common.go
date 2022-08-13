@@ -5,6 +5,9 @@ import (
 	"github.com/livekit/protocol/livekit"
 	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 	"google.golang.org/protobuf/proto"
+	"io/fs"
+	"path/filepath"
+	"sort"
 )
 
 func PrepareCommonWebhookNotifyEvent(event *livekit.WebhookEvent) *plugnmeet.CommonNotifyEvent {
@@ -48,4 +51,24 @@ func SendProtoResponse(c *fiber.Ctx, res proto.Message) error {
 	}
 	c.Set("Content-Type", "application/protobuf")
 	return c.Send(marshal)
+}
+
+func GetFilesFromDir(path, ext string, s bool) ([]string, error) {
+	var files []string
+	err := filepath.WalkDir(path, func(s string, d fs.DirEntry, e error) error {
+		if e != nil {
+			return e
+		}
+		if filepath.Ext(d.Name()) == ext {
+			files = append(files, d.Name())
+		}
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	if s {
+		sort.Strings(files)
+	}
+	return files, nil
 }
