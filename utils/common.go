@@ -53,7 +53,7 @@ func SendProtoResponse(c *fiber.Ctx, res proto.Message) error {
 	return c.Send(marshal)
 }
 
-func GetFilesFromDir(path, ext string, s bool) ([]string, error) {
+func GetFilesFromDir(path, ext, s string) ([]string, error) {
 	var files []string
 	err := filepath.WalkDir(path, func(s string, d fs.DirEntry, e error) error {
 		if e != nil {
@@ -67,8 +67,10 @@ func GetFilesFromDir(path, ext string, s bool) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	if s {
+	if s == "asc" {
 		sort.Strings(files)
+	} else if s == "des" {
+		sort.Sort(sort.Reverse(sort.StringSlice(files)))
 	}
 	return files, nil
 }
