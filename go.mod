@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/envoyproxy/protoc-gen-validate v0.6.7
 	github.com/gofiber/fiber/v2 v2.36.0
-	github.com/livekit/protocol v1.0.0
+	github.com/livekit/protocol v1.0.1
 	google.golang.org/protobuf v1.28.1
 )
 
