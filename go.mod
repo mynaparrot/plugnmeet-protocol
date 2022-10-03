@@ -3,7 +3,7 @@ module github.com/mynaparrot/plugnmeet-protocol
 go 1.19
 
 require (
-	github.com/envoyproxy/protoc-gen-validate v0.6.8
+	github.com/envoyproxy/protoc-gen-validate v0.6.13
 	github.com/gofiber/fiber/v2 v2.37.1
 	github.com/livekit/protocol v1.1.2
 	google.golang.org/protobuf v1.28.1
