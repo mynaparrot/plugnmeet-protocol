@@ -277,6 +277,10 @@ func (m *VerifyTokenRes) validate(all bool) error {
 		// no validation rules for Token
 	}
 
+	if m.ServerVersion != nil {
+		// no validation rules for ServerVersion
+	}
+
 	if len(errors) > 0 {
 		return VerifyTokenResMultiError(errors)
 	}

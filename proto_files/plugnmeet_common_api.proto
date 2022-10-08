@@ -19,6 +19,7 @@ message VerifyTokenRes {
   string msg = 2;
   optional string livekit_host = 3;
   optional string token = 4;
+  optional string server_version = 5;
 }
 
 message MuteUnMuteTrackReq {
