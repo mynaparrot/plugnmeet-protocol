@@ -300,6 +300,35 @@ func (m *RoomMetadata) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetCopyrightConf()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RoomMetadataValidationError{
+					field:  "CopyrightConf",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RoomMetadataValidationError{
+					field:  "CopyrightConf",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCopyrightConf()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RoomMetadataValidationError{
+				field:  "CopyrightConf",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.WelcomeMessage != nil {
 		// no validation rules for WelcomeMessage
 	}
@@ -1629,6 +1658,110 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = DisplayExternalLinkFeaturesValidationError{}
+
+// Validate checks the field values on CopyrightConf with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *CopyrightConf) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CopyrightConf with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in CopyrightConfMultiError, or
+// nil if none found.
+func (m *CopyrightConf) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CopyrightConf) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Display
+
+	// no validation rules for Text
+
+	if len(errors) > 0 {
+		return CopyrightConfMultiError(errors)
+	}
+
+	return nil
+}
+
+// CopyrightConfMultiError is an error wrapping multiple validation errors
+// returned by CopyrightConf.ValidateAll() if the designated constraints
+// aren't met.
+type CopyrightConfMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CopyrightConfMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CopyrightConfMultiError) AllErrors() []error { return m }
+
+// CopyrightConfValidationError is the validation error returned by
+// CopyrightConf.Validate if the designated constraints aren't met.
+type CopyrightConfValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CopyrightConfValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CopyrightConfValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CopyrightConfValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CopyrightConfValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CopyrightConfValidationError) ErrorName() string { return "CopyrightConfValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CopyrightConfValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCopyrightConf.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CopyrightConfValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CopyrightConfValidationError{}
 
 // Validate checks the field values on CreateRoomRes with the rules defined in
 // the proto definition for this message. If any rules are violated, the first

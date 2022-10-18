@@ -27,6 +27,7 @@ message RoomMetadata {
   uint64 started_at = 8;
   RoomCreateFeatures room_features = 9 [(validate.rules).any.required = true];
   LockSettings default_lock_settings = 10;
+  CopyrightConf copyright_conf = 11;
 }
 
 message RoomCreateFeatures {
@@ -99,6 +100,11 @@ message DisplayExternalLinkFeatures {
   bool is_active = 2 [(validate.rules).bool.const = false];
   optional string link = 3;
   optional string shared_by = 4;
+}
+
+message CopyrightConf {
+  bool display = 1;
+  string text = 2;
 }
 
 message CreateRoomRes {
