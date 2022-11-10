@@ -8,6 +8,15 @@ import (
 func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 	rf := r.Metadata.RoomFeatures
 
+	if rf.RecordingFeatures == nil {
+		rf.RecordingFeatures = &plugnmeet.RecordingFeatures{
+			IsAllow:                  true,
+			IsAllowCloud:             true,
+			IsAllowLocal:             true,
+			EnableAutoCloudRecording: false,
+		}
+	}
+
 	if rf.ChatFeatures == nil {
 		rf.ChatFeatures = &plugnmeet.ChatFeatures{
 			AllowChat:       false,

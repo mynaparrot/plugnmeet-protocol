@@ -34,20 +34,20 @@ message RoomCreateFeatures {
   bool allow_webcams = 1;
   bool mute_on_start = 2;
   bool allow_screen_share = 3;
-  bool allow_recording = 4;
   bool allow_rtmp = 5;
   bool allow_view_other_webcams = 6;
   bool allow_view_other_users_list = 7;
   bool admin_only_webcams = 8;
   bool allow_polls = 9;
   optional uint64 room_duration = 10;
-  ChatFeatures chat_features = 11;
-  SharedNotePadFeatures shared_note_pad_features = 12;
-  WhiteboardFeatures whiteboard_features = 13;
-  ExternalMediaPlayerFeatures external_media_player_features = 14;
-  WaitingRoomFeatures waiting_room_features = 15;
-  BreakoutRoomFeatures breakout_room_features = 16;
-  DisplayExternalLinkFeatures display_external_link_features = 17;
+  RecordingFeatures recording_features = 11;
+  ChatFeatures chat_features = 12;
+  SharedNotePadFeatures shared_note_pad_features = 13;
+  WhiteboardFeatures whiteboard_features = 14;
+  ExternalMediaPlayerFeatures external_media_player_features = 15;
+  WaitingRoomFeatures waiting_room_features = 16;
+  BreakoutRoomFeatures breakout_room_features = 17;
+  DisplayExternalLinkFeatures display_external_link_features = 18;
 }
 
 message ChatFeatures {
@@ -100,6 +100,13 @@ message DisplayExternalLinkFeatures {
   bool is_active = 2 [(validate.rules).bool.const = false];
   optional string link = 3;
   optional string shared_by = 4;
+}
+
+message RecordingFeatures {
+  bool is_allow = 1;
+  bool is_allow_cloud = 2;
+  bool enable_auto_cloud_recording = 3;
+  bool is_allow_local = 4;
 }
 
 message CopyrightConf {

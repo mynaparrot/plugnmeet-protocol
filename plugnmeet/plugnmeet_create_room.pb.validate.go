@@ -438,8 +438,6 @@ func (m *RoomCreateFeatures) validate(all bool) error {
 
 	// no validation rules for AllowScreenShare
 
-	// no validation rules for AllowRecording
-
 	// no validation rules for AllowRtmp
 
 	// no validation rules for AllowViewOtherWebcams
@@ -449,6 +447,35 @@ func (m *RoomCreateFeatures) validate(all bool) error {
 	// no validation rules for AdminOnlyWebcams
 
 	// no validation rules for AllowPolls
+
+	if all {
+		switch v := interface{}(m.GetRecordingFeatures()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RoomCreateFeaturesValidationError{
+					field:  "RecordingFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RoomCreateFeaturesValidationError{
+					field:  "RecordingFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRecordingFeatures()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RoomCreateFeaturesValidationError{
+				field:  "RecordingFeatures",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if all {
 		switch v := interface{}(m.GetChatFeatures()).(type) {
@@ -1658,6 +1685,116 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = DisplayExternalLinkFeaturesValidationError{}
+
+// Validate checks the field values on RecordingFeatures with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *RecordingFeatures) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RecordingFeatures with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RecordingFeaturesMultiError, or nil if none found.
+func (m *RecordingFeatures) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RecordingFeatures) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsAllow
+
+	// no validation rules for IsAllowCloud
+
+	// no validation rules for EnableAutoCloudRecording
+
+	// no validation rules for IsAllowLocal
+
+	if len(errors) > 0 {
+		return RecordingFeaturesMultiError(errors)
+	}
+
+	return nil
+}
+
+// RecordingFeaturesMultiError is an error wrapping multiple validation errors
+// returned by RecordingFeatures.ValidateAll() if the designated constraints
+// aren't met.
+type RecordingFeaturesMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RecordingFeaturesMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RecordingFeaturesMultiError) AllErrors() []error { return m }
+
+// RecordingFeaturesValidationError is the validation error returned by
+// RecordingFeatures.Validate if the designated constraints aren't met.
+type RecordingFeaturesValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RecordingFeaturesValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RecordingFeaturesValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RecordingFeaturesValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RecordingFeaturesValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RecordingFeaturesValidationError) ErrorName() string {
+	return "RecordingFeaturesValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RecordingFeaturesValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRecordingFeatures.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RecordingFeaturesValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RecordingFeaturesValidationError{}
 
 // Validate checks the field values on CopyrightConf with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
