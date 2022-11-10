@@ -78,9 +78,10 @@ func PrepareLTIV1RoomCreateReq(c *plugnmeet.LtiClaims) *plugnmeet.CreateRoomReq 
 				AllowViewOtherUsersList: true,
 				AllowPolls:              true,
 				RecordingFeatures: &plugnmeet.RecordingFeatures{
-					IsAllow:      true,
-					IsAllowCloud: true,
-					IsAllowLocal: true,
+					IsAllow:                  true,
+					IsAllowCloud:             true,
+					IsAllowLocal:             true,
+					EnableAutoCloudRecording: false,
 				},
 				ChatFeatures: &plugnmeet.ChatFeatures{
 					AllowChat:       true,
