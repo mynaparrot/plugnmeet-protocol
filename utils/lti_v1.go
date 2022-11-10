@@ -73,11 +73,15 @@ func PrepareLTIV1RoomCreateReq(c *plugnmeet.LtiClaims) *plugnmeet.CreateRoomReq 
 			RoomFeatures: &plugnmeet.RoomCreateFeatures{
 				AllowWebcams:            true,
 				AllowScreenShare:        true,
-				AllowRecording:          true,
 				AllowRtmp:               true,
 				AllowViewOtherWebcams:   true,
 				AllowViewOtherUsersList: true,
 				AllowPolls:              true,
+				RecordingFeatures: &plugnmeet.RecordingFeatures{
+					IsAllow:      true,
+					IsAllowCloud: true,
+					IsAllowLocal: true,
+				},
 				ChatFeatures: &plugnmeet.ChatFeatures{
 					AllowChat:       true,
 					AllowFileUpload: true,
@@ -121,7 +125,7 @@ func PrepareLTIV1RoomCreateReq(c *plugnmeet.LtiClaims) *plugnmeet.CreateRoomReq 
 			f.AllowPolls = *p.AllowPolls
 		}
 		if p.AllowRecording != nil {
-			f.AllowRecording = *p.AllowRecording
+			f.RecordingFeatures.IsAllow = *p.AllowRecording
 		}
 		if p.AllowRtmp != nil {
 			f.AllowRtmp = *p.AllowRtmp
