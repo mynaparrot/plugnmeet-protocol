@@ -23,11 +23,12 @@ message RoomMetadata {
   bool is_active_rtmp = 4 [(validate.rules).bool.const = false];
   string parent_room_id = 5;
   bool is_breakout_room = 6;
-  string webhook_url = 7;
+  optional string webhook_url = 7 [(validate.rules).string.uri = true];
   uint64 started_at = 8;
-  RoomCreateFeatures room_features = 9 [(validate.rules).any.required = true];
-  LockSettings default_lock_settings = 10;
-  CopyrightConf copyright_conf = 11;
+  optional string logout_url = 9 [(validate.rules).string.uri = true];
+  RoomCreateFeatures room_features = 10 [(validate.rules).any.required = true];
+  LockSettings default_lock_settings = 11;
+  CopyrightConf copyright_conf = 12;
 }
 
 message RoomCreateFeatures {

@@ -252,8 +252,6 @@ func (m *RoomMetadata) validate(all bool) error {
 
 	// no validation rules for IsBreakoutRoom
 
-	// no validation rules for WebhookUrl
-
 	// no validation rules for StartedAt
 
 	if m.GetRoomFeatures() == nil {
@@ -331,6 +329,56 @@ func (m *RoomMetadata) validate(all bool) error {
 
 	if m.WelcomeMessage != nil {
 		// no validation rules for WelcomeMessage
+	}
+
+	if m.WebhookUrl != nil {
+
+		if uri, err := url.Parse(m.GetWebhookUrl()); err != nil {
+			err = RoomMetadataValidationError{
+				field:  "WebhookUrl",
+				reason: "value must be a valid URI",
+				cause:  err,
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		} else if !uri.IsAbs() {
+			err := RoomMetadataValidationError{
+				field:  "WebhookUrl",
+				reason: "value must be absolute",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
+
+	if m.LogoutUrl != nil {
+
+		if uri, err := url.Parse(m.GetLogoutUrl()); err != nil {
+			err = RoomMetadataValidationError{
+				field:  "LogoutUrl",
+				reason: "value must be a valid URI",
+				cause:  err,
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		} else if !uri.IsAbs() {
+			err := RoomMetadataValidationError{
+				field:  "LogoutUrl",
+				reason: "value must be absolute",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
 	}
 
 	if len(errors) > 0 {
