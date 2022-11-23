@@ -152,6 +152,8 @@ github.com/livekit/protocol v1.1.2 h1:LDEFKK16T57pwDwxlJkkWMpbgvR0DJ3PozjOnvq29C
 github.com/livekit/protocol v1.1.2/go.mod h1:eburCdz6ZtbgKSKYkAeCdWP1z33DB9clTphz7uNaxp0=
 github.com/livekit/protocol v1.2.2 h1:FB/P15QMaofHVpTooxFOr/cEHQhME1yBvGqUVPHgSo0=
 github.com/livekit/protocol v1.2.2/go.mod h1:eveiL9UJGmVsmqVXVVZtCMkkqH83YyHcDt+ryZWbc6E=
+github.com/livekit/protocol v1.2.3 h1:iy0mVixq6u2X+X1Z74OMOZ4R7MVgkb2po6hFCeJ7XNU=
+github.com/livekit/protocol v1.2.3/go.mod h1:eveiL9UJGmVsmqVXVVZtCMkkqH83YyHcDt+ryZWbc6E=
 github.com/lyft/protoc-gen-star v0.6.1/go.mod h1:TGAoBVkt8w7MPG72TrKIu85MIdXwDuzJYeZuUPFPNwA=
 github.com/mattn/go-colorable v0.1.13 h1:fFA4WZxdEF4tXPZVKMLwD8oUnCTTo08duU7wxecdEvA=
 github.com/mattn/go-colorable v0.1.13/go.mod h1:7S9/ev0klgBDR4GtXTXX8a3vIGJpMovkB8vQcUbaXHg=
