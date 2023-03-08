@@ -113,3 +113,22 @@ func SetRoomDefaultLockSettings(r *plugnmeet.CreateRoomReq) {
 		r.Metadata.DefaultLockSettings.LockSharedNotepad = lock
 	}
 }
+
+type RoomDefaultSettings struct {
+	MaxParticipants *uint32 `yaml:"max_participants"`
+	MaxDuration     *uint64 `yaml:"max_duration"`
+}
+
+func SetDefaultRoomSettings(s *RoomDefaultSettings, r *plugnmeet.CreateRoomReq) {
+	if s == nil {
+		return
+	}
+
+	if s.MaxParticipants != nil && *s.MaxParticipants > 0 {
+		r.MaxParticipants = s.MaxParticipants
+	}
+
+	if s.MaxDuration != nil && *s.MaxDuration > 0 {
+		r.Metadata.RoomFeatures.RoomDuration = s.MaxDuration
+	}
+}
