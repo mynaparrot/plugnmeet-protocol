@@ -125,10 +125,16 @@ func SetDefaultRoomSettings(s *RoomDefaultSettings, r *plugnmeet.CreateRoomReq) 
 	}
 
 	if s.MaxParticipants != nil && *s.MaxParticipants > 0 {
+		if r.MaxParticipants != nil && *r.MaxParticipants > 0 && *r.MaxParticipants <= *s.MaxParticipants {
+			return
+		}
 		r.MaxParticipants = s.MaxParticipants
 	}
 
 	if s.MaxDuration != nil && *s.MaxDuration > 0 {
+		if r.Metadata.RoomFeatures.RoomDuration != nil && *r.Metadata.RoomFeatures.RoomDuration > 0 && *r.Metadata.RoomFeatures.RoomDuration <= *s.MaxDuration {
+			return
+		}
 		r.Metadata.RoomFeatures.RoomDuration = s.MaxDuration
 	}
 }
