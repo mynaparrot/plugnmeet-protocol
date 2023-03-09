@@ -26,6 +26,8 @@ github.com/klauspost/compress v1.16.0 h1:iULayQNOReoYUe+1qtKOqw9CwJv3aNQu8ivo7lw
 github.com/klauspost/compress v1.16.0/go.mod h1:ntbaceVETuRiXiv4DpjP66DpAtAGkEQskQzEyD//IeE=
 github.com/livekit/protocol v1.4.2 h1:XmobZ9eQmTSThWUmkko48tGf0AWfPMVWzpWzt3uoj+4=
 github.com/livekit/protocol v1.4.2/go.mod h1:mVzmVesPCIgk2gg/jMr6PWtHu8dfRdhaAJ6okFs5nQw=
+github.com/livekit/protocol v1.5.0 h1:jFGSkSEv0PTjUlrW/WnmERejwxyHOSE9If4VU33PYgk=
+github.com/livekit/protocol v1.5.0/go.mod h1:hkK/G0wwFiLUGp9F5kxeQxq2CQuIzkmfBwKhTsc71us=
 github.com/mattn/go-colorable v0.1.13 h1:fFA4WZxdEF4tXPZVKMLwD8oUnCTTo08duU7wxecdEvA=
 github.com/mattn/go-colorable v0.1.13/go.mod h1:7S9/ev0klgBDR4GtXTXX8a3vIGJpMovkB8vQcUbaXHg=
 github.com/mattn/go-isatty v0.0.16/go.mod h1:kYGgaQfpe5nmfYZH+SKPsOc2e4SrIfOl2e/yFXSvRLM=
