@@ -71,6 +71,12 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 		}
 	}
 
+	if rf.IngressFeatures == nil {
+		rf.IngressFeatures = &plugnmeet.IngressFeatures{
+			IsAllow: false,
+		}
+	}
+
 	if r.Metadata.DefaultLockSettings == nil {
 		r.Metadata.DefaultLockSettings = new(plugnmeet.LockSettings)
 	}
