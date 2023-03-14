@@ -6,6 +6,7 @@ option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 import "plugnmeet_gen_token.proto";
 import "validate/validate.proto";
 import "livekit_models.proto";
+import "plugnmeet_ingress.proto";
 
 message CreateRoomReq {
   string room_id = 1 [(validate.rules).string = {
@@ -49,6 +50,7 @@ message RoomCreateFeatures {
   WaitingRoomFeatures waiting_room_features = 16;
   BreakoutRoomFeatures breakout_room_features = 17;
   DisplayExternalLinkFeatures display_external_link_features = 18;
+  IngressFeatures ingress_features = 19;
 }
 
 message ChatFeatures {
@@ -108,6 +110,13 @@ message RecordingFeatures {
   bool is_allow_cloud = 2;
   bool enable_auto_cloud_recording = 3;
   bool is_allow_local = 4;
+}
+
+message IngressFeatures {
+  bool is_allow = 1;
+  IngressInput input_type = 2;
+  string url = 3 [(validate.rules).string.const = ""];;
+  string stream_key = 4 [(validate.rules).string.const = ""];;
 }
 
 message CopyrightConf {
