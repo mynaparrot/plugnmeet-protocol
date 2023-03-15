@@ -48,3 +48,20 @@ message IsRoomActiveRes {
   bool status = 1;
   string msg = 2;
 }
+
+message ActiveRoomWithParticipant {
+  optional ActiveRoomInfo room_info = 3;
+  repeated livekit.ParticipantInfo participants_info = 4;
+}
+
+message GetActiveRoomInfoRes {
+  bool status = 1;
+  string msg = 2;
+  ActiveRoomWithParticipant room = 3;
+}
+
+message GetActiveRoomsInfoRes {
+  bool status = 1;
+  string msg = 2;
+  repeated ActiveRoomWithParticipant rooms = 3;
+}

@@ -845,3 +845,447 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = IsRoomActiveResValidationError{}
+
+// Validate checks the field values on ActiveRoomWithParticipant with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ActiveRoomWithParticipant) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ActiveRoomWithParticipant with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ActiveRoomWithParticipantMultiError, or nil if none found.
+func (m *ActiveRoomWithParticipant) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ActiveRoomWithParticipant) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetParticipantsInfo() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ActiveRoomWithParticipantValidationError{
+						field:  fmt.Sprintf("ParticipantsInfo[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ActiveRoomWithParticipantValidationError{
+						field:  fmt.Sprintf("ParticipantsInfo[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ActiveRoomWithParticipantValidationError{
+					field:  fmt.Sprintf("ParticipantsInfo[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.RoomInfo != nil {
+
+		if all {
+			switch v := interface{}(m.GetRoomInfo()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ActiveRoomWithParticipantValidationError{
+						field:  "RoomInfo",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ActiveRoomWithParticipantValidationError{
+						field:  "RoomInfo",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetRoomInfo()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ActiveRoomWithParticipantValidationError{
+					field:  "RoomInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ActiveRoomWithParticipantMultiError(errors)
+	}
+
+	return nil
+}
+
+// ActiveRoomWithParticipantMultiError is an error wrapping multiple validation
+// errors returned by ActiveRoomWithParticipant.ValidateAll() if the
+// designated constraints aren't met.
+type ActiveRoomWithParticipantMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ActiveRoomWithParticipantMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ActiveRoomWithParticipantMultiError) AllErrors() []error { return m }
+
+// ActiveRoomWithParticipantValidationError is the validation error returned by
+// ActiveRoomWithParticipant.Validate if the designated constraints aren't met.
+type ActiveRoomWithParticipantValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ActiveRoomWithParticipantValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ActiveRoomWithParticipantValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ActiveRoomWithParticipantValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ActiveRoomWithParticipantValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ActiveRoomWithParticipantValidationError) ErrorName() string {
+	return "ActiveRoomWithParticipantValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ActiveRoomWithParticipantValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sActiveRoomWithParticipant.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ActiveRoomWithParticipantValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ActiveRoomWithParticipantValidationError{}
+
+// Validate checks the field values on GetActiveRoomInfoRes with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetActiveRoomInfoRes) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetActiveRoomInfoRes with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetActiveRoomInfoResMultiError, or nil if none found.
+func (m *GetActiveRoomInfoRes) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetActiveRoomInfoRes) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	// no validation rules for Msg
+
+	if all {
+		switch v := interface{}(m.GetRoom()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetActiveRoomInfoResValidationError{
+					field:  "Room",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetActiveRoomInfoResValidationError{
+					field:  "Room",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRoom()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetActiveRoomInfoResValidationError{
+				field:  "Room",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetActiveRoomInfoResMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetActiveRoomInfoResMultiError is an error wrapping multiple validation
+// errors returned by GetActiveRoomInfoRes.ValidateAll() if the designated
+// constraints aren't met.
+type GetActiveRoomInfoResMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetActiveRoomInfoResMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetActiveRoomInfoResMultiError) AllErrors() []error { return m }
+
+// GetActiveRoomInfoResValidationError is the validation error returned by
+// GetActiveRoomInfoRes.Validate if the designated constraints aren't met.
+type GetActiveRoomInfoResValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetActiveRoomInfoResValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetActiveRoomInfoResValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetActiveRoomInfoResValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetActiveRoomInfoResValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetActiveRoomInfoResValidationError) ErrorName() string {
+	return "GetActiveRoomInfoResValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetActiveRoomInfoResValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetActiveRoomInfoRes.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetActiveRoomInfoResValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetActiveRoomInfoResValidationError{}
+
+// Validate checks the field values on GetActiveRoomsInfoRes with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetActiveRoomsInfoRes) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetActiveRoomsInfoRes with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetActiveRoomsInfoResMultiError, or nil if none found.
+func (m *GetActiveRoomsInfoRes) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetActiveRoomsInfoRes) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	// no validation rules for Msg
+
+	for idx, item := range m.GetRooms() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetActiveRoomsInfoResValidationError{
+						field:  fmt.Sprintf("Rooms[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetActiveRoomsInfoResValidationError{
+						field:  fmt.Sprintf("Rooms[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetActiveRoomsInfoResValidationError{
+					field:  fmt.Sprintf("Rooms[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetActiveRoomsInfoResMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetActiveRoomsInfoResMultiError is an error wrapping multiple validation
+// errors returned by GetActiveRoomsInfoRes.ValidateAll() if the designated
+// constraints aren't met.
+type GetActiveRoomsInfoResMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetActiveRoomsInfoResMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetActiveRoomsInfoResMultiError) AllErrors() []error { return m }
+
+// GetActiveRoomsInfoResValidationError is the validation error returned by
+// GetActiveRoomsInfoRes.Validate if the designated constraints aren't met.
+type GetActiveRoomsInfoResValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetActiveRoomsInfoResValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetActiveRoomsInfoResValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetActiveRoomsInfoResValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetActiveRoomsInfoResValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetActiveRoomsInfoResValidationError) ErrorName() string {
+	return "GetActiveRoomsInfoResValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetActiveRoomsInfoResValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetActiveRoomsInfoRes.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetActiveRoomsInfoResValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetActiveRoomsInfoResValidationError{}

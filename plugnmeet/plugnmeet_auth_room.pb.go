@@ -478,6 +478,187 @@ func (x *IsRoomActiveRes) GetMsg() string {
 	return ""
 }
 
+type ActiveRoomWithParticipant struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	RoomInfo         *ActiveRoomInfo            `protobuf:"bytes,3,opt,name=room_info,json=roomInfo,proto3,oneof" json:"room_info,omitempty"`
+	ParticipantsInfo []*livekit.ParticipantInfo `protobuf:"bytes,4,rep,name=participants_info,json=participantsInfo,proto3" json:"participants_info,omitempty"`
+}
+
+func (x *ActiveRoomWithParticipant) Reset() {
+	*x = ActiveRoomWithParticipant{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plugnmeet_auth_room_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ActiveRoomWithParticipant) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ActiveRoomWithParticipant) ProtoMessage() {}
+
+func (x *ActiveRoomWithParticipant) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_auth_room_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ActiveRoomWithParticipant.ProtoReflect.Descriptor instead.
+func (*ActiveRoomWithParticipant) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_auth_room_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ActiveRoomWithParticipant) GetRoomInfo() *ActiveRoomInfo {
+	if x != nil {
+		return x.RoomInfo
+	}
+	return nil
+}
+
+func (x *ActiveRoomWithParticipant) GetParticipantsInfo() []*livekit.ParticipantInfo {
+	if x != nil {
+		return x.ParticipantsInfo
+	}
+	return nil
+}
+
+type GetActiveRoomInfoRes struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Status bool                       `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	Msg    string                     `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Room   *ActiveRoomWithParticipant `protobuf:"bytes,3,opt,name=room,proto3" json:"room,omitempty"`
+}
+
+func (x *GetActiveRoomInfoRes) Reset() {
+	*x = GetActiveRoomInfoRes{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plugnmeet_auth_room_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetActiveRoomInfoRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetActiveRoomInfoRes) ProtoMessage() {}
+
+func (x *GetActiveRoomInfoRes) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_auth_room_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetActiveRoomInfoRes.ProtoReflect.Descriptor instead.
+func (*GetActiveRoomInfoRes) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_auth_room_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetActiveRoomInfoRes) GetStatus() bool {
+	if x != nil {
+		return x.Status
+	}
+	return false
+}
+
+func (x *GetActiveRoomInfoRes) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *GetActiveRoomInfoRes) GetRoom() *ActiveRoomWithParticipant {
+	if x != nil {
+		return x.Room
+	}
+	return nil
+}
+
+type GetActiveRoomsInfoRes struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Status bool                         `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	Msg    string                       `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Rooms  []*ActiveRoomWithParticipant `protobuf:"bytes,3,rep,name=rooms,proto3" json:"rooms,omitempty"`
+}
+
+func (x *GetActiveRoomsInfoRes) Reset() {
+	*x = GetActiveRoomsInfoRes{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plugnmeet_auth_room_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetActiveRoomsInfoRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetActiveRoomsInfoRes) ProtoMessage() {}
+
+func (x *GetActiveRoomsInfoRes) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_auth_room_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetActiveRoomsInfoRes.ProtoReflect.Descriptor instead.
+func (*GetActiveRoomsInfoRes) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_auth_room_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetActiveRoomsInfoRes) GetStatus() bool {
+	if x != nil {
+		return x.Status
+	}
+	return false
+}
+
+func (x *GetActiveRoomsInfoRes) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *GetActiveRoomsInfoRes) GetRooms() []*ActiveRoomWithParticipant {
+	if x != nil {
+		return x.Rooms
+	}
+	return nil
+}
+
 var File_plugnmeet_auth_room_proto protoreflect.FileDescriptor
 
 var file_plugnmeet_auth_room_proto_rawDesc = []byte{
@@ -539,11 +720,38 @@ var file_plugnmeet_auth_room_proto_rawDesc = []byte{
 	0x49, 0x64, 0x22, 0x3b, 0x0a, 0x0f, 0x49, 0x73, 0x52, 0x6f, 0x6f, 0x6d, 0x41, 0x63, 0x74, 0x69,
 	0x76, 0x65, 0x52, 0x65, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x10, 0x0a,
-	0x03, 0x6d, 0x73, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x42,
-	0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6d, 0x79,
-	0x6e, 0x61, 0x70, 0x61, 0x72, 0x72, 0x6f, 0x74, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x6e, 0x6d, 0x65,
-	0x65, 0x74, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x2f, 0x70, 0x6c, 0x75, 0x67,
-	0x6e, 0x6d, 0x65, 0x65, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x03, 0x6d, 0x73, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x22,
+	0xad, 0x01, 0x0a, 0x19, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x52, 0x6f, 0x6f, 0x6d, 0x57, 0x69,
+	0x74, 0x68, 0x50, 0x61, 0x72, 0x74, 0x69, 0x63, 0x69, 0x70, 0x61, 0x6e, 0x74, 0x12, 0x3b, 0x0a,
+	0x09, 0x72, 0x6f, 0x6f, 0x6d, 0x5f, 0x69, 0x6e, 0x66, 0x6f, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x19, 0x2e, 0x70, 0x6c, 0x75, 0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74, 0x2e, 0x41, 0x63, 0x74,
+	0x69, 0x76, 0x65, 0x52, 0x6f, 0x6f, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x48, 0x00, 0x52, 0x08, 0x72,
+	0x6f, 0x6f, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x88, 0x01, 0x01, 0x12, 0x45, 0x0a, 0x11, 0x70, 0x61,
+	0x72, 0x74, 0x69, 0x63, 0x69, 0x70, 0x61, 0x6e, 0x74, 0x73, 0x5f, 0x69, 0x6e, 0x66, 0x6f, 0x18,
+	0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6c, 0x69, 0x76, 0x65, 0x6b, 0x69, 0x74, 0x2e,
+	0x50, 0x61, 0x72, 0x74, 0x69, 0x63, 0x69, 0x70, 0x61, 0x6e, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x52,
+	0x10, 0x70, 0x61, 0x72, 0x74, 0x69, 0x63, 0x69, 0x70, 0x61, 0x6e, 0x74, 0x73, 0x49, 0x6e, 0x66,
+	0x6f, 0x42, 0x0c, 0x0a, 0x0a, 0x5f, 0x72, 0x6f, 0x6f, 0x6d, 0x5f, 0x69, 0x6e, 0x66, 0x6f, 0x22,
+	0x7a, 0x0a, 0x14, 0x47, 0x65, 0x74, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x52, 0x6f, 0x6f, 0x6d,
+	0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75,
+	0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12,
+	0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73,
+	0x67, 0x12, 0x38, 0x0a, 0x04, 0x72, 0x6f, 0x6f, 0x6d, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x24, 0x2e, 0x70, 0x6c, 0x75, 0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74, 0x2e, 0x41, 0x63, 0x74, 0x69,
+	0x76, 0x65, 0x52, 0x6f, 0x6f, 0x6d, 0x57, 0x69, 0x74, 0x68, 0x50, 0x61, 0x72, 0x74, 0x69, 0x63,
+	0x69, 0x70, 0x61, 0x6e, 0x74, 0x52, 0x04, 0x72, 0x6f, 0x6f, 0x6d, 0x22, 0x7d, 0x0a, 0x15, 0x47,
+	0x65, 0x74, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x52, 0x6f, 0x6f, 0x6d, 0x73, 0x49, 0x6e, 0x66,
+	0x6f, 0x52, 0x65, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x10, 0x0a, 0x03,
+	0x6d, 0x73, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x12, 0x3a,
+	0x0a, 0x05, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x24, 0x2e,
+	0x70, 0x6c, 0x75, 0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74, 0x2e, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65,
+	0x52, 0x6f, 0x6f, 0x6d, 0x57, 0x69, 0x74, 0x68, 0x50, 0x61, 0x72, 0x74, 0x69, 0x63, 0x69, 0x70,
+	0x61, 0x6e, 0x74, 0x52, 0x05, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69,
+	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6d, 0x79, 0x6e, 0x61, 0x70, 0x61, 0x72,
+	0x72, 0x6f, 0x74, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74, 0x2d, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x6e, 0x6d, 0x65, 0x65, 0x74,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -558,25 +766,32 @@ func file_plugnmeet_auth_room_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_auth_room_proto_rawDescData
 }
 
-var file_plugnmeet_auth_room_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_plugnmeet_auth_room_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_plugnmeet_auth_room_proto_goTypes = []interface{}{
-	(*GetActiveRoomInfoReq)(nil),    // 0: plugnmeet.GetActiveRoomInfoReq
-	(*ActiveRoomInfoRes)(nil),       // 1: plugnmeet.ActiveRoomInfoRes
-	(*ActiveRoomInfo)(nil),          // 2: plugnmeet.ActiveRoomInfo
-	(*RoomEndReq)(nil),              // 3: plugnmeet.RoomEndReq
-	(*RoomEndRes)(nil),              // 4: plugnmeet.RoomEndRes
-	(*IsRoomActiveReq)(nil),         // 5: plugnmeet.IsRoomActiveReq
-	(*IsRoomActiveRes)(nil),         // 6: plugnmeet.IsRoomActiveRes
-	(*livekit.ParticipantInfo)(nil), // 7: livekit.ParticipantInfo
+	(*GetActiveRoomInfoReq)(nil),      // 0: plugnmeet.GetActiveRoomInfoReq
+	(*ActiveRoomInfoRes)(nil),         // 1: plugnmeet.ActiveRoomInfoRes
+	(*ActiveRoomInfo)(nil),            // 2: plugnmeet.ActiveRoomInfo
+	(*RoomEndReq)(nil),                // 3: plugnmeet.RoomEndReq
+	(*RoomEndRes)(nil),                // 4: plugnmeet.RoomEndRes
+	(*IsRoomActiveReq)(nil),           // 5: plugnmeet.IsRoomActiveReq
+	(*IsRoomActiveRes)(nil),           // 6: plugnmeet.IsRoomActiveRes
+	(*ActiveRoomWithParticipant)(nil), // 7: plugnmeet.ActiveRoomWithParticipant
+	(*GetActiveRoomInfoRes)(nil),      // 8: plugnmeet.GetActiveRoomInfoRes
+	(*GetActiveRoomsInfoRes)(nil),     // 9: plugnmeet.GetActiveRoomsInfoRes
+	(*livekit.ParticipantInfo)(nil),   // 10: livekit.ParticipantInfo
 }
 var file_plugnmeet_auth_room_proto_depIdxs = []int32{
-	2, // 0: plugnmeet.ActiveRoomInfoRes.room_info:type_name -> plugnmeet.ActiveRoomInfo
-	7, // 1: plugnmeet.ActiveRoomInfoRes.participants_info:type_name -> livekit.ParticipantInfo
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	2,  // 0: plugnmeet.ActiveRoomInfoRes.room_info:type_name -> plugnmeet.ActiveRoomInfo
+	10, // 1: plugnmeet.ActiveRoomInfoRes.participants_info:type_name -> livekit.ParticipantInfo
+	2,  // 2: plugnmeet.ActiveRoomWithParticipant.room_info:type_name -> plugnmeet.ActiveRoomInfo
+	10, // 3: plugnmeet.ActiveRoomWithParticipant.participants_info:type_name -> livekit.ParticipantInfo
+	7,  // 4: plugnmeet.GetActiveRoomInfoRes.room:type_name -> plugnmeet.ActiveRoomWithParticipant
+	7,  // 5: plugnmeet.GetActiveRoomsInfoRes.rooms:type_name -> plugnmeet.ActiveRoomWithParticipant
+	6,  // [6:6] is the sub-list for method output_type
+	6,  // [6:6] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_auth_room_proto_init() }
@@ -669,15 +884,52 @@ func file_plugnmeet_auth_room_proto_init() {
 				return nil
 			}
 		}
+		file_plugnmeet_auth_room_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ActiveRoomWithParticipant); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_plugnmeet_auth_room_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetActiveRoomInfoRes); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_plugnmeet_auth_room_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetActiveRoomsInfoRes); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_plugnmeet_auth_room_proto_msgTypes[1].OneofWrappers = []interface{}{}
+	file_plugnmeet_auth_room_proto_msgTypes[7].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_plugnmeet_auth_room_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
