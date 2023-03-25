@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/envoyproxy/protoc-gen-validate v0.10.1
 	github.com/go-sql-driver/mysql v1.7.0
-	github.com/gofiber/fiber/v2 v2.42.0
+	github.com/gofiber/fiber/v2 v2.43.0
 	github.com/livekit/protocol v1.5.1
 	github.com/redis/go-redis/v9 v9.0.2
 	google.golang.org/protobuf v1.30.0
@@ -28,7 +28,7 @@ require (
 	github.com/tinylib/msgp v1.1.8 // indirect
 	github.com/twitchtv/twirp v8.1.3+incompatible // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.44.0 // indirect
+	github.com/valyala/fasthttp v1.45.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	golang.org/x/net v0.8.0 // indirect
 	golang.org/x/sys v0.6.0 // indirect
