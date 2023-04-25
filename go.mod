@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/envoyproxy/protoc-gen-validate v0.10.1
-	github.com/go-sql-driver/mysql v1.7.0
+	github.com/go-sql-driver/mysql v1.7.1
 	github.com/gofiber/fiber/v2 v2.43.0
 	github.com/livekit/protocol v1.5.1
 	github.com/redis/go-redis/v9 v9.0.2
