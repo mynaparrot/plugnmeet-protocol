@@ -51,6 +51,7 @@ message RoomCreateFeatures {
   BreakoutRoomFeatures breakout_room_features = 17;
   DisplayExternalLinkFeatures display_external_link_features = 18;
   IngressFeatures ingress_features = 19;
+  SpeechToTextTranslationFeatures speech_to_text_translation_features = 20;
 }
 
 message ChatFeatures {
@@ -117,6 +118,16 @@ message IngressFeatures {
   IngressInput input_type = 2;
   string url = 3 [(validate.rules).string.const = ""];;
   string stream_key = 4 [(validate.rules).string.const = ""];;
+}
+
+message SpeechToTextTranslationFeatures {
+  bool is_allow = 1;
+  bool is_allow_translation = 2;
+  bool is_enabled = 3 [(validate.rules).bool.const = false];
+  bool is_enabled_translation = 4 [(validate.rules).bool.const = false];
+  repeated string allowed_speech_langs = 7 [(validate.rules).repeated.max_items = 0];
+  repeated string allowed_speech_users = 8 [(validate.rules).repeated.max_items = 0];;
+  repeated string allowed_trans_langs = 9 [(validate.rules).repeated.max_items = 0];;
 }
 
 message CopyrightConf {

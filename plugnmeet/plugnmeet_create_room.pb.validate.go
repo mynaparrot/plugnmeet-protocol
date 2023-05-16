@@ -757,6 +757,35 @@ func (m *RoomCreateFeatures) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetSpeechToTextTranslationFeatures()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RoomCreateFeaturesValidationError{
+					field:  "SpeechToTextTranslationFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RoomCreateFeaturesValidationError{
+					field:  "SpeechToTextTranslationFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSpeechToTextTranslationFeatures()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RoomCreateFeaturesValidationError{
+				field:  "SpeechToTextTranslationFeatures",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.RoomDuration != nil {
 		// no validation rules for RoomDuration
 	}
@@ -1998,6 +2027,168 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = IngressFeaturesValidationError{}
+
+// Validate checks the field values on SpeechToTextTranslationFeatures with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SpeechToTextTranslationFeatures) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SpeechToTextTranslationFeatures with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SpeechToTextTranslationFeaturesMultiError, or nil if none found.
+func (m *SpeechToTextTranslationFeatures) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SpeechToTextTranslationFeatures) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsAllow
+
+	// no validation rules for IsAllowTranslation
+
+	if m.GetIsEnabled() != false {
+		err := SpeechToTextTranslationFeaturesValidationError{
+			field:  "IsEnabled",
+			reason: "value must equal false",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetIsEnabledTranslation() != false {
+		err := SpeechToTextTranslationFeaturesValidationError{
+			field:  "IsEnabledTranslation",
+			reason: "value must equal false",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(m.GetAllowedSpeechLangs()) > 0 {
+		err := SpeechToTextTranslationFeaturesValidationError{
+			field:  "AllowedSpeechLangs",
+			reason: "value must contain no more than 0 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(m.GetAllowedSpeechUsers()) > 0 {
+		err := SpeechToTextTranslationFeaturesValidationError{
+			field:  "AllowedSpeechUsers",
+			reason: "value must contain no more than 0 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(m.GetAllowedTransLangs()) > 0 {
+		err := SpeechToTextTranslationFeaturesValidationError{
+			field:  "AllowedTransLangs",
+			reason: "value must contain no more than 0 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return SpeechToTextTranslationFeaturesMultiError(errors)
+	}
+
+	return nil
+}
+
+// SpeechToTextTranslationFeaturesMultiError is an error wrapping multiple
+// validation errors returned by SpeechToTextTranslationFeatures.ValidateAll()
+// if the designated constraints aren't met.
+type SpeechToTextTranslationFeaturesMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SpeechToTextTranslationFeaturesMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SpeechToTextTranslationFeaturesMultiError) AllErrors() []error { return m }
+
+// SpeechToTextTranslationFeaturesValidationError is the validation error
+// returned by SpeechToTextTranslationFeatures.Validate if the designated
+// constraints aren't met.
+type SpeechToTextTranslationFeaturesValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SpeechToTextTranslationFeaturesValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SpeechToTextTranslationFeaturesValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SpeechToTextTranslationFeaturesValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SpeechToTextTranslationFeaturesValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SpeechToTextTranslationFeaturesValidationError) ErrorName() string {
+	return "SpeechToTextTranslationFeaturesValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SpeechToTextTranslationFeaturesValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSpeechToTextTranslationFeatures.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SpeechToTextTranslationFeaturesValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SpeechToTextTranslationFeaturesValidationError{}
 
 // Validate checks the field values on CopyrightConf with the rules defined in
 // the proto definition for this message. If any rules are violated, the first

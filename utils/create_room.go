@@ -77,6 +77,13 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 		}
 	}
 
+	if rf.SpeechToTextTranslationFeatures == nil {
+		rf.SpeechToTextTranslationFeatures = &plugnmeet.SpeechToTextTranslationFeatures{
+			IsAllow:            false,
+			IsAllowTranslation: false,
+		}
+	}
+
 	if r.Metadata.DefaultLockSettings == nil {
 		r.Metadata.DefaultLockSettings = new(plugnmeet.LockSettings)
 	}
