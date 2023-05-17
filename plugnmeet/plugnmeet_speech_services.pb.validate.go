@@ -277,6 +277,10 @@ func (m *GenerateAzureTokenRes) validate(all bool) error {
 		// no validation rules for Token
 	}
 
+	if m.ServiceRegion != nil {
+		// no validation rules for ServiceRegion
+	}
+
 	if len(errors) > 0 {
 		return GenerateAzureTokenResMultiError(errors)
 	}
