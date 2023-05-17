@@ -1,0 +1,26 @@
+syntax = "proto3";
+package plugnmeet;
+
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+
+message SpeechToTextTranslationReq {
+  string room_id = 1;
+
+  bool is_enabled = 3;
+  repeated string allowed_speech_langs = 4;
+  repeated string allowed_speech_users = 5;
+
+  bool is_enabled_translation = 6;
+  repeated string allowed_trans_langs = 7;
+}
+
+message GenerateAzureTokenReq {
+  string room_id = 1;
+}
+
+message GenerateAzureTokenRes {
+  bool status = 1;
+  string msg = 2;
+  optional string token = 3;
+  optional string service_region = 4;
+}

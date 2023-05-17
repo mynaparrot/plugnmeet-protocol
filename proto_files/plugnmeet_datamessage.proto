@@ -51,6 +51,7 @@ enum DataMsgBodyType {
   NEW_POLL_RESPONSE = 13;
   POLL_CLOSED = 14;
   JOIN_BREAKOUT_ROOM = 15;
+  SPEECH_SUBTITLE_TEXT = 23;
   
   // USER type
   CHAT = 16;
@@ -62,4 +63,6 @@ enum DataMsgBodyType {
   ADD_WHITEBOARD_OFFICE_FILE = 20;
   PAGE_CHANGE = 21;
   WHITEBOARD_APP_STATE_CHANGE = 22;
+
+  // next ID: 24
 }
