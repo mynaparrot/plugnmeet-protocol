@@ -23,4 +23,17 @@ message GenerateAzureTokenRes {
   string msg = 2;
   optional string token = 3;
   optional string service_region = 4;
+  optional string key_id = 5;
+}
+
+enum SpeechServiceUserStatusTasks {
+  SESSION_STARTED = 0;
+  SESSION_ENDED = 1;
+}
+
+message SpeechServiceUserStatusReq  {
+  string room_id = 1;
+  string user_id = 2;
+  string key_id = 3;
+  SpeechServiceUserStatusTasks task = 4;
 }
