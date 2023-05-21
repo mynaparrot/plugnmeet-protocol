@@ -16,6 +16,7 @@ message SpeechToTextTranslationReq {
 
 message GenerateAzureTokenReq {
   string room_id = 1;
+  string user_sid = 2;
 }
 
 message GenerateAzureTokenRes {

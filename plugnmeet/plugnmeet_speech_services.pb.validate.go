@@ -167,6 +167,8 @@ func (m *GenerateAzureTokenReq) validate(all bool) error {
 
 	// no validation rules for RoomId
 
+	// no validation rules for UserSid
+
 	if len(errors) > 0 {
 		return GenerateAzureTokenReqMultiError(errors)
 	}
