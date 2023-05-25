@@ -10,6 +10,7 @@ message CommonNotifyEvent {
   optional NotifyEventRoom room = 2;
   optional livekit.ParticipantInfo participant = 3;
   optional RecordingInfoEvent recording_info = 4;
+  optional SpeechServiceEvent speech_service = 5;
   optional livekit.TrackInfo track = 6;
   optional string id = 9;
   optional int64 created_at = 10;
@@ -32,4 +33,9 @@ message RecordingInfoEvent {
   string recorder_msg = 3;
   optional string  file_path = 4;
   optional float file_size = 5;
+}
+
+message SpeechServiceEvent {
+  optional string user_id = 3;
+  int64 total_usage = 4;
 }

@@ -28,13 +28,16 @@ message GenerateAzureTokenRes {
 }
 
 enum SpeechServiceUserStatusTasks {
-  SESSION_STARTED = 0;
-  SESSION_ENDED = 1;
+  SPEECH_TO_TEXT_SESSION_STARTED = 0;
+  SPEECH_TO_TEXT_SESSION_ENDED = 1;
+
+  SPEECH_TO_TEXT_TOTAL_USAGE = 2;
 }
 
 message SpeechServiceUserStatusReq  {
   string room_id = 1;
-  string user_id = 2;
-  string key_id = 3;
-  SpeechServiceUserStatusTasks task = 4;
+  string room_sid = 2;
+  string user_id = 3;
+  string key_id = 4;
+  SpeechServiceUserStatusTasks task = 5;
 }

@@ -391,6 +391,8 @@ func (m *SpeechServiceUserStatusReq) validate(all bool) error {
 
 	// no validation rules for RoomId
 
+	// no validation rules for RoomSid
+
 	// no validation rules for UserId
 
 	// no validation rules for KeyId
