@@ -59,6 +59,10 @@ func (m *RecordingReq) validate(all bool) error {
 
 	// no validation rules for Task
 
+	// no validation rules for RoomId
+
+	// no validation rules for RoomTableId
+
 	// no validation rules for Sid
 
 	if m.RtmpUrl != nil {

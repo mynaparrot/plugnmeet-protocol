@@ -7,7 +7,9 @@ import "plugnmeet_recorder.proto";
 
 message RecordingReq {
   RecordingTasks task = 1;
-  string sid = 2;
-  optional string rtmp_url = 3;
-  optional string custom_design = 4;
+  string room_id = 2;
+  int64 room_table_id = 3;
+  string sid = 4;
+  optional string rtmp_url = 5;
+  optional string custom_design = 6;
 }

@@ -6,7 +6,7 @@ option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 message PlugNmeetToRecorder {
   string from = 1;
   RecordingTasks task = 2;
-  string room_id = 3;
+  int64 room_table_id = 3;
   string room_sid = 4;
   string recording_id = 5;
   string recorder_id = 6;
@@ -20,18 +20,19 @@ message RecorderToPlugNmeet {
   bool status = 3;
   string msg = 4;
   string recording_id = 5;
+  int64 room_table_id = 11;
   string room_id = 6;
   string room_sid = 7;
   string recorder_id = 8;
   string file_path = 9;
   float file_size = 10;
+  // next key 12
 }
 
 message FromParentToChild {
   RecordingTasks task = 1;
   string recording_id = 2;
-  string room_id = 3;
-  string room_sid = 4;
+  int64 room_table_id = 3;
 }
 
 message FromChildToParent {
@@ -39,8 +40,7 @@ message FromChildToParent {
   bool status = 2;
   string msg = 3;
   string recording_id = 4;
-  string room_id = 5;
-  string room_sid = 6;
+  int64 room_table_id = 5;
 }
 
 enum RecordingTasks {
@@ -58,9 +58,8 @@ enum RecordingTasks {
 }
 
 message StartRecorderChildArgs {
-    string room_id = 1;
+  int64 room_table_id = 1;
     string recording_id = 2;
-    string room_sid = 3;
     string access_token = 4;
     PlugNmeetInfo plug_n_meet_info = 5;
     bool post_mp4_convert = 6;

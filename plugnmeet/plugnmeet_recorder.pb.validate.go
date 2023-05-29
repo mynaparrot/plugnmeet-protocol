@@ -61,7 +61,7 @@ func (m *PlugNmeetToRecorder) validate(all bool) error {
 
 	// no validation rules for Task
 
-	// no validation rules for RoomId
+	// no validation rules for RoomTableId
 
 	// no validation rules for RoomSid
 
@@ -187,6 +187,8 @@ func (m *RecorderToPlugNmeet) validate(all bool) error {
 
 	// no validation rules for RecordingId
 
+	// no validation rules for RoomTableId
+
 	// no validation rules for RoomId
 
 	// no validation rules for RoomSid
@@ -303,9 +305,7 @@ func (m *FromParentToChild) validate(all bool) error {
 
 	// no validation rules for RecordingId
 
-	// no validation rules for RoomId
-
-	// no validation rules for RoomSid
+	// no validation rules for RoomTableId
 
 	if len(errors) > 0 {
 		return FromParentToChildMultiError(errors)
@@ -417,9 +417,7 @@ func (m *FromChildToParent) validate(all bool) error {
 
 	// no validation rules for RecordingId
 
-	// no validation rules for RoomId
-
-	// no validation rules for RoomSid
+	// no validation rules for RoomTableId
 
 	if len(errors) > 0 {
 		return FromChildToParentMultiError(errors)
@@ -523,11 +521,9 @@ func (m *StartRecorderChildArgs) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for RoomId
+	// no validation rules for RoomTableId
 
 	// no validation rules for RecordingId
-
-	// no validation rules for RoomSid
 
 	// no validation rules for AccessToken
 
