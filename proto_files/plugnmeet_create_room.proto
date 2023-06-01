@@ -52,6 +52,7 @@ message RoomCreateFeatures {
   DisplayExternalLinkFeatures display_external_link_features = 18;
   IngressFeatures ingress_features = 19;
   SpeechToTextTranslationFeatures speech_to_text_translation_features = 20;
+  EndToEndEncryptionFeatures end_to_end_encryption_features = 21;
 }
 
 message ChatFeatures {
@@ -116,8 +117,8 @@ message RecordingFeatures {
 message IngressFeatures {
   bool is_allow = 1;
   IngressInput input_type = 2;
-  string url = 3 [(validate.rules).string.const = ""];;
-  string stream_key = 4 [(validate.rules).string.const = ""];;
+  string url = 3 [(validate.rules).string.const = ""];
+  string stream_key = 4 [(validate.rules).string.const = ""];
 }
 
 message SpeechToTextTranslationFeatures {
@@ -126,8 +127,13 @@ message SpeechToTextTranslationFeatures {
   bool is_enabled = 3 [(validate.rules).bool.const = false];
   bool is_enabled_translation = 4 [(validate.rules).bool.const = false];
   repeated string allowed_speech_langs = 7 [(validate.rules).repeated.max_items = 0];
-  repeated string allowed_speech_users = 8 [(validate.rules).repeated.max_items = 0];;
-  repeated string allowed_trans_langs = 9 [(validate.rules).repeated.max_items = 0];;
+  repeated string allowed_speech_users = 8 [(validate.rules).repeated.max_items = 0];
+  repeated string allowed_trans_langs = 9 [(validate.rules).repeated.max_items = 0];
+}
+
+message EndToEndEncryptionFeatures {
+  bool is_enabled = 1;
+  optional string encryption_key = 2 [(validate.rules).string.const = ""];
 }
 
 message CopyrightConf {

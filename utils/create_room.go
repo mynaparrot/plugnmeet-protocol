@@ -84,6 +84,18 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 		}
 	}
 
+	if rf.EndToEndEncryptionFeatures == nil {
+		rf.EndToEndEncryptionFeatures = &plugnmeet.EndToEndEncryptionFeatures{
+			IsEnabled: false,
+		}
+	} else if rf.EndToEndEncryptionFeatures.IsEnabled {
+		randomKey, err := GenerateSecureRandomStrings(32)
+		if err != nil {
+			randomKey = GenerateRandomStrings(32)
+		}
+		rf.EndToEndEncryptionFeatures.EncryptionKey = &randomKey
+	}
+
 	if r.Metadata.DefaultLockSettings == nil {
 		r.Metadata.DefaultLockSettings = new(plugnmeet.LockSettings)
 	}

@@ -1,14 +1,19 @@
 package utils
 
 import (
+	"crypto/rand"
+	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"github.com/livekit/protocol/livekit"
 	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 	"io/fs"
+	"math/big"
+	rd "math/rand"
 	"path/filepath"
 	"sort"
+	"time"
 )
 
 func PrepareCommonWebhookNotifyEvent(event *livekit.WebhookEvent) *plugnmeet.CommonNotifyEvent {
@@ -104,4 +109,25 @@ func GetFilesFromDir(path, ext, s string) ([]string, error) {
 		sort.Sort(sort.Reverse(sort.StringSlice(files)))
 	}
 	return files, nil
+}
+
+func GenerateSecureRandomStrings(n int) (string, error) {
+	const letters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+	ret := make([]byte, n)
+	for i := 0; i < n; i++ {
+		num, err := rand.Int(rand.Reader, big.NewInt(int64(len(letters))))
+		if err != nil {
+			return "", err
+		}
+		ret[i] = letters[num.Int64()]
+	}
+
+	return string(ret), nil
+}
+
+func GenerateRandomStrings(n int) string {
+	r := rd.New(rd.NewSource(time.Now().UnixNano()))
+	b := make([]byte, n+2)
+	r.Read(b)
+	return fmt.Sprintf("%x", b)[2 : n+2]
 }
