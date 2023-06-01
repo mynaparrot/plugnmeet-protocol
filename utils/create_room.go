@@ -88,12 +88,6 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 		rf.EndToEndEncryptionFeatures = &plugnmeet.EndToEndEncryptionFeatures{
 			IsEnabled: false,
 		}
-	} else if rf.EndToEndEncryptionFeatures.IsEnabled {
-		randomKey, err := GenerateSecureRandomStrings(32)
-		if err != nil {
-			randomKey = GenerateRandomStrings(32)
-		}
-		rf.EndToEndEncryptionFeatures.EncryptionKey = &randomKey
 	}
 
 	if r.Metadata.DefaultLockSettings == nil {
@@ -120,6 +114,14 @@ func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize uint64, allo
 
 	if rf.BreakoutRoomFeatures.IsAllow && rf.BreakoutRoomFeatures.AllowedNumberRooms == 0 {
 		rf.BreakoutRoomFeatures.AllowedNumberRooms = 6
+	}
+
+	if rf.EndToEndEncryptionFeatures.IsEnabled {
+		randomKey, err := GenerateSecureRandomStrings(32)
+		if err != nil {
+			randomKey = GenerateRandomStrings(32)
+		}
+		rf.EndToEndEncryptionFeatures.EncryptionKey = &randomKey
 	}
 }
 
