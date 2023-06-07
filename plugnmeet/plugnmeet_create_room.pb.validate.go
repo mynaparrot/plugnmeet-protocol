@@ -381,6 +381,21 @@ func (m *RoomMetadata) validate(all bool) error {
 
 	}
 
+	if m.MetadataId != nil {
+
+		if m.GetMetadataId() != "" {
+			err := RoomMetadataValidationError{
+				field:  "MetadataId",
+				reason: "value must equal ",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return RoomMetadataMultiError(errors)
 	}

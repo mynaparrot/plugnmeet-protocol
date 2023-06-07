@@ -30,6 +30,8 @@ message RoomMetadata {
   RoomCreateFeatures room_features = 10 [(validate.rules).any.required = true];
   LockSettings default_lock_settings = 11;
   CopyrightConf copyright_conf = 12;
+  // we'll use this as version control
+  optional string metadata_id = 13 [(validate.rules).string.const = ""];
 }
 
 message RoomCreateFeatures {
