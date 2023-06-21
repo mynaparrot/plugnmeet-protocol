@@ -1866,6 +1866,8 @@ func (m *RecordingFeatures) validate(all bool) error {
 
 	// no validation rules for IsAllowLocal
 
+	// no validation rules for OnlyRecordAdminWebcams
+
 	if len(errors) > 0 {
 		return RecordingFeaturesMultiError(errors)
 	}

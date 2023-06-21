@@ -114,6 +114,7 @@ message RecordingFeatures {
   bool is_allow_cloud = 2;
   bool enable_auto_cloud_recording = 3;
   bool is_allow_local = 4;
+  bool only_record_admin_webcams = 5;
 }
 
 message IngressFeatures {
