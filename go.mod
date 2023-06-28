@@ -8,7 +8,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.47.0
 	github.com/livekit/protocol v1.5.7
 	github.com/redis/go-redis/v9 v9.0.5
-	google.golang.org/protobuf v1.30.0
+	google.golang.org/protobuf v1.31.0
 )
 
 require (
