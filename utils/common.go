@@ -13,6 +13,7 @@ import (
 	rd "math/rand"
 	"path/filepath"
 	"sort"
+	"strings"
 	"time"
 )
 
@@ -95,7 +96,7 @@ func GetFilesFromDir(path, ext, s string) ([]string, error) {
 		if e != nil {
 			return e
 		}
-		if filepath.Ext(d.Name()) == ext {
+		if filepath.Ext(d.Name()) == ext && checkIfAllowedFilePrefix(d.Name()) {
 			files = append(files, d.Name())
 		}
 		return nil
@@ -109,6 +110,16 @@ func GetFilesFromDir(path, ext, s string) ([]string, error) {
 		sort.Sort(sort.Reverse(sort.StringSlice(files)))
 	}
 	return files, nil
+}
+
+func checkIfAllowedFilePrefix(f string) bool {
+	allowedPrefix := []string{"main", "runtime", "vendor", "tflite"}
+	for _, p := range allowedPrefix {
+		if strings.HasPrefix(f, p) {
+			return true
+		}
+	}
+	return false
 }
 
 func GenerateSecureRandomStrings(n int) (string, error) {
