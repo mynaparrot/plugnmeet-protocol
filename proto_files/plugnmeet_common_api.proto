@@ -20,6 +20,7 @@ message VerifyTokenRes {
   optional string livekit_host = 3;
   optional string token = 4;
   optional string server_version = 5;
+  bool enabled_e2ee = 6;
 }
 
 message MuteUnMuteTrackReq {

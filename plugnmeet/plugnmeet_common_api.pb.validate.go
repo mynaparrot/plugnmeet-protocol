@@ -269,6 +269,8 @@ func (m *VerifyTokenRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	// no validation rules for EnabledE2Ee
+
 	if m.LivekitHost != nil {
 		// no validation rules for LivekitHost
 	}
