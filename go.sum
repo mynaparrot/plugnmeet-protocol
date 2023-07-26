@@ -33,6 +33,8 @@ github.com/livekit/protocol v1.5.8 h1:Q8Ctyq3rhv+trg0Hnd2rKncKAa9QAMlQO7zAUxvz4T
 github.com/livekit/protocol v1.5.8/go.mod h1:B6hJiuXT84dHsUgaKHBo+ZLPX4XhklptYA2UbANSiNg=
 github.com/livekit/protocol v1.5.9 h1:fqPOLgKkWmkmUMnpfj2KDZlidHgAazAPU2T3FewyLew=
 github.com/livekit/protocol v1.5.9/go.mod h1:GMTlFbc0JypUGo+PMilDrL45AX+yUBiQ1Cl/FGZibDY=
+github.com/livekit/protocol v1.5.10 h1:lnaHMa27cbRkHybi/jvOVuRSaLsho2wCLRjKiC6ce2Y=
+github.com/livekit/protocol v1.5.10/go.mod h1:eRzojAYSPJuNgDHMlvLji/CPauj9hrgvb6rVPUj6MoU=
 github.com/mattn/go-colorable v0.1.13 h1:fFA4WZxdEF4tXPZVKMLwD8oUnCTTo08duU7wxecdEvA=
 github.com/mattn/go-colorable v0.1.13/go.mod h1:7S9/ev0klgBDR4GtXTXX8a3vIGJpMovkB8vQcUbaXHg=
 github.com/mattn/go-isatty v0.0.16/go.mod h1:kYGgaQfpe5nmfYZH+SKPsOc2e4SrIfOl2e/yFXSvRLM=
@@ -132,6 +134,8 @@ google.golang.org/grpc v1.55.0 h1:3Oj82/tFSCeUrRTg/5E/7d/W5A1tj6Ky1ABAuZuv5ag=
 google.golang.org/grpc v1.55.0/go.mod h1:iYEXKGkEBhg1PjZQvoYEVPTDkHo1/bjTnfwTeGONTY8=
 google.golang.org/grpc v1.56.1 h1:z0dNfjIl0VpaZ9iSVjA6daGatAYwPGstTjt5vkRMFkQ=
 google.golang.org/grpc v1.56.1/go.mod h1:I9bI3vqKfayGqPUAwGdOSu7kt6oIJLixfffKrpXqQ9s=
+google.golang.org/grpc v1.56.2 h1:fVRFRnXvU+x6C4IlHZewvJOVHoOv1TUuQyoRsYnB4bI=
+google.golang.org/grpc v1.56.2/go.mod h1:I9bI3vqKfayGqPUAwGdOSu7kt6oIJLixfffKrpXqQ9s=
 google.golang.org/protobuf v1.26.0-rc.1/go.mod h1:jlhhOSvTdKEhbULTjvd4ARK9grFBp09yW+WbY/TyQbw=
 google.golang.org/protobuf v1.26.0/go.mod h1:9q0QmTI4eRPtz6boOQmLYwt+qCgq0jsYwAQnmE0givc=
 google.golang.org/protobuf v1.30.0 h1:kPPoIgf3TsEvrm0PFe15JQ+570QVxYzEvvHqChK+cng=
