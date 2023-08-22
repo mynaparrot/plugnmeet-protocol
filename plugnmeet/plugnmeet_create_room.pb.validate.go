@@ -396,6 +396,10 @@ func (m *RoomMetadata) validate(all bool) error {
 
 	}
 
+	if m.ExtraData != nil {
+		// no validation rules for ExtraData
+	}
+
 	if len(errors) > 0 {
 		return RoomMetadataMultiError(errors)
 	}
