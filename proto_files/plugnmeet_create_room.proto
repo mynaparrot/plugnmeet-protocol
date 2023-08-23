@@ -78,7 +78,7 @@ message SharedNotePadFeatures {
 message WhiteboardFeatures {
   bool allowed_whiteboard = 1;
   bool visible = 2 [(validate.rules).bool.const = false];
-  string preload_file = 3;
+  optional string preload_file = 3 [(validate.rules).string.uri = true];
   string whiteboard_file_id = 4 [(validate.rules).string.const = ""];
   string file_name = 5 [(validate.rules).string.const = ""];
   string file_path = 6 [(validate.rules).string.const = ""];
