@@ -66,5 +66,8 @@ enum DataMsgBodyType {
   PAGE_CHANGE = 21;
   WHITEBOARD_APP_STATE_CHANGE = 22;
 
-  // next ID: 26
+  // analytics
+  ANALYTICS_DATA = 27;
+
+  // next ID: 28
 }
