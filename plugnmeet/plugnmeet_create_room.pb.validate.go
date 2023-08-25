@@ -515,6 +515,8 @@ func (m *RoomCreateFeatures) validate(all bool) error {
 
 	// no validation rules for AllowPolls
 
+	// no validation rules for EnableAnalytics
+
 	if all {
 		switch v := interface{}(m.GetRecordingFeatures()).(type) {
 		case interface{ ValidateAll() error }:

@@ -19,13 +19,40 @@ message AnalyticsDataMsg {
   optional int64 time = 8;
 }
 
+message AnalyticsEventData{
+  string name = 1;
+  uint32 total = 2;
+  repeated string values = 3;
+}
+
+message AnalyticsRoomInfo {
+  string room_id = 1;
+  string room_title = 2;
+  int64 room_total_users = 3;
+  int64 room_creation = 4;
+  int64 room_ended = 5;
+  int64 room_duration = 6;
+  repeated AnalyticsEventData events = 9;
+}
+
+message AnalyticsUserInfo {
+  string user_id = 1;
+  string name = 2;
+  repeated AnalyticsEventData events = 3;
+}
+
+message AnalyticsResult {
+    AnalyticsRoomInfo room = 1;
+    repeated AnalyticsUserInfo users = 2;
+}
+
 enum AnalyticsEvents {
   ANALYTICS_EVENT_UNKNOWN = 0;
   // room related
   ANALYTICS_EVENT_ROOM_POLL_ADDED = 1;
   // user join will be room related
   // after take record it will pass to user
-  ANALYTICS_EVENT_ROOM_USER_JOIN  = 2;
+  ANALYTICS_EVENT_USER_JOINED  = 2;
 
   // room recorder
   ANALYTICS_EVENT_ROOM_RECORDING_STARTED = 3;
@@ -49,7 +76,7 @@ enum AnalyticsEvents {
   ANALYTICS_EVENT_ROOM_INGRESS_CREATED = 16;
 
   // here all related with user
-  ANALYTICS_EVENT_ROOM_USER_LEFT  = 17;
+  ANALYTICS_EVENT_USER_LEFT  = 17;
   // microphone
   ANALYTICS_EVENT_USER_STARTED_MIC = 18;
   ANALYTICS_EVENT_USER_STOPPED_MIC = 19;
