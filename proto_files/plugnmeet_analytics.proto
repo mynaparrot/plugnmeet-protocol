@@ -18,6 +18,7 @@ message AnalyticsDataMsg {
   optional string user_id = 7;
   optional string user_name = 8;
   optional int64 time = 9;
+  bool is_admin = 10;
 }
 
 message AnalyticsEventData{
@@ -39,12 +40,20 @@ message AnalyticsRoomInfo {
 message AnalyticsUserInfo {
   string user_id = 1;
   string name = 2;
-  repeated AnalyticsEventData events = 3;
+  bool is_admin = 3;
+  optional string extra_data = 4;
+  repeated AnalyticsEventData events = 5;
 }
 
 message AnalyticsResult {
     AnalyticsRoomInfo room = 1;
     repeated AnalyticsUserInfo users = 2;
+}
+
+message AnalyticsRedisUserInfo {
+  optional string name = 1;
+  bool is_admin = 2;
+  optional string extra_data = 3;
 }
 
 enum AnalyticsEvents {
