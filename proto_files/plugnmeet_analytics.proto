@@ -18,7 +18,7 @@ message AnalyticsDataMsg {
   optional string user_id = 7;
   optional string user_name = 8;
   optional int64 time = 9;
-  bool is_admin = 10;
+  optional string extra_data = 10;
 }
 
 message AnalyticsEventData{

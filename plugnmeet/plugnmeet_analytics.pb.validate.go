@@ -61,8 +61,6 @@ func (m *AnalyticsDataMsg) validate(all bool) error {
 
 	// no validation rules for EventName
 
-	// no validation rules for IsAdmin
-
 	if m.EventValueString != nil {
 		// no validation rules for EventValueString
 	}
@@ -89,6 +87,10 @@ func (m *AnalyticsDataMsg) validate(all bool) error {
 
 	if m.Time != nil {
 		// no validation rules for Time
+	}
+
+	if m.ExtraData != nil {
+		// no validation rules for ExtraData
 	}
 
 	if len(errors) > 0 {
