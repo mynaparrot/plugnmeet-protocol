@@ -11,12 +11,13 @@ enum AnalyticsEventType {
 message AnalyticsDataMsg {
   AnalyticsEventType event_type = 1;
   AnalyticsEvents event_name = 2;
-  optional string event_value = 3;
-  optional string room_id = 4;
-  optional string room_sid = 5;
-  optional string user_id = 6;
-  optional string user_name = 7;
-  optional int64 time = 8;
+  optional string event_value_string = 3; // it will always use SET
+  optional int64 event_value_integer = 4; // it will always use INCRBY
+  optional string room_id = 5;
+  optional string room_sid = 6;
+  optional string user_id = 7;
+  optional string user_name = 8;
+  optional int64 time = 9;
 }
 
 message AnalyticsEventData{
@@ -72,6 +73,7 @@ enum AnalyticsEvents {
 
   ANALYTICS_EVENT_ROOM_SPEECH_SERVICE_STARTED = 14;
   ANALYTICS_EVENT_ROOM_SPEECH_SERVICE_ENDED = 15;
+  ANALYTICS_EVENT_ROOM_SPEECH_SERVICE_TOTAL_USAGE = 35;
 
   ANALYTICS_EVENT_ROOM_INGRESS_CREATED = 16;
 
@@ -106,6 +108,7 @@ enum AnalyticsEvents {
   // etc
   ANALYTICS_EVENT_USER_INVISIBLE_INTERFACE = 32;
   ANALYTICS_EVENT_USER_RAISE_HAND = 33;
+  ANALYTICS_EVENT_USER_SPEECH_SERVICES_USAGE = 34;
 
-  // next ID: 34
+  // next ID: 36
 }

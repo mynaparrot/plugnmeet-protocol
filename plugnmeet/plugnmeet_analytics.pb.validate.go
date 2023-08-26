@@ -61,8 +61,12 @@ func (m *AnalyticsDataMsg) validate(all bool) error {
 
 	// no validation rules for EventName
 
-	if m.EventValue != nil {
-		// no validation rules for EventValue
+	if m.EventValueString != nil {
+		// no validation rules for EventValueString
+	}
+
+	if m.EventValueInteger != nil {
+		// no validation rules for EventValueInteger
 	}
 
 	if m.RoomId != nil {
