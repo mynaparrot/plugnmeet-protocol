@@ -69,8 +69,8 @@ func (m *AnalyticsDataMsg) validate(all bool) error {
 		// no validation rules for EventValueInteger
 	}
 
-	if m.ZsetMemberValue != nil {
-		// no validation rules for ZsetMemberValue
+	if m.HsetValue != nil {
+		// no validation rules for HsetValue
 	}
 
 	if m.RoomId != nil {

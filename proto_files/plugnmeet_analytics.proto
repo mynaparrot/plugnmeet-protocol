@@ -13,7 +13,7 @@ message AnalyticsDataMsg {
   AnalyticsEvents event_name = 2;
   optional string event_value_string = 3; // it will always use SET
   optional int64 event_value_integer = 4; // it will always use INCRBY
-  optional string zset_member_value = 5; // for zset member
+  optional string hset_value = 5; // for HSET value
   optional string room_id = 6;
   optional string room_sid = 7;
   optional string user_id = 8;
@@ -100,7 +100,7 @@ enum AnalyticsEvents {
   ANALYTICS_EVENT_USER_STOPPED_MIC = 19;
   ANALYTICS_EVENT_USER_MUTED_MIC   = 20;
   ANALYTICS_EVENT_USER_UNMUTED_MIC = 21;
-  ANALYTICS_EVENT_USER_TALKED = 41;
+  ANALYTICS_EVENT_USER_TALKED = 39;
 
   // webcam
   ANALYTICS_EVENT_USER_STARTED_WEBCAM = 22;
@@ -123,16 +123,13 @@ enum AnalyticsEvents {
   ANALYTICS_EVENT_USER_WHITEBOARD_FILES_ADDED = 31;
 
   // etc
-  ANALYTICS_EVENT_USER_INTERFACE_INVISIBILITY = 32;
+  ANALYTICS_EVENT_USER_INTERFACE_VISIBILITY = 32;
   ANALYTICS_EVENT_USER_RAISE_HAND = 33;
   ANALYTICS_EVENT_USER_SPEECH_SERVICES_USAGE = 34;
   ANALYTICS_EVENT_USER_SPEECH_SERVICES_STARTED = 36;
   ANALYTICS_EVENT_USER_SPEECH_SERVICES_ENDED = 37;
 
-  ANALYTICS_EVENT_USER_CONNECTION_QUALITY_EXCELLENT = 38;
-  ANALYTICS_EVENT_USER_CONNECTION_QUALITY_GOOD = 39;
-  ANALYTICS_EVENT_USER_CONNECTION_QUALITY_POOR = 40;
+  ANALYTICS_EVENT_USER_CONNECTION_QUALITY = 38;
 
-
-  // next ID: 43
+  // next ID: 40
 }
