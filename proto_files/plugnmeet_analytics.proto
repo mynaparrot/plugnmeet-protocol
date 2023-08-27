@@ -46,6 +46,7 @@ message AnalyticsRoomInfo {
   int64 room_creation = 4;
   int64 room_ended = 5;
   int64 room_duration = 6;
+  bool enabled_e2ee = 7;
   repeated AnalyticsEventData events = 9;
 }
 

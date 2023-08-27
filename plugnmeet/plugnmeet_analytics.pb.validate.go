@@ -451,6 +451,8 @@ func (m *AnalyticsRoomInfo) validate(all bool) error {
 
 	// no validation rules for RoomDuration
 
+	// no validation rules for EnabledE2Ee
+
 	for idx, item := range m.GetEvents() {
 		_, _ = idx, item
 
