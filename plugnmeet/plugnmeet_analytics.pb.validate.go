@@ -61,6 +61,10 @@ func (m *AnalyticsDataMsg) validate(all bool) error {
 
 	// no validation rules for EventName
 
+	// no validation rules for RoomId
+
+	// no validation rules for Time
+
 	if m.EventValueString != nil {
 		// no validation rules for EventValueString
 	}
@@ -73,10 +77,6 @@ func (m *AnalyticsDataMsg) validate(all bool) error {
 		// no validation rules for HsetValue
 	}
 
-	if m.RoomId != nil {
-		// no validation rules for RoomId
-	}
-
 	if m.RoomSid != nil {
 		// no validation rules for RoomSid
 	}
@@ -87,10 +87,6 @@ func (m *AnalyticsDataMsg) validate(all bool) error {
 
 	if m.UserName != nil {
 		// no validation rules for UserName
-	}
-
-	if m.Time != nil {
-		// no validation rules for Time
 	}
 
 	if m.ExtraData != nil {

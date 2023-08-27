@@ -11,14 +11,20 @@ enum AnalyticsEventType {
 message AnalyticsDataMsg {
   AnalyticsEventType event_type = 1;
   AnalyticsEvents event_name = 2;
-  optional string event_value_string = 3; // it will always use SET
-  optional int64 event_value_integer = 4; // it will always use INCRBY
-  optional string hset_value = 5; // for HSET value
-  optional string room_id = 6;
-  optional string room_sid = 7;
-  optional string user_id = 8;
-  optional string user_name = 9;
-  optional int64 time = 10;
+  string room_id = 3;
+  // should be unix milliseconds
+  int64 time = 4;
+  // if we pass value here then it will use redis SET to set the value for the key
+  optional string event_value_string = 5;
+  // if we pass value here then it will use redis INCRBY to increment value for the key
+  optional int64 event_value_integer = 6;
+  // if we pass value here then it will use redis HSET to set hash field value for the key
+  // hash field will be unix milliseconds, so it will remain unique as always
+  optional string hset_value = 7;
+  optional string room_sid = 8;
+  optional string user_id = 9;
+  optional string user_name = 10;
+  // this extra_data can be use for various purposes like, room or user metadata
   optional string extra_data = 11;
 }
 
@@ -94,25 +100,22 @@ enum AnalyticsEvents {
   ANALYTICS_EVENT_USER_WEBCAM_STATUS = 16;
   // screen share
   ANALYTICS_EVENT_USER_SCREEN_SHARE_STATUS = 17;
-
   // polls
   ANALYTICS_EVENT_USER_VOTED_POLL = 18;
-
   // chat
   ANALYTICS_EVENT_USER_PUBLIC_CHAT = 19;
   ANALYTICS_EVENT_USER_PRIVATE_CHAT = 20;
   ANALYTICS_EVENT_USER_CHAT_FILES = 21;
-
   // whiteboard
   ANALYTICS_EVENT_USER_WHITEBOARD_ANNOTATED = 22;
-  ANALYTICS_EVENT_USER_WHITEBOARD_FILES_ADDED = 23;
+  ANALYTICS_EVENT_USER_WHITEBOARD_FILES = 23;
+  // speech services
+  ANALYTICS_EVENT_USER_SPEECH_SERVICES_USAGE = 24;
+  ANALYTICS_EVENT_USER_SPEECH_SERVICES_STATUS = 25;
 
   // etc
-  ANALYTICS_EVENT_USER_INTERFACE_VISIBILITY = 24;
-  ANALYTICS_EVENT_USER_RAISE_HAND = 25;
-  ANALYTICS_EVENT_USER_SPEECH_SERVICES_USAGE = 26;
-  ANALYTICS_EVENT_USER_SPEECH_SERVICES_STATUS = 27;
-
+  ANALYTICS_EVENT_USER_INTERFACE_VISIBILITY = 26;
+  ANALYTICS_EVENT_USER_RAISE_HAND = 27;
   ANALYTICS_EVENT_USER_CONNECTION_QUALITY = 28;
 
   // next ID: 29
