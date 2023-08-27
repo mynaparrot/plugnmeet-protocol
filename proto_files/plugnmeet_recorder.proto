@@ -59,28 +59,31 @@ enum RecordingTasks {
 
 message StartRecorderChildArgs {
   int64 room_table_id = 1;
-    string recording_id = 2;
-    string access_token = 4;
-    PlugNmeetInfo plug_n_meet_info = 5;
-    bool post_mp4_convert = 6;
-    CopyToPath copy_to_path = 7;
-    RecorderServiceType serviceType = 8;
-    optional string recorder_id = 9;
-    optional string rtmp_url = 10;
-    string websocket_url = 11;
-    optional string custom_chrome_path = 12;
+  string recording_id = 2;
+  string access_token = 4;
+  PlugNmeetInfo plug_n_meet_info = 5;
+  bool post_mp4_convert = 6;
+  CopyToPath copy_to_path = 7;
+  RecorderServiceType serviceType = 8;
+  optional string recorder_id = 9;
+  optional string rtmp_url = 10;
+  string websocket_url = 11;
+  optional string custom_chrome_path = 12;
+  optional uint32 width = 13;
+  optional uint32 height = 14;
+  optional uint32 xvfb_dpi = 15;
 }
 
 message PlugNmeetInfo {
-    string host = 1;
-    string api_key = 2;
-    string api_secret = 3;
-    optional string join_host = 4;
+  string host = 1;
+  string api_key = 2;
+  string api_secret = 3;
+  optional string join_host = 4;
 }
 
 message CopyToPath {
-    string main_path = 1;
-    optional string sub_path = 2;
+  string main_path = 1;
+  optional string sub_path = 2;
 }
 
 enum RecorderServiceType {
