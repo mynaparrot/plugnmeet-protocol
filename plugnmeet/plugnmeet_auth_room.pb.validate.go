@@ -1289,3 +1289,505 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetActiveRoomsInfoResValidationError{}
+
+// Validate checks the field values on PastRoomInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *PastRoomInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PastRoomInfo with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in PastRoomInfoMultiError, or
+// nil if none found.
+func (m *PastRoomInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PastRoomInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomTitle
+
+	// no validation rules for RoomId
+
+	// no validation rules for RoomSid
+
+	// no validation rules for JoinedParticipants
+
+	// no validation rules for WebhookUrl
+
+	// no validation rules for Created
+
+	// no validation rules for Ended
+
+	// no validation rules for AnalyticsFileId
+
+	if len(errors) > 0 {
+		return PastRoomInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// PastRoomInfoMultiError is an error wrapping multiple validation errors
+// returned by PastRoomInfo.ValidateAll() if the designated constraints aren't met.
+type PastRoomInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PastRoomInfoMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PastRoomInfoMultiError) AllErrors() []error { return m }
+
+// PastRoomInfoValidationError is the validation error returned by
+// PastRoomInfo.Validate if the designated constraints aren't met.
+type PastRoomInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PastRoomInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PastRoomInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PastRoomInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PastRoomInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PastRoomInfoValidationError) ErrorName() string { return "PastRoomInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PastRoomInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPastRoomInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PastRoomInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PastRoomInfoValidationError{}
+
+// Validate checks the field values on FetchPastRoomsReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *FetchPastRoomsReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on FetchPastRoomsReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// FetchPastRoomsReqMultiError, or nil if none found.
+func (m *FetchPastRoomsReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *FetchPastRoomsReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for From
+
+	// no validation rules for Limit
+
+	// no validation rules for OrderBy
+
+	if len(errors) > 0 {
+		return FetchPastRoomsReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// FetchPastRoomsReqMultiError is an error wrapping multiple validation errors
+// returned by FetchPastRoomsReq.ValidateAll() if the designated constraints
+// aren't met.
+type FetchPastRoomsReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m FetchPastRoomsReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m FetchPastRoomsReqMultiError) AllErrors() []error { return m }
+
+// FetchPastRoomsReqValidationError is the validation error returned by
+// FetchPastRoomsReq.Validate if the designated constraints aren't met.
+type FetchPastRoomsReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e FetchPastRoomsReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e FetchPastRoomsReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e FetchPastRoomsReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e FetchPastRoomsReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e FetchPastRoomsReqValidationError) ErrorName() string {
+	return "FetchPastRoomsReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e FetchPastRoomsReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sFetchPastRoomsReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = FetchPastRoomsReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = FetchPastRoomsReqValidationError{}
+
+// Validate checks the field values on FetchPastRoomsResult with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *FetchPastRoomsResult) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on FetchPastRoomsResult with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// FetchPastRoomsResultMultiError, or nil if none found.
+func (m *FetchPastRoomsResult) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *FetchPastRoomsResult) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TotalRooms
+
+	// no validation rules for From
+
+	// no validation rules for Limit
+
+	// no validation rules for OrderBy
+
+	for idx, item := range m.GetRoomsList() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, FetchPastRoomsResultValidationError{
+						field:  fmt.Sprintf("RoomsList[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, FetchPastRoomsResultValidationError{
+						field:  fmt.Sprintf("RoomsList[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return FetchPastRoomsResultValidationError{
+					field:  fmt.Sprintf("RoomsList[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return FetchPastRoomsResultMultiError(errors)
+	}
+
+	return nil
+}
+
+// FetchPastRoomsResultMultiError is an error wrapping multiple validation
+// errors returned by FetchPastRoomsResult.ValidateAll() if the designated
+// constraints aren't met.
+type FetchPastRoomsResultMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m FetchPastRoomsResultMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m FetchPastRoomsResultMultiError) AllErrors() []error { return m }
+
+// FetchPastRoomsResultValidationError is the validation error returned by
+// FetchPastRoomsResult.Validate if the designated constraints aren't met.
+type FetchPastRoomsResultValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e FetchPastRoomsResultValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e FetchPastRoomsResultValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e FetchPastRoomsResultValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e FetchPastRoomsResultValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e FetchPastRoomsResultValidationError) ErrorName() string {
+	return "FetchPastRoomsResultValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e FetchPastRoomsResultValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sFetchPastRoomsResult.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = FetchPastRoomsResultValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = FetchPastRoomsResultValidationError{}
+
+// Validate checks the field values on FetchPastRoomsRes with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *FetchPastRoomsRes) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on FetchPastRoomsRes with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// FetchPastRoomsResMultiError, or nil if none found.
+func (m *FetchPastRoomsRes) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *FetchPastRoomsRes) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	// no validation rules for Msg
+
+	if all {
+		switch v := interface{}(m.GetResult()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, FetchPastRoomsResValidationError{
+					field:  "Result",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, FetchPastRoomsResValidationError{
+					field:  "Result",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetResult()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return FetchPastRoomsResValidationError{
+				field:  "Result",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return FetchPastRoomsResMultiError(errors)
+	}
+
+	return nil
+}
+
+// FetchPastRoomsResMultiError is an error wrapping multiple validation errors
+// returned by FetchPastRoomsRes.ValidateAll() if the designated constraints
+// aren't met.
+type FetchPastRoomsResMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m FetchPastRoomsResMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m FetchPastRoomsResMultiError) AllErrors() []error { return m }
+
+// FetchPastRoomsResValidationError is the validation error returned by
+// FetchPastRoomsRes.Validate if the designated constraints aren't met.
+type FetchPastRoomsResValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e FetchPastRoomsResValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e FetchPastRoomsResValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e FetchPastRoomsResValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e FetchPastRoomsResValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e FetchPastRoomsResValidationError) ErrorName() string {
+	return "FetchPastRoomsResValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e FetchPastRoomsResValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sFetchPastRoomsRes.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = FetchPastRoomsResValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = FetchPastRoomsResValidationError{}
