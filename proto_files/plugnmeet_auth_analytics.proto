@@ -16,8 +16,9 @@ message AnalyticsInfo {
   string room_id = 1;
   string file_id = 2;
   string file_name = 3;
-  int64 creation_time = 4;
-  int64 room_creation_time = 5;
+  uint64 file_size = 4;
+  int64 creation_time = 5;
+  int64 room_creation_time = 6;
 }
 
 message FetchAnalyticsResult {
