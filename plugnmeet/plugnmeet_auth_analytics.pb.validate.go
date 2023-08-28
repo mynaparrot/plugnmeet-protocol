@@ -171,6 +171,8 @@ func (m *AnalyticsInfo) validate(all bool) error {
 
 	// no validation rules for FileName
 
+	// no validation rules for FileSize
+
 	// no validation rules for CreationTime
 
 	// no validation rules for RoomCreationTime

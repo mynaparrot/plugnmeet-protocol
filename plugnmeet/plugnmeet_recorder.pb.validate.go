@@ -603,6 +603,18 @@ func (m *StartRecorderChildArgs) validate(all bool) error {
 		// no validation rules for CustomChromePath
 	}
 
+	if m.Width != nil {
+		// no validation rules for Width
+	}
+
+	if m.Height != nil {
+		// no validation rules for Height
+	}
+
+	if m.XvfbDpi != nil {
+		// no validation rules for XvfbDpi
+	}
+
 	if len(errors) > 0 {
 		return StartRecorderChildArgsMultiError(errors)
 	}
