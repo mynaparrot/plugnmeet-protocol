@@ -149,3 +149,127 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = RecordingReqValidationError{}
+
+// Validate checks the field values on RecordingInfoFile with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *RecordingInfoFile) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RecordingInfoFile with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RecordingInfoFileMultiError, or nil if none found.
+func (m *RecordingInfoFile) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RecordingInfoFile) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomTableId
+
+	// no validation rules for RoomId
+
+	// no validation rules for RoomTitle
+
+	// no validation rules for RoomSid
+
+	// no validation rules for RoomCreationTime
+
+	// no validation rules for RoomEnded
+
+	// no validation rules for RecordingId
+
+	// no validation rules for RecorderId
+
+	// no validation rules for FilePath
+
+	// no validation rules for FileSize
+
+	// no validation rules for CreationTime
+
+	if len(errors) > 0 {
+		return RecordingInfoFileMultiError(errors)
+	}
+
+	return nil
+}
+
+// RecordingInfoFileMultiError is an error wrapping multiple validation errors
+// returned by RecordingInfoFile.ValidateAll() if the designated constraints
+// aren't met.
+type RecordingInfoFileMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RecordingInfoFileMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RecordingInfoFileMultiError) AllErrors() []error { return m }
+
+// RecordingInfoFileValidationError is the validation error returned by
+// RecordingInfoFile.Validate if the designated constraints aren't met.
+type RecordingInfoFileValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RecordingInfoFileValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RecordingInfoFileValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RecordingInfoFileValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RecordingInfoFileValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RecordingInfoFileValidationError) ErrorName() string {
+	return "RecordingInfoFileValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RecordingInfoFileValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRecordingInfoFile.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RecordingInfoFileValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RecordingInfoFileValidationError{}
