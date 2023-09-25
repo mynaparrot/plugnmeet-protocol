@@ -5,9 +5,7 @@ option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
 enum IngressInput {
   RTMP_INPUT = 0;
-  //    FILE_INPUT = 1;
-  //    SRT_INPUT = 2;
-  //    URL_INPUT = 3;
+  WHIP_INPUT = 1;
 }
 
 message CreateIngressReq {
