@@ -167,6 +167,8 @@ func (m *CreateIngressRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	// no validation rules for InputType
+
 	// no validation rules for Url
 
 	// no validation rules for StreamKey

@@ -17,6 +17,7 @@ message CreateIngressReq {
 message CreateIngressRes {
   bool status = 1;
   string msg = 2;
-  string url = 3;
-  string stream_key = 4;
+  IngressInput input_type = 3;
+  string url = 4;
+  string stream_key = 5;
 }
