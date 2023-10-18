@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-const maxDurationWaitBeforeCleanRoom = 2 // minutes
+const maxDurationWaitBeforeCleanRoom = 1 // minutes
 
 type WebhookNotifier struct {
 	sync.RWMutex
