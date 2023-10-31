@@ -9,7 +9,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.50.0
 	github.com/hashicorp/go-retryablehttp v0.7.4
 	github.com/livekit/protocol v1.8.0
-	github.com/redis/go-redis/v9 v9.2.1
+	github.com/redis/go-redis/v9 v9.3.0
 	github.com/sirupsen/logrus v1.9.3
 	go.uber.org/atomic v1.11.0
 	google.golang.org/protobuf v1.31.0
