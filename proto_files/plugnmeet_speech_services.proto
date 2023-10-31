@@ -12,6 +12,7 @@ message SpeechToTextTranslationReq {
 
   bool is_enabled_translation = 6;
   repeated string allowed_trans_langs = 7;
+  optional string default_subtitle_lang = 8;
 }
 
 message GenerateAzureTokenReq {

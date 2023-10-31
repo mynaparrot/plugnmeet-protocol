@@ -135,6 +135,7 @@ message SpeechToTextTranslationFeatures {
   repeated string allowed_speech_langs = 7 [(validate.rules).repeated.max_items = 0];
   repeated string allowed_speech_users = 8 [(validate.rules).repeated.max_items = 0];
   repeated string allowed_trans_langs = 9 [(validate.rules).repeated.max_items = 0];
+  optional string default_subtitle_lang = 10 [(validate.rules).string.const = ""];
 }
 
 message EndToEndEncryptionFeatures {

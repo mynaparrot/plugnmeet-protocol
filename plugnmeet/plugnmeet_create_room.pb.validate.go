@@ -2184,6 +2184,21 @@ func (m *SpeechToTextTranslationFeatures) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if m.DefaultSubtitleLang != nil {
+
+		if m.GetDefaultSubtitleLang() != "" {
+			err := SpeechToTextTranslationFeaturesValidationError{
+				field:  "DefaultSubtitleLang",
+				reason: "value must equal ",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return SpeechToTextTranslationFeaturesMultiError(errors)
 	}

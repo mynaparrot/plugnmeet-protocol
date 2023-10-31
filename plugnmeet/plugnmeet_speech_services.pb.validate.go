@@ -63,6 +63,10 @@ func (m *SpeechToTextTranslationReq) validate(all bool) error {
 
 	// no validation rules for IsEnabledTranslation
 
+	if m.DefaultSubtitleLang != nil {
+		// no validation rules for DefaultSubtitleLang
+	}
+
 	if len(errors) > 0 {
 		return SpeechToTextTranslationReqMultiError(errors)
 	}
