@@ -512,6 +512,118 @@ var _ interface {
 	ErrorName() string
 } = UserMetadataValidationError{}
 
+// Validate checks the field values on PlugNmeetTokenClaims with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PlugNmeetTokenClaims) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PlugNmeetTokenClaims with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PlugNmeetTokenClaimsMultiError, or nil if none found.
+func (m *PlugNmeetTokenClaims) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PlugNmeetTokenClaims) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Name
+
+	// no validation rules for UserId
+
+	// no validation rules for RoomId
+
+	// no validation rules for IsAdmin
+
+	// no validation rules for IsHidden
+
+	if len(errors) > 0 {
+		return PlugNmeetTokenClaimsMultiError(errors)
+	}
+
+	return nil
+}
+
+// PlugNmeetTokenClaimsMultiError is an error wrapping multiple validation
+// errors returned by PlugNmeetTokenClaims.ValidateAll() if the designated
+// constraints aren't met.
+type PlugNmeetTokenClaimsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PlugNmeetTokenClaimsMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PlugNmeetTokenClaimsMultiError) AllErrors() []error { return m }
+
+// PlugNmeetTokenClaimsValidationError is the validation error returned by
+// PlugNmeetTokenClaims.Validate if the designated constraints aren't met.
+type PlugNmeetTokenClaimsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PlugNmeetTokenClaimsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PlugNmeetTokenClaimsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PlugNmeetTokenClaimsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PlugNmeetTokenClaimsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PlugNmeetTokenClaimsValidationError) ErrorName() string {
+	return "PlugNmeetTokenClaimsValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PlugNmeetTokenClaimsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPlugNmeetTokenClaims.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PlugNmeetTokenClaimsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PlugNmeetTokenClaimsValidationError{}
+
 // Validate checks the field values on LockSettings with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.

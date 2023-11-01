@@ -34,6 +34,14 @@ message UserMetadata {
   optional string metadata_id = 13 [(validate.rules).string.const = ""];
 }
 
+message PlugNmeetTokenClaims {
+  string name = 1;
+  string user_id = 2;
+  string room_id = 3;
+  bool is_admin = 4;
+  bool is_hidden = 5;
+}
+
 message LockSettings {
   optional bool lock_microphone = 1;
   optional bool lock_webcam = 2;
