@@ -8,10 +8,6 @@ import (
 	"time"
 )
 
-const (
-	defaultValidDuration = 6 * time.Hour
-)
-
 func GeneratePlugNmeetJWTAccessToken(apiKey, secret, userId string, tokenValidity time.Duration, c *plugnmeet.PlugNmeetTokenClaims) (string, error) {
 	sig, err := jose.NewSigner(jose.SigningKey{Algorithm: jose.HS256, Key: []byte(secret)},
 		(&jose.SignerOptions{}).WithType("JWT"))
