@@ -63,6 +63,8 @@ func (m *PlugNmeetToRecorder) validate(all bool) error {
 
 	// no validation rules for RoomTableId
 
+	// no validation rules for RoomId
+
 	// no validation rules for RoomSid
 
 	// no validation rules for RecordingId
