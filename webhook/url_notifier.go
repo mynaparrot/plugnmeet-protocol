@@ -86,7 +86,7 @@ func (n *URLNotifier) QueueNotify(event *plugnmeet.CommonNotifyEvent) error {
 			n.params.Logger.Errorln("failed to send webhook", err, "url", n.params.URL, "event:", event.GetEvent(), "roomId:", event.GetRoom().GetRoomId())
 			n.dropped.Add(event.NumDropped + 1)
 		} else {
-			n.params.Logger.Errorln("sent webhook", "url", n.params.URL, "event:", event.GetEvent(), "roomId:", event.GetRoom().GetRoomId())
+			n.params.Logger.Infoln("sent webhook", "url", n.params.URL, "event:", event.GetEvent(), "roomId:", event.GetRoom().GetRoomId())
 		}
 	})
 	return nil
