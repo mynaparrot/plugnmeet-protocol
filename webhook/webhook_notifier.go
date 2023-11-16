@@ -54,13 +54,18 @@ func (a *WebhookNotifier) RoomExist(roomId string) bool {
 	return ok
 }
 
-func (a *WebhookNotifier) SendWebhook(event *plugnmeet.CommonNotifyEvent) error {
+func (a *WebhookNotifier) SendWebhook(event *plugnmeet.CommonNotifyEvent, roomId *string) error {
 	if a == nil || event == nil || event.GetRoom().GetRoomId() == "" {
 		return nil
 	}
 	a.Lock()
 	defer a.Unlock()
-	if queued, ok := a.webhookQueuedNotifier[event.GetRoom().GetRoomId()]; ok {
+
+	checkRoom := event.GetRoom().GetRoomId()
+	if roomId != nil && *roomId != "" {
+		checkRoom = *roomId
+	}
+	if queued, ok := a.webhookQueuedNotifier[checkRoom]; ok {
 		err := queued.QueueNotify(a.ctx, event)
 		if err != nil {
 			return err
