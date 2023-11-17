@@ -14,7 +14,6 @@ message CommonNotifyEvent {
   optional livekit.TrackInfo track = 6;
   optional string id = 9;
   optional int64 created_at = 10;
-  int32 num_dropped = 11;
 }
 
 message NotifyEventRoom {

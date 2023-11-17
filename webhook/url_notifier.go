@@ -33,11 +33,12 @@ import (
 )
 
 type URLNotifierParams struct {
-	Logger    *logrus.Logger
-	QueueSize int
-	URL       string
-	APIKey    string
-	APISecret string
+	Logger     *logrus.Logger
+	QueueSize  int
+	URL        string
+	APIKey     string
+	APISecret  string
+	NumDropped int32
 }
 
 const (
@@ -83,10 +84,10 @@ func (n *URLNotifier) SetKeys(apiKey, apiSecret string) {
 func (n *URLNotifier) QueueNotify(event *plugnmeet.CommonNotifyEvent) error {
 	n.worker.Submit(func() {
 		if err := n.send(event); err != nil {
-			n.params.Logger.Errorln("failed to send webhook", err, "url", n.params.URL, "event:", event.GetEvent(), "roomId:", event.GetRoom().GetRoomId())
-			n.dropped.Add(event.NumDropped + 1)
-		} else {
-			n.params.Logger.Infoln("sent webhook", "url", n.params.URL, "event:", event.GetEvent(), "roomId:", event.GetRoom().GetRoomId())
+			n.params.Logger.Errorln("failed to send webhook,", "url:", n.params.URL, "event:", event.GetEvent(), "roomId:", event.GetRoom().GetRoomId(), "error:", err)
+			n.mu.Lock()
+			n.dropped.Add(n.params.NumDropped + 1)
+			n.mu.Unlock()
 		}
 	})
 	return nil
@@ -102,7 +103,10 @@ func (n *URLNotifier) Stop(force bool) {
 
 func (n *URLNotifier) send(event *plugnmeet.CommonNotifyEvent) error {
 	// set dropped count
-	event.NumDropped = n.dropped.Swap(0)
+	n.mu.Lock()
+	n.params.NumDropped = n.dropped.Swap(0)
+	n.mu.Unlock()
+
 	op := protojson.MarshalOptions{
 		EmitUnpopulated: false,
 		UseProtoNames:   true,

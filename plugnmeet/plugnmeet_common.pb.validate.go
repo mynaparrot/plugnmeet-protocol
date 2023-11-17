@@ -57,8 +57,6 @@ func (m *CommonNotifyEvent) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for NumDropped
-
 	if m.Event != nil {
 		// no validation rules for Event
 	}
