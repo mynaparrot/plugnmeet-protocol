@@ -22,8 +22,8 @@ message RoomMetadata {
   optional string welcome_message = 2;
   bool is_recording = 3 [(buf.validate.field).bool.const = false];
   bool is_active_rtmp = 4 [(buf.validate.field).bool.const = false];
-  string parent_room_id = 5 [(buf.validate.field).string.const = ""];
-  bool is_breakout_room = 6 [(buf.validate.field).bool.const = false];
+  string parent_room_id = 5;
+  bool is_breakout_room = 6;
   optional string webhook_url = 7 [(buf.validate.field).string.uri = true];
   uint64 started_at = 8 [(buf.validate.field).uint64.const = 0];
   optional string logout_url = 9 [(buf.validate.field).string.uri = true];
