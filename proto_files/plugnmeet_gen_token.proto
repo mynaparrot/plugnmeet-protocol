@@ -3,35 +3,35 @@ package plugnmeet;
 
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
-import "validate/validate.proto";
+import "buf/validate/validate.proto";
 
 message GenerateTokenReq {
-  string room_id = 1 [(validate.rules).string = {
+  string room_id = 1 [(buf.validate.field).string = {
     pattern:   "^[a-zA-Z0-9-_.:]+$",
   }];
-  UserInfo user_info = 2 [(validate.rules).any.required = true];
+  UserInfo user_info = 2 [(buf.validate.field).required = true];
 }
 
 message UserInfo {
-  string name = 1 [(validate.rules).string.min_len = 0];
-  string user_id = 2 [(validate.rules).string = {
+  string name = 1 [(buf.validate.field).string.min_len = 0];
+  string user_id = 2 [(buf.validate.field).string = {
     pattern:   "^[a-zA-Z0-9-_.:]+$",
   }];
   bool is_admin = 3;
   bool is_hidden = 4;
-  UserMetadata user_metadata = 5 [(validate.rules).any.required = true];
+  UserMetadata user_metadata = 5 [(buf.validate.field).required = true];
 }
 
 message UserMetadata {
-  optional string profile_pic = 1 [(validate.rules).string.uri = true];
+  optional string profile_pic = 1 [(buf.validate.field).string.uri = true];
   bool is_admin = 2;
   optional bool record_webcam = 7;
-  bool is_presenter = 3 [(validate.rules).bool.const = false];
-  bool raised_hand = 4 [(validate.rules).bool.const = false];
-  bool wait_for_approval = 5 [(validate.rules).bool.const = false];
+  bool is_presenter = 3 [(buf.validate.field).bool.const = false];
+  bool raised_hand = 4 [(buf.validate.field).bool.const = false];
+  bool wait_for_approval = 5 [(buf.validate.field).bool.const = false];
   LockSettings lock_settings = 6;
   // we'll use this as version control
-  optional string metadata_id = 13 [(validate.rules).string.const = ""];
+  optional string metadata_id = 13 [(buf.validate.field).string.const = ""];
 }
 
 message PlugNmeetTokenClaims {

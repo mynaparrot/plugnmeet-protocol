@@ -57,60 +57,43 @@ func (m *CreateRoomReq) validate(all bool) error {
 
 	var errors []error
 
-	if !_CreateRoomReq_RoomId_Pattern.MatchString(m.GetRoomId()) {
-		err := CreateRoomReqValidationError{
-			field:  "RoomId",
-			reason: "value does not match regex pattern \"^[a-zA-Z0-9-_.:]+$\"",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for RoomId
 
-	if m.GetMetadata() == nil {
-		err := CreateRoomReqValidationError{
-			field:  "Metadata",
-			reason: "value is required",
+	if all {
+		switch v := interface{}(m.GetMetadata()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateRoomReqValidationError{
+					field:  "Metadata",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateRoomReqValidationError{
+					field:  "Metadata",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
 		}
-		if !all {
-			return err
+	} else if v, ok := interface{}(m.GetMetadata()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateRoomReqValidationError{
+				field:  "Metadata",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
 		}
-		errors = append(errors, err)
-	}
-
-	if a := m.GetMetadata(); a != nil {
-
 	}
 
 	if m.EmptyTimeout != nil {
-
-		if m.GetEmptyTimeout() <= 0 {
-			err := CreateRoomReqValidationError{
-				field:  "EmptyTimeout",
-				reason: "value must be greater than 0",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-
+		// no validation rules for EmptyTimeout
 	}
 
 	if m.MaxParticipants != nil {
-
-		if m.GetMaxParticipants() <= 0 {
-			err := CreateRoomReqValidationError{
-				field:  "MaxParticipants",
-				reason: "value must be greater than 0",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-
+		// no validation rules for MaxParticipants
 	}
 
 	if len(errors) > 0 {
@@ -191,8 +174,6 @@ var _ interface {
 	ErrorName() string
 } = CreateRoomReqValidationError{}
 
-var _CreateRoomReq_RoomId_Pattern = regexp.MustCompile("^[a-zA-Z0-9-_.:]+$")
-
 // Validate checks the field values on RoomMetadata with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -215,38 +196,11 @@ func (m *RoomMetadata) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetRoomTitle()) < 1 {
-		err := RoomMetadataValidationError{
-			field:  "RoomTitle",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for RoomTitle
 
-	if m.GetIsRecording() != false {
-		err := RoomMetadataValidationError{
-			field:  "IsRecording",
-			reason: "value must equal false",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for IsRecording
 
-	if m.GetIsActiveRtmp() != false {
-		err := RoomMetadataValidationError{
-			field:  "IsActiveRtmp",
-			reason: "value must equal false",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for IsActiveRtmp
 
 	// no validation rules for ParentRoomId
 
@@ -254,19 +208,33 @@ func (m *RoomMetadata) validate(all bool) error {
 
 	// no validation rules for StartedAt
 
-	if m.GetRoomFeatures() == nil {
-		err := RoomMetadataValidationError{
-			field:  "RoomFeatures",
-			reason: "value is required",
+	if all {
+		switch v := interface{}(m.GetRoomFeatures()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RoomMetadataValidationError{
+					field:  "RoomFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RoomMetadataValidationError{
+					field:  "RoomFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
 		}
-		if !all {
-			return err
+	} else if v, ok := interface{}(m.GetRoomFeatures()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RoomMetadataValidationError{
+				field:  "RoomFeatures",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
 		}
-		errors = append(errors, err)
-	}
-
-	if a := m.GetRoomFeatures(); a != nil {
-
 	}
 
 	if all {
@@ -332,68 +300,15 @@ func (m *RoomMetadata) validate(all bool) error {
 	}
 
 	if m.WebhookUrl != nil {
-
-		if uri, err := url.Parse(m.GetWebhookUrl()); err != nil {
-			err = RoomMetadataValidationError{
-				field:  "WebhookUrl",
-				reason: "value must be a valid URI",
-				cause:  err,
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		} else if !uri.IsAbs() {
-			err := RoomMetadataValidationError{
-				field:  "WebhookUrl",
-				reason: "value must be absolute",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-
+		// no validation rules for WebhookUrl
 	}
 
 	if m.LogoutUrl != nil {
-
-		if uri, err := url.Parse(m.GetLogoutUrl()); err != nil {
-			err = RoomMetadataValidationError{
-				field:  "LogoutUrl",
-				reason: "value must be a valid URI",
-				cause:  err,
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		} else if !uri.IsAbs() {
-			err := RoomMetadataValidationError{
-				field:  "LogoutUrl",
-				reason: "value must be absolute",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-
+		// no validation rules for LogoutUrl
 	}
 
 	if m.MetadataId != nil {
-
-		if m.GetMetadataId() != "" {
-			err := RoomMetadataValidationError{
-				field:  "MetadataId",
-				reason: "value must equal ",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-
+		// no validation rules for MetadataId
 	}
 
 	if m.ExtraData != nil {
@@ -1051,71 +966,17 @@ func (m *SharedNotePadFeatures) validate(all bool) error {
 
 	// no validation rules for AllowedSharedNotePad
 
-	if m.GetIsActive() != false {
-		err := SharedNotePadFeaturesValidationError{
-			field:  "IsActive",
-			reason: "value must equal false",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for IsActive
 
-	if m.GetVisible() != false {
-		err := SharedNotePadFeaturesValidationError{
-			field:  "Visible",
-			reason: "value must equal false",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for Visible
 
-	if m.GetNodeId() != "" {
-		err := SharedNotePadFeaturesValidationError{
-			field:  "NodeId",
-			reason: "value must equal ",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for NodeId
 
-	if m.GetHost() != "" {
-		err := SharedNotePadFeaturesValidationError{
-			field:  "Host",
-			reason: "value must equal ",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for Host
 
-	if m.GetNotePadId() != "" {
-		err := SharedNotePadFeaturesValidationError{
-			field:  "NotePadId",
-			reason: "value must equal ",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for NotePadId
 
-	if m.GetReadOnlyPadId() != "" {
-		err := SharedNotePadFeaturesValidationError{
-			field:  "ReadOnlyPadId",
-			reason: "value must equal ",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for ReadOnlyPadId
 
 	if len(errors) > 0 {
 		return SharedNotePadFeaturesMultiError(errors)
@@ -1221,75 +1082,18 @@ func (m *WhiteboardFeatures) validate(all bool) error {
 
 	// no validation rules for AllowedWhiteboard
 
-	if m.GetVisible() != false {
-		err := WhiteboardFeaturesValidationError{
-			field:  "Visible",
-			reason: "value must equal false",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for Visible
 
-	if m.GetWhiteboardFileId() != "" {
-		err := WhiteboardFeaturesValidationError{
-			field:  "WhiteboardFileId",
-			reason: "value must equal ",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for WhiteboardFileId
 
-	if m.GetFileName() != "" {
-		err := WhiteboardFeaturesValidationError{
-			field:  "FileName",
-			reason: "value must equal ",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for FileName
 
-	if m.GetFilePath() != "" {
-		err := WhiteboardFeaturesValidationError{
-			field:  "FilePath",
-			reason: "value must equal ",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for FilePath
 
 	// no validation rules for TotalPages
 
 	if m.PreloadFile != nil {
-
-		if uri, err := url.Parse(m.GetPreloadFile()); err != nil {
-			err = WhiteboardFeaturesValidationError{
-				field:  "PreloadFile",
-				reason: "value must be a valid URI",
-				cause:  err,
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		} else if !uri.IsAbs() {
-			err := WhiteboardFeaturesValidationError{
-				field:  "PreloadFile",
-				reason: "value must be absolute",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-
+		// no validation rules for PreloadFile
 	}
 
 	if len(errors) > 0 {
@@ -1396,45 +1200,14 @@ func (m *ExternalMediaPlayerFeatures) validate(all bool) error {
 
 	// no validation rules for AllowedExternalMediaPlayer
 
-	if m.GetIsActive() != false {
-		err := ExternalMediaPlayerFeaturesValidationError{
-			field:  "IsActive",
-			reason: "value must equal false",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for IsActive
 
 	if m.SharedBy != nil {
-
-		if m.GetSharedBy() != "" {
-			err := ExternalMediaPlayerFeaturesValidationError{
-				field:  "SharedBy",
-				reason: "value must equal ",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-
+		// no validation rules for SharedBy
 	}
 
 	if m.Url != nil {
-
-		if m.GetUrl() != "" {
-			err := ExternalMediaPlayerFeaturesValidationError{
-				field:  "Url",
-				reason: "value must equal ",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-
+		// no validation rules for Url
 	}
 
 	if len(errors) > 0 {
@@ -1648,16 +1421,7 @@ func (m *BreakoutRoomFeatures) validate(all bool) error {
 
 	// no validation rules for IsAllow
 
-	if m.GetIsActive() != false {
-		err := BreakoutRoomFeaturesValidationError{
-			field:  "IsActive",
-			reason: "value must equal false",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for IsActive
 
 	// no validation rules for AllowedNumberRooms
 
@@ -1765,16 +1529,7 @@ func (m *DisplayExternalLinkFeatures) validate(all bool) error {
 
 	// no validation rules for IsAllow
 
-	if m.GetIsActive() != false {
-		err := DisplayExternalLinkFeaturesValidationError{
-			field:  "IsActive",
-			reason: "value must equal false",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for IsActive
 
 	if m.Link != nil {
 		// no validation rules for Link
@@ -2003,27 +1758,9 @@ func (m *IngressFeatures) validate(all bool) error {
 
 	// no validation rules for InputType
 
-	if m.GetUrl() != "" {
-		err := IngressFeaturesValidationError{
-			field:  "Url",
-			reason: "value must equal ",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for Url
 
-	if m.GetStreamKey() != "" {
-		err := IngressFeaturesValidationError{
-			field:  "StreamKey",
-			reason: "value must equal ",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for StreamKey
 
 	if len(errors) > 0 {
 		return IngressFeaturesMultiError(errors)
@@ -2129,74 +1866,12 @@ func (m *SpeechToTextTranslationFeatures) validate(all bool) error {
 
 	// no validation rules for IsAllowTranslation
 
-	if m.GetIsEnabled() != false {
-		err := SpeechToTextTranslationFeaturesValidationError{
-			field:  "IsEnabled",
-			reason: "value must equal false",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for IsEnabled
 
-	if m.GetIsEnabledTranslation() != false {
-		err := SpeechToTextTranslationFeaturesValidationError{
-			field:  "IsEnabledTranslation",
-			reason: "value must equal false",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if len(m.GetAllowedSpeechLangs()) > 0 {
-		err := SpeechToTextTranslationFeaturesValidationError{
-			field:  "AllowedSpeechLangs",
-			reason: "value must contain no more than 0 item(s)",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if len(m.GetAllowedSpeechUsers()) > 0 {
-		err := SpeechToTextTranslationFeaturesValidationError{
-			field:  "AllowedSpeechUsers",
-			reason: "value must contain no more than 0 item(s)",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if len(m.GetAllowedTransLangs()) > 0 {
-		err := SpeechToTextTranslationFeaturesValidationError{
-			field:  "AllowedTransLangs",
-			reason: "value must contain no more than 0 item(s)",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for IsEnabledTranslation
 
 	if m.DefaultSubtitleLang != nil {
-
-		if m.GetDefaultSubtitleLang() != "" {
-			err := SpeechToTextTranslationFeaturesValidationError{
-				field:  "DefaultSubtitleLang",
-				reason: "value must equal ",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-
+		// no validation rules for DefaultSubtitleLang
 	}
 
 	if len(errors) > 0 {
@@ -2305,18 +1980,7 @@ func (m *EndToEndEncryptionFeatures) validate(all bool) error {
 	// no validation rules for IsEnabled
 
 	if m.EncryptionKey != nil {
-
-		if m.GetEncryptionKey() != "" {
-			err := EndToEndEncryptionFeaturesValidationError{
-				field:  "EncryptionKey",
-				reason: "value must equal ",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-
+		// no validation rules for EncryptionKey
 	}
 
 	if len(errors) > 0 {
