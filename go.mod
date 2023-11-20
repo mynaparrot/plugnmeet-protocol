@@ -3,7 +3,7 @@ module github.com/mynaparrot/plugnmeet-protocol
 go 1.21
 
 require (
-	github.com/envoyproxy/protoc-gen-validate v1.0.2
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.31.0-20231115204500-e097f827e652.2
 	github.com/frostbyte73/core v0.0.9
 	github.com/go-jose/go-jose/v3 v3.0.1
 	github.com/go-sql-driver/mysql v1.7.1

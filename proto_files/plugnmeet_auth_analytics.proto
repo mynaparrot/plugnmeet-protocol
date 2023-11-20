@@ -3,7 +3,7 @@ package plugnmeet;
 
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
-import "validate/validate.proto";
+import "buf/validate/validate.proto";
 
 message FetchAnalyticsReq {
   repeated string room_ids = 1;
@@ -36,7 +36,7 @@ message FetchAnalyticsRes{
 }
 
 message DeleteAnalyticsReq {
-  string file_id = 1 [(validate.rules).string.min_len = 1];
+  string file_id = 1 [(buf.validate.field).string.min_len = 1];
 }
 
 message DeleteAnalyticsRes {
@@ -45,7 +45,7 @@ message DeleteAnalyticsRes {
 }
 
 message GetAnalyticsDownloadTokenReq {
-  string file_id = 1 [(validate.rules).string.min_len = 1];
+  string file_id = 1 [(buf.validate.field).string.min_len = 1];
 }
 
 message GetAnalyticsDownloadTokenRes {

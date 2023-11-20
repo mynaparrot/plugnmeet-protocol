@@ -556,16 +556,7 @@ func (m *DeleteAnalyticsReq) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetFileId()) < 1 {
-		err := DeleteAnalyticsReqValidationError{
-			field:  "FileId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for FileId
 
 	if len(errors) > 0 {
 		return DeleteAnalyticsReqMultiError(errors)
@@ -775,16 +766,7 @@ func (m *GetAnalyticsDownloadTokenReq) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetFileId()) < 1 {
-		err := GetAnalyticsDownloadTokenReqValidationError{
-			field:  "FileId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for FileId
 
 	if len(errors) > 0 {
 		return GetAnalyticsDownloadTokenReqMultiError(errors)

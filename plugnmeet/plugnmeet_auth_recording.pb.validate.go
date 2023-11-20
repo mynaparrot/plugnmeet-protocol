@@ -558,16 +558,7 @@ func (m *DeleteRecordingReq) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetRecordId()) < 1 {
-		err := DeleteRecordingReqValidationError{
-			field:  "RecordId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for RecordId
 
 	if len(errors) > 0 {
 		return DeleteRecordingReqMultiError(errors)
@@ -777,16 +768,7 @@ func (m *GetDownloadTokenReq) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetRecordId()) < 1 {
-		err := GetDownloadTokenReqValidationError{
-			field:  "RecordId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for RecordId
 
 	if len(errors) > 0 {
 		return GetDownloadTokenReqMultiError(errors)

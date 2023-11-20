@@ -4,34 +4,44 @@ package plugnmeet;
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
 import "plugnmeet_gen_token.proto";
-import "validate/validate.proto";
+import "buf/validate/validate.proto";
 import "livekit_models.proto";
 import "plugnmeet_ingress.proto";
 
 message CreateRoomReq {
-  string room_id = 1 [(validate.rules).string = {
-    pattern:   "^[a-zA-Z0-9-_.:]+$",
+  string room_id = 1 [(buf.validate.field).cel = {
+    id: "room_id_format",
+    message: "room_id should only contain letters, digits or special characters: -_.:",
+    expression: "this.matches('^[a-zA-Z0-9-_.:]+$')"
   }];
-  optional uint32 empty_timeout = 2 [(validate.rules).uint32.gt = 0];
-  optional uint32 max_participants = 3 [(validate.rules).uint32.gt = 0];
-  RoomMetadata metadata = 4 [(validate.rules).any.required = true];
+  optional uint32 empty_timeout = 2 [(buf.validate.field).uint32.gt = 0];
+  optional uint32 max_participants = 3 [(buf.validate.field).uint32.gt = 0];
+  RoomMetadata metadata = 4 [(buf.validate.field).required = true];
 }
 
 message RoomMetadata {
-  string room_title = 1 [(validate.rules).string.min_len = 1];
+  string room_title = 1 [(buf.validate.field).required = true];
   optional string welcome_message = 2;
-  bool is_recording = 3 [(validate.rules).bool.const = false];
-  bool is_active_rtmp = 4 [(validate.rules).bool.const = false];
-  string parent_room_id = 5;
-  bool is_breakout_room = 6;
-  optional string webhook_url = 7 [(validate.rules).string.uri = true];
-  uint64 started_at = 8;
-  optional string logout_url = 9 [(validate.rules).string.uri = true];
-  RoomCreateFeatures room_features = 10 [(validate.rules).any.required = true];
+  bool is_recording = 3 [(buf.validate.field).bool.const = false];
+  bool is_active_rtmp = 4 [(buf.validate.field).bool.const = false];
+  string parent_room_id = 5 [(buf.validate.field).cel = {
+    id: "parent_room_id_format",
+    message: "parent_room_id should not contain any value",
+    expression: "this.matches('^$')"
+  }];
+  bool is_breakout_room = 6 [(buf.validate.field).bool.const = false];
+  optional string webhook_url = 7 [(buf.validate.field).string.uri = true];
+  uint64 started_at = 8 [(buf.validate.field).uint64.const = 0];
+  optional string logout_url = 9 [(buf.validate.field).string.uri = true];
+  RoomCreateFeatures room_features = 10 [(buf.validate.field).required = true];
   LockSettings default_lock_settings = 11;
   CopyrightConf copyright_conf = 12;
   // we'll use this as version control
-  optional string metadata_id = 13 [(validate.rules).string.const = ""];
+  optional string metadata_id = 13 [(buf.validate.field).cel = {
+    id: "metadata_id_format",
+    message: "metadata_id should not contain any value",
+    expression: "this.matches('^$')"
+  }];
   optional string extra_data = 14;
 }
 
@@ -69,29 +79,65 @@ message ChatFeatures {
 
 message SharedNotePadFeatures {
   bool allowed_shared_note_pad = 1;
-  bool is_active = 2 [(validate.rules).bool.const = false];
-  bool visible = 3 [(validate.rules).bool.const = false];
-  string node_id = 4 [(validate.rules).string.const = ""];
-  string host = 5 [(validate.rules).string.const = ""];
-  string note_pad_id = 6 [(validate.rules).string.const = ""];
-  string read_only_pad_id = 7 [(validate.rules).string.const = ""];
+  bool is_active = 2 [(buf.validate.field).bool.const = false];
+  bool visible = 3 [(buf.validate.field).bool.const = false];
+  string node_id = 4 [(buf.validate.field).cel = {
+    id: "node_id_format",
+    message: "node_id should not contain any value",
+    expression: "this.matches('^$')"
+  }];
+  string host = 5 [(buf.validate.field).cel = {
+    id: "host_format",
+    message: "host should not contain any value",
+    expression: "this.matches('^$')"
+  }];
+  string note_pad_id = 6 [(buf.validate.field).cel = {
+    id: "note_pad_id_format",
+    message: "note_pad_id should not contain any value",
+    expression: "this.matches('^$')"
+  }];
+  string read_only_pad_id = 7 [(buf.validate.field).cel = {
+    id: "read_only_pad_id_format",
+    message: "read_only_pad_id should not contain any value",
+    expression: "this.matches('^$')"
+  }];
 }
 
 message WhiteboardFeatures {
   bool allowed_whiteboard = 1;
-  bool visible = 2 [(validate.rules).bool.const = false];
-  optional string preload_file = 3 [(validate.rules).string.uri = true];
-  string whiteboard_file_id = 4 [(validate.rules).string.const = ""];
-  string file_name = 5 [(validate.rules).string.const = ""];
-  string file_path = 6 [(validate.rules).string.const = ""];
+  bool visible = 2 [(buf.validate.field).bool.const = false];
+  optional string preload_file = 3 [(buf.validate.field).string.uri = true];
+  string whiteboard_file_id = 4 [(buf.validate.field).cel = {
+    id: "whiteboard_file_id_format",
+    message: "whiteboard_file_id should not contain any value",
+    expression: "this.matches('^$')"
+  }];
+  string file_name = 5 [(buf.validate.field).cel = {
+    id: "file_name_format",
+    message: "file_name should not contain any value",
+    expression: "this.matches('^$')"
+  }];
+  string file_path = 6 [(buf.validate.field).cel = {
+    id: "file_path_format",
+    message: "file_path should not contain any value",
+    expression: "this.matches('^$')"
+  }];
   uint32 total_pages = 7;
 }
 
 message ExternalMediaPlayerFeatures {
   bool allowed_external_media_player = 1;
-  bool is_active = 2 [(validate.rules).bool.const = false];
-  optional string shared_by = 3 [(validate.rules).string.const = ""];
-  optional string url = 4 [(validate.rules).string.const = ""];
+  bool is_active = 2 [(buf.validate.field).bool.const = false];
+  optional string shared_by = 3 [(buf.validate.field).cel = {
+    id: "shared_by_format",
+    message: "shared_by should not contain any value",
+    expression: "this.matches('^$')"
+  }];
+  optional string url = 4 [(buf.validate.field).cel = {
+    id: "url_format",
+    message: "url should not contain any value",
+    expression: "this.matches('^$')"
+  }];
 }
 
 message WaitingRoomFeatures {
@@ -101,13 +147,13 @@ message WaitingRoomFeatures {
 
 message BreakoutRoomFeatures {
   bool is_allow = 1;
-  bool is_active = 2 [(validate.rules).bool.const = false];
+  bool is_active = 2 [(buf.validate.field).bool.const = false];
   uint32 allowed_number_rooms = 3;
 }
 
 message DisplayExternalLinkFeatures {
   bool is_allow = 1;
-  bool is_active = 2 [(validate.rules).bool.const = false];
+  bool is_active = 2 [(buf.validate.field).bool.const = false];
   optional string link = 3;
   optional string shared_by = 4;
 }
@@ -123,24 +169,40 @@ message RecordingFeatures {
 message IngressFeatures {
   bool is_allow = 1;
   IngressInput input_type = 2;
-  string url = 3 [(validate.rules).string.const = ""];
-  string stream_key = 4 [(validate.rules).string.const = ""];
+  string url = 3 [(buf.validate.field).cel = {
+    id: "url_format",
+    message: "url should not contain any value",
+    expression: "this.matches('^$')"
+  }];
+  string stream_key = 4 [(buf.validate.field).cel = {
+    id: "stream_key_format",
+    message: "stream_key should not contain any value",
+    expression: "this.matches('^$')"
+  }];
 }
 
 message SpeechToTextTranslationFeatures {
   bool is_allow = 1;
   bool is_allow_translation = 2;
-  bool is_enabled = 3 [(validate.rules).bool.const = false];
-  bool is_enabled_translation = 4 [(validate.rules).bool.const = false];
-  repeated string allowed_speech_langs = 7 [(validate.rules).repeated.max_items = 0];
-  repeated string allowed_speech_users = 8 [(validate.rules).repeated.max_items = 0];
-  repeated string allowed_trans_langs = 9 [(validate.rules).repeated.max_items = 0];
-  optional string default_subtitle_lang = 10 [(validate.rules).string.const = ""];
+  bool is_enabled = 3 [(buf.validate.field).bool.const = false];
+  bool is_enabled_translation = 4 [(buf.validate.field).bool.const = false];
+  repeated string allowed_speech_langs = 7 [(buf.validate.field).repeated.max_items = 0];
+  repeated string allowed_speech_users = 8 [(buf.validate.field).repeated.max_items = 0];
+  repeated string allowed_trans_langs = 9 [(buf.validate.field).repeated.max_items = 0];
+  optional string default_subtitle_lang = 10 [(buf.validate.field).cel = {
+    id: "default_subtitle_lang_format",
+    message: "default_subtitle_lang should not contain any value",
+    expression: "this.matches('^$')"
+  }];
 }
 
 message EndToEndEncryptionFeatures {
   bool is_enabled = 1;
-  optional string encryption_key = 2 [(validate.rules).string.const = ""];
+  optional string encryption_key = 2 [(buf.validate.field).cel = {
+    id: "encryption_key_format",
+    message: "encryption_key should not contain any value",
+    expression: "this.matches('^$')"
+  }];
 }
 
 message CopyrightConf {
