@@ -536,6 +536,270 @@ var _ interface {
 	ErrorName() string
 } = FetchRecordingsResValidationError{}
 
+// Validate checks the field values on RecordingInfoReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *RecordingInfoReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RecordingInfoReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RecordingInfoReqMultiError, or nil if none found.
+func (m *RecordingInfoReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RecordingInfoReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RecordId
+
+	if len(errors) > 0 {
+		return RecordingInfoReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// RecordingInfoReqMultiError is an error wrapping multiple validation errors
+// returned by RecordingInfoReq.ValidateAll() if the designated constraints
+// aren't met.
+type RecordingInfoReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RecordingInfoReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RecordingInfoReqMultiError) AllErrors() []error { return m }
+
+// RecordingInfoReqValidationError is the validation error returned by
+// RecordingInfoReq.Validate if the designated constraints aren't met.
+type RecordingInfoReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RecordingInfoReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RecordingInfoReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RecordingInfoReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RecordingInfoReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RecordingInfoReqValidationError) ErrorName() string { return "RecordingInfoReqValidationError" }
+
+// Error satisfies the builtin error interface
+func (e RecordingInfoReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRecordingInfoReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RecordingInfoReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RecordingInfoReqValidationError{}
+
+// Validate checks the field values on RecordingInfoRes with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *RecordingInfoRes) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RecordingInfoRes with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RecordingInfoResMultiError, or nil if none found.
+func (m *RecordingInfoRes) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RecordingInfoRes) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	// no validation rules for Msg
+
+	if all {
+		switch v := interface{}(m.GetRecordingInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RecordingInfoResValidationError{
+					field:  "RecordingInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RecordingInfoResValidationError{
+					field:  "RecordingInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRecordingInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RecordingInfoResValidationError{
+				field:  "RecordingInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetRoomInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RecordingInfoResValidationError{
+					field:  "RoomInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RecordingInfoResValidationError{
+					field:  "RoomInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRoomInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RecordingInfoResValidationError{
+				field:  "RoomInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return RecordingInfoResMultiError(errors)
+	}
+
+	return nil
+}
+
+// RecordingInfoResMultiError is an error wrapping multiple validation errors
+// returned by RecordingInfoRes.ValidateAll() if the designated constraints
+// aren't met.
+type RecordingInfoResMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RecordingInfoResMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RecordingInfoResMultiError) AllErrors() []error { return m }
+
+// RecordingInfoResValidationError is the validation error returned by
+// RecordingInfoRes.Validate if the designated constraints aren't met.
+type RecordingInfoResValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RecordingInfoResValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RecordingInfoResValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RecordingInfoResValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RecordingInfoResValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RecordingInfoResValidationError) ErrorName() string { return "RecordingInfoResValidationError" }
+
+// Error satisfies the builtin error interface
+func (e RecordingInfoResValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRecordingInfoRes.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RecordingInfoResValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RecordingInfoResValidationError{}
+
 // Validate checks the field values on DeleteRecordingReq with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
