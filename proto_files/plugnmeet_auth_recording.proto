@@ -4,6 +4,7 @@ package plugnmeet;
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
 import "buf/validate/validate.proto";
+import "plugnmeet_auth_room.proto";
 
 message FetchRecordingsReq {
   repeated string room_ids = 1;
@@ -36,8 +37,19 @@ message FetchRecordingsRes{
   FetchRecordingsResult result = 3;
 }
 
+message RecordingInfoReq {
+  string record_id = 1 [(buf.validate.field).required = true];
+}
+
+message RecordingInfoRes {
+  bool status = 1;
+  string msg = 2;
+  RecordingInfo recording_info = 3;
+  PastRoomInfo room_info = 4;
+}
+
 message DeleteRecordingReq {
-  string record_id = 1 [(buf.validate.field).string.min_len = 1];
+  string record_id = 1 [(buf.validate.field).required = true];
 }
 
 message DeleteRecordingRes {
@@ -46,7 +58,7 @@ message DeleteRecordingRes {
 }
 
 message GetDownloadTokenReq {
-  string record_id = 1 [(buf.validate.field).string.min_len = 1];
+  string record_id = 1 [(buf.validate.field).required = true];
 }
 
 message GetDownloadTokenRes {
