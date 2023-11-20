@@ -226,6 +226,39 @@ func (m *CommonNotifyEvent) validate(all bool) error {
 
 	}
 
+	if m.Analytics != nil {
+
+		if all {
+			switch v := interface{}(m.GetAnalytics()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CommonNotifyEventValidationError{
+						field:  "Analytics",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CommonNotifyEventValidationError{
+						field:  "Analytics",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAnalytics()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CommonNotifyEventValidationError{
+					field:  "Analytics",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if m.Id != nil {
 		// no validation rules for Id
 	}
@@ -699,3 +732,107 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SpeechServiceEventValidationError{}
+
+// Validate checks the field values on AnalyticsEvent with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *AnalyticsEvent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AnalyticsEvent with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in AnalyticsEventMultiError,
+// or nil if none found.
+func (m *AnalyticsEvent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AnalyticsEvent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.FileId != nil {
+		// no validation rules for FileId
+	}
+
+	if len(errors) > 0 {
+		return AnalyticsEventMultiError(errors)
+	}
+
+	return nil
+}
+
+// AnalyticsEventMultiError is an error wrapping multiple validation errors
+// returned by AnalyticsEvent.ValidateAll() if the designated constraints
+// aren't met.
+type AnalyticsEventMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AnalyticsEventMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AnalyticsEventMultiError) AllErrors() []error { return m }
+
+// AnalyticsEventValidationError is the validation error returned by
+// AnalyticsEvent.Validate if the designated constraints aren't met.
+type AnalyticsEventValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AnalyticsEventValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AnalyticsEventValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AnalyticsEventValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AnalyticsEventValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AnalyticsEventValidationError) ErrorName() string { return "AnalyticsEventValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AnalyticsEventValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAnalyticsEvent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AnalyticsEventValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AnalyticsEventValidationError{}
