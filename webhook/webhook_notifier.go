@@ -13,7 +13,7 @@ const maxDurationWaitBeforeCleanRoom = 1 // minutes
 type WebhookNotifier struct {
 	sync.RWMutex
 	ctx                   context.Context
-	webhookQueuedNotifier map[string]QueuedNotifier
+	webhookQueuedNotifier map[string]webhookQueuedNotifier
 
 	apiKey    string
 	apiSecret string
@@ -21,10 +21,15 @@ type WebhookNotifier struct {
 	logger    *logrus.Logger
 }
 
+type webhookQueuedNotifier struct {
+	deleteQueuedNotifier bool
+	queuedNotifier       QueuedNotifier
+}
+
 func NewWebhookNotifier(apiKey, apiSecret string, logger *logrus.Logger) *WebhookNotifier {
 	return &WebhookNotifier{
 		ctx:                   context.Background(),
-		webhookQueuedNotifier: make(map[string]QueuedNotifier),
+		webhookQueuedNotifier: make(map[string]webhookQueuedNotifier),
 		apiKey:                apiKey,
 		apiSecret:             apiSecret,
 		logger:                logger,
@@ -39,7 +44,9 @@ func (a *WebhookNotifier) AddToWebhookQueuedNotifier(roomId string, urls []strin
 	a.Lock()
 	defer a.Unlock()
 	if _, ok := a.webhookQueuedNotifier[roomId]; !ok {
-		a.webhookQueuedNotifier[roomId] = NewDefaultNotifier(a.apiKey, a.apiSecret, urls, a.logger)
+		a.webhookQueuedNotifier[roomId] = webhookQueuedNotifier{
+			queuedNotifier: NewDefaultNotifier(a.apiKey, a.apiSecret, urls, a.logger),
+		}
 	}
 }
 
@@ -66,9 +73,21 @@ func (a *WebhookNotifier) SendWebhook(event *plugnmeet.CommonNotifyEvent, roomId
 		checkRoom = *roomId
 	}
 	if queued, ok := a.webhookQueuedNotifier[checkRoom]; ok {
-		err := queued.QueueNotify(a.ctx, event)
+		err := queued.queuedNotifier.QueueNotify(a.ctx, event)
 		if err != nil {
 			return err
+		}
+		// it may happen that the room was created again before we delete the queue
+		// in DeleteWebhookQueuedNotifier
+		// if we delete then no further events will send even the room is active,
+		// so here we'll reset the deleted status
+		if event.GetEvent() == "room_started" && queued.deleteQueuedNotifier {
+			queued.deleteQueuedNotifier = false
+			a.webhookQueuedNotifier[checkRoom] = queued
+		} else if event.GetEvent() == "room_finished" && !queued.deleteQueuedNotifier {
+			// if we got room_finished then we'll set for deleting
+			queued.deleteQueuedNotifier = true
+			a.webhookQueuedNotifier[checkRoom] = queued
 		}
 	}
 	return nil
@@ -83,7 +102,9 @@ func (a *WebhookNotifier) DeleteWebhookQueuedNotifier(roomId string) {
 	time.Sleep(time.Minute * maxDurationWaitBeforeCleanRoom)
 	a.Lock()
 	defer a.Unlock()
-	if _, ok := a.webhookQueuedNotifier[roomId]; ok {
-		delete(a.webhookQueuedNotifier, roomId)
+	if queued, ok := a.webhookQueuedNotifier[roomId]; ok {
+		if queued.deleteQueuedNotifier {
+			delete(a.webhookQueuedNotifier, roomId)
+		}
 	}
 }
