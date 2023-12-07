@@ -44,6 +44,8 @@ type URLNotifierParams struct {
 const (
 	defaultQueueSize = 100
 	authHeader       = "Authorization"
+	hashToken        = "Hash-Token" // in various Apache modules will strip the Authorization header,
+	// so we'll use additional one
 )
 
 // URLNotifier is a QueuedNotifier that sends a POST request to a Webhook URL.
@@ -137,7 +139,10 @@ func (n *URLNotifier) send(event *plugnmeet.CommonNotifyEvent) error {
 		return err
 	}
 	r.Header.Set(authHeader, token)
-	// use a custom mime type to ensure signature is checked prior to parsing
+	// in various Apache modules will strip the Authorization header,
+	// so we'll use additional one for easy use
+	r.Header.Set(hashToken, token)
+	// use a custom mime type to ensure the signature is checked prior to parsing
 	r.Header.Set("content-type", "application/webhook+json")
 	res, err := n.client.Do(r)
 	if err != nil {
