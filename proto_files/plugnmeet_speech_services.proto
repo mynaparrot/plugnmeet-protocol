@@ -26,6 +26,14 @@ message GenerateAzureTokenRes {
   optional string token = 3;
   optional string service_region = 4;
   optional string key_id = 5;
+  bool renew = 6;
+}
+
+message AzureTokenRenewReq {
+  string room_id = 1;
+  string user_sid = 2;
+  string service_region = 3;
+  string key_id = 4;
 }
 
 enum SpeechServiceUserStatusTasks {
