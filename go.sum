@@ -58,6 +58,8 @@ github.com/livekit/mageutil v0.0.0-20230125210925-54e8a70427c1 h1:jm09419p0lqTkD
 github.com/livekit/mageutil v0.0.0-20230125210925-54e8a70427c1/go.mod h1:Rs3MhFwutWhGwmY1VQsygw28z5bWcnEYmS1OG9OxjOQ=
 github.com/livekit/protocol v1.9.1 h1:RTycWwtGUoYLb+7WYosJ3IP8f0e8j4lLxC/osy/dQi0=
 github.com/livekit/protocol v1.9.1/go.mod h1:kqDGmx+WZ6WMZ5V/T9lF8DgnuThAjetwjHq1nd7moSE=
+github.com/livekit/protocol v1.9.3 h1:quHq/9dZ60ZDLFcWaY945qznO9ftgdCpHmaLfNEoi0U=
+github.com/livekit/protocol v1.9.3/go.mod h1:8f342d5nvfNp9YAEfJokSR+zbNFpaivgU0h6vwaYhes=
 github.com/livekit/psrpc v0.5.1 h1:ihN5uKIvbU69UsFS4HdYmou5GuK0Dt4hix4eOmRS7o8=
 github.com/livekit/psrpc v0.5.1/go.mod h1:cQjxg1oCxYHhxxv6KJH1gSvdtCHQoRZCHgPdm5N8v2g=
 github.com/mackerelio/go-osstat v0.2.4 h1:qxGbdPkFo65PXOb/F/nhDKpF2nGmGaCFDLXoZjJTtUs=
