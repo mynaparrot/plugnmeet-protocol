@@ -5,6 +5,7 @@ import (
 	"encoding/xml"
 	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 	"github.com/mynaparrot/plugnmeet-protocol/utils"
+	"net/url"
 	"strings"
 )
 
@@ -19,7 +20,6 @@ type CreateMeetingReq struct {
 	Duration                uint64 `query:"duration"`
 	Record                  bool   `query:"record"`
 	AutoStartRecording      bool   `query:"autoStartRecording"`
-	Meta                    string `query:"meta"`
 	WebcamsOnlyForModerator bool   `query:"webcamsOnlyForModerator"`
 	MuteOnStart             bool   `query:"muteOnStart"`
 	GuestPolicy             string `query:"guestPolicy"` // ALWAYS_ACCEPT, ASK_MODERATOR
@@ -38,11 +38,11 @@ type CreateMeetingReq struct {
 }
 
 type CreateMeetingDefaultExtraData struct {
-	AttendeePW        string `json:"attendeePW"`
-	ModeratorPW       string `json:"moderatorPW"`
-	Logo              string `json:"logo"`
-	OriginalMeetingId string `json:"originalMeetingId"`
-	Meta              string `json:"meta"`
+	AttendeePW        string            `json:"attendeePW"`
+	ModeratorPW       string            `json:"moderatorPW"`
+	Logo              string            `json:"logo"`
+	OriginalMeetingId string            `json:"originalMeetingId"`
+	Meta              map[string]string `json:"meta"`
 }
 
 type CreateMeetingResp struct {
@@ -61,7 +61,7 @@ type CreateMeetingResp struct {
 	Duration          int64    `xml:"duration"`
 }
 
-func ConvertCreateRequest(r *CreateMeetingReq) (*plugnmeet.CreateRoomReq, error) {
+func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*plugnmeet.CreateRoomReq, error) {
 	req := plugnmeet.CreateRoomReq{
 		RoomId: CheckMeetingIdToMatchFormat(r.MeetingID),
 		Metadata: &plugnmeet.RoomMetadata{
@@ -151,12 +151,24 @@ func ConvertCreateRequest(r *CreateMeetingReq) (*plugnmeet.CreateRoomReq, error)
 	// now from the request
 	setLockSettings(req.Metadata.DefaultLockSettings, r)
 
+	meta := map[string]string{}
+	for k, qq := range rawQueries {
+		if strings.Contains(k, "meta_") {
+			val := qq
+			unescape, err := url.QueryUnescape(qq)
+			if err == nil {
+				val = unescape
+			}
+			meta[strings.Replace(k, "meta_", "", 1)] = val
+		}
+	}
+
 	marshal, err := json.Marshal(CreateMeetingDefaultExtraData{
 		ModeratorPW:       r.ModeratorPW,
 		AttendeePW:        r.AttendeePW,
 		OriginalMeetingId: r.MeetingID,
 		Logo:              r.Logo,
-		Meta:              r.Meta,
+		Meta:              meta,
 	})
 	if err != nil {
 		return nil, err
