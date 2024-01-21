@@ -2,20 +2,19 @@ package bbbapiwrapper
 
 import "encoding/xml"
 
-// StringMap is a map[string]string.
-type StringMap map[string]string
+// MetadataMap is a map[string]string.
+type MetadataMap map[string]string
 
-// StringMap marshals into XML.
-func (s StringMap) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
-
+// MarshalXML marshals MetadataMap into XML.
+func (s MetadataMap) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	tokens := []xml.Token{start}
 
 	for key, value := range s {
-		t := xml.StartElement{Name: xml.Name{"", key}}
-		tokens = append(tokens, t, xml.CharData(value), xml.EndElement{t.Name})
+		t := xml.StartElement{Name: xml.Name{Local: key}}
+		tokens = append(tokens, t, xml.CharData(value), xml.EndElement{Name: t.Name})
 	}
 
-	tokens = append(tokens, xml.EndElement{start.Name})
+	tokens = append(tokens, xml.EndElement{Name: start.Name})
 
 	for _, t := range tokens {
 		err := e.EncodeToken(t)

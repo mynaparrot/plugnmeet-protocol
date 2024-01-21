@@ -44,8 +44,8 @@ type MeetingInfo struct {
 	AttendeesInfo         struct {
 		Attendees []Attendee `xml:"attendee"`
 	} `xml:"attendees"`
-	IsBreakout bool      `xml:"isBreakout"`
-	Metadata   StringMap `xml:"metadata"`
+	IsBreakout bool        `xml:"isBreakout"`
+	Metadata   MetadataMap `xml:"metadata"`
 }
 
 type Attendee struct {
