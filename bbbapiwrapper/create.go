@@ -130,16 +130,8 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 		setDifferentFeatures(req.Metadata.RoomFeatures, r.DisabledFeatures)
 	}
 
-	if r.PreUploadedPresentation != "" {
-		if req.Metadata.RoomFeatures.WhiteboardFeatures != nil {
-			req.Metadata.RoomFeatures.WhiteboardFeatures.AllowedWhiteboard = true
-			req.Metadata.RoomFeatures.WhiteboardFeatures.PreloadFile = &r.PreUploadedPresentation
-		} else {
-			req.Metadata.RoomFeatures.WhiteboardFeatures = &plugnmeet.WhiteboardFeatures{
-				AllowedWhiteboard: false,
-				PreloadFile:       &r.PreUploadedPresentation,
-			}
-		}
+	if r.PreUploadedPresentation != "" && req.Metadata.RoomFeatures.WhiteboardFeatures.AllowedWhiteboard {
+		req.Metadata.RoomFeatures.WhiteboardFeatures.PreloadFile = &r.PreUploadedPresentation
 	}
 
 	// lock settings

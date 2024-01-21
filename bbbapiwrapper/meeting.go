@@ -20,42 +20,44 @@ type IsMeetingRunningRes struct {
 }
 
 type MeetingInfo struct {
-	MeetingName           string `xml:"meetingName"`
-	MeetingID             string `xml:"meetingID"`
-	InternalMeetingID     string `xml:"internalMeetingID"`
-	CreateTime            int64  `xml:"createTime"`
-	CreateDate            string `xml:"createDate"`
-	AttendeePW            string `xml:"attendeePW"`  // Deprecated
-	ModeratorPW           string `xml:"moderatorPW"` // Deprecated
-	Running               bool   `xml:"running"`
-	Duration              uint32 `xml:"duration"`
-	HasUserJoined         bool   `xml:"hasUserJoined"`
-	Recording             bool   `xml:"recording"`
-	HasBeenForciblyEnded  bool   `xml:"hasBeenForciblyEnded"`
-	StartTime             int64  `xml:"startTime"`
-	EndTime               int64  `xml:"endTime"`
-	ParticipantCount      int64  `xml:"participantCount"`
-	ListenerCount         int64  `xml:"listenerCount"`
-	VoiceParticipantCount int64  `xml:"voiceParticipantCount"`
-	VideoCount            int64  `xml:"videoCount"`
-	MaxUsers              int64  `xml:"maxUsers"`
-	ModeratorCount        int64  `xml:"moderatorCount"`
-	Attendees             struct {
-		Attendee []Attendee `xml:"attendee"`
+	XMLName               xml.Name `xml:"meeting"`
+	MeetingName           string   `xml:"meetingName"`
+	MeetingID             string   `xml:"meetingID"`
+	InternalMeetingID     string   `xml:"internalMeetingID"`
+	CreateTime            int64    `xml:"createTime"`
+	CreateDate            string   `xml:"createDate"`
+	AttendeePW            string   `xml:"attendeePW"`  // Deprecated
+	ModeratorPW           string   `xml:"moderatorPW"` // Deprecated
+	Running               bool     `xml:"running"`
+	Duration              uint32   `xml:"duration"`
+	HasUserJoined         bool     `xml:"hasUserJoined"`
+	Recording             bool     `xml:"recording"`
+	HasBeenForciblyEnded  bool     `xml:"hasBeenForciblyEnded"`
+	StartTime             int64    `xml:"startTime"`
+	EndTime               int64    `xml:"endTime"`
+	ParticipantCount      int64    `xml:"participantCount"`
+	ListenerCount         int64    `xml:"listenerCount"`
+	VoiceParticipantCount int64    `xml:"voiceParticipantCount"`
+	VideoCount            int64    `xml:"videoCount"`
+	MaxUsers              int64    `xml:"maxUsers"`
+	ModeratorCount        int64    `xml:"moderatorCount"`
+	AttendeesInfo         struct {
+		Attendees []Attendee `xml:"attendee"`
 	} `xml:"attendees"`
 	IsBreakout bool      `xml:"isBreakout"`
 	Metadata   StringMap `xml:"metadata"`
 }
 
 type Attendee struct {
-	UserID          string `xml:"userID"`
-	FullName        string `xml:"fullName"`
-	Role            string `xml:"role"`
-	IsPresenter     bool   `xml:"isPresenter"`
-	IsListeningOnly bool   `xml:"isListeningOnly"`
-	HasJoinedVoice  bool   `xml:"hasJoinedVoice"`
-	HasVideo        bool   `xml:"hasVideo"`
-	ClientType      string `xml:"clientType"`
+	XMLName         xml.Name `xml:"attendee"`
+	UserID          string   `xml:"userID"`
+	FullName        string   `xml:"fullName"`
+	Role            string   `xml:"role"`
+	IsPresenter     bool     `xml:"isPresenter"`
+	IsListeningOnly bool     `xml:"isListeningOnly"`
+	HasJoinedVoice  bool     `xml:"hasJoinedVoice"`
+	HasVideo        bool     `xml:"hasVideo"`
+	ClientType      string   `xml:"clientType"`
 }
 
 type MeetingInfoRes struct {
@@ -65,10 +67,10 @@ type MeetingInfoRes struct {
 }
 
 type GetMeetingsRes struct {
-	XMLName    xml.Name `xml:"response"`
-	ReturnCode string   `xml:"returncode"`
-	Meetings   struct {
-		Meeting []MeetingInfo `xml:"meeting"`
+	XMLName      xml.Name `xml:"response"`
+	ReturnCode   string   `xml:"returncode"`
+	MeetingsInfo struct {
+		Meetings []*MeetingInfo `xml:"meeting"`
 	} `xml:"meetings"`
 }
 
@@ -153,7 +155,7 @@ func ConvertActiveRoomInfoToBBBMeetingInfo(r *plugnmeet.ActiveRoomWithParticipan
 	}
 
 	if len(attendees) > 0 {
-		res.Attendees.Attendee = attendees
+		res.AttendeesInfo.Attendees = attendees
 	}
 
 	return &res
