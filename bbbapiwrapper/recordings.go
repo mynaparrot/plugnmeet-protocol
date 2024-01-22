@@ -73,3 +73,34 @@ type PaginationPageable struct {
 	Paged   uint64   `xml:"paged"`
 	Unpaged bool     `xml:"unpaged"`
 }
+
+type PublishRecordingsReq struct {
+	RecordID string `query:"recordID"`
+	Publish  bool   `query:"publish"`
+}
+
+type PublishRecordingsRes struct {
+	XMLName    xml.Name `xml:"response"`
+	ReturnCode string   `xml:"returncode"`
+	Published  bool     `xml:"published"`
+}
+
+type UpdateRecordingsReq struct {
+	RecordID string `query:"recordID"`
+}
+
+type UpdateRecordingsRes struct {
+	XMLName    xml.Name `xml:"response"`
+	ReturnCode string   `xml:"returncode"`
+	Updated    bool     `xml:"updated"`
+}
+
+type DeleteRecordingsReq struct {
+	RecordID string `query:"recordID"`
+}
+
+type DeleteRecordingsRes struct {
+	XMLName    xml.Name `xml:"response"`
+	ReturnCode string   `xml:"returncode"`
+	Deleted    bool     `xml:"deleted"`
+}
