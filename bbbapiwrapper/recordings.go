@@ -15,7 +15,7 @@ type GetRecordingsRes struct {
 	RecordingsInfo struct {
 		Recordings []*RecordingInfo
 	} `xml:"recordings"`
-	Pagination Pagination
+	Pagination *Pagination
 }
 
 type RecordingInfo struct {
@@ -61,7 +61,7 @@ type PlayBackPreviewImage struct {
 
 type Pagination struct {
 	XMLName       xml.Name `xml:"pagination"`
-	Pageable      PaginationPageable
+	Pageable      *PaginationPageable
 	TotalElements uint64 `xml:"totalElements"`
 	Empty         bool   `xml:"empty"`
 }
