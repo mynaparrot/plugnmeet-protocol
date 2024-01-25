@@ -72,6 +72,7 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 				EnableAnalytics:  r.MeetingKeepEvents,
 				MuteOnStart:      r.MuteOnStart,
 				AllowRtmp:        true,
+				AllowPolls:       true,
 				RecordingFeatures: &plugnmeet.RecordingFeatures{
 					IsAllow:                  r.Record,
 					IsAllowCloud:             r.Record,
