@@ -42,3 +42,23 @@ func GenerateLivekitAccessToken(apiKey, secret string, tokenValidity time.Durati
 
 	return at.ToJWT()
 }
+
+// GenerateTokenForDownloadRecording will generate token
+// path format: sub_path/roomSid/filename
+func GenerateTokenForDownloadRecording(path, apiKey, apiSecret string, tokenValidity time.Duration) (string, error) {
+	sig, err := jose.NewSigner(jose.SigningKey{Algorithm: jose.HS256, Key: []byte(apiSecret)}, (&jose.SignerOptions{}).WithType("JWT"))
+
+	if err != nil {
+		return "", err
+	}
+
+	cl := jwt.Claims{
+		Issuer:    apiKey,
+		NotBefore: jwt.NewNumericDate(time.Now().UTC()),
+		Expiry:    jwt.NewNumericDate(time.Now().UTC().Add(tokenValidity)),
+		// format: sub_path/roomSid/filename
+		Subject: path,
+	}
+
+	return jwt.Signed(sig).Claims(cl).CompactSerialize()
+}
