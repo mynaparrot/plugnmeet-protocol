@@ -35,6 +35,10 @@ type CreateMeetingReq struct {
 	LockSettingsDisablePublicChat  bool `query:"lockSettingsDisablePublicChat"`
 	LockSettingsDisableNotes       bool `query:"lockSettingsDisableNotes"`
 	LockSettingsHideUserList       bool `query:"lockSettingsHideUserList"`
+
+	// to avoid incompatibility
+	VoiceBridge string `query:"voiceBridge"`
+	DialNumber  string `query:"dialNumber"`
 }
 
 type CreateMeetingDefaultExtraData struct {
@@ -46,19 +50,22 @@ type CreateMeetingDefaultExtraData struct {
 }
 
 type CreateMeetingResp struct {
-	XMLName           xml.Name `xml:"response"`
-	ReturnCode        string   `xml:"returncode"`
-	MessageKey        string   `xml:"messageKey"`
-	Message           string   `xml:"message"`
-	MeetingID         string   `xml:"meetingID"`
-	InternalMeetingID string   `xml:"internalMeetingID"`
-	ParentMeetingID   string   `xml:"parentMeetingID"`
-	AttendeePW        string   `xml:"attendeePW"`  // Deprecated
-	ModeratorPW       string   `xml:"moderatorPW"` // Deprecated
-	CreateTime        int64    `xml:"createTime"`
-	CreateDate        string   `xml:"createDate"`
-	HasUserJoined     bool     `xml:"hasUserJoined"`
-	Duration          int64    `xml:"duration"`
+	XMLName              xml.Name `xml:"response"`
+	ReturnCode           string   `xml:"returncode"`
+	MessageKey           string   `xml:"messageKey"`
+	Message              string   `xml:"message"`
+	MeetingID            string   `xml:"meetingID"`
+	InternalMeetingID    string   `xml:"internalMeetingID"`
+	ParentMeetingID      string   `xml:"parentMeetingID"`
+	AttendeePW           string   `xml:"attendeePW"`  // Deprecated
+	ModeratorPW          string   `xml:"moderatorPW"` // Deprecated
+	CreateTime           int64    `xml:"createTime"`
+	CreateDate           string   `xml:"createDate"`
+	HasUserJoined        bool     `xml:"hasUserJoined"`
+	Duration             int64    `xml:"duration"`
+	VoiceBridge          string   `xml:"voiceBridge"`
+	DialNumber           string   `xml:"dialNumber"`
+	HasBeenForciblyEnded bool     `xml:"hasBeenForciblyEnded"`
 }
 
 func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*plugnmeet.CreateRoomReq, error) {
