@@ -107,6 +107,10 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 				IngressFeatures: &plugnmeet.IngressFeatures{
 					IsAllow: true,
 				},
+				SpeechToTextTranslationFeatures: &plugnmeet.SpeechToTextTranslationFeatures{
+					IsAllow:            true,
+					IsAllowTranslation: true,
+				},
 			},
 			DefaultLockSettings: &plugnmeet.LockSettings{},
 		},
