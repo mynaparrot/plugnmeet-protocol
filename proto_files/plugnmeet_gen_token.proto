@@ -67,3 +67,16 @@ message GenerateTokenRes {
   string msg = 2;
   optional string token = 3;
 }
+
+message CustomDesignParams {
+  optional string primary_color = 1;
+  optional string secondary_color = 2;
+  optional string background_color = 3;
+  optional string background_image = 4;
+  optional string header_bg_color = 5;
+  optional string footer_bg_color = 6;
+  optional string left_side_bg_color = 7;
+  optional string right_side_bg_color = 8;
+  optional string custom_css_url = 9;
+  optional string custom_logo = 10;
+}

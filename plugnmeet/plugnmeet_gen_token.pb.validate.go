@@ -804,3 +804,145 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GenerateTokenResValidationError{}
+
+// Validate checks the field values on CustomDesignParams with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CustomDesignParams) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CustomDesignParams with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CustomDesignParamsMultiError, or nil if none found.
+func (m *CustomDesignParams) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomDesignParams) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.PrimaryColor != nil {
+		// no validation rules for PrimaryColor
+	}
+
+	if m.SecondaryColor != nil {
+		// no validation rules for SecondaryColor
+	}
+
+	if m.BackgroundColor != nil {
+		// no validation rules for BackgroundColor
+	}
+
+	if m.BackgroundImage != nil {
+		// no validation rules for BackgroundImage
+	}
+
+	if m.HeaderBgColor != nil {
+		// no validation rules for HeaderBgColor
+	}
+
+	if m.FooterBgColor != nil {
+		// no validation rules for FooterBgColor
+	}
+
+	if m.LeftSideBgColor != nil {
+		// no validation rules for LeftSideBgColor
+	}
+
+	if m.RightSideBgColor != nil {
+		// no validation rules for RightSideBgColor
+	}
+
+	if m.CustomCssUrl != nil {
+		// no validation rules for CustomCssUrl
+	}
+
+	if m.CustomLogo != nil {
+		// no validation rules for CustomLogo
+	}
+
+	if len(errors) > 0 {
+		return CustomDesignParamsMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomDesignParamsMultiError is an error wrapping multiple validation errors
+// returned by CustomDesignParams.ValidateAll() if the designated constraints
+// aren't met.
+type CustomDesignParamsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomDesignParamsMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomDesignParamsMultiError) AllErrors() []error { return m }
+
+// CustomDesignParamsValidationError is the validation error returned by
+// CustomDesignParams.Validate if the designated constraints aren't met.
+type CustomDesignParamsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomDesignParamsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CustomDesignParamsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CustomDesignParamsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CustomDesignParamsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CustomDesignParamsValidationError) ErrorName() string {
+	return "CustomDesignParamsValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomDesignParamsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomDesignParams.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomDesignParamsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomDesignParamsValidationError{}
