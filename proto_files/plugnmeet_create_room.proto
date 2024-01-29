@@ -56,6 +56,8 @@ message RoomCreateFeatures {
   bool allow_polls = 9;
   optional uint64 room_duration = 10;
   bool enable_analytics = 22;
+  optional bool allow_virtual_bg = 23;
+  optional bool allow_raise_hand = 24;
   RecordingFeatures recording_features = 11;
   ChatFeatures chat_features = 12;
   SharedNotePadFeatures shared_note_pad_features = 13;
@@ -67,7 +69,7 @@ message RoomCreateFeatures {
   IngressFeatures ingress_features = 19;
   SpeechToTextTranslationFeatures speech_to_text_translation_features = 20;
   EndToEndEncryptionFeatures end_to_end_encryption_features = 21;
-  // next ID: 23
+  // next ID: 25
 }
 
 message ChatFeatures {

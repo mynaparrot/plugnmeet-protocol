@@ -369,6 +369,10 @@ func (m *UserMetadata) validate(all bool) error {
 		// no validation rules for RecordWebcam
 	}
 
+	if m.PreferredLang != nil {
+		// no validation rules for PreferredLang
+	}
+
 	if m.MetadataId != nil {
 		// no validation rules for MetadataId
 	}

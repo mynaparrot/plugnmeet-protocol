@@ -755,6 +755,14 @@ func (m *RoomCreateFeatures) validate(all bool) error {
 		// no validation rules for RoomDuration
 	}
 
+	if m.AllowVirtualBg != nil {
+		// no validation rules for AllowVirtualBg
+	}
+
+	if m.AllowRaiseHand != nil {
+		// no validation rules for AllowRaiseHand
+	}
+
 	if len(errors) > 0 {
 		return RoomCreateFeaturesMultiError(errors)
 	}
