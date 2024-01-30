@@ -25,7 +25,7 @@ type CreateMeetingReq struct {
 	GuestPolicy             string `query:"guestPolicy"` // ALWAYS_ACCEPT, ASK_MODERATOR
 	MeetingKeepEvents       bool   `query:"meetingKeepEvents"`
 	Logo                    string `query:"logo"`
-	DisabledFeatures        string `query:"disabledFeatures"` //breakoutRooms,chat,externalVideos,polls,screenshare,sharedNotes,virtualBackgrounds,liveTranscription,presentation
+	DisabledFeatures        string `query:"disabledFeatures"` //breakoutRooms,chat,externalVideos,polls,screenshare,sharedNotes,virtualBackgrounds,liveTranscription,presentation,virtualBackgrounds,raiseHand
 	PreUploadedPresentation string `query:"preUploadedPresentation"`
 
 	// few locks
@@ -185,25 +185,30 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 
 func setDifferentFeatures(f *plugnmeet.RoomCreateFeatures, disabledFeatures string) {
 	features := strings.Split(disabledFeatures, ",")
+	fVal := false
 
 	for _, ff := range features {
 		switch ff {
 		case "breakoutRooms":
-			f.BreakoutRoomFeatures.IsAllow = false
+			f.BreakoutRoomFeatures.IsAllow = fVal
 		case "chat":
-			f.ChatFeatures.AllowChat = false
+			f.ChatFeatures.AllowChat = fVal
 		case "externalVideos":
-			f.ExternalMediaPlayerFeatures.AllowedExternalMediaPlayer = false
+			f.ExternalMediaPlayerFeatures.AllowedExternalMediaPlayer = fVal
 		case "polls":
-			f.AllowPolls = false
+			f.AllowPolls = fVal
 		case "screenshare":
-			f.AllowScreenShare = false
+			f.AllowScreenShare = fVal
 		case "sharedNotes":
-			f.SharedNotePadFeatures.AllowedSharedNotePad = false
+			f.SharedNotePadFeatures.AllowedSharedNotePad = fVal
 		case "liveTranscription":
-			f.SpeechToTextTranslationFeatures.IsAllow = false
+			f.SpeechToTextTranslationFeatures.IsAllow = fVal
 		case "presentation":
-			f.WhiteboardFeatures.AllowedWhiteboard = false
+			f.WhiteboardFeatures.AllowedWhiteboard = fVal
+		case "virtualBackgrounds":
+			f.AllowVirtualBg = &fVal
+		case "raiseHand":
+			f.AllowRaiseHand = &fVal
 		}
 	}
 }
