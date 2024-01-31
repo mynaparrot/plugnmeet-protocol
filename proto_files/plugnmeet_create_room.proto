@@ -188,6 +188,7 @@ message SpeechToTextTranslationFeatures {
   bool is_allow_translation = 2;
   bool is_enabled = 3 [(buf.validate.field).bool.const = false];
   bool is_enabled_translation = 4 [(buf.validate.field).bool.const = false];
+  int32 max_num_tran_langs_allow_selecting = 11;
   repeated string allowed_speech_langs = 7 [(buf.validate.field).repeated.max_items = 0];
   repeated string allowed_speech_users = 8 [(buf.validate.field).repeated.max_items = 0];
   repeated string allowed_trans_langs = 9 [(buf.validate.field).repeated.max_items = 0];
@@ -196,6 +197,7 @@ message SpeechToTextTranslationFeatures {
     message: "default_subtitle_lang should not contain any value",
     expression: "this.matches('^$')"
   }];
+  // next ID: 12
 }
 
 message EndToEndEncryptionFeatures {
