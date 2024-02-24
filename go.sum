@@ -82,6 +82,8 @@ github.com/livekit/protocol v1.9.4 h1:bufTLhxqPM7GLR001p06JKoXaNKTVRLxi46g39axgr
 github.com/livekit/protocol v1.9.4/go.mod h1:Qv55+z0kD0NYp/G0qAaFA4Mjalxt7tsOJwrvV3HymsA=
 github.com/livekit/protocol v1.9.7 h1:5pYAMS/rzOStpIfRGnhXETPH/NyoFJtbV7FW4NHxg7o=
 github.com/livekit/protocol v1.9.7/go.mod h1:daddOPw85C9nq6f9w1uiuc1i/He6X2gArlFcKUPELI4=
+github.com/livekit/protocol v1.9.9 h1:VNfeJeoVhHrU6fiHqKJyIISFKSLMWYldCDVuHYZwgyk=
+github.com/livekit/protocol v1.9.9/go.mod h1:j5ctajx0GDRA1GugIsDBGyMGMXhMP6rCNl+43mR+5h8=
 github.com/livekit/psrpc v0.5.1 h1:ihN5uKIvbU69UsFS4HdYmou5GuK0Dt4hix4eOmRS7o8=
 github.com/livekit/psrpc v0.5.1/go.mod h1:cQjxg1oCxYHhxxv6KJH1gSvdtCHQoRZCHgPdm5N8v2g=
 github.com/mackerelio/go-osstat v0.2.4 h1:qxGbdPkFo65PXOb/F/nhDKpF2nGmGaCFDLXoZjJTtUs=
@@ -200,6 +202,8 @@ golang.org/x/exp v0.0.0-20240112132812-db7319d0e0e3 h1:hNQpMuAJe5CtcUqCXaWga3FHu
 golang.org/x/exp v0.0.0-20240112132812-db7319d0e0e3/go.mod h1:idGWGoKP1toJGkd5/ig9ZLuPcZBC3ewk7SzmH0uou08=
 golang.org/x/exp v0.0.0-20240119083558-1b970713d09a h1:Q8/wZp0KX97QFTc2ywcOE0YRjZPVIx+MXInMzdvQqcA=
 golang.org/x/exp v0.0.0-20240119083558-1b970713d09a/go.mod h1:idGWGoKP1toJGkd5/ig9ZLuPcZBC3ewk7SzmH0uou08=
+golang.org/x/exp v0.0.0-20240205201215-2c58cdc269a3 h1:/RIbNt/Zr7rVhIkQhooTxCxFcdWLGIKnZA4IXNFSrvo=
+golang.org/x/exp v0.0.0-20240205201215-2c58cdc269a3/go.mod h1:idGWGoKP1toJGkd5/ig9ZLuPcZBC3ewk7SzmH0uou08=
 golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4/go.mod h1:jJ57K6gSWd91VN4djpZkiMVwK6gcyfeH4XE8wZrZaV4=
 golang.org/x/mod v0.8.0/go.mod h1:iBbtSCu2XBx23ZKBPSOrRkjjQPZFPuis4dIYUhu/chs=
 golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
