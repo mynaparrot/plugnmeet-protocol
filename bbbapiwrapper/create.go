@@ -69,6 +69,7 @@ type CreateMeetingResp struct {
 }
 
 func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*plugnmeet.CreateRoomReq, error) {
+	b := true
 	req := plugnmeet.CreateRoomReq{
 		RoomId: CheckMeetingIdToMatchFormat(r.MeetingID),
 		Metadata: &plugnmeet.RoomMetadata{
@@ -76,10 +77,13 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 			RoomFeatures: &plugnmeet.RoomCreateFeatures{
 				AllowWebcams:     true,
 				AdminOnlyWebcams: r.WebcamsOnlyForModerator,
-				EnableAnalytics:  r.MeetingKeepEvents,
+				EnableAnalytics:  true,
 				MuteOnStart:      r.MuteOnStart,
 				AllowRtmp:        true,
 				AllowPolls:       true,
+				AllowScreenShare: true,
+				AllowRaiseHand:   &b,
+				AllowVirtualBg:   &b,
 				RecordingFeatures: &plugnmeet.RecordingFeatures{
 					IsAllow:                  r.Record,
 					IsAllowCloud:             r.Record,
@@ -144,6 +148,11 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 
 	if r.PreUploadedPresentation != "" && req.Metadata.RoomFeatures.WhiteboardFeatures.AllowedWhiteboard {
 		req.Metadata.RoomFeatures.WhiteboardFeatures.PreloadFile = &r.PreUploadedPresentation
+	}
+
+	// we'll only consider if some value was sent
+	if rawQueries["meetingKeepEvents"] != "" {
+		req.Metadata.RoomFeatures.EnableAnalytics = r.MeetingKeepEvents
 	}
 
 	// lock settings
