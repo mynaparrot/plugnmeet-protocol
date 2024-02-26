@@ -68,6 +68,18 @@ type CreateMeetingResp struct {
 	HasBeenForciblyEnded bool     `xml:"hasBeenForciblyEnded"`
 }
 
+type PreUploadWhiteboardPostFile struct {
+	XMLName xml.Name `xml:"modules"`
+	Module  struct {
+		Name     string `xml:"name,attr"`
+		Document []struct {
+			URL      string `xml:"url,attr"`
+			Filename string `xml:"filename,attr"`
+			Name     string `xml:"name,attr"`
+		} `xml:"document"`
+	} `xml:"module"`
+}
+
 func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*plugnmeet.CreateRoomReq, error) {
 	b := true
 	req := plugnmeet.CreateRoomReq{
