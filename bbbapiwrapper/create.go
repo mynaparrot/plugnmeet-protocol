@@ -71,8 +71,8 @@ type CreateMeetingResp struct {
 type PreUploadWhiteboardPostFile struct {
 	XMLName xml.Name `xml:"modules"`
 	Module  struct {
-		Name     string `xml:"name,attr"`
-		Document []struct {
+		Name      string `xml:"name,attr"`
+		Documents []struct {
 			URL      string `xml:"url,attr"`
 			Filename string `xml:"filename,attr"`
 			Name     string `xml:"name,attr"`
