@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.33.0-20240221180331-f05a6f4403ce.1
-	github.com/frostbyte73/core v0.0.9
+	github.com/frostbyte73/core v0.0.10
 	github.com/go-jose/go-jose/v3 v3.0.2
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/gofiber/fiber/v2 v2.52.1
