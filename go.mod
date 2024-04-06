@@ -4,12 +4,16 @@ go 1.21
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.33.0-20240401165935-b983156c5e99.1
+	github.com/frostbyte73/core v0.0.10
 	github.com/go-jose/go-jose/v4 v4.0.1
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/gofiber/fiber/v2 v2.52.4
 	github.com/google/uuid v1.6.0
+	github.com/hashicorp/go-retryablehttp v0.7.5
 	github.com/livekit/protocol v1.12.0
 	github.com/redis/go-redis/v9 v9.5.1
+	github.com/sirupsen/logrus v1.9.3
+	go.uber.org/atomic v1.11.0
 	google.golang.org/protobuf v1.33.0
 )
 
@@ -18,7 +22,9 @@ require (
 	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
+	github.com/gammazero/deque v0.2.1 // indirect
 	github.com/go-jose/go-jose/v3 v3.0.3 // indirect
+	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/klauspost/compress v1.17.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
