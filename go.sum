@@ -109,6 +109,8 @@ github.com/livekit/protocol v1.9.9 h1:VNfeJeoVhHrU6fiHqKJyIISFKSLMWYldCDVuHYZwgy
 github.com/livekit/protocol v1.9.9/go.mod h1:j5ctajx0GDRA1GugIsDBGyMGMXhMP6rCNl+43mR+5h8=
 github.com/livekit/protocol v1.11.0 h1:3V1j0EGfh5T8A/rb/H7kB+ak9TINA8a/2jXpH+emLsg=
 github.com/livekit/protocol v1.11.0/go.mod h1:XpJ2t2wFnnQghPpkxXAzMZhYMDnm8wWxdxYJK4fP9gM=
+github.com/livekit/protocol v1.12.0 h1:B7qsqq5xf9MmyG9WEk9/gMsfMVXuyLNxX5cO6TQil6s=
+github.com/livekit/protocol v1.12.0/go.mod h1:G7Pa985GhZv2MCC3UnUocBhZfi3DsWA6WmlSkkpQYTM=
 github.com/livekit/psrpc v0.5.1 h1:ihN5uKIvbU69UsFS4HdYmou5GuK0Dt4hix4eOmRS7o8=
 github.com/livekit/psrpc v0.5.1/go.mod h1:cQjxg1oCxYHhxxv6KJH1gSvdtCHQoRZCHgPdm5N8v2g=
 github.com/mackerelio/go-osstat v0.2.4 h1:qxGbdPkFo65PXOb/F/nhDKpF2nGmGaCFDLXoZjJTtUs=
