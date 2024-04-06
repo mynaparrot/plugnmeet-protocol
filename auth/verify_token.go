@@ -5,7 +5,8 @@ import (
 	"crypto/subtle"
 	"encoding/base64"
 	"errors"
-	"github.com/go-jose/go-jose/v3/jwt"
+	"github.com/go-jose/go-jose/v4"
+	"github.com/go-jose/go-jose/v4/jwt"
 	"github.com/livekit/protocol/auth"
 	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 	"time"
@@ -13,7 +14,7 @@ import (
 
 // VerifyPlugNmeetAccessToken can be use to verify plugNmeet access token
 func VerifyPlugNmeetAccessToken(apiKey, secret, token string) (*plugnmeet.PlugNmeetTokenClaims, error) {
-	tok, err := jwt.ParseSigned(token)
+	tok, err := jwt.ParseSigned(token, []jose.SignatureAlgorithm{jose.HS256})
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +52,7 @@ func ValidateLivekitWebhookToken(secret, token string) (string, error) {
 // in plugNmeet we're following the same token system as livekit is using
 // in this method we'll verify the provided body request
 func VerifyWebhookRequest(body []byte, apiKey, secret, token string) (bool, error) {
-	tok, err := jwt.ParseSigned(token)
+	tok, err := jwt.ParseSigned(token, []jose.SignatureAlgorithm{jose.HS256})
 	if err != nil {
 		return false, err
 	}

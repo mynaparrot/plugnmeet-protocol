@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"github.com/go-jose/go-jose/v3"
-	"github.com/go-jose/go-jose/v3/jwt"
+	"github.com/go-jose/go-jose/v4"
+	"github.com/go-jose/go-jose/v4/jwt"
 	"github.com/livekit/protocol/auth"
 	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 	"time"
@@ -22,7 +22,7 @@ func GeneratePlugNmeetJWTAccessToken(apiKey, secret, userId string, tokenValidit
 		Expiry:    jwt.NewNumericDate(time.Now().UTC().Add(tokenValidity)),
 		Subject:   userId,
 	}
-	return jwt.Signed(sig).Claims(cl).Claims(c).CompactSerialize()
+	return jwt.Signed(sig).Claims(cl).Claims(c).Serialize()
 }
 
 func GenerateLivekitAccessToken(apiKey, secret string, tokenValidity time.Duration, c *plugnmeet.PlugNmeetTokenClaims, metadata string) (string, error) {
@@ -60,5 +60,5 @@ func GenerateTokenForDownloadRecording(path, apiKey, apiSecret string, tokenVali
 		Subject: path,
 	}
 
-	return jwt.Signed(sig).Claims(cl).CompactSerialize()
+	return jwt.Signed(sig).Claims(cl).Serialize()
 }
