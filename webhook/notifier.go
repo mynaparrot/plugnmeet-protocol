@@ -21,7 +21,7 @@ const (
 	// in various Apache modules will strip the Authorization header,
 	// so we'll use additional one
 	hashToken = "Hash-Token"
-	maxRetry  = 3
+	maxRetry  = 2 // retryablehttp will use maxRetry + 1
 )
 
 type Notifier struct {
