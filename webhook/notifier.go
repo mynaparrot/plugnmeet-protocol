@@ -18,8 +18,10 @@ import (
 
 const (
 	authHeader = "Authorization"
-	hashToken  = "Hash-Token" // in various Apache modules will strip the Authorization header,
+	// in various Apache modules will strip the Authorization header,
 	// so we'll use additional one
+	hashToken = "Hash-Token"
+	maxRetry  = 3
 )
 
 type Notifier struct {
@@ -33,6 +35,7 @@ type Notifier struct {
 func newWebhookNotifier(queueSize int, debug bool, logger *logrus.Logger) *Notifier {
 	client := retryablehttp.NewClient()
 	client.Logger = nil
+	client.RetryMax = maxRetry
 
 	w := &Notifier{
 		client: client,
