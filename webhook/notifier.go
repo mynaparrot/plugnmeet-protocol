@@ -13,6 +13,7 @@ import (
 	"go.uber.org/atomic"
 	"google.golang.org/protobuf/encoding/protojson"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -79,6 +80,10 @@ func (n *Notifier) sendPostRequest(event *plugnmeet.CommonNotifyEvent, apiKey, a
 		EmitUnpopulated: false,
 		UseProtoNames:   true,
 	}
+	// make sure event name is lowercase
+	ev := strings.ToLower(event.GetEvent())
+	event.Event = &ev
+
 	encoded, err := op.Marshal(event)
 	if err != nil {
 		return nil, err
