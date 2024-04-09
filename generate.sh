@@ -21,7 +21,7 @@ GOPATH=$HOME/go
 protoc \
 -I ${GOPATH}/pkg/mod \
 -I ${PROTO_VALIDATOR_DIR}/proto/protovalidate \
--I ${LIVEKIT_PROTO_DIR} \
+-I ${LIVEKIT_PROTO_DIR}/protobufs \
 --proto_path=proto_files \
 proto_files/*.proto \
 --go_out=paths=source_relative:./plugnmeet \
