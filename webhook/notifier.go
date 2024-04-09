@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"crypto/sha256"
 	"encoding/base64"
-	"errors"
 	"fmt"
 	"github.com/frostbyte73/core"
 	"github.com/hashicorp/go-retryablehttp"
@@ -13,6 +12,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"go.uber.org/atomic"
 	"google.golang.org/protobuf/encoding/protojson"
+	"net/http"
 	"time"
 )
 
@@ -59,26 +59,26 @@ func (n *Notifier) AddInNotifyQueue(event *plugnmeet.CommonNotifyEvent, apiKey, 
 
 	for _, u := range urls {
 		n.worker.Submit(func() {
-			err := n.sendPostRequest(event, apiKey, apiSecret, u)
+			res, err := n.sendPostRequest(event, apiKey, apiSecret, u)
 			if err != nil {
 				n.logger.Errorln("failed to sendPostRequest webhook,", "url:", u, "event:", event.GetEvent(), "roomId:", event.GetRoom().GetRoomId(), "sid:", event.Room.GetSid(), "error:", err)
 			} else {
 				if n.debug {
-					n.logger.Println("webhook sent for event:", event.GetEvent(), "roomID:", event.Room.GetRoomId(), "sid:", event.Room.GetSid(), "to URL:", u)
+					n.logger.Println("webhook sent for event:", event.GetEvent(), "roomID:", event.Room.GetRoomId(), "sid:", event.Room.GetSid(), "to URL:", u, "with http response code:", res.StatusCode, "& msg:", res.Status)
 				}
 			}
 		})
 	}
 }
 
-func (n *Notifier) sendPostRequest(event *plugnmeet.CommonNotifyEvent, apiKey, apiSecret, url string) error {
+func (n *Notifier) sendPostRequest(event *plugnmeet.CommonNotifyEvent, apiKey, apiSecret, url string) (*http.Response, error) {
 	op := protojson.MarshalOptions{
 		EmitUnpopulated: false,
 		UseProtoNames:   true,
 	}
 	encoded, err := op.Marshal(event)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	// sign payload
 	sum := sha256.Sum256(encoded)
@@ -89,12 +89,12 @@ func (n *Notifier) sendPostRequest(event *plugnmeet.CommonNotifyEvent, apiKey, a
 		SetSha256(b64)
 	token, err := at.ToJWT()
 	if err != nil {
-		return err
+		return nil, err
 	}
 	r, err := retryablehttp.NewRequest("POST", url, bytes.NewReader(encoded))
 	if err != nil {
 		// ignore and continue
-		return err
+		return nil, err
 	}
 	r.Header.Set(authHeader, token)
 	// in various Apache modules will strip the Authorization header,
@@ -104,15 +104,11 @@ func (n *Notifier) sendPostRequest(event *plugnmeet.CommonNotifyEvent, apiKey, a
 	r.Header.Set("content-type", "application/webhook+json")
 	res, err := n.client.Do(r)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	_ = res.Body.Close()
 
-	statusOK := res.StatusCode >= 200 && res.StatusCode < 300
-	if !statusOK {
-		return errors.New(fmt.Sprintf("http response code: %d, msg: %s", res.StatusCode, res.Status))
-	}
-	return nil
+	return res, nil
 }
 
 var webhookNotifier *Notifier
