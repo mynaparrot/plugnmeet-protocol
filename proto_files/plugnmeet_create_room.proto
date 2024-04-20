@@ -211,7 +211,8 @@ message EndToEndEncryptionFeatures {
 
 message CopyrightConf {
   bool display = 1;
-  string text = 2;
+  bool allow_override = 2;
+  string text = 3;
 }
 
 message CreateRoomRes {

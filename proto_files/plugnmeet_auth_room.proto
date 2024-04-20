@@ -47,7 +47,8 @@ message IsRoomActiveReq {
 
 message IsRoomActiveRes {
   bool status = 1;
-  string msg = 2;
+  bool is_active = 2;
+  string msg = 3;
 }
 
 message ActiveRoomWithParticipant {
