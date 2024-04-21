@@ -2097,8 +2097,6 @@ func (m *CopyrightConf) validate(all bool) error {
 
 	// no validation rules for Display
 
-	// no validation rules for AllowOverride
-
 	// no validation rules for Text
 
 	if len(errors) > 0 {

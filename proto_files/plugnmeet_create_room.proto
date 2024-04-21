@@ -211,7 +211,6 @@ message EndToEndEncryptionFeatures {
 
 message CopyrightConf {
   bool display = 1;
-  bool allow_override = 2;
   string text = 3;
 }
 
