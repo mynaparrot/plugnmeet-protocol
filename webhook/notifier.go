@@ -6,6 +6,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"github.com/frostbyte73/core"
+	"github.com/google/uuid"
 	"github.com/hashicorp/go-retryablehttp"
 	"github.com/livekit/protocol/auth"
 	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
@@ -83,6 +84,15 @@ func (n *Notifier) sendPostRequest(event *plugnmeet.CommonNotifyEvent, apiKey, a
 	// make sure event name is lowercase
 	ev := strings.ToLower(event.GetEvent())
 	event.Event = &ev
+
+	if event.CreatedAt == nil {
+		now := time.Now().UTC().Unix()
+		event.CreatedAt = &now
+	}
+	if event.Id == nil {
+		mId := uuid.NewString()
+		event.Id = &mId
+	}
 
 	encoded, err := op.Marshal(event)
 	if err != nil {

@@ -94,7 +94,7 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 		r.Metadata.DefaultLockSettings = new(plugnmeet.LockSettings)
 	}
 
-	r.Metadata.StartedAt = uint64(time.Now().Unix())
+	r.Metadata.StartedAt = uint64(time.Now().UTC().Unix())
 	r.Metadata.RoomFeatures = rf
 }
 
