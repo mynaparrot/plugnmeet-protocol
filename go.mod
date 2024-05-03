@@ -1,6 +1,8 @@
 module github.com/mynaparrot/plugnmeet-protocol
 
-go 1.21
+go 1.22
+
+toolchain go1.22.2
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.34.0-20240401165935-b983156c5e99.1
@@ -10,7 +12,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.52.4
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-retryablehttp v0.7.5
-	github.com/livekit/protocol v1.12.0
+	github.com/livekit/protocol v1.15.0
 	github.com/redis/go-redis/v9 v9.5.1
 	github.com/sirupsen/logrus v1.9.3
 	go.uber.org/atomic v1.11.0
