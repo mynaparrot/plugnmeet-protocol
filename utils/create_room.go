@@ -94,7 +94,7 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 		r.Metadata.DefaultLockSettings = new(plugnmeet.LockSettings)
 	}
 
-	r.Metadata.StartedAt = uint64(time.Now().Unix())
+	r.Metadata.StartedAt = uint64(time.Now().UTC().Unix())
 	r.Metadata.RoomFeatures = rf
 }
 
@@ -142,8 +142,9 @@ func SetRoomDefaultLockSettings(r *plugnmeet.CreateRoomReq) {
 }
 
 type RoomDefaultSettings struct {
-	MaxParticipants *uint32 `yaml:"max_participants"`
-	MaxDuration     *uint64 `yaml:"max_duration"`
+	MaxParticipants     *uint32 `yaml:"max_participants"`
+	MaxDuration         *uint64 `yaml:"max_duration"`
+	MaxNumBreakoutRooms *uint32 `yaml:"max_num_breakout_rooms"`
 }
 
 func SetDefaultRoomSettings(s *RoomDefaultSettings, r *plugnmeet.CreateRoomReq) {
@@ -163,5 +164,17 @@ func SetDefaultRoomSettings(s *RoomDefaultSettings, r *plugnmeet.CreateRoomReq) 
 			return
 		}
 		r.Metadata.RoomFeatures.RoomDuration = s.MaxDuration
+	}
+
+	// at present, we will allow max 16 rooms
+	var maxNum uint32 = 16
+	if s.MaxNumBreakoutRooms == nil {
+		s.MaxNumBreakoutRooms = &maxNum
+	} else if s.MaxNumBreakoutRooms != nil && *s.MaxParticipants > maxNum {
+		s.MaxNumBreakoutRooms = &maxNum
+	}
+
+	if r.Metadata.RoomFeatures.BreakoutRoomFeatures.AllowedNumberRooms > *s.MaxNumBreakoutRooms {
+		r.Metadata.RoomFeatures.BreakoutRoomFeatures.AllowedNumberRooms = *s.MaxNumBreakoutRooms
 	}
 }

@@ -766,6 +766,8 @@ func (m *IsRoomActiveRes) validate(all bool) error {
 
 	// no validation rules for Status
 
+	// no validation rules for IsActive
+
 	// no validation rules for Msg
 
 	if len(errors) > 0 {
