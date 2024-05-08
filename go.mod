@@ -3,7 +3,7 @@ module github.com/mynaparrot/plugnmeet-protocol
 go 1.22
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.34.1-20240401165935-b983156c5e99.1
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.34.1-20240508200655-46a4cf4ba109.1
 	github.com/frostbyte73/core v0.0.10
 	github.com/go-jose/go-jose/v4 v4.0.1
 	github.com/go-sql-driver/mysql v1.8.1
