@@ -16,13 +16,11 @@ if [ ! -d ${LIVEKIT_PROTO_DIR} ]; then
   git clone https://github.com/livekit/protocol ${LIVEKIT_PROTO_DIR}
 fi
 
-GOPATH=$HOME/go
 
-protoc \
--I ${GOPATH}/pkg/mod \
--I ${PROTO_VALIDATOR_DIR}/proto/protovalidate \
--I ${LIVEKIT_PROTO_DIR}/protobufs \
---proto_path=proto_files \
-proto_files/*.proto \
---go_out=paths=source_relative:./plugnmeet \
---validate_out="lang=go,paths=source_relative:./plugnmeet"
+if ! which buf >/dev/null; then
+  printf "buf not installed, installing using go install"
+  go install github.com/bufbuild/buf/cmd/buf
+fi
+
+buf dep update
+buf generate
