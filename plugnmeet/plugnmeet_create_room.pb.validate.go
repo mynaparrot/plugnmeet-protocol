@@ -1989,6 +1989,8 @@ func (m *EndToEndEncryptionFeatures) validate(all bool) error {
 
 	// no validation rules for IsEnabled
 
+	// no validation rules for IncludedChatMessages
+
 	if m.EncryptionKey != nil {
 		// no validation rules for EncryptionKey
 	}
