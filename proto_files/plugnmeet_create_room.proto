@@ -203,7 +203,11 @@ message SpeechToTextTranslationFeatures {
 message EndToEndEncryptionFeatures {
   bool is_enabled = 1;
   bool included_chat_messages = 2;
-  optional string encryption_key = 3 [(buf.validate.field).cel = {
+  // SCENE_UPDATE, POINTER_UPDATE
+  // this may use more CPU for the user end.
+  // do not enable it unless really necessary
+  bool included_whiteboard = 3;
+  optional string encryption_key = 4 [(buf.validate.field).cel = {
     id: "encryption_key_format",
     message: "encryption_key should not contain any value",
     expression: "this.matches('^$')"
