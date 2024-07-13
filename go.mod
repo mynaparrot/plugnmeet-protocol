@@ -11,7 +11,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-retryablehttp v0.7.7
 	github.com/livekit/protocol v1.19.0
-	github.com/redis/go-redis/v9 v9.5.3
+	github.com/redis/go-redis/v9 v9.5.4
 	github.com/sirupsen/logrus v1.9.3
 	go.uber.org/atomic v1.11.0
 	google.golang.org/protobuf v1.34.2
