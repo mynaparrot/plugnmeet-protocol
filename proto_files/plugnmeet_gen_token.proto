@@ -8,8 +8,8 @@ import "buf/validate/validate.proto";
 message GenerateTokenReq {
   string room_id = 1 [(buf.validate.field).cel = {
     id: "room_id_format",
-    message: "room_id should only contain letters, digits or special characters: -_.:",
-    expression: "this.matches('^[a-zA-Z0-9-_.:]+$')"
+    message: "room_id should only contain letters, digits or special characters: -_",
+    expression: "this.matches('^[a-zA-Z0-9-_]+$')"
   }];
   UserInfo user_info = 2 [(buf.validate.field).required = true];
 }

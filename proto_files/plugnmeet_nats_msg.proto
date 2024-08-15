@@ -29,3 +29,17 @@ message NatsMsgClientToServer {
   NatsMsgClientToServerEvents event = 2;
   string msg = 3;
 }
+
+message NatsKvRoomInfo {
+  string room_id = 1;
+  string room_sid = 2;
+  string metadata = 3;
+}
+
+message NatsKvUserInfo {
+  string user_id = 1;
+  string user_sid = 2;
+  string name = 3;
+  string room_id = 4;
+  string metadata = 5;
+}

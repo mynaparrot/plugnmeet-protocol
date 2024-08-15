@@ -11,8 +11,8 @@ import "plugnmeet_ingress.proto";
 message CreateRoomReq {
   string room_id = 1 [(buf.validate.field).cel = {
     id: "room_id_format",
-    message: "room_id should only contain letters, digits or special characters: -_.:",
-    expression: "this.matches('^[a-zA-Z0-9-_.:]+$')"
+    message: "room_id should only contain letters, digits or special characters: -_",
+    expression: "this.matches('^[a-zA-Z0-9-_]+$')"
   }];
   optional uint32 empty_timeout = 2 [(buf.validate.field).uint32.gt = 0];
   optional uint32 max_participants = 3 [(buf.validate.field).uint32.gt = 0];
