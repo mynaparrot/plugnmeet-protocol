@@ -1,0 +1,31 @@
+syntax = "proto3";
+package plugnmeet;
+
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+
+enum NatsMsgServerToClientEvents {
+  UNKNOWN_NATS_SERVER_EVENT = 0;
+  ROOM_METADATA = 1; // both initial & update
+  LOCAL_USER_INFO = 2;
+  JOINED_USERS_LIST = 3;
+  USER_METADATA = 4; // mostly after update
+  USER_JOINED = 5;
+  USER_DISCONNECTED = 6;
+}
+
+enum NatsMsgClientToServerEvents {
+  UNKNOWN_NATS_CLIENT_EVENT = 0;
+  RENEW_PNM_TOKEN = 1;
+}
+
+message NatsMsgServerToClient {
+  string id = 1;
+  NatsMsgServerToClientEvents event = 2;
+  string msg = 3;
+}
+
+message NatsMsgClientToServer {
+  string id = 1;
+  NatsMsgClientToServerEvents event = 2;
+  string msg = 3;
+}

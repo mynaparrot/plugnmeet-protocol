@@ -1258,8 +1258,8 @@ type EndToEndEncryptionFeatures struct {
 	IsEnabled            bool `protobuf:"varint,1,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
 	IncludedChatMessages bool `protobuf:"varint,2,opt,name=included_chat_messages,json=includedChatMessages,proto3" json:"included_chat_messages,omitempty"`
 	// SCENE_UPDATE, POINTER_UPDATE
-	// this may use more CPU for user end.
-	// do not enable it if really necessary
+	// this may use more CPU for the user end.
+	// do not enable it unless really necessary
 	IncludedWhiteboard bool    `protobuf:"varint,3,opt,name=included_whiteboard,json=includedWhiteboard,proto3" json:"included_whiteboard,omitempty"`
 	EncryptionKey      *string `protobuf:"bytes,4,opt,name=encryption_key,json=encryptionKey,proto3,oneof" json:"encryption_key,omitempty"`
 }

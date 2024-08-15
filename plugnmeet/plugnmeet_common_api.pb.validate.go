@@ -283,6 +283,47 @@ func (m *VerifyTokenRes) validate(all bool) error {
 		// no validation rules for ServerVersion
 	}
 
+	if m.RoomId != nil {
+		// no validation rules for RoomId
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.NatsSubjects != nil {
+
+		if all {
+			switch v := interface{}(m.GetNatsSubjects()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, VerifyTokenResValidationError{
+						field:  "NatsSubjects",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, VerifyTokenResValidationError{
+						field:  "NatsSubjects",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetNatsSubjects()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return VerifyTokenResValidationError{
+					field:  "NatsSubjects",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return VerifyTokenResMultiError(errors)
 	}
@@ -1907,3 +1948,114 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UpdateUserLockSettingsReqValidationError{}
+
+// Validate checks the field values on NatsSubjects with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *NatsSubjects) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on NatsSubjects with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in NatsSubjectsMultiError, or
+// nil if none found.
+func (m *NatsSubjects) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *NatsSubjects) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for SystemWorker
+
+	// no validation rules for SystemPublic
+
+	// no validation rules for SystemPrivate
+
+	// no validation rules for ChatPublic
+
+	// no validation rules for ChatPrivate
+
+	// no validation rules for Whiteboard
+
+	if len(errors) > 0 {
+		return NatsSubjectsMultiError(errors)
+	}
+
+	return nil
+}
+
+// NatsSubjectsMultiError is an error wrapping multiple validation errors
+// returned by NatsSubjects.ValidateAll() if the designated constraints aren't met.
+type NatsSubjectsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m NatsSubjectsMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m NatsSubjectsMultiError) AllErrors() []error { return m }
+
+// NatsSubjectsValidationError is the validation error returned by
+// NatsSubjects.Validate if the designated constraints aren't met.
+type NatsSubjectsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e NatsSubjectsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e NatsSubjectsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e NatsSubjectsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e NatsSubjectsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e NatsSubjectsValidationError) ErrorName() string { return "NatsSubjectsValidationError" }
+
+// Error satisfies the builtin error interface
+func (e NatsSubjectsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sNatsSubjects.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = NatsSubjectsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = NatsSubjectsValidationError{}
