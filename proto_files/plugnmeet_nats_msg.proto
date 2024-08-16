@@ -10,6 +10,7 @@ enum NatsMsgServerToClientEvents {
   ROOM_INFO = 1;
   LOCAL_USER_INFO = 2;
   JOINED_USERS_LIST = 3;
+  MEDIA_SERVER_INFO = 10;
 
   ROOM_METADATA_UPDATE = 4;
   USER_METADATA_UPDATE = 5;
@@ -17,6 +18,10 @@ enum NatsMsgServerToClientEvents {
   USER_JOINED = 6;
   USER_DISCONNECTED = 7;
   USER_OFFLINE = 8;
+
+  PMN_RENEWED_TOKEN = 9;
+
+  //next ID: 11
 }
 
 enum NatsMsgClientToServerEvents {
