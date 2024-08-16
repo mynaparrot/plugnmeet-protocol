@@ -5,12 +5,18 @@ option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
 enum NatsMsgServerToClientEvents {
   UNKNOWN_NATS_SERVER_EVENT = 0;
-  ROOM_METADATA = 1; // both initial & update
+
+  // initial data
+  ROOM_INFO = 1;
   LOCAL_USER_INFO = 2;
   JOINED_USERS_LIST = 3;
-  USER_METADATA = 4; // mostly after update
-  USER_JOINED = 5;
-  USER_DISCONNECTED = 6;
+
+  ROOM_METADATA_UPDATE = 4;
+  USER_METADATA_UPDATE = 5;
+
+  USER_JOINED = 6;
+  USER_DISCONNECTED = 7;
+  USER_OFFLINE = 8;
 }
 
 enum NatsMsgClientToServerEvents {
@@ -34,6 +40,7 @@ message NatsKvRoomInfo {
   string room_id = 1;
   string room_sid = 2;
   string metadata = 3;
+  uint64 created_at = 4;
 }
 
 message NatsKvUserInfo {
@@ -42,4 +49,7 @@ message NatsKvUserInfo {
   string name = 3;
   string room_id = 4;
   string metadata = 5;
+  uint64 joined_at = 6;
+  uint64 reconnected_at = 7;
+  uint64 disconnected_at = 8;
 }

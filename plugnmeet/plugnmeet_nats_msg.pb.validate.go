@@ -279,6 +279,8 @@ func (m *NatsKvRoomInfo) validate(all bool) error {
 
 	// no validation rules for Metadata
 
+	// no validation rules for CreatedAt
+
 	if len(errors) > 0 {
 		return NatsKvRoomInfoMultiError(errors)
 	}
@@ -388,6 +390,12 @@ func (m *NatsKvUserInfo) validate(all bool) error {
 	// no validation rules for RoomId
 
 	// no validation rules for Metadata
+
+	// no validation rules for JoinedAt
+
+	// no validation rules for ReconnectedAt
+
+	// no validation rules for DisconnectedAt
 
 	if len(errors) > 0 {
 		return NatsKvUserInfoMultiError(errors)
