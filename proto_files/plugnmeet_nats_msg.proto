@@ -44,8 +44,9 @@ message NatsMsgClientToServer {
 message NatsKvRoomInfo {
   string room_id = 1;
   string room_sid = 2;
-  string metadata = 3;
-  uint64 created_at = 4;
+  bool enabled_e2ee = 3;
+  string metadata = 4;
+  uint64 created_at = 5;
 }
 
 message NatsKvUserInfo {
@@ -53,8 +54,15 @@ message NatsKvUserInfo {
   string user_sid = 2;
   string name = 3;
   string room_id = 4;
-  string metadata = 5;
-  uint64 joined_at = 6;
-  uint64 reconnected_at = 7;
-  uint64 disconnected_at = 8;
+  bool is_admin = 5;
+  string metadata = 6;
+  uint64 joined_at = 7;
+  uint64 reconnected_at = 8;
+  uint64 disconnected_at = 9;
+}
+
+message MediaServerConnInfo {
+  string url = 1;
+  string token = 2;
+  bool enabled_e2ee = 3;
 }

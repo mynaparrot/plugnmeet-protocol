@@ -277,6 +277,8 @@ func (m *NatsKvRoomInfo) validate(all bool) error {
 
 	// no validation rules for RoomSid
 
+	// no validation rules for EnabledE2Ee
+
 	// no validation rules for Metadata
 
 	// no validation rules for CreatedAt
@@ -389,6 +391,8 @@ func (m *NatsKvUserInfo) validate(all bool) error {
 
 	// no validation rules for RoomId
 
+	// no validation rules for IsAdmin
+
 	// no validation rules for Metadata
 
 	// no validation rules for JoinedAt
@@ -474,3 +478,111 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = NatsKvUserInfoValidationError{}
+
+// Validate checks the field values on MediaServerConnInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MediaServerConnInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MediaServerConnInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MediaServerConnInfoMultiError, or nil if none found.
+func (m *MediaServerConnInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MediaServerConnInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Url
+
+	// no validation rules for Token
+
+	// no validation rules for EnabledE2Ee
+
+	if len(errors) > 0 {
+		return MediaServerConnInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// MediaServerConnInfoMultiError is an error wrapping multiple validation
+// errors returned by MediaServerConnInfo.ValidateAll() if the designated
+// constraints aren't met.
+type MediaServerConnInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MediaServerConnInfoMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MediaServerConnInfoMultiError) AllErrors() []error { return m }
+
+// MediaServerConnInfoValidationError is the validation error returned by
+// MediaServerConnInfo.Validate if the designated constraints aren't met.
+type MediaServerConnInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MediaServerConnInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MediaServerConnInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MediaServerConnInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MediaServerConnInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MediaServerConnInfoValidationError) ErrorName() string {
+	return "MediaServerConnInfoValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MediaServerConnInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMediaServerConnInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MediaServerConnInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MediaServerConnInfoValidationError{}
