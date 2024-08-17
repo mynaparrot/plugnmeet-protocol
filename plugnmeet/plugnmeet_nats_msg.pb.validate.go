@@ -589,6 +589,227 @@ var _ interface {
 	ErrorName() string
 } = MediaServerConnInfoValidationError{}
 
+// Validate checks the field values on NatsInitialData with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *NatsInitialData) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on NatsInitialData with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// NatsInitialDataMultiError, or nil if none found.
+func (m *NatsInitialData) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *NatsInitialData) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetRoom()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, NatsInitialDataValidationError{
+					field:  "Room",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, NatsInitialDataValidationError{
+					field:  "Room",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRoom()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return NatsInitialDataValidationError{
+				field:  "Room",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetLocalUser()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, NatsInitialDataValidationError{
+					field:  "LocalUser",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, NatsInitialDataValidationError{
+					field:  "LocalUser",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetLocalUser()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return NatsInitialDataValidationError{
+				field:  "LocalUser",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetMediaServerInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, NatsInitialDataValidationError{
+					field:  "MediaServerInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, NatsInitialDataValidationError{
+					field:  "MediaServerInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMediaServerInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return NatsInitialDataValidationError{
+				field:  "MediaServerInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	for idx, item := range m.GetOnlineUsers() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, NatsInitialDataValidationError{
+						field:  fmt.Sprintf("OnlineUsers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, NatsInitialDataValidationError{
+						field:  fmt.Sprintf("OnlineUsers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return NatsInitialDataValidationError{
+					field:  fmt.Sprintf("OnlineUsers[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return NatsInitialDataMultiError(errors)
+	}
+
+	return nil
+}
+
+// NatsInitialDataMultiError is an error wrapping multiple validation errors
+// returned by NatsInitialData.ValidateAll() if the designated constraints
+// aren't met.
+type NatsInitialDataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m NatsInitialDataMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m NatsInitialDataMultiError) AllErrors() []error { return m }
+
+// NatsInitialDataValidationError is the validation error returned by
+// NatsInitialData.Validate if the designated constraints aren't met.
+type NatsInitialDataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e NatsInitialDataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e NatsInitialDataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e NatsInitialDataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e NatsInitialDataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e NatsInitialDataValidationError) ErrorName() string { return "NatsInitialDataValidationError" }
+
+// Error satisfies the builtin error interface
+func (e NatsInitialDataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sNatsInitialData.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = NatsInitialDataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = NatsInitialDataValidationError{}
+
 // Validate checks the field values on NatsSystemNotification with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
