@@ -20,8 +20,9 @@ enum NatsMsgServerToClientEvents {
   USER_OFFLINE = 8;
 
   PMN_RENEWED_TOKEN = 9;
+  SYSTEM_NOTIFICATION = 11;
 
-  //next ID: 11
+  //next ID: 12
 }
 
 enum NatsMsgClientToServerEvents {
@@ -66,4 +67,17 @@ message MediaServerConnInfo {
   string url = 1;
   string token = 2;
   bool enabled_e2ee = 3;
+}
+
+enum NatsSystemNotificationTypes {
+  NATS_SYSTEM_NOTIFICATION_INFO = 0;
+  NATS_SYSTEM_NOTIFICATION_WARNING = 1;
+  NATS_SYSTEM_NOTIFICATION_ERROR = 2;
+}
+
+message NatsSystemNotification {
+  string id = 1;
+  NatsSystemNotificationTypes type = 2;
+  string msg = 3;
+  int64 sent_at = 4;
 }
