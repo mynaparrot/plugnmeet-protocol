@@ -393,6 +393,8 @@ func (m *NatsKvUserInfo) validate(all bool) error {
 
 	// no validation rules for IsAdmin
 
+	// no validation rules for IsPresenter
+
 	// no validation rules for Metadata
 
 	// no validation rules for JoinedAt

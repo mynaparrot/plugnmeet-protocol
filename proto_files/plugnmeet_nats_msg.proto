@@ -55,10 +55,11 @@ message NatsKvUserInfo {
   string name = 3;
   string room_id = 4;
   bool is_admin = 5;
-  string metadata = 6;
-  uint64 joined_at = 7;
-  uint64 reconnected_at = 8;
-  uint64 disconnected_at = 9;
+  bool is_presenter = 6;
+  string metadata = 7;
+  uint64 joined_at = 8;
+  uint64 reconnected_at = 9;
+  uint64 disconnected_at = 10;
 }
 
 message MediaServerConnInfo {
