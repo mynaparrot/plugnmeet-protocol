@@ -13,13 +13,13 @@ enum NatsMsgServerToClientEvents {
 
   USER_JOINED = 4;
   USER_DISCONNECTED = 5;
-  USER_OFFLINE = 6;
+  USER_OFFLINE = 7;
 
-  RESP_RENEW_PNM_TOKEN = 7;
-  SYSTEM_NOTIFICATION = 8;
-  RESP_DATA_MSG = 9;
+  RESP_RENEW_PNM_TOKEN = 8;
+  SYSTEM_NOTIFICATION = 9;
+  RESP_DATA_MSG = 10;
 
-  //next ID: 10
+  //next ID: 11
 }
 
 enum NatsMsgClientToServerEvents {
@@ -27,6 +27,7 @@ enum NatsMsgClientToServerEvents {
   REQ_RENEW_PNM_TOKEN = 1;
   REQ_DATA_MSG = 3;
   PING = 4;
+  REQ_LOGOUT = 5;
 }
 
 message NatsMsgServerToClient {
