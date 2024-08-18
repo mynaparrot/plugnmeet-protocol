@@ -15,15 +15,17 @@ enum NatsMsgServerToClientEvents {
   USER_DISCONNECTED = 5;
   USER_OFFLINE = 6;
 
-  PMN_RENEWED_TOKEN = 7;
+  RESP_RENEW_PNM_TOKEN = 7;
   SYSTEM_NOTIFICATION = 8;
+  RESP_DATA_MSG = 9;
 
-  //next ID: 9
+  //next ID: 10
 }
 
 enum NatsMsgClientToServerEvents {
-  UNKNOWN_NATS_CLIENT_EVENT = 0;
-  RENEW_PNM_TOKEN = 1;
+  REQ_INITIAL_DATA = 0;
+  REQ_RENEW_PNM_TOKEN = 1;
+  REQ_DATA_MSG = 3;
 }
 
 message NatsMsgServerToClient {
@@ -69,7 +71,6 @@ message NatsInitialData {
   NatsKvRoomInfo room = 1;
   NatsKvUserInfo local_user = 2;
   MediaServerConnInfo media_server_info = 3;
-  repeated NatsKvUserInfo online_users = 4;
 }
 
 enum NatsSystemNotificationTypes {
