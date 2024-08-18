@@ -26,6 +26,7 @@ enum NatsMsgClientToServerEvents {
   REQ_INITIAL_DATA = 0;
   REQ_RENEW_PNM_TOKEN = 1;
   REQ_DATA_MSG = 3;
+  PING = 4;
 }
 
 message NatsMsgServerToClient {
