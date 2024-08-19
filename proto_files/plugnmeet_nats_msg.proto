@@ -87,3 +87,8 @@ message NatsSystemNotification {
   string msg = 3;
   int64 sent_at = 4;
 }
+
+message NatsUserMetadataUpdate {
+  string user_id = 1;
+  string metadata = 2;
+}
