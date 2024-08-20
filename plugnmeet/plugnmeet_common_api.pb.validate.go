@@ -1983,6 +1983,8 @@ func (m *NatsSubjects) validate(all bool) error {
 
 	// no validation rules for Whiteboard
 
+	// no validation rules for DataChannel
+
 	if len(errors) > 0 {
 		return NatsSubjectsMultiError(errors)
 	}

@@ -3,6 +3,8 @@ package plugnmeet;
 
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
+import "plugnmeet_datamessage.proto";
+
 enum NatsMsgServerToClientEvents {
   // initial data
   INITIAL_DATA = 0;
@@ -101,3 +103,12 @@ message ChatMessage {
   bool is_private = 6;
   string message = 7;
 }
+
+message DataChannelMessage {
+  string id = 1;
+  DataMsgBodyType type = 2;
+  string from_user_id = 3;
+  string to_user_id = 4;
+  string message = 5;
+}
+

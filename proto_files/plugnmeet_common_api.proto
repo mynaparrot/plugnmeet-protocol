@@ -146,4 +146,5 @@ message NatsSubjects {
   string chat_public = 4;
   string chat_private = 5;
   string whiteboard = 6;
+  string data_channel = 7;
 }
