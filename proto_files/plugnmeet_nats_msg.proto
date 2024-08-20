@@ -47,9 +47,10 @@ message NatsMsgClientToServer {
 message NatsKvRoomInfo {
   string room_id = 1;
   string room_sid = 2;
-  bool enabled_e2ee = 3;
-  string metadata = 4;
-  uint64 created_at = 5;
+  uint64 empty_timeout = 3;
+  bool enabled_e2ee = 4;
+  string metadata = 5;
+  uint64 created_at = 6;
 }
 
 message NatsKvUserInfo {

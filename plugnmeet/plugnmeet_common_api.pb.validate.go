@@ -271,14 +271,6 @@ func (m *VerifyTokenRes) validate(all bool) error {
 
 	// no validation rules for EnabledE2Ee
 
-	if m.LivekitHost != nil {
-		// no validation rules for LivekitHost
-	}
-
-	if m.Token != nil {
-		// no validation rules for Token
-	}
-
 	if m.ServerVersion != nil {
 		// no validation rules for ServerVersion
 	}
@@ -1977,9 +1969,7 @@ func (m *NatsSubjects) validate(all bool) error {
 
 	// no validation rules for SystemPrivate
 
-	// no validation rules for ChatPublic
-
-	// no validation rules for ChatPrivate
+	// no validation rules for Chat
 
 	// no validation rules for Whiteboard
 
