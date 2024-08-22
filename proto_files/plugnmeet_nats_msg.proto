@@ -29,9 +29,15 @@ enum NatsMsgServerToClientEvents {
 enum NatsMsgClientToServerEvents {
   REQ_INITIAL_DATA = 0;
   REQ_RENEW_PNM_TOKEN = 1;
-  REQ_DATA_MSG = 3;
-  PING = 4;
-  REQ_LOGOUT = 5;
+  REQ_DATA_MSG = 2;
+  PING = 3;
+  REQ_LOGOUT = 4;
+
+  REQ_RAISE_HAND = 5;
+  REQ_LOWER_HAND = 6;
+  REQ_LOWER_OTHER_USER_HAND = 7;
+
+  //next ID: 8
 }
 
 message NatsMsgServerToClient {
@@ -91,6 +97,7 @@ message NatsSystemNotification {
   NatsSystemNotificationTypes type = 2;
   string msg = 3;
   int64 sent_at = 4;
+  bool with_sound = 5;
 }
 
 message NatsUserMetadataUpdate {

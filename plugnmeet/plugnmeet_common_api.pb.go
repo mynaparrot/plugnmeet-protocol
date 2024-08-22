@@ -601,7 +601,7 @@ func (x *DataMessageReq) GetMsgBodyType() DataMsgBodyType {
 	if x != nil {
 		return x.MsgBodyType
 	}
-	return DataMsgBodyType_RAISE_HAND
+	return DataMsgBodyType_UNKNOWN
 }
 
 func (x *DataMessageReq) GetMsg() string {

@@ -35,9 +35,8 @@ enum DataMsgType {
 
 enum DataMsgBodyType {
   // SYSTEM type
-  RAISE_HAND = 0;
-  LOWER_HAND = 1;
-  OTHER_USER_LOWER_HAND = 2;
+  UNKNOWN = 0;
+
   FILE_UPLOAD = 3;
   INFO = 4;
   ALERT = 5;

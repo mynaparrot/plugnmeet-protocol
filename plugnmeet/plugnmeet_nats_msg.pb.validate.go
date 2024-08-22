@@ -808,6 +808,8 @@ func (m *NatsSystemNotification) validate(all bool) error {
 
 	// no validation rules for SentAt
 
+	// no validation rules for WithSound
+
 	if len(errors) > 0 {
 		return NatsSystemNotificationMultiError(errors)
 	}
