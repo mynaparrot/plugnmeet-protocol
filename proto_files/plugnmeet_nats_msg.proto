@@ -5,6 +5,17 @@ option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
 import "plugnmeet_datamessage.proto";
 
+
+message NatsSubjects {
+  string system_api_worker = 1;
+  string system_js_worker = 2;
+  string system_public = 3;
+  string system_private = 4;
+  string chat = 5;
+  string whiteboard = 6;
+  string data_channel = 7;
+}
+
 enum NatsMsgServerToClientEvents {
   // initial data
   INITIAL_DATA = 0;
@@ -54,12 +65,13 @@ message NatsMsgClientToServer {
 }
 
 message NatsKvRoomInfo {
-  string room_id = 1;
-  string room_sid = 2;
-  uint64 empty_timeout = 3;
-  bool enabled_e2ee = 4;
-  string metadata = 5;
-  uint64 created_at = 6;
+  uint64 db_table_id = 1;
+  string room_id = 2;
+  string room_sid = 3;
+  uint64 empty_timeout = 4;
+  bool enabled_e2ee = 5;
+  string metadata = 6;
+  uint64 created_at = 7;
 }
 
 message NatsKvUserInfo {

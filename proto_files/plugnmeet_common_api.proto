@@ -4,6 +4,7 @@ package plugnmeet;
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
 import "plugnmeet_datamessage.proto";
+import "plugnmeet_nats_msg.proto";
 
 message CommonResponse {
   bool status = 1;
@@ -17,11 +18,12 @@ message VerifyTokenReq {
 message VerifyTokenRes {
   bool status = 1;
   string msg = 2;
-  optional string server_version = 5;
-  bool enabled_e2ee = 6;
-  optional string room_id = 7;
-  optional string user_id = 8;
-  optional NatsSubjects nats_subjects = 9;
+  optional string nats_ws_url = 3;
+  optional string server_version = 4;
+  bool enabled_e2ee = 5;
+  optional string room_id = 6;
+  optional string user_id = 7;
+  optional NatsSubjects nats_subjects = 8;
 }
 
 message MuteUnMuteTrackReq {
@@ -135,13 +137,4 @@ message UpdateUserLockSettingsReq {
   string service = 4;
   string direction = 5;
   string Requested_user_id = 6;
-}
-
-message NatsSubjects {
-  string system_worker = 1;
-  string system_public = 2;
-  string system_private = 3;
-  string chat = 4;
-  string whiteboard = 5;
-  string data_channel = 6;
 }
