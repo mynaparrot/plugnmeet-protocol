@@ -70,10 +70,11 @@ message NatsKvRoomInfo {
   uint64 db_table_id = 1;
   string room_id = 2;
   string room_sid = 3;
-  uint64 empty_timeout = 4;
-  bool enabled_e2ee = 5;
-  string metadata = 6;
-  uint64 created_at = 7;
+  string status = 4;
+  uint64 empty_timeout = 5;
+  bool enabled_e2ee = 6;
+  string metadata = 7;
+  uint64 created_at = 8;
 }
 
 message NatsKvUserInfo {

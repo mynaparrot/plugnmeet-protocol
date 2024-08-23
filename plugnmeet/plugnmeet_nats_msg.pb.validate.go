@@ -392,6 +392,8 @@ func (m *NatsKvRoomInfo) validate(all bool) error {
 
 	// no validation rules for RoomSid
 
+	// no validation rules for Status
+
 	// no validation rules for EmptyTimeout
 
 	// no validation rules for EnabledE2Ee
