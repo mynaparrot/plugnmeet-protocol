@@ -49,7 +49,9 @@ enum NatsMsgClientToServerEvents {
   REQ_LOWER_HAND = 6;
   REQ_LOWER_OTHER_USER_HAND = 7;
 
-  //next ID: 8
+  PUSH_ANALYTICS_DATA = 8;
+
+  //next ID: 9
 }
 
 message NatsMsgServerToClient {
