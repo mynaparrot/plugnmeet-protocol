@@ -18,7 +18,7 @@ message VerifyTokenReq {
 message VerifyTokenRes {
   bool status = 1;
   string msg = 2;
-  optional string nats_ws_url = 3;
+  repeated string nats_ws_urls = 3;
   optional string server_version = 4;
   bool enabled_e2ee = 5;
   optional string room_id = 6;

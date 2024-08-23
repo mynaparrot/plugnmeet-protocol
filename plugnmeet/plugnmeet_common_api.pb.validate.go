@@ -271,10 +271,6 @@ func (m *VerifyTokenRes) validate(all bool) error {
 
 	// no validation rules for EnabledE2Ee
 
-	if m.NatsWsUrl != nil {
-		// no validation rules for NatsWsUrl
-	}
-
 	if m.ServerVersion != nil {
 		// no validation rules for ServerVersion
 	}
