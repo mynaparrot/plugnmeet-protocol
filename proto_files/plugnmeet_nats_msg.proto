@@ -34,8 +34,9 @@ enum NatsMsgServerToClientEvents {
 
   AZURE_COGNITIVE_SERVICE_SPEECH_TOKEN = 11;
   SESSION_ENDED = 12;
+  POLL_CLOSED = 13;
 
-  //next ID: 12
+  //next ID: 13
 }
 
 enum NatsMsgClientToServerEvents {
