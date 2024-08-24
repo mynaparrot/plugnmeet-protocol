@@ -3,9 +3,6 @@ package plugnmeet;
 
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
-import "plugnmeet_datamessage.proto";
-
-
 message NatsSubjects {
   string system_api_worker = 1;
   string system_js_worker = 2;
@@ -26,36 +23,34 @@ enum NatsMsgServerToClientEvents {
 
   USER_JOINED = 4;
   USER_DISCONNECTED = 5;
-  USER_OFFLINE = 7;
+  USER_OFFLINE = 6;
 
-  RESP_RENEW_PNM_TOKEN = 8;
-  SYSTEM_NOTIFICATION = 9;
-  RESP_DATA_MSG = 10;
+  RESP_RENEW_PNM_TOKEN = 7;
+  SYSTEM_NOTIFICATION = 8;
 
-  AZURE_COGNITIVE_SERVICE_SPEECH_TOKEN = 11;
-  SESSION_ENDED = 12;
-  POLL_CLOSED = 13;
-  POLL_CREATED = 14;
-  JOIN_BREAKOUT_ROOM = 15;
-  SYSTEM_CHAT_MSG = 16; // mostly system message display in chat
+  AZURE_COGNITIVE_SERVICE_SPEECH_TOKEN = 9;
+  SESSION_ENDED = 10;
+  POLL_CLOSED = 11;
+  POLL_CREATED = 12;
+  JOIN_BREAKOUT_ROOM = 13;
+  SYSTEM_CHAT_MSG = 14; // mostly system message display in chat
 
-  //next ID: 17
+  //next ID: 15
 }
 
 enum NatsMsgClientToServerEvents {
   REQ_INITIAL_DATA = 0;
   REQ_RENEW_PNM_TOKEN = 1;
-  REQ_DATA_MSG = 2;
-  PING = 3;
-  REQ_LOGOUT = 4;
+  PING = 2;
+  REQ_LOGOUT = 3;
 
-  REQ_RAISE_HAND = 5;
-  REQ_LOWER_HAND = 6;
-  REQ_LOWER_OTHER_USER_HAND = 7;
+  REQ_RAISE_HAND = 4;
+  REQ_LOWER_HAND = 5;
+  REQ_LOWER_OTHER_USER_HAND = 6;
 
-  PUSH_ANALYTICS_DATA = 8;
+  PUSH_ANALYTICS_DATA = 7;
 
-  //next ID: 9
+  //next ID: 8
 }
 
 message NatsMsgServerToClient {
@@ -133,12 +128,3 @@ message ChatMessage {
   bool is_private = 6;
   string message = 7;
 }
-
-message DataChannelMessage {
-  string id = 1;
-  DataMsgBodyType type = 2;
-  string from_user_id = 3;
-  string to_user_id = 4;
-  string message = 5;
-}
-
