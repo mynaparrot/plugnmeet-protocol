@@ -269,8 +269,6 @@ func (m *VerifyTokenRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
-	// no validation rules for EnabledE2Ee
-
 	if m.ServerVersion != nil {
 		// no validation rules for ServerVersion
 	}

@@ -63,9 +63,11 @@ func (m *DataChannelMessage) validate(all bool) error {
 
 	// no validation rules for FromUserId
 
-	// no validation rules for ToUserId
-
 	// no validation rules for Message
+
+	if m.ToUserId != nil {
+		// no validation rules for ToUserId
+	}
 
 	if len(errors) > 0 {
 		return DataChannelMessageMultiError(errors)

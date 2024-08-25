@@ -20,10 +20,9 @@ message VerifyTokenRes {
   string msg = 2;
   repeated string nats_ws_urls = 3;
   optional string server_version = 4;
-  bool enabled_e2ee = 5;
-  optional string room_id = 6;
-  optional string user_id = 7;
-  optional NatsSubjects nats_subjects = 8;
+  optional string room_id = 5;
+  optional string user_id = 6;
+  optional NatsSubjects nats_subjects = 7;
 }
 
 message MuteUnMuteTrackReq {

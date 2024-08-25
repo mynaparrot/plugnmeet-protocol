@@ -15,7 +15,7 @@ message NatsSubjects {
 
 enum NatsMsgServerToClientEvents {
   // initial data
-  INITIAL_DATA = 0;
+  RES_INITIAL_DATA = 0;
   JOINED_USERS_LIST = 1;
 
   ROOM_METADATA_UPDATE = 2;
@@ -42,7 +42,6 @@ enum NatsMsgClientToServerEvents {
   REQ_INITIAL_DATA = 0;
   REQ_RENEW_PNM_TOKEN = 1;
   PING = 2;
-  REQ_LOGOUT = 3;
 
   REQ_RAISE_HAND = 4;
   REQ_LOWER_HAND = 5;
@@ -71,9 +70,8 @@ message NatsKvRoomInfo {
   string room_sid = 3;
   string status = 4;
   uint64 empty_timeout = 5;
-  bool enabled_e2ee = 6;
-  string metadata = 7;
-  uint64 created_at = 8;
+  string metadata = 6;
+  uint64 created_at = 7;
 }
 
 message NatsKvUserInfo {
