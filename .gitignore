@@ -5,3 +5,5 @@ log
 .idea
 build/
 tmp/
+node_modules/
+/js/src/gen/*

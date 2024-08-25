@@ -5,7 +5,6 @@ option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
 import "plugnmeet_gen_token.proto";
 import "buf/validate/validate.proto";
-import "livekit_models.proto";
 import "plugnmeet_ingress.proto";
 import "plugnmeet_nats_msg.proto";
 
