@@ -25,7 +25,7 @@ func GeneratePlugNmeetJWTAccessToken(apiKey, secret, userId string, tokenValidit
 	return jwt.Signed(sig).Claims(cl).Claims(c).Serialize()
 }
 
-func GenerateLivekitAccessToken(apiKey, secret string, tokenValidity time.Duration, c *plugnmeet.PlugNmeetTokenClaims, metadata string) (string, error) {
+func GenerateLivekitAccessToken(apiKey, secret string, tokenValidity time.Duration, c *plugnmeet.PlugNmeetTokenClaims) (string, error) {
 	at := auth.NewAccessToken(apiKey, secret)
 	grant := &auth.VideoGrant{
 		RoomJoin:  true,
@@ -37,7 +37,6 @@ func GenerateLivekitAccessToken(apiKey, secret string, tokenValidity time.Durati
 	at.AddGrant(grant).
 		SetIdentity(c.UserId).
 		SetName(c.Name).
-		SetMetadata(metadata).
 		SetValidFor(tokenValidity)
 
 	return at.ToJWT()
