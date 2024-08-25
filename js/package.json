@@ -1,0 +1,26 @@
+{
+  "name": "plugnmeet-protocol-js",
+  "version": "1.0.0",
+  "description": "JS proto files",
+  "author": "Jibon L. Costa",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "files": [
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./*": {
+      "types": "./src/gen/plugnmeet_*_pb.d.ts",
+      "default": "./src/gen/plugnmeet_*_pb.js"
+    }
+  },
+  "dependencies": {
+    "@bufbuild/protobuf": "1.10.0"
+  }
+}
