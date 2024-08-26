@@ -1,7 +1,7 @@
 {
   "name": "plugnmeet-protocol-js",
   "version": "1.0.0",
-  "description": "JS proto files",
+  "description": "plugNmeet JS proto files",
   "author": "Jibon L. Costa",
   "license": "MIT",
   "type": "module",
