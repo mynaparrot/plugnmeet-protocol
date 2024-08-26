@@ -12,9 +12,6 @@ plugins:
      - import_extension=js
 inputs:
   - directory: ../proto_files
+  - module: buf.build/bufbuild/protovalidate
   - proto_file: ../tmp/livekit-protocol/protobufs/livekit_models.proto
-    include_package_files: true
-  - proto_file: ../tmp/protovalidate/proto/protovalidate/buf/validate/validate.proto
-    include_package_files: true
-  - proto_file: ../tmp/protovalidate/proto/protovalidate/buf/validate/priv/private.proto
     include_package_files: true
