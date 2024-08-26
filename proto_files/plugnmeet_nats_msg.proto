@@ -122,6 +122,7 @@ message ChatMessage {
   string id = 1;
   string from_name = 2;
   string from_user_id = 3;
+  int64 sent_at = 4;
   optional string to_user_id = 5;
   bool is_private = 6;
   string message = 7;
