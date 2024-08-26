@@ -10,10 +10,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name:
-        uses: bufbuild/buf-setup-action@v1.38.0
+        uses: bufbuild/buf-setup-action@v1
         with:
           version: latest
       - run: buf --version
+      - name:  'Automated Version Bump'
+        uses:  'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGEJSON_DIR:  'js'
+        with:
+          default: prerelease
       - name: setup node
         uses: actions/setup-node@v4
         with:
@@ -24,8 +31,7 @@ jobs:
           cd js
           buf generate
           npm install
-          ls src
-          ls src/gen
+          npm config set '//registry.npmjs.org/:_authToken' $NPM_TOKEN
           npm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
