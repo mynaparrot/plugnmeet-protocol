@@ -9,6 +9,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name:
+        uses: bufbuild/buf-setup-action@v1.38.0
+        with:
+          version: latest
+      - run: buf --version
       - name: setup node
         uses: actions/setup-node@v4
         with:
