@@ -7,4 +7,3 @@ build/
 tmp/
 node_modules/
 /js/src/gen/*
-/js/package-lock.json
