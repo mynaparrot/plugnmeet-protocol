@@ -21,6 +21,7 @@ jobs:
           PACKAGEJSON_DIR:  'js'
         with:
           default: prerelease
+          rc-wording: 'alpha,wip'
       - name: setup node
         uses: actions/setup-node@v4
         with:
