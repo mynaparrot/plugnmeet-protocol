@@ -6,7 +6,7 @@ option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 import "plugnmeet_gen_token.proto";
 import "buf/validate/validate.proto";
 import "plugnmeet_ingress.proto";
-import "plugnmeet_nats_msg.proto";
+import "plugnmeet_auth_room.proto";
 
 message CreateRoomReq {
   string room_id = 1 [(buf.validate.field).cel = {
@@ -222,5 +222,5 @@ message CopyrightConf {
 message CreateRoomRes {
   bool status = 1;
   string msg = 2;
-  NatsKvRoomInfo room_info = 3;
+  ActiveRoomInfo room_info = 3;
 }
