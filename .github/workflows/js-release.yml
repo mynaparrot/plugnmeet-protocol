@@ -2,7 +2,7 @@ name: Build and release client
 on:
   push:
     branches:
-      - 'nats'
+      - 'main'
 jobs:
   build:
     runs-on: ubuntu-latest
