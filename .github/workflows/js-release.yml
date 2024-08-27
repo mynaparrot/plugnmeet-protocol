@@ -22,6 +22,8 @@ jobs:
         with:
           patch-wording:  'patch,fixes,fix'
           rc-wording:     'test,alpha,wip,test-release,release'
+          commit-message: 'bump version'
+          bump-policy: 'all'
       - name: setup node
         uses: actions/setup-node@v4
         with:
