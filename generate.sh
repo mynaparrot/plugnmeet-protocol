@@ -19,7 +19,7 @@ fi
 
 if ! which buf >/dev/null; then
   printf "buf not installed, installing using go install"
-  go install github.com/bufbuild/buf/cmd/buf
+  go install github.com/bufbuild/buf/cmd/buf@latest
 fi
 
 buf dep update

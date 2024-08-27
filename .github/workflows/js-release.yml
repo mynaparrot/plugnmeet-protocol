@@ -1,0 +1,40 @@
+name: Build and release client
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name:
+        uses: bufbuild/buf-setup-action@v1
+        with:
+          version: latest
+      - run: buf --version
+      - name:  'Automated Version Bump'
+        uses:  'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGEJSON_DIR:  'js'
+        with:
+          patch-wording:  'patch,fixes,fix'
+          rc-wording:     'test,alpha,wip,test-release,release'
+          commit-message: 'bump'
+          bump-policy: 'all'
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - name: Build and publish
+        run: |
+          bash generate.sh
+          cd js
+          buf generate
+          npm install
+          npm config set '//registry.npmjs.org/:_authToken' $NPM_TOKEN
+          npm publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

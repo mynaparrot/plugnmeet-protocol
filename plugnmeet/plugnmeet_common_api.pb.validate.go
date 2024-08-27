@@ -269,18 +269,49 @@ func (m *VerifyTokenRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
-	// no validation rules for EnabledE2Ee
-
-	if m.LivekitHost != nil {
-		// no validation rules for LivekitHost
-	}
-
-	if m.Token != nil {
-		// no validation rules for Token
-	}
-
 	if m.ServerVersion != nil {
 		// no validation rules for ServerVersion
+	}
+
+	if m.RoomId != nil {
+		// no validation rules for RoomId
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.NatsSubjects != nil {
+
+		if all {
+			switch v := interface{}(m.GetNatsSubjects()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, VerifyTokenResValidationError{
+						field:  "NatsSubjects",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, VerifyTokenResValidationError{
+						field:  "NatsSubjects",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetNatsSubjects()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return VerifyTokenResValidationError{
+					field:  "NatsSubjects",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if len(errors) > 0 {

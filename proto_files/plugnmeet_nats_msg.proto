@@ -1,0 +1,129 @@
+syntax = "proto3";
+package plugnmeet;
+
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+
+message NatsSubjects {
+  string system_api_worker = 1;
+  string system_js_worker = 2;
+  string system_public = 3;
+  string system_private = 4;
+  string chat = 5;
+  string whiteboard = 6;
+  string data_channel = 7;
+}
+
+enum NatsMsgServerToClientEvents {
+  // initial data
+  RES_INITIAL_DATA = 0;
+  JOINED_USERS_LIST = 1;
+
+  ROOM_METADATA_UPDATE = 2;
+  USER_METADATA_UPDATE = 3;
+
+  USER_JOINED = 4;
+  USER_DISCONNECTED = 5;
+  USER_OFFLINE = 6;
+
+  RESP_RENEW_PNM_TOKEN = 7;
+  SYSTEM_NOTIFICATION = 8;
+
+  AZURE_COGNITIVE_SERVICE_SPEECH_TOKEN = 9;
+  SESSION_ENDED = 10;
+  POLL_CLOSED = 11;
+  POLL_CREATED = 12;
+  JOIN_BREAKOUT_ROOM = 13;
+  SYSTEM_CHAT_MSG = 14; // mostly system message display in chat
+
+  //next ID: 15
+}
+
+enum NatsMsgClientToServerEvents {
+  REQ_INITIAL_DATA = 0;
+  REQ_RENEW_PNM_TOKEN = 1;
+  PING = 2;
+
+  REQ_RAISE_HAND = 4;
+  REQ_LOWER_HAND = 5;
+  REQ_LOWER_OTHER_USER_HAND = 6;
+
+  PUSH_ANALYTICS_DATA = 7;
+
+  //next ID: 8
+}
+
+message NatsMsgServerToClient {
+  string id = 1;
+  NatsMsgServerToClientEvents event = 2;
+  string msg = 3;
+}
+
+message NatsMsgClientToServer {
+  string id = 1;
+  NatsMsgClientToServerEvents event = 2;
+  string msg = 3;
+}
+
+message NatsKvRoomInfo {
+  uint64 db_table_id = 1;
+  string room_id = 2;
+  string room_sid = 3;
+  string status = 4;
+  uint64 empty_timeout = 5;
+  string metadata = 6;
+  uint64 created_at = 7;
+}
+
+message NatsKvUserInfo {
+  string user_id = 1;
+  string user_sid = 2;
+  string name = 3;
+  string room_id = 4;
+  bool is_admin = 5;
+  bool is_presenter = 6;
+  string metadata = 7;
+  uint64 joined_at = 8;
+  uint64 reconnected_at = 9;
+  uint64 disconnected_at = 10;
+}
+
+message MediaServerConnInfo {
+  string url = 1;
+  string token = 2;
+  bool enabled_e2ee = 3;
+}
+
+message NatsInitialData {
+  NatsKvRoomInfo room = 1;
+  NatsKvUserInfo local_user = 2;
+  MediaServerConnInfo media_server_info = 3;
+}
+
+enum NatsSystemNotificationTypes {
+  NATS_SYSTEM_NOTIFICATION_INFO = 0;
+  NATS_SYSTEM_NOTIFICATION_WARNING = 1;
+  NATS_SYSTEM_NOTIFICATION_ERROR = 2;
+}
+
+message NatsSystemNotification {
+  string id = 1;
+  NatsSystemNotificationTypes type = 2;
+  string msg = 3;
+  int64 sent_at = 4;
+  bool with_sound = 5;
+}
+
+message NatsUserMetadataUpdate {
+  string user_id = 1;
+  string metadata = 2;
+}
+
+message ChatMessage {
+  string id = 1;
+  string from_name = 2;
+  string from_user_id = 3;
+  int64 sent_at = 4;
+  optional string to_user_id = 5;
+  bool is_private = 6;
+  string message = 7;
+}

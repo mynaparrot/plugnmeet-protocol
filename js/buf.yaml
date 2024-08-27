@@ -1,0 +1,14 @@
+version: v2
+lint:
+  use:
+    - DEFAULT
+breaking:
+  use:
+    - FILE
+modules:
+ - path: ../proto_files
+ - path: ../tmp/protovalidate/proto/protovalidate
+   name: buf.build/bufbuild/protovalidate
+ - path: ../tmp/livekit-protocol/protobufs
+deps:
+  - buf.build/bufbuild/protovalidate

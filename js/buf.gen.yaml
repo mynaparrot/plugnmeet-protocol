@@ -1,0 +1,17 @@
+version: v2
+managed:
+  enabled: true
+  override:
+    - field_option: jstype
+      value: JS_STRING
+plugins:
+  - remote: buf.build/bufbuild/es:v2.0.0
+    out: src/gen
+    opt:
+     - target=dts+js
+     - import_extension=js
+inputs:
+  - directory: ../proto_files
+  - module: buf.build/bufbuild/protovalidate
+  - proto_file: ../tmp/livekit-protocol/protobufs/livekit_models.proto
+    include_package_files: true
