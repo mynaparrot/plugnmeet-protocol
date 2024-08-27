@@ -20,8 +20,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PACKAGEJSON_DIR:  'js'
         with:
-          version-type:  'prerelease'
-          skip-tag:  'true'
+          patch-wording:  'patch,fixes,fix'
+          rc-wording:     'test,alpha,wip,test-release,release'
       - name: setup node
         uses: actions/setup-node@v4
         with:
