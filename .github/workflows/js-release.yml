@@ -1,8 +1,7 @@
 name: Build and release client
 on:
-  push:
-    branches:
-      - 'main'
+  release:
+    types: [ published ]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,18 +13,6 @@ jobs:
         with:
           version: latest
       - run: buf --version
-      - name:  'Automated Version Bump'
-        uses:  'phips28/gh-action-bump-version@master'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PACKAGEJSON_DIR:  'js'
-        with:
-          patch-wording:  'patch,fixes,fix'
-          rc-wording:     'test,alpha,wip,test-release,release'
-          commit-message: 'bump'
-          bump-policy: 'all'
-          skip-commit:  'true'
-          skip-tag: 'false'
       - name: setup node
         uses: actions/setup-node@v4
         with:
