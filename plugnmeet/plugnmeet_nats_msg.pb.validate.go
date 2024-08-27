@@ -1139,6 +1139,8 @@ func (m *ChatMessage) validate(all bool) error {
 
 	// no validation rules for FromUserId
 
+	// no validation rules for SentAt
+
 	// no validation rules for IsPrivate
 
 	// no validation rules for Message
