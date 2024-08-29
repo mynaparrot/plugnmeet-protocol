@@ -88,3 +88,9 @@ enum RecorderServiceType {
   RECORDING = 0;
   RTMP = 1;
 }
+
+enum RecorderInfoKeys {
+  RECORDER_INFO_MAX_LIMIT = 0;
+  RECORDER_INFO_LAST_PING = 1;
+  RECORDER_INFO_CURRENT_PROGRESS = 3;
+}

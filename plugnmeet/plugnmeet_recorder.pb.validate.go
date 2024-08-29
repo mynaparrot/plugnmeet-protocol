@@ -523,82 +523,20 @@ func (m *StartRecorderChildArgs) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for ServiceType
+
 	// no validation rules for RoomTableId
 
 	// no validation rules for RecordingId
 
 	// no validation rules for AccessToken
 
-	if all {
-		switch v := interface{}(m.GetPlugNMeetInfo()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, StartRecorderChildArgsValidationError{
-					field:  "PlugNMeetInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, StartRecorderChildArgsValidationError{
-					field:  "PlugNMeetInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetPlugNMeetInfo()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return StartRecorderChildArgsValidationError{
-				field:  "PlugNMeetInfo",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for PostMp4Convert
-
-	if all {
-		switch v := interface{}(m.GetCopyToPath()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, StartRecorderChildArgsValidationError{
-					field:  "CopyToPath",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, StartRecorderChildArgsValidationError{
-					field:  "CopyToPath",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetCopyToPath()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return StartRecorderChildArgsValidationError{
-				field:  "CopyToPath",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for ServiceType
+	// no validation rules for PnmHost
 
 	// no validation rules for WebsocketUrl
 
-	if m.RecorderId != nil {
-		// no validation rules for RecorderId
-	}
-
-	if m.RtmpUrl != nil {
-		// no validation rules for RtmpUrl
+	if m.PnmJoinHost != nil {
+		// no validation rules for PnmJoinHost
 	}
 
 	if m.CustomChromePath != nil {
