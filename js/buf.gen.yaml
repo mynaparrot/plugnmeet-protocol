@@ -8,8 +8,7 @@ plugins:
   - remote: buf.build/bufbuild/es:v2.0.0
     out: src/gen
     opt:
-     - target=dts+js
-     - import_extension=js
+     - target=ts
 inputs:
   - directory: ../proto_files
   - module: buf.build/bufbuild/protovalidate
