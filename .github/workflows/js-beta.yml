@@ -32,7 +32,7 @@ jobs:
           PACKAGEJSON_DIR: 'js'
         with:
           version-type: 'prerelease'
-          commit-message: 'bump'
+          commit-message: 'bump version'
           skip-tag: 'true'
           skip-commit:  'false'
       - name: Build and publish
