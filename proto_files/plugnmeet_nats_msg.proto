@@ -126,4 +126,5 @@ message ChatMessage {
   optional string to_user_id = 5;
   bool is_private = 6;
   string message = 7;
+  bool from_admin = 8;
 }
