@@ -1145,6 +1145,8 @@ func (m *ChatMessage) validate(all bool) error {
 
 	// no validation rules for Message
 
+	// no validation rules for FromAdmin
+
 	if m.ToUserId != nil {
 		// no validation rules for ToUserId
 	}

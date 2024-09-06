@@ -338,7 +338,7 @@ func (m *ActiveRoomInfo) validate(all bool) error {
 
 	// no validation rules for RoomId
 
-	// no validation rules for RoomSid
+	// no validation rules for Sid
 
 	// no validation rules for JoinedParticipants
 
