@@ -63,7 +63,7 @@ func (m *RecordingReq) validate(all bool) error {
 
 	// no validation rules for RoomTableId
 
-	// no validation rules for Sid
+	// no validation rules for RoomSid
 
 	if m.RtmpUrl != nil {
 		// no validation rules for RtmpUrl

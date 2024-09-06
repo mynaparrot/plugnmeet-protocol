@@ -404,7 +404,7 @@ func (m *NotifyEventRoom) validate(all bool) error {
 	}
 
 	if m.Sid != nil {
-		// no validation rules for Sid
+		// no validation rules for RoomSid
 	}
 
 	if m.RoomId != nil {

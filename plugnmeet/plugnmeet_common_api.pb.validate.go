@@ -414,7 +414,7 @@ func (m *MuteUnMuteTrackReq) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Sid
+	// no validation rules for RoomSid
 
 	// no validation rules for RoomId
 
@@ -528,7 +528,7 @@ func (m *RemoveParticipantReq) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Sid
+	// no validation rules for RoomSid
 
 	// no validation rules for RoomId
 
