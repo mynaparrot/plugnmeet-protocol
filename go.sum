@@ -45,6 +45,8 @@ github.com/frostbyte73/core v0.0.10 h1:D4DQXdPb8ICayz0n75rs4UYTXrUSdxzUfeleuNJOR
 github.com/frostbyte73/core v0.0.10/go.mod h1:XsOGqrqe/VEV7+8vJ+3a8qnCIXNbKsoEiu/czs7nrcU=
 github.com/frostbyte73/core v0.0.12 h1:kySA8+Os6eqnPFoExD2T7cehjSAY1MRyIViL0yTy2uc=
 github.com/frostbyte73/core v0.0.12/go.mod h1:XsOGqrqe/VEV7+8vJ+3a8qnCIXNbKsoEiu/czs7nrcU=
+github.com/frostbyte73/core v0.0.13 h1:W/NFPNiCkGTRzMWnCVptn6vX6Tr4a7LvN0RFc0xsC2k=
+github.com/frostbyte73/core v0.0.13/go.mod h1:XsOGqrqe/VEV7+8vJ+3a8qnCIXNbKsoEiu/czs7nrcU=
 github.com/fsnotify/fsnotify v1.7.0 h1:8JEhPFa5W2WU7YfeZzPNqzMP6Lwt7L2715Ggo0nosvA=
 github.com/fsnotify/fsnotify v1.7.0/go.mod h1:40Bi/Hjc2AVfZrqy+aj+yEI+/bRxZnMJyTJwOpGvigM=
 github.com/gammazero/deque v0.2.1 h1:qSdsbG6pgp6nL7A0+K/B7s12mcCY/5l5SIUpMOl+dC0=
