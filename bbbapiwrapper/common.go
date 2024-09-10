@@ -39,7 +39,7 @@ func CalculateCheckSum(apiSecret, method, queries string) string {
 // CheckMeetingIdToMatchFormat will check the meeting ID format
 // if don't match with our allowed format then it will make convert it to md5
 func CheckMeetingIdToMatchFormat(meetingID string) string {
-	valid, _ := regexp.MatchString("^[a-zA-Z0-9-_.:]+$", meetingID)
+	valid, _ := regexp.MatchString("^[a-zA-Z0-9-_]+$", meetingID)
 	if !valid {
 		// if not valid then we'll convert it
 		// otherwise plugNmeet will complain
