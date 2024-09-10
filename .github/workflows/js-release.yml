@@ -17,14 +17,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
       - name: Build and publish
         run: |
           bash generate.sh
           cd js
           buf generate
-          npm install
-          npm run build
-          npm config set '//registry.npmjs.org/:_authToken' $NPM_TOKEN
-          npm publish
+          pnpm install
+          pnpm run build
+          pnpm config set '//registry.npmjs.org/:_authToken' $NPM_TOKEN
+          pnpm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
