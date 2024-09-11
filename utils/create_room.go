@@ -101,6 +101,12 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize uint64, allowedTypes []string, allowedNotepad bool) {
 	rf := r.Metadata.RoomFeatures
 
+	if rf.AutoGenUserId == nil {
+		// by default, auto user id generation will be disabled
+		ff := new(bool)
+		rf.AutoGenUserId = ff
+	}
+
 	if rf.SharedNotePadFeatures.AllowedSharedNotePad && !allowedNotepad {
 		rf.SharedNotePadFeatures.AllowedSharedNotePad = false
 	}

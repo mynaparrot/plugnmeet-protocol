@@ -62,6 +62,7 @@ message NatsMsgClientToServer {
   string id = 1;
   NatsMsgClientToServerEvents event = 2;
   string msg = 3;
+  bytes bin_msg = 4;
 }
 
 message NatsKvRoomInfo {

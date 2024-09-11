@@ -763,6 +763,10 @@ func (m *RoomCreateFeatures) validate(all bool) error {
 		// no validation rules for AllowRaiseHand
 	}
 
+	if m.AutoGenUserId != nil {
+		// no validation rules for AutoGenUserId
+	}
+
 	if len(errors) > 0 {
 		return RoomCreateFeaturesMultiError(errors)
 	}

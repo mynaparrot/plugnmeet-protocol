@@ -284,6 +284,8 @@ func (m *NatsMsgClientToServer) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	// no validation rules for BinMsg
+
 	if len(errors) > 0 {
 		return NatsMsgClientToServerMultiError(errors)
 	}
