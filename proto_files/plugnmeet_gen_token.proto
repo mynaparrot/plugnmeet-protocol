@@ -20,6 +20,7 @@ message UserInfo {
   bool is_admin = 3;
   bool is_hidden = 4;
   UserMetadata user_metadata = 5;
+  optional string extra_data = 6;
 }
 
 message UserMetadata {
