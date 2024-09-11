@@ -20,7 +20,6 @@ message UserInfo {
   bool is_admin = 3;
   bool is_hidden = 4;
   UserMetadata user_metadata = 5;
-  optional string extra_data = 6;
 }
 
 message UserMetadata {
@@ -38,7 +37,8 @@ message UserMetadata {
     message: "metadata_id should not contain any value",
     expression: "this.matches('^$')"
   }];
-  // Next ID: 10
+  optional string extra_data = 10;
+  // Next ID: 11
 }
 
 message PlugNmeetTokenClaims {

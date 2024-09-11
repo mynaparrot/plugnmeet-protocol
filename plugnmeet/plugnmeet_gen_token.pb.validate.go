@@ -225,10 +225,6 @@ func (m *UserInfo) validate(all bool) error {
 		}
 	}
 
-	if m.ExtraData != nil {
-		// no validation rules for ExtraData
-	}
-
 	if len(errors) > 0 {
 		return UserInfoMultiError(errors)
 	}
@@ -379,6 +375,10 @@ func (m *UserMetadata) validate(all bool) error {
 
 	if m.MetadataId != nil {
 		// no validation rules for MetadataId
+	}
+
+	if m.ExtraData != nil {
+		// no validation rules for ExtraData
 	}
 
 	if len(errors) > 0 {
