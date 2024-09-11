@@ -25,14 +25,14 @@ message UserInfo {
 message UserMetadata {
   optional string profile_pic = 1 [(buf.validate.field).string.uri = true];
   bool is_admin = 2;
-  optional bool record_webcam = 7;
-  bool is_presenter = 3 [(buf.validate.field).bool.const = false];
-  bool raised_hand = 4 [(buf.validate.field).bool.const = false];
-  bool wait_for_approval = 5 [(buf.validate.field).bool.const = false];
-  optional string preferred_lang = 9;
-  LockSettings lock_settings = 6;
+  optional bool record_webcam = 3;
+  bool is_presenter = 4 [(buf.validate.field).bool.const = false];
+  bool raised_hand = 5 [(buf.validate.field).bool.const = false];
+  bool wait_for_approval = 6 [(buf.validate.field).bool.const = false];
+  optional string preferred_lang = 7;
+  LockSettings lock_settings = 8;
   // we'll use this as version control
-  optional string metadata_id = 8 [(buf.validate.field).cel = {
+  optional string metadata_id = 9 [(buf.validate.field).cel = {
     id: "metadata_id_format",
     message: "metadata_id should not contain any value",
     expression: "this.matches('^$')"
