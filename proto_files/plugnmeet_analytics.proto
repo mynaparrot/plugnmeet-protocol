@@ -55,7 +55,8 @@ message AnalyticsUserInfo {
   string name = 2;
   bool is_admin = 3;
   optional string extra_data = 4;
-  repeated AnalyticsEventData events = 5;
+  optional string ex_user_id = 5;
+  repeated AnalyticsEventData events = 6;
 }
 
 message AnalyticsResult {
@@ -67,6 +68,7 @@ message AnalyticsRedisUserInfo {
   optional string name = 1;
   bool is_admin = 2;
   optional string extra_data = 3;
+  optional string ex_user_id = 4;
 }
 
 enum AnalyticsEvents {

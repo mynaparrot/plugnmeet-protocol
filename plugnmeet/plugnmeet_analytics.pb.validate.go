@@ -633,6 +633,10 @@ func (m *AnalyticsUserInfo) validate(all bool) error {
 		// no validation rules for ExtraData
 	}
 
+	if m.ExUserId != nil {
+		// no validation rules for ExUserId
+	}
+
 	if len(errors) > 0 {
 		return AnalyticsUserInfoMultiError(errors)
 	}
@@ -906,6 +910,10 @@ func (m *AnalyticsRedisUserInfo) validate(all bool) error {
 
 	if m.ExtraData != nil {
 		// no validation rules for ExtraData
+	}
+
+	if m.ExUserId != nil {
+		// no validation rules for ExUserId
 	}
 
 	if len(errors) > 0 {
