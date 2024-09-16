@@ -33,6 +33,7 @@ enum NatsMsgServerToClientEvents {
   POLL_CLOSED = 11;
   POLL_CREATED = 12;
   JOIN_BREAKOUT_ROOM = 13;
+  BREAKOUT_ROOM_ENDED = 15;
   SYSTEM_CHAT_MSG = 14; // mostly system message display in chat
 
   //next ID: 15
