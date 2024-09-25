@@ -398,6 +398,8 @@ func (m *NatsKvRoomInfo) validate(all bool) error {
 
 	// no validation rules for EmptyTimeout
 
+	// no validation rules for MaxParticipants
+
 	// no validation rules for Metadata
 
 	// no validation rules for CreatedAt

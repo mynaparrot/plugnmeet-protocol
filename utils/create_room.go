@@ -159,17 +159,23 @@ func SetDefaultRoomSettings(s *RoomDefaultSettings, r *plugnmeet.CreateRoomReq) 
 	}
 
 	if s.MaxParticipants != nil && *s.MaxParticipants > 0 {
-		if r.MaxParticipants != nil && *r.MaxParticipants > 0 && *r.MaxParticipants <= *s.MaxParticipants {
-			return
+		if r.MaxParticipants != nil {
+			if *r.MaxParticipants == 0 || *r.MaxParticipants > *s.MaxParticipants {
+				r.MaxParticipants = s.MaxParticipants
+			}
+		} else {
+			r.MaxParticipants = s.MaxParticipants
 		}
-		r.MaxParticipants = s.MaxParticipants
 	}
 
 	if s.MaxDuration != nil && *s.MaxDuration > 0 {
-		if r.Metadata.RoomFeatures.RoomDuration != nil && *r.Metadata.RoomFeatures.RoomDuration > 0 && *r.Metadata.RoomFeatures.RoomDuration <= *s.MaxDuration {
-			return
+		if r.Metadata.RoomFeatures.RoomDuration != nil {
+			if *r.Metadata.RoomFeatures.RoomDuration == 0 || *r.Metadata.RoomFeatures.RoomDuration > *s.MaxDuration {
+				r.Metadata.RoomFeatures.RoomDuration = s.MaxDuration
+			}
+		} else {
+			r.Metadata.RoomFeatures.RoomDuration = s.MaxDuration
 		}
-		r.Metadata.RoomFeatures.RoomDuration = s.MaxDuration
 	}
 
 	// at present, we will allow max 16 rooms
