@@ -30,10 +30,10 @@ func ConvertJoinRequest(r *JoinMeetingReq, isAdmin bool) *plugnmeet.GenerateToke
 		RoomId: CheckMeetingIdToMatchFormat(r.MeetingID),
 		UserInfo: &plugnmeet.UserInfo{
 			Name:    r.FullName,
-			UserId:  CheckForUserId(r.UserID),
 			IsAdmin: isAdmin,
 			UserMetadata: &plugnmeet.UserMetadata{
 				LockSettings: &plugnmeet.LockSettings{},
+				ExUserId:     &r.UserID,
 			},
 		},
 	}

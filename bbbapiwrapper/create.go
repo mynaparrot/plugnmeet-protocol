@@ -96,6 +96,7 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 				AllowScreenShare: true,
 				AllowRaiseHand:   &b,
 				AllowVirtualBg:   &b,
+				AutoGenUserId:    &b,
 				RecordingFeatures: &plugnmeet.RecordingFeatures{
 					IsAllow:                  r.Record,
 					IsAllowCloud:             r.Record,
@@ -240,19 +241,15 @@ func setLockSettings(f *plugnmeet.LockSettings, r *CreateMeetingReq) {
 	if r.LockSettingsDisableCam {
 		f.LockWebcam = &l
 	}
-
 	if r.LockSettingsDisableMic {
 		f.LockMicrophone = &l
 	}
-
 	if r.LockSettingsDisablePublicChat {
 		f.LockChatSendMessage = &l
 	}
-
 	if r.LockSettingsDisablePrivateChat {
 		f.LockPrivateChat = &l
 	}
-
 	if r.LockSettingsDisableNotes {
 		f.LockSharedNotepad = &l
 	}

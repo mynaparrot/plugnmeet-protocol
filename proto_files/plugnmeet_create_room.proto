@@ -11,7 +11,7 @@ import "plugnmeet_auth_room.proto";
 message CreateRoomReq {
   string room_id = 1 [(buf.validate.field).cel = {
     id: "room_id_format",
-    message: "room_id should only contain letters, digits or -_",
+    message: "room_id should only contain ASCII letters (a-z A-Z), digits (0-9) or -_",
     expression: "this.matches('^[a-zA-Z0-9-_]+$')"
   }];
   optional uint32 empty_timeout = 2 [(buf.validate.field).uint32.gt = 0];
