@@ -8,7 +8,7 @@ import (
 )
 
 // VerifyPlugNmeetAccessToken can be use to verify plugNmeet access token
-func VerifyPlugNmeetAccessToken(apiKey, secret, token string) (*plugnmeet.PlugNmeetTokenClaims, error) {
+func VerifyPlugNmeetAccessToken(apiKey, secret, token string, withTime bool) (*plugnmeet.PlugNmeetTokenClaims, error) {
 	tok, err := jwt.ParseSigned(token, []jose.SignatureAlgorithm{jose.HS256})
 	if err != nil {
 		return nil, err
@@ -20,7 +20,17 @@ func VerifyPlugNmeetAccessToken(apiKey, secret, token string) (*plugnmeet.PlugNm
 		return nil, err
 	}
 
-	if err = out.Validate(jwt.Expected{Issuer: apiKey, Time: time.Now().UTC()}); err != nil {
+	exp := jwt.Expected{Issuer: apiKey, Subject: claims.UserId}
+	if withTime {
+		exp.Time = time.Now().UTC()
+	} else {
+		// so the token will not be expired
+		out.Expiry = nil
+		out.NotBefore = nil
+		out.IssuedAt = nil
+	}
+
+	if err = out.Validate(exp); err != nil {
 		return nil, err
 	}
 	claims.UserId = out.Subject
