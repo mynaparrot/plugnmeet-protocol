@@ -46,7 +46,7 @@ jobs:
           buf generate
           pnpm install
           pnpm run build
-          pnpm config set '//registry.npmjs.org/:_authToken' $NPM_TOKEN
-          pnpm publish
+          npm config set '//registry.npmjs.org/:_authToken' $NPM_TOKEN
+          npm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
