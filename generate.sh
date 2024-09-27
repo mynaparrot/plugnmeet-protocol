@@ -24,3 +24,7 @@ fi
 
 buf dep update
 buf generate
+
+cd js
+buf generate
+pnpm run build

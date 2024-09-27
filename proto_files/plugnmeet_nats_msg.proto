@@ -16,7 +16,7 @@ message NatsSubjects {
 enum NatsMsgServerToClientEvents {
   // initial data
   RES_INITIAL_DATA = 0;
-  JOINED_USERS_LIST = 1;
+  RES_JOINED_USERS_LIST = 1;
 
   ROOM_METADATA_UPDATE = 2;
   USER_METADATA_UPDATE = 3;
@@ -41,8 +41,9 @@ enum NatsMsgServerToClientEvents {
 
 enum NatsMsgClientToServerEvents {
   REQ_INITIAL_DATA = 0;
-  REQ_RENEW_PNM_TOKEN = 1;
-  PING = 2;
+  REQ_JOINED_USERS_LIST = 1;
+  REQ_RENEW_PNM_TOKEN = 2;
+  PING = 3;
 
   REQ_RAISE_HAND = 4;
   REQ_LOWER_HAND = 5;
