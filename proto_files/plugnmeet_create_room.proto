@@ -126,6 +126,7 @@ message WhiteboardFeatures {
     expression: "this.matches('^$')"
   }];
   uint32 total_pages = 7;
+  optional uint64 max_allowed_file_size = 8 [(buf.validate.field).uint64.const = 0];
 }
 
 message ExternalMediaPlayerFeatures {

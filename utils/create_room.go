@@ -98,7 +98,7 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 	r.Metadata.RoomFeatures = rf
 }
 
-func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize uint64, allowedTypes []string, allowedNotepad bool) {
+func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhiteboardFile uint64, allowedTypes []string, allowedNotepad bool) {
 	rf := r.Metadata.RoomFeatures
 
 	if rf.AutoGenUserId == nil {
@@ -116,6 +116,13 @@ func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize uint64, allo
 			rf.ChatFeatures.AllowedFileTypes = allowedTypes
 		}
 		rf.ChatFeatures.MaxFileSize = &maxSize
+	}
+
+	if rf.WhiteboardFeatures.AllowedWhiteboard {
+		if maxSizeWhiteboardFile < 1 {
+			maxSizeWhiteboardFile = 30
+		}
+		rf.WhiteboardFeatures.MaxAllowedFileSize = &maxSizeWhiteboardFile
 	}
 
 	if rf.BreakoutRoomFeatures.IsAllow && rf.BreakoutRoomFeatures.AllowedNumberRooms == 0 {

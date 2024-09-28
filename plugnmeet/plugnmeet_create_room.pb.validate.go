@@ -1108,6 +1108,10 @@ func (m *WhiteboardFeatures) validate(all bool) error {
 		// no validation rules for PreloadFile
 	}
 
+	if m.MaxAllowedFileSize != nil {
+		// no validation rules for MaxAllowedFileSize
+	}
+
 	if len(errors) > 0 {
 		return WhiteboardFeaturesMultiError(errors)
 	}
