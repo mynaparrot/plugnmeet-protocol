@@ -25,9 +25,7 @@ jobs:
         run: |
           bash generate.sh
           cd js
-          buf generate
-          pnpm install
-          pnpm run build
+          bash generate.sh
           pnpm config set '//registry.npmjs.org/:_authToken' $NPM_TOKEN
           pnpm publish
         env:
