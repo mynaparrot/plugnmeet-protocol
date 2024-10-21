@@ -185,6 +185,11 @@ func SetDefaultRoomSettings(s *RoomDefaultSettings, r *plugnmeet.CreateRoomReq) 
 		}
 	}
 
+	if r.EmptyTimeout == nil || *r.EmptyTimeout < 120 {
+		var et uint32 = 1800 // 1800 seconds = 30 minutes
+		r.EmptyTimeout = &et
+	}
+
 	// at present, we will allow max 16 rooms
 	var maxNum uint32 = 16
 	if s.MaxNumBreakoutRooms == nil {
