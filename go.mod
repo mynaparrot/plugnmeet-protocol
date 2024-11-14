@@ -12,7 +12,7 @@ require (
 	github.com/livekit/protocol v1.27.1
 	github.com/sirupsen/logrus v1.9.3
 	go.uber.org/atomic v1.11.0
-	google.golang.org/protobuf v1.35.1
+	google.golang.org/protobuf v1.35.2
 )
 
 require (
