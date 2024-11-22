@@ -17,13 +17,13 @@ importers:
         version: 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))
       '@parcel/transformer-typescript-types':
         specifier: 2.13.0
-        version: 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))(typescript@5.6.3)
+        version: 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))(typescript@5.7.2)
       parcel:
         specifier: 2.13.0
-        version: 2.13.0(@swc/helpers@0.5.13)(typescript@5.6.3)
+        version: 2.13.0(@swc/helpers@0.5.13)(typescript@5.7.2)
       typescript:
-        specifier: 5.6.3
-        version: 5.6.3
+        specifier: 5.7.2
+        version: 5.7.2
 
 packages:
 
@@ -940,8 +940,8 @@ packages:
     resolution: {integrity: sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==}
     engines: {node: '>=10'}
 
-  typescript@5.6.3:
-    resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
+  typescript@5.7.2:
+    resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -1053,14 +1053,14 @@ snapshots:
     transitivePeerDependencies:
       - '@parcel/core'
 
-  '@parcel/config-default@2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)(typescript@5.6.3)':
+  '@parcel/config-default@2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)(typescript@5.7.2)':
     dependencies:
       '@parcel/bundler-default': 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))
       '@parcel/compressor-raw': 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))
       '@parcel/core': 2.13.0(@swc/helpers@0.5.13)
       '@parcel/namer-default': 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))
       '@parcel/optimizer-css': 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))
-      '@parcel/optimizer-htmlnano': 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))(typescript@5.6.3)
+      '@parcel/optimizer-htmlnano': 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))(typescript@5.7.2)
       '@parcel/optimizer-image': 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))
       '@parcel/optimizer-svgo': 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))
       '@parcel/optimizer-swc': 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
@@ -1194,12 +1194,12 @@ snapshots:
     transitivePeerDependencies:
       - '@parcel/core'
 
-  '@parcel/optimizer-htmlnano@2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))(typescript@5.6.3)':
+  '@parcel/optimizer-htmlnano@2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))(typescript@5.7.2)':
     dependencies:
       '@parcel/diagnostic': 2.13.0
       '@parcel/plugin': 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))
       '@parcel/utils': 2.13.0
-      htmlnano: 2.1.1(typescript@5.6.3)
+      htmlnano: 2.1.1(typescript@5.7.2)
       nullthrows: 1.1.1
       posthtml: 0.16.6
     transitivePeerDependencies:
@@ -1525,22 +1525,22 @@ snapshots:
     transitivePeerDependencies:
       - '@parcel/core'
 
-  '@parcel/transformer-typescript-types@2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))(typescript@5.6.3)':
+  '@parcel/transformer-typescript-types@2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))(typescript@5.7.2)':
     dependencies:
       '@parcel/diagnostic': 2.13.0
       '@parcel/plugin': 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))
       '@parcel/source-map': 2.1.1
-      '@parcel/ts-utils': 2.13.0(typescript@5.6.3)
+      '@parcel/ts-utils': 2.13.0(typescript@5.7.2)
       '@parcel/utils': 2.13.0
       nullthrows: 1.1.1
-      typescript: 5.6.3
+      typescript: 5.7.2
     transitivePeerDependencies:
       - '@parcel/core'
 
-  '@parcel/ts-utils@2.13.0(typescript@5.6.3)':
+  '@parcel/ts-utils@2.13.0(typescript@5.7.2)':
     dependencies:
       nullthrows: 1.1.1
-      typescript: 5.6.3
+      typescript: 5.7.2
 
   '@parcel/types-internal@2.13.0':
     dependencies:
@@ -1748,14 +1748,14 @@ snapshots:
 
   commander@12.1.0: {}
 
-  cosmiconfig@9.0.0(typescript@5.6.3):
+  cosmiconfig@9.0.0(typescript@5.7.2):
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.0
       js-yaml: 4.1.0
       parse-json: 5.2.0
     optionalDependencies:
-      typescript: 5.6.3
+      typescript: 5.7.2
 
   detect-libc@1.0.3: {}
 
@@ -1833,9 +1833,9 @@ snapshots:
 
   has-flag@4.0.0: {}
 
-  htmlnano@2.1.1(typescript@5.6.3):
+  htmlnano@2.1.1(typescript@5.7.2):
     dependencies:
-      cosmiconfig: 9.0.0(typescript@5.6.3)
+      cosmiconfig: 9.0.0(typescript@5.7.2)
       posthtml: 0.16.6
       timsort: 0.3.0
     transitivePeerDependencies:
@@ -1984,9 +1984,9 @@ snapshots:
 
   ordered-binary@1.5.1: {}
 
-  parcel@2.13.0(@swc/helpers@0.5.13)(typescript@5.6.3):
+  parcel@2.13.0(@swc/helpers@0.5.13)(typescript@5.7.2):
     dependencies:
-      '@parcel/config-default': 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)(typescript@5.6.3)
+      '@parcel/config-default': 2.13.0(@parcel/core@2.13.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)(typescript@5.7.2)
       '@parcel/core': 2.13.0(@swc/helpers@0.5.13)
       '@parcel/diagnostic': 2.13.0
       '@parcel/events': 2.13.0
@@ -2081,7 +2081,7 @@ snapshots:
 
   type-fest@0.20.2: {}
 
-  typescript@5.6.3: {}
+  typescript@5.7.2: {}
 
   update-browserslist-db@1.1.0(browserslist@4.23.3):
     dependencies:
