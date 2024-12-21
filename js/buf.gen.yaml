@@ -5,7 +5,7 @@ managed:
     - field_option: jstype
       value: JS_STRING
 plugins:
-  - remote: buf.build/bufbuild/es:v2.0.0
+  - remote: buf.build/bufbuild/es:v2.2.3
     out: src/gen
     opt:
      - target=ts
