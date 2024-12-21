@@ -19,28 +19,33 @@ jobs:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
       - name: Checkout
-        if: ${{ steps.release.outputs.release_created }}
         uses: actions/checkout@v4
       - name:
-        if: ${{ steps.release.outputs.release_created }}
         uses: bufbuild/buf-setup-action@v1
         with:
           version: latest
       - name: setup node
-        if: ${{ steps.release.outputs.release_created }}
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
       - uses: pnpm/action-setup@v4
-        if: ${{ steps.release.outputs.release_created }}
         name: Install pnpm
         with:
-          version: 9
+          version: "9"
       - name: Build and publish
-        if: ${{ steps.release.outputs.release_created }}
         run: |
           bash generate.sh
           cd js
+          
+          if [ ! ${{ steps.release.outputs.release_created }} ]; then
+            # we'll update version for beta release
+            git_hash=$(git rev-parse --short "$GITHUB_SHA")
+            CURRENT_VERSION=$(node -p "require('./package.json').version")
+            NEW_VERSION="${CURRENT_VERSION}-${git_hash}"
+            echo "New version for NPM as beta: ${NEW_VERSION}"
+            sed -i "s/${CURRENT_VERSION}/${NEW_VERSION}/" package.json
+          fi
+          
           bash generate.sh
           npm config set '//registry.npmjs.org/:_authToken' $NPM_TOKEN
           npm publish
