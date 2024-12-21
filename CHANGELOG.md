@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.9](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.8...v1.0.9) (2024-12-21)
+
+
+### Bug Fixes
+
+* **ci:** release beta version on each commit ([700eafb](https://github.com/mynaparrot/plugnmeet-protocol/commit/700eafbd4eae2a9c5a27daba9888011062617134))
+
 ## [1.0.8](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.7...v1.0.8) (2024-12-21)
 
 
