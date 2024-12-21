@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.8](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.7...v1.0.8) (2024-12-21)
+
+
+### Bug Fixes
+
+* **ci:** missed to add steps ([37ffed4](https://github.com/mynaparrot/plugnmeet-protocol/commit/37ffed44b00836a37da8a8eb2bf01c01e0d48eac))
+* **ci:** version path ([4c1784a](https://github.com/mynaparrot/plugnmeet-protocol/commit/4c1784aa7a5da2a85210acfac798ab07d1b46167))
+* **deps:** bump `buf.build/bufbuild/es:v2.2.3` ([d227f95](https://github.com/mynaparrot/plugnmeet-protocol/commit/d227f95993b7c5720c80d71d4dafc45ebfbb7009))
+
 ## [1.0.7](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.7...v1.0.7) (2024-12-21)
 
 
