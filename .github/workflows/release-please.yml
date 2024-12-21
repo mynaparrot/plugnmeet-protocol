@@ -1,0 +1,30 @@
+name: Build server for release
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+      - name: Build and publish
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          bash generate.sh
+          cd js
+          bash generate.sh
+          npm config set '//registry.npmjs.org/:_authToken' $NPM_TOKEN
+          npm publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
