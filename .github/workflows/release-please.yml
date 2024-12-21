@@ -40,11 +40,10 @@ jobs:
           if [ ! ${{ steps.release.outputs.release_created }} ]; then
             # we'll update version for beta release
             git_hash=$(git rev-parse --short "$GITHUB_SHA")
-            CURRENT_VERSION=$(node -p "require('./package.json').version")
-            NEXT_VERSION=$(echo ${CURRENT_VERSION} | awk -F. -v OFS=. '{$NF += 1 ; print}')
+            NEXT_VERSION=$(echo $(node -p "require('./package.json').version") | awk -F. -v OFS=. '{$NF += 1 ; print}')
             BETA_VERSION="${NEXT_VERSION}-${git_hash}"
             echo "New beta version for NPM: ${BETA_VERSION}"
-            sed -i "s/${CURRENT_VERSION}/${BETA_VERSION}/" package.json
+            npm version ${BETA_VERSION}
           fi
           
           bash generate.sh
