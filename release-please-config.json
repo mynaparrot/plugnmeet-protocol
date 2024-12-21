@@ -1,11 +1,15 @@
 {
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
   "include-component-in-tag": false,
-  "release-type": "node",
+  "release-type": "go",
   "packages": {
     ".": {
       "extra-files": [
-        "js/package.json"
+        {
+          "type": "json",
+          "path": "js/package.json",
+          "jsonpath": "$.version"
+        }
       ]
     }
   }
