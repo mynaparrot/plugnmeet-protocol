@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.9](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.8...v1.0.9) (2024-12-22)
+
+
+### Bug Fixes
+
+* **ci:** bump beta version ([16b85f9](https://github.com/mynaparrot/plugnmeet-protocol/commit/16b85f945a216cd38b693ffe7e8bbef3d31a19a2))
+* **ci:** calculate beta version based on next version ([9402b78](https://github.com/mynaparrot/plugnmeet-protocol/commit/9402b78373ef22be80302050f217d9c282802b1f))
+* **ci:** release a beta version on each commit ([7e36c97](https://github.com/mynaparrot/plugnmeet-protocol/commit/7e36c9795372cf5a3a591e168a2125ca91da1f12))
+* **ci:** removed rebase again ([aa60bba](https://github.com/mynaparrot/plugnmeet-protocol/commit/aa60bba6b1eb0c88d321346c323ed012cbf6887c))
+* **ci:** To rebase again ([26be5fd](https://github.com/mynaparrot/plugnmeet-protocol/commit/26be5fde5463ffd6c07bcf69c9c7622f1a6163d1))
+* **ci:** use `npm version` ([242cfa7](https://github.com/mynaparrot/plugnmeet-protocol/commit/242cfa72d44995689d2321e19f1f8050afdafc4e))
+
 ## [1.0.8](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.7...v1.0.8) (2024-12-21)
 
 
