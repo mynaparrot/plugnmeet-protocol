@@ -38,12 +38,13 @@ jobs:
           cd js
           
           if [ ! ${{ steps.release.outputs.release_created }} ]; then
-            # we'll update version for beta release
-            git_hash=$(git rev-parse --short "$GITHUB_SHA")
-            NEXT_VERSION=$(echo $(node -p "require('./package.json').version") | awk -F. -v OFS=. '{$NF += 1 ; print}')
-            BETA_VERSION="${NEXT_VERSION}-${git_hash}"
-            echo "New beta version for NPM: ${BETA_VERSION}"
-            npm version ${BETA_VERSION}
+            pnpm version prerelease --no-commit-hooks --no-git-tag-version
+            # push changes
+            git config user.name github-actions
+            git config user.email github-actions@github.com
+            git add .
+            git commit -m "fix(ci): bump beta version"
+            git push
           fi
           
           bash generate.sh
@@ -51,3 +52,10 @@ jobs:
           npm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: To rebase again
+        uses: googleapis/release-please-action@v4
+        if: ${{ ! steps.release.outputs.release_created }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
