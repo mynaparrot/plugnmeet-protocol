@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.9](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.8...v1.0.9) (2025-01-03)
+
+
+### Bug Fixes
+
+* **ci:** bump beta version ([16b85f9](https://github.com/mynaparrot/plugnmeet-protocol/commit/16b85f945a216cd38b693ffe7e8bbef3d31a19a2))
+* **ci:** calculate beta version based on next version ([9402b78](https://github.com/mynaparrot/plugnmeet-protocol/commit/9402b78373ef22be80302050f217d9c282802b1f))
+* **ci:** release a beta version on each commit ([7e36c97](https://github.com/mynaparrot/plugnmeet-protocol/commit/7e36c9795372cf5a3a591e168a2125ca91da1f12))
+* **ci:** removed rebase again ([aa60bba](https://github.com/mynaparrot/plugnmeet-protocol/commit/aa60bba6b1eb0c88d321346c323ed012cbf6887c))
+* **ci:** To rebase again ([26be5fd](https://github.com/mynaparrot/plugnmeet-protocol/commit/26be5fde5463ffd6c07bcf69c9c7622f1a6163d1))
+* **ci:** use `npm version` ([242cfa7](https://github.com/mynaparrot/plugnmeet-protocol/commit/242cfa72d44995689d2321e19f1f8050afdafc4e))
+* deps update ([ed82bac](https://github.com/mynaparrot/plugnmeet-protocol/commit/ed82bac7ab8d6e768f8c8c8c3d5a96d1f852f7a4))
+* **deps:** update module buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go to v1.36.1-20241127180247-a33202765966.1 ([b760f47](https://github.com/mynaparrot/plugnmeet-protocol/commit/b760f4783ece235b52938333091e6c1a9cbc2128))
+* **deps:** update module github.com/gofiber/fiber/v2 to v2.52.6 ([23140fd](https://github.com/mynaparrot/plugnmeet-protocol/commit/23140fd74b803d62b90e9dcfc2b6daaf03150133))
+* **deps:** update module github.com/livekit/protocol to v1.30.0 ([0b9a908](https://github.com/mynaparrot/plugnmeet-protocol/commit/0b9a908a1be09c72ca2c7fd55be688d4207adaf8))
+
 ## [1.0.8](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.7...v1.0.8) (2024-12-21)
 
 
