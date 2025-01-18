@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.10](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.9...v1.0.10) (2025-01-18)
+
+
+### Bug Fixes
+
+* **deps:** update module buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go to v1.36.3-20241127180247-a33202765966.1 ([52c8bbf](https://github.com/mynaparrot/plugnmeet-protocol/commit/52c8bbfac1bd393594f7dc2edc76c484b9e9be23))
+* **deps:** update module github.com/livekit/protocol to v1.31.0 ([a2380d1](https://github.com/mynaparrot/plugnmeet-protocol/commit/a2380d1faebc90aaea4c3969abd92dc0e4ca0e7f))
+
 ## [1.0.9](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.8...v1.0.9) (2025-01-03)
 
 
