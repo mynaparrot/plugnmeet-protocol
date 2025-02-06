@@ -3,7 +3,7 @@ module github.com/mynaparrot/plugnmeet-protocol
 go 1.23
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.4-20250130201111-63bb56e20495.1
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.5-20250130201111-63bb56e20495.1
 	github.com/frostbyte73/core v0.1.0
 	github.com/go-jose/go-jose/v4 v4.0.4
 	github.com/gofiber/fiber/v2 v2.52.6
@@ -12,7 +12,7 @@ require (
 	github.com/livekit/protocol v1.32.1
 	github.com/sirupsen/logrus v1.9.3
 	go.uber.org/atomic v1.11.0
-	google.golang.org/protobuf v1.36.4
+	google.golang.org/protobuf v1.36.5
 )
 
 require (
