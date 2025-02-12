@@ -115,7 +115,7 @@ type CreateBreakoutRoomsReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m CreateBreakoutRoomsReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -260,7 +260,7 @@ type BreakoutRoomMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m BreakoutRoomMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -366,7 +366,7 @@ type BreakoutRoomUserMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m BreakoutRoomUserMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -472,7 +472,7 @@ type IncreaseBreakoutRoomDurationReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m IncreaseBreakoutRoomDurationReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -579,7 +579,7 @@ type BroadcastBreakoutRoomMsgReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m BroadcastBreakoutRoomMsgReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -690,7 +690,7 @@ type JoinBreakoutRoomReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m JoinBreakoutRoomReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -796,7 +796,7 @@ type EndBreakoutRoomReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m EndBreakoutRoomReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -973,7 +973,7 @@ type BreakoutRoomResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m BreakoutRoomResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}

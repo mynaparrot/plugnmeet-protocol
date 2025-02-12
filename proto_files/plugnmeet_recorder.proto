@@ -30,20 +30,6 @@ message RecorderToPlugNmeet {
   // next key 12
 }
 
-message FromParentToChild {
-  RecordingTasks task = 1;
-  string recording_id = 2;
-  int64 room_table_id = 3;
-}
-
-message FromChildToParent {
-  RecordingTasks task = 1;
-  bool status = 2;
-  string msg = 3;
-  string recording_id = 4;
-  int64 room_table_id = 5;
-}
-
 enum RecordingTasks {
   START_RECORDING = 0;
   STOP_RECORDING = 1;
@@ -56,37 +42,6 @@ enum RecordingTasks {
   RECORDING_PROCEEDED = 6;
   
   STOP = 7;
-}
-
-message StartRecorderChildArgs {
-  RecorderServiceType serviceType = 1;
-  int64 room_table_id = 2;
-  string recording_id = 3;
-  string access_token = 4;
-  string pnm_host = 5;
-  optional string pnm_join_host = 6;
-  string websocket_url = 7;
-  optional string custom_chrome_path = 8;
-  optional uint32 width = 9;
-  optional uint32 height = 10;
-  optional uint32 xvfb_dpi = 11;
-}
-
-message PlugNmeetInfo {
-  string host = 1;
-  string api_key = 2;
-  string api_secret = 3;
-  optional string join_host = 4;
-}
-
-message CopyToPath {
-  string main_path = 1;
-  optional string sub_path = 2;
-}
-
-enum RecorderServiceType {
-  RECORDING = 0;
-  RTMP = 1;
 }
 
 enum RecorderInfoKeys {

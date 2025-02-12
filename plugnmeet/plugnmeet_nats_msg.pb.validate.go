@@ -84,7 +84,7 @@ type NatsSubjectsMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m NatsSubjectsMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -190,7 +190,7 @@ type NatsMsgServerToClientMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m NatsMsgServerToClientMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -300,7 +300,7 @@ type NatsMsgClientToServerMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m NatsMsgClientToServerMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -418,7 +418,7 @@ type NatsKvRoomInfoMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m NatsKvRoomInfoMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -538,7 +538,7 @@ type NatsKvUserInfoMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m NatsKvUserInfoMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -644,7 +644,7 @@ type MediaServerConnInfoMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m MediaServerConnInfoMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -833,7 +833,7 @@ type NatsInitialDataMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m NatsInitialDataMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -943,7 +943,7 @@ type NatsSystemNotificationMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m NatsSystemNotificationMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1049,7 +1049,7 @@ type NatsUserMetadataUpdateMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m NatsUserMetadataUpdateMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1168,7 +1168,7 @@ type ChatMessageMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ChatMessageMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}

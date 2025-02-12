@@ -77,7 +77,7 @@ type FetchAnalyticsReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m FetchAnalyticsReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -191,7 +191,7 @@ type AnalyticsInfoMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m AnalyticsInfoMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -333,7 +333,7 @@ type FetchAnalyticsResultMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m FetchAnalyticsResultMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -468,7 +468,7 @@ type FetchAnalyticsResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m FetchAnalyticsResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -572,7 +572,7 @@ type DeleteAnalyticsReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m DeleteAnalyticsReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -678,7 +678,7 @@ type DeleteAnalyticsResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m DeleteAnalyticsResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -782,7 +782,7 @@ type GetAnalyticsDownloadTokenReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m GetAnalyticsDownloadTokenReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -893,7 +893,7 @@ type GetAnalyticsDownloadTokenResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m GetAnalyticsDownloadTokenResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}

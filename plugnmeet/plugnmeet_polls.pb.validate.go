@@ -113,7 +113,7 @@ type CreatePollReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m CreatePollReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -217,7 +217,7 @@ type CreatePollOptionsMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m CreatePollOptionsMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -366,7 +366,7 @@ type PollInfoMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m PollInfoMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -476,7 +476,7 @@ type SubmitPollResponseReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m SubmitPollResponseReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -583,7 +583,7 @@ type ClosePollReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ClosePollReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -689,7 +689,7 @@ type PollResponsesResultOptionsMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m PollResponsesResultOptionsMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -829,7 +829,7 @@ type PollResponsesResultMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m PollResponsesResultMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -934,7 +934,7 @@ type PollsStatsMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m PollsStatsMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1159,7 +1159,7 @@ type PollResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m PollResponseMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}

@@ -110,7 +110,7 @@ type CreateRoomReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m CreateRoomReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -328,7 +328,7 @@ type RoomMetadataMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m RoomMetadataMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -781,7 +781,7 @@ type RoomCreateFeaturesMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m RoomCreateFeaturesMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -890,7 +890,7 @@ type ChatFeaturesMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ChatFeaturesMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1004,7 +1004,7 @@ type SharedNotePadFeaturesMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m SharedNotePadFeaturesMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1126,7 +1126,7 @@ type WhiteboardFeaturesMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m WhiteboardFeaturesMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1240,7 +1240,7 @@ type ExternalMediaPlayerFeaturesMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ExternalMediaPlayerFeaturesMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1347,7 +1347,7 @@ type WaitingRoomFeaturesMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m WaitingRoomFeaturesMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1455,7 +1455,7 @@ type BreakoutRoomFeaturesMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m BreakoutRoomFeaturesMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1569,7 +1569,7 @@ type DisplayExternalLinkFeaturesMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m DisplayExternalLinkFeaturesMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1682,7 +1682,7 @@ type RecordingFeaturesMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m RecordingFeaturesMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1792,7 +1792,7 @@ type IngressFeaturesMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m IngressFeaturesMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1906,7 +1906,7 @@ type SpeechToTextTranslationFeaturesMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m SpeechToTextTranslationFeaturesMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -2019,7 +2019,7 @@ type EndToEndEncryptionFeaturesMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m EndToEndEncryptionFeaturesMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -2125,7 +2125,7 @@ type CopyrightConfMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m CopyrightConfMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -2258,7 +2258,7 @@ type CreateRoomResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m CreateRoomResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}

@@ -73,7 +73,7 @@ type GetActiveRoomInfoReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m GetActiveRoomInfoReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -246,7 +246,7 @@ type ActiveRoomInfoResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ActiveRoomInfoResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -372,7 +372,7 @@ type ActiveRoomInfoMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ActiveRoomInfoMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -473,7 +473,7 @@ type RoomEndReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m RoomEndReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -576,7 +576,7 @@ type RoomEndResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m RoomEndResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -678,7 +678,7 @@ type IsRoomActiveReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m IsRoomActiveReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -784,7 +784,7 @@ type IsRoomActiveResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m IsRoomActiveResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -951,7 +951,7 @@ type ActiveRoomWithParticipantMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ActiveRoomWithParticipantMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1086,7 +1086,7 @@ type GetActiveRoomInfoResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m GetActiveRoomInfoResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1226,7 +1226,7 @@ type GetActiveRoomsInfoResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m GetActiveRoomsInfoResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1343,7 +1343,7 @@ type PastRoomInfoMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m PastRoomInfoMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1449,7 +1449,7 @@ type FetchPastRoomsReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m FetchPastRoomsReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1593,7 +1593,7 @@ type FetchPastRoomsResultMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m FetchPastRoomsResultMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1728,7 +1728,7 @@ type FetchPastRoomsResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m FetchPastRoomsResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}

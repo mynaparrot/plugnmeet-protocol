@@ -75,7 +75,7 @@ type CommonResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m CommonResponseMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -179,7 +179,7 @@ type VerifyTokenReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m VerifyTokenReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -328,7 +328,7 @@ type VerifyTokenResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m VerifyTokenResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -440,7 +440,7 @@ type MuteUnMuteTrackReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m MuteUnMuteTrackReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -552,7 +552,7 @@ type RemoveParticipantReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m RemoveParticipantReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -670,7 +670,7 @@ type DataMessageReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m DataMessageReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -772,7 +772,7 @@ type RoomEndAPIReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m RoomEndAPIReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -882,7 +882,7 @@ type ChangeVisibilityResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ChangeVisibilityResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -992,7 +992,7 @@ type SwitchPresenterReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m SwitchPresenterReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1108,7 +1108,7 @@ type ExternalMediaPlayerReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ExternalMediaPlayerReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1220,7 +1220,7 @@ type ExternalDisplayLinkReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ExternalDisplayLinkReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1334,7 +1334,7 @@ type CreateEtherpadSessionResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m CreateEtherpadSessionResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1442,7 +1442,7 @@ type CleanEtherpadReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m CleanEtherpadReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1546,7 +1546,7 @@ type ChangeEtherpadStatusReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ChangeEtherpadStatusReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1652,7 +1652,7 @@ type ApproveWaitingUsersReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ApproveWaitingUsersReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1758,7 +1758,7 @@ type UpdateWaitingRoomMessageReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m UpdateWaitingRoomMessageReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1873,7 +1873,7 @@ type UpdateUserLockSettingsReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m UpdateUserLockSettingsReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}

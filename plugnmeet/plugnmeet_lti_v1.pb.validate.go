@@ -109,7 +109,7 @@ type LtiClaimsMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m LtiClaimsMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -274,7 +274,7 @@ type LtiCustomParametersMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m LtiCustomParametersMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -392,7 +392,7 @@ type LtiCustomDesignMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m LtiCustomDesignMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}

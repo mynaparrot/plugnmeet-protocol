@@ -77,7 +77,7 @@ type FetchRecordingsReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m FetchRecordingsReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -193,7 +193,7 @@ type RecordingInfoMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m RecordingInfoMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -335,7 +335,7 @@ type FetchRecordingsResultMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m FetchRecordingsResultMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -470,7 +470,7 @@ type FetchRecordingsResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m FetchRecordingsResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -574,7 +574,7 @@ type RecordingInfoReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m RecordingInfoReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -736,7 +736,7 @@ type RecordingInfoResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m RecordingInfoResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -838,7 +838,7 @@ type DeleteRecordingReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m DeleteRecordingReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -944,7 +944,7 @@ type DeleteRecordingResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m DeleteRecordingResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1048,7 +1048,7 @@ type GetDownloadTokenReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m GetDownloadTokenReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -1158,7 +1158,7 @@ type GetDownloadTokenResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m GetDownloadTokenResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}

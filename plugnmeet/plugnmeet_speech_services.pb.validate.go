@@ -81,7 +81,7 @@ type SpeechToTextTranslationReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m SpeechToTextTranslationReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -187,7 +187,7 @@ type GenerateAzureTokenReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m GenerateAzureTokenReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -307,7 +307,7 @@ type GenerateAzureTokenResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m GenerateAzureTokenResMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -417,7 +417,7 @@ type AzureTokenRenewReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m AzureTokenRenewReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -529,7 +529,7 @@ type SpeechServiceUserStatusReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m SpeechServiceUserStatusReqMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}

@@ -281,7 +281,7 @@ type CommonNotifyEventMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m CommonNotifyEventMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -445,7 +445,7 @@ type NotifyEventRoomMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m NotifyEventRoomMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -559,7 +559,7 @@ type RecordingInfoEventMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m RecordingInfoEventMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -667,7 +667,7 @@ type SpeechServiceEventMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m SpeechServiceEventMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -773,7 +773,7 @@ type AnalyticsEventMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m AnalyticsEventMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
