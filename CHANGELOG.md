@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.12](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.11...v1.0.12) (2025-02-12)
+
+
+### Bug Fixes
+
+* error with `protovalidate-go` ([ed58ee2](https://github.com/mynaparrot/plugnmeet-protocol/commit/ed58ee210fde51c318e1887ff13ff0a2bd635f20))
+
 ## [1.0.11](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.10...v1.0.11) (2025-02-01)
 
 
