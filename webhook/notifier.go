@@ -4,14 +4,12 @@ import (
 	"bytes"
 	"crypto/sha256"
 	"encoding/base64"
-	"fmt"
 	"github.com/frostbyte73/core"
 	"github.com/google/uuid"
 	"github.com/hashicorp/go-retryablehttp"
 	"github.com/livekit/protocol/auth"
 	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 	"github.com/sirupsen/logrus"
-	"go.uber.org/atomic"
 	"google.golang.org/protobuf/encoding/protojson"
 	"net/http"
 	"strings"
@@ -27,11 +25,10 @@ const (
 )
 
 type Notifier struct {
-	client  *retryablehttp.Client
-	debug   bool
-	dropped atomic.Int32
-	worker  core.QueueWorker
-	logger  *logrus.Logger
+	client *retryablehttp.Client
+	debug  bool
+	worker core.QueueWorker
+	logger *logrus.Logger
 }
 
 func newWebhookNotifier(queueSize int, debug bool, logger *logrus.Logger) *Notifier {
@@ -48,10 +45,6 @@ func newWebhookNotifier(queueSize int, debug bool, logger *logrus.Logger) *Notif
 	w.worker = core.NewQueueWorker(core.QueueWorkerParams{
 		QueueSize:    queueSize,
 		DropWhenFull: true,
-		OnDropped: func() {
-			l := w.dropped.Inc()
-			logger.Println(fmt.Sprintf("Total dropped webhook events: %d", l))
-		},
 	})
 
 	return w
@@ -81,7 +74,7 @@ func (n *Notifier) sendPostRequest(event *plugnmeet.CommonNotifyEvent, apiKey, a
 		EmitUnpopulated: false,
 		UseProtoNames:   true,
 	}
-	// make sure event name is lowercase
+	// make sure the event name is lowercase
 	ev := strings.ToLower(event.GetEvent())
 	event.Event = &ev
 
@@ -118,7 +111,7 @@ func (n *Notifier) sendPostRequest(event *plugnmeet.CommonNotifyEvent, apiKey, a
 	// in various Apache modules will strip the Authorization header,
 	// so we'll use additional one for easy use
 	r.Header.Set(hashToken, token)
-	// use a custom mime type to ensure the signature is checked prior to parsing
+	// use a custom mime type to ensure the signature is checked before parsing
 	r.Header.Set("content-type", "application/webhook+json")
 	res, err := n.client.Do(r)
 	if err != nil {
