@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.13](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.12...v1.0.13) (2025-02-18)
+
+
+### Bug Fixes
+
+* moved  to proto ([919a988](https://github.com/mynaparrot/plugnmeet-protocol/commit/919a9885cad1527efea091799c87e181a469797b))
+
 ## [1.0.12](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.11...v1.0.12) (2025-02-12)
 
 
