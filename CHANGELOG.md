@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.14](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.13...v1.0.14) (2025-02-19)
+
+
+### Bug Fixes
+
+* **deps:** update module buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go to v1.36.5-20250219170025-d39267d9df8f.1 ([8b9c6b3](https://github.com/mynaparrot/plugnmeet-protocol/commit/8b9c6b391306f11ec5c735899b85750b8b6c8d4a))
+* **deps:** update module github.com/nats-io/nats.go to v1.39.1 ([3f290bd](https://github.com/mynaparrot/plugnmeet-protocol/commit/3f290bd7e1e4974b64779cd5f81ec980e993c6d4))
+
 ## [1.0.13](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.12...v1.0.13) (2025-02-18)
 
 
