@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.14](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.13...v1.0.14) (2025-03-07)
+
+
+### Bug Fixes
+
+* added option for ([0ac59f0](https://github.com/mynaparrot/plugnmeet-protocol/commit/0ac59f0d63b58c6b5c5c22795a892bfca550a83b))
+* bump dep ([dcfa2ca](https://github.com/mynaparrot/plugnmeet-protocol/commit/dcfa2ca40cd116709f780ed3f376009626f05fd5))
+* **deps:** update module buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go to v1.36.5-20250219170025-d39267d9df8f.1 ([2358381](https://github.com/mynaparrot/plugnmeet-protocol/commit/23583819ab27dfdd6ee1326dbe808ef224abd61f))
+* **deps:** update module buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go to v1.36.5-20250219170025-d39267d9df8f.1 ([8b9c6b3](https://github.com/mynaparrot/plugnmeet-protocol/commit/8b9c6b391306f11ec5c735899b85750b8b6c8d4a))
+* **deps:** update module github.com/go-jose/go-jose/v4 to v4.0.5 ([2881d00](https://github.com/mynaparrot/plugnmeet-protocol/commit/2881d000afc7031a4b73e455c9720a133e7eb504))
+* **deps:** update module github.com/go-jose/go-jose/v4 to v4.0.5 ([c810273](https://github.com/mynaparrot/plugnmeet-protocol/commit/c8102731a6140208b0d00ee27fb78a0fcb277de2))
+* **deps:** update module github.com/livekit/protocol to v1.34.0 ([95ad32c](https://github.com/mynaparrot/plugnmeet-protocol/commit/95ad32c9365a7ee4a88a3975e25a20f106c8ad70))
+* **deps:** update module github.com/livekit/protocol to v1.34.0 ([da05d11](https://github.com/mynaparrot/plugnmeet-protocol/commit/da05d1134edaa3c62ff1e73ca76b2724f9841d3f))
+* **deps:** update module github.com/nats-io/nats.go to v1.39.1 ([aca00fb](https://github.com/mynaparrot/plugnmeet-protocol/commit/aca00fbce51203bc54e21850b099187ec700ff9b))
+* **deps:** update module github.com/nats-io/nats.go to v1.39.1 ([3f290bd](https://github.com/mynaparrot/plugnmeet-protocol/commit/3f290bd7e1e4974b64779cd5f81ec980e993c6d4))
+
 ## [1.0.13](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.12...v1.0.13) (2025-02-18)
 
 
