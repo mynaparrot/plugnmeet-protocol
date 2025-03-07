@@ -130,11 +130,13 @@ func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhit
 	}
 
 	if rf.EndToEndEncryptionFeatures.IsEnabled {
-		randomKey, err := GenerateSecureRandomStrings(32)
-		if err != nil {
-			randomKey = GenerateRandomStrings(32)
+		if !rf.EndToEndEncryptionFeatures.EnabledSelfInsertEncryptionKey {
+			randomKey, err := GenerateSecureRandomStrings(32)
+			if err != nil {
+				randomKey = GenerateRandomStrings(32)
+			}
+			rf.EndToEndEncryptionFeatures.EncryptionKey = &randomKey
 		}
-		rf.EndToEndEncryptionFeatures.EncryptionKey = &randomKey
 	}
 }
 

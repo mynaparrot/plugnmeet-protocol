@@ -314,6 +314,10 @@ func (m *VerifyTokenRes) validate(all bool) error {
 
 	}
 
+	if m.EnabledSelfInsertEncryptionKey != nil {
+		// no validation rules for EnabledSelfInsertEncryptionKey
+	}
+
 	if len(errors) > 0 {
 		return VerifyTokenResMultiError(errors)
 	}

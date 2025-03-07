@@ -2001,6 +2001,8 @@ func (m *EndToEndEncryptionFeatures) validate(all bool) error {
 
 	// no validation rules for IncludedWhiteboard
 
+	// no validation rules for EnabledSelfInsertEncryptionKey
+
 	if m.EncryptionKey != nil {
 		// no validation rules for EncryptionKey
 	}

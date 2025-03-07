@@ -214,6 +214,7 @@ message EndToEndEncryptionFeatures {
     message: "encryption_key should not contain any value",
     expression: "this.matches('^$')"
   }];
+  bool enabled_self_insert_encryption_key = 5;
 }
 
 message CopyrightConf {
