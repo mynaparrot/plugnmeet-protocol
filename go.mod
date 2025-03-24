@@ -3,7 +3,7 @@ module github.com/mynaparrot/plugnmeet-protocol
 go 1.23
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.5-20250219170025-d39267d9df8f.1
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.6-20250307204501-0409229c3780.1
 	github.com/frostbyte73/core v0.1.1
 	github.com/go-jose/go-jose/v4 v4.0.5
 	github.com/gofiber/fiber/v2 v2.52.6
@@ -14,7 +14,7 @@ require (
 	github.com/nats-io/nats.go v1.39.1
 	github.com/nats-io/nkeys v0.4.10
 	github.com/sirupsen/logrus v1.9.3
-	google.golang.org/protobuf v1.36.5
+	google.golang.org/protobuf v1.36.6
 )
 
 require (
