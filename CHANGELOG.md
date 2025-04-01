@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.15](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.14...v1.0.15) (2025-04-01)
+
+
+### Bug Fixes
+
+* deps update ([4add58e](https://github.com/mynaparrot/plugnmeet-protocol/commit/4add58ee5ea28ac98263284e14f778730ef5e3e4))
+* deps update ([f35a2ed](https://github.com/mynaparrot/plugnmeet-protocol/commit/f35a2ed762609aaac5ae4079f7275fe86b7547da))
+* **deps:** update dependency @bufbuild/protobuf to v2.2.5 ([627b388](https://github.com/mynaparrot/plugnmeet-protocol/commit/627b388b7f64c84d43f6460f5e59a1ca84ab24db))
+* **deps:** update dependency @bufbuild/protobuf to v2.2.5 ([0f7b41a](https://github.com/mynaparrot/plugnmeet-protocol/commit/0f7b41a1077a5ea510175e2ba13738e5f95695b1))
+* **deps:** update module buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go to v1.36.6-20250307204501-0409229c3780.1 ([8d3bea5](https://github.com/mynaparrot/plugnmeet-protocol/commit/8d3bea572c9646f9467e95cc89d8581b87242970))
+* **deps:** update module buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go to v1.36.6-20250307204501-0409229c3780.1 ([b1b66db](https://github.com/mynaparrot/plugnmeet-protocol/commit/b1b66db1e089a27f0a1d50f0b60d27313f519ad3))
+* **deps:** update module github.com/livekit/protocol to v1.36.1 ([cacad2d](https://github.com/mynaparrot/plugnmeet-protocol/commit/cacad2db8bf239c421b86f52c747be499287919c))
+* **deps:** update module github.com/livekit/protocol to v1.36.1 ([cde46c6](https://github.com/mynaparrot/plugnmeet-protocol/commit/cde46c604656d8ed5920531776ca4d81f5224194))
+* **deps:** update module github.com/nats-io/nats.go to v1.40.1 ([72a1b8d](https://github.com/mynaparrot/plugnmeet-protocol/commit/72a1b8de12fdcce81dbb182af38cd69cf4ebe43a))
+* **deps:** update module github.com/nats-io/nats.go to v1.40.1 ([20acc84](https://github.com/mynaparrot/plugnmeet-protocol/commit/20acc84aa575afc09ca9fd58d5d7c33258a787fb))
+
 ## [1.0.14](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.13...v1.0.14) (2025-03-07)
 
 
