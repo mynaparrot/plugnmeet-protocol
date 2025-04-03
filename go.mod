@@ -11,7 +11,7 @@ require (
 	github.com/hashicorp/go-retryablehttp v0.7.7
 	github.com/livekit/protocol v1.36.1
 	github.com/nats-io/jwt/v2 v2.7.3
-	github.com/nats-io/nats.go v1.40.1
+	github.com/nats-io/nats.go v1.41.0
 	github.com/nats-io/nkeys v0.4.10
 	github.com/sirupsen/logrus v1.9.3
 	google.golang.org/protobuf v1.36.6
