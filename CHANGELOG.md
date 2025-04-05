@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.16](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.15...v1.0.16) (2025-04-05)
+
+
+### Bug Fixes
+
+* moved poll option to own features option ([70c0690](https://github.com/mynaparrot/plugnmeet-protocol/commit/70c06901e143dabfd1192835e84e8f5c1b730c2d))
+
 ## [1.0.15](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.14...v1.0.15) (2025-04-01)
 
 
