@@ -90,6 +90,12 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 		}
 	}
 
+	if rf.PollsFeatures == nil {
+		rf.PollsFeatures = &plugnmeet.PollsFeatures{
+			IsAllow: rf.AllowPolls, // for backward compatibility
+		}
+	}
+
 	if r.Metadata.DefaultLockSettings == nil {
 		r.Metadata.DefaultLockSettings = new(plugnmeet.LockSettings)
 	}

@@ -3,6 +3,11 @@ package plugnmeet;
 
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
+message ActivatePollsReq {
+  string room_id = 1;
+  bool is_active = 2;
+}
+
 message CreatePollReq {
   string room_id = 1;
   string user_id = 2;

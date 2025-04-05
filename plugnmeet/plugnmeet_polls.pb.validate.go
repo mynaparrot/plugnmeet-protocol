@@ -35,6 +35,110 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on ActivatePollsReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ActivatePollsReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ActivatePollsReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ActivatePollsReqMultiError, or nil if none found.
+func (m *ActivatePollsReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ActivatePollsReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomId
+
+	// no validation rules for IsActive
+
+	if len(errors) > 0 {
+		return ActivatePollsReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// ActivatePollsReqMultiError is an error wrapping multiple validation errors
+// returned by ActivatePollsReq.ValidateAll() if the designated constraints
+// aren't met.
+type ActivatePollsReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ActivatePollsReqMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ActivatePollsReqMultiError) AllErrors() []error { return m }
+
+// ActivatePollsReqValidationError is the validation error returned by
+// ActivatePollsReq.Validate if the designated constraints aren't met.
+type ActivatePollsReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ActivatePollsReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ActivatePollsReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ActivatePollsReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ActivatePollsReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ActivatePollsReqValidationError) ErrorName() string { return "ActivatePollsReqValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ActivatePollsReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sActivatePollsReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ActivatePollsReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ActivatePollsReqValidationError{}
+
 // Validate checks the field values on CreatePollReq with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
