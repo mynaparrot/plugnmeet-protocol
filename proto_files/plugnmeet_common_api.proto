@@ -138,3 +138,18 @@ message UpdateUserLockSettingsReq {
   string direction = 5;
   string Requested_user_id = 6;
 }
+
+message UploadBase64EncodedDataReq {
+  string room_id = 1;
+  string data = 3;
+  string file_name = 4;
+}
+
+message UploadBase64EncodedDataRes {
+  bool status = 1;
+  string msg = 2;
+  string file_path = 3;
+  string file_name = 4;
+  string file_extension = 5;
+  string file_mime_type =  6;
+}

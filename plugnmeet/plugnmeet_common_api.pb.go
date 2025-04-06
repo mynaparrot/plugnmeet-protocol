@@ -1307,6 +1307,158 @@ func (x *UpdateUserLockSettingsReq) GetRequestedUserId() string {
 	return ""
 }
 
+type UploadBase64EncodedDataReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RoomId        string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	MimeType      string                 `protobuf:"bytes,2,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
+	Data          string                 `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
+	FileName      string                 `protobuf:"bytes,4,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UploadBase64EncodedDataReq) Reset() {
+	*x = UploadBase64EncodedDataReq{}
+	mi := &file_plugnmeet_common_api_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UploadBase64EncodedDataReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadBase64EncodedDataReq) ProtoMessage() {}
+
+func (x *UploadBase64EncodedDataReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_common_api_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadBase64EncodedDataReq.ProtoReflect.Descriptor instead.
+func (*UploadBase64EncodedDataReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *UploadBase64EncodedDataReq) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
+func (x *UploadBase64EncodedDataReq) GetMimeType() string {
+	if x != nil {
+		return x.MimeType
+	}
+	return ""
+}
+
+func (x *UploadBase64EncodedDataReq) GetData() string {
+	if x != nil {
+		return x.Data
+	}
+	return ""
+}
+
+func (x *UploadBase64EncodedDataReq) GetFileName() string {
+	if x != nil {
+		return x.FileName
+	}
+	return ""
+}
+
+type UploadBase64EncodedDataRes struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	FilePath      string                 `protobuf:"bytes,3,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
+	FileName      string                 `protobuf:"bytes,4,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	FileExtension string                 `protobuf:"bytes,5,opt,name=file_extension,json=fileExtension,proto3" json:"file_extension,omitempty"`
+	FileMimeType  string                 `protobuf:"bytes,6,opt,name=file_mime_type,json=fileMimeType,proto3" json:"file_mime_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UploadBase64EncodedDataRes) Reset() {
+	*x = UploadBase64EncodedDataRes{}
+	mi := &file_plugnmeet_common_api_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UploadBase64EncodedDataRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadBase64EncodedDataRes) ProtoMessage() {}
+
+func (x *UploadBase64EncodedDataRes) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_common_api_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadBase64EncodedDataRes.ProtoReflect.Descriptor instead.
+func (*UploadBase64EncodedDataRes) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *UploadBase64EncodedDataRes) GetStatus() bool {
+	if x != nil {
+		return x.Status
+	}
+	return false
+}
+
+func (x *UploadBase64EncodedDataRes) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *UploadBase64EncodedDataRes) GetFilePath() string {
+	if x != nil {
+		return x.FilePath
+	}
+	return ""
+}
+
+func (x *UploadBase64EncodedDataRes) GetFileName() string {
+	if x != nil {
+		return x.FileName
+	}
+	return ""
+}
+
+func (x *UploadBase64EncodedDataRes) GetFileExtension() string {
+	if x != nil {
+		return x.FileExtension
+	}
+	return ""
+}
+
+func (x *UploadBase64EncodedDataRes) GetFileMimeType() string {
+	if x != nil {
+		return x.FileMimeType
+	}
+	return ""
+}
+
 var File_plugnmeet_common_api_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_common_api_proto_rawDesc = "" +
@@ -1413,7 +1565,19 @@ const file_plugnmeet_common_api_proto_rawDesc = "" +
 	"\auser_id\x18\x03 \x01(\tR\x06userId\x12\x18\n" +
 	"\aservice\x18\x04 \x01(\tR\aservice\x12\x1c\n" +
 	"\tdirection\x18\x05 \x01(\tR\tdirection\x12*\n" +
-	"\x11Requested_user_id\x18\x06 \x01(\tR\x0fRequestedUserId*.\n" +
+	"\x11Requested_user_id\x18\x06 \x01(\tR\x0fRequestedUserId\"\x83\x01\n" +
+	"\x1aUploadBase64EncodedDataReq\x12\x17\n" +
+	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x1b\n" +
+	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x12\x12\n" +
+	"\x04data\x18\x03 \x01(\tR\x04data\x12\x1b\n" +
+	"\tfile_name\x18\x04 \x01(\tR\bfileName\"\xcd\x01\n" +
+	"\x1aUploadBase64EncodedDataRes\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x1b\n" +
+	"\tfile_path\x18\x03 \x01(\tR\bfilePath\x12\x1b\n" +
+	"\tfile_name\x18\x04 \x01(\tR\bfileName\x12%\n" +
+	"\x0efile_extension\x18\x05 \x01(\tR\rfileExtension\x12$\n" +
+	"\x0efile_mime_type\x18\x06 \x01(\tR\ffileMimeType*.\n" +
 	"\x13SwitchPresenterTask\x12\v\n" +
 	"\aPROMOTE\x10\x00\x12\n" +
 	"\n" +
@@ -1439,7 +1603,7 @@ func file_plugnmeet_common_api_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_common_api_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_plugnmeet_common_api_proto_goTypes = []any{
 	(SwitchPresenterTask)(0),            // 0: plugnmeet.SwitchPresenterTask
 	(ExternalMediaPlayerTask)(0),        // 1: plugnmeet.ExternalMediaPlayerTask
@@ -1461,12 +1625,14 @@ var file_plugnmeet_common_api_proto_goTypes = []any{
 	(*ApproveWaitingUsersReq)(nil),      // 17: plugnmeet.ApproveWaitingUsersReq
 	(*UpdateWaitingRoomMessageReq)(nil), // 18: plugnmeet.UpdateWaitingRoomMessageReq
 	(*UpdateUserLockSettingsReq)(nil),   // 19: plugnmeet.UpdateUserLockSettingsReq
-	(*NatsSubjects)(nil),                // 20: plugnmeet.NatsSubjects
-	(DataMsgBodyType)(0),                // 21: plugnmeet.DataMsgBodyType
+	(*UploadBase64EncodedDataReq)(nil),  // 20: plugnmeet.UploadBase64EncodedDataReq
+	(*UploadBase64EncodedDataRes)(nil),  // 21: plugnmeet.UploadBase64EncodedDataRes
+	(*NatsSubjects)(nil),                // 22: plugnmeet.NatsSubjects
+	(DataMsgBodyType)(0),                // 23: plugnmeet.DataMsgBodyType
 }
 var file_plugnmeet_common_api_proto_depIdxs = []int32{
-	20, // 0: plugnmeet.VerifyTokenRes.nats_subjects:type_name -> plugnmeet.NatsSubjects
-	21, // 1: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
+	22, // 0: plugnmeet.VerifyTokenRes.nats_subjects:type_name -> plugnmeet.NatsSubjects
+	23, // 1: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
 	0,  // 2: plugnmeet.SwitchPresenterReq.task:type_name -> plugnmeet.SwitchPresenterTask
 	1,  // 3: plugnmeet.ExternalMediaPlayerReq.task:type_name -> plugnmeet.ExternalMediaPlayerTask
 	2,  // 4: plugnmeet.ExternalDisplayLinkReq.task:type_name -> plugnmeet.ExternalDisplayLinkTask
@@ -1496,7 +1662,7 @@ func file_plugnmeet_common_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_common_api_proto_rawDesc), len(file_plugnmeet_common_api_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   17,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

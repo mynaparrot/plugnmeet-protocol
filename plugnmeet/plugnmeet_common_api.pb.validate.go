@@ -1942,3 +1942,227 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UpdateUserLockSettingsReqValidationError{}
+
+// Validate checks the field values on UploadBase64EncodedDataReq with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UploadBase64EncodedDataReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UploadBase64EncodedDataReq with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UploadBase64EncodedDataReqMultiError, or nil if none found.
+func (m *UploadBase64EncodedDataReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UploadBase64EncodedDataReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomId
+
+	// no validation rules for MimeType
+
+	// no validation rules for Data
+
+	// no validation rules for FileName
+
+	if len(errors) > 0 {
+		return UploadBase64EncodedDataReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// UploadBase64EncodedDataReqMultiError is an error wrapping multiple
+// validation errors returned by UploadBase64EncodedDataReq.ValidateAll() if
+// the designated constraints aren't met.
+type UploadBase64EncodedDataReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UploadBase64EncodedDataReqMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UploadBase64EncodedDataReqMultiError) AllErrors() []error { return m }
+
+// UploadBase64EncodedDataReqValidationError is the validation error returned
+// by UploadBase64EncodedDataReq.Validate if the designated constraints aren't met.
+type UploadBase64EncodedDataReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UploadBase64EncodedDataReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UploadBase64EncodedDataReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UploadBase64EncodedDataReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UploadBase64EncodedDataReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UploadBase64EncodedDataReqValidationError) ErrorName() string {
+	return "UploadBase64EncodedDataReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UploadBase64EncodedDataReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUploadBase64EncodedDataReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UploadBase64EncodedDataReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UploadBase64EncodedDataReqValidationError{}
+
+// Validate checks the field values on UploadBase64EncodedDataRes with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UploadBase64EncodedDataRes) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UploadBase64EncodedDataRes with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UploadBase64EncodedDataResMultiError, or nil if none found.
+func (m *UploadBase64EncodedDataRes) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UploadBase64EncodedDataRes) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	// no validation rules for Msg
+
+	// no validation rules for FilePath
+
+	// no validation rules for FileName
+
+	// no validation rules for FileExtension
+
+	// no validation rules for FileMimeType
+
+	if len(errors) > 0 {
+		return UploadBase64EncodedDataResMultiError(errors)
+	}
+
+	return nil
+}
+
+// UploadBase64EncodedDataResMultiError is an error wrapping multiple
+// validation errors returned by UploadBase64EncodedDataRes.ValidateAll() if
+// the designated constraints aren't met.
+type UploadBase64EncodedDataResMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UploadBase64EncodedDataResMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UploadBase64EncodedDataResMultiError) AllErrors() []error { return m }
+
+// UploadBase64EncodedDataResValidationError is the validation error returned
+// by UploadBase64EncodedDataRes.Validate if the designated constraints aren't met.
+type UploadBase64EncodedDataResValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UploadBase64EncodedDataResValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UploadBase64EncodedDataResValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UploadBase64EncodedDataResValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UploadBase64EncodedDataResValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UploadBase64EncodedDataResValidationError) ErrorName() string {
+	return "UploadBase64EncodedDataResValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UploadBase64EncodedDataResValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUploadBase64EncodedDataRes.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UploadBase64EncodedDataResValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UploadBase64EncodedDataResValidationError{}
