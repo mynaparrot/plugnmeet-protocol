@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.16](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.15...v1.0.16) (2025-04-10)
+
+
+### Bug Fixes
+
+* deps update ([da7567c](https://github.com/mynaparrot/plugnmeet-protocol/commit/da7567c7a69bfa3bc21e4bff77a0772a2185edf1))
+* **deps:** update module github.com/go-jose/go-jose/v4 to v4.1.0 ([016526e](https://github.com/mynaparrot/plugnmeet-protocol/commit/016526e260d5cc374ade6bcce0000777eb0cd5ca))
+* **deps:** update module github.com/go-jose/go-jose/v4 to v4.1.0 ([da7351c](https://github.com/mynaparrot/plugnmeet-protocol/commit/da7351c4f75497f7bc07f622b8774289f1aad774))
+* **deps:** update module github.com/nats-io/nats.go to v1.41.1 ([8935d8c](https://github.com/mynaparrot/plugnmeet-protocol/commit/8935d8cdcfeef004a54de18e2467ea830281c3c3))
+* **deps:** update module github.com/nats-io/nats.go to v1.41.1 ([3817231](https://github.com/mynaparrot/plugnmeet-protocol/commit/38172318de45af0e7f0bc687d98d6cc46d923c17))
+* moved poll option to own features option ([70c0690](https://github.com/mynaparrot/plugnmeet-protocol/commit/70c06901e143dabfd1192835e84e8f5c1b730c2d))
+* option to upload base64 data ([e7bb8d0](https://github.com/mynaparrot/plugnmeet-protocol/commit/e7bb8d02490157d8db15ce65ed5e10254399984c))
+
 ## [1.0.15](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.14...v1.0.15) (2025-04-01)
 
 
