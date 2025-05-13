@@ -2,5 +2,5 @@
 
 pnpm install
 rm -rf src/gen
-buf generate
+pnpm exec buf generate
 pnpm run build
