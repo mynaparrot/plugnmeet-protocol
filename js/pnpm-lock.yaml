@@ -9,15 +9,15 @@ importers:
   .:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: 2.4.0
-        version: 2.4.0
+        specifier: 2.5.0
+        version: 2.5.0
     devDependencies:
       '@bufbuild/buf':
         specifier: 1.54.0
         version: 1.54.0
       '@bufbuild/protoc-gen-es':
         specifier: 2.4.0
-        version: 2.4.0(@bufbuild/protobuf@2.4.0)
+        version: 2.4.0(@bufbuild/protobuf@2.5.0)
       '@parcel/packager-ts':
         specifier: 2.15.0
         version: 2.15.0(@parcel/core@2.15.0)
@@ -82,6 +82,9 @@ packages:
 
   '@bufbuild/protobuf@2.4.0':
     resolution: {integrity: sha512-RN9M76x7N11QRihKovEglEjjVCQEA9PRBVnDgk9xw8JHLrcUrp4FpAVSPSH91cNbcTft3u2vpLN4GMbiKY9PJw==}
+
+  '@bufbuild/protobuf@2.5.0':
+    resolution: {integrity: sha512-nniMblXT+dNyubek2OLKAYJnG/in4tmfS2c5CDnIvqfF9kFlERSG3FCBvmdqerpkWuPv0qhdGKReQ2OqKPG20w==}
 
   '@bufbuild/protoc-gen-es@2.4.0':
     resolution: {integrity: sha512-f5nm7HxXwVJKcAqpUTevKeLJOjy9WWqAuYORx3AnlB7w+XHPo/qrjQgMh4a9Dy1/aixYvBw2CnNK5d0DZ6CRgw==}
@@ -957,11 +960,13 @@ snapshots:
 
   '@bufbuild/protobuf@2.4.0': {}
 
-  '@bufbuild/protoc-gen-es@2.4.0(@bufbuild/protobuf@2.4.0)':
+  '@bufbuild/protobuf@2.5.0': {}
+
+  '@bufbuild/protoc-gen-es@2.4.0(@bufbuild/protobuf@2.5.0)':
     dependencies:
       '@bufbuild/protoplugin': 2.4.0
     optionalDependencies:
-      '@bufbuild/protobuf': 2.4.0
+      '@bufbuild/protobuf': 2.5.0
     transitivePeerDependencies:
       - supports-color
 

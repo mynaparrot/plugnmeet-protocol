@@ -16,7 +16,7 @@
     "build": "rm -rf ./dist && parcel build"
   },
   "dependencies": {
-    "@bufbuild/protobuf": "2.4.0"
+    "@bufbuild/protobuf": "2.5.0"
   },
   "devDependencies": {
     "@bufbuild/buf": "1.54.0",
