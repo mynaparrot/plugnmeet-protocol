@@ -8,7 +8,7 @@ require (
 	github.com/go-jose/go-jose/v4 v4.1.0
 	github.com/gofiber/fiber/v2 v2.52.8
 	github.com/google/uuid v1.6.0
-	github.com/hashicorp/go-retryablehttp v0.7.7
+	github.com/hashicorp/go-retryablehttp v0.7.8
 	github.com/livekit/protocol v1.38.0
 	github.com/nats-io/jwt/v2 v2.7.4
 	github.com/nats-io/nats.go v1.42.0
