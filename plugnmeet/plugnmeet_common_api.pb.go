@@ -1310,7 +1310,6 @@ func (x *UpdateUserLockSettingsReq) GetRequestedUserId() string {
 type UploadBase64EncodedDataReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RoomId        string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
-	MimeType      string                 `protobuf:"bytes,2,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
 	Data          string                 `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
 	FileName      string                 `protobuf:"bytes,4,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1350,13 +1349,6 @@ func (*UploadBase64EncodedDataReq) Descriptor() ([]byte, []int) {
 func (x *UploadBase64EncodedDataReq) GetRoomId() string {
 	if x != nil {
 		return x.RoomId
-	}
-	return ""
-}
-
-func (x *UploadBase64EncodedDataReq) GetMimeType() string {
-	if x != nil {
-		return x.MimeType
 	}
 	return ""
 }
@@ -1565,10 +1557,9 @@ const file_plugnmeet_common_api_proto_rawDesc = "" +
 	"\auser_id\x18\x03 \x01(\tR\x06userId\x12\x18\n" +
 	"\aservice\x18\x04 \x01(\tR\aservice\x12\x1c\n" +
 	"\tdirection\x18\x05 \x01(\tR\tdirection\x12*\n" +
-	"\x11Requested_user_id\x18\x06 \x01(\tR\x0fRequestedUserId\"\x83\x01\n" +
+	"\x11Requested_user_id\x18\x06 \x01(\tR\x0fRequestedUserId\"f\n" +
 	"\x1aUploadBase64EncodedDataReq\x12\x17\n" +
-	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x1b\n" +
-	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x12\x12\n" +
+	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x12\n" +
 	"\x04data\x18\x03 \x01(\tR\x04data\x12\x1b\n" +
 	"\tfile_name\x18\x04 \x01(\tR\bfileName\"\xcd\x01\n" +
 	"\x1aUploadBase64EncodedDataRes\x12\x16\n" +

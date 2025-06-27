@@ -1967,8 +1967,6 @@ func (m *UploadBase64EncodedDataReq) validate(all bool) error {
 
 	// no validation rules for RoomId
 
-	// no validation rules for MimeType
-
 	// no validation rules for Data
 
 	// no validation rules for FileName
