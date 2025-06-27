@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.0.16](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.15...v1.0.16) (2025-06-27)
+
+
+### Bug Fixes
+
+* add protobuf as peerDependencies ([3b0898d](https://github.com/mynaparrot/plugnmeet-protocol/commit/3b0898d1b07bab416119545f2652204668d78f0c))
+* deps update ([08045dd](https://github.com/mynaparrot/plugnmeet-protocol/commit/08045ddd7d96f4a01ee4018d5ebb52388cb1f643))
+* deps update ([d0a19df](https://github.com/mynaparrot/plugnmeet-protocol/commit/d0a19dfcebe9316eeacdb729b372de58d4d96856))
+* deps update ([da7567c](https://github.com/mynaparrot/plugnmeet-protocol/commit/da7567c7a69bfa3bc21e4bff77a0772a2185edf1))
+* **deps:** deps update ([30edd95](https://github.com/mynaparrot/plugnmeet-protocol/commit/30edd95bd4f5adb708ef90a1bddbbad36c63b168))
+* **deps:** update module github.com/go-jose/go-jose/v4 to v4.1.0 ([016526e](https://github.com/mynaparrot/plugnmeet-protocol/commit/016526e260d5cc374ade6bcce0000777eb0cd5ca))
+* **deps:** update module github.com/go-jose/go-jose/v4 to v4.1.0 ([da7351c](https://github.com/mynaparrot/plugnmeet-protocol/commit/da7351c4f75497f7bc07f622b8774289f1aad774))
+* **deps:** update module github.com/nats-io/nats.go to v1.41.1 ([8935d8c](https://github.com/mynaparrot/plugnmeet-protocol/commit/8935d8cdcfeef004a54de18e2467ea830281c3c3))
+* **deps:** update module github.com/nats-io/nats.go to v1.41.1 ([3817231](https://github.com/mynaparrot/plugnmeet-protocol/commit/38172318de45af0e7f0bc687d98d6cc46d923c17))
+* moved poll option to own features option ([70c0690](https://github.com/mynaparrot/plugnmeet-protocol/commit/70c06901e143dabfd1192835e84e8f5c1b730c2d))
+* option to upload base64 data ([e7bb8d0](https://github.com/mynaparrot/plugnmeet-protocol/commit/e7bb8d02490157d8db15ce65ed5e10254399984c))
+* update protobuf ([9d88de2](https://github.com/mynaparrot/plugnmeet-protocol/commit/9d88de2f48736423fb5cbd4b70bc4d30ae997f6d))
+* update protobuf ([5639acc](https://github.com/mynaparrot/plugnmeet-protocol/commit/5639accc3ae09e891dc08f95d78b35c7b1e15eb6))
+
 ## [1.0.15](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.14...v1.0.15) (2025-04-01)
 
 
