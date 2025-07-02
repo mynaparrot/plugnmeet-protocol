@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"crypto/sha256"
 	"encoding/base64"
-	"github.com/frostbyte73/core"
 	"github.com/google/uuid"
 	"github.com/hashicorp/go-retryablehttp"
 	"github.com/livekit/protocol/auth"
@@ -24,28 +23,27 @@ const (
 	maxRetry  = 2 // retryablehttp will use maxRetry + 1
 )
 
+// sharedClient is a reusable HTTP client for all webhook requests.
+var sharedClient *retryablehttp.Client
+
+func init() {
+	sharedClient = retryablehttp.NewClient()
+	sharedClient.Logger = nil
+	sharedClient.RetryMax = maxRetry
+}
+
 type Notifier struct {
-	client *retryablehttp.Client
 	debug  bool
-	worker core.QueueWorker
+	worker *SimpleQueueWorker
 	logger *logrus.Logger
 }
 
-func newWebhookNotifier(queueSize int, debug bool, logger *logrus.Logger) *Notifier {
-	client := retryablehttp.NewClient()
-	client.Logger = nil
-	client.RetryMax = maxRetry
-
+func NewNotifier(queueSize int, debug bool, logger *logrus.Logger) *Notifier {
 	w := &Notifier{
-		client: client,
 		debug:  debug,
 		logger: logger,
+		worker: NewSimpleQueueWorker(queueSize),
 	}
-
-	w.worker = core.NewQueueWorker(core.QueueWorkerParams{
-		QueueSize:    queueSize,
-		DropWhenFull: true,
-	})
 
 	return w
 }
@@ -57,19 +55,35 @@ func (n *Notifier) AddInNotifyQueue(event *plugnmeet.CommonNotifyEvent, apiKey, 
 
 	for _, u := range urls {
 		n.worker.Submit(func() {
-			res, err := n.sendPostRequest(event, apiKey, apiSecret, u)
+			res, err := n.sendWebhookRequest(event, apiKey, apiSecret, u)
 			if err != nil {
-				n.logger.Errorln("failed to sendPostRequest webhook,", "url:", u, "event:", event.GetEvent(), "roomId:", event.GetRoom().GetRoomId(), "sid:", event.Room.GetSid(), "error:", err)
-			} else {
+				n.logger.Errorln("failed to send webhook,", "url:", u, "event:", event.GetEvent(), "roomId:", event.GetRoom().GetRoomId(), "sid:", event.Room.GetSid(), "error:", err)
+			} else if res != nil {
+				defer res.Body.Close()
 				if n.debug {
-					n.logger.Println("webhook sent for event:", event.GetEvent(), "roomID:", event.Room.GetRoomId(), "sid:", event.Room.GetSid(), "to URL:", u, "with http response code:", res.StatusCode, "msg:", res.Status)
+					n.logger.Println("webhook sent for event:", event.GetEvent(), "roomID:", event.GetRoom().GetRoomId(), "sid:", event.Room.GetSid(), "to URL:", u, "with http response code:", res.StatusCode, "msg:", res.Status)
 				}
 			}
 		})
 	}
 }
 
-func (n *Notifier) sendPostRequest(event *plugnmeet.CommonNotifyEvent, apiKey, apiSecret, url string) (*http.Response, error) {
+// StopGracefully waits for all queued items to be processed before stopping.
+func (n *Notifier) StopGracefully() {
+	if n.worker != nil {
+		n.worker.StopGracefully()
+	}
+}
+
+// Kill stops the worker immediately, dropping any unprocessed items in the queue.
+func (n *Notifier) Kill() {
+	if n.worker != nil {
+		n.worker.Kill()
+	}
+}
+
+// sendWebhookRequest sends a single webhook event synchronously.
+func (n *Notifier) sendWebhookRequest(event *plugnmeet.CommonNotifyEvent, apiKey, apiSecret, url string) (*http.Response, error) {
 	op := protojson.MarshalOptions{
 		EmitUnpopulated: false,
 		UseProtoNames:   true,
@@ -102,33 +116,19 @@ func (n *Notifier) sendPostRequest(event *plugnmeet.CommonNotifyEvent, apiKey, a
 	if err != nil {
 		return nil, err
 	}
+
 	r, err := retryablehttp.NewRequest("POST", url, bytes.NewReader(encoded))
 	if err != nil {
-		// ignore and continue
 		return nil, err
 	}
 	r.Header.Set(authHeader, token)
-	// in various Apache modules will strip the Authorization header,
-	// so we'll use additional one for easy use
 	r.Header.Set(hashToken, token)
-	// use a custom mime type to ensure the signature is checked before parsing
 	r.Header.Set("content-type", "application/webhook+json")
-	res, err := n.client.Do(r)
+	res, err := sharedClient.Do(r)
+
 	if err != nil {
 		return nil, err
 	}
-	_ = res.Body.Close()
-
+	// The caller is responsible for closing the response body.
 	return res, nil
-}
-
-var webhookNotifier *Notifier
-
-func GetWebhookNotifier(queueSize int, debug bool, logger *logrus.Logger) *Notifier {
-	if webhookNotifier != nil {
-		return webhookNotifier
-	}
-	webhookNotifier = newWebhookNotifier(queueSize, debug, logger)
-
-	return webhookNotifier
 }

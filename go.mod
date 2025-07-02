@@ -4,7 +4,6 @@ go 1.24
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.6-20250625184727-c923a0c2a132.1
-	github.com/frostbyte73/core v0.1.1
 	github.com/go-jose/go-jose/v4 v4.1.1
 	github.com/gofiber/fiber/v2 v2.52.8
 	github.com/google/uuid v1.6.0
@@ -27,6 +26,7 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/dennwc/iters v1.1.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
+	github.com/frostbyte73/core v0.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/gammazero/deque v1.0.0 // indirect
 	github.com/go-jose/go-jose/v3 v3.0.4 // indirect
