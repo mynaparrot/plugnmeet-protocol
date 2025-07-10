@@ -37,5 +37,7 @@ enum DataMsgBodyType {
   ADD_WHITEBOARD_OFFICE_FILE = 14;
   PAGE_CHANGE = 15;
 
-  // next ID: 16
+  USER_CONNECTION_QUALITY_CHANGE = 16;
+
+  // next ID: 17
 }
