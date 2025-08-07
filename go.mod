@@ -10,7 +10,7 @@ require (
 	github.com/hashicorp/go-retryablehttp v0.7.8
 	github.com/livekit/protocol v1.39.3
 	github.com/nats-io/jwt/v2 v2.7.4
-	github.com/nats-io/nats.go v1.43.0
+	github.com/nats-io/nats.go v1.44.0
 	github.com/nats-io/nkeys v0.4.11
 	github.com/sirupsen/logrus v1.9.3
 	google.golang.org/protobuf v1.36.6
