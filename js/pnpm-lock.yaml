@@ -23,13 +23,13 @@ importers:
         version: 2.15.4(@parcel/core@2.15.4)
       '@parcel/transformer-typescript-types':
         specifier: 2.15.4
-        version: 2.15.4(@parcel/core@2.15.4)(typescript@5.8.3)
+        version: 2.15.4(@parcel/core@2.15.4)(typescript@5.9.2)
       parcel:
         specifier: 2.15.4
         version: 2.15.4
       typescript:
-        specifier: 5.8.3
-        version: 5.8.3
+        specifier: 5.9.2
+        version: 5.9.2
 
 packages:
 
@@ -904,8 +904,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typescript@5.8.3:
-    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
+  typescript@5.9.2:
+    resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -1576,23 +1576,23 @@ snapshots:
       - '@parcel/core'
       - napi-wasm
 
-  '@parcel/transformer-typescript-types@2.15.4(@parcel/core@2.15.4)(typescript@5.8.3)':
+  '@parcel/transformer-typescript-types@2.15.4(@parcel/core@2.15.4)(typescript@5.9.2)':
     dependencies:
       '@parcel/diagnostic': 2.15.4
       '@parcel/plugin': 2.15.4(@parcel/core@2.15.4)
       '@parcel/source-map': 2.1.1
-      '@parcel/ts-utils': 2.15.4(typescript@5.8.3)
+      '@parcel/ts-utils': 2.15.4(typescript@5.9.2)
       '@parcel/utils': 2.15.4
       nullthrows: 1.1.1
-      typescript: 5.8.3
+      typescript: 5.9.2
     transitivePeerDependencies:
       - '@parcel/core'
       - napi-wasm
 
-  '@parcel/ts-utils@2.15.4(typescript@5.8.3)':
+  '@parcel/ts-utils@2.15.4(typescript@5.9.2)':
     dependencies:
       nullthrows: 1.1.1
-      typescript: 5.8.3
+      typescript: 5.9.2
 
   '@parcel/types-internal@2.15.4':
     dependencies:
@@ -1988,7 +1988,7 @@ snapshots:
 
   typescript@5.4.5: {}
 
-  typescript@5.8.3: {}
+  typescript@5.9.2: {}
 
   update-browserslist-db@1.1.3(browserslist@4.24.5):
     dependencies:
