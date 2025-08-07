@@ -22,7 +22,7 @@
     "@bufbuild/protobuf": "2.5.2"
   },
   "devDependencies": {
-    "@bufbuild/buf": "1.55.1",
+    "@bufbuild/buf": "1.56.0",
     "@bufbuild/protoc-gen-es": "2.5.2",
     "@parcel/packager-ts": "2.15.4",
     "@parcel/transformer-typescript-types": "2.15.4",
