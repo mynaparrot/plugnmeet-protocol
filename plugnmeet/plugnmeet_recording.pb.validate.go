@@ -73,6 +73,10 @@ func (m *RecordingReq) validate(all bool) error {
 		// no validation rules for CustomDesign
 	}
 
+	if m.RecordingVariant != nil {
+		// no validation rules for RecordingVariant
+	}
+
 	if len(errors) > 0 {
 		return RecordingReqMultiError(errors)
 	}

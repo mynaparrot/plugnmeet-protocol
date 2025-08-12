@@ -12,6 +12,7 @@ message RecordingReq {
   string sid = 4;
   optional string rtmp_url = 5;
   optional string custom_design = 6;
+  optional CloudRecordingVariants recording_variant = 7;
 }
 
 message RecordingInfoFile {

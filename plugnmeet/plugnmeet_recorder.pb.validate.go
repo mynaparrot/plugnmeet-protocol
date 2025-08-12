@@ -201,6 +201,10 @@ func (m *RecorderToPlugNmeet) validate(all bool) error {
 
 	// no validation rules for FileSize
 
+	if m.RecordingVariant != nil {
+		// no validation rules for RecordingVariant
+	}
+
 	if len(errors) > 0 {
 		return RecorderToPlugNmeetMultiError(errors)
 	}

@@ -27,7 +27,8 @@ message RecorderToPlugNmeet {
   string recorder_id = 8;
   string file_path = 9;
   float file_size = 10;
-  // next key 12
+  optional CloudRecordingVariants recording_variant = 12;
+  // next key 13
 }
 
 enum RecordingTasks {
@@ -35,12 +36,12 @@ enum RecordingTasks {
   STOP_RECORDING = 1;
   START_RTMP = 2;
   STOP_RTMP = 3;
-  
+
   END_RECORDING = 4;
   END_RTMP = 5;
-  
+
   RECORDING_PROCEEDED = 6;
-  
+
   STOP = 7;
 }
 
@@ -48,4 +49,9 @@ enum RecorderInfoKeys {
   RECORDER_INFO_MAX_LIMIT = 0;
   RECORDER_INFO_LAST_PING = 1;
   RECORDER_INFO_CURRENT_PROGRESS = 3;
+}
+
+enum CloudRecordingVariants {
+  FULL_SCREEN_CLOUD_RECORDING = 0;
+  MEDIA_ONLY_CLOUD_RECORDING = 1;
 }

@@ -318,6 +318,10 @@ func (m *VerifyTokenRes) validate(all bool) error {
 		// no validation rules for EnabledSelfInsertEncryptionKey
 	}
 
+	if m.IsCloud != nil {
+		// no validation rules for IsCloud
+	}
+
 	if len(errors) > 0 {
 		return VerifyTokenResMultiError(errors)
 	}

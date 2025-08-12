@@ -24,6 +24,7 @@ message VerifyTokenRes {
   optional string user_id = 6;
   optional NatsSubjects nats_subjects = 7;
   optional bool enabled_self_insert_encryption_key = 8;
+  optional bool is_cloud = 9;
 }
 
 message MuteUnMuteTrackReq {
