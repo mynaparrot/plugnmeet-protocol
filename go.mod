@@ -8,7 +8,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.52.9
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-retryablehttp v0.7.8
-	github.com/livekit/protocol v1.39.3
+	github.com/livekit/protocol v1.40.0
 	github.com/nats-io/jwt/v2 v2.8.0
 	github.com/nats-io/nats.go v1.44.0
 	github.com/nats-io/nkeys v0.4.11
@@ -28,7 +28,7 @@ require (
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/frostbyte73/core v0.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
-	github.com/gammazero/deque v1.0.0 // indirect
+	github.com/gammazero/deque v1.1.0 // indirect
 	github.com/go-jose/go-jose/v3 v3.0.4 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/google/cel-go v0.25.0 // indirect
