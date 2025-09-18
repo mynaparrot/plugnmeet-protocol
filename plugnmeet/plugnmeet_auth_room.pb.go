@@ -943,6 +943,74 @@ func (x *FetchPastRoomsRes) GetResult() *FetchPastRoomsResult {
 	return nil
 }
 
+type GetClientFilesRes struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Css           []string               `protobuf:"bytes,3,rep,name=css,proto3" json:"css,omitempty"`
+	Js            []string               `protobuf:"bytes,4,rep,name=js,proto3" json:"js,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetClientFilesRes) Reset() {
+	*x = GetClientFilesRes{}
+	mi := &file_plugnmeet_auth_room_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetClientFilesRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetClientFilesRes) ProtoMessage() {}
+
+func (x *GetClientFilesRes) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_auth_room_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetClientFilesRes.ProtoReflect.Descriptor instead.
+func (*GetClientFilesRes) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_auth_room_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetClientFilesRes) GetStatus() bool {
+	if x != nil {
+		return x.Status
+	}
+	return false
+}
+
+func (x *GetClientFilesRes) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *GetClientFilesRes) GetCss() []string {
+	if x != nil {
+		return x.Css
+	}
+	return nil
+}
+
+func (x *GetClientFilesRes) GetJs() []string {
+	if x != nil {
+		return x.Js
+	}
+	return nil
+}
+
 var File_plugnmeet_auth_room_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_auth_room_proto_rawDesc = "" +
@@ -1027,7 +1095,12 @@ const file_plugnmeet_auth_room_proto_rawDesc = "" +
 	"\x11FetchPastRoomsRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x127\n" +
-	"\x06result\x18\x03 \x01(\v2\x1f.plugnmeet.FetchPastRoomsResultR\x06resultB\x9f\x01\n" +
+	"\x06result\x18\x03 \x01(\v2\x1f.plugnmeet.FetchPastRoomsResultR\x06result\"_\n" +
+	"\x11GetClientFilesRes\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x10\n" +
+	"\x03css\x18\x03 \x03(\tR\x03css\x12\x0e\n" +
+	"\x02js\x18\x04 \x03(\tR\x02jsB\x9f\x01\n" +
 	"\rcom.plugnmeetB\x16PlugnmeetAuthRoomProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -1042,7 +1115,7 @@ func file_plugnmeet_auth_room_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_auth_room_proto_rawDescData
 }
 
-var file_plugnmeet_auth_room_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_plugnmeet_auth_room_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_plugnmeet_auth_room_proto_goTypes = []any{
 	(*GetActiveRoomInfoReq)(nil),      // 0: plugnmeet.GetActiveRoomInfoReq
 	(*ActiveRoomInfoRes)(nil),         // 1: plugnmeet.ActiveRoomInfoRes
@@ -1058,13 +1131,14 @@ var file_plugnmeet_auth_room_proto_goTypes = []any{
 	(*FetchPastRoomsReq)(nil),         // 11: plugnmeet.FetchPastRoomsReq
 	(*FetchPastRoomsResult)(nil),      // 12: plugnmeet.FetchPastRoomsResult
 	(*FetchPastRoomsRes)(nil),         // 13: plugnmeet.FetchPastRoomsRes
-	(*livekit.ParticipantInfo)(nil),   // 14: livekit.ParticipantInfo
+	(*GetClientFilesRes)(nil),         // 14: plugnmeet.GetClientFilesRes
+	(*livekit.ParticipantInfo)(nil),   // 15: livekit.ParticipantInfo
 }
 var file_plugnmeet_auth_room_proto_depIdxs = []int32{
 	2,  // 0: plugnmeet.ActiveRoomInfoRes.room_info:type_name -> plugnmeet.ActiveRoomInfo
-	14, // 1: plugnmeet.ActiveRoomInfoRes.participants_info:type_name -> livekit.ParticipantInfo
+	15, // 1: plugnmeet.ActiveRoomInfoRes.participants_info:type_name -> livekit.ParticipantInfo
 	2,  // 2: plugnmeet.ActiveRoomWithParticipant.room_info:type_name -> plugnmeet.ActiveRoomInfo
-	14, // 3: plugnmeet.ActiveRoomWithParticipant.participants_info:type_name -> livekit.ParticipantInfo
+	15, // 3: plugnmeet.ActiveRoomWithParticipant.participants_info:type_name -> livekit.ParticipantInfo
 	7,  // 4: plugnmeet.GetActiveRoomInfoRes.room:type_name -> plugnmeet.ActiveRoomWithParticipant
 	7,  // 5: plugnmeet.GetActiveRoomsInfoRes.rooms:type_name -> plugnmeet.ActiveRoomWithParticipant
 	10, // 6: plugnmeet.FetchPastRoomsResult.rooms_list:type_name -> plugnmeet.PastRoomInfo
@@ -1089,7 +1163,7 @@ func file_plugnmeet_auth_room_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_auth_room_proto_rawDesc), len(file_plugnmeet_auth_room_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
