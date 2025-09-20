@@ -3,20 +3,24 @@ package webhook
 import (
 	"context"
 	"sync"
+
+	"github.com/sirupsen/logrus"
 )
 
 // SimpleQueueWorker provides a basic job queue with a single worker goroutine.
 type SimpleQueueWorker struct {
 	jobs   chan func()
 	wg     sync.WaitGroup
+	logger *logrus.Entry
 	cancel context.CancelFunc
 }
 
 // NewSimpleQueueWorker creates and starts a new queue worker.
-func NewSimpleQueueWorker(queueSize int) *SimpleQueueWorker {
-	ctx, cancel := context.WithCancel(context.Background())
+func NewSimpleQueueWorker(ctx context.Context, queueSize int, logger *logrus.Entry) *SimpleQueueWorker {
+	ctx, cancel := context.WithCancel(ctx)
 	qw := &SimpleQueueWorker{
 		jobs:   make(chan func(), queueSize),
+		logger: logger,
 		cancel: cancel,
 	}
 	qw.start(ctx)
@@ -37,7 +41,7 @@ func (qw *SimpleQueueWorker) start(ctx context.Context) {
 				}
 				job()
 			case <-ctx.Done():
-				// Context cancelled, exit immediately.
+				// Context canceled, exit immediately.
 				return
 			}
 		}
@@ -46,11 +50,18 @@ func (qw *SimpleQueueWorker) start(ctx context.Context) {
 
 // Submit adds a job to the queue. It will drop the job if the queue is full.
 func (qw *SimpleQueueWorker) Submit(job func()) {
+	// First, check if the worker is still running.
+	// This prevents a panic if Submit is called after StopGracefully or Kill.
+	if qw.isStopped() {
+		return
+	}
+
 	select {
 	case qw.jobs <- job:
 		// Job submitted
 	default:
-		// Queue is full, drop job.
+		// The Queue is full, drop the job to prevent blocking.
+		qw.logger.Warnln("webhook queue is full, dropping job")
 	}
 }
 
@@ -64,4 +75,9 @@ func (qw *SimpleQueueWorker) StopGracefully() {
 func (qw *SimpleQueueWorker) Kill() {
 	qw.cancel()
 	qw.wg.Wait()
+}
+
+// isStopped checks if the worker's context has been cancelled.
+func (qw *SimpleQueueWorker) isStopped() bool {
+	return qw.cancel == nil || qw.jobs == nil
 }

@@ -2,17 +2,19 @@ package webhook
 
 import (
 	"bytes"
+	"context"
 	"crypto/sha256"
 	"encoding/base64"
+	"net/http"
+	"strings"
+	"time"
+
 	"github.com/google/uuid"
 	"github.com/hashicorp/go-retryablehttp"
 	"github.com/livekit/protocol/auth"
 	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/protobuf/encoding/protojson"
-	"net/http"
-	"strings"
-	"time"
 )
 
 const (
@@ -33,16 +35,15 @@ func init() {
 }
 
 type Notifier struct {
-	debug  bool
 	worker *SimpleQueueWorker
-	logger *logrus.Logger
+	logger *logrus.Entry
 }
 
-func NewNotifier(queueSize int, debug bool, logger *logrus.Logger) *Notifier {
+func NewNotifier(ctx context.Context, queueSize int, logger *logrus.Logger) *Notifier {
+	loggerEntry := logger.WithField("component", "webhook-notifier")
 	w := &Notifier{
-		debug:  debug,
-		logger: logger,
-		worker: NewSimpleQueueWorker(queueSize),
+		logger: loggerEntry,
+		worker: NewSimpleQueueWorker(ctx, queueSize, loggerEntry.WithField("sub-component", "queue-worker")),
 	}
 
 	return w
@@ -56,13 +57,20 @@ func (n *Notifier) AddInNotifyQueue(event *plugnmeet.CommonNotifyEvent, apiKey, 
 	for _, u := range urls {
 		n.worker.Submit(func() {
 			res, err := n.sendWebhookRequest(event, apiKey, apiSecret, u)
+			logFields := logrus.Fields{
+				"url":   u,
+				"event": event.GetEvent(),
+				"room":  event.GetRoom().GetRoomId(),
+				"sid":   event.GetRoom().GetSid(),
+			}
+
 			if err != nil {
-				n.logger.Errorln("failed to send webhook,", "url:", u, "event:", event.GetEvent(), "roomId:", event.GetRoom().GetRoomId(), "sid:", event.Room.GetSid(), "error:", err)
+				n.logger.WithFields(logFields).WithError(err).Error("failed to send webhook")
 			} else if res != nil {
 				defer res.Body.Close()
-				if n.debug {
-					n.logger.Println("webhook sent for event:", event.GetEvent(), "roomID:", event.GetRoom().GetRoomId(), "sid:", event.Room.GetSid(), "to URL:", u, "with http response code:", res.StatusCode, "msg:", res.Status)
-				}
+				logFields["http_status_code"] = res.StatusCode
+				logFields["http_status"] = res.Status
+				n.logger.WithFields(logFields).Info("webhook sent successfully")
 			}
 		})
 	}
