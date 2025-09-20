@@ -1,9 +1,10 @@
 package utils
 
 import (
-	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 	"net/url"
 	"strconv"
+
+	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 )
 
 func AssignLTIV1CustomParams(params *url.Values, claims *plugnmeet.LtiClaims) {

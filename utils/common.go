@@ -3,11 +3,6 @@ package utils
 import (
 	"crypto/rand"
 	"fmt"
-	"github.com/gofiber/fiber/v2"
-	"github.com/livekit/protocol/livekit"
-	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
-	"google.golang.org/protobuf/encoding/protojson"
-	"google.golang.org/protobuf/proto"
 	"io/fs"
 	"math/big"
 	rd "math/rand"
@@ -15,7 +10,18 @@ import (
 	"sort"
 	"strings"
 	"time"
+
+	"github.com/gofiber/fiber/v2"
+	"github.com/livekit/protocol/livekit"
+	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
+	"google.golang.org/protobuf/encoding/protojson"
+	"google.golang.org/protobuf/proto"
 )
+
+var op = protojson.MarshalOptions{
+	EmitUnpopulated: true,
+	UseProtoNames:   true,
+}
 
 func PrepareCommonWebhookNotifyEvent(event *livekit.WebhookEvent) *plugnmeet.CommonNotifyEvent {
 	ct := uint64(event.Room.CreationTime)
@@ -65,10 +71,6 @@ func SendCommonProtoJsonResponse(c *fiber.Ctx, s bool, m string) error {
 		Status: s,
 		Msg:    m,
 	}
-	op := protojson.MarshalOptions{
-		EmitUnpopulated: true,
-		UseProtoNames:   true,
-	}
 	marshal, err := op.Marshal(res)
 	if err != nil {
 		return err
@@ -78,10 +80,6 @@ func SendCommonProtoJsonResponse(c *fiber.Ctx, s bool, m string) error {
 }
 
 func SendProtoJsonResponse(c *fiber.Ctx, res proto.Message) error {
-	op := protojson.MarshalOptions{
-		EmitUnpopulated: true,
-		UseProtoNames:   true,
-	}
 	marshal, err := op.Marshal(res)
 	if err != nil {
 		return err

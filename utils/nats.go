@@ -2,6 +2,7 @@ package utils
 
 import (
 	"errors"
+
 	"github.com/nats-io/jwt/v2"
 	"github.com/nats-io/nats.go"
 	"github.com/nats-io/nkeys"

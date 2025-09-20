@@ -1,8 +1,9 @@
 package utils
 
 import (
-	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 	"time"
+
+	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 )
 
 func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
