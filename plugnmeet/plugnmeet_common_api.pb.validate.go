@@ -1975,6 +1975,8 @@ func (m *UploadBase64EncodedDataReq) validate(all bool) error {
 
 	// no validation rules for FileName
 
+	// no validation rules for FileType
+
 	if len(errors) > 0 {
 		return UploadBase64EncodedDataReqMultiError(errors)
 	}
@@ -2168,3 +2170,599 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UploadBase64EncodedDataResValidationError{}
+
+// Validate checks the field values on UploadedFileMergeReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UploadedFileMergeReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UploadedFileMergeReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UploadedFileMergeReqMultiError, or nil if none found.
+func (m *UploadedFileMergeReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UploadedFileMergeReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomSid
+
+	// no validation rules for RoomId
+
+	// no validation rules for FileType
+
+	// no validation rules for ResumableIdentifier
+
+	// no validation rules for ResumableFilename
+
+	// no validation rules for ResumableTotalChunks
+
+	if len(errors) > 0 {
+		return UploadedFileMergeReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// UploadedFileMergeReqMultiError is an error wrapping multiple validation
+// errors returned by UploadedFileMergeReq.ValidateAll() if the designated
+// constraints aren't met.
+type UploadedFileMergeReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UploadedFileMergeReqMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UploadedFileMergeReqMultiError) AllErrors() []error { return m }
+
+// UploadedFileMergeReqValidationError is the validation error returned by
+// UploadedFileMergeReq.Validate if the designated constraints aren't met.
+type UploadedFileMergeReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UploadedFileMergeReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UploadedFileMergeReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UploadedFileMergeReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UploadedFileMergeReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UploadedFileMergeReqValidationError) ErrorName() string {
+	return "UploadedFileMergeReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UploadedFileMergeReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUploadedFileMergeReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UploadedFileMergeReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UploadedFileMergeReqValidationError{}
+
+// Validate checks the field values on UploadedFileRes with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *UploadedFileRes) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UploadedFileRes with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UploadedFileResMultiError, or nil if none found.
+func (m *UploadedFileRes) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UploadedFileRes) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	// no validation rules for Msg
+
+	// no validation rules for FileId
+
+	// no validation rules for FilePath
+
+	// no validation rules for FileName
+
+	// no validation rules for FileExtension
+
+	// no validation rules for FileMimeType
+
+	// no validation rules for FileType
+
+	if len(errors) > 0 {
+		return UploadedFileResMultiError(errors)
+	}
+
+	return nil
+}
+
+// UploadedFileResMultiError is an error wrapping multiple validation errors
+// returned by UploadedFileRes.ValidateAll() if the designated constraints
+// aren't met.
+type UploadedFileResMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UploadedFileResMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UploadedFileResMultiError) AllErrors() []error { return m }
+
+// UploadedFileResValidationError is the validation error returned by
+// UploadedFileRes.Validate if the designated constraints aren't met.
+type UploadedFileResValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UploadedFileResValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UploadedFileResValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UploadedFileResValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UploadedFileResValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UploadedFileResValidationError) ErrorName() string { return "UploadedFileResValidationError" }
+
+// Error satisfies the builtin error interface
+func (e UploadedFileResValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUploadedFileRes.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UploadedFileResValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UploadedFileResValidationError{}
+
+// Validate checks the field values on RoomUploadedFileMetadata with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RoomUploadedFileMetadata) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RoomUploadedFileMetadata with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RoomUploadedFileMetadataMultiError, or nil if none found.
+func (m *RoomUploadedFileMetadata) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RoomUploadedFileMetadata) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for FileId
+
+	// no validation rules for FileName
+
+	// no validation rules for FilePath
+
+	// no validation rules for MimeType
+
+	// no validation rules for UploadedByUserId
+
+	// no validation rules for UploadedByName
+
+	// no validation rules for FileType
+
+	if m.TotalPages != nil {
+		// no validation rules for TotalPages
+	}
+
+	if len(errors) > 0 {
+		return RoomUploadedFileMetadataMultiError(errors)
+	}
+
+	return nil
+}
+
+// RoomUploadedFileMetadataMultiError is an error wrapping multiple validation
+// errors returned by RoomUploadedFileMetadata.ValidateAll() if the designated
+// constraints aren't met.
+type RoomUploadedFileMetadataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RoomUploadedFileMetadataMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RoomUploadedFileMetadataMultiError) AllErrors() []error { return m }
+
+// RoomUploadedFileMetadataValidationError is the validation error returned by
+// RoomUploadedFileMetadata.Validate if the designated constraints aren't met.
+type RoomUploadedFileMetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RoomUploadedFileMetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RoomUploadedFileMetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RoomUploadedFileMetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RoomUploadedFileMetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RoomUploadedFileMetadataValidationError) ErrorName() string {
+	return "RoomUploadedFileMetadataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RoomUploadedFileMetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRoomUploadedFileMetadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RoomUploadedFileMetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RoomUploadedFileMetadataValidationError{}
+
+// Validate checks the field values on GetRoomUploadedFilesReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetRoomUploadedFilesReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetRoomUploadedFilesReq with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetRoomUploadedFilesReqMultiError, or nil if none found.
+func (m *GetRoomUploadedFilesReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetRoomUploadedFilesReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomId
+
+	// no validation rules for FileType
+
+	if len(errors) > 0 {
+		return GetRoomUploadedFilesReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetRoomUploadedFilesReqMultiError is an error wrapping multiple validation
+// errors returned by GetRoomUploadedFilesReq.ValidateAll() if the designated
+// constraints aren't met.
+type GetRoomUploadedFilesReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetRoomUploadedFilesReqMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetRoomUploadedFilesReqMultiError) AllErrors() []error { return m }
+
+// GetRoomUploadedFilesReqValidationError is the validation error returned by
+// GetRoomUploadedFilesReq.Validate if the designated constraints aren't met.
+type GetRoomUploadedFilesReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetRoomUploadedFilesReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetRoomUploadedFilesReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetRoomUploadedFilesReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetRoomUploadedFilesReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetRoomUploadedFilesReqValidationError) ErrorName() string {
+	return "GetRoomUploadedFilesReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetRoomUploadedFilesReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetRoomUploadedFilesReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetRoomUploadedFilesReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetRoomUploadedFilesReqValidationError{}
+
+// Validate checks the field values on GetRoomUploadedFilesRes with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetRoomUploadedFilesRes) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetRoomUploadedFilesRes with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetRoomUploadedFilesResMultiError, or nil if none found.
+func (m *GetRoomUploadedFilesRes) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetRoomUploadedFilesRes) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	// no validation rules for Msg
+
+	for idx, item := range m.GetFiles() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetRoomUploadedFilesResValidationError{
+						field:  fmt.Sprintf("Files[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetRoomUploadedFilesResValidationError{
+						field:  fmt.Sprintf("Files[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetRoomUploadedFilesResValidationError{
+					field:  fmt.Sprintf("Files[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetRoomUploadedFilesResMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetRoomUploadedFilesResMultiError is an error wrapping multiple validation
+// errors returned by GetRoomUploadedFilesRes.ValidateAll() if the designated
+// constraints aren't met.
+type GetRoomUploadedFilesResMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetRoomUploadedFilesResMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetRoomUploadedFilesResMultiError) AllErrors() []error { return m }
+
+// GetRoomUploadedFilesResValidationError is the validation error returned by
+// GetRoomUploadedFilesRes.Validate if the designated constraints aren't met.
+type GetRoomUploadedFilesResValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetRoomUploadedFilesResValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetRoomUploadedFilesResValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetRoomUploadedFilesResValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetRoomUploadedFilesResValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetRoomUploadedFilesResValidationError) ErrorName() string {
+	return "GetRoomUploadedFilesResValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetRoomUploadedFilesResValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetRoomUploadedFilesRes.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetRoomUploadedFilesResValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetRoomUploadedFilesResValidationError{}

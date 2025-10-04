@@ -140,10 +140,19 @@ message UpdateUserLockSettingsReq {
   string Requested_user_id = 6;
 }
 
+enum RoomUploadedFileType {
+  CHAT_FILE = 0;
+  WHITEBOARD_IMAGE_FILE = 1;
+  WHITEBOARD_CONVERTED_FILE = 2;
+  EXTERNAL_MEDIA_PLAYER_FILE = 3;
+  VIRTUAL_BACKGROUND = 4;
+}
+
 message UploadBase64EncodedDataReq {
   string room_id = 1;
   string data = 3;
   string file_name = 4;
+  RoomUploadedFileType file_type = 5;
 }
 
 message UploadBase64EncodedDataRes {
@@ -153,4 +162,46 @@ message UploadBase64EncodedDataRes {
   string file_name = 4;
   string file_extension = 5;
   string file_mime_type =  6;
+}
+
+message UploadedFileMergeReq {
+  string room_sid = 1;
+  string room_id = 2;
+  RoomUploadedFileType file_type = 3;
+  string resumable_identifier = 4;
+  string resumable_filename = 5;
+  int32 resumable_total_chunks = 6;
+}
+
+message UploadedFileRes {
+  bool status = 1;
+  string msg = 2;
+  string file_id = 3;
+  string file_path = 4;
+  string file_name = 5;
+  string file_extension = 6;
+  string file_mime_type = 7;
+  RoomUploadedFileType file_type = 8;
+}
+
+message RoomUploadedFileMetadata {
+  string file_id = 1;
+  string file_name = 2;
+  string file_path = 3;
+  string mime_type = 4;
+  string uploaded_by_user_id = 5;
+  string uploaded_by_name = 6;
+  RoomUploadedFileType file_type = 7;
+  optional int32 total_pages = 8;
+}
+
+message GetRoomUploadedFilesReq {
+  string room_id = 1;
+  RoomUploadedFileType file_type = 2;
+}
+
+message GetRoomUploadedFilesRes {
+  bool status = 1;
+  string msg = 2;
+  repeated RoomUploadedFileMetadata files = 3;
 }
