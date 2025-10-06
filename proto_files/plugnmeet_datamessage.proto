@@ -34,6 +34,7 @@ enum DataMsgBodyType {
   WHITEBOARD_APP_STATE_CHANGE = 12;
   PAGE_CHANGE = 15;
   FILE_CHANGE = 17;
+  UPDATE_CURRENT_OFFICE_FILE_PAGES = 18;
 
   ADD_WHITEBOARD_FILE = 13 [deprecated = true];
   ADD_WHITEBOARD_OFFICE_FILE = 14 [deprecated = true];
