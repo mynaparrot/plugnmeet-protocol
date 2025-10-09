@@ -32,6 +32,7 @@ const (
 	DataMsgBodyType_USER_VISIBILITY_CHANGE       DataMsgBodyType = 4
 	DataMsgBodyType_EXTERNAL_MEDIA_PLAYER_EVENTS DataMsgBodyType = 5
 	DataMsgBodyType_NEW_POLL_RESPONSE            DataMsgBodyType = 6
+	DataMsgBodyType_PUSH_JOIN_BREAKOUT_ROOM      DataMsgBodyType = 19
 	DataMsgBodyType_SPEECH_SUBTITLE_TEXT         DataMsgBodyType = 7
 	// WHITEBOARD type
 	DataMsgBodyType_REQ_FULL_WHITEBOARD_DATA         DataMsgBodyType = 8
@@ -59,6 +60,7 @@ var (
 		4:  "USER_VISIBILITY_CHANGE",
 		5:  "EXTERNAL_MEDIA_PLAYER_EVENTS",
 		6:  "NEW_POLL_RESPONSE",
+		19: "PUSH_JOIN_BREAKOUT_ROOM",
 		7:  "SPEECH_SUBTITLE_TEXT",
 		8:  "REQ_FULL_WHITEBOARD_DATA",
 		9:  "RES_FULL_WHITEBOARD_DATA",
@@ -80,6 +82,7 @@ var (
 		"USER_VISIBILITY_CHANGE":           4,
 		"EXTERNAL_MEDIA_PLAYER_EVENTS":     5,
 		"NEW_POLL_RESPONSE":                6,
+		"PUSH_JOIN_BREAKOUT_ROOM":          19,
 		"SPEECH_SUBTITLE_TEXT":             7,
 		"REQ_FULL_WHITEBOARD_DATA":         8,
 		"RES_FULL_WHITEBOARD_DATA":         9,
@@ -211,7 +214,7 @@ const file_plugnmeet_datamessage_proto_rawDesc = "" +
 	"\n" +
 	"to_user_id\x18\x04 \x01(\tH\x00R\btoUserId\x88\x01\x01\x12\x18\n" +
 	"\amessage\x18\x05 \x01(\tR\amessageB\r\n" +
-	"\v_to_user_id*\xe3\x03\n" +
+	"\v_to_user_id*\x80\x04\n" +
 	"\x0fDataMsgBodyType\x12\v\n" +
 	"\aUNKNOWN\x10\x00\x12\x0f\n" +
 	"\vFILE_UPLOAD\x10\x01\x12\b\n" +
@@ -219,7 +222,8 @@ const file_plugnmeet_datamessage_proto_rawDesc = "" +
 	"\x05ALERT\x10\x03\x12\x1a\n" +
 	"\x16USER_VISIBILITY_CHANGE\x10\x04\x12 \n" +
 	"\x1cEXTERNAL_MEDIA_PLAYER_EVENTS\x10\x05\x12\x15\n" +
-	"\x11NEW_POLL_RESPONSE\x10\x06\x12\x18\n" +
+	"\x11NEW_POLL_RESPONSE\x10\x06\x12\x1b\n" +
+	"\x17PUSH_JOIN_BREAKOUT_ROOM\x10\x13\x12\x18\n" +
 	"\x14SPEECH_SUBTITLE_TEXT\x10\a\x12\x1c\n" +
 	"\x18REQ_FULL_WHITEBOARD_DATA\x10\b\x12\x1c\n" +
 	"\x18RES_FULL_WHITEBOARD_DATA\x10\t\x12\x10\n" +

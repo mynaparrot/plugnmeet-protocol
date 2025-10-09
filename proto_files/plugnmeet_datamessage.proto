@@ -23,6 +23,7 @@ enum DataMsgBodyType {
   EXTERNAL_MEDIA_PLAYER_EVENTS = 5;
 
   NEW_POLL_RESPONSE = 6;
+  PUSH_JOIN_BREAKOUT_ROOM = 19;
   SPEECH_SUBTITLE_TEXT = 7;
 
   // WHITEBOARD type
@@ -41,5 +42,5 @@ enum DataMsgBodyType {
 
   USER_CONNECTION_QUALITY_CHANGE = 16;
 
-  // next ID: 18
+  // next ID: 20
 }
