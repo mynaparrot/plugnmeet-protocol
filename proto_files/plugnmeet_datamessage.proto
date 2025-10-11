@@ -36,11 +36,12 @@ enum DataMsgBodyType {
   PAGE_CHANGE = 15;
   FILE_CHANGE = 17;
   UPDATE_CURRENT_OFFICE_FILE_PAGES = 18;
+  WHITEBOARD_RESET = 20;
 
   ADD_WHITEBOARD_FILE = 13 [deprecated = true];
   ADD_WHITEBOARD_OFFICE_FILE = 14 [deprecated = true];
 
   USER_CONNECTION_QUALITY_CHANGE = 16;
 
-  // next ID: 20
+  // next ID: 21
 }

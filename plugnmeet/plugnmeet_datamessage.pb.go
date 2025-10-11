@@ -43,6 +43,7 @@ const (
 	DataMsgBodyType_PAGE_CHANGE                      DataMsgBodyType = 15
 	DataMsgBodyType_FILE_CHANGE                      DataMsgBodyType = 17
 	DataMsgBodyType_UPDATE_CURRENT_OFFICE_FILE_PAGES DataMsgBodyType = 18
+	DataMsgBodyType_WHITEBOARD_RESET                 DataMsgBodyType = 20
 	// Deprecated: Marked as deprecated in plugnmeet_datamessage.proto.
 	DataMsgBodyType_ADD_WHITEBOARD_FILE DataMsgBodyType = 13
 	// Deprecated: Marked as deprecated in plugnmeet_datamessage.proto.
@@ -70,6 +71,7 @@ var (
 		15: "PAGE_CHANGE",
 		17: "FILE_CHANGE",
 		18: "UPDATE_CURRENT_OFFICE_FILE_PAGES",
+		20: "WHITEBOARD_RESET",
 		13: "ADD_WHITEBOARD_FILE",
 		14: "ADD_WHITEBOARD_OFFICE_FILE",
 		16: "USER_CONNECTION_QUALITY_CHANGE",
@@ -92,6 +94,7 @@ var (
 		"PAGE_CHANGE":                      15,
 		"FILE_CHANGE":                      17,
 		"UPDATE_CURRENT_OFFICE_FILE_PAGES": 18,
+		"WHITEBOARD_RESET":                 20,
 		"ADD_WHITEBOARD_FILE":              13,
 		"ADD_WHITEBOARD_OFFICE_FILE":       14,
 		"USER_CONNECTION_QUALITY_CHANGE":   16,
@@ -214,7 +217,7 @@ const file_plugnmeet_datamessage_proto_rawDesc = "" +
 	"\n" +
 	"to_user_id\x18\x04 \x01(\tH\x00R\btoUserId\x88\x01\x01\x12\x18\n" +
 	"\amessage\x18\x05 \x01(\tR\amessageB\r\n" +
-	"\v_to_user_id*\x80\x04\n" +
+	"\v_to_user_id*\x96\x04\n" +
 	"\x0fDataMsgBodyType\x12\v\n" +
 	"\aUNKNOWN\x10\x00\x12\x0f\n" +
 	"\vFILE_UPLOAD\x10\x01\x12\b\n" +
@@ -233,7 +236,8 @@ const file_plugnmeet_datamessage_proto_rawDesc = "" +
 	"\x1bWHITEBOARD_APP_STATE_CHANGE\x10\f\x12\x0f\n" +
 	"\vPAGE_CHANGE\x10\x0f\x12\x0f\n" +
 	"\vFILE_CHANGE\x10\x11\x12$\n" +
-	" UPDATE_CURRENT_OFFICE_FILE_PAGES\x10\x12\x12\x1b\n" +
+	" UPDATE_CURRENT_OFFICE_FILE_PAGES\x10\x12\x12\x14\n" +
+	"\x10WHITEBOARD_RESET\x10\x14\x12\x1b\n" +
 	"\x13ADD_WHITEBOARD_FILE\x10\r\x1a\x02\b\x01\x12\"\n" +
 	"\x1aADD_WHITEBOARD_OFFICE_FILE\x10\x0e\x1a\x02\b\x01\x12\"\n" +
 	"\x1eUSER_CONNECTION_QUALITY_CHANGE\x10\x10B\xa2\x01\n" +
