@@ -4,14 +4,14 @@ go 1.25.1
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.10-20250912141014-52f32327d4b0.1
-	github.com/DeRuina/timberjack v1.3.7
+	github.com/DeRuina/timberjack v1.3.8
 	github.com/go-jose/go-jose/v4 v4.1.3
 	github.com/gofiber/fiber/v2 v2.52.9
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-retryablehttp v0.7.8
 	github.com/livekit/protocol v1.42.0
 	github.com/nats-io/jwt/v2 v2.8.0
-	github.com/nats-io/nats.go v1.46.1
+	github.com/nats-io/nats.go v1.47.0
 	github.com/nats-io/nkeys v0.4.11
 	github.com/sirupsen/logrus v1.9.3
 	google.golang.org/protobuf v1.36.10

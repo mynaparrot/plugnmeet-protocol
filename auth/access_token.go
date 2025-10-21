@@ -1,11 +1,12 @@
 package auth
 
 import (
+	"time"
+
 	"github.com/go-jose/go-jose/v4"
 	"github.com/go-jose/go-jose/v4/jwt"
 	"github.com/livekit/protocol/auth"
 	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
-	"time"
 )
 
 func GeneratePlugNmeetJWTAccessToken(apiKey, secret, userId string, tokenValidity time.Duration, c *plugnmeet.PlugNmeetTokenClaims) (string, error) {
