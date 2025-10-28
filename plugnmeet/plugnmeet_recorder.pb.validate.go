@@ -284,3 +284,119 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = RecorderToPlugNmeetValidationError{}
+
+// Validate checks the field values on TranscodingTask with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *TranscodingTask) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on TranscodingTask with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// TranscodingTaskMultiError, or nil if none found.
+func (m *TranscodingTask) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *TranscodingTask) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RecordingId
+
+	// no validation rules for RoomId
+
+	// no validation rules for RoomSid
+
+	// no validation rules for FilePath
+
+	// no validation rules for FileName
+
+	// no validation rules for RoomTableId
+
+	// no validation rules for RecorderId
+
+	// no validation rules for RecordingVariant
+
+	if len(errors) > 0 {
+		return TranscodingTaskMultiError(errors)
+	}
+
+	return nil
+}
+
+// TranscodingTaskMultiError is an error wrapping multiple validation errors
+// returned by TranscodingTask.ValidateAll() if the designated constraints
+// aren't met.
+type TranscodingTaskMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m TranscodingTaskMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m TranscodingTaskMultiError) AllErrors() []error { return m }
+
+// TranscodingTaskValidationError is the validation error returned by
+// TranscodingTask.Validate if the designated constraints aren't met.
+type TranscodingTaskValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e TranscodingTaskValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e TranscodingTaskValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e TranscodingTaskValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e TranscodingTaskValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e TranscodingTaskValidationError) ErrorName() string { return "TranscodingTaskValidationError" }
+
+// Error satisfies the builtin error interface
+func (e TranscodingTaskValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sTranscodingTask.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = TranscodingTaskValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = TranscodingTaskValidationError{}

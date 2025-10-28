@@ -420,6 +420,111 @@ func (x *RecorderToPlugNmeet) GetRecordingVariant() CloudRecordingVariants {
 	return CloudRecordingVariants_FULL_SCREEN_CLOUD_RECORDING
 }
 
+// TranscodingTask will be the job for the transcoding worker.
+type TranscodingTask struct {
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	RecordingId string                 `protobuf:"bytes,1,opt,name=recording_id,json=recordingId,proto3" json:"recording_id,omitempty"`
+	RoomId      string                 `protobuf:"bytes,2,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	RoomSid     string                 `protobuf:"bytes,3,opt,name=room_sid,json=roomSid,proto3" json:"room_sid,omitempty"`
+	// directory where raw file is stored
+	FilePath string `protobuf:"bytes,4,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
+	// raw file name e.g. rec-xxx_raw.mkv
+	FileName    string `protobuf:"bytes,5,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	RoomTableId int64  `protobuf:"varint,6,opt,name=room_table_id,json=roomTableId,proto3" json:"room_table_id,omitempty"`
+	// ID of the original recorder that captured the file
+	RecorderId string `protobuf:"bytes,7,opt,name=recorder_id,json=recorderId,proto3" json:"recorder_id,omitempty"`
+	// The variant of the recording
+	RecordingVariant CloudRecordingVariants `protobuf:"varint,8,opt,name=recording_variant,json=recordingVariant,proto3,enum=plugnmeet.CloudRecordingVariants" json:"recording_variant,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *TranscodingTask) Reset() {
+	*x = TranscodingTask{}
+	mi := &file_plugnmeet_recorder_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TranscodingTask) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TranscodingTask) ProtoMessage() {}
+
+func (x *TranscodingTask) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_recorder_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TranscodingTask.ProtoReflect.Descriptor instead.
+func (*TranscodingTask) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_recorder_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *TranscodingTask) GetRecordingId() string {
+	if x != nil {
+		return x.RecordingId
+	}
+	return ""
+}
+
+func (x *TranscodingTask) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
+func (x *TranscodingTask) GetRoomSid() string {
+	if x != nil {
+		return x.RoomSid
+	}
+	return ""
+}
+
+func (x *TranscodingTask) GetFilePath() string {
+	if x != nil {
+		return x.FilePath
+	}
+	return ""
+}
+
+func (x *TranscodingTask) GetFileName() string {
+	if x != nil {
+		return x.FileName
+	}
+	return ""
+}
+
+func (x *TranscodingTask) GetRoomTableId() int64 {
+	if x != nil {
+		return x.RoomTableId
+	}
+	return 0
+}
+
+func (x *TranscodingTask) GetRecorderId() string {
+	if x != nil {
+		return x.RecorderId
+	}
+	return ""
+}
+
+func (x *TranscodingTask) GetRecordingVariant() CloudRecordingVariants {
+	if x != nil {
+		return x.RecordingVariant
+	}
+	return CloudRecordingVariants_FULL_SCREEN_CLOUD_RECORDING
+}
+
 var File_plugnmeet_recorder_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_recorder_proto_rawDesc = "" +
@@ -452,7 +557,17 @@ const file_plugnmeet_recorder_proto_rawDesc = "" +
 	"\tfile_size\x18\n" +
 	" \x01(\x02R\bfileSize\x12S\n" +
 	"\x11recording_variant\x18\f \x01(\x0e2!.plugnmeet.CloudRecordingVariantsH\x00R\x10recordingVariant\x88\x01\x01B\x14\n" +
-	"\x12_recording_variant*\x9c\x01\n" +
+	"\x12_recording_variant\"\xb7\x02\n" +
+	"\x0fTranscodingTask\x12!\n" +
+	"\frecording_id\x18\x01 \x01(\tR\vrecordingId\x12\x17\n" +
+	"\aroom_id\x18\x02 \x01(\tR\x06roomId\x12\x19\n" +
+	"\broom_sid\x18\x03 \x01(\tR\aroomSid\x12\x1b\n" +
+	"\tfile_path\x18\x04 \x01(\tR\bfilePath\x12\x1b\n" +
+	"\tfile_name\x18\x05 \x01(\tR\bfileName\x12\"\n" +
+	"\rroom_table_id\x18\x06 \x01(\x03R\vroomTableId\x12\x1f\n" +
+	"\vrecorder_id\x18\a \x01(\tR\n" +
+	"recorderId\x12N\n" +
+	"\x11recording_variant\x18\b \x01(\x0e2!.plugnmeet.CloudRecordingVariantsR\x10recordingVariant*\x9c\x01\n" +
 	"\x0eRecordingTasks\x12\x13\n" +
 	"\x0fSTART_RECORDING\x10\x00\x12\x12\n" +
 	"\x0eSTOP_RECORDING\x10\x01\x12\x0e\n" +
@@ -485,23 +600,25 @@ func file_plugnmeet_recorder_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_recorder_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_plugnmeet_recorder_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_plugnmeet_recorder_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_plugnmeet_recorder_proto_goTypes = []any{
 	(RecordingTasks)(0),         // 0: plugnmeet.RecordingTasks
 	(RecorderInfoKeys)(0),       // 1: plugnmeet.RecorderInfoKeys
 	(CloudRecordingVariants)(0), // 2: plugnmeet.CloudRecordingVariants
 	(*PlugNmeetToRecorder)(nil), // 3: plugnmeet.PlugNmeetToRecorder
 	(*RecorderToPlugNmeet)(nil), // 4: plugnmeet.RecorderToPlugNmeet
+	(*TranscodingTask)(nil),     // 5: plugnmeet.TranscodingTask
 }
 var file_plugnmeet_recorder_proto_depIdxs = []int32{
 	0, // 0: plugnmeet.PlugNmeetToRecorder.task:type_name -> plugnmeet.RecordingTasks
 	0, // 1: plugnmeet.RecorderToPlugNmeet.task:type_name -> plugnmeet.RecordingTasks
 	2, // 2: plugnmeet.RecorderToPlugNmeet.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	2, // 3: plugnmeet.TranscodingTask.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_recorder_proto_init() }
@@ -517,7 +634,7 @@ func file_plugnmeet_recorder_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_recorder_proto_rawDesc), len(file_plugnmeet_recorder_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
