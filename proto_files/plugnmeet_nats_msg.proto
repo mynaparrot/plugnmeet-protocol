@@ -17,6 +17,7 @@ enum NatsMsgServerToClientEvents {
   // initial data
   RES_INITIAL_DATA = 0;
   RES_JOINED_USERS_LIST = 1;
+  RES_MEDIA_SERVER_DATA = 16;
 
   ROOM_METADATA_UPDATE = 2;
   USER_METADATA_UPDATE = 3;
@@ -36,11 +37,12 @@ enum NatsMsgServerToClientEvents {
   BREAKOUT_ROOM_ENDED = 15;
   SYSTEM_CHAT_MSG = 14; // mostly system message display in chat
 
-  //next ID: 15
+  //next ID: 17
 }
 
 enum NatsMsgClientToServerEvents {
   REQ_INITIAL_DATA = 0;
+  REQ_MEDIA_SERVER_DATA = 8;
   REQ_JOINED_USERS_LIST = 1;
   REQ_RENEW_PNM_TOKEN = 2;
   PING = 3;
@@ -51,7 +53,7 @@ enum NatsMsgClientToServerEvents {
 
   PUSH_ANALYTICS_DATA = 7;
 
-  //next ID: 8
+  //next ID: 9
 }
 
 message NatsMsgServerToClient {

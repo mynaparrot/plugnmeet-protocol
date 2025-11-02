@@ -27,6 +27,7 @@ const (
 	// initial data
 	NatsMsgServerToClientEvents_RES_INITIAL_DATA                     NatsMsgServerToClientEvents = 0
 	NatsMsgServerToClientEvents_RES_JOINED_USERS_LIST                NatsMsgServerToClientEvents = 1
+	NatsMsgServerToClientEvents_RES_MEDIA_SERVER_DATA                NatsMsgServerToClientEvents = 16
 	NatsMsgServerToClientEvents_ROOM_METADATA_UPDATE                 NatsMsgServerToClientEvents = 2
 	NatsMsgServerToClientEvents_USER_METADATA_UPDATE                 NatsMsgServerToClientEvents = 3
 	NatsMsgServerToClientEvents_USER_JOINED                          NatsMsgServerToClientEvents = 4
@@ -48,6 +49,7 @@ var (
 	NatsMsgServerToClientEvents_name = map[int32]string{
 		0:  "RES_INITIAL_DATA",
 		1:  "RES_JOINED_USERS_LIST",
+		16: "RES_MEDIA_SERVER_DATA",
 		2:  "ROOM_METADATA_UPDATE",
 		3:  "USER_METADATA_UPDATE",
 		4:  "USER_JOINED",
@@ -66,6 +68,7 @@ var (
 	NatsMsgServerToClientEvents_value = map[string]int32{
 		"RES_INITIAL_DATA":                     0,
 		"RES_JOINED_USERS_LIST":                1,
+		"RES_MEDIA_SERVER_DATA":                16,
 		"ROOM_METADATA_UPDATE":                 2,
 		"USER_METADATA_UPDATE":                 3,
 		"USER_JOINED":                          4,
@@ -114,6 +117,7 @@ type NatsMsgClientToServerEvents int32
 
 const (
 	NatsMsgClientToServerEvents_REQ_INITIAL_DATA          NatsMsgClientToServerEvents = 0
+	NatsMsgClientToServerEvents_REQ_MEDIA_SERVER_DATA     NatsMsgClientToServerEvents = 8
 	NatsMsgClientToServerEvents_REQ_JOINED_USERS_LIST     NatsMsgClientToServerEvents = 1
 	NatsMsgClientToServerEvents_REQ_RENEW_PNM_TOKEN       NatsMsgClientToServerEvents = 2
 	NatsMsgClientToServerEvents_PING                      NatsMsgClientToServerEvents = 3
@@ -127,6 +131,7 @@ const (
 var (
 	NatsMsgClientToServerEvents_name = map[int32]string{
 		0: "REQ_INITIAL_DATA",
+		8: "REQ_MEDIA_SERVER_DATA",
 		1: "REQ_JOINED_USERS_LIST",
 		2: "REQ_RENEW_PNM_TOKEN",
 		3: "PING",
@@ -137,6 +142,7 @@ var (
 	}
 	NatsMsgClientToServerEvents_value = map[string]int32{
 		"REQ_INITIAL_DATA":          0,
+		"REQ_MEDIA_SERVER_DATA":     8,
 		"REQ_JOINED_USERS_LIST":     1,
 		"REQ_RENEW_PNM_TOKEN":       2,
 		"PING":                      3,
@@ -1085,10 +1091,11 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\amessage\x18\a \x01(\tR\amessage\x12\x1d\n" +
 	"\n" +
 	"from_admin\x18\b \x01(\bR\tfromAdminB\r\n" +
-	"\v_to_user_id*\x95\x03\n" +
+	"\v_to_user_id*\xb0\x03\n" +
 	"\x1bNatsMsgServerToClientEvents\x12\x14\n" +
 	"\x10RES_INITIAL_DATA\x10\x00\x12\x19\n" +
-	"\x15RES_JOINED_USERS_LIST\x10\x01\x12\x18\n" +
+	"\x15RES_JOINED_USERS_LIST\x10\x01\x12\x19\n" +
+	"\x15RES_MEDIA_SERVER_DATA\x10\x10\x12\x18\n" +
 	"\x14ROOM_METADATA_UPDATE\x10\x02\x12\x18\n" +
 	"\x14USER_METADATA_UPDATE\x10\x03\x12\x0f\n" +
 	"\vUSER_JOINED\x10\x04\x12\x15\n" +
@@ -1103,9 +1110,10 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\fPOLL_CREATED\x10\f\x12\x16\n" +
 	"\x12JOIN_BREAKOUT_ROOM\x10\r\x12\x17\n" +
 	"\x13BREAKOUT_ROOM_ENDED\x10\x0f\x12\x13\n" +
-	"\x0fSYSTEM_CHAT_MSG\x10\x0e*\xd1\x01\n" +
+	"\x0fSYSTEM_CHAT_MSG\x10\x0e*\xec\x01\n" +
 	"\x1bNatsMsgClientToServerEvents\x12\x14\n" +
 	"\x10REQ_INITIAL_DATA\x10\x00\x12\x19\n" +
+	"\x15REQ_MEDIA_SERVER_DATA\x10\b\x12\x19\n" +
 	"\x15REQ_JOINED_USERS_LIST\x10\x01\x12\x17\n" +
 	"\x13REQ_RENEW_PNM_TOKEN\x10\x02\x12\b\n" +
 	"\x04PING\x10\x03\x12\x12\n" +

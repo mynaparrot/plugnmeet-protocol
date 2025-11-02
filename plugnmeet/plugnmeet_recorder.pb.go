@@ -428,7 +428,7 @@ type TranscodingTask struct {
 	RoomSid     string                 `protobuf:"bytes,3,opt,name=room_sid,json=roomSid,proto3" json:"room_sid,omitempty"`
 	// directory where raw file is stored
 	FilePath string `protobuf:"bytes,4,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
-	// raw file name e.g. rec-xxx_raw.mkv
+	// raw file name e.g. rec-xxx_raw.mp4
 	FileName    string `protobuf:"bytes,5,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
 	RoomTableId int64  `protobuf:"varint,6,opt,name=room_table_id,json=roomTableId,proto3" json:"room_table_id,omitempty"`
 	// ID of the original recorder that captured the file
