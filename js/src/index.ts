@@ -15,3 +15,4 @@ export * from "./gen/plugnmeet_polls_pb";
 export * from "./gen/plugnmeet_recorder_pb";
 export * from "./gen/plugnmeet_recording_pb";
 export * from "./gen/plugnmeet_speech_services_pb";
+export * from "./gen/plugnmeet_insights_pb";

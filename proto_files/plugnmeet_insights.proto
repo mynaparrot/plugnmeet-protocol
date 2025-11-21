@@ -1,0 +1,82 @@
+syntax = "proto3";
+package plugnmeet;
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+
+// Enum to define all available insights services in a type-safe way.
+// This is the single source of truth for all clients.
+enum InsightsServiceType {
+  INSIGHTS_SERVICE_TYPE_UNSPECIFIED = 0;
+  INSIGHTS_SERVICE_TYPE_TRANSCRIPTION = 1;
+  INSIGHTS_SERVICE_TYPE_TRANSLATION = 2;
+}
+
+enum InsightsUserSessionAction {
+  USER_SESSION_ACTION_UNSPECIFIED = 0;
+  USER_SESSION_ACTION_START = 1;
+  USER_SESSION_ACTION_STOP = 2;
+}
+
+message InsightsSupportedLangInfo {
+  string code = 1;
+  string name = 2;
+  string locale = 3;
+}
+
+message InsightsTranscriptionConfigReq {
+  bool is_enabled = 1;
+  repeated string allowed_spoken_langs = 2;
+  repeated string allowed_speech_users = 3;
+
+  bool is_enabled_translation = 4;
+  repeated string allowed_trans_langs = 5;
+  optional string default_subtitle_lang = 6;
+}
+
+message InsightsTranscriptionUserSessionReq {
+  InsightsUserSessionAction action = 1;
+  optional string spoken_lang = 2;
+}
+
+message InsightsTranscriptionResult {
+  string from_user_id = 1;
+  string lang = 2;
+  string text = 3;
+  bool is_partial = 4;
+  map<string, string> translations = 5; // A map of target language -> translated text
+}
+
+message InsightsTranslateTextReq {
+  string text = 1;
+  string source_lang = 2;
+  repeated string target_langs = 3;
+}
+
+message InsightsTextTranslationResult {
+  string original_text = 1;
+  string source_lang = 2;
+  map<string, string> translations = 3; // map of lang_code -> translated_text
+}
+
+message InsightsTranslateTextRes {
+  bool status = 1;
+  string msg = 2;
+  optional InsightsTextTranslationResult result = 3;
+}
+
+message InsightsGetSupportedLanguagesReq {
+  InsightsServiceType service_type = 1;
+}
+
+message InsightsGetSupportedLanguagesRes {
+  bool status = 1;
+  string msg = 2;
+  repeated InsightsSupportedLangInfo languages = 3;
+}
+
+message InsightsGetUserStatusRes {
+  bool status = 1;
+  string msg = 2;
+  InsightsServiceType service_type = 3;
+  bool is_active = 4;
+  optional string spoken_lang = 5;
+}

@@ -71,7 +71,8 @@ message RoomCreateFeatures {
   SpeechToTextTranslationFeatures speech_to_text_translation_features = 23;
   EndToEndEncryptionFeatures end_to_end_encryption_features = 24;
   PollsFeatures polls_features = 25;
-  // next ID: 26
+  InsightsFeatures insights_features = 26;
+  // next ID: 27
 }
 
 message ChatFeatures {
@@ -221,6 +222,39 @@ message EndToEndEncryptionFeatures {
 message PollsFeatures {
   bool is_allow = 1;
   bool is_active = 2 [(buf.validate.field).bool.const = false];
+}
+
+message InsightsFeatures {
+  bool is_allow = 1; // Allow/disallow all insights features for this room
+  optional InsightsTranscriptionFeatures transcription_features = 2;
+  optional InsightsChatTranslationFeatures chat_translation_features = 3;
+}
+
+message InsightsTranscriptionFeatures {
+  bool is_allow = 1;
+  bool is_allow_translation = 2;
+
+  // all internal usage fields
+  bool is_enabled = 3 [(buf.validate.field).bool.const = false];
+  repeated string allowed_spoken_langs = 4 [(buf.validate.field).repeated.max_items = 0];
+  repeated string allowed_speech_users = 5 [(buf.validate.field).repeated.max_items = 0];
+
+  bool is_enabled_translation = 6 [(buf.validate.field).bool.const = false];
+  int32 max_selected_trans_langs = 7 [(buf.validate.field).int32.const = 0];
+  repeated string allowed_trans_langs = 8 [(buf.validate.field).repeated.max_items = 0];
+  optional string default_subtitle_lang = 9 [(buf.validate.field).cel = {
+    id: "default_subtitle_lang_format",
+    message: "default_subtitle_lang should not contain any value",
+    expression: "this.matches('^$')"
+  }];
+}
+
+message InsightsChatTranslationFeatures {
+  bool is_allow = 1;
+
+  // all internal usage fields
+  bool is_enabled = 2 [(buf.validate.field).bool.const = false];
+  repeated string allowed_trans_langs = 3 [(buf.validate.field).repeated.max_items = 0];
 }
 
 message CopyrightConf {
