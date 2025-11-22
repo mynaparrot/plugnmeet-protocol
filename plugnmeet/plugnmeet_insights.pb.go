@@ -455,7 +455,7 @@ func (x *InsightsTranslateTextReq) GetTargetLangs() []string {
 
 type InsightsTextTranslationResult struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OriginalText  string                 `protobuf:"bytes,1,opt,name=original_text,json=originalText,proto3" json:"original_text,omitempty"`
+	SourceText    string                 `protobuf:"bytes,1,opt,name=source_text,json=sourceText,proto3" json:"source_text,omitempty"`
 	SourceLang    string                 `protobuf:"bytes,2,opt,name=source_lang,json=sourceLang,proto3" json:"source_lang,omitempty"`
 	Translations  map[string]string      `protobuf:"bytes,3,rep,name=translations,proto3" json:"translations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // map of lang_code -> translated_text
 	unknownFields protoimpl.UnknownFields
@@ -492,9 +492,9 @@ func (*InsightsTextTranslationResult) Descriptor() ([]byte, []int) {
 	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *InsightsTextTranslationResult) GetOriginalText() string {
+func (x *InsightsTextTranslationResult) GetSourceText() string {
 	if x != nil {
-		return x.OriginalText
+		return x.SourceText
 	}
 	return ""
 }
@@ -791,9 +791,10 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"\x04text\x18\x01 \x01(\tR\x04text\x12\x1f\n" +
 	"\vsource_lang\x18\x02 \x01(\tR\n" +
 	"sourceLang\x12!\n" +
-	"\ftarget_langs\x18\x03 \x03(\tR\vtargetLangs\"\x86\x02\n" +
-	"\x1dInsightsTextTranslationResult\x12#\n" +
-	"\roriginal_text\x18\x01 \x01(\tR\foriginalText\x12\x1f\n" +
+	"\ftarget_langs\x18\x03 \x03(\tR\vtargetLangs\"\x82\x02\n" +
+	"\x1dInsightsTextTranslationResult\x12\x1f\n" +
+	"\vsource_text\x18\x01 \x01(\tR\n" +
+	"sourceText\x12\x1f\n" +
 	"\vsource_lang\x18\x02 \x01(\tR\n" +
 	"sourceLang\x12^\n" +
 	"\ftranslations\x18\x03 \x03(\v2:.plugnmeet.InsightsTextTranslationResult.TranslationsEntryR\ftranslations\x1a?\n" +

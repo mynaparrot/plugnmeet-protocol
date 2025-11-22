@@ -52,7 +52,7 @@ message InsightsTranslateTextReq {
 }
 
 message InsightsTextTranslationResult {
-  string original_text = 1;
+  string source_text = 1;
   string source_lang = 2;
   map<string, string> translations = 3; // map of lang_code -> translated_text
 }

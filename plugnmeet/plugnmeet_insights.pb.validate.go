@@ -606,7 +606,7 @@ func (m *InsightsTextTranslationResult) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for OriginalText
+	// no validation rules for SourceText
 
 	// no validation rules for SourceLang
 
