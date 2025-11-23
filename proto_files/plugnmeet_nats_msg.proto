@@ -134,4 +134,6 @@ message ChatMessage {
   bool is_private = 6;
   string message = 7;
   bool from_admin = 8;
+  optional string source_lang = 9;
+  map<string, string> translations = 10;
 }

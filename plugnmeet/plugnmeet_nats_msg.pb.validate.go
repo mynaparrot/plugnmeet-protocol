@@ -1151,8 +1151,14 @@ func (m *ChatMessage) validate(all bool) error {
 
 	// no validation rules for FromAdmin
 
+	// no validation rules for Translations
+
 	if m.ToUserId != nil {
 		// no validation rules for ToUserId
+	}
+
+	if m.SourceLang != nil {
+		// no validation rules for SourceLang
 	}
 
 	if len(errors) > 0 {
