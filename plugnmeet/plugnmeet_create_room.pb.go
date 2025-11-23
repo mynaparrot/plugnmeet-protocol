@@ -1549,10 +1549,12 @@ type InsightsChatTranslationFeatures struct {
 	state   protoimpl.MessageState `protogen:"open.v1"`
 	IsAllow bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
 	// all internal usage fields
-	IsEnabled         bool     `protobuf:"varint,2,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
-	AllowedTransLangs []string `protobuf:"bytes,3,rep,name=allowed_trans_langs,json=allowedTransLangs,proto3" json:"allowed_trans_langs,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	IsEnabled             bool     `protobuf:"varint,2,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
+	AllowedTransLangs     []string `protobuf:"bytes,3,rep,name=allowed_trans_langs,json=allowedTransLangs,proto3" json:"allowed_trans_langs,omitempty"`
+	MaxSelectedTransLangs int32    `protobuf:"varint,4,opt,name=max_selected_trans_langs,json=maxSelectedTransLangs,proto3" json:"max_selected_trans_langs,omitempty"`
+	DefaultLang           *string  `protobuf:"bytes,5,opt,name=default_lang,json=defaultLang,proto3,oneof" json:"default_lang,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *InsightsChatTranslationFeatures) Reset() {
@@ -1604,6 +1606,20 @@ func (x *InsightsChatTranslationFeatures) GetAllowedTransLangs() []string {
 		return x.AllowedTransLangs
 	}
 	return nil
+}
+
+func (x *InsightsChatTranslationFeatures) GetMaxSelectedTransLangs() int32 {
+	if x != nil {
+		return x.MaxSelectedTransLangs
+	}
+	return 0
+}
+
+func (x *InsightsChatTranslationFeatures) GetDefaultLang() string {
+	if x != nil && x.DefaultLang != nil {
+		return *x.DefaultLang
+	}
+	return ""
 }
 
 type CopyrightConf struct {
@@ -1914,12 +1930,16 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x13allowed_trans_langs\x18\b \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x11allowedTransLangs\x12\xa5\x01\n" +
 	"\x15default_subtitle_lang\x18\t \x01(\tBl\xbaHi\xba\x01f\n" +
 	"\x1cdefault_subtitle_lang_format\x122default_subtitle_lang should not contain any value\x1a\x12this.matches('^$')H\x00R\x13defaultSubtitleLang\x88\x01\x01B\x18\n" +
-	"\x16_default_subtitle_lang\"\x9e\x01\n" +
+	"\x16_default_subtitle_lang\"\xf6\x02\n" +
 	"\x1fInsightsChatTranslationFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12&\n" +
 	"\n" +
 	"is_enabled\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\tisEnabled\x128\n" +
-	"\x13allowed_trans_langs\x18\x03 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x11allowedTransLangs\"=\n" +
+	"\x13allowed_trans_langs\x18\x03 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x11allowedTransLangs\x12@\n" +
+	"\x18max_selected_trans_langs\x18\x04 \x01(\x05B\a\xbaH\x04\x1a\x02\b\x00R\x15maxSelectedTransLangs\x12\x82\x01\n" +
+	"\fdefault_lang\x18\x05 \x01(\tBZ\xbaHW\xba\x01T\n" +
+	"\x13default_lang_format\x12)default_lang should not contain any value\x1a\x12this.matches('^$')H\x00R\vdefaultLang\x88\x01\x01B\x0f\n" +
+	"\r_default_lang\"=\n" +
 	"\rCopyrightConf\x12\x18\n" +
 	"\adisplay\x18\x01 \x01(\bR\adisplay\x12\x12\n" +
 	"\x04text\x18\x03 \x01(\tR\x04text\"q\n" +
@@ -2015,6 +2035,7 @@ func file_plugnmeet_create_room_proto_init() {
 	file_plugnmeet_create_room_proto_msgTypes[13].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[15].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[16].OneofWrappers = []any{}
+	file_plugnmeet_create_room_proto_msgTypes[17].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -478,6 +478,117 @@ var _ interface {
 	ErrorName() string
 } = InsightsTranscriptionResultValidationError{}
 
+// Validate checks the field values on InsightsChatTranslationConfigReq with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *InsightsChatTranslationConfigReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InsightsChatTranslationConfigReq with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// InsightsChatTranslationConfigReqMultiError, or nil if none found.
+func (m *InsightsChatTranslationConfigReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InsightsChatTranslationConfigReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsEnabled
+
+	if m.DefaultLang != nil {
+		// no validation rules for DefaultLang
+	}
+
+	if len(errors) > 0 {
+		return InsightsChatTranslationConfigReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// InsightsChatTranslationConfigReqMultiError is an error wrapping multiple
+// validation errors returned by
+// InsightsChatTranslationConfigReq.ValidateAll() if the designated
+// constraints aren't met.
+type InsightsChatTranslationConfigReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InsightsChatTranslationConfigReqMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InsightsChatTranslationConfigReqMultiError) AllErrors() []error { return m }
+
+// InsightsChatTranslationConfigReqValidationError is the validation error
+// returned by InsightsChatTranslationConfigReq.Validate if the designated
+// constraints aren't met.
+type InsightsChatTranslationConfigReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InsightsChatTranslationConfigReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InsightsChatTranslationConfigReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InsightsChatTranslationConfigReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InsightsChatTranslationConfigReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InsightsChatTranslationConfigReqValidationError) ErrorName() string {
+	return "InsightsChatTranslationConfigReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InsightsChatTranslationConfigReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInsightsChatTranslationConfigReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InsightsChatTranslationConfigReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InsightsChatTranslationConfigReqValidationError{}
+
 // Validate checks the field values on InsightsTranslateTextReq with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

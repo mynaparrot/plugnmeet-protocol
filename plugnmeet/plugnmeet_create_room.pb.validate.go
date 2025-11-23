@@ -2560,6 +2560,12 @@ func (m *InsightsChatTranslationFeatures) validate(all bool) error {
 
 	// no validation rules for IsEnabled
 
+	// no validation rules for MaxSelectedTransLangs
+
+	if m.DefaultLang != nil {
+		// no validation rules for DefaultLang
+	}
+
 	if len(errors) > 0 {
 		return InsightsChatTranslationFeaturesMultiError(errors)
 	}

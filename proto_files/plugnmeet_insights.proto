@@ -45,6 +45,12 @@ message InsightsTranscriptionResult {
   map<string, string> translations = 5; // A map of target language -> translated text
 }
 
+message InsightsChatTranslationConfigReq {
+  bool is_enabled = 1;
+  repeated string allowed_trans_langs = 5;
+  optional string default_lang = 6;
+}
+
 message InsightsTranslateTextReq {
   string text = 1;
   string source_lang = 2;

@@ -393,6 +393,66 @@ func (x *InsightsTranscriptionResult) GetTranslations() map[string]string {
 	return nil
 }
 
+type InsightsChatTranslationConfigReq struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	IsEnabled         bool                   `protobuf:"varint,1,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
+	AllowedTransLangs []string               `protobuf:"bytes,5,rep,name=allowed_trans_langs,json=allowedTransLangs,proto3" json:"allowed_trans_langs,omitempty"`
+	DefaultLang       *string                `protobuf:"bytes,6,opt,name=default_lang,json=defaultLang,proto3,oneof" json:"default_lang,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *InsightsChatTranslationConfigReq) Reset() {
+	*x = InsightsChatTranslationConfigReq{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InsightsChatTranslationConfigReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InsightsChatTranslationConfigReq) ProtoMessage() {}
+
+func (x *InsightsChatTranslationConfigReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InsightsChatTranslationConfigReq.ProtoReflect.Descriptor instead.
+func (*InsightsChatTranslationConfigReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *InsightsChatTranslationConfigReq) GetIsEnabled() bool {
+	if x != nil {
+		return x.IsEnabled
+	}
+	return false
+}
+
+func (x *InsightsChatTranslationConfigReq) GetAllowedTransLangs() []string {
+	if x != nil {
+		return x.AllowedTransLangs
+	}
+	return nil
+}
+
+func (x *InsightsChatTranslationConfigReq) GetDefaultLang() string {
+	if x != nil && x.DefaultLang != nil {
+		return *x.DefaultLang
+	}
+	return ""
+}
+
 type InsightsTranslateTextReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Text          string                 `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
@@ -404,7 +464,7 @@ type InsightsTranslateTextReq struct {
 
 func (x *InsightsTranslateTextReq) Reset() {
 	*x = InsightsTranslateTextReq{}
-	mi := &file_plugnmeet_insights_proto_msgTypes[4]
+	mi := &file_plugnmeet_insights_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -416,7 +476,7 @@ func (x *InsightsTranslateTextReq) String() string {
 func (*InsightsTranslateTextReq) ProtoMessage() {}
 
 func (x *InsightsTranslateTextReq) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_insights_proto_msgTypes[4]
+	mi := &file_plugnmeet_insights_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -429,7 +489,7 @@ func (x *InsightsTranslateTextReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsTranslateTextReq.ProtoReflect.Descriptor instead.
 func (*InsightsTranslateTextReq) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{4}
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *InsightsTranslateTextReq) GetText() string {
@@ -464,7 +524,7 @@ type InsightsTextTranslationResult struct {
 
 func (x *InsightsTextTranslationResult) Reset() {
 	*x = InsightsTextTranslationResult{}
-	mi := &file_plugnmeet_insights_proto_msgTypes[5]
+	mi := &file_plugnmeet_insights_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -476,7 +536,7 @@ func (x *InsightsTextTranslationResult) String() string {
 func (*InsightsTextTranslationResult) ProtoMessage() {}
 
 func (x *InsightsTextTranslationResult) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_insights_proto_msgTypes[5]
+	mi := &file_plugnmeet_insights_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -489,7 +549,7 @@ func (x *InsightsTextTranslationResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsTextTranslationResult.ProtoReflect.Descriptor instead.
 func (*InsightsTextTranslationResult) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{5}
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *InsightsTextTranslationResult) GetSourceText() string {
@@ -524,7 +584,7 @@ type InsightsTranslateTextRes struct {
 
 func (x *InsightsTranslateTextRes) Reset() {
 	*x = InsightsTranslateTextRes{}
-	mi := &file_plugnmeet_insights_proto_msgTypes[6]
+	mi := &file_plugnmeet_insights_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -536,7 +596,7 @@ func (x *InsightsTranslateTextRes) String() string {
 func (*InsightsTranslateTextRes) ProtoMessage() {}
 
 func (x *InsightsTranslateTextRes) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_insights_proto_msgTypes[6]
+	mi := &file_plugnmeet_insights_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -549,7 +609,7 @@ func (x *InsightsTranslateTextRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsTranslateTextRes.ProtoReflect.Descriptor instead.
 func (*InsightsTranslateTextRes) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{6}
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *InsightsTranslateTextRes) GetStatus() bool {
@@ -582,7 +642,7 @@ type InsightsGetSupportedLanguagesReq struct {
 
 func (x *InsightsGetSupportedLanguagesReq) Reset() {
 	*x = InsightsGetSupportedLanguagesReq{}
-	mi := &file_plugnmeet_insights_proto_msgTypes[7]
+	mi := &file_plugnmeet_insights_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -594,7 +654,7 @@ func (x *InsightsGetSupportedLanguagesReq) String() string {
 func (*InsightsGetSupportedLanguagesReq) ProtoMessage() {}
 
 func (x *InsightsGetSupportedLanguagesReq) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_insights_proto_msgTypes[7]
+	mi := &file_plugnmeet_insights_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -607,7 +667,7 @@ func (x *InsightsGetSupportedLanguagesReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsGetSupportedLanguagesReq.ProtoReflect.Descriptor instead.
 func (*InsightsGetSupportedLanguagesReq) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{7}
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *InsightsGetSupportedLanguagesReq) GetServiceType() InsightsServiceType {
@@ -628,7 +688,7 @@ type InsightsGetSupportedLanguagesRes struct {
 
 func (x *InsightsGetSupportedLanguagesRes) Reset() {
 	*x = InsightsGetSupportedLanguagesRes{}
-	mi := &file_plugnmeet_insights_proto_msgTypes[8]
+	mi := &file_plugnmeet_insights_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -640,7 +700,7 @@ func (x *InsightsGetSupportedLanguagesRes) String() string {
 func (*InsightsGetSupportedLanguagesRes) ProtoMessage() {}
 
 func (x *InsightsGetSupportedLanguagesRes) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_insights_proto_msgTypes[8]
+	mi := &file_plugnmeet_insights_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -653,7 +713,7 @@ func (x *InsightsGetSupportedLanguagesRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsGetSupportedLanguagesRes.ProtoReflect.Descriptor instead.
 func (*InsightsGetSupportedLanguagesRes) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{8}
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *InsightsGetSupportedLanguagesRes) GetStatus() bool {
@@ -690,7 +750,7 @@ type InsightsGetUserStatusRes struct {
 
 func (x *InsightsGetUserStatusRes) Reset() {
 	*x = InsightsGetUserStatusRes{}
-	mi := &file_plugnmeet_insights_proto_msgTypes[9]
+	mi := &file_plugnmeet_insights_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -702,7 +762,7 @@ func (x *InsightsGetUserStatusRes) String() string {
 func (*InsightsGetUserStatusRes) ProtoMessage() {}
 
 func (x *InsightsGetUserStatusRes) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_insights_proto_msgTypes[9]
+	mi := &file_plugnmeet_insights_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -715,7 +775,7 @@ func (x *InsightsGetUserStatusRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsGetUserStatusRes.ProtoReflect.Descriptor instead.
 func (*InsightsGetUserStatusRes) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{9}
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *InsightsGetUserStatusRes) GetStatus() bool {
@@ -786,7 +846,13 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"\ftranslations\x18\x05 \x03(\v28.plugnmeet.InsightsTranscriptionResult.TranslationsEntryR\ftranslations\x1a?\n" +
 	"\x11TranslationsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"r\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xaa\x01\n" +
+	" InsightsChatTranslationConfigReq\x12\x1d\n" +
+	"\n" +
+	"is_enabled\x18\x01 \x01(\bR\tisEnabled\x12.\n" +
+	"\x13allowed_trans_langs\x18\x05 \x03(\tR\x11allowedTransLangs\x12&\n" +
+	"\fdefault_lang\x18\x06 \x01(\tH\x00R\vdefaultLang\x88\x01\x01B\x0f\n" +
+	"\r_default_lang\"r\n" +
 	"\x18InsightsTranslateTextReq\x12\x12\n" +
 	"\x04text\x18\x01 \x01(\tR\x04text\x12\x1f\n" +
 	"\vsource_lang\x18\x02 \x01(\tR\n" +
@@ -843,7 +909,7 @@ func file_plugnmeet_insights_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_insights_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_plugnmeet_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_plugnmeet_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_plugnmeet_insights_proto_goTypes = []any{
 	(InsightsServiceType)(0),                    // 0: plugnmeet.InsightsServiceType
 	(InsightsUserSessionAction)(0),              // 1: plugnmeet.InsightsUserSessionAction
@@ -851,20 +917,21 @@ var file_plugnmeet_insights_proto_goTypes = []any{
 	(*InsightsTranscriptionConfigReq)(nil),      // 3: plugnmeet.InsightsTranscriptionConfigReq
 	(*InsightsTranscriptionUserSessionReq)(nil), // 4: plugnmeet.InsightsTranscriptionUserSessionReq
 	(*InsightsTranscriptionResult)(nil),         // 5: plugnmeet.InsightsTranscriptionResult
-	(*InsightsTranslateTextReq)(nil),            // 6: plugnmeet.InsightsTranslateTextReq
-	(*InsightsTextTranslationResult)(nil),       // 7: plugnmeet.InsightsTextTranslationResult
-	(*InsightsTranslateTextRes)(nil),            // 8: plugnmeet.InsightsTranslateTextRes
-	(*InsightsGetSupportedLanguagesReq)(nil),    // 9: plugnmeet.InsightsGetSupportedLanguagesReq
-	(*InsightsGetSupportedLanguagesRes)(nil),    // 10: plugnmeet.InsightsGetSupportedLanguagesRes
-	(*InsightsGetUserStatusRes)(nil),            // 11: plugnmeet.InsightsGetUserStatusRes
-	nil,                                         // 12: plugnmeet.InsightsTranscriptionResult.TranslationsEntry
-	nil,                                         // 13: plugnmeet.InsightsTextTranslationResult.TranslationsEntry
+	(*InsightsChatTranslationConfigReq)(nil),    // 6: plugnmeet.InsightsChatTranslationConfigReq
+	(*InsightsTranslateTextReq)(nil),            // 7: plugnmeet.InsightsTranslateTextReq
+	(*InsightsTextTranslationResult)(nil),       // 8: plugnmeet.InsightsTextTranslationResult
+	(*InsightsTranslateTextRes)(nil),            // 9: plugnmeet.InsightsTranslateTextRes
+	(*InsightsGetSupportedLanguagesReq)(nil),    // 10: plugnmeet.InsightsGetSupportedLanguagesReq
+	(*InsightsGetSupportedLanguagesRes)(nil),    // 11: plugnmeet.InsightsGetSupportedLanguagesRes
+	(*InsightsGetUserStatusRes)(nil),            // 12: plugnmeet.InsightsGetUserStatusRes
+	nil,                                         // 13: plugnmeet.InsightsTranscriptionResult.TranslationsEntry
+	nil,                                         // 14: plugnmeet.InsightsTextTranslationResult.TranslationsEntry
 }
 var file_plugnmeet_insights_proto_depIdxs = []int32{
 	1,  // 0: plugnmeet.InsightsTranscriptionUserSessionReq.action:type_name -> plugnmeet.InsightsUserSessionAction
-	12, // 1: plugnmeet.InsightsTranscriptionResult.translations:type_name -> plugnmeet.InsightsTranscriptionResult.TranslationsEntry
-	13, // 2: plugnmeet.InsightsTextTranslationResult.translations:type_name -> plugnmeet.InsightsTextTranslationResult.TranslationsEntry
-	7,  // 3: plugnmeet.InsightsTranslateTextRes.result:type_name -> plugnmeet.InsightsTextTranslationResult
+	13, // 1: plugnmeet.InsightsTranscriptionResult.translations:type_name -> plugnmeet.InsightsTranscriptionResult.TranslationsEntry
+	14, // 2: plugnmeet.InsightsTextTranslationResult.translations:type_name -> plugnmeet.InsightsTextTranslationResult.TranslationsEntry
+	8,  // 3: plugnmeet.InsightsTranslateTextRes.result:type_name -> plugnmeet.InsightsTextTranslationResult
 	0,  // 4: plugnmeet.InsightsGetSupportedLanguagesReq.service_type:type_name -> plugnmeet.InsightsServiceType
 	2,  // 5: plugnmeet.InsightsGetSupportedLanguagesRes.languages:type_name -> plugnmeet.InsightsSupportedLangInfo
 	0,  // 6: plugnmeet.InsightsGetUserStatusRes.service_type:type_name -> plugnmeet.InsightsServiceType
@@ -882,15 +949,16 @@ func file_plugnmeet_insights_proto_init() {
 	}
 	file_plugnmeet_insights_proto_msgTypes[1].OneofWrappers = []any{}
 	file_plugnmeet_insights_proto_msgTypes[2].OneofWrappers = []any{}
-	file_plugnmeet_insights_proto_msgTypes[6].OneofWrappers = []any{}
-	file_plugnmeet_insights_proto_msgTypes[9].OneofWrappers = []any{}
+	file_plugnmeet_insights_proto_msgTypes[4].OneofWrappers = []any{}
+	file_plugnmeet_insights_proto_msgTypes[7].OneofWrappers = []any{}
+	file_plugnmeet_insights_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_insights_proto_rawDesc), len(file_plugnmeet_insights_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   12,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

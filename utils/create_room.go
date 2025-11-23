@@ -105,7 +105,8 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 				MaxSelectedTransLangs: 2,
 			},
 			ChatTranslationFeatures: &plugnmeet.InsightsChatTranslationFeatures{
-				IsAllow: false,
+				IsAllow:               false,
+				MaxSelectedTransLangs: 5,
 			},
 		}
 	}

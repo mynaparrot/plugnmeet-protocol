@@ -255,6 +255,12 @@ message InsightsChatTranslationFeatures {
   // all internal usage fields
   bool is_enabled = 2 [(buf.validate.field).bool.const = false];
   repeated string allowed_trans_langs = 3 [(buf.validate.field).repeated.max_items = 0];
+  int32 max_selected_trans_langs = 4 [(buf.validate.field).int32.const = 0];
+  optional string default_lang = 5 [(buf.validate.field).cel = {
+    id: "default_lang_format",
+    message: "default_lang should not contain any value",
+    expression: "this.matches('^$')"
+  }];
 }
 
 message CopyrightConf {
