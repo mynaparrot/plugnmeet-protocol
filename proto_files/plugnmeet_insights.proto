@@ -8,6 +8,7 @@ enum InsightsServiceType {
   INSIGHTS_SERVICE_TYPE_UNSPECIFIED = 0;
   INSIGHTS_SERVICE_TYPE_TRANSCRIPTION = 1;
   INSIGHTS_SERVICE_TYPE_TRANSLATION = 2;
+  INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS = 3;
 }
 
 enum InsightsUserSessionAction {
@@ -30,6 +31,8 @@ message InsightsTranscriptionConfigReq {
   bool is_enabled_translation = 4;
   repeated string allowed_trans_langs = 5;
   optional string default_subtitle_lang = 6;
+
+  bool is_enabled_speech_synthesis = 7;
 }
 
 message InsightsTranscriptionUserSessionReq {

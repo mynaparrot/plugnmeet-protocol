@@ -169,6 +169,8 @@ func (m *InsightsTranscriptionConfigReq) validate(all bool) error {
 
 	// no validation rules for IsEnabledTranslation
 
+	// no validation rules for IsEnabledSpeechSynthesis
+
 	if m.DefaultSubtitleLang != nil {
 		// no validation rules for DefaultSubtitleLang
 	}

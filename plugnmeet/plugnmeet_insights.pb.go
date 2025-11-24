@@ -26,9 +26,10 @@ const (
 type InsightsServiceType int32
 
 const (
-	InsightsServiceType_INSIGHTS_SERVICE_TYPE_UNSPECIFIED   InsightsServiceType = 0
-	InsightsServiceType_INSIGHTS_SERVICE_TYPE_TRANSCRIPTION InsightsServiceType = 1
-	InsightsServiceType_INSIGHTS_SERVICE_TYPE_TRANSLATION   InsightsServiceType = 2
+	InsightsServiceType_INSIGHTS_SERVICE_TYPE_UNSPECIFIED      InsightsServiceType = 0
+	InsightsServiceType_INSIGHTS_SERVICE_TYPE_TRANSCRIPTION    InsightsServiceType = 1
+	InsightsServiceType_INSIGHTS_SERVICE_TYPE_TRANSLATION      InsightsServiceType = 2
+	InsightsServiceType_INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS InsightsServiceType = 3
 )
 
 // Enum value maps for InsightsServiceType.
@@ -37,11 +38,13 @@ var (
 		0: "INSIGHTS_SERVICE_TYPE_UNSPECIFIED",
 		1: "INSIGHTS_SERVICE_TYPE_TRANSCRIPTION",
 		2: "INSIGHTS_SERVICE_TYPE_TRANSLATION",
+		3: "INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS",
 	}
 	InsightsServiceType_value = map[string]int32{
-		"INSIGHTS_SERVICE_TYPE_UNSPECIFIED":   0,
-		"INSIGHTS_SERVICE_TYPE_TRANSCRIPTION": 1,
-		"INSIGHTS_SERVICE_TYPE_TRANSLATION":   2,
+		"INSIGHTS_SERVICE_TYPE_UNSPECIFIED":      0,
+		"INSIGHTS_SERVICE_TYPE_TRANSCRIPTION":    1,
+		"INSIGHTS_SERVICE_TYPE_TRANSLATION":      2,
+		"INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS": 3,
 	}
 )
 
@@ -182,15 +185,16 @@ func (x *InsightsSupportedLangInfo) GetLocale() string {
 }
 
 type InsightsTranscriptionConfigReq struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	IsEnabled            bool                   `protobuf:"varint,1,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
-	AllowedSpokenLangs   []string               `protobuf:"bytes,2,rep,name=allowed_spoken_langs,json=allowedSpokenLangs,proto3" json:"allowed_spoken_langs,omitempty"`
-	AllowedSpeechUsers   []string               `protobuf:"bytes,3,rep,name=allowed_speech_users,json=allowedSpeechUsers,proto3" json:"allowed_speech_users,omitempty"`
-	IsEnabledTranslation bool                   `protobuf:"varint,4,opt,name=is_enabled_translation,json=isEnabledTranslation,proto3" json:"is_enabled_translation,omitempty"`
-	AllowedTransLangs    []string               `protobuf:"bytes,5,rep,name=allowed_trans_langs,json=allowedTransLangs,proto3" json:"allowed_trans_langs,omitempty"`
-	DefaultSubtitleLang  *string                `protobuf:"bytes,6,opt,name=default_subtitle_lang,json=defaultSubtitleLang,proto3,oneof" json:"default_subtitle_lang,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"open.v1"`
+	IsEnabled                bool                   `protobuf:"varint,1,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
+	AllowedSpokenLangs       []string               `protobuf:"bytes,2,rep,name=allowed_spoken_langs,json=allowedSpokenLangs,proto3" json:"allowed_spoken_langs,omitempty"`
+	AllowedSpeechUsers       []string               `protobuf:"bytes,3,rep,name=allowed_speech_users,json=allowedSpeechUsers,proto3" json:"allowed_speech_users,omitempty"`
+	IsEnabledTranslation     bool                   `protobuf:"varint,4,opt,name=is_enabled_translation,json=isEnabledTranslation,proto3" json:"is_enabled_translation,omitempty"`
+	AllowedTransLangs        []string               `protobuf:"bytes,5,rep,name=allowed_trans_langs,json=allowedTransLangs,proto3" json:"allowed_trans_langs,omitempty"`
+	DefaultSubtitleLang      *string                `protobuf:"bytes,6,opt,name=default_subtitle_lang,json=defaultSubtitleLang,proto3,oneof" json:"default_subtitle_lang,omitempty"`
+	IsEnabledSpeechSynthesis bool                   `protobuf:"varint,7,opt,name=is_enabled_speech_synthesis,json=isEnabledSpeechSynthesis,proto3" json:"is_enabled_speech_synthesis,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *InsightsTranscriptionConfigReq) Reset() {
@@ -263,6 +267,13 @@ func (x *InsightsTranscriptionConfigReq) GetDefaultSubtitleLang() string {
 		return *x.DefaultSubtitleLang
 	}
 	return ""
+}
+
+func (x *InsightsTranscriptionConfigReq) GetIsEnabledSpeechSynthesis() bool {
+	if x != nil {
+		return x.IsEnabledSpeechSynthesis
+	}
+	return false
 }
 
 type InsightsTranscriptionUserSessionReq struct {
@@ -821,7 +832,7 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"\x19InsightsSupportedLangInfo\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
-	"\x06locale\x18\x03 \x01(\tR\x06locale\"\xdc\x02\n" +
+	"\x06locale\x18\x03 \x01(\tR\x06locale\"\x9b\x03\n" +
 	"\x1eInsightsTranscriptionConfigReq\x12\x1d\n" +
 	"\n" +
 	"is_enabled\x18\x01 \x01(\bR\tisEnabled\x120\n" +
@@ -829,7 +840,8 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"\x14allowed_speech_users\x18\x03 \x03(\tR\x12allowedSpeechUsers\x124\n" +
 	"\x16is_enabled_translation\x18\x04 \x01(\bR\x14isEnabledTranslation\x12.\n" +
 	"\x13allowed_trans_langs\x18\x05 \x03(\tR\x11allowedTransLangs\x127\n" +
-	"\x15default_subtitle_lang\x18\x06 \x01(\tH\x00R\x13defaultSubtitleLang\x88\x01\x01B\x18\n" +
+	"\x15default_subtitle_lang\x18\x06 \x01(\tH\x00R\x13defaultSubtitleLang\x88\x01\x01\x12=\n" +
+	"\x1bis_enabled_speech_synthesis\x18\a \x01(\bR\x18isEnabledSpeechSynthesisB\x18\n" +
 	"\x16_default_subtitle_lang\"\x99\x01\n" +
 	"#InsightsTranscriptionUserSessionReq\x12<\n" +
 	"\x06action\x18\x01 \x01(\x0e2$.plugnmeet.InsightsUserSessionActionR\x06action\x12$\n" +
@@ -885,11 +897,12 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"\tis_active\x18\x04 \x01(\bR\bisActive\x12$\n" +
 	"\vspoken_lang\x18\x05 \x01(\tH\x00R\n" +
 	"spokenLang\x88\x01\x01B\x0e\n" +
-	"\f_spoken_lang*\x8c\x01\n" +
+	"\f_spoken_lang*\xb8\x01\n" +
 	"\x13InsightsServiceType\x12%\n" +
 	"!INSIGHTS_SERVICE_TYPE_UNSPECIFIED\x10\x00\x12'\n" +
 	"#INSIGHTS_SERVICE_TYPE_TRANSCRIPTION\x10\x01\x12%\n" +
-	"!INSIGHTS_SERVICE_TYPE_TRANSLATION\x10\x02*}\n" +
+	"!INSIGHTS_SERVICE_TYPE_TRANSLATION\x10\x02\x12*\n" +
+	"&INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS\x10\x03*}\n" +
 	"\x19InsightsUserSessionAction\x12#\n" +
 	"\x1fUSER_SESSION_ACTION_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19USER_SESSION_ACTION_START\x10\x01\x12\x1c\n" +

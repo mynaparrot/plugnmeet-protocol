@@ -2443,11 +2443,15 @@ func (m *InsightsTranscriptionFeatures) validate(all bool) error {
 
 	// no validation rules for IsAllowTranslation
 
+	// no validation rules for IsAllowSpeechSynthesis
+
 	// no validation rules for IsEnabled
 
 	// no validation rules for IsEnabledTranslation
 
 	// no validation rules for MaxSelectedTransLangs
+
+	// no validation rules for IsEnabledSpeechSynthesis
 
 	if m.DefaultSubtitleLang != nil {
 		// no validation rules for DefaultSubtitleLang

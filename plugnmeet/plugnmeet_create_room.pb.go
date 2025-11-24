@@ -1437,19 +1437,21 @@ func (x *InsightsFeatures) GetChatTranslationFeatures() *InsightsChatTranslation
 }
 
 type InsightsTranscriptionFeatures struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	IsAllow            bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
-	IsAllowTranslation bool                   `protobuf:"varint,2,opt,name=is_allow_translation,json=isAllowTranslation,proto3" json:"is_allow_translation,omitempty"`
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	IsAllow                bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
+	IsAllowTranslation     bool                   `protobuf:"varint,2,opt,name=is_allow_translation,json=isAllowTranslation,proto3" json:"is_allow_translation,omitempty"`
+	IsAllowSpeechSynthesis bool                   `protobuf:"varint,3,opt,name=is_allow_speech_synthesis,json=isAllowSpeechSynthesis,proto3" json:"is_allow_speech_synthesis,omitempty"`
 	// all internal usage fields
-	IsEnabled             bool     `protobuf:"varint,3,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
-	AllowedSpokenLangs    []string `protobuf:"bytes,4,rep,name=allowed_spoken_langs,json=allowedSpokenLangs,proto3" json:"allowed_spoken_langs,omitempty"`
-	AllowedSpeechUsers    []string `protobuf:"bytes,5,rep,name=allowed_speech_users,json=allowedSpeechUsers,proto3" json:"allowed_speech_users,omitempty"`
-	IsEnabledTranslation  bool     `protobuf:"varint,6,opt,name=is_enabled_translation,json=isEnabledTranslation,proto3" json:"is_enabled_translation,omitempty"`
-	MaxSelectedTransLangs int32    `protobuf:"varint,7,opt,name=max_selected_trans_langs,json=maxSelectedTransLangs,proto3" json:"max_selected_trans_langs,omitempty"`
-	AllowedTransLangs     []string `protobuf:"bytes,8,rep,name=allowed_trans_langs,json=allowedTransLangs,proto3" json:"allowed_trans_langs,omitempty"`
-	DefaultSubtitleLang   *string  `protobuf:"bytes,9,opt,name=default_subtitle_lang,json=defaultSubtitleLang,proto3,oneof" json:"default_subtitle_lang,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	IsEnabled                bool     `protobuf:"varint,4,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
+	AllowedSpokenLangs       []string `protobuf:"bytes,5,rep,name=allowed_spoken_langs,json=allowedSpokenLangs,proto3" json:"allowed_spoken_langs,omitempty"`
+	AllowedSpeechUsers       []string `protobuf:"bytes,6,rep,name=allowed_speech_users,json=allowedSpeechUsers,proto3" json:"allowed_speech_users,omitempty"`
+	IsEnabledTranslation     bool     `protobuf:"varint,7,opt,name=is_enabled_translation,json=isEnabledTranslation,proto3" json:"is_enabled_translation,omitempty"`
+	MaxSelectedTransLangs    int32    `protobuf:"varint,8,opt,name=max_selected_trans_langs,json=maxSelectedTransLangs,proto3" json:"max_selected_trans_langs,omitempty"`
+	AllowedTransLangs        []string `protobuf:"bytes,9,rep,name=allowed_trans_langs,json=allowedTransLangs,proto3" json:"allowed_trans_langs,omitempty"`
+	DefaultSubtitleLang      *string  `protobuf:"bytes,10,opt,name=default_subtitle_lang,json=defaultSubtitleLang,proto3,oneof" json:"default_subtitle_lang,omitempty"`
+	IsEnabledSpeechSynthesis bool     `protobuf:"varint,11,opt,name=is_enabled_speech_synthesis,json=isEnabledSpeechSynthesis,proto3" json:"is_enabled_speech_synthesis,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *InsightsTranscriptionFeatures) Reset() {
@@ -1492,6 +1494,13 @@ func (x *InsightsTranscriptionFeatures) GetIsAllow() bool {
 func (x *InsightsTranscriptionFeatures) GetIsAllowTranslation() bool {
 	if x != nil {
 		return x.IsAllowTranslation
+	}
+	return false
+}
+
+func (x *InsightsTranscriptionFeatures) GetIsAllowSpeechSynthesis() bool {
+	if x != nil {
+		return x.IsAllowSpeechSynthesis
 	}
 	return false
 }
@@ -1543,6 +1552,13 @@ func (x *InsightsTranscriptionFeatures) GetDefaultSubtitleLang() string {
 		return *x.DefaultSubtitleLang
 	}
 	return ""
+}
+
+func (x *InsightsTranscriptionFeatures) GetIsEnabledSpeechSynthesis() bool {
+	if x != nil {
+		return x.IsEnabledSpeechSynthesis
+	}
+	return false
 }
 
 type InsightsChatTranslationFeatures struct {
@@ -1917,19 +1933,22 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x16transcription_features\x18\x02 \x01(\v2(.plugnmeet.InsightsTranscriptionFeaturesH\x00R\x15transcriptionFeatures\x88\x01\x01\x12k\n" +
 	"\x19chat_translation_features\x18\x03 \x01(\v2*.plugnmeet.InsightsChatTranslationFeaturesH\x01R\x17chatTranslationFeatures\x88\x01\x01B\x19\n" +
 	"\x17_transcription_featuresB\x1c\n" +
-	"\x1a_chat_translation_features\"\x89\x05\n" +
+	"\x1a_chat_translation_features\"\x8c\x06\n" +
 	"\x1dInsightsTranscriptionFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x120\n" +
-	"\x14is_allow_translation\x18\x02 \x01(\bR\x12isAllowTranslation\x12&\n" +
+	"\x14is_allow_translation\x18\x02 \x01(\bR\x12isAllowTranslation\x129\n" +
+	"\x19is_allow_speech_synthesis\x18\x03 \x01(\bR\x16isAllowSpeechSynthesis\x12&\n" +
 	"\n" +
-	"is_enabled\x18\x03 \x01(\bB\a\xbaH\x04j\x02\b\x00R\tisEnabled\x12:\n" +
-	"\x14allowed_spoken_langs\x18\x04 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x12allowedSpokenLangs\x12:\n" +
-	"\x14allowed_speech_users\x18\x05 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x12allowedSpeechUsers\x12=\n" +
-	"\x16is_enabled_translation\x18\x06 \x01(\bB\a\xbaH\x04j\x02\b\x00R\x14isEnabledTranslation\x12@\n" +
-	"\x18max_selected_trans_langs\x18\a \x01(\x05B\a\xbaH\x04\x1a\x02\b\x00R\x15maxSelectedTransLangs\x128\n" +
-	"\x13allowed_trans_langs\x18\b \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x11allowedTransLangs\x12\xa5\x01\n" +
-	"\x15default_subtitle_lang\x18\t \x01(\tBl\xbaHi\xba\x01f\n" +
-	"\x1cdefault_subtitle_lang_format\x122default_subtitle_lang should not contain any value\x1a\x12this.matches('^$')H\x00R\x13defaultSubtitleLang\x88\x01\x01B\x18\n" +
+	"is_enabled\x18\x04 \x01(\bB\a\xbaH\x04j\x02\b\x00R\tisEnabled\x12:\n" +
+	"\x14allowed_spoken_langs\x18\x05 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x12allowedSpokenLangs\x12:\n" +
+	"\x14allowed_speech_users\x18\x06 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x12allowedSpeechUsers\x12=\n" +
+	"\x16is_enabled_translation\x18\a \x01(\bB\a\xbaH\x04j\x02\b\x00R\x14isEnabledTranslation\x12@\n" +
+	"\x18max_selected_trans_langs\x18\b \x01(\x05B\a\xbaH\x04\x1a\x02\b\x00R\x15maxSelectedTransLangs\x128\n" +
+	"\x13allowed_trans_langs\x18\t \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x11allowedTransLangs\x12\xa5\x01\n" +
+	"\x15default_subtitle_lang\x18\n" +
+	" \x01(\tBl\xbaHi\xba\x01f\n" +
+	"\x1cdefault_subtitle_lang_format\x122default_subtitle_lang should not contain any value\x1a\x12this.matches('^$')H\x00R\x13defaultSubtitleLang\x88\x01\x01\x12F\n" +
+	"\x1bis_enabled_speech_synthesis\x18\v \x01(\bB\a\xbaH\x04j\x02\b\x00R\x18isEnabledSpeechSynthesisB\x18\n" +
 	"\x16_default_subtitle_lang\"\xf6\x02\n" +
 	"\x1fInsightsChatTranslationFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12&\n" +
