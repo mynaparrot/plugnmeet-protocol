@@ -1308,3 +1308,228 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = InsightsGetUserStatusResValidationError{}
+
+// Validate checks the field values on InsightsAITextChatContent with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InsightsAITextChatContent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InsightsAITextChatContent with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// InsightsAITextChatContentMultiError, or nil if none found.
+func (m *InsightsAITextChatContent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InsightsAITextChatContent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Role
+
+	// no validation rules for Text
+
+	if m.StreamId != nil {
+		// no validation rules for StreamId
+	}
+
+	if len(errors) > 0 {
+		return InsightsAITextChatContentMultiError(errors)
+	}
+
+	return nil
+}
+
+// InsightsAITextChatContentMultiError is an error wrapping multiple validation
+// errors returned by InsightsAITextChatContent.ValidateAll() if the
+// designated constraints aren't met.
+type InsightsAITextChatContentMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InsightsAITextChatContentMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InsightsAITextChatContentMultiError) AllErrors() []error { return m }
+
+// InsightsAITextChatContentValidationError is the validation error returned by
+// InsightsAITextChatContent.Validate if the designated constraints aren't met.
+type InsightsAITextChatContentValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InsightsAITextChatContentValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InsightsAITextChatContentValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InsightsAITextChatContentValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InsightsAITextChatContentValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InsightsAITextChatContentValidationError) ErrorName() string {
+	return "InsightsAITextChatContentValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InsightsAITextChatContentValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInsightsAITextChatContent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InsightsAITextChatContentValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InsightsAITextChatContentValidationError{}
+
+// Validate checks the field values on InsightsAITextChatStreamResult with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InsightsAITextChatStreamResult) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InsightsAITextChatStreamResult with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// InsightsAITextChatStreamResultMultiError, or nil if none found.
+func (m *InsightsAITextChatStreamResult) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InsightsAITextChatStreamResult) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Text
+
+	// no validation rules for IsLastChunk
+
+	// no validation rules for PromptTokens
+
+	// no validation rules for CompletionTokens
+
+	// no validation rules for TotalTokens
+
+	if len(errors) > 0 {
+		return InsightsAITextChatStreamResultMultiError(errors)
+	}
+
+	return nil
+}
+
+// InsightsAITextChatStreamResultMultiError is an error wrapping multiple
+// validation errors returned by InsightsAITextChatStreamResult.ValidateAll()
+// if the designated constraints aren't met.
+type InsightsAITextChatStreamResultMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InsightsAITextChatStreamResultMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InsightsAITextChatStreamResultMultiError) AllErrors() []error { return m }
+
+// InsightsAITextChatStreamResultValidationError is the validation error
+// returned by InsightsAITextChatStreamResult.Validate if the designated
+// constraints aren't met.
+type InsightsAITextChatStreamResultValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InsightsAITextChatStreamResultValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InsightsAITextChatStreamResultValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InsightsAITextChatStreamResultValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InsightsAITextChatStreamResultValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InsightsAITextChatStreamResultValidationError) ErrorName() string {
+	return "InsightsAITextChatStreamResultValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InsightsAITextChatStreamResultValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInsightsAITextChatStreamResult.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InsightsAITextChatStreamResultValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InsightsAITextChatStreamResultValidationError{}

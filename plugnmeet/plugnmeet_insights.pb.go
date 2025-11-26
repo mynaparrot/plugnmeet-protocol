@@ -30,6 +30,7 @@ const (
 	InsightsServiceType_INSIGHTS_SERVICE_TYPE_TRANSCRIPTION    InsightsServiceType = 1
 	InsightsServiceType_INSIGHTS_SERVICE_TYPE_TRANSLATION      InsightsServiceType = 2
 	InsightsServiceType_INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS InsightsServiceType = 3
+	InsightsServiceType_INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT     InsightsServiceType = 4
 )
 
 // Enum value maps for InsightsServiceType.
@@ -39,12 +40,14 @@ var (
 		1: "INSIGHTS_SERVICE_TYPE_TRANSCRIPTION",
 		2: "INSIGHTS_SERVICE_TYPE_TRANSLATION",
 		3: "INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS",
+		4: "INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT",
 	}
 	InsightsServiceType_value = map[string]int32{
 		"INSIGHTS_SERVICE_TYPE_UNSPECIFIED":      0,
 		"INSIGHTS_SERVICE_TYPE_TRANSCRIPTION":    1,
 		"INSIGHTS_SERVICE_TYPE_TRANSLATION":      2,
 		"INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS": 3,
+		"INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT":     4,
 	}
 )
 
@@ -122,6 +125,59 @@ func (x InsightsUserSessionAction) Number() protoreflect.EnumNumber {
 // Deprecated: Use InsightsUserSessionAction.Descriptor instead.
 func (InsightsUserSessionAction) EnumDescriptor() ([]byte, []int) {
 	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{1}
+}
+
+// New messages for AI Text Chat
+type InsightsAITextChatRole int32
+
+const (
+	InsightsAITextChatRole_INSIGHTS_AI_TEXT_CHAT_ROLE_UNSPECIFIED InsightsAITextChatRole = 0
+	InsightsAITextChatRole_INSIGHTS_AI_TEXT_CHAT_ROLE_SYSTEM      InsightsAITextChatRole = 1
+	InsightsAITextChatRole_INSIGHTS_AI_TEXT_CHAT_ROLE_USER        InsightsAITextChatRole = 2
+	InsightsAITextChatRole_INSIGHTS_AI_TEXT_CHAT_ROLE_MODEL       InsightsAITextChatRole = 3
+)
+
+// Enum value maps for InsightsAITextChatRole.
+var (
+	InsightsAITextChatRole_name = map[int32]string{
+		0: "INSIGHTS_AI_TEXT_CHAT_ROLE_UNSPECIFIED",
+		1: "INSIGHTS_AI_TEXT_CHAT_ROLE_SYSTEM",
+		2: "INSIGHTS_AI_TEXT_CHAT_ROLE_USER",
+		3: "INSIGHTS_AI_TEXT_CHAT_ROLE_MODEL",
+	}
+	InsightsAITextChatRole_value = map[string]int32{
+		"INSIGHTS_AI_TEXT_CHAT_ROLE_UNSPECIFIED": 0,
+		"INSIGHTS_AI_TEXT_CHAT_ROLE_SYSTEM":      1,
+		"INSIGHTS_AI_TEXT_CHAT_ROLE_USER":        2,
+		"INSIGHTS_AI_TEXT_CHAT_ROLE_MODEL":       3,
+	}
+)
+
+func (x InsightsAITextChatRole) Enum() *InsightsAITextChatRole {
+	p := new(InsightsAITextChatRole)
+	*p = x
+	return p
+}
+
+func (x InsightsAITextChatRole) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (InsightsAITextChatRole) Descriptor() protoreflect.EnumDescriptor {
+	return file_plugnmeet_insights_proto_enumTypes[2].Descriptor()
+}
+
+func (InsightsAITextChatRole) Type() protoreflect.EnumType {
+	return &file_plugnmeet_insights_proto_enumTypes[2]
+}
+
+func (x InsightsAITextChatRole) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use InsightsAITextChatRole.Descriptor instead.
+func (InsightsAITextChatRole) EnumDescriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{2}
 }
 
 type InsightsSupportedLangInfo struct {
@@ -824,6 +880,150 @@ func (x *InsightsGetUserStatusRes) GetSpokenLang() string {
 	return ""
 }
 
+type InsightsAITextChatContent struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Role          InsightsAITextChatRole `protobuf:"varint,1,opt,name=role,proto3,enum=plugnmeet.InsightsAITextChatRole" json:"role,omitempty"`
+	Text          string                 `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
+	StreamId      *string                `protobuf:"bytes,3,opt,name=stream_id,json=streamId,proto3,oneof" json:"stream_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InsightsAITextChatContent) Reset() {
+	*x = InsightsAITextChatContent{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InsightsAITextChatContent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InsightsAITextChatContent) ProtoMessage() {}
+
+func (x *InsightsAITextChatContent) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InsightsAITextChatContent.ProtoReflect.Descriptor instead.
+func (*InsightsAITextChatContent) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *InsightsAITextChatContent) GetRole() InsightsAITextChatRole {
+	if x != nil {
+		return x.Role
+	}
+	return InsightsAITextChatRole_INSIGHTS_AI_TEXT_CHAT_ROLE_UNSPECIFIED
+}
+
+func (x *InsightsAITextChatContent) GetText() string {
+	if x != nil {
+		return x.Text
+	}
+	return ""
+}
+
+func (x *InsightsAITextChatContent) GetStreamId() string {
+	if x != nil && x.StreamId != nil {
+		return *x.StreamId
+	}
+	return ""
+}
+
+type InsightsAITextChatStreamResult struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Text             string                 `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
+	IsLastChunk      bool                   `protobuf:"varint,3,opt,name=is_last_chunk,json=isLastChunk,proto3" json:"is_last_chunk,omitempty"`
+	PromptTokens     uint32                 `protobuf:"varint,4,opt,name=prompt_tokens,json=promptTokens,proto3" json:"prompt_tokens,omitempty"`
+	CompletionTokens uint32                 `protobuf:"varint,5,opt,name=completion_tokens,json=completionTokens,proto3" json:"completion_tokens,omitempty"`
+	TotalTokens      uint32                 `protobuf:"varint,6,opt,name=total_tokens,json=totalTokens,proto3" json:"total_tokens,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *InsightsAITextChatStreamResult) Reset() {
+	*x = InsightsAITextChatStreamResult{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InsightsAITextChatStreamResult) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InsightsAITextChatStreamResult) ProtoMessage() {}
+
+func (x *InsightsAITextChatStreamResult) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InsightsAITextChatStreamResult.ProtoReflect.Descriptor instead.
+func (*InsightsAITextChatStreamResult) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *InsightsAITextChatStreamResult) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *InsightsAITextChatStreamResult) GetText() string {
+	if x != nil {
+		return x.Text
+	}
+	return ""
+}
+
+func (x *InsightsAITextChatStreamResult) GetIsLastChunk() bool {
+	if x != nil {
+		return x.IsLastChunk
+	}
+	return false
+}
+
+func (x *InsightsAITextChatStreamResult) GetPromptTokens() uint32 {
+	if x != nil {
+		return x.PromptTokens
+	}
+	return 0
+}
+
+func (x *InsightsAITextChatStreamResult) GetCompletionTokens() uint32 {
+	if x != nil {
+		return x.CompletionTokens
+	}
+	return 0
+}
+
+func (x *InsightsAITextChatStreamResult) GetTotalTokens() uint32 {
+	if x != nil {
+		return x.TotalTokens
+	}
+	return 0
+}
+
 var File_plugnmeet_insights_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_insights_proto_rawDesc = "" +
@@ -897,16 +1097,35 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"\tis_active\x18\x04 \x01(\bR\bisActive\x12$\n" +
 	"\vspoken_lang\x18\x05 \x01(\tH\x00R\n" +
 	"spokenLang\x88\x01\x01B\x0e\n" +
-	"\f_spoken_lang*\xb8\x01\n" +
+	"\f_spoken_lang\"\x96\x01\n" +
+	"\x19InsightsAITextChatContent\x125\n" +
+	"\x04role\x18\x01 \x01(\x0e2!.plugnmeet.InsightsAITextChatRoleR\x04role\x12\x12\n" +
+	"\x04text\x18\x02 \x01(\tR\x04text\x12 \n" +
+	"\tstream_id\x18\x03 \x01(\tH\x00R\bstreamId\x88\x01\x01B\f\n" +
+	"\n" +
+	"_stream_id\"\xdd\x01\n" +
+	"\x1eInsightsAITextChatStreamResult\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04text\x18\x02 \x01(\tR\x04text\x12\"\n" +
+	"\ris_last_chunk\x18\x03 \x01(\bR\visLastChunk\x12#\n" +
+	"\rprompt_tokens\x18\x04 \x01(\rR\fpromptTokens\x12+\n" +
+	"\x11completion_tokens\x18\x05 \x01(\rR\x10completionTokens\x12!\n" +
+	"\ftotal_tokens\x18\x06 \x01(\rR\vtotalTokens*\xe0\x01\n" +
 	"\x13InsightsServiceType\x12%\n" +
 	"!INSIGHTS_SERVICE_TYPE_UNSPECIFIED\x10\x00\x12'\n" +
 	"#INSIGHTS_SERVICE_TYPE_TRANSCRIPTION\x10\x01\x12%\n" +
 	"!INSIGHTS_SERVICE_TYPE_TRANSLATION\x10\x02\x12*\n" +
-	"&INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS\x10\x03*}\n" +
+	"&INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS\x10\x03\x12&\n" +
+	"\"INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT\x10\x04*}\n" +
 	"\x19InsightsUserSessionAction\x12#\n" +
 	"\x1fUSER_SESSION_ACTION_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19USER_SESSION_ACTION_START\x10\x01\x12\x1c\n" +
-	"\x18USER_SESSION_ACTION_STOP\x10\x02B\x9f\x01\n" +
+	"\x18USER_SESSION_ACTION_STOP\x10\x02*\xb6\x01\n" +
+	"\x16InsightsAITextChatRole\x12*\n" +
+	"&INSIGHTS_AI_TEXT_CHAT_ROLE_UNSPECIFIED\x10\x00\x12%\n" +
+	"!INSIGHTS_AI_TEXT_CHAT_ROLE_SYSTEM\x10\x01\x12#\n" +
+	"\x1fINSIGHTS_AI_TEXT_CHAT_ROLE_USER\x10\x02\x12$\n" +
+	" INSIGHTS_AI_TEXT_CHAT_ROLE_MODEL\x10\x03B\x9f\x01\n" +
 	"\rcom.plugnmeetB\x16PlugnmeetInsightsProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -921,38 +1140,42 @@ func file_plugnmeet_insights_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_insights_proto_rawDescData
 }
 
-var file_plugnmeet_insights_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_plugnmeet_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_plugnmeet_insights_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_plugnmeet_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_plugnmeet_insights_proto_goTypes = []any{
 	(InsightsServiceType)(0),                    // 0: plugnmeet.InsightsServiceType
 	(InsightsUserSessionAction)(0),              // 1: plugnmeet.InsightsUserSessionAction
-	(*InsightsSupportedLangInfo)(nil),           // 2: plugnmeet.InsightsSupportedLangInfo
-	(*InsightsTranscriptionConfigReq)(nil),      // 3: plugnmeet.InsightsTranscriptionConfigReq
-	(*InsightsTranscriptionUserSessionReq)(nil), // 4: plugnmeet.InsightsTranscriptionUserSessionReq
-	(*InsightsTranscriptionResult)(nil),         // 5: plugnmeet.InsightsTranscriptionResult
-	(*InsightsChatTranslationConfigReq)(nil),    // 6: plugnmeet.InsightsChatTranslationConfigReq
-	(*InsightsTranslateTextReq)(nil),            // 7: plugnmeet.InsightsTranslateTextReq
-	(*InsightsTextTranslationResult)(nil),       // 8: plugnmeet.InsightsTextTranslationResult
-	(*InsightsTranslateTextRes)(nil),            // 9: plugnmeet.InsightsTranslateTextRes
-	(*InsightsGetSupportedLanguagesReq)(nil),    // 10: plugnmeet.InsightsGetSupportedLanguagesReq
-	(*InsightsGetSupportedLanguagesRes)(nil),    // 11: plugnmeet.InsightsGetSupportedLanguagesRes
-	(*InsightsGetUserStatusRes)(nil),            // 12: plugnmeet.InsightsGetUserStatusRes
-	nil,                                         // 13: plugnmeet.InsightsTranscriptionResult.TranslationsEntry
-	nil,                                         // 14: plugnmeet.InsightsTextTranslationResult.TranslationsEntry
+	(InsightsAITextChatRole)(0),                 // 2: plugnmeet.InsightsAITextChatRole
+	(*InsightsSupportedLangInfo)(nil),           // 3: plugnmeet.InsightsSupportedLangInfo
+	(*InsightsTranscriptionConfigReq)(nil),      // 4: plugnmeet.InsightsTranscriptionConfigReq
+	(*InsightsTranscriptionUserSessionReq)(nil), // 5: plugnmeet.InsightsTranscriptionUserSessionReq
+	(*InsightsTranscriptionResult)(nil),         // 6: plugnmeet.InsightsTranscriptionResult
+	(*InsightsChatTranslationConfigReq)(nil),    // 7: plugnmeet.InsightsChatTranslationConfigReq
+	(*InsightsTranslateTextReq)(nil),            // 8: plugnmeet.InsightsTranslateTextReq
+	(*InsightsTextTranslationResult)(nil),       // 9: plugnmeet.InsightsTextTranslationResult
+	(*InsightsTranslateTextRes)(nil),            // 10: plugnmeet.InsightsTranslateTextRes
+	(*InsightsGetSupportedLanguagesReq)(nil),    // 11: plugnmeet.InsightsGetSupportedLanguagesReq
+	(*InsightsGetSupportedLanguagesRes)(nil),    // 12: plugnmeet.InsightsGetSupportedLanguagesRes
+	(*InsightsGetUserStatusRes)(nil),            // 13: plugnmeet.InsightsGetUserStatusRes
+	(*InsightsAITextChatContent)(nil),           // 14: plugnmeet.InsightsAITextChatContent
+	(*InsightsAITextChatStreamResult)(nil),      // 15: plugnmeet.InsightsAITextChatStreamResult
+	nil,                                         // 16: plugnmeet.InsightsTranscriptionResult.TranslationsEntry
+	nil,                                         // 17: plugnmeet.InsightsTextTranslationResult.TranslationsEntry
 }
 var file_plugnmeet_insights_proto_depIdxs = []int32{
 	1,  // 0: plugnmeet.InsightsTranscriptionUserSessionReq.action:type_name -> plugnmeet.InsightsUserSessionAction
-	13, // 1: plugnmeet.InsightsTranscriptionResult.translations:type_name -> plugnmeet.InsightsTranscriptionResult.TranslationsEntry
-	14, // 2: plugnmeet.InsightsTextTranslationResult.translations:type_name -> plugnmeet.InsightsTextTranslationResult.TranslationsEntry
-	8,  // 3: plugnmeet.InsightsTranslateTextRes.result:type_name -> plugnmeet.InsightsTextTranslationResult
+	16, // 1: plugnmeet.InsightsTranscriptionResult.translations:type_name -> plugnmeet.InsightsTranscriptionResult.TranslationsEntry
+	17, // 2: plugnmeet.InsightsTextTranslationResult.translations:type_name -> plugnmeet.InsightsTextTranslationResult.TranslationsEntry
+	9,  // 3: plugnmeet.InsightsTranslateTextRes.result:type_name -> plugnmeet.InsightsTextTranslationResult
 	0,  // 4: plugnmeet.InsightsGetSupportedLanguagesReq.service_type:type_name -> plugnmeet.InsightsServiceType
-	2,  // 5: plugnmeet.InsightsGetSupportedLanguagesRes.languages:type_name -> plugnmeet.InsightsSupportedLangInfo
+	3,  // 5: plugnmeet.InsightsGetSupportedLanguagesRes.languages:type_name -> plugnmeet.InsightsSupportedLangInfo
 	0,  // 6: plugnmeet.InsightsGetUserStatusRes.service_type:type_name -> plugnmeet.InsightsServiceType
-	7,  // [7:7] is the sub-list for method output_type
-	7,  // [7:7] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	2,  // 7: plugnmeet.InsightsAITextChatContent.role:type_name -> plugnmeet.InsightsAITextChatRole
+	8,  // [8:8] is the sub-list for method output_type
+	8,  // [8:8] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_insights_proto_init() }
@@ -965,13 +1188,14 @@ func file_plugnmeet_insights_proto_init() {
 	file_plugnmeet_insights_proto_msgTypes[4].OneofWrappers = []any{}
 	file_plugnmeet_insights_proto_msgTypes[7].OneofWrappers = []any{}
 	file_plugnmeet_insights_proto_msgTypes[10].OneofWrappers = []any{}
+	file_plugnmeet_insights_proto_msgTypes[11].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_insights_proto_rawDesc), len(file_plugnmeet_insights_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   13,
+			NumEnums:      3,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

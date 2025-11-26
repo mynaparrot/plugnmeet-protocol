@@ -9,6 +9,7 @@ enum InsightsServiceType {
   INSIGHTS_SERVICE_TYPE_TRANSCRIPTION = 1;
   INSIGHTS_SERVICE_TYPE_TRANSLATION = 2;
   INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS = 3;
+  INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT = 4;
 }
 
 enum InsightsUserSessionAction {
@@ -88,4 +89,27 @@ message InsightsGetUserStatusRes {
   InsightsServiceType service_type = 3;
   bool is_active = 4;
   optional string spoken_lang = 5;
+}
+
+// New messages for AI Text Chat
+enum InsightsAITextChatRole {
+  INSIGHTS_AI_TEXT_CHAT_ROLE_UNSPECIFIED = 0;
+  INSIGHTS_AI_TEXT_CHAT_ROLE_SYSTEM = 1;
+  INSIGHTS_AI_TEXT_CHAT_ROLE_USER = 2;
+  INSIGHTS_AI_TEXT_CHAT_ROLE_MODEL = 3;
+}
+
+message InsightsAITextChatContent {
+  InsightsAITextChatRole role = 1;
+  string text = 2;
+  optional string stream_id = 3;
+}
+
+message InsightsAITextChatStreamResult {
+  string id = 1;
+  string text = 2;
+  bool is_last_chunk = 3;
+  uint32 prompt_tokens = 4;
+  uint32 completion_tokens = 5;
+  uint32 total_tokens = 6;
 }
