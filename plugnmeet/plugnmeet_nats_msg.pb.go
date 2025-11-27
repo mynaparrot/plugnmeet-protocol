@@ -43,6 +43,7 @@ const (
 	NatsMsgServerToClientEvents_BREAKOUT_ROOM_ENDED                  NatsMsgServerToClientEvents = 15
 	NatsMsgServerToClientEvents_SYSTEM_CHAT_MSG                      NatsMsgServerToClientEvents = 14 // mostly system message display in chat
 	NatsMsgServerToClientEvents_TRANSCRIPTION_OUTPUT_TEXT            NatsMsgServerToClientEvents = 17
+	NatsMsgServerToClientEvents_RESP_INSIGHTS_AI_TEXT_CHAT           NatsMsgServerToClientEvents = 19
 )
 
 // Enum value maps for NatsMsgServerToClientEvents.
@@ -66,6 +67,7 @@ var (
 		15: "BREAKOUT_ROOM_ENDED",
 		14: "SYSTEM_CHAT_MSG",
 		17: "TRANSCRIPTION_OUTPUT_TEXT",
+		19: "RESP_INSIGHTS_AI_TEXT_CHAT",
 	}
 	NatsMsgServerToClientEvents_value = map[string]int32{
 		"RES_INITIAL_DATA":                     0,
@@ -86,6 +88,7 @@ var (
 		"BREAKOUT_ROOM_ENDED":                  15,
 		"SYSTEM_CHAT_MSG":                      14,
 		"TRANSCRIPTION_OUTPUT_TEXT":            17,
+		"RESP_INSIGHTS_AI_TEXT_CHAT":           19,
 	}
 )
 
@@ -1118,7 +1121,7 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
 	"\v_to_user_idB\x0e\n" +
-	"\f_source_lang*\xcf\x03\n" +
+	"\f_source_lang*\xef\x03\n" +
 	"\x1bNatsMsgServerToClientEvents\x12\x14\n" +
 	"\x10RES_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15RES_JOINED_USERS_LIST\x10\x01\x12\x19\n" +
@@ -1138,7 +1141,8 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x12JOIN_BREAKOUT_ROOM\x10\r\x12\x17\n" +
 	"\x13BREAKOUT_ROOM_ENDED\x10\x0f\x12\x13\n" +
 	"\x0fSYSTEM_CHAT_MSG\x10\x0e\x12\x1d\n" +
-	"\x19TRANSCRIPTION_OUTPUT_TEXT\x10\x11*\xec\x01\n" +
+	"\x19TRANSCRIPTION_OUTPUT_TEXT\x10\x11\x12\x1e\n" +
+	"\x1aRESP_INSIGHTS_AI_TEXT_CHAT\x10\x13*\xec\x01\n" +
 	"\x1bNatsMsgClientToServerEvents\x12\x14\n" +
 	"\x10REQ_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15REQ_MEDIA_SERVER_DATA\x10\b\x12\x19\n" +

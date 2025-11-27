@@ -1453,6 +1453,8 @@ func (m *InsightsAITextChatStreamResult) validate(all bool) error {
 
 	// no validation rules for TotalTokens
 
+	// no validation rules for CreatedAt
+
 	if len(errors) > 0 {
 		return InsightsAITextChatStreamResultMultiError(errors)
 	}

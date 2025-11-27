@@ -948,6 +948,7 @@ type InsightsAITextChatStreamResult struct {
 	PromptTokens     uint32                 `protobuf:"varint,4,opt,name=prompt_tokens,json=promptTokens,proto3" json:"prompt_tokens,omitempty"`
 	CompletionTokens uint32                 `protobuf:"varint,5,opt,name=completion_tokens,json=completionTokens,proto3" json:"completion_tokens,omitempty"`
 	TotalTokens      uint32                 `protobuf:"varint,6,opt,name=total_tokens,json=totalTokens,proto3" json:"total_tokens,omitempty"`
+	CreatedAt        string                 `protobuf:"bytes,7,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1022,6 +1023,13 @@ func (x *InsightsAITextChatStreamResult) GetTotalTokens() uint32 {
 		return x.TotalTokens
 	}
 	return 0
+}
+
+func (x *InsightsAITextChatStreamResult) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
 }
 
 type InsightsAITextChatConfigReq struct {
@@ -1163,14 +1171,15 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"\x04text\x18\x02 \x01(\tR\x04text\x12 \n" +
 	"\tstream_id\x18\x03 \x01(\tH\x00R\bstreamId\x88\x01\x01B\f\n" +
 	"\n" +
-	"_stream_id\"\xdd\x01\n" +
+	"_stream_id\"\xfb\x01\n" +
 	"\x1eInsightsAITextChatStreamResult\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04text\x18\x02 \x01(\tR\x04text\x12\"\n" +
 	"\ris_last_chunk\x18\x03 \x01(\bR\visLastChunk\x12#\n" +
 	"\rprompt_tokens\x18\x04 \x01(\rR\fpromptTokens\x12+\n" +
 	"\x11completion_tokens\x18\x05 \x01(\rR\x10completionTokens\x12!\n" +
-	"\ftotal_tokens\x18\x06 \x01(\rR\vtotalTokens\"\x96\x01\n" +
+	"\ftotal_tokens\x18\x06 \x01(\rR\vtotalTokens\x12\x1c\n" +
+	"\tcreatedAt\x18\a \x01(\tR\tcreatedAt\"\x96\x01\n" +
 	"\x1bInsightsAITextChatConfigReq\x12\x1d\n" +
 	"\n" +
 	"is_enabled\x18\x01 \x01(\bR\tisEnabled\x12.\n" +

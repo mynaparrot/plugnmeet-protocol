@@ -37,8 +37,9 @@ enum NatsMsgServerToClientEvents {
   BREAKOUT_ROOM_ENDED = 15;
   SYSTEM_CHAT_MSG = 14; // mostly system message display in chat
   TRANSCRIPTION_OUTPUT_TEXT = 17;
+  RESP_INSIGHTS_AI_TEXT_CHAT = 19;
 
-  //next ID: 18
+  //next ID: 20
 }
 
 enum NatsMsgClientToServerEvents {

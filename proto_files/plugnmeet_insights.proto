@@ -112,6 +112,7 @@ message InsightsAITextChatStreamResult {
   uint32 prompt_tokens = 4;
   uint32 completion_tokens = 5;
   uint32 total_tokens = 6;
+  string createdAt = 7;
 }
 
 message InsightsAITextChatConfigReq {
