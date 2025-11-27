@@ -108,6 +108,9 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 				IsAllow:               false,
 				MaxSelectedTransLangs: 5,
 			},
+			AiTextChatFeatures: &plugnmeet.InsightsAITextChatFeatures{
+				IsAllow: false,
+			},
 		}
 	}
 

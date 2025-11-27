@@ -127,7 +127,7 @@ func (InsightsUserSessionAction) EnumDescriptor() ([]byte, []int) {
 	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{1}
 }
 
-// New messages for AI Text Chat
+// start AI Text Chat
 type InsightsAITextChatRole int32
 
 const (
@@ -1024,6 +1024,66 @@ func (x *InsightsAITextChatStreamResult) GetTotalTokens() uint32 {
 	return 0
 }
 
+type InsightsAITextChatConfigReq struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	IsEnabled         bool                   `protobuf:"varint,1,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
+	IsAllowedEveryone bool                   `protobuf:"varint,3,opt,name=is_allowed_everyone,json=isAllowedEveryone,proto3" json:"is_allowed_everyone,omitempty"`
+	AllowedUserIds    []string               `protobuf:"bytes,4,rep,name=allowed_user_ids,json=allowedUserIds,proto3" json:"allowed_user_ids,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *InsightsAITextChatConfigReq) Reset() {
+	*x = InsightsAITextChatConfigReq{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InsightsAITextChatConfigReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InsightsAITextChatConfigReq) ProtoMessage() {}
+
+func (x *InsightsAITextChatConfigReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InsightsAITextChatConfigReq.ProtoReflect.Descriptor instead.
+func (*InsightsAITextChatConfigReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *InsightsAITextChatConfigReq) GetIsEnabled() bool {
+	if x != nil {
+		return x.IsEnabled
+	}
+	return false
+}
+
+func (x *InsightsAITextChatConfigReq) GetIsAllowedEveryone() bool {
+	if x != nil {
+		return x.IsAllowedEveryone
+	}
+	return false
+}
+
+func (x *InsightsAITextChatConfigReq) GetAllowedUserIds() []string {
+	if x != nil {
+		return x.AllowedUserIds
+	}
+	return nil
+}
+
 var File_plugnmeet_insights_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_insights_proto_rawDesc = "" +
@@ -1110,7 +1170,12 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"\ris_last_chunk\x18\x03 \x01(\bR\visLastChunk\x12#\n" +
 	"\rprompt_tokens\x18\x04 \x01(\rR\fpromptTokens\x12+\n" +
 	"\x11completion_tokens\x18\x05 \x01(\rR\x10completionTokens\x12!\n" +
-	"\ftotal_tokens\x18\x06 \x01(\rR\vtotalTokens*\xe0\x01\n" +
+	"\ftotal_tokens\x18\x06 \x01(\rR\vtotalTokens\"\x96\x01\n" +
+	"\x1bInsightsAITextChatConfigReq\x12\x1d\n" +
+	"\n" +
+	"is_enabled\x18\x01 \x01(\bR\tisEnabled\x12.\n" +
+	"\x13is_allowed_everyone\x18\x03 \x01(\bR\x11isAllowedEveryone\x12(\n" +
+	"\x10allowed_user_ids\x18\x04 \x03(\tR\x0eallowedUserIds*\xe0\x01\n" +
 	"\x13InsightsServiceType\x12%\n" +
 	"!INSIGHTS_SERVICE_TYPE_UNSPECIFIED\x10\x00\x12'\n" +
 	"#INSIGHTS_SERVICE_TYPE_TRANSCRIPTION\x10\x01\x12%\n" +
@@ -1141,7 +1206,7 @@ func file_plugnmeet_insights_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_insights_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_plugnmeet_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_plugnmeet_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_plugnmeet_insights_proto_goTypes = []any{
 	(InsightsServiceType)(0),                    // 0: plugnmeet.InsightsServiceType
 	(InsightsUserSessionAction)(0),              // 1: plugnmeet.InsightsUserSessionAction
@@ -1159,13 +1224,14 @@ var file_plugnmeet_insights_proto_goTypes = []any{
 	(*InsightsGetUserStatusRes)(nil),            // 13: plugnmeet.InsightsGetUserStatusRes
 	(*InsightsAITextChatContent)(nil),           // 14: plugnmeet.InsightsAITextChatContent
 	(*InsightsAITextChatStreamResult)(nil),      // 15: plugnmeet.InsightsAITextChatStreamResult
-	nil,                                         // 16: plugnmeet.InsightsTranscriptionResult.TranslationsEntry
-	nil,                                         // 17: plugnmeet.InsightsTextTranslationResult.TranslationsEntry
+	(*InsightsAITextChatConfigReq)(nil),         // 16: plugnmeet.InsightsAITextChatConfigReq
+	nil,                                         // 17: plugnmeet.InsightsTranscriptionResult.TranslationsEntry
+	nil,                                         // 18: plugnmeet.InsightsTextTranslationResult.TranslationsEntry
 }
 var file_plugnmeet_insights_proto_depIdxs = []int32{
 	1,  // 0: plugnmeet.InsightsTranscriptionUserSessionReq.action:type_name -> plugnmeet.InsightsUserSessionAction
-	16, // 1: plugnmeet.InsightsTranscriptionResult.translations:type_name -> plugnmeet.InsightsTranscriptionResult.TranslationsEntry
-	17, // 2: plugnmeet.InsightsTextTranslationResult.translations:type_name -> plugnmeet.InsightsTextTranslationResult.TranslationsEntry
+	17, // 1: plugnmeet.InsightsTranscriptionResult.translations:type_name -> plugnmeet.InsightsTranscriptionResult.TranslationsEntry
+	18, // 2: plugnmeet.InsightsTextTranslationResult.translations:type_name -> plugnmeet.InsightsTextTranslationResult.TranslationsEntry
 	9,  // 3: plugnmeet.InsightsTranslateTextRes.result:type_name -> plugnmeet.InsightsTextTranslationResult
 	0,  // 4: plugnmeet.InsightsGetSupportedLanguagesReq.service_type:type_name -> plugnmeet.InsightsServiceType
 	3,  // 5: plugnmeet.InsightsGetSupportedLanguagesRes.languages:type_name -> plugnmeet.InsightsSupportedLangInfo
@@ -1195,7 +1261,7 @@ func file_plugnmeet_insights_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_insights_proto_rawDesc), len(file_plugnmeet_insights_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   15,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

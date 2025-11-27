@@ -91,7 +91,7 @@ message InsightsGetUserStatusRes {
   optional string spoken_lang = 5;
 }
 
-// New messages for AI Text Chat
+// start AI Text Chat
 enum InsightsAITextChatRole {
   INSIGHTS_AI_TEXT_CHAT_ROLE_UNSPECIFIED = 0;
   INSIGHTS_AI_TEXT_CHAT_ROLE_SYSTEM = 1;
@@ -113,3 +113,11 @@ message InsightsAITextChatStreamResult {
   uint32 completion_tokens = 5;
   uint32 total_tokens = 6;
 }
+
+message InsightsAITextChatConfigReq {
+  bool is_enabled = 1;
+  bool is_allowed_everyone = 3;
+  repeated string allowed_user_ids = 4;
+}
+
+// end AI Text Chat
