@@ -228,7 +228,7 @@ message InsightsFeatures {
   bool is_allow = 1; // Allow/disallow all insights features for this room
   optional InsightsTranscriptionFeatures transcription_features = 2;
   optional InsightsChatTranslationFeatures chat_translation_features = 3;
-  optional InsightsAITextChatFeatures ai_text_chat_features = 4;
+  optional InsightsAIFeatures ai_features = 4;
 }
 
 message InsightsTranscriptionFeatures {
@@ -264,6 +264,11 @@ message InsightsChatTranslationFeatures {
     message: "default_lang should not contain any value",
     expression: "this.matches('^$')"
   }];
+}
+
+message InsightsAIFeatures {
+  bool is_allow = 1;
+  optional InsightsAITextChatFeatures ai_text_chat_features = 2;
 }
 
 message InsightsAITextChatFeatures {
