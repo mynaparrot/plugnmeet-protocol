@@ -113,6 +113,9 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 				AiTextChatFeatures: &plugnmeet.InsightsAITextChatFeatures{
 					IsAllow: false,
 				},
+				MeetingSummarizationFeatures: &plugnmeet.InsightsAIMeetingSummarizationFeatures{
+					IsAllow: false,
+				},
 			},
 		}
 	}

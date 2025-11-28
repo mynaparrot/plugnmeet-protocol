@@ -21,16 +21,16 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Enum to define all available insights services in a type-safe way.
-// This is the single source of truth for all clients.
 type InsightsServiceType int32
 
 const (
-	InsightsServiceType_INSIGHTS_SERVICE_TYPE_UNSPECIFIED      InsightsServiceType = 0
-	InsightsServiceType_INSIGHTS_SERVICE_TYPE_TRANSCRIPTION    InsightsServiceType = 1
-	InsightsServiceType_INSIGHTS_SERVICE_TYPE_TRANSLATION      InsightsServiceType = 2
-	InsightsServiceType_INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS InsightsServiceType = 3
-	InsightsServiceType_INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT     InsightsServiceType = 4
+	InsightsServiceType_INSIGHTS_SERVICE_TYPE_UNSPECIFIED         InsightsServiceType = 0
+	InsightsServiceType_INSIGHTS_SERVICE_TYPE_TRANSCRIPTION       InsightsServiceType = 1
+	InsightsServiceType_INSIGHTS_SERVICE_TYPE_TRANSLATION         InsightsServiceType = 2
+	InsightsServiceType_INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS    InsightsServiceType = 3
+	InsightsServiceType_INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT        InsightsServiceType = 4
+	InsightsServiceType_INSIGHTS_SERVICE_TYPE_CHAT_TRANSLATION    InsightsServiceType = 5
+	InsightsServiceType_INSIGHTS_SERVICE_TYPE_MEETING_SUMMARIZING InsightsServiceType = 6
 )
 
 // Enum value maps for InsightsServiceType.
@@ -41,13 +41,17 @@ var (
 		2: "INSIGHTS_SERVICE_TYPE_TRANSLATION",
 		3: "INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS",
 		4: "INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT",
+		5: "INSIGHTS_SERVICE_TYPE_CHAT_TRANSLATION",
+		6: "INSIGHTS_SERVICE_TYPE_MEETING_SUMMARIZING",
 	}
 	InsightsServiceType_value = map[string]int32{
-		"INSIGHTS_SERVICE_TYPE_UNSPECIFIED":      0,
-		"INSIGHTS_SERVICE_TYPE_TRANSCRIPTION":    1,
-		"INSIGHTS_SERVICE_TYPE_TRANSLATION":      2,
-		"INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS": 3,
-		"INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT":     4,
+		"INSIGHTS_SERVICE_TYPE_UNSPECIFIED":         0,
+		"INSIGHTS_SERVICE_TYPE_TRANSCRIPTION":       1,
+		"INSIGHTS_SERVICE_TYPE_TRANSLATION":         2,
+		"INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS":    3,
+		"INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT":        4,
+		"INSIGHTS_SERVICE_TYPE_CHAT_TRANSLATION":    5,
+		"INSIGHTS_SERVICE_TYPE_MEETING_SUMMARIZING": 6,
 	}
 )
 
@@ -1092,6 +1096,58 @@ func (x *InsightsAITextChatConfigReq) GetAllowedUserIds() []string {
 	return nil
 }
 
+type InsightsAIMeetingSummarizationConfigReq struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	IsEnabled           bool                   `protobuf:"varint,1,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
+	SummarizationPrompt string                 `protobuf:"bytes,3,opt,name=summarization_prompt,json=summarizationPrompt,proto3" json:"summarization_prompt,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *InsightsAIMeetingSummarizationConfigReq) Reset() {
+	*x = InsightsAIMeetingSummarizationConfigReq{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InsightsAIMeetingSummarizationConfigReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InsightsAIMeetingSummarizationConfigReq) ProtoMessage() {}
+
+func (x *InsightsAIMeetingSummarizationConfigReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InsightsAIMeetingSummarizationConfigReq.ProtoReflect.Descriptor instead.
+func (*InsightsAIMeetingSummarizationConfigReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *InsightsAIMeetingSummarizationConfigReq) GetIsEnabled() bool {
+	if x != nil {
+		return x.IsEnabled
+	}
+	return false
+}
+
+func (x *InsightsAIMeetingSummarizationConfigReq) GetSummarizationPrompt() string {
+	if x != nil {
+		return x.SummarizationPrompt
+	}
+	return ""
+}
+
 var File_plugnmeet_insights_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_insights_proto_rawDesc = "" +
@@ -1184,13 +1240,19 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"\n" +
 	"is_enabled\x18\x01 \x01(\bR\tisEnabled\x12.\n" +
 	"\x13is_allowed_everyone\x18\x03 \x01(\bR\x11isAllowedEveryone\x12(\n" +
-	"\x10allowed_user_ids\x18\x04 \x03(\tR\x0eallowedUserIds*\xe0\x01\n" +
+	"\x10allowed_user_ids\x18\x04 \x03(\tR\x0eallowedUserIds\"{\n" +
+	"'InsightsAIMeetingSummarizationConfigReq\x12\x1d\n" +
+	"\n" +
+	"is_enabled\x18\x01 \x01(\bR\tisEnabled\x121\n" +
+	"\x14summarization_prompt\x18\x03 \x01(\tR\x13summarizationPrompt*\xbb\x02\n" +
 	"\x13InsightsServiceType\x12%\n" +
 	"!INSIGHTS_SERVICE_TYPE_UNSPECIFIED\x10\x00\x12'\n" +
 	"#INSIGHTS_SERVICE_TYPE_TRANSCRIPTION\x10\x01\x12%\n" +
 	"!INSIGHTS_SERVICE_TYPE_TRANSLATION\x10\x02\x12*\n" +
 	"&INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS\x10\x03\x12&\n" +
-	"\"INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT\x10\x04*}\n" +
+	"\"INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT\x10\x04\x12*\n" +
+	"&INSIGHTS_SERVICE_TYPE_CHAT_TRANSLATION\x10\x05\x12-\n" +
+	")INSIGHTS_SERVICE_TYPE_MEETING_SUMMARIZING\x10\x06*}\n" +
 	"\x19InsightsUserSessionAction\x12#\n" +
 	"\x1fUSER_SESSION_ACTION_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19USER_SESSION_ACTION_START\x10\x01\x12\x1c\n" +
@@ -1215,32 +1277,33 @@ func file_plugnmeet_insights_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_insights_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_plugnmeet_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_plugnmeet_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_plugnmeet_insights_proto_goTypes = []any{
-	(InsightsServiceType)(0),                    // 0: plugnmeet.InsightsServiceType
-	(InsightsUserSessionAction)(0),              // 1: plugnmeet.InsightsUserSessionAction
-	(InsightsAITextChatRole)(0),                 // 2: plugnmeet.InsightsAITextChatRole
-	(*InsightsSupportedLangInfo)(nil),           // 3: plugnmeet.InsightsSupportedLangInfo
-	(*InsightsTranscriptionConfigReq)(nil),      // 4: plugnmeet.InsightsTranscriptionConfigReq
-	(*InsightsTranscriptionUserSessionReq)(nil), // 5: plugnmeet.InsightsTranscriptionUserSessionReq
-	(*InsightsTranscriptionResult)(nil),         // 6: plugnmeet.InsightsTranscriptionResult
-	(*InsightsChatTranslationConfigReq)(nil),    // 7: plugnmeet.InsightsChatTranslationConfigReq
-	(*InsightsTranslateTextReq)(nil),            // 8: plugnmeet.InsightsTranslateTextReq
-	(*InsightsTextTranslationResult)(nil),       // 9: plugnmeet.InsightsTextTranslationResult
-	(*InsightsTranslateTextRes)(nil),            // 10: plugnmeet.InsightsTranslateTextRes
-	(*InsightsGetSupportedLanguagesReq)(nil),    // 11: plugnmeet.InsightsGetSupportedLanguagesReq
-	(*InsightsGetSupportedLanguagesRes)(nil),    // 12: plugnmeet.InsightsGetSupportedLanguagesRes
-	(*InsightsGetUserStatusRes)(nil),            // 13: plugnmeet.InsightsGetUserStatusRes
-	(*InsightsAITextChatContent)(nil),           // 14: plugnmeet.InsightsAITextChatContent
-	(*InsightsAITextChatStreamResult)(nil),      // 15: plugnmeet.InsightsAITextChatStreamResult
-	(*InsightsAITextChatConfigReq)(nil),         // 16: plugnmeet.InsightsAITextChatConfigReq
-	nil,                                         // 17: plugnmeet.InsightsTranscriptionResult.TranslationsEntry
-	nil,                                         // 18: plugnmeet.InsightsTextTranslationResult.TranslationsEntry
+	(InsightsServiceType)(0),                        // 0: plugnmeet.InsightsServiceType
+	(InsightsUserSessionAction)(0),                  // 1: plugnmeet.InsightsUserSessionAction
+	(InsightsAITextChatRole)(0),                     // 2: plugnmeet.InsightsAITextChatRole
+	(*InsightsSupportedLangInfo)(nil),               // 3: plugnmeet.InsightsSupportedLangInfo
+	(*InsightsTranscriptionConfigReq)(nil),          // 4: plugnmeet.InsightsTranscriptionConfigReq
+	(*InsightsTranscriptionUserSessionReq)(nil),     // 5: plugnmeet.InsightsTranscriptionUserSessionReq
+	(*InsightsTranscriptionResult)(nil),             // 6: plugnmeet.InsightsTranscriptionResult
+	(*InsightsChatTranslationConfigReq)(nil),        // 7: plugnmeet.InsightsChatTranslationConfigReq
+	(*InsightsTranslateTextReq)(nil),                // 8: plugnmeet.InsightsTranslateTextReq
+	(*InsightsTextTranslationResult)(nil),           // 9: plugnmeet.InsightsTextTranslationResult
+	(*InsightsTranslateTextRes)(nil),                // 10: plugnmeet.InsightsTranslateTextRes
+	(*InsightsGetSupportedLanguagesReq)(nil),        // 11: plugnmeet.InsightsGetSupportedLanguagesReq
+	(*InsightsGetSupportedLanguagesRes)(nil),        // 12: plugnmeet.InsightsGetSupportedLanguagesRes
+	(*InsightsGetUserStatusRes)(nil),                // 13: plugnmeet.InsightsGetUserStatusRes
+	(*InsightsAITextChatContent)(nil),               // 14: plugnmeet.InsightsAITextChatContent
+	(*InsightsAITextChatStreamResult)(nil),          // 15: plugnmeet.InsightsAITextChatStreamResult
+	(*InsightsAITextChatConfigReq)(nil),             // 16: plugnmeet.InsightsAITextChatConfigReq
+	(*InsightsAIMeetingSummarizationConfigReq)(nil), // 17: plugnmeet.InsightsAIMeetingSummarizationConfigReq
+	nil, // 18: plugnmeet.InsightsTranscriptionResult.TranslationsEntry
+	nil, // 19: plugnmeet.InsightsTextTranslationResult.TranslationsEntry
 }
 var file_plugnmeet_insights_proto_depIdxs = []int32{
 	1,  // 0: plugnmeet.InsightsTranscriptionUserSessionReq.action:type_name -> plugnmeet.InsightsUserSessionAction
-	17, // 1: plugnmeet.InsightsTranscriptionResult.translations:type_name -> plugnmeet.InsightsTranscriptionResult.TranslationsEntry
-	18, // 2: plugnmeet.InsightsTextTranslationResult.translations:type_name -> plugnmeet.InsightsTextTranslationResult.TranslationsEntry
+	18, // 1: plugnmeet.InsightsTranscriptionResult.translations:type_name -> plugnmeet.InsightsTranscriptionResult.TranslationsEntry
+	19, // 2: plugnmeet.InsightsTextTranslationResult.translations:type_name -> plugnmeet.InsightsTextTranslationResult.TranslationsEntry
 	9,  // 3: plugnmeet.InsightsTranslateTextRes.result:type_name -> plugnmeet.InsightsTextTranslationResult
 	0,  // 4: plugnmeet.InsightsGetSupportedLanguagesReq.service_type:type_name -> plugnmeet.InsightsServiceType
 	3,  // 5: plugnmeet.InsightsGetSupportedLanguagesRes.languages:type_name -> plugnmeet.InsightsSupportedLangInfo
@@ -1270,7 +1333,7 @@ func file_plugnmeet_insights_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_insights_proto_rawDesc), len(file_plugnmeet_insights_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   16,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

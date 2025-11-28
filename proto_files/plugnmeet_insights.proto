@@ -2,14 +2,14 @@ syntax = "proto3";
 package plugnmeet;
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
-// Enum to define all available insights services in a type-safe way.
-// This is the single source of truth for all clients.
 enum InsightsServiceType {
   INSIGHTS_SERVICE_TYPE_UNSPECIFIED = 0;
   INSIGHTS_SERVICE_TYPE_TRANSCRIPTION = 1;
   INSIGHTS_SERVICE_TYPE_TRANSLATION = 2;
   INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS = 3;
   INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT = 4;
+  INSIGHTS_SERVICE_TYPE_CHAT_TRANSLATION = 5;
+  INSIGHTS_SERVICE_TYPE_MEETING_SUMMARIZING = 6;
 }
 
 enum InsightsUserSessionAction {
@@ -120,5 +120,9 @@ message InsightsAITextChatConfigReq {
   bool is_allowed_everyone = 3;
   repeated string allowed_user_ids = 4;
 }
-
 // end AI Text Chat
+
+message InsightsAIMeetingSummarizationConfigReq {
+  bool is_enabled = 1;
+  string summarization_prompt = 3;
+}

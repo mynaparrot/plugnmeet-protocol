@@ -269,6 +269,7 @@ message InsightsChatTranslationFeatures {
 message InsightsAIFeatures {
   bool is_allow = 1;
   optional InsightsAITextChatFeatures ai_text_chat_features = 2;
+  optional InsightsAIMeetingSummarizationFeatures meeting_summarization_features = 3;
 }
 
 message InsightsAITextChatFeatures {
@@ -278,6 +279,14 @@ message InsightsAITextChatFeatures {
   bool is_enabled = 2 [(buf.validate.field).bool.const = false];
   bool is_allowed_everyone = 3 [(buf.validate.field).bool.const = false];
   repeated string allowed_user_ids = 4 [(buf.validate.field).repeated.max_items = 0];
+}
+
+message InsightsAIMeetingSummarizationFeatures {
+  bool is_allow = 1;
+  string summarization_prompt = 2;
+
+  // all internal usage fields
+  bool is_enabled = 3 [(buf.validate.field).bool.const = false];
 }
 
 message CopyrightConf {
