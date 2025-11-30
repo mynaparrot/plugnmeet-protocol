@@ -259,6 +259,39 @@ func (m *CommonNotifyEvent) validate(all bool) error {
 
 	}
 
+	if m.RoomArtifact != nil {
+
+		if all {
+			switch v := interface{}(m.GetRoomArtifact()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CommonNotifyEventValidationError{
+						field:  "RoomArtifact",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CommonNotifyEventValidationError{
+						field:  "RoomArtifact",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetRoomArtifact()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CommonNotifyEventValidationError{
+					field:  "RoomArtifact",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if m.Id != nil {
 		// no validation rules for Id
 	}

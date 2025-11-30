@@ -4,6 +4,7 @@ package plugnmeet;
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 
 import "livekit_models.proto";
+import "plugnmeet_room_artifacts.proto";
 
 message CommonNotifyEvent {
   optional string event = 1;
@@ -13,6 +14,7 @@ message CommonNotifyEvent {
   optional SpeechServiceEvent speech_service = 5;
   optional livekit.TrackInfo track = 6;
   optional AnalyticsEvent analytics = 7;
+  optional RoomArtifactWebhookEvent room_artifact = 8;
   optional string id = 9;
   optional int64 created_at = 10;
 }
