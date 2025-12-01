@@ -33,8 +33,10 @@ const (
 	RoomArtifactType_CHAT_TRANSLATION RoomArtifactType = 3
 	// A record of a text-to-speech synthesis event.
 	RoomArtifactType_SYNTHESIZED_SPEECH RoomArtifactType = 4
-	// A record of an AI text-based chat session.
-	RoomArtifactType_AI_TEXT_CHAT_SESSION RoomArtifactType = 5
+	// A record of an AI text-based chat interaction.
+	RoomArtifactType_AI_TEXT_CHAT_INTERACTION RoomArtifactType = 5
+	// A record of an on-demand summarization of an AI text chat.
+	RoomArtifactType_AI_TEXT_CHAT_SUMMARIZATION RoomArtifactType = 6
 )
 
 // Enum value maps for RoomArtifactType.
@@ -45,15 +47,17 @@ var (
 		2: "SPEECH_TRANSCRIPTION",
 		3: "CHAT_TRANSLATION",
 		4: "SYNTHESIZED_SPEECH",
-		5: "AI_TEXT_CHAT_SESSION",
+		5: "AI_TEXT_CHAT_INTERACTION",
+		6: "AI_TEXT_CHAT_SUMMARIZATION",
 	}
 	RoomArtifactType_value = map[string]int32{
-		"UNKNOWN_ARTIFACT":     0,
-		"MEETING_SUMMARY":      1,
-		"SPEECH_TRANSCRIPTION": 2,
-		"CHAT_TRANSLATION":     3,
-		"SYNTHESIZED_SPEECH":   4,
-		"AI_TEXT_CHAT_SESSION": 5,
+		"UNKNOWN_ARTIFACT":           0,
+		"MEETING_SUMMARY":            1,
+		"SPEECH_TRANSCRIPTION":       2,
+		"CHAT_TRANSLATION":           3,
+		"SYNTHESIZED_SPEECH":         4,
+		"AI_TEXT_CHAT_INTERACTION":   5,
+		"AI_TEXT_CHAT_SUMMARIZATION": 6,
 	}
 )
 
@@ -377,6 +381,61 @@ func (x *RoomArtifactDurationUsage) GetBreakdown() map[string]int64 {
 	return nil
 }
 
+// RoomArtifactCharacterCountUsage contains character count usage statistics.
+type RoomArtifactCharacterCountUsage struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	TotalCharacters uint32                 `protobuf:"varint,1,opt,name=total_characters,json=totalCharacters,proto3" json:"total_characters,omitempty"`
+	// Optional: A detailed breakdown of character usage.
+	// The key could be a user_id, language_code, etc.
+	Breakdown     map[string]int64 `protobuf:"bytes,2,rep,name=breakdown,proto3" json:"breakdown,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RoomArtifactCharacterCountUsage) Reset() {
+	*x = RoomArtifactCharacterCountUsage{}
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RoomArtifactCharacterCountUsage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RoomArtifactCharacterCountUsage) ProtoMessage() {}
+
+func (x *RoomArtifactCharacterCountUsage) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RoomArtifactCharacterCountUsage.ProtoReflect.Descriptor instead.
+func (*RoomArtifactCharacterCountUsage) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_room_artifacts_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *RoomArtifactCharacterCountUsage) GetTotalCharacters() uint32 {
+	if x != nil {
+		return x.TotalCharacters
+	}
+	return 0
+}
+
+func (x *RoomArtifactCharacterCountUsage) GetBreakdown() map[string]int64 {
+	if x != nil {
+		return x.Breakdown
+	}
+	return nil
+}
+
 // RoomArtifactMetadata is the universal structure for the 'metadata' JSON field
 // in the pnm_room_artifacts table. All fields are optional.
 type RoomArtifactMetadata struct {
@@ -393,6 +452,7 @@ type RoomArtifactMetadata struct {
 	//
 	//	*RoomArtifactMetadata_TokenUsage
 	//	*RoomArtifactMetadata_DurationUsage
+	//	*RoomArtifactMetadata_CharacterCountUsage
 	UsageDetails  isRoomArtifactMetadata_UsageDetails `protobuf_oneof:"usage_details"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -400,7 +460,7 @@ type RoomArtifactMetadata struct {
 
 func (x *RoomArtifactMetadata) Reset() {
 	*x = RoomArtifactMetadata{}
-	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[5]
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -412,7 +472,7 @@ func (x *RoomArtifactMetadata) String() string {
 func (*RoomArtifactMetadata) ProtoMessage() {}
 
 func (x *RoomArtifactMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[5]
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -425,7 +485,7 @@ func (x *RoomArtifactMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoomArtifactMetadata.ProtoReflect.Descriptor instead.
 func (*RoomArtifactMetadata) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_room_artifacts_proto_rawDescGZIP(), []int{5}
+	return file_plugnmeet_room_artifacts_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *RoomArtifactMetadata) GetUserInfo() *RoomArtifactUserInfo {
@@ -474,6 +534,15 @@ func (x *RoomArtifactMetadata) GetDurationUsage() *RoomArtifactDurationUsage {
 	return nil
 }
 
+func (x *RoomArtifactMetadata) GetCharacterCountUsage() *RoomArtifactCharacterCountUsage {
+	if x != nil {
+		if x, ok := x.UsageDetails.(*RoomArtifactMetadata_CharacterCountUsage); ok {
+			return x.CharacterCountUsage
+		}
+	}
+	return nil
+}
+
 type isRoomArtifactMetadata_UsageDetails interface {
 	isRoomArtifactMetadata_UsageDetails()
 }
@@ -486,9 +555,15 @@ type RoomArtifactMetadata_DurationUsage struct {
 	DurationUsage *RoomArtifactDurationUsage `protobuf:"bytes,5,opt,name=duration_usage,json=durationUsage,proto3,oneof"`
 }
 
+type RoomArtifactMetadata_CharacterCountUsage struct {
+	CharacterCountUsage *RoomArtifactCharacterCountUsage `protobuf:"bytes,6,opt,name=character_count_usage,json=characterCountUsage,proto3,oneof"` // New field
+}
+
 func (*RoomArtifactMetadata_TokenUsage) isRoomArtifactMetadata_UsageDetails() {}
 
 func (*RoomArtifactMetadata_DurationUsage) isRoomArtifactMetadata_UsageDetails() {}
+
+func (*RoomArtifactMetadata_CharacterCountUsage) isRoomArtifactMetadata_UsageDetails() {}
 
 // Webhook-specific Messages
 type RoomArtifactWebhookEvent struct {
@@ -502,7 +577,7 @@ type RoomArtifactWebhookEvent struct {
 
 func (x *RoomArtifactWebhookEvent) Reset() {
 	*x = RoomArtifactWebhookEvent{}
-	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[6]
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -514,7 +589,7 @@ func (x *RoomArtifactWebhookEvent) String() string {
 func (*RoomArtifactWebhookEvent) ProtoMessage() {}
 
 func (x *RoomArtifactWebhookEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[6]
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -527,7 +602,7 @@ func (x *RoomArtifactWebhookEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoomArtifactWebhookEvent.ProtoReflect.Descriptor instead.
 func (*RoomArtifactWebhookEvent) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_room_artifacts_proto_rawDescGZIP(), []int{6}
+	return file_plugnmeet_room_artifacts_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *RoomArtifactWebhookEvent) GetType() RoomArtifactType {
@@ -580,27 +655,35 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\tbreakdown\x18\x02 \x03(\v23.plugnmeet.RoomArtifactDurationUsage.BreakdownEntryR\tbreakdown\x1a<\n" +
 	"\x0eBreakdownEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01\"\x8c\x03\n" +
+	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01\"\xe3\x01\n" +
+	"\x1fRoomArtifactCharacterCountUsage\x12)\n" +
+	"\x10total_characters\x18\x01 \x01(\rR\x0ftotalCharacters\x12W\n" +
+	"\tbreakdown\x18\x02 \x03(\v29.plugnmeet.RoomArtifactCharacterCountUsage.BreakdownEntryR\tbreakdown\x1a<\n" +
+	"\x0eBreakdownEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01\"\xee\x03\n" +
 	"\x14RoomArtifactMetadata\x12<\n" +
 	"\tuser_info\x18\x01 \x01(\v2\x1f.plugnmeet.RoomArtifactUserInfoR\buserInfo\x12R\n" +
 	"\x11provider_job_info\x18\x02 \x01(\v2&.plugnmeet.RoomArtifactProviderJobInfoR\x0fproviderJobInfo\x12<\n" +
 	"\tfile_info\x18\x03 \x01(\v2\x1f.plugnmeet.RoomArtifactFileInfoR\bfileInfo\x12D\n" +
 	"\vtoken_usage\x18\x04 \x01(\v2!.plugnmeet.RoomArtifactTokenUsageH\x00R\n" +
 	"tokenUsage\x12M\n" +
-	"\x0eduration_usage\x18\x05 \x01(\v2$.plugnmeet.RoomArtifactDurationUsageH\x00R\rdurationUsageB\x0f\n" +
+	"\x0eduration_usage\x18\x05 \x01(\v2$.plugnmeet.RoomArtifactDurationUsageH\x00R\rdurationUsage\x12`\n" +
+	"\x15character_count_usage\x18\x06 \x01(\v2*.plugnmeet.RoomArtifactCharacterCountUsageH\x00R\x13characterCountUsageB\x0f\n" +
 	"\rusage_details\"\xa9\x01\n" +
 	"\x18RoomArtifactWebhookEvent\x12/\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1b.plugnmeet.RoomArtifactTypeR\x04type\x12\x1f\n" +
 	"\vartifact_id\x18\x02 \x01(\tR\n" +
 	"artifactId\x12;\n" +
-	"\bmetadata\x18\x03 \x01(\v2\x1f.plugnmeet.RoomArtifactMetadataR\bmetadata*\x9f\x01\n" +
+	"\bmetadata\x18\x03 \x01(\v2\x1f.plugnmeet.RoomArtifactMetadataR\bmetadata*\xc3\x01\n" +
 	"\x10RoomArtifactType\x12\x14\n" +
 	"\x10UNKNOWN_ARTIFACT\x10\x00\x12\x13\n" +
 	"\x0fMEETING_SUMMARY\x10\x01\x12\x18\n" +
 	"\x14SPEECH_TRANSCRIPTION\x10\x02\x12\x14\n" +
 	"\x10CHAT_TRANSLATION\x10\x03\x12\x16\n" +
-	"\x12SYNTHESIZED_SPEECH\x10\x04\x12\x18\n" +
-	"\x14AI_TEXT_CHAT_SESSION\x10\x05B\xa4\x01\n" +
+	"\x12SYNTHESIZED_SPEECH\x10\x04\x12\x1c\n" +
+	"\x18AI_TEXT_CHAT_INTERACTION\x10\x05\x12\x1e\n" +
+	"\x1aAI_TEXT_CHAT_SUMMARIZATION\x10\x06B\xa4\x01\n" +
 	"\rcom.plugnmeetB\x1bPlugnmeetRoomArtifactsProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -616,34 +699,38 @@ func file_plugnmeet_room_artifacts_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_room_artifacts_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_plugnmeet_room_artifacts_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_plugnmeet_room_artifacts_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_plugnmeet_room_artifacts_proto_goTypes = []any{
-	(RoomArtifactType)(0),               // 0: plugnmeet.RoomArtifactType
-	(*RoomArtifactFileInfo)(nil),        // 1: plugnmeet.RoomArtifactFileInfo
-	(*RoomArtifactProviderJobInfo)(nil), // 2: plugnmeet.RoomArtifactProviderJobInfo
-	(*RoomArtifactUserInfo)(nil),        // 3: plugnmeet.RoomArtifactUserInfo
-	(*RoomArtifactTokenUsage)(nil),      // 4: plugnmeet.RoomArtifactTokenUsage
-	(*RoomArtifactDurationUsage)(nil),   // 5: plugnmeet.RoomArtifactDurationUsage
-	(*RoomArtifactMetadata)(nil),        // 6: plugnmeet.RoomArtifactMetadata
-	(*RoomArtifactWebhookEvent)(nil),    // 7: plugnmeet.RoomArtifactWebhookEvent
-	nil,                                 // 8: plugnmeet.RoomArtifactTokenUsage.BreakdownEntry
-	nil,                                 // 9: plugnmeet.RoomArtifactDurationUsage.BreakdownEntry
+	(RoomArtifactType)(0),                   // 0: plugnmeet.RoomArtifactType
+	(*RoomArtifactFileInfo)(nil),            // 1: plugnmeet.RoomArtifactFileInfo
+	(*RoomArtifactProviderJobInfo)(nil),     // 2: plugnmeet.RoomArtifactProviderJobInfo
+	(*RoomArtifactUserInfo)(nil),            // 3: plugnmeet.RoomArtifactUserInfo
+	(*RoomArtifactTokenUsage)(nil),          // 4: plugnmeet.RoomArtifactTokenUsage
+	(*RoomArtifactDurationUsage)(nil),       // 5: plugnmeet.RoomArtifactDurationUsage
+	(*RoomArtifactCharacterCountUsage)(nil), // 6: plugnmeet.RoomArtifactCharacterCountUsage
+	(*RoomArtifactMetadata)(nil),            // 7: plugnmeet.RoomArtifactMetadata
+	(*RoomArtifactWebhookEvent)(nil),        // 8: plugnmeet.RoomArtifactWebhookEvent
+	nil,                                     // 9: plugnmeet.RoomArtifactTokenUsage.BreakdownEntry
+	nil,                                     // 10: plugnmeet.RoomArtifactDurationUsage.BreakdownEntry
+	nil,                                     // 11: plugnmeet.RoomArtifactCharacterCountUsage.BreakdownEntry
 }
 var file_plugnmeet_room_artifacts_proto_depIdxs = []int32{
-	8, // 0: plugnmeet.RoomArtifactTokenUsage.breakdown:type_name -> plugnmeet.RoomArtifactTokenUsage.BreakdownEntry
-	9, // 1: plugnmeet.RoomArtifactDurationUsage.breakdown:type_name -> plugnmeet.RoomArtifactDurationUsage.BreakdownEntry
-	3, // 2: plugnmeet.RoomArtifactMetadata.user_info:type_name -> plugnmeet.RoomArtifactUserInfo
-	2, // 3: plugnmeet.RoomArtifactMetadata.provider_job_info:type_name -> plugnmeet.RoomArtifactProviderJobInfo
-	1, // 4: plugnmeet.RoomArtifactMetadata.file_info:type_name -> plugnmeet.RoomArtifactFileInfo
-	4, // 5: plugnmeet.RoomArtifactMetadata.token_usage:type_name -> plugnmeet.RoomArtifactTokenUsage
-	5, // 6: plugnmeet.RoomArtifactMetadata.duration_usage:type_name -> plugnmeet.RoomArtifactDurationUsage
-	0, // 7: plugnmeet.RoomArtifactWebhookEvent.type:type_name -> plugnmeet.RoomArtifactType
-	6, // 8: plugnmeet.RoomArtifactWebhookEvent.metadata:type_name -> plugnmeet.RoomArtifactMetadata
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+	9,  // 0: plugnmeet.RoomArtifactTokenUsage.breakdown:type_name -> plugnmeet.RoomArtifactTokenUsage.BreakdownEntry
+	10, // 1: plugnmeet.RoomArtifactDurationUsage.breakdown:type_name -> plugnmeet.RoomArtifactDurationUsage.BreakdownEntry
+	11, // 2: plugnmeet.RoomArtifactCharacterCountUsage.breakdown:type_name -> plugnmeet.RoomArtifactCharacterCountUsage.BreakdownEntry
+	3,  // 3: plugnmeet.RoomArtifactMetadata.user_info:type_name -> plugnmeet.RoomArtifactUserInfo
+	2,  // 4: plugnmeet.RoomArtifactMetadata.provider_job_info:type_name -> plugnmeet.RoomArtifactProviderJobInfo
+	1,  // 5: plugnmeet.RoomArtifactMetadata.file_info:type_name -> plugnmeet.RoomArtifactFileInfo
+	4,  // 6: plugnmeet.RoomArtifactMetadata.token_usage:type_name -> plugnmeet.RoomArtifactTokenUsage
+	5,  // 7: plugnmeet.RoomArtifactMetadata.duration_usage:type_name -> plugnmeet.RoomArtifactDurationUsage
+	6,  // 8: plugnmeet.RoomArtifactMetadata.character_count_usage:type_name -> plugnmeet.RoomArtifactCharacterCountUsage
+	0,  // 9: plugnmeet.RoomArtifactWebhookEvent.type:type_name -> plugnmeet.RoomArtifactType
+	7,  // 10: plugnmeet.RoomArtifactWebhookEvent.metadata:type_name -> plugnmeet.RoomArtifactMetadata
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_room_artifacts_proto_init() }
@@ -652,9 +739,10 @@ func file_plugnmeet_room_artifacts_proto_init() {
 		return
 	}
 	file_plugnmeet_room_artifacts_proto_msgTypes[2].OneofWrappers = []any{}
-	file_plugnmeet_room_artifacts_proto_msgTypes[5].OneofWrappers = []any{
+	file_plugnmeet_room_artifacts_proto_msgTypes[6].OneofWrappers = []any{
 		(*RoomArtifactMetadata_TokenUsage)(nil),
 		(*RoomArtifactMetadata_DurationUsage)(nil),
+		(*RoomArtifactMetadata_CharacterCountUsage)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -662,7 +750,7 @@ func file_plugnmeet_room_artifacts_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_room_artifacts_proto_rawDesc), len(file_plugnmeet_room_artifacts_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   9,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

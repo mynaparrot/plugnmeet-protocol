@@ -12,8 +12,10 @@ enum RoomArtifactType {
   CHAT_TRANSLATION = 3;
   // A record of a text-to-speech synthesis event.
   SYNTHESIZED_SPEECH = 4;
-  // A record of an AI text-based chat session.
-  AI_TEXT_CHAT_SESSION = 5;
+  // A record of an AI text-based chat interaction.
+  AI_TEXT_CHAT_INTERACTION = 5;
+  // A record of an on-demand summarization of an AI text chat.
+  AI_TEXT_CHAT_SUMMARIZATION = 6;
 }
 
 // FileInfo contains details about a generated file artifact.
@@ -53,6 +55,14 @@ message RoomArtifactDurationUsage {
   map<string, int64> breakdown = 2;
 }
 
+// RoomArtifactCharacterCountUsage contains character count usage statistics.
+message RoomArtifactCharacterCountUsage {
+  uint32 total_characters = 1;
+  // Optional: A detailed breakdown of character usage.
+  // The key could be a user_id, language_code, etc.
+  map<string, int64> breakdown = 2;
+}
+
 // RoomArtifactMetadata is the universal structure for the 'metadata' JSON field
 // in the pnm_room_artifacts table. All fields are optional.
 message RoomArtifactMetadata {
@@ -69,6 +79,7 @@ message RoomArtifactMetadata {
   oneof usage_details {
     RoomArtifactTokenUsage token_usage = 4;
     RoomArtifactDurationUsage duration_usage = 5;
+    RoomArtifactCharacterCountUsage character_count_usage = 6;
   }
 }
 
