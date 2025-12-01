@@ -35,6 +35,329 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on RoomArtifactFileInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RoomArtifactFileInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RoomArtifactFileInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RoomArtifactFileInfoMultiError, or nil if none found.
+func (m *RoomArtifactFileInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RoomArtifactFileInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for FilePath
+
+	// no validation rules for FileSize
+
+	// no validation rules for MimeType
+
+	if len(errors) > 0 {
+		return RoomArtifactFileInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// RoomArtifactFileInfoMultiError is an error wrapping multiple validation
+// errors returned by RoomArtifactFileInfo.ValidateAll() if the designated
+// constraints aren't met.
+type RoomArtifactFileInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RoomArtifactFileInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RoomArtifactFileInfoMultiError) AllErrors() []error { return m }
+
+// RoomArtifactFileInfoValidationError is the validation error returned by
+// RoomArtifactFileInfo.Validate if the designated constraints aren't met.
+type RoomArtifactFileInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RoomArtifactFileInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RoomArtifactFileInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RoomArtifactFileInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RoomArtifactFileInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RoomArtifactFileInfoValidationError) ErrorName() string {
+	return "RoomArtifactFileInfoValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RoomArtifactFileInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRoomArtifactFileInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RoomArtifactFileInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RoomArtifactFileInfoValidationError{}
+
+// Validate checks the field values on RoomArtifactProviderJobInfo with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RoomArtifactProviderJobInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RoomArtifactProviderJobInfo with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RoomArtifactProviderJobInfoMultiError, or nil if none found.
+func (m *RoomArtifactProviderJobInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RoomArtifactProviderJobInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for JobId
+
+	// no validation rules for FileName
+
+	if len(errors) > 0 {
+		return RoomArtifactProviderJobInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// RoomArtifactProviderJobInfoMultiError is an error wrapping multiple
+// validation errors returned by RoomArtifactProviderJobInfo.ValidateAll() if
+// the designated constraints aren't met.
+type RoomArtifactProviderJobInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RoomArtifactProviderJobInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RoomArtifactProviderJobInfoMultiError) AllErrors() []error { return m }
+
+// RoomArtifactProviderJobInfoValidationError is the validation error returned
+// by RoomArtifactProviderJobInfo.Validate if the designated constraints
+// aren't met.
+type RoomArtifactProviderJobInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RoomArtifactProviderJobInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RoomArtifactProviderJobInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RoomArtifactProviderJobInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RoomArtifactProviderJobInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RoomArtifactProviderJobInfoValidationError) ErrorName() string {
+	return "RoomArtifactProviderJobInfoValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RoomArtifactProviderJobInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRoomArtifactProviderJobInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RoomArtifactProviderJobInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RoomArtifactProviderJobInfoValidationError{}
+
+// Validate checks the field values on RoomArtifactUserInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RoomArtifactUserInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RoomArtifactUserInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RoomArtifactUserInfoMultiError, or nil if none found.
+func (m *RoomArtifactUserInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RoomArtifactUserInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if m.Name != nil {
+		// no validation rules for Name
+	}
+
+	if len(errors) > 0 {
+		return RoomArtifactUserInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// RoomArtifactUserInfoMultiError is an error wrapping multiple validation
+// errors returned by RoomArtifactUserInfo.ValidateAll() if the designated
+// constraints aren't met.
+type RoomArtifactUserInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RoomArtifactUserInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RoomArtifactUserInfoMultiError) AllErrors() []error { return m }
+
+// RoomArtifactUserInfoValidationError is the validation error returned by
+// RoomArtifactUserInfo.Validate if the designated constraints aren't met.
+type RoomArtifactUserInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RoomArtifactUserInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RoomArtifactUserInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RoomArtifactUserInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RoomArtifactUserInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RoomArtifactUserInfoValidationError) ErrorName() string {
+	return "RoomArtifactUserInfoValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RoomArtifactUserInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRoomArtifactUserInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RoomArtifactUserInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RoomArtifactUserInfoValidationError{}
+
 // Validate checks the field values on RoomArtifactTokenUsage with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -57,13 +380,11 @@ func (m *RoomArtifactTokenUsage) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Prompt
+	// no validation rules for PromptTokens
 
-	// no validation rules for Completion
+	// no validation rules for CompletionTokens
 
-	if m.Total != nil {
-		// no validation rules for Total
-	}
+	// no validation rules for TotalTokens
 
 	if len(errors) > 0 {
 		return RoomArtifactTokenUsageMultiError(errors)
@@ -145,6 +466,386 @@ var _ interface {
 	ErrorName() string
 } = RoomArtifactTokenUsageValidationError{}
 
+// Validate checks the field values on RoomArtifactDurationUsage with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RoomArtifactDurationUsage) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RoomArtifactDurationUsage with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RoomArtifactDurationUsageMultiError, or nil if none found.
+func (m *RoomArtifactDurationUsage) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RoomArtifactDurationUsage) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for DurationSec
+
+	if len(errors) > 0 {
+		return RoomArtifactDurationUsageMultiError(errors)
+	}
+
+	return nil
+}
+
+// RoomArtifactDurationUsageMultiError is an error wrapping multiple validation
+// errors returned by RoomArtifactDurationUsage.ValidateAll() if the
+// designated constraints aren't met.
+type RoomArtifactDurationUsageMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RoomArtifactDurationUsageMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RoomArtifactDurationUsageMultiError) AllErrors() []error { return m }
+
+// RoomArtifactDurationUsageValidationError is the validation error returned by
+// RoomArtifactDurationUsage.Validate if the designated constraints aren't met.
+type RoomArtifactDurationUsageValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RoomArtifactDurationUsageValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RoomArtifactDurationUsageValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RoomArtifactDurationUsageValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RoomArtifactDurationUsageValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RoomArtifactDurationUsageValidationError) ErrorName() string {
+	return "RoomArtifactDurationUsageValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RoomArtifactDurationUsageValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRoomArtifactDurationUsage.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RoomArtifactDurationUsageValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RoomArtifactDurationUsageValidationError{}
+
+// Validate checks the field values on RoomArtifactMetadata with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RoomArtifactMetadata) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RoomArtifactMetadata with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RoomArtifactMetadataMultiError, or nil if none found.
+func (m *RoomArtifactMetadata) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RoomArtifactMetadata) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetUserInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RoomArtifactMetadataValidationError{
+					field:  "UserInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RoomArtifactMetadataValidationError{
+					field:  "UserInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUserInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RoomArtifactMetadataValidationError{
+				field:  "UserInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetProviderJobInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RoomArtifactMetadataValidationError{
+					field:  "ProviderJobInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RoomArtifactMetadataValidationError{
+					field:  "ProviderJobInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetProviderJobInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RoomArtifactMetadataValidationError{
+				field:  "ProviderJobInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetFileInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RoomArtifactMetadataValidationError{
+					field:  "FileInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RoomArtifactMetadataValidationError{
+					field:  "FileInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFileInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RoomArtifactMetadataValidationError{
+				field:  "FileInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	switch v := m.UsageDetails.(type) {
+	case *RoomArtifactMetadata_TokenUsage:
+		if v == nil {
+			err := RoomArtifactMetadataValidationError{
+				field:  "UsageDetails",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetTokenUsage()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, RoomArtifactMetadataValidationError{
+						field:  "TokenUsage",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, RoomArtifactMetadataValidationError{
+						field:  "TokenUsage",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetTokenUsage()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return RoomArtifactMetadataValidationError{
+					field:  "TokenUsage",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *RoomArtifactMetadata_DurationUsage:
+		if v == nil {
+			err := RoomArtifactMetadataValidationError{
+				field:  "UsageDetails",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetDurationUsage()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, RoomArtifactMetadataValidationError{
+						field:  "DurationUsage",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, RoomArtifactMetadataValidationError{
+						field:  "DurationUsage",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetDurationUsage()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return RoomArtifactMetadataValidationError{
+					field:  "DurationUsage",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		_ = v // ensures v is used
+	}
+
+	if len(errors) > 0 {
+		return RoomArtifactMetadataMultiError(errors)
+	}
+
+	return nil
+}
+
+// RoomArtifactMetadataMultiError is an error wrapping multiple validation
+// errors returned by RoomArtifactMetadata.ValidateAll() if the designated
+// constraints aren't met.
+type RoomArtifactMetadataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RoomArtifactMetadataMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RoomArtifactMetadataMultiError) AllErrors() []error { return m }
+
+// RoomArtifactMetadataValidationError is the validation error returned by
+// RoomArtifactMetadata.Validate if the designated constraints aren't met.
+type RoomArtifactMetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RoomArtifactMetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RoomArtifactMetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RoomArtifactMetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RoomArtifactMetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RoomArtifactMetadataValidationError) ErrorName() string {
+	return "RoomArtifactMetadataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RoomArtifactMetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRoomArtifactMetadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RoomArtifactMetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RoomArtifactMetadataValidationError{}
+
 // Validate checks the field values on RoomArtifactWebhookEvent with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -171,41 +872,33 @@ func (m *RoomArtifactWebhookEvent) validate(all bool) error {
 
 	// no validation rules for ArtifactId
 
-	if m.Metadata != nil {
-		// no validation rules for Metadata
-	}
-
-	if m.TokenUsage != nil {
-
-		if all {
-			switch v := interface{}(m.GetTokenUsage()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, RoomArtifactWebhookEventValidationError{
-						field:  "TokenUsage",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, RoomArtifactWebhookEventValidationError{
-						field:  "TokenUsage",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetTokenUsage()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return RoomArtifactWebhookEventValidationError{
-					field:  "TokenUsage",
+	if all {
+		switch v := interface{}(m.GetMetadata()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RoomArtifactWebhookEventValidationError{
+					field:  "Metadata",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RoomArtifactWebhookEventValidationError{
+					field:  "Metadata",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetMetadata()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RoomArtifactWebhookEventValidationError{
+				field:  "Metadata",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	if len(errors) > 0 {
