@@ -26,9 +26,10 @@ const (
 type FetchArtifactsReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RoomIds       []string               `protobuf:"bytes,1,rep,name=room_ids,json=roomIds,proto3" json:"room_ids,omitempty"`
-	From          uint64                 `protobuf:"varint,2,opt,name=from,proto3" json:"from,omitempty"`
-	Limit         uint64                 `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
-	OrderBy       string                 `protobuf:"bytes,4,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	Type          *RoomArtifactType      `protobuf:"varint,2,opt,name=type,proto3,enum=plugnmeet.RoomArtifactType,oneof" json:"type,omitempty"`
+	From          uint64                 `protobuf:"varint,3,opt,name=from,proto3" json:"from,omitempty"`
+	Limit         uint64                 `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`
+	OrderBy       string                 `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -68,6 +69,13 @@ func (x *FetchArtifactsReq) GetRoomIds() []string {
 		return x.RoomIds
 	}
 	return nil
+}
+
+func (x *FetchArtifactsReq) GetType() RoomArtifactType {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return RoomArtifactType_UNKNOWN_ARTIFACT
 }
 
 func (x *FetchArtifactsReq) GetFrom() uint64 {
@@ -175,7 +183,8 @@ type FetchArtifactsResult struct {
 	From           uint64                 `protobuf:"varint,2,opt,name=from,proto3" json:"from,omitempty"`
 	Limit          uint64                 `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
 	OrderBy        string                 `protobuf:"bytes,4,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
-	ArtifactsList  []*ArtifactInfo        `protobuf:"bytes,5,rep,name=artifacts_list,json=artifactsList,proto3" json:"artifacts_list,omitempty"`
+	Type           *RoomArtifactType      `protobuf:"varint,5,opt,name=type,proto3,enum=plugnmeet.RoomArtifactType,oneof" json:"type,omitempty"`
+	ArtifactsList  []*ArtifactInfo        `protobuf:"bytes,6,rep,name=artifacts_list,json=artifactsList,proto3" json:"artifacts_list,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -236,6 +245,13 @@ func (x *FetchArtifactsResult) GetOrderBy() string {
 		return x.OrderBy
 	}
 	return ""
+}
+
+func (x *FetchArtifactsResult) GetType() RoomArtifactType {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return RoomArtifactType_UNKNOWN_ARTIFACT
 }
 
 func (x *FetchArtifactsResult) GetArtifactsList() []*ArtifactInfo {
@@ -514,25 +530,29 @@ var File_plugnmeet_auth_artifact_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_auth_artifact_proto_rawDesc = "" +
 	"\n" +
-	"\x1dplugnmeet_auth_artifact.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\x1a\x1eplugnmeet_room_artifacts.proto\"s\n" +
+	"\x1dplugnmeet_auth_artifact.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\x1a\x1eplugnmeet_room_artifacts.proto\"\xb2\x01\n" +
 	"\x11FetchArtifactsReq\x12\x19\n" +
-	"\broom_ids\x18\x01 \x03(\tR\aroomIds\x12\x12\n" +
-	"\x04from\x18\x02 \x01(\x04R\x04from\x12\x14\n" +
-	"\x05limit\x18\x03 \x01(\x04R\x05limit\x12\x19\n" +
-	"\border_by\x18\x04 \x01(\tR\aorderBy\"\xdb\x01\n" +
+	"\broom_ids\x18\x01 \x03(\tR\aroomIds\x124\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x1b.plugnmeet.RoomArtifactTypeH\x00R\x04type\x88\x01\x01\x12\x12\n" +
+	"\x04from\x18\x03 \x01(\x04R\x04from\x12\x14\n" +
+	"\x05limit\x18\x04 \x01(\x04R\x05limit\x12\x19\n" +
+	"\border_by\x18\x05 \x01(\tR\aorderByB\a\n" +
+	"\x05_type\"\xdb\x01\n" +
 	"\fArtifactInfo\x12\x1f\n" +
 	"\vartifact_id\x18\x01 \x01(\tR\n" +
 	"artifactId\x12\x17\n" +
 	"\aroom_id\x18\x02 \x01(\tR\x06roomId\x12/\n" +
 	"\x04type\x18\x03 \x01(\x0e2\x1b.plugnmeet.RoomArtifactTypeR\x04type\x12#\n" +
 	"\rcreation_time\x18\x04 \x01(\x03R\fcreationTime\x12;\n" +
-	"\bmetadata\x18\x05 \x01(\v2\x1f.plugnmeet.RoomArtifactMetadataR\bmetadata\"\xc4\x01\n" +
+	"\bmetadata\x18\x05 \x01(\v2\x1f.plugnmeet.RoomArtifactMetadataR\bmetadata\"\x83\x02\n" +
 	"\x14FetchArtifactsResult\x12'\n" +
 	"\x0ftotal_artifacts\x18\x01 \x01(\x03R\x0etotalArtifacts\x12\x12\n" +
 	"\x04from\x18\x02 \x01(\x04R\x04from\x12\x14\n" +
 	"\x05limit\x18\x03 \x01(\x04R\x05limit\x12\x19\n" +
-	"\border_by\x18\x04 \x01(\tR\aorderBy\x12>\n" +
-	"\x0eartifacts_list\x18\x05 \x03(\v2\x17.plugnmeet.ArtifactInfoR\rartifactsList\"v\n" +
+	"\border_by\x18\x04 \x01(\tR\aorderBy\x124\n" +
+	"\x04type\x18\x05 \x01(\x0e2\x1b.plugnmeet.RoomArtifactTypeH\x00R\x04type\x88\x01\x01\x12>\n" +
+	"\x0eartifacts_list\x18\x06 \x03(\v2\x17.plugnmeet.ArtifactInfoR\rartifactsListB\a\n" +
+	"\x05_type\"v\n" +
 	"\x11FetchArtifactsRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x127\n" +
@@ -579,15 +599,17 @@ var file_plugnmeet_auth_artifact_proto_goTypes = []any{
 	(*RoomArtifactMetadata)(nil),        // 9: plugnmeet.RoomArtifactMetadata
 }
 var file_plugnmeet_auth_artifact_proto_depIdxs = []int32{
-	8, // 0: plugnmeet.ArtifactInfo.type:type_name -> plugnmeet.RoomArtifactType
-	9, // 1: plugnmeet.ArtifactInfo.metadata:type_name -> plugnmeet.RoomArtifactMetadata
-	1, // 2: plugnmeet.FetchArtifactsResult.artifacts_list:type_name -> plugnmeet.ArtifactInfo
-	2, // 3: plugnmeet.FetchArtifactsRes.result:type_name -> plugnmeet.FetchArtifactsResult
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	8, // 0: plugnmeet.FetchArtifactsReq.type:type_name -> plugnmeet.RoomArtifactType
+	8, // 1: plugnmeet.ArtifactInfo.type:type_name -> plugnmeet.RoomArtifactType
+	9, // 2: plugnmeet.ArtifactInfo.metadata:type_name -> plugnmeet.RoomArtifactMetadata
+	8, // 3: plugnmeet.FetchArtifactsResult.type:type_name -> plugnmeet.RoomArtifactType
+	1, // 4: plugnmeet.FetchArtifactsResult.artifacts_list:type_name -> plugnmeet.ArtifactInfo
+	2, // 5: plugnmeet.FetchArtifactsRes.result:type_name -> plugnmeet.FetchArtifactsResult
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_auth_artifact_proto_init() }
@@ -596,6 +618,8 @@ func file_plugnmeet_auth_artifact_proto_init() {
 		return
 	}
 	file_plugnmeet_room_artifacts_proto_init()
+	file_plugnmeet_auth_artifact_proto_msgTypes[0].OneofWrappers = []any{}
+	file_plugnmeet_auth_artifact_proto_msgTypes[2].OneofWrappers = []any{}
 	file_plugnmeet_auth_artifact_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

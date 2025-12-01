@@ -8,9 +8,10 @@ import "plugnmeet_room_artifacts.proto";
 // Request to fetch a list of artifacts
 message FetchArtifactsReq {
   repeated string room_ids = 1;
-  uint64 from = 2;
-  uint64 limit = 3;
-  string order_by = 4;
+  optional RoomArtifactType type = 2;
+  uint64 from = 3;
+  uint64 limit = 4;
+  string order_by = 5;
 }
 
 // A single artifact entry in the list response
@@ -28,7 +29,8 @@ message FetchArtifactsResult {
   uint64 from = 2;
   uint64 limit = 3;
   string order_by = 4;
-  repeated ArtifactInfo artifacts_list = 5;
+  optional RoomArtifactType type = 5;
+  repeated ArtifactInfo artifacts_list = 6;
 }
 
 // Response for fetching artifacts

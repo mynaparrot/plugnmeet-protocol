@@ -63,6 +63,10 @@ func (m *FetchArtifactsReq) validate(all bool) error {
 
 	// no validation rules for OrderBy
 
+	if m.Type != nil {
+		// no validation rules for Type
+	}
+
 	if len(errors) > 0 {
 		return FetchArtifactsReqMultiError(errors)
 	}
@@ -341,6 +345,10 @@ func (m *FetchArtifactsResult) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if m.Type != nil {
+		// no validation rules for Type
 	}
 
 	if len(errors) > 0 {
