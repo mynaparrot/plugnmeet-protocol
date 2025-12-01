@@ -1,0 +1,62 @@
+syntax = "proto3";
+package plugnmeet;
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+
+import "buf/validate/validate.proto";
+import "plugnmeet_room_artifacts.proto";
+
+// Request to fetch a list of artifacts
+message FetchArtifactsReq {
+  repeated string room_ids = 1;
+  uint64 from = 2;
+  uint64 limit = 3;
+  string order_by = 4;
+}
+
+// A single artifact entry in the list response
+message ArtifactInfo {
+  string artifact_id = 1;
+  string room_id = 2;
+  RoomArtifactType type = 3;
+  int64 creation_time = 4;
+  RoomArtifactMetadata metadata = 5;
+}
+
+// Result for fetching artifacts
+message FetchArtifactsResult {
+  int64 total_artifacts = 1;
+  uint64 from = 2;
+  uint64 limit = 3;
+  string order_by = 4;
+  repeated ArtifactInfo artifacts_list = 5;
+}
+
+// Response for fetching artifacts
+message FetchArtifactsRes {
+  bool status = 1;
+  string msg = 2;
+  FetchArtifactsResult result = 3;
+}
+
+// Request to get a download token for an artifact
+message GetArtifactDownloadTokenReq {
+  string artifact_id = 1 [(buf.validate.field).required = true];
+}
+
+// Response for a download token
+message GetArtifactDownloadTokenRes {
+  bool status = 1;
+  string msg = 2;
+  optional string token = 3;
+}
+
+// Request to delete an artifact
+message DeleteArtifactReq {
+  string artifact_id = 1 [(buf.validate.field).required = true];
+}
+
+// Response for deleting an artifact
+message DeleteArtifactRes {
+  bool status = 1;
+  string msg = 2;
+}

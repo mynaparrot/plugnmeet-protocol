@@ -556,7 +556,7 @@ type RoomArtifactMetadata_DurationUsage struct {
 }
 
 type RoomArtifactMetadata_CharacterCountUsage struct {
-	CharacterCountUsage *RoomArtifactCharacterCountUsage `protobuf:"bytes,6,opt,name=character_count_usage,json=characterCountUsage,proto3,oneof"` // New field
+	CharacterCountUsage *RoomArtifactCharacterCountUsage `protobuf:"bytes,6,opt,name=character_count_usage,json=characterCountUsage,proto3,oneof"`
 }
 
 func (*RoomArtifactMetadata_TokenUsage) isRoomArtifactMetadata_UsageDetails() {}
