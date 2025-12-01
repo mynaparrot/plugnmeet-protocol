@@ -386,6 +386,8 @@ func (m *RoomArtifactTokenUsage) validate(all bool) error {
 
 	// no validation rules for TotalTokens
 
+	// no validation rules for Breakdown
+
 	if len(errors) > 0 {
 		return RoomArtifactTokenUsageMultiError(errors)
 	}
@@ -489,6 +491,8 @@ func (m *RoomArtifactDurationUsage) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for DurationSec
+
+	// no validation rules for Breakdown
 
 	if len(errors) > 0 {
 		return RoomArtifactDurationUsageMultiError(errors)
