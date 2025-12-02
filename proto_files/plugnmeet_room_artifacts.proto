@@ -40,26 +40,25 @@ message RoomArtifactTokenUsage {
   uint32 prompt_tokens = 1;
   uint32 completion_tokens = 2;
   uint32 total_tokens = 3;
-  // Optional: A detailed breakdown of token usage.
-  // The key could be a user_id, task_type, etc.
   map<string, int64> breakdown = 4;
+
+  optional double prompt_tokens_estimated_cost = 5;
+  optional double completion_tokens_estimated_cost = 6;
+  optional double total_tokens_estimated_cost = 7;
 }
 
-// DurationUsage contains duration usage for a service (e.g., STT).
 message RoomArtifactDurationUsage {
-  // Duration in seconds.
   uint32 duration_sec = 1;
-  // Optional: A detailed breakdown of duration usage.
-  // The key could be a user_id, language_code, etc.
   map<string, int64> breakdown = 2;
+
+  optional double duration_sec_estimated_cost = 3;
 }
 
-// RoomArtifactCharacterCountUsage contains character count usage statistics.
 message RoomArtifactCharacterCountUsage {
   uint32 total_characters = 1;
-  // Optional: A detailed breakdown of character usage.
-  // The key could be a user_id, language_code, etc.
   map<string, int64> breakdown = 2;
+
+  optional double total_characters_estimated_cost = 3;
 }
 
 // RoomArtifactMetadata is the universal structure for the 'metadata' JSON field

@@ -256,15 +256,16 @@ func (x *RoomArtifactUserInfo) GetName() string {
 }
 
 type RoomArtifactTokenUsage struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	PromptTokens     uint32                 `protobuf:"varint,1,opt,name=prompt_tokens,json=promptTokens,proto3" json:"prompt_tokens,omitempty"`
-	CompletionTokens uint32                 `protobuf:"varint,2,opt,name=completion_tokens,json=completionTokens,proto3" json:"completion_tokens,omitempty"`
-	TotalTokens      uint32                 `protobuf:"varint,3,opt,name=total_tokens,json=totalTokens,proto3" json:"total_tokens,omitempty"`
-	// Optional: A detailed breakdown of token usage.
-	// The key could be a user_id, task_type, etc.
-	Breakdown     map[string]int64 `protobuf:"bytes,4,rep,name=breakdown,proto3" json:"breakdown,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"open.v1"`
+	PromptTokens                  uint32                 `protobuf:"varint,1,opt,name=prompt_tokens,json=promptTokens,proto3" json:"prompt_tokens,omitempty"`
+	CompletionTokens              uint32                 `protobuf:"varint,2,opt,name=completion_tokens,json=completionTokens,proto3" json:"completion_tokens,omitempty"`
+	TotalTokens                   uint32                 `protobuf:"varint,3,opt,name=total_tokens,json=totalTokens,proto3" json:"total_tokens,omitempty"`
+	Breakdown                     map[string]int64       `protobuf:"bytes,4,rep,name=breakdown,proto3" json:"breakdown,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	PromptTokensEstimatedCost     *float64               `protobuf:"fixed64,5,opt,name=prompt_tokens_estimated_cost,json=promptTokensEstimatedCost,proto3,oneof" json:"prompt_tokens_estimated_cost,omitempty"`
+	CompletionTokensEstimatedCost *float64               `protobuf:"fixed64,6,opt,name=completion_tokens_estimated_cost,json=completionTokensEstimatedCost,proto3,oneof" json:"completion_tokens_estimated_cost,omitempty"`
+	TotalTokensEstimatedCost      *float64               `protobuf:"fixed64,7,opt,name=total_tokens_estimated_cost,json=totalTokensEstimatedCost,proto3,oneof" json:"total_tokens_estimated_cost,omitempty"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *RoomArtifactTokenUsage) Reset() {
@@ -325,16 +326,34 @@ func (x *RoomArtifactTokenUsage) GetBreakdown() map[string]int64 {
 	return nil
 }
 
-// DurationUsage contains duration usage for a service (e.g., STT).
+func (x *RoomArtifactTokenUsage) GetPromptTokensEstimatedCost() float64 {
+	if x != nil && x.PromptTokensEstimatedCost != nil {
+		return *x.PromptTokensEstimatedCost
+	}
+	return 0
+}
+
+func (x *RoomArtifactTokenUsage) GetCompletionTokensEstimatedCost() float64 {
+	if x != nil && x.CompletionTokensEstimatedCost != nil {
+		return *x.CompletionTokensEstimatedCost
+	}
+	return 0
+}
+
+func (x *RoomArtifactTokenUsage) GetTotalTokensEstimatedCost() float64 {
+	if x != nil && x.TotalTokensEstimatedCost != nil {
+		return *x.TotalTokensEstimatedCost
+	}
+	return 0
+}
+
 type RoomArtifactDurationUsage struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Duration in seconds.
-	DurationSec uint32 `protobuf:"varint,1,opt,name=duration_sec,json=durationSec,proto3" json:"duration_sec,omitempty"`
-	// Optional: A detailed breakdown of duration usage.
-	// The key could be a user_id, language_code, etc.
-	Breakdown     map[string]int64 `protobuf:"bytes,2,rep,name=breakdown,proto3" json:"breakdown,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"open.v1"`
+	DurationSec              uint32                 `protobuf:"varint,1,opt,name=duration_sec,json=durationSec,proto3" json:"duration_sec,omitempty"`
+	Breakdown                map[string]int64       `protobuf:"bytes,2,rep,name=breakdown,proto3" json:"breakdown,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	DurationSecEstimatedCost *float64               `protobuf:"fixed64,3,opt,name=duration_sec_estimated_cost,json=durationSecEstimatedCost,proto3,oneof" json:"duration_sec_estimated_cost,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *RoomArtifactDurationUsage) Reset() {
@@ -381,15 +400,20 @@ func (x *RoomArtifactDurationUsage) GetBreakdown() map[string]int64 {
 	return nil
 }
 
-// RoomArtifactCharacterCountUsage contains character count usage statistics.
+func (x *RoomArtifactDurationUsage) GetDurationSecEstimatedCost() float64 {
+	if x != nil && x.DurationSecEstimatedCost != nil {
+		return *x.DurationSecEstimatedCost
+	}
+	return 0
+}
+
 type RoomArtifactCharacterCountUsage struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	TotalCharacters uint32                 `protobuf:"varint,1,opt,name=total_characters,json=totalCharacters,proto3" json:"total_characters,omitempty"`
-	// Optional: A detailed breakdown of character usage.
-	// The key could be a user_id, language_code, etc.
-	Breakdown     map[string]int64 `protobuf:"bytes,2,rep,name=breakdown,proto3" json:"breakdown,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                        protoimpl.MessageState `protogen:"open.v1"`
+	TotalCharacters              uint32                 `protobuf:"varint,1,opt,name=total_characters,json=totalCharacters,proto3" json:"total_characters,omitempty"`
+	Breakdown                    map[string]int64       `protobuf:"bytes,2,rep,name=breakdown,proto3" json:"breakdown,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	TotalCharactersEstimatedCost *float64               `protobuf:"fixed64,3,opt,name=total_characters_estimated_cost,json=totalCharactersEstimatedCost,proto3,oneof" json:"total_characters_estimated_cost,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *RoomArtifactCharacterCountUsage) Reset() {
@@ -434,6 +458,13 @@ func (x *RoomArtifactCharacterCountUsage) GetBreakdown() map[string]int64 {
 		return x.Breakdown
 	}
 	return nil
+}
+
+func (x *RoomArtifactCharacterCountUsage) GetTotalCharactersEstimatedCost() float64 {
+	if x != nil && x.TotalCharactersEstimatedCost != nil {
+		return *x.TotalCharactersEstimatedCost
+	}
+	return 0
 }
 
 // RoomArtifactMetadata is the universal structure for the 'metadata' JSON field
@@ -641,27 +672,37 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\x14RoomArtifactUserInfo\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01B\a\n" +
-	"\x05_name\"\x9b\x02\n" +
+	"\x05_name\"\xd9\x04\n" +
 	"\x16RoomArtifactTokenUsage\x12#\n" +
 	"\rprompt_tokens\x18\x01 \x01(\rR\fpromptTokens\x12+\n" +
 	"\x11completion_tokens\x18\x02 \x01(\rR\x10completionTokens\x12!\n" +
 	"\ftotal_tokens\x18\x03 \x01(\rR\vtotalTokens\x12N\n" +
-	"\tbreakdown\x18\x04 \x03(\v20.plugnmeet.RoomArtifactTokenUsage.BreakdownEntryR\tbreakdown\x1a<\n" +
+	"\tbreakdown\x18\x04 \x03(\v20.plugnmeet.RoomArtifactTokenUsage.BreakdownEntryR\tbreakdown\x12D\n" +
+	"\x1cprompt_tokens_estimated_cost\x18\x05 \x01(\x01H\x00R\x19promptTokensEstimatedCost\x88\x01\x01\x12L\n" +
+	" completion_tokens_estimated_cost\x18\x06 \x01(\x01H\x01R\x1dcompletionTokensEstimatedCost\x88\x01\x01\x12B\n" +
+	"\x1btotal_tokens_estimated_cost\x18\a \x01(\x01H\x02R\x18totalTokensEstimatedCost\x88\x01\x01\x1a<\n" +
 	"\x0eBreakdownEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01\"\xcf\x01\n" +
+	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01B\x1f\n" +
+	"\x1d_prompt_tokens_estimated_costB#\n" +
+	"!_completion_tokens_estimated_costB\x1e\n" +
+	"\x1c_total_tokens_estimated_cost\"\xb3\x02\n" +
 	"\x19RoomArtifactDurationUsage\x12!\n" +
 	"\fduration_sec\x18\x01 \x01(\rR\vdurationSec\x12Q\n" +
-	"\tbreakdown\x18\x02 \x03(\v23.plugnmeet.RoomArtifactDurationUsage.BreakdownEntryR\tbreakdown\x1a<\n" +
+	"\tbreakdown\x18\x02 \x03(\v23.plugnmeet.RoomArtifactDurationUsage.BreakdownEntryR\tbreakdown\x12B\n" +
+	"\x1bduration_sec_estimated_cost\x18\x03 \x01(\x01H\x00R\x18durationSecEstimatedCost\x88\x01\x01\x1a<\n" +
 	"\x0eBreakdownEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01\"\xe3\x01\n" +
+	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01B\x1e\n" +
+	"\x1c_duration_sec_estimated_cost\"\xd3\x02\n" +
 	"\x1fRoomArtifactCharacterCountUsage\x12)\n" +
 	"\x10total_characters\x18\x01 \x01(\rR\x0ftotalCharacters\x12W\n" +
-	"\tbreakdown\x18\x02 \x03(\v29.plugnmeet.RoomArtifactCharacterCountUsage.BreakdownEntryR\tbreakdown\x1a<\n" +
+	"\tbreakdown\x18\x02 \x03(\v29.plugnmeet.RoomArtifactCharacterCountUsage.BreakdownEntryR\tbreakdown\x12J\n" +
+	"\x1ftotal_characters_estimated_cost\x18\x03 \x01(\x01H\x00R\x1ctotalCharactersEstimatedCost\x88\x01\x01\x1a<\n" +
 	"\x0eBreakdownEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01\"\xee\x03\n" +
+	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01B\"\n" +
+	" _total_characters_estimated_cost\"\xee\x03\n" +
 	"\x14RoomArtifactMetadata\x12<\n" +
 	"\tuser_info\x18\x01 \x01(\v2\x1f.plugnmeet.RoomArtifactUserInfoR\buserInfo\x12R\n" +
 	"\x11provider_job_info\x18\x02 \x01(\v2&.plugnmeet.RoomArtifactProviderJobInfoR\x0fproviderJobInfo\x12<\n" +
@@ -741,6 +782,9 @@ func file_plugnmeet_room_artifacts_proto_init() {
 		return
 	}
 	file_plugnmeet_room_artifacts_proto_msgTypes[2].OneofWrappers = []any{}
+	file_plugnmeet_room_artifacts_proto_msgTypes[3].OneofWrappers = []any{}
+	file_plugnmeet_room_artifacts_proto_msgTypes[4].OneofWrappers = []any{}
+	file_plugnmeet_room_artifacts_proto_msgTypes[5].OneofWrappers = []any{}
 	file_plugnmeet_room_artifacts_proto_msgTypes[6].OneofWrappers = []any{
 		(*RoomArtifactMetadata_TokenUsage)(nil),
 		(*RoomArtifactMetadata_DurationUsage)(nil),

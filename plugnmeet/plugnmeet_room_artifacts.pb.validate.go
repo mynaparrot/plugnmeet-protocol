@@ -388,6 +388,18 @@ func (m *RoomArtifactTokenUsage) validate(all bool) error {
 
 	// no validation rules for Breakdown
 
+	if m.PromptTokensEstimatedCost != nil {
+		// no validation rules for PromptTokensEstimatedCost
+	}
+
+	if m.CompletionTokensEstimatedCost != nil {
+		// no validation rules for CompletionTokensEstimatedCost
+	}
+
+	if m.TotalTokensEstimatedCost != nil {
+		// no validation rules for TotalTokensEstimatedCost
+	}
+
 	if len(errors) > 0 {
 		return RoomArtifactTokenUsageMultiError(errors)
 	}
@@ -494,6 +506,10 @@ func (m *RoomArtifactDurationUsage) validate(all bool) error {
 
 	// no validation rules for Breakdown
 
+	if m.DurationSecEstimatedCost != nil {
+		// no validation rules for DurationSecEstimatedCost
+	}
+
 	if len(errors) > 0 {
 		return RoomArtifactDurationUsageMultiError(errors)
 	}
@@ -599,6 +615,10 @@ func (m *RoomArtifactCharacterCountUsage) validate(all bool) error {
 	// no validation rules for TotalCharacters
 
 	// no validation rules for Breakdown
+
+	if m.TotalCharactersEstimatedCost != nil {
+		// no validation rules for TotalCharactersEstimatedCost
+	}
 
 	if len(errors) > 0 {
 		return RoomArtifactCharacterCountUsageMultiError(errors)
