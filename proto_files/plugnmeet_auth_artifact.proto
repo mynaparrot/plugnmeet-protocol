@@ -19,7 +19,7 @@ message ArtifactInfo {
   string artifact_id = 1;
   string room_id = 2;
   RoomArtifactType type = 3;
-  int64 creation_time = 4;
+  string created = 4;
   RoomArtifactMetadata metadata = 5;
 }
 

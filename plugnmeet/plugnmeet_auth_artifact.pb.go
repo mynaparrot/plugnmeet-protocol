@@ -105,7 +105,7 @@ type ArtifactInfo struct {
 	ArtifactId    string                 `protobuf:"bytes,1,opt,name=artifact_id,json=artifactId,proto3" json:"artifact_id,omitempty"`
 	RoomId        string                 `protobuf:"bytes,2,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
 	Type          RoomArtifactType       `protobuf:"varint,3,opt,name=type,proto3,enum=plugnmeet.RoomArtifactType" json:"type,omitempty"`
-	CreationTime  int64                  `protobuf:"varint,4,opt,name=creation_time,json=creationTime,proto3" json:"creation_time,omitempty"`
+	Created       string                 `protobuf:"bytes,4,opt,name=created,proto3" json:"created,omitempty"`
 	Metadata      *RoomArtifactMetadata  `protobuf:"bytes,5,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -162,11 +162,11 @@ func (x *ArtifactInfo) GetType() RoomArtifactType {
 	return RoomArtifactType_UNKNOWN_ARTIFACT
 }
 
-func (x *ArtifactInfo) GetCreationTime() int64 {
+func (x *ArtifactInfo) GetCreated() string {
 	if x != nil {
-		return x.CreationTime
+		return x.Created
 	}
-	return 0
+	return ""
 }
 
 func (x *ArtifactInfo) GetMetadata() *RoomArtifactMetadata {
@@ -537,13 +537,13 @@ const file_plugnmeet_auth_artifact_proto_rawDesc = "" +
 	"\x04from\x18\x03 \x01(\x04R\x04from\x12\x14\n" +
 	"\x05limit\x18\x04 \x01(\x04R\x05limit\x12\x19\n" +
 	"\border_by\x18\x05 \x01(\tR\aorderByB\a\n" +
-	"\x05_type\"\xdb\x01\n" +
+	"\x05_type\"\xd0\x01\n" +
 	"\fArtifactInfo\x12\x1f\n" +
 	"\vartifact_id\x18\x01 \x01(\tR\n" +
 	"artifactId\x12\x17\n" +
 	"\aroom_id\x18\x02 \x01(\tR\x06roomId\x12/\n" +
-	"\x04type\x18\x03 \x01(\x0e2\x1b.plugnmeet.RoomArtifactTypeR\x04type\x12#\n" +
-	"\rcreation_time\x18\x04 \x01(\x03R\fcreationTime\x12;\n" +
+	"\x04type\x18\x03 \x01(\x0e2\x1b.plugnmeet.RoomArtifactTypeR\x04type\x12\x18\n" +
+	"\acreated\x18\x04 \x01(\tR\acreated\x12;\n" +
 	"\bmetadata\x18\x05 \x01(\v2\x1f.plugnmeet.RoomArtifactMetadataR\bmetadata\"\x83\x02\n" +
 	"\x14FetchArtifactsResult\x12'\n" +
 	"\x0ftotal_artifacts\x18\x01 \x01(\x03R\x0etotalArtifacts\x12\x12\n" +

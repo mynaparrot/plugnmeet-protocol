@@ -175,7 +175,7 @@ func (m *ArtifactInfo) validate(all bool) error {
 
 	// no validation rules for Type
 
-	// no validation rules for CreationTime
+	// no validation rules for Created
 
 	if all {
 		switch v := interface{}(m.GetMetadata()).(type) {
