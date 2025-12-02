@@ -337,11 +337,12 @@ func (x *InsightsTranscriptionConfigReq) GetIsEnabledSpeechSynthesis() bool {
 }
 
 type InsightsTranscriptionUserSessionReq struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Action        InsightsUserSessionAction `protobuf:"varint,1,opt,name=action,proto3,enum=plugnmeet.InsightsUserSessionAction" json:"action,omitempty"`
-	SpokenLang    *string                   `protobuf:"bytes,2,opt,name=spoken_lang,json=spokenLang,proto3,oneof" json:"spoken_lang,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                       protoimpl.MessageState    `protogen:"open.v1"`
+	Action                      InsightsUserSessionAction `protobuf:"varint,1,opt,name=action,proto3,enum=plugnmeet.InsightsUserSessionAction" json:"action,omitempty"`
+	SpokenLang                  *string                   `protobuf:"bytes,2,opt,name=spoken_lang,json=spokenLang,proto3,oneof" json:"spoken_lang,omitempty"`
+	AllowedTranscriptionStorage bool                      `protobuf:"varint,3,opt,name=allowed_transcription_storage,json=allowedTranscriptionStorage,proto3" json:"allowed_transcription_storage,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *InsightsTranscriptionUserSessionReq) Reset() {
@@ -388,15 +389,24 @@ func (x *InsightsTranscriptionUserSessionReq) GetSpokenLang() string {
 	return ""
 }
 
+func (x *InsightsTranscriptionUserSessionReq) GetAllowedTranscriptionStorage() bool {
+	if x != nil {
+		return x.AllowedTranscriptionStorage
+	}
+	return false
+}
+
 type InsightsTranscriptionResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	FromUserId    string                 `protobuf:"bytes,1,opt,name=from_user_id,json=fromUserId,proto3" json:"from_user_id,omitempty"`
-	Lang          string                 `protobuf:"bytes,2,opt,name=lang,proto3" json:"lang,omitempty"`
-	Text          string                 `protobuf:"bytes,3,opt,name=text,proto3" json:"text,omitempty"`
-	IsPartial     bool                   `protobuf:"varint,4,opt,name=is_partial,json=isPartial,proto3" json:"is_partial,omitempty"`
-	Translations  map[string]string      `protobuf:"bytes,5,rep,name=translations,proto3" json:"translations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // A map of target language -> translated text
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"open.v1"`
+	FromUserId                  string                 `protobuf:"bytes,1,opt,name=from_user_id,json=fromUserId,proto3" json:"from_user_id,omitempty"`
+	FromUserName                string                 `protobuf:"bytes,2,opt,name=from_user_name,json=fromUserName,proto3" json:"from_user_name,omitempty"`
+	Lang                        string                 `protobuf:"bytes,3,opt,name=lang,proto3" json:"lang,omitempty"`
+	Text                        string                 `protobuf:"bytes,4,opt,name=text,proto3" json:"text,omitempty"`
+	IsPartial                   bool                   `protobuf:"varint,5,opt,name=is_partial,json=isPartial,proto3" json:"is_partial,omitempty"`
+	AllowedTranscriptionStorage bool                   `protobuf:"varint,6,opt,name=allowed_transcription_storage,json=allowedTranscriptionStorage,proto3" json:"allowed_transcription_storage,omitempty"`
+	Translations                map[string]string      `protobuf:"bytes,7,rep,name=translations,proto3" json:"translations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // A map of target language -> translated text
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *InsightsTranscriptionResult) Reset() {
@@ -436,6 +446,13 @@ func (x *InsightsTranscriptionResult) GetFromUserId() string {
 	return ""
 }
 
+func (x *InsightsTranscriptionResult) GetFromUserName() string {
+	if x != nil {
+		return x.FromUserName
+	}
+	return ""
+}
+
 func (x *InsightsTranscriptionResult) GetLang() string {
 	if x != nil {
 		return x.Lang
@@ -453,6 +470,13 @@ func (x *InsightsTranscriptionResult) GetText() string {
 func (x *InsightsTranscriptionResult) GetIsPartial() bool {
 	if x != nil {
 		return x.IsPartial
+	}
+	return false
+}
+
+func (x *InsightsTranscriptionResult) GetAllowedTranscriptionStorage() bool {
+	if x != nil {
+		return x.AllowedTranscriptionStorage
 	}
 	return false
 }
@@ -809,14 +833,15 @@ func (x *InsightsGetSupportedLanguagesRes) GetLanguages() []*InsightsSupportedLa
 }
 
 type InsightsGetUserStatusRes struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
-	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	ServiceType   InsightsServiceType    `protobuf:"varint,3,opt,name=service_type,json=serviceType,proto3,enum=plugnmeet.InsightsServiceType" json:"service_type,omitempty"`
-	IsActive      bool                   `protobuf:"varint,4,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
-	SpokenLang    *string                `protobuf:"bytes,5,opt,name=spoken_lang,json=spokenLang,proto3,oneof" json:"spoken_lang,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"open.v1"`
+	Status                      bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	Msg                         string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	ServiceType                 InsightsServiceType    `protobuf:"varint,3,opt,name=service_type,json=serviceType,proto3,enum=plugnmeet.InsightsServiceType" json:"service_type,omitempty"`
+	IsActive                    bool                   `protobuf:"varint,4,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	SpokenLang                  *string                `protobuf:"bytes,5,opt,name=spoken_lang,json=spokenLang,proto3,oneof" json:"spoken_lang,omitempty"`
+	AllowedTranscriptionStorage *bool                  `protobuf:"varint,6,opt,name=allowed_transcription_storage,json=allowedTranscriptionStorage,proto3,oneof" json:"allowed_transcription_storage,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *InsightsGetUserStatusRes) Reset() {
@@ -882,6 +907,13 @@ func (x *InsightsGetUserStatusRes) GetSpokenLang() string {
 		return *x.SpokenLang
 	}
 	return ""
+}
+
+func (x *InsightsGetUserStatusRes) GetAllowedTranscriptionStorage() bool {
+	if x != nil && x.AllowedTranscriptionStorage != nil {
+		return *x.AllowedTranscriptionStorage
+	}
+	return false
 }
 
 type InsightsAITextChatContent struct {
@@ -1166,20 +1198,23 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"\x13allowed_trans_langs\x18\x05 \x03(\tR\x11allowedTransLangs\x127\n" +
 	"\x15default_subtitle_lang\x18\x06 \x01(\tH\x00R\x13defaultSubtitleLang\x88\x01\x01\x12=\n" +
 	"\x1bis_enabled_speech_synthesis\x18\a \x01(\bR\x18isEnabledSpeechSynthesisB\x18\n" +
-	"\x16_default_subtitle_lang\"\x99\x01\n" +
+	"\x16_default_subtitle_lang\"\xdd\x01\n" +
 	"#InsightsTranscriptionUserSessionReq\x12<\n" +
 	"\x06action\x18\x01 \x01(\x0e2$.plugnmeet.InsightsUserSessionActionR\x06action\x12$\n" +
 	"\vspoken_lang\x18\x02 \x01(\tH\x00R\n" +
-	"spokenLang\x88\x01\x01B\x0e\n" +
-	"\f_spoken_lang\"\xa5\x02\n" +
+	"spokenLang\x88\x01\x01\x12B\n" +
+	"\x1dallowed_transcription_storage\x18\x03 \x01(\bR\x1ballowedTranscriptionStorageB\x0e\n" +
+	"\f_spoken_lang\"\x8f\x03\n" +
 	"\x1bInsightsTranscriptionResult\x12 \n" +
 	"\ffrom_user_id\x18\x01 \x01(\tR\n" +
-	"fromUserId\x12\x12\n" +
-	"\x04lang\x18\x02 \x01(\tR\x04lang\x12\x12\n" +
-	"\x04text\x18\x03 \x01(\tR\x04text\x12\x1d\n" +
+	"fromUserId\x12$\n" +
+	"\x0efrom_user_name\x18\x02 \x01(\tR\ffromUserName\x12\x12\n" +
+	"\x04lang\x18\x03 \x01(\tR\x04lang\x12\x12\n" +
+	"\x04text\x18\x04 \x01(\tR\x04text\x12\x1d\n" +
 	"\n" +
-	"is_partial\x18\x04 \x01(\bR\tisPartial\x12\\\n" +
-	"\ftranslations\x18\x05 \x03(\v28.plugnmeet.InsightsTranscriptionResult.TranslationsEntryR\ftranslations\x1a?\n" +
+	"is_partial\x18\x05 \x01(\bR\tisPartial\x12B\n" +
+	"\x1dallowed_transcription_storage\x18\x06 \x01(\bR\x1ballowedTranscriptionStorage\x12\\\n" +
+	"\ftranslations\x18\a \x03(\v28.plugnmeet.InsightsTranscriptionResult.TranslationsEntryR\ftranslations\x1a?\n" +
 	"\x11TranslationsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xaa\x01\n" +
@@ -1213,15 +1248,17 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	" InsightsGetSupportedLanguagesRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12B\n" +
-	"\tlanguages\x18\x03 \x03(\v2$.plugnmeet.InsightsSupportedLangInfoR\tlanguages\"\xda\x01\n" +
+	"\tlanguages\x18\x03 \x03(\v2$.plugnmeet.InsightsSupportedLangInfoR\tlanguages\"\xc5\x02\n" +
 	"\x18InsightsGetUserStatusRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12A\n" +
 	"\fservice_type\x18\x03 \x01(\x0e2\x1e.plugnmeet.InsightsServiceTypeR\vserviceType\x12\x1b\n" +
 	"\tis_active\x18\x04 \x01(\bR\bisActive\x12$\n" +
 	"\vspoken_lang\x18\x05 \x01(\tH\x00R\n" +
-	"spokenLang\x88\x01\x01B\x0e\n" +
-	"\f_spoken_lang\"\x96\x01\n" +
+	"spokenLang\x88\x01\x01\x12G\n" +
+	"\x1dallowed_transcription_storage\x18\x06 \x01(\bH\x01R\x1ballowedTranscriptionStorage\x88\x01\x01B\x0e\n" +
+	"\f_spoken_langB \n" +
+	"\x1e_allowed_transcription_storage\"\x96\x01\n" +
 	"\x19InsightsAITextChatContent\x125\n" +
 	"\x04role\x18\x01 \x01(\x0e2!.plugnmeet.InsightsAITextChatRoleR\x04role\x12\x12\n" +
 	"\x04text\x18\x02 \x01(\tR\x04text\x12 \n" +

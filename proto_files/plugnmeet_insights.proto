@@ -39,14 +39,17 @@ message InsightsTranscriptionConfigReq {
 message InsightsTranscriptionUserSessionReq {
   InsightsUserSessionAction action = 1;
   optional string spoken_lang = 2;
+  bool allowed_transcription_storage = 3;
 }
 
 message InsightsTranscriptionResult {
   string from_user_id = 1;
-  string lang = 2;
-  string text = 3;
-  bool is_partial = 4;
-  map<string, string> translations = 5; // A map of target language -> translated text
+  string from_user_name = 2;
+  string lang = 3;
+  string text = 4;
+  bool is_partial = 5;
+  bool allowed_transcription_storage = 6;
+  map<string, string> translations = 7; // A map of target language -> translated text
 }
 
 message InsightsChatTranslationConfigReq {
@@ -89,6 +92,7 @@ message InsightsGetUserStatusRes {
   InsightsServiceType service_type = 3;
   bool is_active = 4;
   optional string spoken_lang = 5;
+  optional bool allowed_transcription_storage = 6;
 }
 
 // start AI Text Chat

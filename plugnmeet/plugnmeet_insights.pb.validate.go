@@ -281,6 +281,8 @@ func (m *InsightsTranscriptionUserSessionReq) validate(all bool) error {
 
 	// no validation rules for Action
 
+	// no validation rules for AllowedTranscriptionStorage
+
 	if m.SpokenLang != nil {
 		// no validation rules for SpokenLang
 	}
@@ -391,11 +393,15 @@ func (m *InsightsTranscriptionResult) validate(all bool) error {
 
 	// no validation rules for FromUserId
 
+	// no validation rules for FromUserName
+
 	// no validation rules for Lang
 
 	// no validation rules for Text
 
 	// no validation rules for IsPartial
+
+	// no validation rules for AllowedTranscriptionStorage
 
 	// no validation rules for Translations
 
@@ -1227,6 +1233,10 @@ func (m *InsightsGetUserStatusRes) validate(all bool) error {
 
 	if m.SpokenLang != nil {
 		// no validation rules for SpokenLang
+	}
+
+	if m.AllowedTranscriptionStorage != nil {
+		// no validation rules for AllowedTranscriptionStorage
 	}
 
 	if len(errors) > 0 {
