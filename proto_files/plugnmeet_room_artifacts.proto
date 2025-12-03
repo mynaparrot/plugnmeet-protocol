@@ -79,6 +79,9 @@ message RoomArtifactMetadata {
     RoomArtifactDurationUsage duration_usage = 5;
     RoomArtifactCharacterCountUsage character_count_usage = 6;
   }
+
+  // A field to link a file artifact back to its usage artifact.
+  optional string reference_artifact_id = 10;
 }
 
 // Webhook-specific Messages

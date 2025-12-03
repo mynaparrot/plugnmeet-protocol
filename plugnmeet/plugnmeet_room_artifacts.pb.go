@@ -484,9 +484,11 @@ type RoomArtifactMetadata struct {
 	//	*RoomArtifactMetadata_TokenUsage
 	//	*RoomArtifactMetadata_DurationUsage
 	//	*RoomArtifactMetadata_CharacterCountUsage
-	UsageDetails  isRoomArtifactMetadata_UsageDetails `protobuf_oneof:"usage_details"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	UsageDetails isRoomArtifactMetadata_UsageDetails `protobuf_oneof:"usage_details"`
+	// Add a field to link a file artifact back to its usage artifact.
+	ReferenceArtifactId *string `protobuf:"bytes,10,opt,name=reference_artifact_id,json=referenceArtifactId,proto3,oneof" json:"reference_artifact_id,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *RoomArtifactMetadata) Reset() {
@@ -572,6 +574,13 @@ func (x *RoomArtifactMetadata) GetCharacterCountUsage() *RoomArtifactCharacterCo
 		}
 	}
 	return nil
+}
+
+func (x *RoomArtifactMetadata) GetReferenceArtifactId() string {
+	if x != nil && x.ReferenceArtifactId != nil {
+		return *x.ReferenceArtifactId
+	}
+	return ""
 }
 
 type isRoomArtifactMetadata_UsageDetails interface {
@@ -702,7 +711,7 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\x0eBreakdownEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01B\"\n" +
-	" _total_characters_estimated_cost\"\xee\x03\n" +
+	" _total_characters_estimated_cost\"\xc1\x04\n" +
 	"\x14RoomArtifactMetadata\x12<\n" +
 	"\tuser_info\x18\x01 \x01(\v2\x1f.plugnmeet.RoomArtifactUserInfoR\buserInfo\x12R\n" +
 	"\x11provider_job_info\x18\x02 \x01(\v2&.plugnmeet.RoomArtifactProviderJobInfoR\x0fproviderJobInfo\x12<\n" +
@@ -710,8 +719,11 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\vtoken_usage\x18\x04 \x01(\v2!.plugnmeet.RoomArtifactTokenUsageH\x00R\n" +
 	"tokenUsage\x12M\n" +
 	"\x0eduration_usage\x18\x05 \x01(\v2$.plugnmeet.RoomArtifactDurationUsageH\x00R\rdurationUsage\x12`\n" +
-	"\x15character_count_usage\x18\x06 \x01(\v2*.plugnmeet.RoomArtifactCharacterCountUsageH\x00R\x13characterCountUsageB\x0f\n" +
-	"\rusage_details\"\xa9\x01\n" +
+	"\x15character_count_usage\x18\x06 \x01(\v2*.plugnmeet.RoomArtifactCharacterCountUsageH\x00R\x13characterCountUsage\x127\n" +
+	"\x15reference_artifact_id\x18\n" +
+	" \x01(\tH\x01R\x13referenceArtifactId\x88\x01\x01B\x0f\n" +
+	"\rusage_detailsB\x18\n" +
+	"\x16_reference_artifact_id\"\xa9\x01\n" +
 	"\x18RoomArtifactWebhookEvent\x12/\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1b.plugnmeet.RoomArtifactTypeR\x04type\x12\x1f\n" +
 	"\vartifact_id\x18\x02 \x01(\tR\n" +

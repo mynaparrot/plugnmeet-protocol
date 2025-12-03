@@ -938,6 +938,10 @@ func (m *RoomArtifactMetadata) validate(all bool) error {
 		_ = v // ensures v is used
 	}
 
+	if m.ReferenceArtifactId != nil {
+		// no validation rules for ReferenceArtifactId
+	}
+
 	if len(errors) > 0 {
 		return RoomArtifactMetadataMultiError(errors)
 	}
