@@ -20,34 +20,52 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 
 	if rf.ChatFeatures == nil {
 		rf.ChatFeatures = &plugnmeet.ChatFeatures{
-			AllowChat:       false,
-			AllowFileUpload: false,
+			AllowChat:             false,
+			AllowFileUpload:       false,
+			IsAllowChat:           false,
+			IsAllowChatFileUpload: false,
 		}
+	} else {
+		// backward compatibility
+		rf.ChatFeatures.IsAllowChat = rf.ChatFeatures.AllowChat
+		rf.ChatFeatures.IsAllowChatFileUpload = rf.ChatFeatures.AllowFileUpload
 	}
 
 	if rf.SharedNotePadFeatures == nil {
 		rf.SharedNotePadFeatures = &plugnmeet.SharedNotePadFeatures{
 			AllowedSharedNotePad: false,
+			IsAllow:              false,
 			IsActive:             false,
 			Visible:              false,
 		}
+	} else {
+		// backward compatibility
+		rf.SharedNotePadFeatures.IsAllow = rf.SharedNotePadFeatures.AllowedSharedNotePad
 	}
 
 	if rf.WhiteboardFeatures == nil {
 		rf.WhiteboardFeatures = &plugnmeet.WhiteboardFeatures{
 			AllowedWhiteboard: false,
+			IsAllow:           false,
 			Visible:           false,
 			WhiteboardFileId:  "default",
 			FileName:          "default",
 			TotalPages:        10,
 		}
+	} else {
+		// backward compatibility
+		rf.WhiteboardFeatures.IsAllow = rf.WhiteboardFeatures.AllowedWhiteboard
 	}
 
 	if rf.ExternalMediaPlayerFeatures == nil {
 		rf.ExternalMediaPlayerFeatures = &plugnmeet.ExternalMediaPlayerFeatures{
 			AllowedExternalMediaPlayer: false,
+			IsAllow:                    false,
 			IsActive:                   false,
 		}
+	} else {
+		// backward compatibility
+		rf.ExternalMediaPlayerFeatures.IsAllow = rf.ExternalMediaPlayerFeatures.AllowedExternalMediaPlayer
 	}
 
 	if rf.WaitingRoomFeatures == nil {
@@ -118,6 +136,12 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 				},
 			},
 		}
+		// backward compatibility
+		if rf.SpeechToTextTranslationFeatures.IsAllow {
+			rf.InsightsFeatures.IsAllow = true
+			rf.InsightsFeatures.TranscriptionFeatures.IsAllow = true
+			rf.InsightsFeatures.TranscriptionFeatures.IsAllowTranslation = rf.SpeechToTextTranslationFeatures.IsAllowTranslation
+		}
 	}
 
 	if r.Metadata.DefaultLockSettings == nil {
@@ -137,18 +161,18 @@ func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhit
 		rf.AutoGenUserId = ff
 	}
 
-	if rf.SharedNotePadFeatures.AllowedSharedNotePad && !allowedNotepad {
-		rf.SharedNotePadFeatures.AllowedSharedNotePad = false
+	if rf.SharedNotePadFeatures.IsAllow && !allowedNotepad {
+		rf.SharedNotePadFeatures.IsAllow = false
 	}
 
-	if rf.ChatFeatures.AllowFileUpload {
+	if rf.ChatFeatures.IsAllowChatFileUpload {
 		if len(rf.ChatFeatures.AllowedFileTypes) == 0 {
 			rf.ChatFeatures.AllowedFileTypes = allowedTypes
 		}
 		rf.ChatFeatures.MaxFileSize = &maxSize
 	}
 
-	if rf.WhiteboardFeatures.AllowedWhiteboard {
+	if rf.WhiteboardFeatures.IsAllow {
 		if maxSizeWhiteboardFile < 1 {
 			maxSizeWhiteboardFile = 30
 		}

@@ -54,7 +54,8 @@ message RoomCreateFeatures {
   bool allow_view_other_webcams = 5;
   bool allow_view_other_users_list = 6;
   bool admin_only_webcams = 7;
-  bool allow_polls = 8 [deprecated=true];
+  // deprecated use polls_features
+  bool allow_polls = 8 [deprecated = true];
   optional uint64 room_duration = 9;
   bool enable_analytics = 10;
   optional bool allow_virtual_bg = 11;
@@ -69,7 +70,8 @@ message RoomCreateFeatures {
   BreakoutRoomFeatures breakout_room_features = 20;
   DisplayExternalLinkFeatures display_external_link_features = 21;
   IngressFeatures ingress_features = 22;
-  SpeechToTextTranslationFeatures speech_to_text_translation_features = 23;
+  // deprecated use insights_features
+  SpeechToTextTranslationFeatures speech_to_text_translation_features = 23 [deprecated = true];
   EndToEndEncryptionFeatures end_to_end_encryption_features = 24;
   PollsFeatures polls_features = 25;
   InsightsFeatures insights_features = 26;
@@ -77,14 +79,19 @@ message RoomCreateFeatures {
 }
 
 message ChatFeatures {
-  bool allow_chat = 1;
-  bool allow_file_upload = 2;
+  bool allow_chat = 1 [deprecated = true];
+  bool allow_file_upload = 2 [deprecated = true];
+  bool is_allow_chat = 5;
+  bool is_allow_chat_file_upload = 6;
+
   repeated string allowed_file_types = 3;
   optional uint64 max_file_size = 4;
 }
 
 message SharedNotePadFeatures {
-  bool allowed_shared_note_pad = 1;
+  bool allowed_shared_note_pad = 1 [deprecated = true];
+  bool is_allow = 8;
+
   bool is_active = 2 [(buf.validate.field).bool.const = false];
   bool visible = 3 [(buf.validate.field).bool.const = false];
   string node_id = 4 [(buf.validate.field).cel = {
@@ -110,7 +117,9 @@ message SharedNotePadFeatures {
 }
 
 message WhiteboardFeatures {
-  bool allowed_whiteboard = 1;
+  bool allowed_whiteboard = 1 [deprecated = true];
+  bool is_allow = 9;
+
   bool visible = 2 [(buf.validate.field).bool.const = false];
   optional string preload_file = 3 [(buf.validate.field).string.uri = true];
   string whiteboard_file_id = 4 [(buf.validate.field).cel = {
@@ -133,7 +142,9 @@ message WhiteboardFeatures {
 }
 
 message ExternalMediaPlayerFeatures {
-  bool allowed_external_media_player = 1;
+  bool allowed_external_media_player = 1 [deprecated = true];
+  bool is_allow = 5;
+
   bool is_active = 2 [(buf.validate.field).bool.const = false];
   optional string shared_by = 3 [(buf.validate.field).cel = {
     id: "shared_by_format",
@@ -188,6 +199,7 @@ message IngressFeatures {
   }];
 }
 
+// deprecated use insights_features
 message SpeechToTextTranslationFeatures {
   bool is_allow = 1;
   bool is_allow_translation = 2;
@@ -208,16 +220,15 @@ message SpeechToTextTranslationFeatures {
 message EndToEndEncryptionFeatures {
   bool is_enabled = 1;
   bool included_chat_messages = 2;
-  // SCENE_UPDATE, POINTER_UPDATE
-  // this may use more CPU for the user end.
-  // do not enable it unless really necessary
   bool included_whiteboard = 3;
+  bool enabled_self_insert_encryption_key = 5;
+
+  // internal fields
   optional string encryption_key = 4 [(buf.validate.field).cel = {
     id: "encryption_key_format",
     message: "encryption_key should not contain any value",
     expression: "this.matches('^$')"
   }];
-  bool enabled_self_insert_encryption_key = 5;
 }
 
 message PollsFeatures {

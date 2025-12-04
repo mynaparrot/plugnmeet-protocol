@@ -944,11 +944,15 @@ func (x *FetchPastRoomsRes) GetResult() *FetchPastRoomsResult {
 }
 
 type GetClientFilesRes struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
-	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	Css           []string               `protobuf:"bytes,3,rep,name=css,proto3" json:"css,omitempty"`
-	Js            []string               `protobuf:"bytes,4,rep,name=js,proto3" json:"js,omitempty"`
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	Status bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	Msg    string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	// Deprecated: Marked as deprecated in plugnmeet_auth_room.proto.
+	Css []string `protobuf:"bytes,3,rep,name=css,proto3" json:"css,omitempty"`
+	// Deprecated: Marked as deprecated in plugnmeet_auth_room.proto.
+	Js            []string `protobuf:"bytes,4,rep,name=js,proto3" json:"js,omitempty"`
+	CssFiles      []string `protobuf:"bytes,5,rep,name=css_files,json=cssFiles,proto3" json:"css_files,omitempty"`
+	JsFiles       []string `protobuf:"bytes,6,rep,name=js_files,json=jsFiles,proto3" json:"js_files,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -997,6 +1001,7 @@ func (x *GetClientFilesRes) GetMsg() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in plugnmeet_auth_room.proto.
 func (x *GetClientFilesRes) GetCss() []string {
 	if x != nil {
 		return x.Css
@@ -1004,9 +1009,24 @@ func (x *GetClientFilesRes) GetCss() []string {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in plugnmeet_auth_room.proto.
 func (x *GetClientFilesRes) GetJs() []string {
 	if x != nil {
 		return x.Js
+	}
+	return nil
+}
+
+func (x *GetClientFilesRes) GetCssFiles() []string {
+	if x != nil {
+		return x.CssFiles
+	}
+	return nil
+}
+
+func (x *GetClientFilesRes) GetJsFiles() []string {
+	if x != nil {
+		return x.JsFiles
 	}
 	return nil
 }
@@ -1095,12 +1115,14 @@ const file_plugnmeet_auth_room_proto_rawDesc = "" +
 	"\x11FetchPastRoomsRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x127\n" +
-	"\x06result\x18\x03 \x01(\v2\x1f.plugnmeet.FetchPastRoomsResultR\x06result\"_\n" +
+	"\x06result\x18\x03 \x01(\v2\x1f.plugnmeet.FetchPastRoomsResultR\x06result\"\x9f\x01\n" +
 	"\x11GetClientFilesRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x10\n" +
-	"\x03css\x18\x03 \x03(\tR\x03css\x12\x0e\n" +
-	"\x02js\x18\x04 \x03(\tR\x02jsB\x9f\x01\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x14\n" +
+	"\x03css\x18\x03 \x03(\tB\x02\x18\x01R\x03css\x12\x12\n" +
+	"\x02js\x18\x04 \x03(\tB\x02\x18\x01R\x02js\x12\x1b\n" +
+	"\tcss_files\x18\x05 \x03(\tR\bcssFiles\x12\x19\n" +
+	"\bjs_files\x18\x06 \x03(\tR\ajsFilesB\x9f\x01\n" +
 	"\rcom.plugnmeetB\x16PlugnmeetAuthRoomProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (

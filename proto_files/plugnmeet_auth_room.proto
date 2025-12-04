@@ -104,6 +104,8 @@ message FetchPastRoomsRes{
 message GetClientFilesRes {
   bool status = 1;
   string msg = 2;
-  repeated string css = 3;
-  repeated string js = 4;
+  repeated string css = 3 [deprecated = true];
+  repeated string js = 4 [deprecated = true];
+  repeated string css_files = 5;
+  repeated string js_files = 6;
 }

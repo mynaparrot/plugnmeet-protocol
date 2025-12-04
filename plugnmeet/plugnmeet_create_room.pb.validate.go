@@ -931,6 +931,10 @@ func (m *ChatFeatures) validate(all bool) error {
 
 	// no validation rules for AllowFileUpload
 
+	// no validation rules for IsAllowChat
+
+	// no validation rules for IsAllowChatFileUpload
+
 	if m.MaxFileSize != nil {
 		// no validation rules for MaxFileSize
 	}
@@ -1035,6 +1039,8 @@ func (m *SharedNotePadFeatures) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for AllowedSharedNotePad
+
+	// no validation rules for IsAllow
 
 	// no validation rules for IsActive
 
@@ -1151,6 +1157,8 @@ func (m *WhiteboardFeatures) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for AllowedWhiteboard
+
+	// no validation rules for IsAllow
 
 	// no validation rules for Visible
 
@@ -1273,6 +1281,8 @@ func (m *ExternalMediaPlayerFeatures) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for AllowedExternalMediaPlayer
+
+	// no validation rules for IsAllow
 
 	// no validation rules for IsActive
 
