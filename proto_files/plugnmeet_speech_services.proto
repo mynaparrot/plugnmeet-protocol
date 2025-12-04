@@ -2,6 +2,7 @@ syntax = "proto3";
 package plugnmeet;
 
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+option php_namespace = "Mynaparrot\\PlugnmeetProto";
 
 message SpeechToTextTranslationReq {
   string room_id = 1;

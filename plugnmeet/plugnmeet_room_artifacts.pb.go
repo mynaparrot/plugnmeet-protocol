@@ -485,7 +485,7 @@ type RoomArtifactMetadata struct {
 	//	*RoomArtifactMetadata_DurationUsage
 	//	*RoomArtifactMetadata_CharacterCountUsage
 	UsageDetails isRoomArtifactMetadata_UsageDetails `protobuf_oneof:"usage_details"`
-	// Add a field to link a file artifact back to its usage artifact.
+	// A field to link a file artifact back to its usage artifact.
 	ReferenceArtifactId *string `protobuf:"bytes,10,opt,name=reference_artifact_id,json=referenceArtifactId,proto3,oneof" json:"reference_artifact_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache

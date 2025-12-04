@@ -1,6 +1,8 @@
 syntax = "proto3";
 package plugnmeet;
+
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+option php_namespace = "Mynaparrot\\PlugnmeetProto";
 
 enum InsightsServiceType {
   INSIGHTS_SERVICE_TYPE_UNSPECIFIED = 0;
