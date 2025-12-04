@@ -931,9 +931,9 @@ func (m *ChatFeatures) validate(all bool) error {
 
 	// no validation rules for AllowFileUpload
 
-	// no validation rules for IsAllowChat
+	// no validation rules for IsAllow
 
-	// no validation rules for IsAllowChatFileUpload
+	// no validation rules for IsAllowFileUpload
 
 	if m.MaxFileSize != nil {
 		// no validation rules for MaxFileSize

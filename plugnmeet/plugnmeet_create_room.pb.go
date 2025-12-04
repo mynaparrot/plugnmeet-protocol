@@ -496,13 +496,13 @@ type ChatFeatures struct {
 	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
 	AllowChat bool `protobuf:"varint,1,opt,name=allow_chat,json=allowChat,proto3" json:"allow_chat,omitempty"`
 	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-	AllowFileUpload       bool     `protobuf:"varint,2,opt,name=allow_file_upload,json=allowFileUpload,proto3" json:"allow_file_upload,omitempty"`
-	IsAllowChat           bool     `protobuf:"varint,5,opt,name=is_allow_chat,json=isAllowChat,proto3" json:"is_allow_chat,omitempty"`
-	IsAllowChatFileUpload bool     `protobuf:"varint,6,opt,name=is_allow_chat_file_upload,json=isAllowChatFileUpload,proto3" json:"is_allow_chat_file_upload,omitempty"`
-	AllowedFileTypes      []string `protobuf:"bytes,3,rep,name=allowed_file_types,json=allowedFileTypes,proto3" json:"allowed_file_types,omitempty"`
-	MaxFileSize           *uint64  `protobuf:"varint,4,opt,name=max_file_size,json=maxFileSize,proto3,oneof" json:"max_file_size,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	AllowFileUpload   bool     `protobuf:"varint,2,opt,name=allow_file_upload,json=allowFileUpload,proto3" json:"allow_file_upload,omitempty"`
+	IsAllow           bool     `protobuf:"varint,5,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
+	IsAllowFileUpload bool     `protobuf:"varint,6,opt,name=is_allow_file_upload,json=isAllowFileUpload,proto3" json:"is_allow_file_upload,omitempty"`
+	AllowedFileTypes  []string `protobuf:"bytes,3,rep,name=allowed_file_types,json=allowedFileTypes,proto3" json:"allowed_file_types,omitempty"`
+	MaxFileSize       *uint64  `protobuf:"varint,4,opt,name=max_file_size,json=maxFileSize,proto3,oneof" json:"max_file_size,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ChatFeatures) Reset() {
@@ -551,16 +551,16 @@ func (x *ChatFeatures) GetAllowFileUpload() bool {
 	return false
 }
 
-func (x *ChatFeatures) GetIsAllowChat() bool {
+func (x *ChatFeatures) GetIsAllow() bool {
 	if x != nil {
-		return x.IsAllowChat
+		return x.IsAllow
 	}
 	return false
 }
 
-func (x *ChatFeatures) GetIsAllowChatFileUpload() bool {
+func (x *ChatFeatures) GetIsAllowFileUpload() bool {
 	if x != nil {
-		return x.IsAllowChatFileUpload
+		return x.IsAllowFileUpload
 	}
 	return false
 }
@@ -2078,13 +2078,13 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x0e_room_durationB\x13\n" +
 	"\x11_allow_virtual_bgB\x13\n" +
 	"\x11_allow_raise_handB\x13\n" +
-	"\x11_auto_gen_user_id\"\xa8\x02\n" +
+	"\x11_auto_gen_user_id\"\x96\x02\n" +
 	"\fChatFeatures\x12!\n" +
 	"\n" +
 	"allow_chat\x18\x01 \x01(\bB\x02\x18\x01R\tallowChat\x12.\n" +
-	"\x11allow_file_upload\x18\x02 \x01(\bB\x02\x18\x01R\x0fallowFileUpload\x12\"\n" +
-	"\ris_allow_chat\x18\x05 \x01(\bR\visAllowChat\x128\n" +
-	"\x19is_allow_chat_file_upload\x18\x06 \x01(\bR\x15isAllowChatFileUpload\x12,\n" +
+	"\x11allow_file_upload\x18\x02 \x01(\bB\x02\x18\x01R\x0fallowFileUpload\x12\x19\n" +
+	"\bis_allow\x18\x05 \x01(\bR\aisAllow\x12/\n" +
+	"\x14is_allow_file_upload\x18\x06 \x01(\bR\x11isAllowFileUpload\x12,\n" +
 	"\x12allowed_file_types\x18\x03 \x03(\tR\x10allowedFileTypes\x12'\n" +
 	"\rmax_file_size\x18\x04 \x01(\x04H\x00R\vmaxFileSize\x88\x01\x01B\x10\n" +
 	"\x0e_max_file_size\"\x89\x05\n" +

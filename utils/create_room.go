@@ -20,15 +20,15 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 
 	if rf.ChatFeatures == nil {
 		rf.ChatFeatures = &plugnmeet.ChatFeatures{
-			AllowChat:             false,
-			AllowFileUpload:       false,
-			IsAllowChat:           false,
-			IsAllowChatFileUpload: false,
+			AllowChat:         false,
+			AllowFileUpload:   false,
+			IsAllow:           false,
+			IsAllowFileUpload: false,
 		}
 	} else {
 		// backward compatibility
-		rf.ChatFeatures.IsAllowChat = rf.ChatFeatures.AllowChat
-		rf.ChatFeatures.IsAllowChatFileUpload = rf.ChatFeatures.AllowFileUpload
+		rf.ChatFeatures.IsAllow = rf.ChatFeatures.AllowChat
+		rf.ChatFeatures.IsAllowFileUpload = rf.ChatFeatures.AllowFileUpload
 	}
 
 	if rf.SharedNotePadFeatures == nil {
@@ -165,7 +165,7 @@ func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhit
 		rf.SharedNotePadFeatures.IsAllow = false
 	}
 
-	if rf.ChatFeatures.IsAllowChatFileUpload {
+	if rf.ChatFeatures.IsAllowFileUpload {
 		if len(rf.ChatFeatures.AllowedFileTypes) == 0 {
 			rf.ChatFeatures.AllowedFileTypes = allowedTypes
 		}

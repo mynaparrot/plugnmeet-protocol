@@ -81,8 +81,8 @@ message RoomCreateFeatures {
 message ChatFeatures {
   bool allow_chat = 1 [deprecated = true];
   bool allow_file_upload = 2 [deprecated = true];
-  bool is_allow_chat = 5;
-  bool is_allow_chat_file_upload = 6;
+  bool is_allow = 5;
+  bool is_allow_file_upload = 6;
 
   repeated string allowed_file_types = 3;
   optional uint64 max_file_size = 4;
