@@ -648,7 +648,7 @@ type PastRoomInfo struct {
 	WebhookUrl         string                 `protobuf:"bytes,5,opt,name=webhook_url,json=webhookUrl,proto3" json:"webhook_url,omitempty"`
 	Created            string                 `protobuf:"bytes,6,opt,name=created,proto3" json:"created,omitempty"`
 	Ended              string                 `protobuf:"bytes,7,opt,name=ended,proto3" json:"ended,omitempty"`
-	AnalyticsFileId    string                 `protobuf:"bytes,8,opt,name=analytics_file_id,json=analyticsFileId,proto3" json:"analytics_file_id,omitempty"`
+	AnalyticsFileId    *string                `protobuf:"bytes,8,opt,name=analytics_file_id,json=analyticsFileId,proto3,oneof" json:"analytics_file_id,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -733,8 +733,8 @@ func (x *PastRoomInfo) GetEnded() string {
 }
 
 func (x *PastRoomInfo) GetAnalyticsFileId() string {
-	if x != nil {
-		return x.AnalyticsFileId
+	if x != nil && x.AnalyticsFileId != nil {
+		return *x.AnalyticsFileId
 	}
 	return ""
 }
@@ -1087,7 +1087,7 @@ const file_plugnmeet_auth_room_proto_rawDesc = "" +
 	"\x15GetActiveRoomsInfoRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12:\n" +
-	"\x05rooms\x18\x03 \x03(\v2$.plugnmeet.ActiveRoomWithParticipantR\x05rooms\"\x8f\x02\n" +
+	"\x05rooms\x18\x03 \x03(\v2$.plugnmeet.ActiveRoomWithParticipantR\x05rooms\"\xaa\x02\n" +
 	"\fPastRoomInfo\x12\x1d\n" +
 	"\n" +
 	"room_title\x18\x01 \x01(\tR\troomTitle\x12\x17\n" +
@@ -1097,8 +1097,9 @@ const file_plugnmeet_auth_room_proto_rawDesc = "" +
 	"\vwebhook_url\x18\x05 \x01(\tR\n" +
 	"webhookUrl\x12\x18\n" +
 	"\acreated\x18\x06 \x01(\tR\acreated\x12\x14\n" +
-	"\x05ended\x18\a \x01(\tR\x05ended\x12*\n" +
-	"\x11analytics_file_id\x18\b \x01(\tR\x0fanalyticsFileId\"s\n" +
+	"\x05ended\x18\a \x01(\tR\x05ended\x12/\n" +
+	"\x11analytics_file_id\x18\b \x01(\tH\x00R\x0fanalyticsFileId\x88\x01\x01B\x14\n" +
+	"\x12_analytics_file_id\"s\n" +
 	"\x11FetchPastRoomsReq\x12\x19\n" +
 	"\broom_ids\x18\x01 \x03(\tR\aroomIds\x12\x12\n" +
 	"\x04from\x18\x02 \x01(\rR\x04from\x12\x14\n" +
@@ -1179,6 +1180,7 @@ func file_plugnmeet_auth_room_proto_init() {
 	}
 	file_plugnmeet_auth_room_proto_msgTypes[1].OneofWrappers = []any{}
 	file_plugnmeet_auth_room_proto_msgTypes[7].OneofWrappers = []any{}
+	file_plugnmeet_auth_room_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

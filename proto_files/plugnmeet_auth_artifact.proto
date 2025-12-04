@@ -6,14 +6,17 @@ option php_namespace = "Mynaparrot\\PlugnmeetProto";
 
 import "buf/validate/validate.proto";
 import "plugnmeet_room_artifacts.proto";
+import "plugnmeet_auth_room.proto";
 
 // Request to fetch a list of artifacts
 message FetchArtifactsReq {
   repeated string room_ids = 1;
-  optional RoomArtifactType type = 2;
-  uint64 from = 3;
-  uint64 limit = 4;
-  string order_by = 5;
+  // To get record for particular session
+  optional string room_sid = 2;
+  optional RoomArtifactType type = 3;
+  uint64 from = 4;
+  uint64 limit = 5;
+  string order_by = 6;
 }
 
 // A single artifact entry in the list response
@@ -63,4 +66,15 @@ message DeleteArtifactReq {
 message DeleteArtifactRes {
   bool status = 1;
   string msg = 2;
+}
+
+message ArtifactDetailsReq {
+  string artifact_id = 1 [(buf.validate.field).required = true];
+}
+
+message ArtifactDetailsRes {
+  bool status = 1;
+  string msg = 2;
+  optional ArtifactInfo artifact_info = 3;
+  optional PastRoomInfo room_info = 4;
 }

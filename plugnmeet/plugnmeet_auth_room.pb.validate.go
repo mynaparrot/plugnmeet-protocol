@@ -1328,7 +1328,9 @@ func (m *PastRoomInfo) validate(all bool) error {
 
 	// no validation rules for Ended
 
-	// no validation rules for AnalyticsFileId
+	if m.AnalyticsFileId != nil {
+		// no validation rules for AnalyticsFileId
+	}
 
 	if len(errors) > 0 {
 		return PastRoomInfoMultiError(errors)

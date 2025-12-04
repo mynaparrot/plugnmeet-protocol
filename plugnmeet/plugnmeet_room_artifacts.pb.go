@@ -25,39 +25,42 @@ type RoomArtifactType int32
 
 const (
 	RoomArtifactType_UNKNOWN_ARTIFACT                 RoomArtifactType = 0
-	RoomArtifactType_MEETING_SUMMARY                  RoomArtifactType = 1
-	RoomArtifactType_MEETING_SUMMARY_USAGE            RoomArtifactType = 2
-	RoomArtifactType_SPEECH_TRANSCRIPTION             RoomArtifactType = 3
-	RoomArtifactType_SPEECH_TRANSCRIPTION_USAGE       RoomArtifactType = 4
-	RoomArtifactType_SYNTHESIZED_SPEECH_USAGE         RoomArtifactType = 5
-	RoomArtifactType_CHAT_TRANSLATION_USAGE           RoomArtifactType = 6
-	RoomArtifactType_AI_TEXT_CHAT_INTERACTION_USAGE   RoomArtifactType = 7
-	RoomArtifactType_AI_TEXT_CHAT_SUMMARIZATION_USAGE RoomArtifactType = 8
+	RoomArtifactType_MEETING_ANALYTICS                RoomArtifactType = 1
+	RoomArtifactType_MEETING_SUMMARY                  RoomArtifactType = 2
+	RoomArtifactType_MEETING_SUMMARY_USAGE            RoomArtifactType = 3
+	RoomArtifactType_SPEECH_TRANSCRIPTION             RoomArtifactType = 4
+	RoomArtifactType_SPEECH_TRANSCRIPTION_USAGE       RoomArtifactType = 5
+	RoomArtifactType_SYNTHESIZED_SPEECH_USAGE         RoomArtifactType = 6
+	RoomArtifactType_CHAT_TRANSLATION_USAGE           RoomArtifactType = 7
+	RoomArtifactType_AI_TEXT_CHAT_INTERACTION_USAGE   RoomArtifactType = 8
+	RoomArtifactType_AI_TEXT_CHAT_SUMMARIZATION_USAGE RoomArtifactType = 9
 )
 
 // Enum value maps for RoomArtifactType.
 var (
 	RoomArtifactType_name = map[int32]string{
 		0: "UNKNOWN_ARTIFACT",
-		1: "MEETING_SUMMARY",
-		2: "MEETING_SUMMARY_USAGE",
-		3: "SPEECH_TRANSCRIPTION",
-		4: "SPEECH_TRANSCRIPTION_USAGE",
-		5: "SYNTHESIZED_SPEECH_USAGE",
-		6: "CHAT_TRANSLATION_USAGE",
-		7: "AI_TEXT_CHAT_INTERACTION_USAGE",
-		8: "AI_TEXT_CHAT_SUMMARIZATION_USAGE",
+		1: "MEETING_ANALYTICS",
+		2: "MEETING_SUMMARY",
+		3: "MEETING_SUMMARY_USAGE",
+		4: "SPEECH_TRANSCRIPTION",
+		5: "SPEECH_TRANSCRIPTION_USAGE",
+		6: "SYNTHESIZED_SPEECH_USAGE",
+		7: "CHAT_TRANSLATION_USAGE",
+		8: "AI_TEXT_CHAT_INTERACTION_USAGE",
+		9: "AI_TEXT_CHAT_SUMMARIZATION_USAGE",
 	}
 	RoomArtifactType_value = map[string]int32{
 		"UNKNOWN_ARTIFACT":                 0,
-		"MEETING_SUMMARY":                  1,
-		"MEETING_SUMMARY_USAGE":            2,
-		"SPEECH_TRANSCRIPTION":             3,
-		"SPEECH_TRANSCRIPTION_USAGE":       4,
-		"SYNTHESIZED_SPEECH_USAGE":         5,
-		"CHAT_TRANSLATION_USAGE":           6,
-		"AI_TEXT_CHAT_INTERACTION_USAGE":   7,
-		"AI_TEXT_CHAT_SUMMARIZATION_USAGE": 8,
+		"MEETING_ANALYTICS":                1,
+		"MEETING_SUMMARY":                  2,
+		"MEETING_SUMMARY_USAGE":            3,
+		"SPEECH_TRANSCRIPTION":             4,
+		"SPEECH_TRANSCRIPTION_USAGE":       5,
+		"SYNTHESIZED_SPEECH_USAGE":         6,
+		"CHAT_TRANSLATION_USAGE":           7,
+		"AI_TEXT_CHAT_INTERACTION_USAGE":   8,
+		"AI_TEXT_CHAT_SUMMARIZATION_USAGE": 9,
 	}
 )
 
@@ -728,17 +731,18 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\x04type\x18\x01 \x01(\x0e2\x1b.plugnmeet.RoomArtifactTypeR\x04type\x12\x1f\n" +
 	"\vartifact_id\x18\x02 \x01(\tR\n" +
 	"artifactId\x12;\n" +
-	"\bmetadata\x18\x03 \x01(\v2\x1f.plugnmeet.RoomArtifactMetadataR\bmetadata*\x96\x02\n" +
+	"\bmetadata\x18\x03 \x01(\v2\x1f.plugnmeet.RoomArtifactMetadataR\bmetadata*\xad\x02\n" +
 	"\x10RoomArtifactType\x12\x14\n" +
-	"\x10UNKNOWN_ARTIFACT\x10\x00\x12\x13\n" +
-	"\x0fMEETING_SUMMARY\x10\x01\x12\x19\n" +
-	"\x15MEETING_SUMMARY_USAGE\x10\x02\x12\x18\n" +
-	"\x14SPEECH_TRANSCRIPTION\x10\x03\x12\x1e\n" +
-	"\x1aSPEECH_TRANSCRIPTION_USAGE\x10\x04\x12\x1c\n" +
-	"\x18SYNTHESIZED_SPEECH_USAGE\x10\x05\x12\x1a\n" +
-	"\x16CHAT_TRANSLATION_USAGE\x10\x06\x12\"\n" +
-	"\x1eAI_TEXT_CHAT_INTERACTION_USAGE\x10\a\x12$\n" +
-	" AI_TEXT_CHAT_SUMMARIZATION_USAGE\x10\bB\xa4\x01\n" +
+	"\x10UNKNOWN_ARTIFACT\x10\x00\x12\x15\n" +
+	"\x11MEETING_ANALYTICS\x10\x01\x12\x13\n" +
+	"\x0fMEETING_SUMMARY\x10\x02\x12\x19\n" +
+	"\x15MEETING_SUMMARY_USAGE\x10\x03\x12\x18\n" +
+	"\x14SPEECH_TRANSCRIPTION\x10\x04\x12\x1e\n" +
+	"\x1aSPEECH_TRANSCRIPTION_USAGE\x10\x05\x12\x1c\n" +
+	"\x18SYNTHESIZED_SPEECH_USAGE\x10\x06\x12\x1a\n" +
+	"\x16CHAT_TRANSLATION_USAGE\x10\a\x12\"\n" +
+	"\x1eAI_TEXT_CHAT_INTERACTION_USAGE\x10\b\x12$\n" +
+	" AI_TEXT_CHAT_SUMMARIZATION_USAGE\x10\tB\xa4\x01\n" +
 	"\rcom.plugnmeetB\x1bPlugnmeetRoomArtifactsProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
