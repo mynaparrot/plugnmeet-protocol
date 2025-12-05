@@ -91,15 +91,14 @@ func (x *FetchAnalyticsReq) GetOrderBy() string {
 }
 
 type AnalyticsInfo struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	RoomId           string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
-	FileId           string                 `protobuf:"bytes,2,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
-	FileName         string                 `protobuf:"bytes,3,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
-	FileSize         float64                `protobuf:"fixed64,4,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
-	CreationTime     int64                  `protobuf:"varint,5,opt,name=creation_time,json=creationTime,proto3" json:"creation_time,omitempty"`
-	RoomCreationTime int64                  `protobuf:"varint,6,opt,name=room_creation_time,json=roomCreationTime,proto3" json:"room_creation_time,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RoomId        string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	FileId        string                 `protobuf:"bytes,2,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
+	FileName      string                 `protobuf:"bytes,3,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	FileSize      float64                `protobuf:"fixed64,4,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	CreationTime  int64                  `protobuf:"varint,5,opt,name=creation_time,json=creationTime,proto3" json:"creation_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AnalyticsInfo) Reset() {
@@ -163,13 +162,6 @@ func (x *AnalyticsInfo) GetFileSize() float64 {
 func (x *AnalyticsInfo) GetCreationTime() int64 {
 	if x != nil {
 		return x.CreationTime
-	}
-	return 0
-}
-
-func (x *AnalyticsInfo) GetRoomCreationTime() int64 {
-	if x != nil {
-		return x.RoomCreationTime
 	}
 	return 0
 }
@@ -519,14 +511,13 @@ const file_plugnmeet_auth_analytics_proto_rawDesc = "" +
 	"\broom_ids\x18\x01 \x03(\tR\aroomIds\x12\x12\n" +
 	"\x04from\x18\x02 \x01(\rR\x04from\x12\x14\n" +
 	"\x05limit\x18\x03 \x01(\rR\x05limit\x12\x19\n" +
-	"\border_by\x18\x04 \x01(\tR\aorderBy\"\xce\x01\n" +
+	"\border_by\x18\x04 \x01(\tR\aorderBy\"\xa0\x01\n" +
 	"\rAnalyticsInfo\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x17\n" +
 	"\afile_id\x18\x02 \x01(\tR\x06fileId\x12\x1b\n" +
 	"\tfile_name\x18\x03 \x01(\tR\bfileName\x12\x1b\n" +
 	"\tfile_size\x18\x04 \x01(\x01R\bfileSize\x12#\n" +
-	"\rcreation_time\x18\x05 \x01(\x03R\fcreationTime\x12,\n" +
-	"\x12room_creation_time\x18\x06 \x01(\x03R\x10roomCreationTime\"\xc5\x01\n" +
+	"\rcreation_time\x18\x05 \x01(\x03R\fcreationTime\"\xc5\x01\n" +
 	"\x14FetchAnalyticsResult\x12'\n" +
 	"\x0ftotal_analytics\x18\x01 \x01(\x03R\x0etotalAnalytics\x12\x12\n" +
 	"\x04from\x18\x02 \x01(\rR\x04from\x12\x14\n" +
