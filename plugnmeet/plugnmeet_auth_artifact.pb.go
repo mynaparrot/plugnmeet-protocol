@@ -535,27 +535,27 @@ func (x *DeleteArtifactRes) GetMsg() string {
 	return ""
 }
 
-type ArtifactDetailsReq struct {
+type ArtifactInfoReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ArtifactId    string                 `protobuf:"bytes,1,opt,name=artifact_id,json=artifactId,proto3" json:"artifact_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ArtifactDetailsReq) Reset() {
-	*x = ArtifactDetailsReq{}
+func (x *ArtifactInfoReq) Reset() {
+	*x = ArtifactInfoReq{}
 	mi := &file_plugnmeet_auth_artifact_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ArtifactDetailsReq) String() string {
+func (x *ArtifactInfoReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ArtifactDetailsReq) ProtoMessage() {}
+func (*ArtifactInfoReq) ProtoMessage() {}
 
-func (x *ArtifactDetailsReq) ProtoReflect() protoreflect.Message {
+func (x *ArtifactInfoReq) ProtoReflect() protoreflect.Message {
 	mi := &file_plugnmeet_auth_artifact_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -567,19 +567,19 @@ func (x *ArtifactDetailsReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ArtifactDetailsReq.ProtoReflect.Descriptor instead.
-func (*ArtifactDetailsReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use ArtifactInfoReq.ProtoReflect.Descriptor instead.
+func (*ArtifactInfoReq) Descriptor() ([]byte, []int) {
 	return file_plugnmeet_auth_artifact_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *ArtifactDetailsReq) GetArtifactId() string {
+func (x *ArtifactInfoReq) GetArtifactId() string {
 	if x != nil {
 		return x.ArtifactId
 	}
 	return ""
 }
 
-type ArtifactDetailsRes struct {
+type ArtifactInfoRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
@@ -589,20 +589,20 @@ type ArtifactDetailsRes struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ArtifactDetailsRes) Reset() {
-	*x = ArtifactDetailsRes{}
+func (x *ArtifactInfoRes) Reset() {
+	*x = ArtifactInfoRes{}
 	mi := &file_plugnmeet_auth_artifact_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ArtifactDetailsRes) String() string {
+func (x *ArtifactInfoRes) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ArtifactDetailsRes) ProtoMessage() {}
+func (*ArtifactInfoRes) ProtoMessage() {}
 
-func (x *ArtifactDetailsRes) ProtoReflect() protoreflect.Message {
+func (x *ArtifactInfoRes) ProtoReflect() protoreflect.Message {
 	mi := &file_plugnmeet_auth_artifact_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -614,33 +614,33 @@ func (x *ArtifactDetailsRes) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ArtifactDetailsRes.ProtoReflect.Descriptor instead.
-func (*ArtifactDetailsRes) Descriptor() ([]byte, []int) {
+// Deprecated: Use ArtifactInfoRes.ProtoReflect.Descriptor instead.
+func (*ArtifactInfoRes) Descriptor() ([]byte, []int) {
 	return file_plugnmeet_auth_artifact_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *ArtifactDetailsRes) GetStatus() bool {
+func (x *ArtifactInfoRes) GetStatus() bool {
 	if x != nil {
 		return x.Status
 	}
 	return false
 }
 
-func (x *ArtifactDetailsRes) GetMsg() string {
+func (x *ArtifactInfoRes) GetMsg() string {
 	if x != nil {
 		return x.Msg
 	}
 	return ""
 }
 
-func (x *ArtifactDetailsRes) GetArtifactInfo() *ArtifactInfo {
+func (x *ArtifactInfoRes) GetArtifactInfo() *ArtifactInfo {
 	if x != nil {
 		return x.ArtifactInfo
 	}
 	return nil
 }
 
-func (x *ArtifactDetailsRes) GetRoomInfo() *PastRoomInfo {
+func (x *ArtifactInfoRes) GetRoomInfo() *PastRoomInfo {
 	if x != nil {
 		return x.RoomInfo
 	}
@@ -693,11 +693,11 @@ const file_plugnmeet_auth_artifact_proto_rawDesc = "" +
 	"artifactId\"=\n" +
 	"\x11DeleteArtifactRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\"=\n" +
-	"\x12ArtifactDetailsReq\x12'\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\":\n" +
+	"\x0fArtifactInfoReq\x12'\n" +
 	"\vartifact_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\n" +
-	"artifactId\"\xdc\x01\n" +
-	"\x12ArtifactDetailsRes\x12\x16\n" +
+	"artifactId\"\xd9\x01\n" +
+	"\x0fArtifactInfoRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12A\n" +
 	"\rartifact_info\x18\x03 \x01(\v2\x17.plugnmeet.ArtifactInfoH\x00R\fartifactInfo\x88\x01\x01\x129\n" +
@@ -729,8 +729,8 @@ var file_plugnmeet_auth_artifact_proto_goTypes = []any{
 	(*GetArtifactDownloadTokenRes)(nil), // 5: plugnmeet.GetArtifactDownloadTokenRes
 	(*DeleteArtifactReq)(nil),           // 6: plugnmeet.DeleteArtifactReq
 	(*DeleteArtifactRes)(nil),           // 7: plugnmeet.DeleteArtifactRes
-	(*ArtifactDetailsReq)(nil),          // 8: plugnmeet.ArtifactDetailsReq
-	(*ArtifactDetailsRes)(nil),          // 9: plugnmeet.ArtifactDetailsRes
+	(*ArtifactInfoReq)(nil),             // 8: plugnmeet.ArtifactInfoReq
+	(*ArtifactInfoRes)(nil),             // 9: plugnmeet.ArtifactInfoRes
 	(RoomArtifactType)(0),               // 10: plugnmeet.RoomArtifactType
 	(*RoomArtifactMetadata)(nil),        // 11: plugnmeet.RoomArtifactMetadata
 	(*PastRoomInfo)(nil),                // 12: plugnmeet.PastRoomInfo
@@ -742,8 +742,8 @@ var file_plugnmeet_auth_artifact_proto_depIdxs = []int32{
 	10, // 3: plugnmeet.FetchArtifactsResult.type:type_name -> plugnmeet.RoomArtifactType
 	1,  // 4: plugnmeet.FetchArtifactsResult.artifacts_list:type_name -> plugnmeet.ArtifactInfo
 	2,  // 5: plugnmeet.FetchArtifactsRes.result:type_name -> plugnmeet.FetchArtifactsResult
-	1,  // 6: plugnmeet.ArtifactDetailsRes.artifact_info:type_name -> plugnmeet.ArtifactInfo
-	12, // 7: plugnmeet.ArtifactDetailsRes.room_info:type_name -> plugnmeet.PastRoomInfo
+	1,  // 6: plugnmeet.ArtifactInfoRes.artifact_info:type_name -> plugnmeet.ArtifactInfo
+	12, // 7: plugnmeet.ArtifactInfoRes.room_info:type_name -> plugnmeet.PastRoomInfo
 	8,  // [8:8] is the sub-list for method output_type
 	8,  // [8:8] is the sub-list for method input_type
 	8,  // [8:8] is the sub-list for extension type_name

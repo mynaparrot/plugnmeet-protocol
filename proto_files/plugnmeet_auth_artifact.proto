@@ -68,11 +68,11 @@ message DeleteArtifactRes {
   string msg = 2;
 }
 
-message ArtifactDetailsReq {
+message ArtifactInfoReq {
   string artifact_id = 1 [(buf.validate.field).required = true];
 }
 
-message ArtifactDetailsRes {
+message ArtifactInfoRes {
   bool status = 1;
   string msg = 2;
   optional ArtifactInfo artifact_info = 3;

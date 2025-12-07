@@ -996,22 +996,22 @@ var _ interface {
 	ErrorName() string
 } = DeleteArtifactResValidationError{}
 
-// Validate checks the field values on ArtifactDetailsReq with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ArtifactDetailsReq) Validate() error {
+// Validate checks the field values on ArtifactInfoReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ArtifactInfoReq) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ArtifactDetailsReq with the rules
+// ValidateAll checks the field values on ArtifactInfoReq with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ArtifactDetailsReqMultiError, or nil if none found.
-func (m *ArtifactDetailsReq) ValidateAll() error {
+// ArtifactInfoReqMultiError, or nil if none found.
+func (m *ArtifactInfoReq) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ArtifactDetailsReq) validate(all bool) error {
+func (m *ArtifactInfoReq) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1021,19 +1021,19 @@ func (m *ArtifactDetailsReq) validate(all bool) error {
 	// no validation rules for ArtifactId
 
 	if len(errors) > 0 {
-		return ArtifactDetailsReqMultiError(errors)
+		return ArtifactInfoReqMultiError(errors)
 	}
 
 	return nil
 }
 
-// ArtifactDetailsReqMultiError is an error wrapping multiple validation errors
-// returned by ArtifactDetailsReq.ValidateAll() if the designated constraints
+// ArtifactInfoReqMultiError is an error wrapping multiple validation errors
+// returned by ArtifactInfoReq.ValidateAll() if the designated constraints
 // aren't met.
-type ArtifactDetailsReqMultiError []error
+type ArtifactInfoReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ArtifactDetailsReqMultiError) Error() string {
+func (m ArtifactInfoReqMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1042,11 +1042,11 @@ func (m ArtifactDetailsReqMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ArtifactDetailsReqMultiError) AllErrors() []error { return m }
+func (m ArtifactInfoReqMultiError) AllErrors() []error { return m }
 
-// ArtifactDetailsReqValidationError is the validation error returned by
-// ArtifactDetailsReq.Validate if the designated constraints aren't met.
-type ArtifactDetailsReqValidationError struct {
+// ArtifactInfoReqValidationError is the validation error returned by
+// ArtifactInfoReq.Validate if the designated constraints aren't met.
+type ArtifactInfoReqValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1054,24 +1054,22 @@ type ArtifactDetailsReqValidationError struct {
 }
 
 // Field function returns field value.
-func (e ArtifactDetailsReqValidationError) Field() string { return e.field }
+func (e ArtifactInfoReqValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ArtifactDetailsReqValidationError) Reason() string { return e.reason }
+func (e ArtifactInfoReqValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ArtifactDetailsReqValidationError) Cause() error { return e.cause }
+func (e ArtifactInfoReqValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ArtifactDetailsReqValidationError) Key() bool { return e.key }
+func (e ArtifactInfoReqValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ArtifactDetailsReqValidationError) ErrorName() string {
-	return "ArtifactDetailsReqValidationError"
-}
+func (e ArtifactInfoReqValidationError) ErrorName() string { return "ArtifactInfoReqValidationError" }
 
 // Error satisfies the builtin error interface
-func (e ArtifactDetailsReqValidationError) Error() string {
+func (e ArtifactInfoReqValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1083,14 +1081,14 @@ func (e ArtifactDetailsReqValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sArtifactDetailsReq.%s: %s%s",
+		"invalid %sArtifactInfoReq.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ArtifactDetailsReqValidationError{}
+var _ error = ArtifactInfoReqValidationError{}
 
 var _ interface {
 	Field() string
@@ -1098,24 +1096,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ArtifactDetailsReqValidationError{}
+} = ArtifactInfoReqValidationError{}
 
-// Validate checks the field values on ArtifactDetailsRes with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ArtifactDetailsRes) Validate() error {
+// Validate checks the field values on ArtifactInfoRes with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ArtifactInfoRes) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ArtifactDetailsRes with the rules
+// ValidateAll checks the field values on ArtifactInfoRes with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ArtifactDetailsResMultiError, or nil if none found.
-func (m *ArtifactDetailsRes) ValidateAll() error {
+// ArtifactInfoResMultiError, or nil if none found.
+func (m *ArtifactInfoRes) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ArtifactDetailsRes) validate(all bool) error {
+func (m *ArtifactInfoRes) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1132,7 +1130,7 @@ func (m *ArtifactDetailsRes) validate(all bool) error {
 			switch v := interface{}(m.GetArtifactInfo()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ArtifactDetailsResValidationError{
+					errors = append(errors, ArtifactInfoResValidationError{
 						field:  "ArtifactInfo",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1140,7 +1138,7 @@ func (m *ArtifactDetailsRes) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ArtifactDetailsResValidationError{
+					errors = append(errors, ArtifactInfoResValidationError{
 						field:  "ArtifactInfo",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1149,7 +1147,7 @@ func (m *ArtifactDetailsRes) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetArtifactInfo()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ArtifactDetailsResValidationError{
+				return ArtifactInfoResValidationError{
 					field:  "ArtifactInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1165,7 +1163,7 @@ func (m *ArtifactDetailsRes) validate(all bool) error {
 			switch v := interface{}(m.GetRoomInfo()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ArtifactDetailsResValidationError{
+					errors = append(errors, ArtifactInfoResValidationError{
 						field:  "RoomInfo",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1173,7 +1171,7 @@ func (m *ArtifactDetailsRes) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ArtifactDetailsResValidationError{
+					errors = append(errors, ArtifactInfoResValidationError{
 						field:  "RoomInfo",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1182,7 +1180,7 @@ func (m *ArtifactDetailsRes) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetRoomInfo()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ArtifactDetailsResValidationError{
+				return ArtifactInfoResValidationError{
 					field:  "RoomInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1193,19 +1191,19 @@ func (m *ArtifactDetailsRes) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ArtifactDetailsResMultiError(errors)
+		return ArtifactInfoResMultiError(errors)
 	}
 
 	return nil
 }
 
-// ArtifactDetailsResMultiError is an error wrapping multiple validation errors
-// returned by ArtifactDetailsRes.ValidateAll() if the designated constraints
+// ArtifactInfoResMultiError is an error wrapping multiple validation errors
+// returned by ArtifactInfoRes.ValidateAll() if the designated constraints
 // aren't met.
-type ArtifactDetailsResMultiError []error
+type ArtifactInfoResMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ArtifactDetailsResMultiError) Error() string {
+func (m ArtifactInfoResMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1214,11 +1212,11 @@ func (m ArtifactDetailsResMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ArtifactDetailsResMultiError) AllErrors() []error { return m }
+func (m ArtifactInfoResMultiError) AllErrors() []error { return m }
 
-// ArtifactDetailsResValidationError is the validation error returned by
-// ArtifactDetailsRes.Validate if the designated constraints aren't met.
-type ArtifactDetailsResValidationError struct {
+// ArtifactInfoResValidationError is the validation error returned by
+// ArtifactInfoRes.Validate if the designated constraints aren't met.
+type ArtifactInfoResValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1226,24 +1224,22 @@ type ArtifactDetailsResValidationError struct {
 }
 
 // Field function returns field value.
-func (e ArtifactDetailsResValidationError) Field() string { return e.field }
+func (e ArtifactInfoResValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ArtifactDetailsResValidationError) Reason() string { return e.reason }
+func (e ArtifactInfoResValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ArtifactDetailsResValidationError) Cause() error { return e.cause }
+func (e ArtifactInfoResValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ArtifactDetailsResValidationError) Key() bool { return e.key }
+func (e ArtifactInfoResValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ArtifactDetailsResValidationError) ErrorName() string {
-	return "ArtifactDetailsResValidationError"
-}
+func (e ArtifactInfoResValidationError) ErrorName() string { return "ArtifactInfoResValidationError" }
 
 // Error satisfies the builtin error interface
-func (e ArtifactDetailsResValidationError) Error() string {
+func (e ArtifactInfoResValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1255,14 +1251,14 @@ func (e ArtifactDetailsResValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sArtifactDetailsRes.%s: %s%s",
+		"invalid %sArtifactInfoRes.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ArtifactDetailsResValidationError{}
+var _ error = ArtifactInfoResValidationError{}
 
 var _ interface {
 	Field() string
@@ -1270,4 +1266,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ArtifactDetailsResValidationError{}
+} = ArtifactInfoResValidationError{}
