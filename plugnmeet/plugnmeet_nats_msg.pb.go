@@ -42,6 +42,8 @@ const (
 	NatsMsgServerToClientEvents_JOIN_BREAKOUT_ROOM                   NatsMsgServerToClientEvents = 13
 	NatsMsgServerToClientEvents_BREAKOUT_ROOM_ENDED                  NatsMsgServerToClientEvents = 15
 	NatsMsgServerToClientEvents_SYSTEM_CHAT_MSG                      NatsMsgServerToClientEvents = 14 // mostly system message display in chat
+	NatsMsgServerToClientEvents_TRANSCRIPTION_OUTPUT_TEXT            NatsMsgServerToClientEvents = 17
+	NatsMsgServerToClientEvents_RESP_INSIGHTS_AI_TEXT_CHAT           NatsMsgServerToClientEvents = 19
 )
 
 // Enum value maps for NatsMsgServerToClientEvents.
@@ -64,6 +66,8 @@ var (
 		13: "JOIN_BREAKOUT_ROOM",
 		15: "BREAKOUT_ROOM_ENDED",
 		14: "SYSTEM_CHAT_MSG",
+		17: "TRANSCRIPTION_OUTPUT_TEXT",
+		19: "RESP_INSIGHTS_AI_TEXT_CHAT",
 	}
 	NatsMsgServerToClientEvents_value = map[string]int32{
 		"RES_INITIAL_DATA":                     0,
@@ -83,6 +87,8 @@ var (
 		"JOIN_BREAKOUT_ROOM":                   13,
 		"BREAKOUT_ROOM_ENDED":                  15,
 		"SYSTEM_CHAT_MSG":                      14,
+		"TRANSCRIPTION_OUTPUT_TEXT":            17,
+		"RESP_INSIGHTS_AI_TEXT_CHAT":           19,
 	}
 )
 
@@ -923,6 +929,8 @@ type ChatMessage struct {
 	IsPrivate     bool                   `protobuf:"varint,6,opt,name=is_private,json=isPrivate,proto3" json:"is_private,omitempty"`
 	Message       string                 `protobuf:"bytes,7,opt,name=message,proto3" json:"message,omitempty"`
 	FromAdmin     bool                   `protobuf:"varint,8,opt,name=from_admin,json=fromAdmin,proto3" json:"from_admin,omitempty"`
+	SourceLang    *string                `protobuf:"bytes,9,opt,name=source_lang,json=sourceLang,proto3,oneof" json:"source_lang,omitempty"`
+	Translations  map[string]string      `protobuf:"bytes,10,rep,name=translations,proto3" json:"translations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1013,6 +1021,20 @@ func (x *ChatMessage) GetFromAdmin() bool {
 	return false
 }
 
+func (x *ChatMessage) GetSourceLang() string {
+	if x != nil && x.SourceLang != nil {
+		return *x.SourceLang
+	}
+	return ""
+}
+
+func (x *ChatMessage) GetTranslations() map[string]string {
+	if x != nil {
+		return x.Translations
+	}
+	return nil
+}
+
 var File_plugnmeet_nats_msg_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_nats_msg_proto_rawDesc = "" +
@@ -1077,7 +1099,7 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"with_sound\x18\x05 \x01(\bR\twithSound\"M\n" +
 	"\x16NatsUserMetadataUpdate\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
-	"\bmetadata\x18\x02 \x01(\tR\bmetadata\"\xff\x01\n" +
+	"\bmetadata\x18\x02 \x01(\tR\bmetadata\"\xc4\x03\n" +
 	"\vChatMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfrom_name\x18\x02 \x01(\tR\bfromName\x12 \n" +
@@ -1090,8 +1112,16 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"is_private\x18\x06 \x01(\bR\tisPrivate\x12\x18\n" +
 	"\amessage\x18\a \x01(\tR\amessage\x12\x1d\n" +
 	"\n" +
-	"from_admin\x18\b \x01(\bR\tfromAdminB\r\n" +
-	"\v_to_user_id*\xb0\x03\n" +
+	"from_admin\x18\b \x01(\bR\tfromAdmin\x12$\n" +
+	"\vsource_lang\x18\t \x01(\tH\x01R\n" +
+	"sourceLang\x88\x01\x01\x12L\n" +
+	"\ftranslations\x18\n" +
+	" \x03(\v2(.plugnmeet.ChatMessage.TranslationsEntryR\ftranslations\x1a?\n" +
+	"\x11TranslationsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
+	"\v_to_user_idB\x0e\n" +
+	"\f_source_lang*\xef\x03\n" +
 	"\x1bNatsMsgServerToClientEvents\x12\x14\n" +
 	"\x10RES_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15RES_JOINED_USERS_LIST\x10\x01\x12\x19\n" +
@@ -1110,7 +1140,9 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\fPOLL_CREATED\x10\f\x12\x16\n" +
 	"\x12JOIN_BREAKOUT_ROOM\x10\r\x12\x17\n" +
 	"\x13BREAKOUT_ROOM_ENDED\x10\x0f\x12\x13\n" +
-	"\x0fSYSTEM_CHAT_MSG\x10\x0e*\xec\x01\n" +
+	"\x0fSYSTEM_CHAT_MSG\x10\x0e\x12\x1d\n" +
+	"\x19TRANSCRIPTION_OUTPUT_TEXT\x10\x11\x12\x1e\n" +
+	"\x1aRESP_INSIGHTS_AI_TEXT_CHAT\x10\x13*\xec\x01\n" +
 	"\x1bNatsMsgClientToServerEvents\x12\x14\n" +
 	"\x10REQ_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15REQ_MEDIA_SERVER_DATA\x10\b\x12\x19\n" +
@@ -1140,7 +1172,7 @@ func file_plugnmeet_nats_msg_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_nats_msg_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_plugnmeet_nats_msg_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_plugnmeet_nats_msg_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_plugnmeet_nats_msg_proto_goTypes = []any{
 	(NatsMsgServerToClientEvents)(0), // 0: plugnmeet.NatsMsgServerToClientEvents
 	(NatsMsgClientToServerEvents)(0), // 1: plugnmeet.NatsMsgClientToServerEvents
@@ -1155,19 +1187,21 @@ var file_plugnmeet_nats_msg_proto_goTypes = []any{
 	(*NatsSystemNotification)(nil),   // 10: plugnmeet.NatsSystemNotification
 	(*NatsUserMetadataUpdate)(nil),   // 11: plugnmeet.NatsUserMetadataUpdate
 	(*ChatMessage)(nil),              // 12: plugnmeet.ChatMessage
+	nil,                              // 13: plugnmeet.ChatMessage.TranslationsEntry
 }
 var file_plugnmeet_nats_msg_proto_depIdxs = []int32{
-	0, // 0: plugnmeet.NatsMsgServerToClient.event:type_name -> plugnmeet.NatsMsgServerToClientEvents
-	1, // 1: plugnmeet.NatsMsgClientToServer.event:type_name -> plugnmeet.NatsMsgClientToServerEvents
-	6, // 2: plugnmeet.NatsInitialData.room:type_name -> plugnmeet.NatsKvRoomInfo
-	7, // 3: plugnmeet.NatsInitialData.local_user:type_name -> plugnmeet.NatsKvUserInfo
-	8, // 4: plugnmeet.NatsInitialData.media_server_info:type_name -> plugnmeet.MediaServerConnInfo
-	2, // 5: plugnmeet.NatsSystemNotification.type:type_name -> plugnmeet.NatsSystemNotificationTypes
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	0,  // 0: plugnmeet.NatsMsgServerToClient.event:type_name -> plugnmeet.NatsMsgServerToClientEvents
+	1,  // 1: plugnmeet.NatsMsgClientToServer.event:type_name -> plugnmeet.NatsMsgClientToServerEvents
+	6,  // 2: plugnmeet.NatsInitialData.room:type_name -> plugnmeet.NatsKvRoomInfo
+	7,  // 3: plugnmeet.NatsInitialData.local_user:type_name -> plugnmeet.NatsKvUserInfo
+	8,  // 4: plugnmeet.NatsInitialData.media_server_info:type_name -> plugnmeet.MediaServerConnInfo
+	2,  // 5: plugnmeet.NatsSystemNotification.type:type_name -> plugnmeet.NatsSystemNotificationTypes
+	13, // 6: plugnmeet.ChatMessage.translations:type_name -> plugnmeet.ChatMessage.TranslationsEntry
+	7,  // [7:7] is the sub-list for method output_type
+	7,  // [7:7] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_nats_msg_proto_init() }
@@ -1182,7 +1216,7 @@ func file_plugnmeet_nats_msg_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_nats_msg_proto_rawDesc), len(file_plugnmeet_nats_msg_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

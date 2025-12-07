@@ -175,8 +175,6 @@ func (m *AnalyticsInfo) validate(all bool) error {
 
 	// no validation rules for CreationTime
 
-	// no validation rules for RoomCreationTime
-
 	if len(errors) > 0 {
 		return AnalyticsInfoMultiError(errors)
 	}

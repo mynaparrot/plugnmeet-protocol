@@ -1,0 +1,80 @@
+syntax = "proto3";
+package plugnmeet;
+
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+option php_namespace = "Mynaparrot\\PlugnmeetProto";
+
+import "buf/validate/validate.proto";
+import "plugnmeet_room_artifacts.proto";
+import "plugnmeet_auth_room.proto";
+
+// Request to fetch a list of artifacts
+message FetchArtifactsReq {
+  repeated string room_ids = 1;
+  // To get information about a particular session
+  optional string room_sid = 2;
+  optional RoomArtifactType type = 3;
+  uint64 from = 4;
+  uint64 limit = 5;
+  string order_by = 6;
+}
+
+// A single artifact entry in the list response
+message ArtifactInfo {
+  string artifact_id = 1;
+  string room_id = 2;
+  RoomArtifactType type = 3;
+  string created = 4;
+  RoomArtifactMetadata metadata = 5;
+}
+
+// Result for fetching artifacts
+message FetchArtifactsResult {
+  int64 total_artifacts = 1;
+  uint64 from = 2;
+  uint64 limit = 3;
+  string order_by = 4;
+  optional RoomArtifactType type = 5;
+  repeated ArtifactInfo artifacts_list = 6;
+}
+
+// Response for fetching artifacts
+message FetchArtifactsRes {
+  bool status = 1;
+  string msg = 2;
+  FetchArtifactsResult result = 3;
+}
+
+// Request to get a download token for an artifact
+message GetArtifactDownloadTokenReq {
+  string artifact_id = 1 [(buf.validate.field).required = true];
+}
+
+// Response for a download token
+message GetArtifactDownloadTokenRes {
+  bool status = 1;
+  string msg = 2;
+  optional string token = 3;
+}
+
+// Request to delete an artifact
+message DeleteArtifactReq {
+  string artifact_id = 1 [(buf.validate.field).required = true];
+}
+
+// Response for deleting an artifact
+message DeleteArtifactRes {
+  bool status = 1;
+  string msg = 2;
+}
+
+message ArtifactDetailsReq {
+  string artifact_id = 1 [(buf.validate.field).required = true];
+}
+
+message ArtifactDetailsRes {
+  bool status = 1;
+  string msg = 2;
+  optional ArtifactInfo artifact_info = 3;
+  optional PastRoomInfo room_info = 4;
+}

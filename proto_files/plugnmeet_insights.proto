@@ -1,0 +1,134 @@
+syntax = "proto3";
+package plugnmeet;
+
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+option php_namespace = "Mynaparrot\\PlugnmeetProto";
+
+enum InsightsServiceType {
+  INSIGHTS_SERVICE_TYPE_UNSPECIFIED = 0;
+  INSIGHTS_SERVICE_TYPE_TRANSCRIPTION = 1;
+  INSIGHTS_SERVICE_TYPE_TRANSLATION = 2;
+  INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS = 3;
+  INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT = 4;
+  INSIGHTS_SERVICE_TYPE_CHAT_TRANSLATION = 5;
+  INSIGHTS_SERVICE_TYPE_MEETING_SUMMARIZING = 6;
+}
+
+enum InsightsUserSessionAction {
+  USER_SESSION_ACTION_UNSPECIFIED = 0;
+  USER_SESSION_ACTION_START = 1;
+  USER_SESSION_ACTION_STOP = 2;
+}
+
+message InsightsSupportedLangInfo {
+  string code = 1;
+  string name = 2;
+  string locale = 3;
+}
+
+message InsightsTranscriptionConfigReq {
+  bool is_enabled = 1;
+  repeated string allowed_spoken_langs = 2;
+  repeated string allowed_speech_users = 3;
+
+  bool is_enabled_translation = 4;
+  repeated string allowed_trans_langs = 5;
+  optional string default_subtitle_lang = 6;
+
+  bool is_enabled_speech_synthesis = 7;
+}
+
+message InsightsTranscriptionUserSessionReq {
+  InsightsUserSessionAction action = 1;
+  optional string spoken_lang = 2;
+  bool allowed_transcription_storage = 3;
+}
+
+message InsightsTranscriptionResult {
+  string from_user_id = 1;
+  string from_user_name = 2;
+  string lang = 3;
+  string text = 4;
+  bool is_partial = 5;
+  bool allowed_transcription_storage = 6;
+  map<string, string> translations = 7; // A map of target language -> translated text
+}
+
+message InsightsChatTranslationConfigReq {
+  bool is_enabled = 1;
+  repeated string allowed_trans_langs = 5;
+  optional string default_lang = 6;
+}
+
+message InsightsTranslateTextReq {
+  string text = 1;
+  string source_lang = 2;
+  repeated string target_langs = 3;
+}
+
+message InsightsTextTranslationResult {
+  string source_text = 1;
+  string source_lang = 2;
+  map<string, string> translations = 3; // map of lang_code -> translated_text
+}
+
+message InsightsTranslateTextRes {
+  bool status = 1;
+  string msg = 2;
+  optional InsightsTextTranslationResult result = 3;
+}
+
+message InsightsGetSupportedLanguagesReq {
+  InsightsServiceType service_type = 1;
+}
+
+message InsightsGetSupportedLanguagesRes {
+  bool status = 1;
+  string msg = 2;
+  repeated InsightsSupportedLangInfo languages = 3;
+}
+
+message InsightsGetUserStatusRes {
+  bool status = 1;
+  string msg = 2;
+  InsightsServiceType service_type = 3;
+  bool is_active = 4;
+  optional string spoken_lang = 5;
+  optional bool allowed_transcription_storage = 6;
+}
+
+// start AI Text Chat
+enum InsightsAITextChatRole {
+  INSIGHTS_AI_TEXT_CHAT_ROLE_UNSPECIFIED = 0;
+  INSIGHTS_AI_TEXT_CHAT_ROLE_SYSTEM = 1;
+  INSIGHTS_AI_TEXT_CHAT_ROLE_USER = 2;
+  INSIGHTS_AI_TEXT_CHAT_ROLE_MODEL = 3;
+}
+
+message InsightsAITextChatContent {
+  InsightsAITextChatRole role = 1;
+  string text = 2;
+  optional string stream_id = 3;
+}
+
+message InsightsAITextChatStreamResult {
+  string id = 1;
+  string text = 2;
+  bool is_last_chunk = 3;
+  uint32 prompt_tokens = 4;
+  uint32 completion_tokens = 5;
+  uint32 total_tokens = 6;
+  string createdAt = 7;
+}
+
+message InsightsAITextChatConfigReq {
+  bool is_enabled = 1;
+  bool is_allowed_everyone = 3;
+  repeated string allowed_user_ids = 4;
+}
+// end AI Text Chat
+
+message InsightsAIMeetingSummarizationConfigReq {
+  bool is_enabled = 1;
+  string summarization_prompt = 3;
+}

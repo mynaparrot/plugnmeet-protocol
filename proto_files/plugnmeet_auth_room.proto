@@ -2,6 +2,7 @@ syntax = "proto3";
 package plugnmeet;
 
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+option php_namespace = "Mynaparrot\\PlugnmeetProto";
 
 import "livekit_models.proto";
 import "buf/validate/validate.proto";
@@ -76,7 +77,7 @@ message PastRoomInfo {
   string webhook_url = 5;
   string created = 6;
   string ended = 7;
-  string analytics_file_id = 8;
+  optional string analytics_file_id = 8;
 }
 
 message FetchPastRoomsReq {
@@ -103,6 +104,8 @@ message FetchPastRoomsRes{
 message GetClientFilesRes {
   bool status = 1;
   string msg = 2;
-  repeated string css = 3;
-  repeated string js = 4;
+  repeated string css = 3 [deprecated = true];
+  repeated string js = 4 [deprecated = true];
+  repeated string css_files = 5;
+  repeated string js_files = 6;
 }

@@ -23,16 +23,17 @@ const (
 )
 
 type CommonNotifyEvent struct {
-	state         protoimpl.MessageState   `protogen:"open.v1"`
-	Event         *string                  `protobuf:"bytes,1,opt,name=event,proto3,oneof" json:"event,omitempty"`
-	Room          *NotifyEventRoom         `protobuf:"bytes,2,opt,name=room,proto3,oneof" json:"room,omitempty"`
-	Participant   *livekit.ParticipantInfo `protobuf:"bytes,3,opt,name=participant,proto3,oneof" json:"participant,omitempty"`
-	RecordingInfo *RecordingInfoEvent      `protobuf:"bytes,4,opt,name=recording_info,json=recordingInfo,proto3,oneof" json:"recording_info,omitempty"`
-	SpeechService *SpeechServiceEvent      `protobuf:"bytes,5,opt,name=speech_service,json=speechService,proto3,oneof" json:"speech_service,omitempty"`
-	Track         *livekit.TrackInfo       `protobuf:"bytes,6,opt,name=track,proto3,oneof" json:"track,omitempty"`
-	Analytics     *AnalyticsEvent          `protobuf:"bytes,7,opt,name=analytics,proto3,oneof" json:"analytics,omitempty"`
-	Id            *string                  `protobuf:"bytes,9,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	CreatedAt     *int64                   `protobuf:"varint,10,opt,name=created_at,json=createdAt,proto3,oneof" json:"created_at,omitempty"`
+	state         protoimpl.MessageState    `protogen:"open.v1"`
+	Event         *string                   `protobuf:"bytes,1,opt,name=event,proto3,oneof" json:"event,omitempty"`
+	Room          *NotifyEventRoom          `protobuf:"bytes,2,opt,name=room,proto3,oneof" json:"room,omitempty"`
+	Participant   *livekit.ParticipantInfo  `protobuf:"bytes,3,opt,name=participant,proto3,oneof" json:"participant,omitempty"`
+	RecordingInfo *RecordingInfoEvent       `protobuf:"bytes,4,opt,name=recording_info,json=recordingInfo,proto3,oneof" json:"recording_info,omitempty"`
+	SpeechService *SpeechServiceEvent       `protobuf:"bytes,5,opt,name=speech_service,json=speechService,proto3,oneof" json:"speech_service,omitempty"`
+	Track         *livekit.TrackInfo        `protobuf:"bytes,6,opt,name=track,proto3,oneof" json:"track,omitempty"`
+	Analytics     *AnalyticsEvent           `protobuf:"bytes,7,opt,name=analytics,proto3,oneof" json:"analytics,omitempty"`
+	RoomArtifact  *RoomArtifactWebhookEvent `protobuf:"bytes,8,opt,name=room_artifact,json=roomArtifact,proto3,oneof" json:"room_artifact,omitempty"`
+	Id            *string                   `protobuf:"bytes,9,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	CreatedAt     *int64                    `protobuf:"varint,10,opt,name=created_at,json=createdAt,proto3,oneof" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -112,6 +113,13 @@ func (x *CommonNotifyEvent) GetTrack() *livekit.TrackInfo {
 func (x *CommonNotifyEvent) GetAnalytics() *AnalyticsEvent {
 	if x != nil {
 		return x.Analytics
+	}
+	return nil
+}
+
+func (x *CommonNotifyEvent) GetRoomArtifact() *RoomArtifactWebhookEvent {
+	if x != nil {
+		return x.RoomArtifact
 	}
 	return nil
 }
@@ -406,7 +414,7 @@ var File_plugnmeet_common_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_common_proto_rawDesc = "" +
 	"\n" +
-	"\x16plugnmeet_common.proto\x12\tplugnmeet\x1a\x14livekit_models.proto\"\xd7\x04\n" +
+	"\x16plugnmeet_common.proto\x12\tplugnmeet\x1a\x14livekit_models.proto\x1a\x1eplugnmeet_room_artifacts.proto\"\xb8\x05\n" +
 	"\x11CommonNotifyEvent\x12\x19\n" +
 	"\x05event\x18\x01 \x01(\tH\x00R\x05event\x88\x01\x01\x123\n" +
 	"\x04room\x18\x02 \x01(\v2\x1a.plugnmeet.NotifyEventRoomH\x01R\x04room\x88\x01\x01\x12?\n" +
@@ -414,11 +422,12 @@ const file_plugnmeet_common_proto_rawDesc = "" +
 	"\x0erecording_info\x18\x04 \x01(\v2\x1d.plugnmeet.RecordingInfoEventH\x03R\rrecordingInfo\x88\x01\x01\x12I\n" +
 	"\x0espeech_service\x18\x05 \x01(\v2\x1d.plugnmeet.SpeechServiceEventH\x04R\rspeechService\x88\x01\x01\x12-\n" +
 	"\x05track\x18\x06 \x01(\v2\x12.livekit.TrackInfoH\x05R\x05track\x88\x01\x01\x12<\n" +
-	"\tanalytics\x18\a \x01(\v2\x19.plugnmeet.AnalyticsEventH\x06R\tanalytics\x88\x01\x01\x12\x13\n" +
-	"\x02id\x18\t \x01(\tH\aR\x02id\x88\x01\x01\x12\"\n" +
+	"\tanalytics\x18\a \x01(\v2\x19.plugnmeet.AnalyticsEventH\x06R\tanalytics\x88\x01\x01\x12M\n" +
+	"\rroom_artifact\x18\b \x01(\v2#.plugnmeet.RoomArtifactWebhookEventH\aR\froomArtifact\x88\x01\x01\x12\x13\n" +
+	"\x02id\x18\t \x01(\tH\bR\x02id\x88\x01\x01\x12\"\n" +
 	"\n" +
 	"created_at\x18\n" +
-	" \x01(\x03H\bR\tcreatedAt\x88\x01\x01B\b\n" +
+	" \x01(\x03H\tR\tcreatedAt\x88\x01\x01B\b\n" +
 	"\x06_eventB\a\n" +
 	"\x05_roomB\x0e\n" +
 	"\f_participantB\x11\n" +
@@ -426,7 +435,8 @@ const file_plugnmeet_common_proto_rawDesc = "" +
 	"\x0f_speech_serviceB\b\n" +
 	"\x06_trackB\f\n" +
 	"\n" +
-	"_analyticsB\x05\n" +
+	"_analyticsB\x10\n" +
+	"\x0e_room_artifactB\x05\n" +
 	"\x03_idB\r\n" +
 	"\v_created_at\"\xc1\x03\n" +
 	"\x0fNotifyEventRoom\x12\x15\n" +
@@ -483,14 +493,15 @@ func file_plugnmeet_common_proto_rawDescGZIP() []byte {
 
 var file_plugnmeet_common_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_plugnmeet_common_proto_goTypes = []any{
-	(*CommonNotifyEvent)(nil),       // 0: plugnmeet.CommonNotifyEvent
-	(*NotifyEventRoom)(nil),         // 1: plugnmeet.NotifyEventRoom
-	(*RecordingInfoEvent)(nil),      // 2: plugnmeet.RecordingInfoEvent
-	(*SpeechServiceEvent)(nil),      // 3: plugnmeet.SpeechServiceEvent
-	(*AnalyticsEvent)(nil),          // 4: plugnmeet.AnalyticsEvent
-	(*livekit.ParticipantInfo)(nil), // 5: livekit.ParticipantInfo
-	(*livekit.TrackInfo)(nil),       // 6: livekit.TrackInfo
-	(*livekit.Codec)(nil),           // 7: livekit.Codec
+	(*CommonNotifyEvent)(nil),        // 0: plugnmeet.CommonNotifyEvent
+	(*NotifyEventRoom)(nil),          // 1: plugnmeet.NotifyEventRoom
+	(*RecordingInfoEvent)(nil),       // 2: plugnmeet.RecordingInfoEvent
+	(*SpeechServiceEvent)(nil),       // 3: plugnmeet.SpeechServiceEvent
+	(*AnalyticsEvent)(nil),           // 4: plugnmeet.AnalyticsEvent
+	(*livekit.ParticipantInfo)(nil),  // 5: livekit.ParticipantInfo
+	(*livekit.TrackInfo)(nil),        // 6: livekit.TrackInfo
+	(*RoomArtifactWebhookEvent)(nil), // 7: plugnmeet.RoomArtifactWebhookEvent
+	(*livekit.Codec)(nil),            // 8: livekit.Codec
 }
 var file_plugnmeet_common_proto_depIdxs = []int32{
 	1, // 0: plugnmeet.CommonNotifyEvent.room:type_name -> plugnmeet.NotifyEventRoom
@@ -499,12 +510,13 @@ var file_plugnmeet_common_proto_depIdxs = []int32{
 	3, // 3: plugnmeet.CommonNotifyEvent.speech_service:type_name -> plugnmeet.SpeechServiceEvent
 	6, // 4: plugnmeet.CommonNotifyEvent.track:type_name -> livekit.TrackInfo
 	4, // 5: plugnmeet.CommonNotifyEvent.analytics:type_name -> plugnmeet.AnalyticsEvent
-	7, // 6: plugnmeet.NotifyEventRoom.enabled_codecs:type_name -> livekit.Codec
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	7, // 6: plugnmeet.CommonNotifyEvent.room_artifact:type_name -> plugnmeet.RoomArtifactWebhookEvent
+	8, // 7: plugnmeet.NotifyEventRoom.enabled_codecs:type_name -> livekit.Codec
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_common_proto_init() }
@@ -512,6 +524,7 @@ func file_plugnmeet_common_proto_init() {
 	if File_plugnmeet_common_proto != nil {
 		return
 	}
+	file_plugnmeet_room_artifacts_proto_init()
 	file_plugnmeet_common_proto_msgTypes[0].OneofWrappers = []any{}
 	file_plugnmeet_common_proto_msgTypes[1].OneofWrappers = []any{}
 	file_plugnmeet_common_proto_msgTypes[2].OneofWrappers = []any{}

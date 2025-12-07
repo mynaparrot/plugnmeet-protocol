@@ -780,6 +780,35 @@ func (m *RoomCreateFeatures) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetInsightsFeatures()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RoomCreateFeaturesValidationError{
+					field:  "InsightsFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RoomCreateFeaturesValidationError{
+					field:  "InsightsFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInsightsFeatures()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RoomCreateFeaturesValidationError{
+				field:  "InsightsFeatures",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.RoomDuration != nil {
 		// no validation rules for RoomDuration
 	}
@@ -902,6 +931,10 @@ func (m *ChatFeatures) validate(all bool) error {
 
 	// no validation rules for AllowFileUpload
 
+	// no validation rules for IsAllow
+
+	// no validation rules for IsAllowFileUpload
+
 	if m.MaxFileSize != nil {
 		// no validation rules for MaxFileSize
 	}
@@ -1006,6 +1039,8 @@ func (m *SharedNotePadFeatures) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for AllowedSharedNotePad
+
+	// no validation rules for IsAllow
 
 	// no validation rules for IsActive
 
@@ -1122,6 +1157,8 @@ func (m *WhiteboardFeatures) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for AllowedWhiteboard
+
+	// no validation rules for IsAllow
 
 	// no validation rules for Visible
 
@@ -1244,6 +1281,8 @@ func (m *ExternalMediaPlayerFeatures) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for AllowedExternalMediaPlayer
+
+	// no validation rules for IsAllow
 
 	// no validation rules for IsActive
 
@@ -2219,6 +2258,831 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = PollsFeaturesValidationError{}
+
+// Validate checks the field values on InsightsFeatures with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *InsightsFeatures) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InsightsFeatures with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// InsightsFeaturesMultiError, or nil if none found.
+func (m *InsightsFeatures) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InsightsFeatures) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsAllow
+
+	if m.TranscriptionFeatures != nil {
+
+		if all {
+			switch v := interface{}(m.GetTranscriptionFeatures()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, InsightsFeaturesValidationError{
+						field:  "TranscriptionFeatures",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, InsightsFeaturesValidationError{
+						field:  "TranscriptionFeatures",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetTranscriptionFeatures()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return InsightsFeaturesValidationError{
+					field:  "TranscriptionFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.ChatTranslationFeatures != nil {
+
+		if all {
+			switch v := interface{}(m.GetChatTranslationFeatures()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, InsightsFeaturesValidationError{
+						field:  "ChatTranslationFeatures",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, InsightsFeaturesValidationError{
+						field:  "ChatTranslationFeatures",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetChatTranslationFeatures()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return InsightsFeaturesValidationError{
+					field:  "ChatTranslationFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.AiFeatures != nil {
+
+		if all {
+			switch v := interface{}(m.GetAiFeatures()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, InsightsFeaturesValidationError{
+						field:  "AiFeatures",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, InsightsFeaturesValidationError{
+						field:  "AiFeatures",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAiFeatures()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return InsightsFeaturesValidationError{
+					field:  "AiFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return InsightsFeaturesMultiError(errors)
+	}
+
+	return nil
+}
+
+// InsightsFeaturesMultiError is an error wrapping multiple validation errors
+// returned by InsightsFeatures.ValidateAll() if the designated constraints
+// aren't met.
+type InsightsFeaturesMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InsightsFeaturesMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InsightsFeaturesMultiError) AllErrors() []error { return m }
+
+// InsightsFeaturesValidationError is the validation error returned by
+// InsightsFeatures.Validate if the designated constraints aren't met.
+type InsightsFeaturesValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InsightsFeaturesValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InsightsFeaturesValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InsightsFeaturesValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InsightsFeaturesValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InsightsFeaturesValidationError) ErrorName() string { return "InsightsFeaturesValidationError" }
+
+// Error satisfies the builtin error interface
+func (e InsightsFeaturesValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInsightsFeatures.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InsightsFeaturesValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InsightsFeaturesValidationError{}
+
+// Validate checks the field values on InsightsTranscriptionFeatures with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InsightsTranscriptionFeatures) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InsightsTranscriptionFeatures with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// InsightsTranscriptionFeaturesMultiError, or nil if none found.
+func (m *InsightsTranscriptionFeatures) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InsightsTranscriptionFeatures) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsAllow
+
+	// no validation rules for IsAllowTranslation
+
+	// no validation rules for IsAllowSpeechSynthesis
+
+	// no validation rules for IsEnabled
+
+	// no validation rules for IsEnabledTranslation
+
+	// no validation rules for MaxSelectedTransLangs
+
+	// no validation rules for IsEnabledSpeechSynthesis
+
+	if m.DefaultSubtitleLang != nil {
+		// no validation rules for DefaultSubtitleLang
+	}
+
+	if len(errors) > 0 {
+		return InsightsTranscriptionFeaturesMultiError(errors)
+	}
+
+	return nil
+}
+
+// InsightsTranscriptionFeaturesMultiError is an error wrapping multiple
+// validation errors returned by InsightsTranscriptionFeatures.ValidateAll()
+// if the designated constraints aren't met.
+type InsightsTranscriptionFeaturesMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InsightsTranscriptionFeaturesMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InsightsTranscriptionFeaturesMultiError) AllErrors() []error { return m }
+
+// InsightsTranscriptionFeaturesValidationError is the validation error
+// returned by InsightsTranscriptionFeatures.Validate if the designated
+// constraints aren't met.
+type InsightsTranscriptionFeaturesValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InsightsTranscriptionFeaturesValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InsightsTranscriptionFeaturesValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InsightsTranscriptionFeaturesValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InsightsTranscriptionFeaturesValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InsightsTranscriptionFeaturesValidationError) ErrorName() string {
+	return "InsightsTranscriptionFeaturesValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InsightsTranscriptionFeaturesValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInsightsTranscriptionFeatures.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InsightsTranscriptionFeaturesValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InsightsTranscriptionFeaturesValidationError{}
+
+// Validate checks the field values on InsightsChatTranslationFeatures with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InsightsChatTranslationFeatures) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InsightsChatTranslationFeatures with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// InsightsChatTranslationFeaturesMultiError, or nil if none found.
+func (m *InsightsChatTranslationFeatures) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InsightsChatTranslationFeatures) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsAllow
+
+	// no validation rules for IsEnabled
+
+	// no validation rules for MaxSelectedTransLangs
+
+	if m.DefaultLang != nil {
+		// no validation rules for DefaultLang
+	}
+
+	if len(errors) > 0 {
+		return InsightsChatTranslationFeaturesMultiError(errors)
+	}
+
+	return nil
+}
+
+// InsightsChatTranslationFeaturesMultiError is an error wrapping multiple
+// validation errors returned by InsightsChatTranslationFeatures.ValidateAll()
+// if the designated constraints aren't met.
+type InsightsChatTranslationFeaturesMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InsightsChatTranslationFeaturesMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InsightsChatTranslationFeaturesMultiError) AllErrors() []error { return m }
+
+// InsightsChatTranslationFeaturesValidationError is the validation error
+// returned by InsightsChatTranslationFeatures.Validate if the designated
+// constraints aren't met.
+type InsightsChatTranslationFeaturesValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InsightsChatTranslationFeaturesValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InsightsChatTranslationFeaturesValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InsightsChatTranslationFeaturesValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InsightsChatTranslationFeaturesValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InsightsChatTranslationFeaturesValidationError) ErrorName() string {
+	return "InsightsChatTranslationFeaturesValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InsightsChatTranslationFeaturesValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInsightsChatTranslationFeatures.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InsightsChatTranslationFeaturesValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InsightsChatTranslationFeaturesValidationError{}
+
+// Validate checks the field values on InsightsAIFeatures with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InsightsAIFeatures) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InsightsAIFeatures with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// InsightsAIFeaturesMultiError, or nil if none found.
+func (m *InsightsAIFeatures) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InsightsAIFeatures) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsAllow
+
+	if m.AiTextChatFeatures != nil {
+
+		if all {
+			switch v := interface{}(m.GetAiTextChatFeatures()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, InsightsAIFeaturesValidationError{
+						field:  "AiTextChatFeatures",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, InsightsAIFeaturesValidationError{
+						field:  "AiTextChatFeatures",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAiTextChatFeatures()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return InsightsAIFeaturesValidationError{
+					field:  "AiTextChatFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.MeetingSummarizationFeatures != nil {
+
+		if all {
+			switch v := interface{}(m.GetMeetingSummarizationFeatures()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, InsightsAIFeaturesValidationError{
+						field:  "MeetingSummarizationFeatures",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, InsightsAIFeaturesValidationError{
+						field:  "MeetingSummarizationFeatures",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetMeetingSummarizationFeatures()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return InsightsAIFeaturesValidationError{
+					field:  "MeetingSummarizationFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return InsightsAIFeaturesMultiError(errors)
+	}
+
+	return nil
+}
+
+// InsightsAIFeaturesMultiError is an error wrapping multiple validation errors
+// returned by InsightsAIFeatures.ValidateAll() if the designated constraints
+// aren't met.
+type InsightsAIFeaturesMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InsightsAIFeaturesMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InsightsAIFeaturesMultiError) AllErrors() []error { return m }
+
+// InsightsAIFeaturesValidationError is the validation error returned by
+// InsightsAIFeatures.Validate if the designated constraints aren't met.
+type InsightsAIFeaturesValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InsightsAIFeaturesValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InsightsAIFeaturesValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InsightsAIFeaturesValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InsightsAIFeaturesValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InsightsAIFeaturesValidationError) ErrorName() string {
+	return "InsightsAIFeaturesValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InsightsAIFeaturesValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInsightsAIFeatures.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InsightsAIFeaturesValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InsightsAIFeaturesValidationError{}
+
+// Validate checks the field values on InsightsAITextChatFeatures with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InsightsAITextChatFeatures) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InsightsAITextChatFeatures with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// InsightsAITextChatFeaturesMultiError, or nil if none found.
+func (m *InsightsAITextChatFeatures) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InsightsAITextChatFeatures) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsAllow
+
+	// no validation rules for IsEnabled
+
+	// no validation rules for IsAllowedEveryone
+
+	if len(errors) > 0 {
+		return InsightsAITextChatFeaturesMultiError(errors)
+	}
+
+	return nil
+}
+
+// InsightsAITextChatFeaturesMultiError is an error wrapping multiple
+// validation errors returned by InsightsAITextChatFeatures.ValidateAll() if
+// the designated constraints aren't met.
+type InsightsAITextChatFeaturesMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InsightsAITextChatFeaturesMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InsightsAITextChatFeaturesMultiError) AllErrors() []error { return m }
+
+// InsightsAITextChatFeaturesValidationError is the validation error returned
+// by InsightsAITextChatFeatures.Validate if the designated constraints aren't met.
+type InsightsAITextChatFeaturesValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InsightsAITextChatFeaturesValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InsightsAITextChatFeaturesValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InsightsAITextChatFeaturesValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InsightsAITextChatFeaturesValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InsightsAITextChatFeaturesValidationError) ErrorName() string {
+	return "InsightsAITextChatFeaturesValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InsightsAITextChatFeaturesValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInsightsAITextChatFeatures.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InsightsAITextChatFeaturesValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InsightsAITextChatFeaturesValidationError{}
+
+// Validate checks the field values on InsightsAIMeetingSummarizationFeatures
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *InsightsAIMeetingSummarizationFeatures) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// InsightsAIMeetingSummarizationFeatures with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// InsightsAIMeetingSummarizationFeaturesMultiError, or nil if none found.
+func (m *InsightsAIMeetingSummarizationFeatures) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InsightsAIMeetingSummarizationFeatures) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsAllow
+
+	// no validation rules for SummarizationPrompt
+
+	// no validation rules for IsEnabled
+
+	if len(errors) > 0 {
+		return InsightsAIMeetingSummarizationFeaturesMultiError(errors)
+	}
+
+	return nil
+}
+
+// InsightsAIMeetingSummarizationFeaturesMultiError is an error wrapping
+// multiple validation errors returned by
+// InsightsAIMeetingSummarizationFeatures.ValidateAll() if the designated
+// constraints aren't met.
+type InsightsAIMeetingSummarizationFeaturesMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InsightsAIMeetingSummarizationFeaturesMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InsightsAIMeetingSummarizationFeaturesMultiError) AllErrors() []error { return m }
+
+// InsightsAIMeetingSummarizationFeaturesValidationError is the validation
+// error returned by InsightsAIMeetingSummarizationFeatures.Validate if the
+// designated constraints aren't met.
+type InsightsAIMeetingSummarizationFeaturesValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InsightsAIMeetingSummarizationFeaturesValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InsightsAIMeetingSummarizationFeaturesValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InsightsAIMeetingSummarizationFeaturesValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InsightsAIMeetingSummarizationFeaturesValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InsightsAIMeetingSummarizationFeaturesValidationError) ErrorName() string {
+	return "InsightsAIMeetingSummarizationFeaturesValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InsightsAIMeetingSummarizationFeaturesValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInsightsAIMeetingSummarizationFeatures.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InsightsAIMeetingSummarizationFeaturesValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InsightsAIMeetingSummarizationFeaturesValidationError{}
 
 // Validate checks the field values on CopyrightConf with the rules defined in
 // the proto definition for this message. If any rules are violated, the first

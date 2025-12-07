@@ -25,3 +25,5 @@ fi
 buf dep update
 buf generate
 
+cd js
+./generate.sh

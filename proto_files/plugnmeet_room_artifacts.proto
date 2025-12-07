@@ -1,0 +1,95 @@
+syntax = "proto3";
+package plugnmeet;
+
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+option php_namespace = "Mynaparrot\\PlugnmeetProto";
+
+enum RoomArtifactType {
+  UNKNOWN_ARTIFACT = 0;
+  MEETING_ANALYTICS = 1;
+
+  MEETING_SUMMARY = 2;
+  MEETING_SUMMARY_USAGE = 3;
+
+  SPEECH_TRANSCRIPTION = 4;
+  SPEECH_TRANSCRIPTION_USAGE = 5;
+  SYNTHESIZED_SPEECH_USAGE = 6;
+
+  CHAT_TRANSLATION_USAGE = 7;
+  AI_TEXT_CHAT_INTERACTION_USAGE = 8;
+  AI_TEXT_CHAT_SUMMARIZATION_USAGE = 9;
+}
+
+// FileInfo contains details about a generated file artifact.
+message RoomArtifactFileInfo {
+  string file_path = 1;
+  int64 file_size = 2;
+  string mime_type = 3;
+}
+
+// ProviderJobInfo contains details about an asynchronous job sent to a provider.
+message RoomArtifactProviderJobInfo {
+  string job_id = 1;
+  string file_name = 2;
+}
+
+// UserInfo contains details about the user associated with an artifact.
+message RoomArtifactUserInfo {
+  string user_id = 1;
+  optional string name = 2;
+}
+
+message RoomArtifactTokenUsage {
+  uint32 prompt_tokens = 1;
+  uint32 completion_tokens = 2;
+  uint32 total_tokens = 3;
+  map<string, int64> breakdown = 4;
+
+  optional double prompt_tokens_estimated_cost = 5;
+  optional double completion_tokens_estimated_cost = 6;
+  optional double total_tokens_estimated_cost = 7;
+}
+
+message RoomArtifactDurationUsage {
+  uint32 duration_sec = 1;
+  map<string, int64> breakdown = 2;
+
+  optional double duration_sec_estimated_cost = 3;
+}
+
+message RoomArtifactCharacterCountUsage {
+  uint32 total_characters = 1;
+  map<string, int64> breakdown = 2;
+
+  optional double total_characters_estimated_cost = 3;
+}
+
+// RoomArtifactMetadata is the universal structure for the 'metadata' JSON field
+// in the pnm_room_artifacts table. All fields are optional.
+message RoomArtifactMetadata {
+  // Optional: Information about the user who initiated or is associated with the artifact.
+  RoomArtifactUserInfo user_info = 1;
+
+  // Optional: Information about an asynchronous provider job.
+  RoomArtifactProviderJobInfo provider_job_info = 2;
+
+  // Optional: Information about the final generated file artifact.
+  RoomArtifactFileInfo file_info = 3;
+
+  // A field for different types of usage metrics.
+  oneof usage_details {
+    RoomArtifactTokenUsage token_usage = 4;
+    RoomArtifactDurationUsage duration_usage = 5;
+    RoomArtifactCharacterCountUsage character_count_usage = 6;
+  }
+
+  // A field to link a file artifact back to its usage artifact.
+  optional string reference_artifact_id = 10;
+}
+
+// Webhook-specific Messages
+message RoomArtifactWebhookEvent {
+  RoomArtifactType type = 1;
+  string artifact_id = 2;
+  RoomArtifactMetadata metadata = 3;
+}

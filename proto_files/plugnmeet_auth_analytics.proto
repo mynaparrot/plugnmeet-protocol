@@ -2,6 +2,7 @@ syntax = "proto3";
 package plugnmeet;
 
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+option php_namespace = "Mynaparrot\\PlugnmeetProto";
 
 import "buf/validate/validate.proto";
 
@@ -18,7 +19,6 @@ message AnalyticsInfo {
   string file_name = 3;
   double file_size = 4;
   int64 creation_time = 5;
-  int64 room_creation_time = 6;
 }
 
 message FetchAnalyticsResult {

@@ -2,6 +2,7 @@ syntax = "proto3";
 package plugnmeet;
 
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+option php_namespace = "Mynaparrot\\PlugnmeetProto";
 
 message NatsSubjects {
   string system_api_worker = 1;
@@ -36,8 +37,10 @@ enum NatsMsgServerToClientEvents {
   JOIN_BREAKOUT_ROOM = 13;
   BREAKOUT_ROOM_ENDED = 15;
   SYSTEM_CHAT_MSG = 14; // mostly system message display in chat
+  TRANSCRIPTION_OUTPUT_TEXT = 17;
+  RESP_INSIGHTS_AI_TEXT_CHAT = 19;
 
-  //next ID: 17
+  //next ID: 20
 }
 
 enum NatsMsgClientToServerEvents {
@@ -133,4 +136,6 @@ message ChatMessage {
   bool is_private = 6;
   string message = 7;
   bool from_admin = 8;
+  optional string source_lang = 9;
+  map<string, string> translations = 10;
 }
