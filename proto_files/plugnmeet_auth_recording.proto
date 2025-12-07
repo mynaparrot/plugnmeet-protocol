@@ -9,9 +9,11 @@ import "plugnmeet_auth_room.proto";
 
 message FetchRecordingsReq {
   repeated string room_ids = 1;
-  uint32 from = 2;
-  uint32 limit = 3;
-  string order_by = 4;
+  // To get information about a particular session
+  optional string room_sid = 2;
+  uint32 from = 3;
+  uint32 limit = 4;
+  string order_by = 5;
 }
 
 message RecordingInfo {

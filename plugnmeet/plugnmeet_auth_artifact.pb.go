@@ -26,7 +26,7 @@ const (
 type FetchArtifactsReq struct {
 	state   protoimpl.MessageState `protogen:"open.v1"`
 	RoomIds []string               `protobuf:"bytes,1,rep,name=room_ids,json=roomIds,proto3" json:"room_ids,omitempty"`
-	// To get record for particular session
+	// To get information about a particular session
 	RoomSid       *string           `protobuf:"bytes,2,opt,name=room_sid,json=roomSid,proto3,oneof" json:"room_sid,omitempty"`
 	Type          *RoomArtifactType `protobuf:"varint,3,opt,name=type,proto3,enum=plugnmeet.RoomArtifactType,oneof" json:"type,omitempty"`
 	From          uint64            `protobuf:"varint,4,opt,name=from,proto3" json:"from,omitempty"`

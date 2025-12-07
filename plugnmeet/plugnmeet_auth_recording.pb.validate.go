@@ -63,6 +63,10 @@ func (m *FetchRecordingsReq) validate(all bool) error {
 
 	// no validation rules for OrderBy
 
+	if m.RoomSid != nil {
+		// no validation rules for RoomSid
+	}
+
 	if len(errors) > 0 {
 		return FetchRecordingsReqMultiError(errors)
 	}

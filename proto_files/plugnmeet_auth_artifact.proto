@@ -11,7 +11,7 @@ import "plugnmeet_auth_room.proto";
 // Request to fetch a list of artifacts
 message FetchArtifactsReq {
   repeated string room_ids = 1;
-  // To get record for particular session
+  // To get information about a particular session
   optional string room_sid = 2;
   optional RoomArtifactType type = 3;
   uint64 from = 4;

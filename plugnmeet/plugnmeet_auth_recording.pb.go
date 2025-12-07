@@ -23,11 +23,13 @@ const (
 )
 
 type FetchRecordingsReq struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	RoomIds       []string               `protobuf:"bytes,1,rep,name=room_ids,json=roomIds,proto3" json:"room_ids,omitempty"`
-	From          uint32                 `protobuf:"varint,2,opt,name=from,proto3" json:"from,omitempty"`
-	Limit         uint32                 `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
-	OrderBy       string                 `protobuf:"bytes,4,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	RoomIds []string               `protobuf:"bytes,1,rep,name=room_ids,json=roomIds,proto3" json:"room_ids,omitempty"`
+	// To get information about a particular session
+	RoomSid       *string `protobuf:"bytes,2,opt,name=room_sid,json=roomSid,proto3,oneof" json:"room_sid,omitempty"`
+	From          uint32  `protobuf:"varint,3,opt,name=from,proto3" json:"from,omitempty"`
+	Limit         uint32  `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`
+	OrderBy       string  `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -67,6 +69,13 @@ func (x *FetchRecordingsReq) GetRoomIds() []string {
 		return x.RoomIds
 	}
 	return nil
+}
+
+func (x *FetchRecordingsReq) GetRoomSid() string {
+	if x != nil && x.RoomSid != nil {
+		return *x.RoomSid
+	}
+	return ""
 }
 
 func (x *FetchRecordingsReq) GetFrom() uint32 {
@@ -634,12 +643,14 @@ var File_plugnmeet_auth_recording_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_auth_recording_proto_rawDesc = "" +
 	"\n" +
-	"\x1eplugnmeet_auth_recording.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\x1a\x19plugnmeet_auth_room.proto\"t\n" +
+	"\x1eplugnmeet_auth_recording.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\x1a\x19plugnmeet_auth_room.proto\"\xa1\x01\n" +
 	"\x12FetchRecordingsReq\x12\x19\n" +
-	"\broom_ids\x18\x01 \x03(\tR\aroomIds\x12\x12\n" +
-	"\x04from\x18\x02 \x01(\rR\x04from\x12\x14\n" +
-	"\x05limit\x18\x03 \x01(\rR\x05limit\x12\x19\n" +
-	"\border_by\x18\x04 \x01(\tR\aorderBy\"\xed\x01\n" +
+	"\broom_ids\x18\x01 \x03(\tR\aroomIds\x12\x1e\n" +
+	"\broom_sid\x18\x02 \x01(\tH\x00R\aroomSid\x88\x01\x01\x12\x12\n" +
+	"\x04from\x18\x03 \x01(\rR\x04from\x12\x14\n" +
+	"\x05limit\x18\x04 \x01(\rR\x05limit\x12\x19\n" +
+	"\border_by\x18\x05 \x01(\tR\aorderByB\v\n" +
+	"\t_room_sid\"\xed\x01\n" +
 	"\rRecordingInfo\x12\x1b\n" +
 	"\trecord_id\x18\x01 \x01(\tR\brecordId\x12\x17\n" +
 	"\aroom_id\x18\x02 \x01(\tR\x06roomId\x12\x19\n" +
@@ -723,6 +734,7 @@ func file_plugnmeet_auth_recording_proto_init() {
 		return
 	}
 	file_plugnmeet_auth_room_proto_init()
+	file_plugnmeet_auth_recording_proto_msgTypes[0].OneofWrappers = []any{}
 	file_plugnmeet_auth_recording_proto_msgTypes[9].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
