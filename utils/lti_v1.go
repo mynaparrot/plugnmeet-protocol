@@ -77,7 +77,6 @@ func PrepareLTIV1RoomCreateReq(c *plugnmeet.LtiClaims) *plugnmeet.CreateRoomReq 
 				AllowRtmp:               true,
 				AllowViewOtherWebcams:   true,
 				AllowViewOtherUsersList: true,
-				AllowPolls:              true,
 				RecordingFeatures: &plugnmeet.RecordingFeatures{
 					IsAllow:                  true,
 					IsAllowCloud:             true,
@@ -85,23 +84,33 @@ func PrepareLTIV1RoomCreateReq(c *plugnmeet.LtiClaims) *plugnmeet.CreateRoomReq 
 					EnableAutoCloudRecording: false,
 				},
 				ChatFeatures: &plugnmeet.ChatFeatures{
-					AllowChat:       true,
-					AllowFileUpload: true,
+					IsAllow:           true,
+					IsAllowFileUpload: true,
 				},
 				SharedNotePadFeatures: &plugnmeet.SharedNotePadFeatures{
-					AllowedSharedNotePad: true,
+					IsAllow: true,
 				},
 				WhiteboardFeatures: &plugnmeet.WhiteboardFeatures{
-					AllowedWhiteboard: true,
+					IsAllow: true,
 				},
 				ExternalMediaPlayerFeatures: &plugnmeet.ExternalMediaPlayerFeatures{
-					AllowedExternalMediaPlayer: true,
+					IsAllow: true,
 				},
 				BreakoutRoomFeatures: &plugnmeet.BreakoutRoomFeatures{
 					IsAllow: true,
 				},
 				DisplayExternalLinkFeatures: &plugnmeet.DisplayExternalLinkFeatures{
 					IsAllow: true,
+				},
+				PollsFeatures: &plugnmeet.PollsFeatures{
+					IsAllow: true,
+				},
+				InsightsFeatures: &plugnmeet.InsightsFeatures{
+					IsAllow: true,
+					TranscriptionFeatures: &plugnmeet.InsightsTranscriptionFeatures{
+						IsAllow:            true,
+						IsAllowTranslation: true,
+					},
 				},
 			},
 		},
@@ -118,13 +127,13 @@ func PrepareLTIV1RoomCreateReq(c *plugnmeet.LtiClaims) *plugnmeet.CreateRoomReq 
 			f.MuteOnStart = *p.MuteOnStart
 		}
 		if p.AllowSharedNotePad != nil {
-			f.SharedNotePadFeatures.AllowedSharedNotePad = *p.AllowSharedNotePad
+			f.SharedNotePadFeatures.IsAllow = *p.AllowSharedNotePad
 		}
 		if p.AllowBreakoutRoom != nil {
 			f.BreakoutRoomFeatures.IsAllow = *p.AllowBreakoutRoom
 		}
 		if p.AllowPolls != nil {
-			f.AllowPolls = *p.AllowPolls
+			f.PollsFeatures.IsAllow = *p.AllowPolls
 		}
 		if p.AllowRecording != nil {
 			f.RecordingFeatures.IsAllow = *p.AllowRecording

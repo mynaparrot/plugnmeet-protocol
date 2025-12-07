@@ -55,7 +55,7 @@ message RoomCreateFeatures {
   bool allow_view_other_users_list = 6;
   bool admin_only_webcams = 7;
   // deprecated use polls_features
-  bool allow_polls = 8 [deprecated = true];
+  optional bool allow_polls = 8 [deprecated = true];
   optional uint64 room_duration = 9;
   bool enable_analytics = 10;
   optional bool allow_virtual_bg = 11;
@@ -79,8 +79,8 @@ message RoomCreateFeatures {
 }
 
 message ChatFeatures {
-  bool allow_chat = 1 [deprecated = true];
-  bool allow_file_upload = 2 [deprecated = true];
+  optional bool allow_chat = 1 [deprecated = true];
+  optional bool allow_file_upload = 2 [deprecated = true];
   bool is_allow = 5;
   bool is_allow_file_upload = 6;
 
@@ -89,7 +89,7 @@ message ChatFeatures {
 }
 
 message SharedNotePadFeatures {
-  bool allowed_shared_note_pad = 1 [deprecated = true];
+  optional bool allowed_shared_note_pad = 1 [deprecated = true];
   bool is_allow = 8;
 
   bool is_active = 2 [(buf.validate.field).bool.const = false];
@@ -117,7 +117,7 @@ message SharedNotePadFeatures {
 }
 
 message WhiteboardFeatures {
-  bool allowed_whiteboard = 1 [deprecated = true];
+  optional bool allowed_whiteboard = 1 [deprecated = true];
   bool is_allow = 9;
 
   bool visible = 2 [(buf.validate.field).bool.const = false];
@@ -142,7 +142,7 @@ message WhiteboardFeatures {
 }
 
 message ExternalMediaPlayerFeatures {
-  bool allowed_external_media_player = 1 [deprecated = true];
+  optional bool allowed_external_media_player = 1 [deprecated = true];
   bool is_allow = 5;
 
   bool is_active = 2 [(buf.validate.field).bool.const = false];

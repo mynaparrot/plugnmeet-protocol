@@ -3,10 +3,11 @@ package bbbapiwrapper
 import (
 	"encoding/json"
 	"encoding/xml"
-	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
-	"github.com/mynaparrot/plugnmeet-protocol/utils"
 	"net/url"
 	"strings"
+
+	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
+	"github.com/mynaparrot/plugnmeet-protocol/utils"
 )
 
 type CreateMeetingReq struct {
@@ -92,7 +93,6 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 				EnableAnalytics:  true,
 				MuteOnStart:      r.MuteOnStart,
 				AllowRtmp:        true,
-				AllowPolls:       true,
 				AllowScreenShare: true,
 				AllowRaiseHand:   &b,
 				AllowVirtualBg:   &b,
@@ -103,17 +103,17 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 					EnableAutoCloudRecording: r.AutoStartRecording,
 				},
 				ChatFeatures: &plugnmeet.ChatFeatures{
-					AllowChat:       true,
-					AllowFileUpload: true,
+					IsAllow:           true,
+					IsAllowFileUpload: true,
 				},
 				SharedNotePadFeatures: &plugnmeet.SharedNotePadFeatures{
-					AllowedSharedNotePad: true,
+					IsAllow: true,
 				},
 				WhiteboardFeatures: &plugnmeet.WhiteboardFeatures{
-					AllowedWhiteboard: true,
+					IsAllow: true,
 				},
 				ExternalMediaPlayerFeatures: &plugnmeet.ExternalMediaPlayerFeatures{
-					AllowedExternalMediaPlayer: true,
+					IsAllow: true,
 				},
 				BreakoutRoomFeatures: &plugnmeet.BreakoutRoomFeatures{
 					IsAllow: true,
@@ -124,9 +124,15 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 				IngressFeatures: &plugnmeet.IngressFeatures{
 					IsAllow: true,
 				},
-				SpeechToTextTranslationFeatures: &plugnmeet.SpeechToTextTranslationFeatures{
-					IsAllow:            true,
-					IsAllowTranslation: true,
+				InsightsFeatures: &plugnmeet.InsightsFeatures{
+					IsAllow: true,
+					TranscriptionFeatures: &plugnmeet.InsightsTranscriptionFeatures{
+						IsAllow:            true,
+						IsAllowTranslation: true,
+					},
+				},
+				PollsFeatures: &plugnmeet.PollsFeatures{
+					IsAllow: true,
 				},
 			},
 			DefaultLockSettings: &plugnmeet.LockSettings{},
@@ -159,7 +165,7 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 		setDifferentFeatures(req.Metadata.RoomFeatures, r.DisabledFeatures)
 	}
 
-	if r.PreUploadedPresentation != "" && req.Metadata.RoomFeatures.WhiteboardFeatures.AllowedWhiteboard {
+	if r.PreUploadedPresentation != "" && req.Metadata.RoomFeatures.WhiteboardFeatures.IsAllow {
 		req.Metadata.RoomFeatures.WhiteboardFeatures.PreloadFile = &r.PreUploadedPresentation
 	}
 
@@ -214,19 +220,19 @@ func setDifferentFeatures(f *plugnmeet.RoomCreateFeatures, disabledFeatures stri
 		case "breakoutRooms":
 			f.BreakoutRoomFeatures.IsAllow = fVal
 		case "chat":
-			f.ChatFeatures.AllowChat = fVal
+			f.ChatFeatures.IsAllow = fVal
 		case "externalVideos":
-			f.ExternalMediaPlayerFeatures.AllowedExternalMediaPlayer = fVal
+			f.ExternalMediaPlayerFeatures.IsAllow = fVal
 		case "polls":
-			f.AllowPolls = fVal
+			f.PollsFeatures.IsAllow = fVal
 		case "screenshare":
 			f.AllowScreenShare = fVal
 		case "sharedNotes":
-			f.SharedNotePadFeatures.AllowedSharedNotePad = fVal
+			f.SharedNotePadFeatures.IsAllow = fVal
 		case "liveTranscription":
-			f.SpeechToTextTranslationFeatures.IsAllow = fVal
+			f.InsightsFeatures.TranscriptionFeatures.IsAllow = fVal
 		case "presentation":
-			f.WhiteboardFeatures.AllowedWhiteboard = fVal
+			f.WhiteboardFeatures.IsAllow = fVal
 		case "virtualBackgrounds":
 			f.AllowVirtualBg = &fVal
 		case "raiseHand":

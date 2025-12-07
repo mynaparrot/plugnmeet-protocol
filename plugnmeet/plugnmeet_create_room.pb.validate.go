@@ -428,8 +428,6 @@ func (m *RoomCreateFeatures) validate(all bool) error {
 
 	// no validation rules for AdminOnlyWebcams
 
-	// no validation rules for AllowPolls
-
 	// no validation rules for EnableAnalytics
 
 	if all {
@@ -809,6 +807,10 @@ func (m *RoomCreateFeatures) validate(all bool) error {
 		}
 	}
 
+	if m.AllowPolls != nil {
+		// no validation rules for AllowPolls
+	}
+
 	if m.RoomDuration != nil {
 		// no validation rules for RoomDuration
 	}
@@ -927,13 +929,17 @@ func (m *ChatFeatures) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for AllowChat
-
-	// no validation rules for AllowFileUpload
-
 	// no validation rules for IsAllow
 
 	// no validation rules for IsAllowFileUpload
+
+	if m.AllowChat != nil {
+		// no validation rules for AllowChat
+	}
+
+	if m.AllowFileUpload != nil {
+		// no validation rules for AllowFileUpload
+	}
 
 	if m.MaxFileSize != nil {
 		// no validation rules for MaxFileSize
@@ -1038,8 +1044,6 @@ func (m *SharedNotePadFeatures) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for AllowedSharedNotePad
-
 	// no validation rules for IsAllow
 
 	// no validation rules for IsActive
@@ -1053,6 +1057,10 @@ func (m *SharedNotePadFeatures) validate(all bool) error {
 	// no validation rules for NotePadId
 
 	// no validation rules for ReadOnlyPadId
+
+	if m.AllowedSharedNotePad != nil {
+		// no validation rules for AllowedSharedNotePad
+	}
 
 	if len(errors) > 0 {
 		return SharedNotePadFeaturesMultiError(errors)
@@ -1156,8 +1164,6 @@ func (m *WhiteboardFeatures) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for AllowedWhiteboard
-
 	// no validation rules for IsAllow
 
 	// no validation rules for Visible
@@ -1169,6 +1175,10 @@ func (m *WhiteboardFeatures) validate(all bool) error {
 	// no validation rules for FilePath
 
 	// no validation rules for TotalPages
+
+	if m.AllowedWhiteboard != nil {
+		// no validation rules for AllowedWhiteboard
+	}
 
 	if m.PreloadFile != nil {
 		// no validation rules for PreloadFile
@@ -1280,11 +1290,13 @@ func (m *ExternalMediaPlayerFeatures) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for AllowedExternalMediaPlayer
-
 	// no validation rules for IsAllow
 
 	// no validation rules for IsActive
+
+	if m.AllowedExternalMediaPlayer != nil {
+		// no validation rules for AllowedExternalMediaPlayer
+	}
 
 	if m.SharedBy != nil {
 		// no validation rules for SharedBy

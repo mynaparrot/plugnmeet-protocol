@@ -2,6 +2,7 @@ package bbbapiwrapper
 
 import (
 	"encoding/xml"
+
 	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 )
 

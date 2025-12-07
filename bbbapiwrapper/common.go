@@ -5,8 +5,9 @@ import (
 	"crypto/sha1"
 	"encoding/hex"
 	"encoding/xml"
-	"github.com/google/uuid"
 	"regexp"
+
+	"github.com/google/uuid"
 )
 
 type CommonResponse struct {

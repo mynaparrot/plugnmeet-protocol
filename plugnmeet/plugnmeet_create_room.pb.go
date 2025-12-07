@@ -251,7 +251,7 @@ type RoomCreateFeatures struct {
 	// deprecated use polls_features
 	//
 	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-	AllowPolls                  bool                         `protobuf:"varint,8,opt,name=allow_polls,json=allowPolls,proto3" json:"allow_polls,omitempty"`
+	AllowPolls                  *bool                        `protobuf:"varint,8,opt,name=allow_polls,json=allowPolls,proto3,oneof" json:"allow_polls,omitempty"`
 	RoomDuration                *uint64                      `protobuf:"varint,9,opt,name=room_duration,json=roomDuration,proto3,oneof" json:"room_duration,omitempty"`
 	EnableAnalytics             bool                         `protobuf:"varint,10,opt,name=enable_analytics,json=enableAnalytics,proto3" json:"enable_analytics,omitempty"`
 	AllowVirtualBg              *bool                        `protobuf:"varint,11,opt,name=allow_virtual_bg,json=allowVirtualBg,proto3,oneof" json:"allow_virtual_bg,omitempty"`
@@ -358,8 +358,8 @@ func (x *RoomCreateFeatures) GetAdminOnlyWebcams() bool {
 
 // Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
 func (x *RoomCreateFeatures) GetAllowPolls() bool {
-	if x != nil {
-		return x.AllowPolls
+	if x != nil && x.AllowPolls != nil {
+		return *x.AllowPolls
 	}
 	return false
 }
@@ -494,9 +494,9 @@ func (x *RoomCreateFeatures) GetInsightsFeatures() *InsightsFeatures {
 type ChatFeatures struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-	AllowChat bool `protobuf:"varint,1,opt,name=allow_chat,json=allowChat,proto3" json:"allow_chat,omitempty"`
+	AllowChat *bool `protobuf:"varint,1,opt,name=allow_chat,json=allowChat,proto3,oneof" json:"allow_chat,omitempty"`
 	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-	AllowFileUpload   bool     `protobuf:"varint,2,opt,name=allow_file_upload,json=allowFileUpload,proto3" json:"allow_file_upload,omitempty"`
+	AllowFileUpload   *bool    `protobuf:"varint,2,opt,name=allow_file_upload,json=allowFileUpload,proto3,oneof" json:"allow_file_upload,omitempty"`
 	IsAllow           bool     `protobuf:"varint,5,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
 	IsAllowFileUpload bool     `protobuf:"varint,6,opt,name=is_allow_file_upload,json=isAllowFileUpload,proto3" json:"is_allow_file_upload,omitempty"`
 	AllowedFileTypes  []string `protobuf:"bytes,3,rep,name=allowed_file_types,json=allowedFileTypes,proto3" json:"allowed_file_types,omitempty"`
@@ -537,16 +537,16 @@ func (*ChatFeatures) Descriptor() ([]byte, []int) {
 
 // Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
 func (x *ChatFeatures) GetAllowChat() bool {
-	if x != nil {
-		return x.AllowChat
+	if x != nil && x.AllowChat != nil {
+		return *x.AllowChat
 	}
 	return false
 }
 
 // Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
 func (x *ChatFeatures) GetAllowFileUpload() bool {
-	if x != nil {
-		return x.AllowFileUpload
+	if x != nil && x.AllowFileUpload != nil {
+		return *x.AllowFileUpload
 	}
 	return false
 }
@@ -582,7 +582,7 @@ func (x *ChatFeatures) GetMaxFileSize() uint64 {
 type SharedNotePadFeatures struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-	AllowedSharedNotePad bool   `protobuf:"varint,1,opt,name=allowed_shared_note_pad,json=allowedSharedNotePad,proto3" json:"allowed_shared_note_pad,omitempty"`
+	AllowedSharedNotePad *bool  `protobuf:"varint,1,opt,name=allowed_shared_note_pad,json=allowedSharedNotePad,proto3,oneof" json:"allowed_shared_note_pad,omitempty"`
 	IsAllow              bool   `protobuf:"varint,8,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
 	IsActive             bool   `protobuf:"varint,2,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
 	Visible              bool   `protobuf:"varint,3,opt,name=visible,proto3" json:"visible,omitempty"`
@@ -626,8 +626,8 @@ func (*SharedNotePadFeatures) Descriptor() ([]byte, []int) {
 
 // Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
 func (x *SharedNotePadFeatures) GetAllowedSharedNotePad() bool {
-	if x != nil {
-		return x.AllowedSharedNotePad
+	if x != nil && x.AllowedSharedNotePad != nil {
+		return *x.AllowedSharedNotePad
 	}
 	return false
 }
@@ -684,7 +684,7 @@ func (x *SharedNotePadFeatures) GetReadOnlyPadId() string {
 type WhiteboardFeatures struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-	AllowedWhiteboard  bool    `protobuf:"varint,1,opt,name=allowed_whiteboard,json=allowedWhiteboard,proto3" json:"allowed_whiteboard,omitempty"`
+	AllowedWhiteboard  *bool   `protobuf:"varint,1,opt,name=allowed_whiteboard,json=allowedWhiteboard,proto3,oneof" json:"allowed_whiteboard,omitempty"`
 	IsAllow            bool    `protobuf:"varint,9,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
 	Visible            bool    `protobuf:"varint,2,opt,name=visible,proto3" json:"visible,omitempty"`
 	PreloadFile        *string `protobuf:"bytes,3,opt,name=preload_file,json=preloadFile,proto3,oneof" json:"preload_file,omitempty"`
@@ -729,8 +729,8 @@ func (*WhiteboardFeatures) Descriptor() ([]byte, []int) {
 
 // Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
 func (x *WhiteboardFeatures) GetAllowedWhiteboard() bool {
-	if x != nil {
-		return x.AllowedWhiteboard
+	if x != nil && x.AllowedWhiteboard != nil {
+		return *x.AllowedWhiteboard
 	}
 	return false
 }
@@ -794,7 +794,7 @@ func (x *WhiteboardFeatures) GetMaxAllowedFileSize() uint64 {
 type ExternalMediaPlayerFeatures struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-	AllowedExternalMediaPlayer bool    `protobuf:"varint,1,opt,name=allowed_external_media_player,json=allowedExternalMediaPlayer,proto3" json:"allowed_external_media_player,omitempty"`
+	AllowedExternalMediaPlayer *bool   `protobuf:"varint,1,opt,name=allowed_external_media_player,json=allowedExternalMediaPlayer,proto3,oneof" json:"allowed_external_media_player,omitempty"`
 	IsAllow                    bool    `protobuf:"varint,5,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
 	IsActive                   bool    `protobuf:"varint,2,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
 	SharedBy                   *string `protobuf:"bytes,3,opt,name=shared_by,json=sharedBy,proto3,oneof" json:"shared_by,omitempty"`
@@ -835,8 +835,8 @@ func (*ExternalMediaPlayerFeatures) Descriptor() ([]byte, []int) {
 
 // Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
 func (x *ExternalMediaPlayerFeatures) GetAllowedExternalMediaPlayer() bool {
-	if x != nil {
-		return x.AllowedExternalMediaPlayer
+	if x != nil && x.AllowedExternalMediaPlayer != nil {
+		return *x.AllowedExternalMediaPlayer
 	}
 	return false
 }
@@ -2044,7 +2044,7 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\f_webhook_urlB\r\n" +
 	"\v_logout_urlB\x0e\n" +
 	"\f_metadata_idB\r\n" +
-	"\v_extra_data\"\x9c\x0e\n" +
+	"\v_extra_data\"\xb1\x0e\n" +
 	"\x12RoomCreateFeatures\x12#\n" +
 	"\rallow_webcams\x18\x01 \x01(\bR\fallowWebcams\x12\"\n" +
 	"\rmute_on_start\x18\x02 \x01(\bR\vmuteOnStart\x12,\n" +
@@ -2053,15 +2053,15 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"allow_rtmp\x18\x04 \x01(\bR\tallowRtmp\x127\n" +
 	"\x18allow_view_other_webcams\x18\x05 \x01(\bR\x15allowViewOtherWebcams\x12<\n" +
 	"\x1ballow_view_other_users_list\x18\x06 \x01(\bR\x17allowViewOtherUsersList\x12,\n" +
-	"\x12admin_only_webcams\x18\a \x01(\bR\x10adminOnlyWebcams\x12#\n" +
-	"\vallow_polls\x18\b \x01(\bB\x02\x18\x01R\n" +
-	"allowPolls\x12(\n" +
-	"\rroom_duration\x18\t \x01(\x04H\x00R\froomDuration\x88\x01\x01\x12)\n" +
+	"\x12admin_only_webcams\x18\a \x01(\bR\x10adminOnlyWebcams\x12(\n" +
+	"\vallow_polls\x18\b \x01(\bB\x02\x18\x01H\x00R\n" +
+	"allowPolls\x88\x01\x01\x12(\n" +
+	"\rroom_duration\x18\t \x01(\x04H\x01R\froomDuration\x88\x01\x01\x12)\n" +
 	"\x10enable_analytics\x18\n" +
 	" \x01(\bR\x0fenableAnalytics\x12-\n" +
-	"\x10allow_virtual_bg\x18\v \x01(\bH\x01R\x0eallowVirtualBg\x88\x01\x01\x12-\n" +
-	"\x10allow_raise_hand\x18\f \x01(\bH\x02R\x0eallowRaiseHand\x88\x01\x01\x12,\n" +
-	"\x10auto_gen_user_id\x18\r \x01(\bH\x03R\rautoGenUserId\x88\x01\x01\x12K\n" +
+	"\x10allow_virtual_bg\x18\v \x01(\bH\x02R\x0eallowVirtualBg\x88\x01\x01\x12-\n" +
+	"\x10allow_raise_hand\x18\f \x01(\bH\x03R\x0eallowRaiseHand\x88\x01\x01\x12,\n" +
+	"\x10auto_gen_user_id\x18\r \x01(\bH\x04R\rautoGenUserId\x88\x01\x01\x12K\n" +
 	"\x12recording_features\x18\x0e \x01(\v2\x1c.plugnmeet.RecordingFeaturesR\x11recordingFeatures\x12<\n" +
 	"\rchat_features\x18\x0f \x01(\v2\x17.plugnmeet.ChatFeaturesR\fchatFeatures\x12Y\n" +
 	"\x18shared_note_pad_features\x18\x10 \x01(\v2 .plugnmeet.SharedNotePadFeaturesR\x15sharedNotePadFeatures\x12N\n" +
@@ -2074,22 +2074,25 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"#speech_to_text_translation_features\x18\x17 \x01(\v2*.plugnmeet.SpeechToTextTranslationFeaturesB\x02\x18\x01R\x1fspeechToTextTranslationFeatures\x12i\n" +
 	"\x1eend_to_end_encryption_features\x18\x18 \x01(\v2%.plugnmeet.EndToEndEncryptionFeaturesR\x1aendToEndEncryptionFeatures\x12?\n" +
 	"\x0epolls_features\x18\x19 \x01(\v2\x18.plugnmeet.PollsFeaturesR\rpollsFeatures\x12H\n" +
-	"\x11insights_features\x18\x1a \x01(\v2\x1b.plugnmeet.InsightsFeaturesR\x10insightsFeaturesB\x10\n" +
+	"\x11insights_features\x18\x1a \x01(\v2\x1b.plugnmeet.InsightsFeaturesR\x10insightsFeaturesB\x0e\n" +
+	"\f_allow_pollsB\x10\n" +
 	"\x0e_room_durationB\x13\n" +
 	"\x11_allow_virtual_bgB\x13\n" +
 	"\x11_allow_raise_handB\x13\n" +
-	"\x11_auto_gen_user_id\"\x96\x02\n" +
-	"\fChatFeatures\x12!\n" +
+	"\x11_auto_gen_user_id\"\xc5\x02\n" +
+	"\fChatFeatures\x12&\n" +
 	"\n" +
-	"allow_chat\x18\x01 \x01(\bB\x02\x18\x01R\tallowChat\x12.\n" +
-	"\x11allow_file_upload\x18\x02 \x01(\bB\x02\x18\x01R\x0fallowFileUpload\x12\x19\n" +
+	"allow_chat\x18\x01 \x01(\bB\x02\x18\x01H\x00R\tallowChat\x88\x01\x01\x123\n" +
+	"\x11allow_file_upload\x18\x02 \x01(\bB\x02\x18\x01H\x01R\x0fallowFileUpload\x88\x01\x01\x12\x19\n" +
 	"\bis_allow\x18\x05 \x01(\bR\aisAllow\x12/\n" +
 	"\x14is_allow_file_upload\x18\x06 \x01(\bR\x11isAllowFileUpload\x12,\n" +
 	"\x12allowed_file_types\x18\x03 \x03(\tR\x10allowedFileTypes\x12'\n" +
-	"\rmax_file_size\x18\x04 \x01(\x04H\x00R\vmaxFileSize\x88\x01\x01B\x10\n" +
-	"\x0e_max_file_size\"\x89\x05\n" +
-	"\x15SharedNotePadFeatures\x129\n" +
-	"\x17allowed_shared_note_pad\x18\x01 \x01(\bB\x02\x18\x01R\x14allowedSharedNotePad\x12\x19\n" +
+	"\rmax_file_size\x18\x04 \x01(\x04H\x02R\vmaxFileSize\x88\x01\x01B\r\n" +
+	"\v_allow_chatB\x14\n" +
+	"\x12_allow_file_uploadB\x10\n" +
+	"\x0e_max_file_size\"\xaa\x05\n" +
+	"\x15SharedNotePadFeatures\x12>\n" +
+	"\x17allowed_shared_note_pad\x18\x01 \x01(\bB\x02\x18\x01H\x00R\x14allowedSharedNotePad\x88\x01\x01\x12\x19\n" +
 	"\bis_allow\x18\b \x01(\bR\aisAllow\x12$\n" +
 	"\tis_active\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisActive\x12!\n" +
 	"\avisible\x18\x03 \x01(\bB\a\xbaH\x04j\x02\b\x00R\avisible\x12i\n" +
@@ -2100,12 +2103,13 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\vnote_pad_id\x18\x06 \x01(\tBX\xbaHU\xba\x01R\n" +
 	"\x12note_pad_id_format\x12(note_pad_id should not contain any value\x1a\x12this.matches('^$')R\tnotePadId\x12\x8b\x01\n" +
 	"\x10read_only_pad_id\x18\a \x01(\tBb\xbaH_\xba\x01\\\n" +
-	"\x17read_only_pad_id_format\x12-read_only_pad_id should not contain any value\x1a\x12this.matches('^$')R\rreadOnlyPadId\"\xc1\x05\n" +
-	"\x12WhiteboardFeatures\x121\n" +
-	"\x12allowed_whiteboard\x18\x01 \x01(\bB\x02\x18\x01R\x11allowedWhiteboard\x12\x19\n" +
+	"\x17read_only_pad_id_format\x12-read_only_pad_id should not contain any value\x1a\x12this.matches('^$')R\rreadOnlyPadIdB\x1a\n" +
+	"\x18_allowed_shared_note_pad\"\xdd\x05\n" +
+	"\x12WhiteboardFeatures\x126\n" +
+	"\x12allowed_whiteboard\x18\x01 \x01(\bB\x02\x18\x01H\x00R\x11allowedWhiteboard\x88\x01\x01\x12\x19\n" +
 	"\bis_allow\x18\t \x01(\bR\aisAllow\x12!\n" +
 	"\avisible\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\avisible\x120\n" +
-	"\fpreload_file\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x00R\vpreloadFile\x88\x01\x01\x12\x94\x01\n" +
+	"\fpreload_file\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x01R\vpreloadFile\x88\x01\x01\x12\x94\x01\n" +
 	"\x12whiteboard_file_id\x18\x04 \x01(\tBf\xbaHc\xba\x01`\n" +
 	"\x19whiteboard_file_id_format\x12/whiteboard_file_id should not contain any value\x1a\x12this.matches('^$')R\x10whiteboardFileId\x12q\n" +
 	"\tfile_name\x18\x05 \x01(\tBT\xbaHQ\xba\x01N\n" +
@@ -2114,18 +2118,20 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x10file_path_format\x12&file_path should not contain any value\x1a\x12this.matches('^$')R\bfilePath\x12\x1f\n" +
 	"\vtotal_pages\x18\a \x01(\rR\n" +
 	"totalPages\x12?\n" +
-	"\x15max_allowed_file_size\x18\b \x01(\x04B\a\xbaH\x042\x02\b\x00H\x01R\x12maxAllowedFileSize\x88\x01\x01B\x0f\n" +
+	"\x15max_allowed_file_size\x18\b \x01(\x04B\a\xbaH\x042\x02\b\x00H\x02R\x12maxAllowedFileSize\x88\x01\x01B\x15\n" +
+	"\x13_allowed_whiteboardB\x0f\n" +
 	"\r_preload_fileB\x18\n" +
-	"\x16_max_allowed_file_size\"\x94\x03\n" +
-	"\x1bExternalMediaPlayerFeatures\x12E\n" +
-	"\x1dallowed_external_media_player\x18\x01 \x01(\bB\x02\x18\x01R\x1aallowedExternalMediaPlayer\x12\x19\n" +
+	"\x16_max_allowed_file_size\"\xbb\x03\n" +
+	"\x1bExternalMediaPlayerFeatures\x12J\n" +
+	"\x1dallowed_external_media_player\x18\x01 \x01(\bB\x02\x18\x01H\x00R\x1aallowedExternalMediaPlayer\x88\x01\x01\x12\x19\n" +
 	"\bis_allow\x18\x05 \x01(\bR\aisAllow\x12$\n" +
 	"\tis_active\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisActive\x12v\n" +
 	"\tshared_by\x18\x03 \x01(\tBT\xbaHQ\xba\x01N\n" +
-	"\x10shared_by_format\x12&shared_by should not contain any value\x1a\x12this.matches('^$')H\x00R\bsharedBy\x88\x01\x01\x12_\n" +
+	"\x10shared_by_format\x12&shared_by should not contain any value\x1a\x12this.matches('^$')H\x01R\bsharedBy\x88\x01\x01\x12_\n" +
 	"\x03url\x18\x04 \x01(\tBH\xbaHE\xba\x01B\n" +
 	"\n" +
-	"url_format\x12 url should not contain any value\x1a\x12this.matches('^$')H\x01R\x03url\x88\x01\x01B\f\n" +
+	"url_format\x12 url should not contain any value\x1a\x12this.matches('^$')H\x02R\x03url\x88\x01\x01B \n" +
+	"\x1e_allowed_external_media_playerB\f\n" +
 	"\n" +
 	"_shared_byB\x06\n" +
 	"\x04_url\"\\\n" +
@@ -2331,6 +2337,7 @@ func file_plugnmeet_create_room_proto_init() {
 	file_plugnmeet_create_room_proto_msgTypes[1].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[2].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[3].OneofWrappers = []any{}
+	file_plugnmeet_create_room_proto_msgTypes[4].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[5].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[6].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[9].OneofWrappers = []any{}

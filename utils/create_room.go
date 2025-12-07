@@ -20,52 +20,57 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 
 	if rf.ChatFeatures == nil {
 		rf.ChatFeatures = &plugnmeet.ChatFeatures{
-			AllowChat:         false,
-			AllowFileUpload:   false,
 			IsAllow:           false,
 			IsAllowFileUpload: false,
 		}
 	} else {
 		// backward compatibility
-		rf.ChatFeatures.IsAllow = rf.ChatFeatures.AllowChat
-		rf.ChatFeatures.IsAllowFileUpload = rf.ChatFeatures.AllowFileUpload
+		if rf.ChatFeatures.AllowChat != nil {
+			rf.ChatFeatures.IsAllow = *rf.ChatFeatures.AllowChat
+		}
+		if rf.ChatFeatures.AllowFileUpload != nil {
+			rf.ChatFeatures.IsAllowFileUpload = *rf.ChatFeatures.AllowFileUpload
+		}
 	}
 
 	if rf.SharedNotePadFeatures == nil {
 		rf.SharedNotePadFeatures = &plugnmeet.SharedNotePadFeatures{
-			AllowedSharedNotePad: false,
-			IsAllow:              false,
-			IsActive:             false,
-			Visible:              false,
+			IsAllow:  false,
+			IsActive: false,
+			Visible:  false,
 		}
 	} else {
 		// backward compatibility
-		rf.SharedNotePadFeatures.IsAllow = rf.SharedNotePadFeatures.AllowedSharedNotePad
+		if rf.SharedNotePadFeatures.AllowedSharedNotePad != nil {
+			rf.SharedNotePadFeatures.IsAllow = *rf.SharedNotePadFeatures.AllowedSharedNotePad
+		}
 	}
 
 	if rf.WhiteboardFeatures == nil {
 		rf.WhiteboardFeatures = &plugnmeet.WhiteboardFeatures{
-			AllowedWhiteboard: false,
-			IsAllow:           false,
-			Visible:           false,
-			WhiteboardFileId:  "default",
-			FileName:          "default",
-			TotalPages:        10,
+			IsAllow:          false,
+			Visible:          false,
+			WhiteboardFileId: "default",
+			FileName:         "default",
+			TotalPages:       10,
 		}
 	} else {
 		// backward compatibility
-		rf.WhiteboardFeatures.IsAllow = rf.WhiteboardFeatures.AllowedWhiteboard
+		if rf.WhiteboardFeatures.AllowedWhiteboard != nil {
+			rf.WhiteboardFeatures.IsAllow = *rf.WhiteboardFeatures.AllowedWhiteboard
+		}
 	}
 
 	if rf.ExternalMediaPlayerFeatures == nil {
 		rf.ExternalMediaPlayerFeatures = &plugnmeet.ExternalMediaPlayerFeatures{
-			AllowedExternalMediaPlayer: false,
-			IsAllow:                    false,
-			IsActive:                   false,
+			IsAllow:  false,
+			IsActive: false,
 		}
 	} else {
 		// backward compatibility
-		rf.ExternalMediaPlayerFeatures.IsAllow = rf.ExternalMediaPlayerFeatures.AllowedExternalMediaPlayer
+		if rf.ExternalMediaPlayerFeatures.AllowedExternalMediaPlayer != nil {
+			rf.ExternalMediaPlayerFeatures.IsAllow = *rf.ExternalMediaPlayerFeatures.AllowedExternalMediaPlayer
+		}
 	}
 
 	if rf.WaitingRoomFeatures == nil {
@@ -111,7 +116,11 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 
 	if rf.PollsFeatures == nil {
 		rf.PollsFeatures = &plugnmeet.PollsFeatures{
-			IsAllow: rf.AllowPolls, // for backward compatibility
+			IsAllow: false,
+		}
+		// for backward compatibility {
+		if rf.AllowPolls != nil {
+			rf.PollsFeatures.IsAllow = *rf.AllowPolls
 		}
 	}
 
