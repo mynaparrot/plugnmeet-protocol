@@ -12,5 +12,7 @@ plugins:
 inputs:
   - directory: ../proto_files
   - module: buf.build/bufbuild/protovalidate
+  - proto_file: ../tmp/livekit-protocol/protobufs/logger/options.proto
+    include_package_files: true
   - proto_file: ../tmp/livekit-protocol/protobufs/livekit_models.proto
     include_package_files: true
