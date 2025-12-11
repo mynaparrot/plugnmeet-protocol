@@ -29,3 +29,15 @@ message RecordingInfoFile {
   float file_size = 10;
   int64 creation_time = 11;
 }
+
+message RecordingSubtitle {
+  string label = 1;
+  string url = 2;
+}
+
+message RecordingMetadata {
+  optional string title = 1;
+  optional string description = 2;
+  repeated RecordingSubtitle subtitles = 3;
+  optional string extra_data = 4;
+}

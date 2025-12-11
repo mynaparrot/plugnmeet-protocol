@@ -6,6 +6,7 @@ option php_namespace = "Mynaparrot\\PlugnmeetProto";
 
 import "buf/validate/validate.proto";
 import "plugnmeet_auth_room.proto";
+import "plugnmeet_recording.proto";
 
 message FetchRecordingsReq {
   repeated string room_ids = 1;
@@ -24,6 +25,7 @@ message RecordingInfo {
   float file_size = 5;
   int64 creation_time = 6;
   int64 room_creation_time = 7;
+  optional RecordingMetadata metadata = 8;
 }
 
 message FetchRecordingsResult {
@@ -68,4 +70,14 @@ message GetDownloadTokenRes {
   bool status = 1;
   string msg = 2;
   optional string token = 3;
+}
+
+message UpdateRecordingMetadataReq {
+  string record_id = 1 [(buf.validate.field).required = true];
+  RecordingMetadata metadata = 2;
+}
+
+message UpdateRecordingMetadataRes {
+  bool status = 1;
+  string msg = 2;
 }

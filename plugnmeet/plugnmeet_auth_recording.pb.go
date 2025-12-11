@@ -108,6 +108,7 @@ type RecordingInfo struct {
 	FileSize         float32                `protobuf:"fixed32,5,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
 	CreationTime     int64                  `protobuf:"varint,6,opt,name=creation_time,json=creationTime,proto3" json:"creation_time,omitempty"`
 	RoomCreationTime int64                  `protobuf:"varint,7,opt,name=room_creation_time,json=roomCreationTime,proto3" json:"room_creation_time,omitempty"`
+	Metadata         *RecordingMetadata     `protobuf:"bytes,8,opt,name=metadata,proto3,oneof" json:"metadata,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -189,6 +190,13 @@ func (x *RecordingInfo) GetRoomCreationTime() int64 {
 		return x.RoomCreationTime
 	}
 	return 0
+}
+
+func (x *RecordingInfo) GetMetadata() *RecordingMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
 }
 
 type FetchRecordingsResult struct {
@@ -639,18 +647,122 @@ func (x *GetDownloadTokenRes) GetToken() string {
 	return ""
 }
 
+type UpdateRecordingMetadataReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RecordId      string                 `protobuf:"bytes,1,opt,name=record_id,json=recordId,proto3" json:"record_id,omitempty"`
+	Metadata      *RecordingMetadata     `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateRecordingMetadataReq) Reset() {
+	*x = UpdateRecordingMetadataReq{}
+	mi := &file_plugnmeet_auth_recording_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateRecordingMetadataReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateRecordingMetadataReq) ProtoMessage() {}
+
+func (x *UpdateRecordingMetadataReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_auth_recording_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateRecordingMetadataReq.ProtoReflect.Descriptor instead.
+func (*UpdateRecordingMetadataReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_auth_recording_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *UpdateRecordingMetadataReq) GetRecordId() string {
+	if x != nil {
+		return x.RecordId
+	}
+	return ""
+}
+
+func (x *UpdateRecordingMetadataReq) GetMetadata() *RecordingMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+type UpdateRecordingMetadataRes struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateRecordingMetadataRes) Reset() {
+	*x = UpdateRecordingMetadataRes{}
+	mi := &file_plugnmeet_auth_recording_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateRecordingMetadataRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateRecordingMetadataRes) ProtoMessage() {}
+
+func (x *UpdateRecordingMetadataRes) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_auth_recording_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateRecordingMetadataRes.ProtoReflect.Descriptor instead.
+func (*UpdateRecordingMetadataRes) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_auth_recording_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *UpdateRecordingMetadataRes) GetStatus() bool {
+	if x != nil {
+		return x.Status
+	}
+	return false
+}
+
+func (x *UpdateRecordingMetadataRes) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 var File_plugnmeet_auth_recording_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_auth_recording_proto_rawDesc = "" +
 	"\n" +
-	"\x1eplugnmeet_auth_recording.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\x1a\x19plugnmeet_auth_room.proto\"\xa1\x01\n" +
+	"\x1eplugnmeet_auth_recording.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\x1a\x19plugnmeet_auth_room.proto\x1a\x19plugnmeet_recording.proto\"\xa1\x01\n" +
 	"\x12FetchRecordingsReq\x12\x19\n" +
 	"\broom_ids\x18\x01 \x03(\tR\aroomIds\x12\x1e\n" +
 	"\broom_sid\x18\x02 \x01(\tH\x00R\aroomSid\x88\x01\x01\x12\x12\n" +
 	"\x04from\x18\x03 \x01(\rR\x04from\x12\x14\n" +
 	"\x05limit\x18\x04 \x01(\rR\x05limit\x12\x19\n" +
 	"\border_by\x18\x05 \x01(\tR\aorderByB\v\n" +
-	"\t_room_sid\"\xed\x01\n" +
+	"\t_room_sid\"\xb9\x02\n" +
 	"\rRecordingInfo\x12\x1b\n" +
 	"\trecord_id\x18\x01 \x01(\tR\brecordId\x12\x17\n" +
 	"\aroom_id\x18\x02 \x01(\tR\x06roomId\x12\x19\n" +
@@ -658,7 +770,9 @@ const file_plugnmeet_auth_recording_proto_rawDesc = "" +
 	"\tfile_path\x18\x04 \x01(\tR\bfilePath\x12\x1b\n" +
 	"\tfile_size\x18\x05 \x01(\x02R\bfileSize\x12#\n" +
 	"\rcreation_time\x18\x06 \x01(\x03R\fcreationTime\x12,\n" +
-	"\x12room_creation_time\x18\a \x01(\x03R\x10roomCreationTime\"\xca\x01\n" +
+	"\x12room_creation_time\x18\a \x01(\x03R\x10roomCreationTime\x12=\n" +
+	"\bmetadata\x18\b \x01(\v2\x1c.plugnmeet.RecordingMetadataH\x00R\bmetadata\x88\x01\x01B\v\n" +
+	"\t_metadata\"\xca\x01\n" +
 	"\x15FetchRecordingsResult\x12)\n" +
 	"\x10total_recordings\x18\x01 \x01(\x03R\x0ftotalRecordings\x12\x12\n" +
 	"\x04from\x18\x02 \x01(\rR\x04from\x12\x14\n" +
@@ -687,7 +801,13 @@ const file_plugnmeet_auth_recording_proto_rawDesc = "" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x19\n" +
 	"\x05token\x18\x03 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
-	"\x06_tokenB\xa4\x01\n" +
+	"\x06_token\"{\n" +
+	"\x1aUpdateRecordingMetadataReq\x12#\n" +
+	"\trecord_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\brecordId\x128\n" +
+	"\bmetadata\x18\x02 \x01(\v2\x1c.plugnmeet.RecordingMetadataR\bmetadata\"F\n" +
+	"\x1aUpdateRecordingMetadataRes\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msgB\xa4\x01\n" +
 	"\rcom.plugnmeetB\x1bPlugnmeetAuthRecordingProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -702,30 +822,35 @@ func file_plugnmeet_auth_recording_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_auth_recording_proto_rawDescData
 }
 
-var file_plugnmeet_auth_recording_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_plugnmeet_auth_recording_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_plugnmeet_auth_recording_proto_goTypes = []any{
-	(*FetchRecordingsReq)(nil),    // 0: plugnmeet.FetchRecordingsReq
-	(*RecordingInfo)(nil),         // 1: plugnmeet.RecordingInfo
-	(*FetchRecordingsResult)(nil), // 2: plugnmeet.FetchRecordingsResult
-	(*FetchRecordingsRes)(nil),    // 3: plugnmeet.FetchRecordingsRes
-	(*RecordingInfoReq)(nil),      // 4: plugnmeet.RecordingInfoReq
-	(*RecordingInfoRes)(nil),      // 5: plugnmeet.RecordingInfoRes
-	(*DeleteRecordingReq)(nil),    // 6: plugnmeet.DeleteRecordingReq
-	(*DeleteRecordingRes)(nil),    // 7: plugnmeet.DeleteRecordingRes
-	(*GetDownloadTokenReq)(nil),   // 8: plugnmeet.GetDownloadTokenReq
-	(*GetDownloadTokenRes)(nil),   // 9: plugnmeet.GetDownloadTokenRes
-	(*PastRoomInfo)(nil),          // 10: plugnmeet.PastRoomInfo
+	(*FetchRecordingsReq)(nil),         // 0: plugnmeet.FetchRecordingsReq
+	(*RecordingInfo)(nil),              // 1: plugnmeet.RecordingInfo
+	(*FetchRecordingsResult)(nil),      // 2: plugnmeet.FetchRecordingsResult
+	(*FetchRecordingsRes)(nil),         // 3: plugnmeet.FetchRecordingsRes
+	(*RecordingInfoReq)(nil),           // 4: plugnmeet.RecordingInfoReq
+	(*RecordingInfoRes)(nil),           // 5: plugnmeet.RecordingInfoRes
+	(*DeleteRecordingReq)(nil),         // 6: plugnmeet.DeleteRecordingReq
+	(*DeleteRecordingRes)(nil),         // 7: plugnmeet.DeleteRecordingRes
+	(*GetDownloadTokenReq)(nil),        // 8: plugnmeet.GetDownloadTokenReq
+	(*GetDownloadTokenRes)(nil),        // 9: plugnmeet.GetDownloadTokenRes
+	(*UpdateRecordingMetadataReq)(nil), // 10: plugnmeet.UpdateRecordingMetadataReq
+	(*UpdateRecordingMetadataRes)(nil), // 11: plugnmeet.UpdateRecordingMetadataRes
+	(*RecordingMetadata)(nil),          // 12: plugnmeet.RecordingMetadata
+	(*PastRoomInfo)(nil),               // 13: plugnmeet.PastRoomInfo
 }
 var file_plugnmeet_auth_recording_proto_depIdxs = []int32{
-	1,  // 0: plugnmeet.FetchRecordingsResult.recordings_list:type_name -> plugnmeet.RecordingInfo
-	2,  // 1: plugnmeet.FetchRecordingsRes.result:type_name -> plugnmeet.FetchRecordingsResult
-	1,  // 2: plugnmeet.RecordingInfoRes.recording_info:type_name -> plugnmeet.RecordingInfo
-	10, // 3: plugnmeet.RecordingInfoRes.room_info:type_name -> plugnmeet.PastRoomInfo
-	4,  // [4:4] is the sub-list for method output_type
-	4,  // [4:4] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	12, // 0: plugnmeet.RecordingInfo.metadata:type_name -> plugnmeet.RecordingMetadata
+	1,  // 1: plugnmeet.FetchRecordingsResult.recordings_list:type_name -> plugnmeet.RecordingInfo
+	2,  // 2: plugnmeet.FetchRecordingsRes.result:type_name -> plugnmeet.FetchRecordingsResult
+	1,  // 3: plugnmeet.RecordingInfoRes.recording_info:type_name -> plugnmeet.RecordingInfo
+	13, // 4: plugnmeet.RecordingInfoRes.room_info:type_name -> plugnmeet.PastRoomInfo
+	12, // 5: plugnmeet.UpdateRecordingMetadataReq.metadata:type_name -> plugnmeet.RecordingMetadata
+	6,  // [6:6] is the sub-list for method output_type
+	6,  // [6:6] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_auth_recording_proto_init() }
@@ -734,7 +859,9 @@ func file_plugnmeet_auth_recording_proto_init() {
 		return
 	}
 	file_plugnmeet_auth_room_proto_init()
+	file_plugnmeet_recording_proto_init()
 	file_plugnmeet_auth_recording_proto_msgTypes[0].OneofWrappers = []any{}
+	file_plugnmeet_auth_recording_proto_msgTypes[1].OneofWrappers = []any{}
 	file_plugnmeet_auth_recording_proto_msgTypes[9].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -742,7 +869,7 @@ func file_plugnmeet_auth_recording_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_auth_recording_proto_rawDesc), len(file_plugnmeet_auth_recording_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

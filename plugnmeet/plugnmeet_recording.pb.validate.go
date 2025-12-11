@@ -277,3 +277,257 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = RecordingInfoFileValidationError{}
+
+// Validate checks the field values on RecordingSubtitle with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *RecordingSubtitle) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RecordingSubtitle with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RecordingSubtitleMultiError, or nil if none found.
+func (m *RecordingSubtitle) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RecordingSubtitle) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Label
+
+	// no validation rules for Url
+
+	if len(errors) > 0 {
+		return RecordingSubtitleMultiError(errors)
+	}
+
+	return nil
+}
+
+// RecordingSubtitleMultiError is an error wrapping multiple validation errors
+// returned by RecordingSubtitle.ValidateAll() if the designated constraints
+// aren't met.
+type RecordingSubtitleMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RecordingSubtitleMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RecordingSubtitleMultiError) AllErrors() []error { return m }
+
+// RecordingSubtitleValidationError is the validation error returned by
+// RecordingSubtitle.Validate if the designated constraints aren't met.
+type RecordingSubtitleValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RecordingSubtitleValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RecordingSubtitleValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RecordingSubtitleValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RecordingSubtitleValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RecordingSubtitleValidationError) ErrorName() string {
+	return "RecordingSubtitleValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RecordingSubtitleValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRecordingSubtitle.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RecordingSubtitleValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RecordingSubtitleValidationError{}
+
+// Validate checks the field values on RecordingMetadata with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *RecordingMetadata) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RecordingMetadata with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RecordingMetadataMultiError, or nil if none found.
+func (m *RecordingMetadata) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RecordingMetadata) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetSubtitles() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, RecordingMetadataValidationError{
+						field:  fmt.Sprintf("Subtitles[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, RecordingMetadataValidationError{
+						field:  fmt.Sprintf("Subtitles[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return RecordingMetadataValidationError{
+					field:  fmt.Sprintf("Subtitles[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.Title != nil {
+		// no validation rules for Title
+	}
+
+	if m.Description != nil {
+		// no validation rules for Description
+	}
+
+	if m.ExtraData != nil {
+		// no validation rules for ExtraData
+	}
+
+	if len(errors) > 0 {
+		return RecordingMetadataMultiError(errors)
+	}
+
+	return nil
+}
+
+// RecordingMetadataMultiError is an error wrapping multiple validation errors
+// returned by RecordingMetadata.ValidateAll() if the designated constraints
+// aren't met.
+type RecordingMetadataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RecordingMetadataMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RecordingMetadataMultiError) AllErrors() []error { return m }
+
+// RecordingMetadataValidationError is the validation error returned by
+// RecordingMetadata.Validate if the designated constraints aren't met.
+type RecordingMetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RecordingMetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RecordingMetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RecordingMetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RecordingMetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RecordingMetadataValidationError) ErrorName() string {
+	return "RecordingMetadataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RecordingMetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRecordingMetadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RecordingMetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RecordingMetadataValidationError{}

@@ -237,6 +237,126 @@ func (x *RecordingInfoFile) GetCreationTime() int64 {
 	return 0
 }
 
+type RecordingSubtitle struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Label         string                 `protobuf:"bytes,1,opt,name=label,proto3" json:"label,omitempty"`
+	Url           string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RecordingSubtitle) Reset() {
+	*x = RecordingSubtitle{}
+	mi := &file_plugnmeet_recording_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RecordingSubtitle) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RecordingSubtitle) ProtoMessage() {}
+
+func (x *RecordingSubtitle) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_recording_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RecordingSubtitle.ProtoReflect.Descriptor instead.
+func (*RecordingSubtitle) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_recording_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *RecordingSubtitle) GetLabel() string {
+	if x != nil {
+		return x.Label
+	}
+	return ""
+}
+
+func (x *RecordingSubtitle) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+type RecordingMetadata struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Title         *string                `protobuf:"bytes,1,opt,name=title,proto3,oneof" json:"title,omitempty"`
+	Description   *string                `protobuf:"bytes,2,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	Subtitles     []*RecordingSubtitle   `protobuf:"bytes,3,rep,name=subtitles,proto3" json:"subtitles,omitempty"`
+	ExtraData     *string                `protobuf:"bytes,4,opt,name=extra_data,json=extraData,proto3,oneof" json:"extra_data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RecordingMetadata) Reset() {
+	*x = RecordingMetadata{}
+	mi := &file_plugnmeet_recording_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RecordingMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RecordingMetadata) ProtoMessage() {}
+
+func (x *RecordingMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_recording_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RecordingMetadata.ProtoReflect.Descriptor instead.
+func (*RecordingMetadata) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_recording_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *RecordingMetadata) GetTitle() string {
+	if x != nil && x.Title != nil {
+		return *x.Title
+	}
+	return ""
+}
+
+func (x *RecordingMetadata) GetDescription() string {
+	if x != nil && x.Description != nil {
+		return *x.Description
+	}
+	return ""
+}
+
+func (x *RecordingMetadata) GetSubtitles() []*RecordingSubtitle {
+	if x != nil {
+		return x.Subtitles
+	}
+	return nil
+}
+
+func (x *RecordingMetadata) GetExtraData() string {
+	if x != nil && x.ExtraData != nil {
+		return *x.ExtraData
+	}
+	return ""
+}
+
 var File_plugnmeet_recording_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_recording_proto_rawDesc = "" +
@@ -268,7 +388,19 @@ const file_plugnmeet_recording_proto_rawDesc = "" +
 	"\tfile_path\x18\t \x01(\tR\bfilePath\x12\x1b\n" +
 	"\tfile_size\x18\n" +
 	" \x01(\x02R\bfileSize\x12#\n" +
-	"\rcreation_time\x18\v \x01(\x03R\fcreationTimeB\xa0\x01\n" +
+	"\rcreation_time\x18\v \x01(\x03R\fcreationTime\";\n" +
+	"\x11RecordingSubtitle\x12\x14\n" +
+	"\x05label\x18\x01 \x01(\tR\x05label\x12\x10\n" +
+	"\x03url\x18\x02 \x01(\tR\x03url\"\xde\x01\n" +
+	"\x11RecordingMetadata\x12\x19\n" +
+	"\x05title\x18\x01 \x01(\tH\x00R\x05title\x88\x01\x01\x12%\n" +
+	"\vdescription\x18\x02 \x01(\tH\x01R\vdescription\x88\x01\x01\x12:\n" +
+	"\tsubtitles\x18\x03 \x03(\v2\x1c.plugnmeet.RecordingSubtitleR\tsubtitles\x12\"\n" +
+	"\n" +
+	"extra_data\x18\x04 \x01(\tH\x02R\textraData\x88\x01\x01B\b\n" +
+	"\x06_titleB\x0e\n" +
+	"\f_descriptionB\r\n" +
+	"\v_extra_dataB\xa0\x01\n" +
 	"\rcom.plugnmeetB\x17PlugnmeetRecordingProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -283,21 +415,24 @@ func file_plugnmeet_recording_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_recording_proto_rawDescData
 }
 
-var file_plugnmeet_recording_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_plugnmeet_recording_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_plugnmeet_recording_proto_goTypes = []any{
 	(*RecordingReq)(nil),        // 0: plugnmeet.RecordingReq
 	(*RecordingInfoFile)(nil),   // 1: plugnmeet.RecordingInfoFile
-	(RecordingTasks)(0),         // 2: plugnmeet.RecordingTasks
-	(CloudRecordingVariants)(0), // 3: plugnmeet.CloudRecordingVariants
+	(*RecordingSubtitle)(nil),   // 2: plugnmeet.RecordingSubtitle
+	(*RecordingMetadata)(nil),   // 3: plugnmeet.RecordingMetadata
+	(RecordingTasks)(0),         // 4: plugnmeet.RecordingTasks
+	(CloudRecordingVariants)(0), // 5: plugnmeet.CloudRecordingVariants
 }
 var file_plugnmeet_recording_proto_depIdxs = []int32{
-	2, // 0: plugnmeet.RecordingReq.task:type_name -> plugnmeet.RecordingTasks
-	3, // 1: plugnmeet.RecordingReq.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	4, // 0: plugnmeet.RecordingReq.task:type_name -> plugnmeet.RecordingTasks
+	5, // 1: plugnmeet.RecordingReq.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
+	2, // 2: plugnmeet.RecordingMetadata.subtitles:type_name -> plugnmeet.RecordingSubtitle
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_recording_proto_init() }
@@ -307,13 +442,14 @@ func file_plugnmeet_recording_proto_init() {
 	}
 	file_plugnmeet_recorder_proto_init()
 	file_plugnmeet_recording_proto_msgTypes[0].OneofWrappers = []any{}
+	file_plugnmeet_recording_proto_msgTypes[3].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_recording_proto_rawDesc), len(file_plugnmeet_recording_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
