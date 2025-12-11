@@ -28,7 +28,7 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v5
         with:
-          node-version: '22.x'
+          node-version: '24.x'
           registry-url: 'https://registry.npmjs.org/'
       - uses: pnpm/action-setup@v4
         name: Install pnpm
