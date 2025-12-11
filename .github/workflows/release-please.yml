@@ -5,6 +5,7 @@ on:
       - main
 
 permissions:
+  id-token: write
   contents: write
   pull-requests: write
 
@@ -20,7 +21,7 @@ jobs:
           manifest-file: .release-please-manifest.json
       - name: Checkout
         uses: actions/checkout@v5
-      - name:
+      - name: Setup buf
         uses: bufbuild/buf-setup-action@v1
         with:
           version: latest
@@ -28,6 +29,7 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: '22.x'
+          registry-url: 'https://registry.npmjs.org/'
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
@@ -37,6 +39,8 @@ jobs:
           bash generate.sh
           cd js
           
+          PUBLISH_TAG="latest" # Default tag for full releases
+
           if [ ! ${{ steps.release.outputs.release_created }} ]; then
             pnpm version prerelease --no-commit-hooks --no-git-tag-version
             # push changes
@@ -45,10 +49,11 @@ jobs:
             git add .
             git commit -m "bump beta version"
             git push
+          
+            PUBLISH_TAG="beta" # Override tag for prereleases
           fi
           
           bash generate.sh
-          npm config set '//registry.npmjs.org/:_authToken' $NPM_TOKEN
-          npm publish
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          npm install -g npm@latest
+          # Use the dynamic tag for publishing
+          npm publish --tag $PUBLISH_TAG --provenance

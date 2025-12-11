@@ -1,6 +1,6 @@
 {
   "name": "plugnmeet-protocol-js",
-  "version": "1.0.16-35",
+  "version": "1.0.16-40",
   "description": "plugNmeet JS proto files",
   "author": "Jibon L. Costa",
   "license": "MIT",
@@ -11,6 +11,10 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mynaparrot/plugnmeet-protocol"
+  },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "build": "rm -rf ./dist && parcel build"
