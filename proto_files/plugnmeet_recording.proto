@@ -38,6 +38,7 @@ message RecordingSubtitle {
 message RecordingMetadata {
   optional string title = 1;
   optional string description = 2;
-  repeated RecordingSubtitle subtitles = 3;
-  optional string extra_data = 4;
+  //e.g. map<language, RecordingSubtitle>
+  map<string, RecordingSubtitle> subtitles = 3;
+  map<string, string> extra_data = 4;
 }

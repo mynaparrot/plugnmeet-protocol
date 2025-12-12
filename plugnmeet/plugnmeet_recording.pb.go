@@ -290,11 +290,12 @@ func (x *RecordingSubtitle) GetUrl() string {
 }
 
 type RecordingMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Title         *string                `protobuf:"bytes,1,opt,name=title,proto3,oneof" json:"title,omitempty"`
-	Description   *string                `protobuf:"bytes,2,opt,name=description,proto3,oneof" json:"description,omitempty"`
-	Subtitles     []*RecordingSubtitle   `protobuf:"bytes,3,rep,name=subtitles,proto3" json:"subtitles,omitempty"`
-	ExtraData     *string                `protobuf:"bytes,4,opt,name=extra_data,json=extraData,proto3,oneof" json:"extra_data,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Title       *string                `protobuf:"bytes,1,opt,name=title,proto3,oneof" json:"title,omitempty"`
+	Description *string                `protobuf:"bytes,2,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	// e.g. map<language,RecordingSubtitle>
+	Subtitles     map[string]*RecordingSubtitle `protobuf:"bytes,3,rep,name=subtitles,proto3" json:"subtitles,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	ExtraData     map[string]string             `protobuf:"bytes,4,rep,name=extra_data,json=extraData,proto3" json:"extra_data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -343,18 +344,18 @@ func (x *RecordingMetadata) GetDescription() string {
 	return ""
 }
 
-func (x *RecordingMetadata) GetSubtitles() []*RecordingSubtitle {
+func (x *RecordingMetadata) GetSubtitles() map[string]*RecordingSubtitle {
 	if x != nil {
 		return x.Subtitles
 	}
 	return nil
 }
 
-func (x *RecordingMetadata) GetExtraData() string {
-	if x != nil && x.ExtraData != nil {
-		return *x.ExtraData
+func (x *RecordingMetadata) GetExtraData() map[string]string {
+	if x != nil {
+		return x.ExtraData
 	}
-	return ""
+	return nil
 }
 
 var File_plugnmeet_recording_proto protoreflect.FileDescriptor
@@ -391,16 +392,21 @@ const file_plugnmeet_recording_proto_rawDesc = "" +
 	"\rcreation_time\x18\v \x01(\x03R\fcreationTime\";\n" +
 	"\x11RecordingSubtitle\x12\x14\n" +
 	"\x05label\x18\x01 \x01(\tR\x05label\x12\x10\n" +
-	"\x03url\x18\x02 \x01(\tR\x03url\"\xde\x01\n" +
+	"\x03url\x18\x02 \x01(\tR\x03url\"\xa0\x03\n" +
 	"\x11RecordingMetadata\x12\x19\n" +
 	"\x05title\x18\x01 \x01(\tH\x00R\x05title\x88\x01\x01\x12%\n" +
-	"\vdescription\x18\x02 \x01(\tH\x01R\vdescription\x88\x01\x01\x12:\n" +
-	"\tsubtitles\x18\x03 \x03(\v2\x1c.plugnmeet.RecordingSubtitleR\tsubtitles\x12\"\n" +
+	"\vdescription\x18\x02 \x01(\tH\x01R\vdescription\x88\x01\x01\x12I\n" +
+	"\tsubtitles\x18\x03 \x03(\v2+.plugnmeet.RecordingMetadata.SubtitlesEntryR\tsubtitles\x12J\n" +
 	"\n" +
-	"extra_data\x18\x04 \x01(\tH\x02R\textraData\x88\x01\x01B\b\n" +
+	"extra_data\x18\x04 \x03(\v2+.plugnmeet.RecordingMetadata.ExtraDataEntryR\textraData\x1aZ\n" +
+	"\x0eSubtitlesEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x122\n" +
+	"\x05value\x18\x02 \x01(\v2\x1c.plugnmeet.RecordingSubtitleR\x05value:\x028\x01\x1a<\n" +
+	"\x0eExtraDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
 	"\x06_titleB\x0e\n" +
-	"\f_descriptionB\r\n" +
-	"\v_extra_dataB\xa0\x01\n" +
+	"\f_descriptionB\xa0\x01\n" +
 	"\rcom.plugnmeetB\x17PlugnmeetRecordingProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -415,24 +421,28 @@ func file_plugnmeet_recording_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_recording_proto_rawDescData
 }
 
-var file_plugnmeet_recording_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_plugnmeet_recording_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_plugnmeet_recording_proto_goTypes = []any{
 	(*RecordingReq)(nil),        // 0: plugnmeet.RecordingReq
 	(*RecordingInfoFile)(nil),   // 1: plugnmeet.RecordingInfoFile
 	(*RecordingSubtitle)(nil),   // 2: plugnmeet.RecordingSubtitle
 	(*RecordingMetadata)(nil),   // 3: plugnmeet.RecordingMetadata
-	(RecordingTasks)(0),         // 4: plugnmeet.RecordingTasks
-	(CloudRecordingVariants)(0), // 5: plugnmeet.CloudRecordingVariants
+	nil,                         // 4: plugnmeet.RecordingMetadata.SubtitlesEntry
+	nil,                         // 5: plugnmeet.RecordingMetadata.ExtraDataEntry
+	(RecordingTasks)(0),         // 6: plugnmeet.RecordingTasks
+	(CloudRecordingVariants)(0), // 7: plugnmeet.CloudRecordingVariants
 }
 var file_plugnmeet_recording_proto_depIdxs = []int32{
-	4, // 0: plugnmeet.RecordingReq.task:type_name -> plugnmeet.RecordingTasks
-	5, // 1: plugnmeet.RecordingReq.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
-	2, // 2: plugnmeet.RecordingMetadata.subtitles:type_name -> plugnmeet.RecordingSubtitle
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	6, // 0: plugnmeet.RecordingReq.task:type_name -> plugnmeet.RecordingTasks
+	7, // 1: plugnmeet.RecordingReq.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
+	4, // 2: plugnmeet.RecordingMetadata.subtitles:type_name -> plugnmeet.RecordingMetadata.SubtitlesEntry
+	5, // 3: plugnmeet.RecordingMetadata.extra_data:type_name -> plugnmeet.RecordingMetadata.ExtraDataEntry
+	2, // 4: plugnmeet.RecordingMetadata.SubtitlesEntry.value:type_name -> plugnmeet.RecordingSubtitle
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_recording_proto_init() }
@@ -449,7 +459,7 @@ func file_plugnmeet_recording_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_recording_proto_rawDesc), len(file_plugnmeet_recording_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
