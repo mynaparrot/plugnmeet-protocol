@@ -107,13 +107,15 @@ func ConvertActiveRoomInfoToBBBMeetingInfo(r *plugnmeet.ActiveRoomWithParticipan
 	err := protojson.Unmarshal([]byte(rInfo.Metadata), rm)
 	if err == nil {
 		if rm.ExtraData != nil {
-			ex := new(CreateMeetingDefaultExtraData)
-			err = json.Unmarshal([]byte(*rm.ExtraData), ex)
-			if err == nil {
-				res.MeetingID = ex.OriginalMeetingId
-				res.ModeratorPW = ex.ModeratorPW
-				res.AttendeePW = ex.AttendeePW
-				res.Metadata = ex.Meta
+			if data, ok := rm.ExtraData[BbbExtraDataTag]; ok {
+				ex := new(CreateMeetingDefaultExtraData)
+				err = json.Unmarshal([]byte(data), ex)
+				if err == nil {
+					res.MeetingID = ex.OriginalMeetingId
+					res.ModeratorPW = ex.ModeratorPW
+					res.AttendeePW = ex.AttendeePW
+					res.Metadata = ex.Meta
+				}
 			}
 		}
 	}

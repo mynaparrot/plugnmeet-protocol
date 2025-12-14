@@ -42,6 +42,8 @@ type CreateMeetingReq struct {
 	DialNumber  string `query:"dialNumber"`
 }
 
+const BbbExtraDataTag = "bbb_extra_data"
+
 type CreateMeetingDefaultExtraData struct {
 	AttendeePW        string            `json:"attendeePW"`
 	ModeratorPW       string            `json:"moderatorPW"`
@@ -205,8 +207,9 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 	if err != nil {
 		return nil, err
 	}
-	extraData := string(marshal)
-	req.Metadata.ExtraData = &extraData
+	req.Metadata.ExtraData = map[string]string{
+		BbbExtraDataTag: string(marshal),
+	}
 
 	return &req, nil
 }
