@@ -105,8 +105,8 @@ type RoomMetadata struct {
 	DefaultLockSettings *LockSettings          `protobuf:"bytes,11,opt,name=default_lock_settings,json=defaultLockSettings,proto3" json:"default_lock_settings,omitempty"`
 	CopyrightConf       *CopyrightConf         `protobuf:"bytes,12,opt,name=copyright_conf,json=copyrightConf,proto3" json:"copyright_conf,omitempty"`
 	// we'll use this as version control
-	MetadataId    *string `protobuf:"bytes,13,opt,name=metadata_id,json=metadataId,proto3,oneof" json:"metadata_id,omitempty"`
-	ExtraData     *string `protobuf:"bytes,14,opt,name=extra_data,json=extraData,proto3,oneof" json:"extra_data,omitempty"`
+	MetadataId    *string           `protobuf:"bytes,13,opt,name=metadata_id,json=metadataId,proto3,oneof" json:"metadata_id,omitempty"`
+	ExtraData     map[string]string `protobuf:"bytes,14,rep,name=extra_data,json=extraData,proto3" json:"extra_data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -232,11 +232,11 @@ func (x *RoomMetadata) GetMetadataId() string {
 	return ""
 }
 
-func (x *RoomMetadata) GetExtraData() string {
-	if x != nil && x.ExtraData != nil {
-		return *x.ExtraData
+func (x *RoomMetadata) GetExtraData() map[string]string {
+	if x != nil {
+		return x.ExtraData
 	}
-	return ""
+	return nil
 }
 
 type RoomCreateFeatures struct {
@@ -2015,7 +2015,7 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x10max_participants\x18\x03 \x01(\rB\a\xbaH\x04*\x02 \x00H\x01R\x0fmaxParticipants\x88\x01\x01\x12;\n" +
 	"\bmetadata\x18\x04 \x01(\v2\x17.plugnmeet.RoomMetadataB\x06\xbaH\x03\xc8\x01\x01R\bmetadataB\x10\n" +
 	"\x0e_empty_timeoutB\x13\n" +
-	"\x11_max_participants\"\xce\a\n" +
+	"\x11_max_participants\"\xa0\b\n" +
 	"\fRoomMetadata\x12%\n" +
 	"\n" +
 	"room_title\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\troomTitle\x12,\n" +
@@ -2037,14 +2037,16 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x0ecopyright_conf\x18\f \x01(\v2\x18.plugnmeet.CopyrightConfR\rcopyrightConf\x12~\n" +
 	"\vmetadata_id\x18\r \x01(\tBX\xbaHU\xba\x01R\n" +
 	"\x12metadata_id_format\x12(metadata_id should not contain any value\x1a\x12this.matches('^$')H\x03R\n" +
-	"metadataId\x88\x01\x01\x12\"\n" +
+	"metadataId\x88\x01\x01\x12E\n" +
 	"\n" +
-	"extra_data\x18\x0e \x01(\tH\x04R\textraData\x88\x01\x01B\x12\n" +
+	"extra_data\x18\x0e \x03(\v2&.plugnmeet.RoomMetadata.ExtraDataEntryR\textraData\x1a<\n" +
+	"\x0eExtraDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x12\n" +
 	"\x10_welcome_messageB\x0e\n" +
 	"\f_webhook_urlB\r\n" +
 	"\v_logout_urlB\x0e\n" +
-	"\f_metadata_idB\r\n" +
-	"\v_extra_data\"\xb1\x0e\n" +
+	"\f_metadata_id\"\xb1\x0e\n" +
 	"\x12RoomCreateFeatures\x12#\n" +
 	"\rallow_webcams\x18\x01 \x01(\bR\fallowWebcams\x12\"\n" +
 	"\rmute_on_start\x18\x02 \x01(\bR\vmuteOnStart\x12,\n" +
@@ -2264,7 +2266,7 @@ func file_plugnmeet_create_room_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_create_room_proto_rawDescData
 }
 
-var file_plugnmeet_create_room_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
+var file_plugnmeet_create_room_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_plugnmeet_create_room_proto_goTypes = []any{
 	(*CreateRoomReq)(nil),                          // 0: plugnmeet.CreateRoomReq
 	(*RoomMetadata)(nil),                           // 1: plugnmeet.RoomMetadata
@@ -2289,40 +2291,42 @@ var file_plugnmeet_create_room_proto_goTypes = []any{
 	(*InsightsAIMeetingSummarizationFeatures)(nil), // 20: plugnmeet.InsightsAIMeetingSummarizationFeatures
 	(*CopyrightConf)(nil),                          // 21: plugnmeet.CopyrightConf
 	(*CreateRoomRes)(nil),                          // 22: plugnmeet.CreateRoomRes
-	(*LockSettings)(nil),                           // 23: plugnmeet.LockSettings
-	(IngressInput)(0),                              // 24: plugnmeet.IngressInput
-	(*ActiveRoomInfo)(nil),                         // 25: plugnmeet.ActiveRoomInfo
+	nil,                                            // 23: plugnmeet.RoomMetadata.ExtraDataEntry
+	(*LockSettings)(nil),                           // 24: plugnmeet.LockSettings
+	(IngressInput)(0),                              // 25: plugnmeet.IngressInput
+	(*ActiveRoomInfo)(nil),                         // 26: plugnmeet.ActiveRoomInfo
 }
 var file_plugnmeet_create_room_proto_depIdxs = []int32{
 	1,  // 0: plugnmeet.CreateRoomReq.metadata:type_name -> plugnmeet.RoomMetadata
 	2,  // 1: plugnmeet.RoomMetadata.room_features:type_name -> plugnmeet.RoomCreateFeatures
-	23, // 2: plugnmeet.RoomMetadata.default_lock_settings:type_name -> plugnmeet.LockSettings
+	24, // 2: plugnmeet.RoomMetadata.default_lock_settings:type_name -> plugnmeet.LockSettings
 	21, // 3: plugnmeet.RoomMetadata.copyright_conf:type_name -> plugnmeet.CopyrightConf
-	10, // 4: plugnmeet.RoomCreateFeatures.recording_features:type_name -> plugnmeet.RecordingFeatures
-	3,  // 5: plugnmeet.RoomCreateFeatures.chat_features:type_name -> plugnmeet.ChatFeatures
-	4,  // 6: plugnmeet.RoomCreateFeatures.shared_note_pad_features:type_name -> plugnmeet.SharedNotePadFeatures
-	5,  // 7: plugnmeet.RoomCreateFeatures.whiteboard_features:type_name -> plugnmeet.WhiteboardFeatures
-	6,  // 8: plugnmeet.RoomCreateFeatures.external_media_player_features:type_name -> plugnmeet.ExternalMediaPlayerFeatures
-	7,  // 9: plugnmeet.RoomCreateFeatures.waiting_room_features:type_name -> plugnmeet.WaitingRoomFeatures
-	8,  // 10: plugnmeet.RoomCreateFeatures.breakout_room_features:type_name -> plugnmeet.BreakoutRoomFeatures
-	9,  // 11: plugnmeet.RoomCreateFeatures.display_external_link_features:type_name -> plugnmeet.DisplayExternalLinkFeatures
-	11, // 12: plugnmeet.RoomCreateFeatures.ingress_features:type_name -> plugnmeet.IngressFeatures
-	12, // 13: plugnmeet.RoomCreateFeatures.speech_to_text_translation_features:type_name -> plugnmeet.SpeechToTextTranslationFeatures
-	13, // 14: plugnmeet.RoomCreateFeatures.end_to_end_encryption_features:type_name -> plugnmeet.EndToEndEncryptionFeatures
-	14, // 15: plugnmeet.RoomCreateFeatures.polls_features:type_name -> plugnmeet.PollsFeatures
-	15, // 16: plugnmeet.RoomCreateFeatures.insights_features:type_name -> plugnmeet.InsightsFeatures
-	24, // 17: plugnmeet.IngressFeatures.input_type:type_name -> plugnmeet.IngressInput
-	16, // 18: plugnmeet.InsightsFeatures.transcription_features:type_name -> plugnmeet.InsightsTranscriptionFeatures
-	17, // 19: plugnmeet.InsightsFeatures.chat_translation_features:type_name -> plugnmeet.InsightsChatTranslationFeatures
-	18, // 20: plugnmeet.InsightsFeatures.ai_features:type_name -> plugnmeet.InsightsAIFeatures
-	19, // 21: plugnmeet.InsightsAIFeatures.ai_text_chat_features:type_name -> plugnmeet.InsightsAITextChatFeatures
-	20, // 22: plugnmeet.InsightsAIFeatures.meeting_summarization_features:type_name -> plugnmeet.InsightsAIMeetingSummarizationFeatures
-	25, // 23: plugnmeet.CreateRoomRes.room_info:type_name -> plugnmeet.ActiveRoomInfo
-	24, // [24:24] is the sub-list for method output_type
-	24, // [24:24] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	23, // 4: plugnmeet.RoomMetadata.extra_data:type_name -> plugnmeet.RoomMetadata.ExtraDataEntry
+	10, // 5: plugnmeet.RoomCreateFeatures.recording_features:type_name -> plugnmeet.RecordingFeatures
+	3,  // 6: plugnmeet.RoomCreateFeatures.chat_features:type_name -> plugnmeet.ChatFeatures
+	4,  // 7: plugnmeet.RoomCreateFeatures.shared_note_pad_features:type_name -> plugnmeet.SharedNotePadFeatures
+	5,  // 8: plugnmeet.RoomCreateFeatures.whiteboard_features:type_name -> plugnmeet.WhiteboardFeatures
+	6,  // 9: plugnmeet.RoomCreateFeatures.external_media_player_features:type_name -> plugnmeet.ExternalMediaPlayerFeatures
+	7,  // 10: plugnmeet.RoomCreateFeatures.waiting_room_features:type_name -> plugnmeet.WaitingRoomFeatures
+	8,  // 11: plugnmeet.RoomCreateFeatures.breakout_room_features:type_name -> plugnmeet.BreakoutRoomFeatures
+	9,  // 12: plugnmeet.RoomCreateFeatures.display_external_link_features:type_name -> plugnmeet.DisplayExternalLinkFeatures
+	11, // 13: plugnmeet.RoomCreateFeatures.ingress_features:type_name -> plugnmeet.IngressFeatures
+	12, // 14: plugnmeet.RoomCreateFeatures.speech_to_text_translation_features:type_name -> plugnmeet.SpeechToTextTranslationFeatures
+	13, // 15: plugnmeet.RoomCreateFeatures.end_to_end_encryption_features:type_name -> plugnmeet.EndToEndEncryptionFeatures
+	14, // 16: plugnmeet.RoomCreateFeatures.polls_features:type_name -> plugnmeet.PollsFeatures
+	15, // 17: plugnmeet.RoomCreateFeatures.insights_features:type_name -> plugnmeet.InsightsFeatures
+	25, // 18: plugnmeet.IngressFeatures.input_type:type_name -> plugnmeet.IngressInput
+	16, // 19: plugnmeet.InsightsFeatures.transcription_features:type_name -> plugnmeet.InsightsTranscriptionFeatures
+	17, // 20: plugnmeet.InsightsFeatures.chat_translation_features:type_name -> plugnmeet.InsightsChatTranslationFeatures
+	18, // 21: plugnmeet.InsightsFeatures.ai_features:type_name -> plugnmeet.InsightsAIFeatures
+	19, // 22: plugnmeet.InsightsAIFeatures.ai_text_chat_features:type_name -> plugnmeet.InsightsAITextChatFeatures
+	20, // 23: plugnmeet.InsightsAIFeatures.meeting_summarization_features:type_name -> plugnmeet.InsightsAIMeetingSummarizationFeatures
+	26, // 24: plugnmeet.CreateRoomRes.room_info:type_name -> plugnmeet.ActiveRoomInfo
+	25, // [25:25] is the sub-list for method output_type
+	25, // [25:25] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_create_room_proto_init() }
@@ -2353,7 +2357,7 @@ func file_plugnmeet_create_room_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_create_room_proto_rawDesc), len(file_plugnmeet_create_room_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   23,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -161,8 +161,8 @@ type UserMetadata struct {
 	PreferredLang   *string                `protobuf:"bytes,7,opt,name=preferred_lang,json=preferredLang,proto3,oneof" json:"preferred_lang,omitempty"`
 	LockSettings    *LockSettings          `protobuf:"bytes,8,opt,name=lock_settings,json=lockSettings,proto3" json:"lock_settings,omitempty"`
 	// we'll use this as version control
-	MetadataId *string `protobuf:"bytes,9,opt,name=metadata_id,json=metadataId,proto3,oneof" json:"metadata_id,omitempty"`
-	ExtraData  *string `protobuf:"bytes,10,opt,name=extra_data,json=extraData,proto3,oneof" json:"extra_data,omitempty"`
+	MetadataId *string           `protobuf:"bytes,9,opt,name=metadata_id,json=metadataId,proto3,oneof" json:"metadata_id,omitempty"`
+	ExtraData  map[string]string `protobuf:"bytes,10,rep,name=extra_data,json=extraData,proto3" json:"extra_data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// if remain empty then will use value from user_id
 	ExUserId      *string `protobuf:"bytes,11,opt,name=ex_user_id,json=exUserId,proto3,oneof" json:"ex_user_id,omitempty"` // Next ID: 12
 	unknownFields protoimpl.UnknownFields
@@ -262,11 +262,11 @@ func (x *UserMetadata) GetMetadataId() string {
 	return ""
 }
 
-func (x *UserMetadata) GetExtraData() string {
-	if x != nil && x.ExtraData != nil {
-		return *x.ExtraData
+func (x *UserMetadata) GetExtraData() map[string]string {
+	if x != nil {
+		return x.ExtraData
 	}
-	return ""
+	return nil
 }
 
 func (x *UserMetadata) GetExUserId() string {
@@ -650,7 +650,7 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x19\n" +
 	"\bis_admin\x18\x03 \x01(\bR\aisAdmin\x12\x1b\n" +
 	"\tis_hidden\x18\x04 \x01(\bR\bisHidden\x12<\n" +
-	"\ruser_metadata\x18\x05 \x01(\v2\x17.plugnmeet.UserMetadataR\fuserMetadata\"\xa2\x05\n" +
+	"\ruser_metadata\x18\x05 \x01(\v2\x17.plugnmeet.UserMetadataR\fuserMetadata\"\xf4\x05\n" +
 	"\fUserMetadata\x12.\n" +
 	"\vprofile_pic\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x00R\n" +
 	"profilePic\x88\x01\x01\x12\x19\n" +
@@ -664,17 +664,19 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"\rlock_settings\x18\b \x01(\v2\x17.plugnmeet.LockSettingsR\flockSettings\x12~\n" +
 	"\vmetadata_id\x18\t \x01(\tBX\xbaHU\xba\x01R\n" +
 	"\x12metadata_id_format\x12(metadata_id should not contain any value\x1a\x12this.matches('^$')H\x03R\n" +
-	"metadataId\x88\x01\x01\x12\"\n" +
+	"metadataId\x88\x01\x01\x12E\n" +
 	"\n" +
 	"extra_data\x18\n" +
-	" \x01(\tH\x04R\textraData\x88\x01\x01\x12!\n" +
+	" \x03(\v2&.plugnmeet.UserMetadata.ExtraDataEntryR\textraData\x12!\n" +
 	"\n" +
-	"ex_user_id\x18\v \x01(\tH\x05R\bexUserId\x88\x01\x01B\x0e\n" +
+	"ex_user_id\x18\v \x01(\tH\x04R\bexUserId\x88\x01\x01\x1a<\n" +
+	"\x0eExtraDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
 	"\f_profile_picB\x10\n" +
 	"\x0e_record_webcamB\x11\n" +
 	"\x0f_preferred_langB\x0e\n" +
 	"\f_metadata_idB\r\n" +
-	"\v_extra_dataB\r\n" +
 	"\v_ex_user_id\"\x94\x01\n" +
 	"\x14PlugNmeetTokenClaims\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
@@ -745,7 +747,7 @@ func file_plugnmeet_gen_token_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_gen_token_proto_rawDescData
 }
 
-var file_plugnmeet_gen_token_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_plugnmeet_gen_token_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_plugnmeet_gen_token_proto_goTypes = []any{
 	(*GenerateTokenReq)(nil),     // 0: plugnmeet.GenerateTokenReq
 	(*UserInfo)(nil),             // 1: plugnmeet.UserInfo
@@ -754,16 +756,18 @@ var file_plugnmeet_gen_token_proto_goTypes = []any{
 	(*LockSettings)(nil),         // 4: plugnmeet.LockSettings
 	(*GenerateTokenRes)(nil),     // 5: plugnmeet.GenerateTokenRes
 	(*CustomDesignParams)(nil),   // 6: plugnmeet.CustomDesignParams
+	nil,                          // 7: plugnmeet.UserMetadata.ExtraDataEntry
 }
 var file_plugnmeet_gen_token_proto_depIdxs = []int32{
 	1, // 0: plugnmeet.GenerateTokenReq.user_info:type_name -> plugnmeet.UserInfo
 	2, // 1: plugnmeet.UserInfo.user_metadata:type_name -> plugnmeet.UserMetadata
 	4, // 2: plugnmeet.UserMetadata.lock_settings:type_name -> plugnmeet.LockSettings
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	7, // 3: plugnmeet.UserMetadata.extra_data:type_name -> plugnmeet.UserMetadata.ExtraDataEntry
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_gen_token_proto_init() }
@@ -781,7 +785,7 @@ func file_plugnmeet_gen_token_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_gen_token_proto_rawDesc), len(file_plugnmeet_gen_token_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

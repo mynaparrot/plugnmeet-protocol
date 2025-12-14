@@ -43,7 +43,7 @@ message RoomMetadata {
     message: "metadata_id should not contain any value",
     expression: "this.matches('^$')"
   }];
-  optional string extra_data = 14;
+  map<string,string> extra_data = 14;
 }
 
 message RoomCreateFeatures {

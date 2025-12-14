@@ -361,6 +361,8 @@ func (m *UserMetadata) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for ExtraData
+
 	if m.ProfilePic != nil {
 		// no validation rules for ProfilePic
 	}
@@ -375,10 +377,6 @@ func (m *UserMetadata) validate(all bool) error {
 
 	if m.MetadataId != nil {
 		// no validation rules for MetadataId
-	}
-
-	if m.ExtraData != nil {
-		// no validation rules for ExtraData
 	}
 
 	if m.ExUserId != nil {

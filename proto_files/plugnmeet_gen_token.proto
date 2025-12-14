@@ -38,7 +38,7 @@ message UserMetadata {
     message: "metadata_id should not contain any value",
     expression: "this.matches('^$')"
   }];
-  optional string extra_data = 10;
+  map<string,string> extra_data = 10;
   // if remain empty then will use value from user_id
   optional string ex_user_id = 11;
   // Next ID: 12
