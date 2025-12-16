@@ -20,7 +20,7 @@ jobs:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Setup buf
         uses: bufbuild/buf-setup-action@v1
         with:
@@ -28,7 +28,7 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v5
         with:
-          node-version: '22.x'
+          node-version: '24.x'
           registry-url: 'https://registry.npmjs.org/'
       - uses: pnpm/action-setup@v4
         name: Install pnpm
