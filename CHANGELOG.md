@@ -1,5 +1,64 @@
 # Changelog
 
+## [2.0.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.15...v2.0.0) (2025-12-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* **refactor:** changed extra_data to map
+* breaking changes in new UI + API
+
+### Features
+
+* ability to download transcription in vtt format ([78c9792](https://github.com/mynaparrot/plugnmeet-protocol/commit/78c9792661e10b501c919f9ed2cb5e892674273b))
+* breaking changes in new UI + API ([61f2438](https://github.com/mynaparrot/plugnmeet-protocol/commit/61f24386fdcef5fdd9ca362eb14dd555ecd729a1))
+* estimated cost calculation ([6005a95](https://github.com/mynaparrot/plugnmeet-protocol/commit/6005a95cec05d4d03fdd52a4d20fe26047781b18))
+* Insights framework ([72f9bb2](https://github.com/mynaparrot/plugnmeet-protocol/commit/72f9bb2e6f53fde9473da7aca99cb4decdf017eb))
+* recording metadata ([a30a92d](https://github.com/mynaparrot/plugnmeet-protocol/commit/a30a92d5516ffb69203ed73d21e5109d87ac7b35))
+* **refactor:** changed extra_data to map ([7ae4269](https://github.com/mynaparrot/plugnmeet-protocol/commit/7ae42698395b9825a32810075b9e0b04de96cd44))
+
+
+### Bug Fixes
+
+* add more clear log ([ab0334d](https://github.com/mynaparrot/plugnmeet-protocol/commit/ab0334d7c9f5918f232406ee450ef5830a46dbeb))
+* add protobuf as peerDependencies ([3b0898d](https://github.com/mynaparrot/plugnmeet-protocol/commit/3b0898d1b07bab416119545f2652204668d78f0c))
+* added ([25df533](https://github.com/mynaparrot/plugnmeet-protocol/commit/25df5338ea6ae66720ed3cce26599cd7a580f12f))
+* added missing GetClientFilesRes ([1d48e85](https://github.com/mynaparrot/plugnmeet-protocol/commit/1d48e852101975227f5d841a51d7f9e7a1da44c5))
+* added new option WHITEBOARD_RESET ([54aa849](https://github.com/mynaparrot/plugnmeet-protocol/commit/54aa849c30b71d026c6b59faec5234dc33e8b617))
+* added option `UPDATE_CURRENT_OFFICE_FILE_PAGES` ([0cc3f3e](https://github.com/mynaparrot/plugnmeet-protocol/commit/0cc3f3e8a71fcba997d505caa5cdd7575d3560ab))
+* added option for requesting media server info ([c84d04b](https://github.com/mynaparrot/plugnmeet-protocol/commit/c84d04b6a00e5811fcf108ee86b1f7262efd940c))
+* added option to push notification for breakout room ([0ec4e0f](https://github.com/mynaparrot/plugnmeet-protocol/commit/0ec4e0fd75a5926c4ef4e30742986731afd394a6))
+* backward compatibility ([d22c9a2](https://github.com/mynaparrot/plugnmeet-protocol/commit/d22c9a2a723b05352764f86b9a06b8e4dbbcfdaa))
+* bump dependencies ([bdd943b](https://github.com/mynaparrot/plugnmeet-protocol/commit/bdd943ba3391f9200215e77e78c96abd5ad95fc4))
+* bump proto ([500cfc9](https://github.com/mynaparrot/plugnmeet-protocol/commit/500cfc9c9f7564e3123e548f41cd1b233c2b08ff))
+* change the way to verify token ([7f7257b](https://github.com/mynaparrot/plugnmeet-protocol/commit/7f7257bf8befbe13d96a045153a96f58107af078))
+* deps update ([d5b80c3](https://github.com/mynaparrot/plugnmeet-protocol/commit/d5b80c3c6dc07fb94cb595ea68024768f9861fcd))
+* deps update ([08045dd](https://github.com/mynaparrot/plugnmeet-protocol/commit/08045ddd7d96f4a01ee4018d5ebb52388cb1f643))
+* deps update ([d0a19df](https://github.com/mynaparrot/plugnmeet-protocol/commit/d0a19dfcebe9316eeacdb729b372de58d4d96856))
+* deps update ([da7567c](https://github.com/mynaparrot/plugnmeet-protocol/commit/da7567c7a69bfa3bc21e4bff77a0772a2185edf1))
+* deps update + recording variant added ([87a743c](https://github.com/mynaparrot/plugnmeet-protocol/commit/87a743caef45e27e2ec37097a7f94ba1c06c0e54))
+* deps upgrade ([bef681c](https://github.com/mynaparrot/plugnmeet-protocol/commit/bef681cc4d4e3860a92e6bff0f575edcb48bb9f1))
+* **deps:** deps update ([30edd95](https://github.com/mynaparrot/plugnmeet-protocol/commit/30edd95bd4f5adb708ef90a1bddbbad36c63b168))
+* **deps:** update module buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go to v1.36.11-20251209175733-2a1774d88802.1 ([f203552](https://github.com/mynaparrot/plugnmeet-protocol/commit/f2035528080b2311f8e3e06de84e78ddd5de8d5b))
+* **deps:** update module buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go to v1.36.11-20251209175733-2a1774d88802.1 ([47436ce](https://github.com/mynaparrot/plugnmeet-protocol/commit/47436cea5a05a918f21962121b81c6e6ce602e7a))
+* **deps:** update module github.com/go-jose/go-jose/v4 to v4.1.0 ([016526e](https://github.com/mynaparrot/plugnmeet-protocol/commit/016526e260d5cc374ade6bcce0000777eb0cd5ca))
+* **deps:** update module github.com/go-jose/go-jose/v4 to v4.1.0 ([da7351c](https://github.com/mynaparrot/plugnmeet-protocol/commit/da7351c4f75497f7bc07f622b8774289f1aad774))
+* **deps:** update module github.com/nats-io/nats.go to v1.41.1 ([8935d8c](https://github.com/mynaparrot/plugnmeet-protocol/commit/8935d8cdcfeef004a54de18e2467ea830281c3c3))
+* **deps:** update module github.com/nats-io/nats.go to v1.41.1 ([3817231](https://github.com/mynaparrot/plugnmeet-protocol/commit/38172318de45af0e7f0bc687d98d6cc46d923c17))
+* **deps:** update module github.com/nats-io/nats.go to v1.48.0 ([c963bc5](https://github.com/mynaparrot/plugnmeet-protocol/commit/c963bc57dc1a42676c53210bc104ea295592592a))
+* **deps:** update module github.com/nats-io/nats.go to v1.48.0 ([5961ba8](https://github.com/mynaparrot/plugnmeet-protocol/commit/5961ba8ff32793ffacbf5f2095aaaf8a1608f925))
+* **improve:** improve webhook notifier to handle each room's request ([aa8f4d0](https://github.com/mynaparrot/plugnmeet-protocol/commit/aa8f4d0e87ae749e17bc3a3963411dd268dcfb01))
+* moved logging in proto to share with recorder ([0fc8660](https://github.com/mynaparrot/plugnmeet-protocol/commit/0fc866004f8ed59dab93d08600748adfac12d497))
+* moved poll option to own features option ([70c0690](https://github.com/mynaparrot/plugnmeet-protocol/commit/70c06901e143dabfd1192835e84e8f5c1b730c2d))
+* moved upload file req/res + room file def ([f3a000b](https://github.com/mynaparrot/plugnmeet-protocol/commit/f3a000bfefb56e252f0948009e70b7d828b0cab3))
+* OIDC ID token ([fc6dcd8](https://github.com/mynaparrot/plugnmeet-protocol/commit/fc6dcd8bc130a72b7e23d8333d4ec42e1ca844eb))
+* option to share user connection status ([c33a27c](https://github.com/mynaparrot/plugnmeet-protocol/commit/c33a27cfc29324c161a8dd729a2a18a80a22e7b3))
+* option to upload base64 data ([e7bb8d0](https://github.com/mynaparrot/plugnmeet-protocol/commit/e7bb8d02490157d8db15ce65ed5e10254399984c))
+* update BBB metadata to match with new format ([24f1fde](https://github.com/mynaparrot/plugnmeet-protocol/commit/24f1fde94caf84549c375eaf01f2c621527c361a))
+* update protobuf ([9d88de2](https://github.com/mynaparrot/plugnmeet-protocol/commit/9d88de2f48736423fb5cbd4b70bc4d30ae997f6d))
+* update protobuf ([5639acc](https://github.com/mynaparrot/plugnmeet-protocol/commit/5639accc3ae09e891dc08f95d78b35c7b1e15eb6))
+* use the same pattern ([adba734](https://github.com/mynaparrot/plugnmeet-protocol/commit/adba734ac858e743ebd0ab0870ba0c6cf9c48d2e))
+
 ## [1.0.15](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.14...v1.0.15) (2025-04-01)
 
 
