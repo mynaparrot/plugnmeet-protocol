@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/mynaparrot/plugnmeet-protocol/compare/v2.0.0...v2.0.1) (2025-12-19)
+
+
+### Bug Fixes
+
+* missed to update version prefix ([92a6f94](https://github.com/mynaparrot/plugnmeet-protocol/commit/92a6f94abd1394aed4945b3790ad1c80dfc95da0))
+
 ## [2.0.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.0.15...v2.0.0) (2025-12-19)
 
 
