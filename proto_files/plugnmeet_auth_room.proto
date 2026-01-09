@@ -108,4 +108,5 @@ message GetClientFilesRes {
   repeated string js = 4 [deprecated = true];
   repeated string css_files = 5;
   repeated string js_files = 6;
+  optional string static_assets_path = 7;
 }

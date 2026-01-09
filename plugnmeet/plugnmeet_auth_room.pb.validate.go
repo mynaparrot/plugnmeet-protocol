@@ -1822,6 +1822,10 @@ func (m *GetClientFilesRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	if m.StaticAssetsPath != nil {
+		// no validation rules for StaticAssetsPath
+	}
+
 	if len(errors) > 0 {
 		return GetClientFilesResMultiError(errors)
 	}
