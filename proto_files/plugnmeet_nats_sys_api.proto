@@ -1,0 +1,21 @@
+syntax = "proto3";
+package plugnmeet;
+
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+option php_namespace = "Mynaparrot\\PlugnmeetProto";
+
+message NatsSystemApiWorker {
+  oneof api_task {
+    ApiWorkerTaskCreateConsumerWithPermissionReq create_consumer_with_permission = 1;
+  }
+}
+
+message ApiWorkerTaskCreateConsumerWithPermissionReq {
+  string room_id = 1;
+  string user_id = 2;
+}
+
+message ApiWorkerTaskCreateConsumerWithPermissionRes {
+  bool status = 1;
+  string msg = 2;
+}
