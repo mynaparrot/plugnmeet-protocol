@@ -14,7 +14,6 @@ export * from "./gen/plugnmeet_nats_msg_pb";
 export * from "./gen/plugnmeet_polls_pb";
 export * from "./gen/plugnmeet_recorder_pb";
 export * from "./gen/plugnmeet_recording_pb";
-export * from "./gen/plugnmeet_speech_services_pb";
 export * from "./gen/plugnmeet_insights_pb";
 export * from "./gen/plugnmeet_room_artifacts_pb";
 export * from "./gen/plugnmeet_auth_artifact_pb";

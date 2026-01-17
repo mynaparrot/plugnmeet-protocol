@@ -25,25 +25,24 @@ type NatsMsgServerToClientEvents int32
 
 const (
 	// initial data
-	NatsMsgServerToClientEvents_RES_INITIAL_DATA                     NatsMsgServerToClientEvents = 0
-	NatsMsgServerToClientEvents_RES_JOINED_USERS_LIST                NatsMsgServerToClientEvents = 1
-	NatsMsgServerToClientEvents_RES_MEDIA_SERVER_DATA                NatsMsgServerToClientEvents = 16
-	NatsMsgServerToClientEvents_ROOM_METADATA_UPDATE                 NatsMsgServerToClientEvents = 2
-	NatsMsgServerToClientEvents_USER_METADATA_UPDATE                 NatsMsgServerToClientEvents = 3
-	NatsMsgServerToClientEvents_USER_JOINED                          NatsMsgServerToClientEvents = 4
-	NatsMsgServerToClientEvents_USER_DISCONNECTED                    NatsMsgServerToClientEvents = 5
-	NatsMsgServerToClientEvents_USER_OFFLINE                         NatsMsgServerToClientEvents = 6
-	NatsMsgServerToClientEvents_RESP_RENEW_PNM_TOKEN                 NatsMsgServerToClientEvents = 7
-	NatsMsgServerToClientEvents_SYSTEM_NOTIFICATION                  NatsMsgServerToClientEvents = 8
-	NatsMsgServerToClientEvents_AZURE_COGNITIVE_SERVICE_SPEECH_TOKEN NatsMsgServerToClientEvents = 9
-	NatsMsgServerToClientEvents_SESSION_ENDED                        NatsMsgServerToClientEvents = 10
-	NatsMsgServerToClientEvents_POLL_CLOSED                          NatsMsgServerToClientEvents = 11
-	NatsMsgServerToClientEvents_POLL_CREATED                         NatsMsgServerToClientEvents = 12
-	NatsMsgServerToClientEvents_JOIN_BREAKOUT_ROOM                   NatsMsgServerToClientEvents = 13
-	NatsMsgServerToClientEvents_BREAKOUT_ROOM_ENDED                  NatsMsgServerToClientEvents = 15
-	NatsMsgServerToClientEvents_SYSTEM_CHAT_MSG                      NatsMsgServerToClientEvents = 14 // mostly system message display in chat
-	NatsMsgServerToClientEvents_TRANSCRIPTION_OUTPUT_TEXT            NatsMsgServerToClientEvents = 17
-	NatsMsgServerToClientEvents_RESP_INSIGHTS_AI_TEXT_CHAT           NatsMsgServerToClientEvents = 19
+	NatsMsgServerToClientEvents_RES_INITIAL_DATA           NatsMsgServerToClientEvents = 0
+	NatsMsgServerToClientEvents_RES_JOINED_USERS_LIST      NatsMsgServerToClientEvents = 1
+	NatsMsgServerToClientEvents_RES_MEDIA_SERVER_DATA      NatsMsgServerToClientEvents = 2
+	NatsMsgServerToClientEvents_ROOM_METADATA_UPDATE       NatsMsgServerToClientEvents = 3
+	NatsMsgServerToClientEvents_USER_METADATA_UPDATE       NatsMsgServerToClientEvents = 4
+	NatsMsgServerToClientEvents_USER_JOINED                NatsMsgServerToClientEvents = 5
+	NatsMsgServerToClientEvents_USER_DISCONNECTED          NatsMsgServerToClientEvents = 6
+	NatsMsgServerToClientEvents_USER_OFFLINE               NatsMsgServerToClientEvents = 7
+	NatsMsgServerToClientEvents_RESP_RENEW_PNM_TOKEN       NatsMsgServerToClientEvents = 8
+	NatsMsgServerToClientEvents_SYSTEM_NOTIFICATION        NatsMsgServerToClientEvents = 9
+	NatsMsgServerToClientEvents_SESSION_ENDED              NatsMsgServerToClientEvents = 10
+	NatsMsgServerToClientEvents_POLL_CLOSED                NatsMsgServerToClientEvents = 11
+	NatsMsgServerToClientEvents_POLL_CREATED               NatsMsgServerToClientEvents = 12
+	NatsMsgServerToClientEvents_JOIN_BREAKOUT_ROOM         NatsMsgServerToClientEvents = 13
+	NatsMsgServerToClientEvents_BREAKOUT_ROOM_ENDED        NatsMsgServerToClientEvents = 14
+	NatsMsgServerToClientEvents_SYSTEM_CHAT_MSG            NatsMsgServerToClientEvents = 15 // mostly system message display in chat
+	NatsMsgServerToClientEvents_TRANSCRIPTION_OUTPUT_TEXT  NatsMsgServerToClientEvents = 16
+	NatsMsgServerToClientEvents_RESP_INSIGHTS_AI_TEXT_CHAT NatsMsgServerToClientEvents = 17
 )
 
 // Enum value maps for NatsMsgServerToClientEvents.
@@ -51,44 +50,42 @@ var (
 	NatsMsgServerToClientEvents_name = map[int32]string{
 		0:  "RES_INITIAL_DATA",
 		1:  "RES_JOINED_USERS_LIST",
-		16: "RES_MEDIA_SERVER_DATA",
-		2:  "ROOM_METADATA_UPDATE",
-		3:  "USER_METADATA_UPDATE",
-		4:  "USER_JOINED",
-		5:  "USER_DISCONNECTED",
-		6:  "USER_OFFLINE",
-		7:  "RESP_RENEW_PNM_TOKEN",
-		8:  "SYSTEM_NOTIFICATION",
-		9:  "AZURE_COGNITIVE_SERVICE_SPEECH_TOKEN",
+		2:  "RES_MEDIA_SERVER_DATA",
+		3:  "ROOM_METADATA_UPDATE",
+		4:  "USER_METADATA_UPDATE",
+		5:  "USER_JOINED",
+		6:  "USER_DISCONNECTED",
+		7:  "USER_OFFLINE",
+		8:  "RESP_RENEW_PNM_TOKEN",
+		9:  "SYSTEM_NOTIFICATION",
 		10: "SESSION_ENDED",
 		11: "POLL_CLOSED",
 		12: "POLL_CREATED",
 		13: "JOIN_BREAKOUT_ROOM",
-		15: "BREAKOUT_ROOM_ENDED",
-		14: "SYSTEM_CHAT_MSG",
-		17: "TRANSCRIPTION_OUTPUT_TEXT",
-		19: "RESP_INSIGHTS_AI_TEXT_CHAT",
+		14: "BREAKOUT_ROOM_ENDED",
+		15: "SYSTEM_CHAT_MSG",
+		16: "TRANSCRIPTION_OUTPUT_TEXT",
+		17: "RESP_INSIGHTS_AI_TEXT_CHAT",
 	}
 	NatsMsgServerToClientEvents_value = map[string]int32{
-		"RES_INITIAL_DATA":                     0,
-		"RES_JOINED_USERS_LIST":                1,
-		"RES_MEDIA_SERVER_DATA":                16,
-		"ROOM_METADATA_UPDATE":                 2,
-		"USER_METADATA_UPDATE":                 3,
-		"USER_JOINED":                          4,
-		"USER_DISCONNECTED":                    5,
-		"USER_OFFLINE":                         6,
-		"RESP_RENEW_PNM_TOKEN":                 7,
-		"SYSTEM_NOTIFICATION":                  8,
-		"AZURE_COGNITIVE_SERVICE_SPEECH_TOKEN": 9,
-		"SESSION_ENDED":                        10,
-		"POLL_CLOSED":                          11,
-		"POLL_CREATED":                         12,
-		"JOIN_BREAKOUT_ROOM":                   13,
-		"BREAKOUT_ROOM_ENDED":                  15,
-		"SYSTEM_CHAT_MSG":                      14,
-		"TRANSCRIPTION_OUTPUT_TEXT":            17,
-		"RESP_INSIGHTS_AI_TEXT_CHAT":           19,
+		"RES_INITIAL_DATA":           0,
+		"RES_JOINED_USERS_LIST":      1,
+		"RES_MEDIA_SERVER_DATA":      2,
+		"ROOM_METADATA_UPDATE":       3,
+		"USER_METADATA_UPDATE":       4,
+		"USER_JOINED":                5,
+		"USER_DISCONNECTED":          6,
+		"USER_OFFLINE":               7,
+		"RESP_RENEW_PNM_TOKEN":       8,
+		"SYSTEM_NOTIFICATION":        9,
+		"SESSION_ENDED":              10,
+		"POLL_CLOSED":                11,
+		"POLL_CREATED":               12,
+		"JOIN_BREAKOUT_ROOM":         13,
+		"BREAKOUT_ROOM_ENDED":        14,
+		"SYSTEM_CHAT_MSG":            15,
+		"TRANSCRIPTION_OUTPUT_TEXT":  16,
+		"RESP_INSIGHTS_AI_TEXT_CHAT": 17,
 	}
 )
 
@@ -123,39 +120,39 @@ type NatsMsgClientToServerEvents int32
 
 const (
 	NatsMsgClientToServerEvents_REQ_INITIAL_DATA          NatsMsgClientToServerEvents = 0
-	NatsMsgClientToServerEvents_REQ_MEDIA_SERVER_DATA     NatsMsgClientToServerEvents = 8
-	NatsMsgClientToServerEvents_REQ_JOINED_USERS_LIST     NatsMsgClientToServerEvents = 1
-	NatsMsgClientToServerEvents_REQ_RENEW_PNM_TOKEN       NatsMsgClientToServerEvents = 2
-	NatsMsgClientToServerEvents_PING                      NatsMsgClientToServerEvents = 3
-	NatsMsgClientToServerEvents_REQ_RAISE_HAND            NatsMsgClientToServerEvents = 4
-	NatsMsgClientToServerEvents_REQ_LOWER_HAND            NatsMsgClientToServerEvents = 5
-	NatsMsgClientToServerEvents_REQ_LOWER_OTHER_USER_HAND NatsMsgClientToServerEvents = 6
-	NatsMsgClientToServerEvents_PUSH_ANALYTICS_DATA       NatsMsgClientToServerEvents = 7
+	NatsMsgClientToServerEvents_REQ_MEDIA_SERVER_DATA     NatsMsgClientToServerEvents = 1
+	NatsMsgClientToServerEvents_REQ_JOINED_USERS_LIST     NatsMsgClientToServerEvents = 2
+	NatsMsgClientToServerEvents_REQ_RENEW_PNM_TOKEN       NatsMsgClientToServerEvents = 3
+	NatsMsgClientToServerEvents_PING                      NatsMsgClientToServerEvents = 4
+	NatsMsgClientToServerEvents_REQ_RAISE_HAND            NatsMsgClientToServerEvents = 5
+	NatsMsgClientToServerEvents_REQ_LOWER_HAND            NatsMsgClientToServerEvents = 6
+	NatsMsgClientToServerEvents_REQ_LOWER_OTHER_USER_HAND NatsMsgClientToServerEvents = 7
+	NatsMsgClientToServerEvents_PUSH_ANALYTICS_DATA       NatsMsgClientToServerEvents = 8
 )
 
 // Enum value maps for NatsMsgClientToServerEvents.
 var (
 	NatsMsgClientToServerEvents_name = map[int32]string{
 		0: "REQ_INITIAL_DATA",
-		8: "REQ_MEDIA_SERVER_DATA",
-		1: "REQ_JOINED_USERS_LIST",
-		2: "REQ_RENEW_PNM_TOKEN",
-		3: "PING",
-		4: "REQ_RAISE_HAND",
-		5: "REQ_LOWER_HAND",
-		6: "REQ_LOWER_OTHER_USER_HAND",
-		7: "PUSH_ANALYTICS_DATA",
+		1: "REQ_MEDIA_SERVER_DATA",
+		2: "REQ_JOINED_USERS_LIST",
+		3: "REQ_RENEW_PNM_TOKEN",
+		4: "PING",
+		5: "REQ_RAISE_HAND",
+		6: "REQ_LOWER_HAND",
+		7: "REQ_LOWER_OTHER_USER_HAND",
+		8: "PUSH_ANALYTICS_DATA",
 	}
 	NatsMsgClientToServerEvents_value = map[string]int32{
 		"REQ_INITIAL_DATA":          0,
-		"REQ_MEDIA_SERVER_DATA":     8,
-		"REQ_JOINED_USERS_LIST":     1,
-		"REQ_RENEW_PNM_TOKEN":       2,
-		"PING":                      3,
-		"REQ_RAISE_HAND":            4,
-		"REQ_LOWER_HAND":            5,
-		"REQ_LOWER_OTHER_USER_HAND": 6,
-		"PUSH_ANALYTICS_DATA":       7,
+		"REQ_MEDIA_SERVER_DATA":     1,
+		"REQ_JOINED_USERS_LIST":     2,
+		"REQ_RENEW_PNM_TOKEN":       3,
+		"PING":                      4,
+		"REQ_RAISE_HAND":            5,
+		"REQ_LOWER_HAND":            6,
+		"REQ_LOWER_OTHER_USER_HAND": 7,
+		"PUSH_ANALYTICS_DATA":       8,
 	}
 )
 
@@ -1121,38 +1118,37 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
 	"\v_to_user_idB\x0e\n" +
-	"\f_source_lang*\xef\x03\n" +
+	"\f_source_lang*\xc5\x03\n" +
 	"\x1bNatsMsgServerToClientEvents\x12\x14\n" +
 	"\x10RES_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15RES_JOINED_USERS_LIST\x10\x01\x12\x19\n" +
-	"\x15RES_MEDIA_SERVER_DATA\x10\x10\x12\x18\n" +
-	"\x14ROOM_METADATA_UPDATE\x10\x02\x12\x18\n" +
-	"\x14USER_METADATA_UPDATE\x10\x03\x12\x0f\n" +
-	"\vUSER_JOINED\x10\x04\x12\x15\n" +
-	"\x11USER_DISCONNECTED\x10\x05\x12\x10\n" +
-	"\fUSER_OFFLINE\x10\x06\x12\x18\n" +
-	"\x14RESP_RENEW_PNM_TOKEN\x10\a\x12\x17\n" +
-	"\x13SYSTEM_NOTIFICATION\x10\b\x12(\n" +
-	"$AZURE_COGNITIVE_SERVICE_SPEECH_TOKEN\x10\t\x12\x11\n" +
+	"\x15RES_MEDIA_SERVER_DATA\x10\x02\x12\x18\n" +
+	"\x14ROOM_METADATA_UPDATE\x10\x03\x12\x18\n" +
+	"\x14USER_METADATA_UPDATE\x10\x04\x12\x0f\n" +
+	"\vUSER_JOINED\x10\x05\x12\x15\n" +
+	"\x11USER_DISCONNECTED\x10\x06\x12\x10\n" +
+	"\fUSER_OFFLINE\x10\a\x12\x18\n" +
+	"\x14RESP_RENEW_PNM_TOKEN\x10\b\x12\x17\n" +
+	"\x13SYSTEM_NOTIFICATION\x10\t\x12\x11\n" +
 	"\rSESSION_ENDED\x10\n" +
 	"\x12\x0f\n" +
 	"\vPOLL_CLOSED\x10\v\x12\x10\n" +
 	"\fPOLL_CREATED\x10\f\x12\x16\n" +
 	"\x12JOIN_BREAKOUT_ROOM\x10\r\x12\x17\n" +
-	"\x13BREAKOUT_ROOM_ENDED\x10\x0f\x12\x13\n" +
-	"\x0fSYSTEM_CHAT_MSG\x10\x0e\x12\x1d\n" +
-	"\x19TRANSCRIPTION_OUTPUT_TEXT\x10\x11\x12\x1e\n" +
-	"\x1aRESP_INSIGHTS_AI_TEXT_CHAT\x10\x13*\xec\x01\n" +
+	"\x13BREAKOUT_ROOM_ENDED\x10\x0e\x12\x13\n" +
+	"\x0fSYSTEM_CHAT_MSG\x10\x0f\x12\x1d\n" +
+	"\x19TRANSCRIPTION_OUTPUT_TEXT\x10\x10\x12\x1e\n" +
+	"\x1aRESP_INSIGHTS_AI_TEXT_CHAT\x10\x11*\xec\x01\n" +
 	"\x1bNatsMsgClientToServerEvents\x12\x14\n" +
 	"\x10REQ_INITIAL_DATA\x10\x00\x12\x19\n" +
-	"\x15REQ_MEDIA_SERVER_DATA\x10\b\x12\x19\n" +
-	"\x15REQ_JOINED_USERS_LIST\x10\x01\x12\x17\n" +
-	"\x13REQ_RENEW_PNM_TOKEN\x10\x02\x12\b\n" +
-	"\x04PING\x10\x03\x12\x12\n" +
-	"\x0eREQ_RAISE_HAND\x10\x04\x12\x12\n" +
-	"\x0eREQ_LOWER_HAND\x10\x05\x12\x1d\n" +
-	"\x19REQ_LOWER_OTHER_USER_HAND\x10\x06\x12\x17\n" +
-	"\x13PUSH_ANALYTICS_DATA\x10\a*\x8a\x01\n" +
+	"\x15REQ_MEDIA_SERVER_DATA\x10\x01\x12\x19\n" +
+	"\x15REQ_JOINED_USERS_LIST\x10\x02\x12\x17\n" +
+	"\x13REQ_RENEW_PNM_TOKEN\x10\x03\x12\b\n" +
+	"\x04PING\x10\x04\x12\x12\n" +
+	"\x0eREQ_RAISE_HAND\x10\x05\x12\x12\n" +
+	"\x0eREQ_LOWER_HAND\x10\x06\x12\x1d\n" +
+	"\x19REQ_LOWER_OTHER_USER_HAND\x10\a\x12\x17\n" +
+	"\x13PUSH_ANALYTICS_DATA\x10\b*\x8a\x01\n" +
 	"\x1bNatsSystemNotificationTypes\x12!\n" +
 	"\x1dNATS_SYSTEM_NOTIFICATION_INFO\x10\x00\x12$\n" +
 	" NATS_SYSTEM_NOTIFICATION_WARNING\x10\x01\x12\"\n" +
