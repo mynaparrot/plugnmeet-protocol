@@ -132,6 +132,9 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 						IsAllow:            true,
 						IsAllowTranslation: true,
 					},
+					ChatTranslationFeatures: &plugnmeet.InsightsChatTranslationFeatures{
+						IsAllow: true,
+					},
 				},
 				PollsFeatures: &plugnmeet.PollsFeatures{
 					IsAllow: true,
@@ -152,6 +155,7 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 	}
 
 	if r.Welcome != "" {
+		r.Welcome = strings.ReplaceAll(r.Welcome, "%%CONFNAME%%", r.Name)
 		req.Metadata.WelcomeMessage = &r.Welcome
 	}
 
@@ -234,6 +238,7 @@ func setDifferentFeatures(f *plugnmeet.RoomCreateFeatures, disabledFeatures stri
 			f.SharedNotePadFeatures.IsAllow = fVal
 		case "liveTranscription":
 			f.InsightsFeatures.TranscriptionFeatures.IsAllow = fVal
+			f.InsightsFeatures.ChatTranslationFeatures.IsAllow = fVal
 		case "presentation":
 			f.WhiteboardFeatures.IsAllow = fVal
 		case "virtualBackgrounds":
