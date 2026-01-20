@@ -153,6 +153,12 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 		}
 	}
 
+	if rf.SipDialInFeatures == nil {
+		rf.SipDialInFeatures = &plugnmeet.SipDialInFeatures{
+			IsAllow: false,
+		}
+	}
+
 	if r.Metadata.DefaultLockSettings == nil {
 		r.Metadata.DefaultLockSettings = new(plugnmeet.LockSettings)
 	}

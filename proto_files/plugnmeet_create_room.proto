@@ -75,7 +75,8 @@ message RoomCreateFeatures {
   EndToEndEncryptionFeatures end_to_end_encryption_features = 24;
   PollsFeatures polls_features = 25;
   InsightsFeatures insights_features = 26;
-  // next ID: 27
+  SipDialInFeatures sip_dial_in_features = 27;
+  // next ID: 28
 }
 
 message ChatFeatures {
@@ -234,6 +235,29 @@ message EndToEndEncryptionFeatures {
 message PollsFeatures {
   bool is_allow = 1;
   bool is_active = 2 [(buf.validate.field).bool.const = false];
+}
+
+message SipDialInFeatures {
+  bool is_allow = 1;
+  // If true, the system will immediately prepare the room for SIP dial-in
+  // by creating a dispatch rule and assigning a PIN upon creation.
+  // If false, this must be done later via a separate API call.
+  bool enable_dial_in_on_create = 2;
+  bool hide_phone_number = 3;
+
+  // all internal usage fields
+  bool is_active = 4 [(buf.validate.field).bool.const = false];
+  repeated string phone_numbers = 5 [(buf.validate.field).repeated.max_items = 0];
+  optional string pin = 6 [(buf.validate.field).cel = {
+    id: "pin_format",
+    message: "pin should not contain any value",
+    expression: "this.matches('^$')"
+  }];
+  optional string dispatch_rule_id = 7 [(buf.validate.field).cel = {
+    id: "dispatch_rule_id_format",
+    message: "dispatch_rule_id should not contain any value",
+    expression: "this.matches('^$')"
+  }];
 }
 
 message InsightsFeatures {
