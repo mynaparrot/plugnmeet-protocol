@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.2.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.1.0...v1.2.0) (2026-01-20)
+
+
+### Features
+
+* SIP dial in ([6c061ac](https://github.com/mynaparrot/plugnmeet-protocol/commit/6c061acaedbf51d32d9574450170a69035640366))
+* SIP dial in ([2d3e813](https://github.com/mynaparrot/plugnmeet-protocol/commit/2d3e813d137c4c02449133c7a34b3669710fe2c0))
+
+
+### Bug Fixes
+
+* added option to set CDN url for static_assets_path ([76e31ac](https://github.com/mynaparrot/plugnmeet-protocol/commit/76e31acd1766564f6b26fc726c4936bdaa2eca04))
+* clean up and remove old code ([24c95d8](https://github.com/mynaparrot/plugnmeet-protocol/commit/24c95d801b9681bc4f3990e700dfe3a61606f8b9))
+* replace BBB `%%CONFNAME%%` with correct value ([70ce32e](https://github.com/mynaparrot/plugnmeet-protocol/commit/70ce32e460f824eec1a849c7aa312e58451b40e6))
+
 ## [1.1.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v2.0.1...v1.1.0) (2025-12-19)
 
 
