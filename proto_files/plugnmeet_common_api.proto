@@ -206,3 +206,8 @@ message GetRoomUploadedFilesRes {
   string msg = 2;
   repeated RoomUploadedFileMetadata files = 3;
 }
+
+message EnableSipDialInReq {
+  string room_id = 1;
+  bool hide_phone_number = 2;
+}

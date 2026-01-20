@@ -1918,6 +1918,58 @@ func (x *GetRoomUploadedFilesRes) GetFiles() []*RoomUploadedFileMetadata {
 	return nil
 }
 
+type EnableSipDialInReq struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	RoomId          string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	HidePhoneNumber bool                   `protobuf:"varint,2,opt,name=hide_phone_number,json=hidePhoneNumber,proto3" json:"hide_phone_number,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *EnableSipDialInReq) Reset() {
+	*x = EnableSipDialInReq{}
+	mi := &file_plugnmeet_common_api_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableSipDialInReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableSipDialInReq) ProtoMessage() {}
+
+func (x *EnableSipDialInReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_common_api_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableSipDialInReq.ProtoReflect.Descriptor instead.
+func (*EnableSipDialInReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *EnableSipDialInReq) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
+func (x *EnableSipDialInReq) GetHidePhoneNumber() bool {
+	if x != nil {
+		return x.HidePhoneNumber
+	}
+	return false
+}
+
 var File_plugnmeet_common_api_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_common_api_proto_rawDesc = "" +
@@ -2072,7 +2124,10 @@ const file_plugnmeet_common_api_proto_rawDesc = "" +
 	"\x17GetRoomUploadedFilesRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x129\n" +
-	"\x05files\x18\x03 \x03(\v2#.plugnmeet.RoomUploadedFileMetadataR\x05files*.\n" +
+	"\x05files\x18\x03 \x03(\v2#.plugnmeet.RoomUploadedFileMetadataR\x05files\"Y\n" +
+	"\x12EnableSipDialInReq\x12\x17\n" +
+	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12*\n" +
+	"\x11hide_phone_number\x18\x02 \x01(\bR\x0fhidePhoneNumber*.\n" +
 	"\x13SwitchPresenterTask\x12\v\n" +
 	"\aPROMOTE\x10\x00\x12\n" +
 	"\n" +
@@ -2104,7 +2159,7 @@ func file_plugnmeet_common_api_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_common_api_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_plugnmeet_common_api_proto_goTypes = []any{
 	(SwitchPresenterTask)(0),            // 0: plugnmeet.SwitchPresenterTask
 	(ExternalMediaPlayerTask)(0),        // 1: plugnmeet.ExternalMediaPlayerTask
@@ -2134,12 +2189,13 @@ var file_plugnmeet_common_api_proto_goTypes = []any{
 	(*RoomUploadedFileMetadata)(nil),    // 25: plugnmeet.RoomUploadedFileMetadata
 	(*GetRoomUploadedFilesReq)(nil),     // 26: plugnmeet.GetRoomUploadedFilesReq
 	(*GetRoomUploadedFilesRes)(nil),     // 27: plugnmeet.GetRoomUploadedFilesRes
-	(*NatsSubjects)(nil),                // 28: plugnmeet.NatsSubjects
-	(DataMsgBodyType)(0),                // 29: plugnmeet.DataMsgBodyType
+	(*EnableSipDialInReq)(nil),          // 28: plugnmeet.EnableSipDialInReq
+	(*NatsSubjects)(nil),                // 29: plugnmeet.NatsSubjects
+	(DataMsgBodyType)(0),                // 30: plugnmeet.DataMsgBodyType
 }
 var file_plugnmeet_common_api_proto_depIdxs = []int32{
-	28, // 0: plugnmeet.VerifyTokenRes.nats_subjects:type_name -> plugnmeet.NatsSubjects
-	29, // 1: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
+	29, // 0: plugnmeet.VerifyTokenRes.nats_subjects:type_name -> plugnmeet.NatsSubjects
+	30, // 1: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
 	0,  // 2: plugnmeet.SwitchPresenterReq.task:type_name -> plugnmeet.SwitchPresenterTask
 	1,  // 3: plugnmeet.ExternalMediaPlayerReq.task:type_name -> plugnmeet.ExternalMediaPlayerTask
 	2,  // 4: plugnmeet.ExternalDisplayLinkReq.task:type_name -> plugnmeet.ExternalDisplayLinkTask
@@ -2176,7 +2232,7 @@ func file_plugnmeet_common_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_common_api_proto_rawDesc), len(file_plugnmeet_common_api_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   24,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
