@@ -729,12 +729,11 @@ func (x *MediaServerConnInfo) GetEnabledE2Ee() bool {
 }
 
 type NatsInitialData struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Room            *NatsKvRoomInfo        `protobuf:"bytes,1,opt,name=room,proto3" json:"room,omitempty"`
-	LocalUser       *NatsKvUserInfo        `protobuf:"bytes,2,opt,name=local_user,json=localUser,proto3" json:"local_user,omitempty"`
-	MediaServerInfo *MediaServerConnInfo   `protobuf:"bytes,3,opt,name=media_server_info,json=mediaServerInfo,proto3" json:"media_server_info,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Room          *NatsKvRoomInfo        `protobuf:"bytes,1,opt,name=room,proto3" json:"room,omitempty"`
+	LocalUser     *NatsKvUserInfo        `protobuf:"bytes,2,opt,name=local_user,json=localUser,proto3" json:"local_user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *NatsInitialData) Reset() {
@@ -777,13 +776,6 @@ func (x *NatsInitialData) GetRoom() *NatsKvRoomInfo {
 func (x *NatsInitialData) GetLocalUser() *NatsKvUserInfo {
 	if x != nil {
 		return x.LocalUser
-	}
-	return nil
-}
-
-func (x *NatsInitialData) GetMediaServerInfo() *MediaServerConnInfo {
-	if x != nil {
-		return x.MediaServerInfo
 	}
 	return nil
 }
@@ -1081,12 +1073,11 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x13MediaServerConnInfo\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12!\n" +
-	"\fenabled_e2ee\x18\x03 \x01(\bR\venabledE2ee\"\xc6\x01\n" +
+	"\fenabled_e2ee\x18\x03 \x01(\bR\venabledE2ee\"z\n" +
 	"\x0fNatsInitialData\x12-\n" +
 	"\x04room\x18\x01 \x01(\v2\x19.plugnmeet.NatsKvRoomInfoR\x04room\x128\n" +
 	"\n" +
-	"local_user\x18\x02 \x01(\v2\x19.plugnmeet.NatsKvUserInfoR\tlocalUser\x12J\n" +
-	"\x11media_server_info\x18\x03 \x01(\v2\x1e.plugnmeet.MediaServerConnInfoR\x0fmediaServerInfo\"\xae\x01\n" +
+	"local_user\x18\x02 \x01(\v2\x19.plugnmeet.NatsKvUserInfoR\tlocalUser\"\xae\x01\n" +
 	"\x16NatsSystemNotification\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12:\n" +
 	"\x04type\x18\x02 \x01(\x0e2&.plugnmeet.NatsSystemNotificationTypesR\x04type\x12\x10\n" +
@@ -1190,14 +1181,13 @@ var file_plugnmeet_nats_msg_proto_depIdxs = []int32{
 	1,  // 1: plugnmeet.NatsMsgClientToServer.event:type_name -> plugnmeet.NatsMsgClientToServerEvents
 	6,  // 2: plugnmeet.NatsInitialData.room:type_name -> plugnmeet.NatsKvRoomInfo
 	7,  // 3: plugnmeet.NatsInitialData.local_user:type_name -> plugnmeet.NatsKvUserInfo
-	8,  // 4: plugnmeet.NatsInitialData.media_server_info:type_name -> plugnmeet.MediaServerConnInfo
-	2,  // 5: plugnmeet.NatsSystemNotification.type:type_name -> plugnmeet.NatsSystemNotificationTypes
-	13, // 6: plugnmeet.ChatMessage.translations:type_name -> plugnmeet.ChatMessage.TranslationsEntry
-	7,  // [7:7] is the sub-list for method output_type
-	7,  // [7:7] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	2,  // 4: plugnmeet.NatsSystemNotification.type:type_name -> plugnmeet.NatsSystemNotificationTypes
+	13, // 5: plugnmeet.ChatMessage.translations:type_name -> plugnmeet.ChatMessage.TranslationsEntry
+	6,  // [6:6] is the sub-list for method output_type
+	6,  // [6:6] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_nats_msg_proto_init() }

@@ -104,7 +104,6 @@ message MediaServerConnInfo {
 message NatsInitialData {
   NatsKvRoomInfo room = 1;
   NatsKvUserInfo local_user = 2;
-  MediaServerConnInfo media_server_info = 3;
 }
 
 enum NatsSystemNotificationTypes {
