@@ -40,5 +40,8 @@ enum DataMsgBodyType {
 
   USER_CONNECTION_QUALITY_CHANGE = 17;
 
-  // next ID: 18
+  REQ_PUBLIC_CHAT_DATA = 18;
+  RES_PUBLIC_CHAT_DATA = 19;
+
+  // next ID: 20
 }

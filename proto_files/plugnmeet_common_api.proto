@@ -23,9 +23,10 @@ message VerifyTokenRes {
   optional string server_version = 4;
   optional string room_id = 5;
   optional string user_id = 6;
-  optional NatsSubjects nats_subjects = 7;
-  optional bool enabled_self_insert_encryption_key = 8;
-  optional bool is_cloud = 9;
+  optional string room_stream_name = 7;
+  optional NatsSubjects nats_subjects = 8;
+  optional bool enabled_self_insert_encryption_key = 9;
+  optional bool is_cloud = 10;
 }
 
 message MuteUnMuteTrackReq {

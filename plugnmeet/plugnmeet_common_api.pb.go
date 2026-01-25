@@ -318,9 +318,10 @@ type VerifyTokenRes struct {
 	ServerVersion                  *string                `protobuf:"bytes,4,opt,name=server_version,json=serverVersion,proto3,oneof" json:"server_version,omitempty"`
 	RoomId                         *string                `protobuf:"bytes,5,opt,name=room_id,json=roomId,proto3,oneof" json:"room_id,omitempty"`
 	UserId                         *string                `protobuf:"bytes,6,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	NatsSubjects                   *NatsSubjects          `protobuf:"bytes,7,opt,name=nats_subjects,json=natsSubjects,proto3,oneof" json:"nats_subjects,omitempty"`
-	EnabledSelfInsertEncryptionKey *bool                  `protobuf:"varint,8,opt,name=enabled_self_insert_encryption_key,json=enabledSelfInsertEncryptionKey,proto3,oneof" json:"enabled_self_insert_encryption_key,omitempty"`
-	IsCloud                        *bool                  `protobuf:"varint,9,opt,name=is_cloud,json=isCloud,proto3,oneof" json:"is_cloud,omitempty"`
+	RoomStreamName                 *string                `protobuf:"bytes,7,opt,name=room_stream_name,json=roomStreamName,proto3,oneof" json:"room_stream_name,omitempty"`
+	NatsSubjects                   *NatsSubjects          `protobuf:"bytes,8,opt,name=nats_subjects,json=natsSubjects,proto3,oneof" json:"nats_subjects,omitempty"`
+	EnabledSelfInsertEncryptionKey *bool                  `protobuf:"varint,9,opt,name=enabled_self_insert_encryption_key,json=enabledSelfInsertEncryptionKey,proto3,oneof" json:"enabled_self_insert_encryption_key,omitempty"`
+	IsCloud                        *bool                  `protobuf:"varint,10,opt,name=is_cloud,json=isCloud,proto3,oneof" json:"is_cloud,omitempty"`
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -393,6 +394,13 @@ func (x *VerifyTokenRes) GetRoomId() string {
 func (x *VerifyTokenRes) GetUserId() string {
 	if x != nil && x.UserId != nil {
 		return *x.UserId
+	}
+	return ""
+}
+
+func (x *VerifyTokenRes) GetRoomStreamName() string {
+	if x != nil && x.RoomStreamName != nil {
+		return *x.RoomStreamName
 	}
 	return ""
 }
@@ -1980,7 +1988,7 @@ const file_plugnmeet_common_api_proto_rawDesc = "" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\"L\n" +
 	"\x0eVerifyTokenReq\x12(\n" +
 	"\ris_production\x18\x01 \x01(\bH\x00R\fisProduction\x88\x01\x01B\x10\n" +
-	"\x0e_is_production\"\xe9\x03\n" +
+	"\x0e_is_production\"\xad\x04\n" +
 	"\x0eVerifyTokenRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12 \n" +
@@ -1988,15 +1996,18 @@ const file_plugnmeet_common_api_proto_rawDesc = "" +
 	"natsWsUrls\x12*\n" +
 	"\x0eserver_version\x18\x04 \x01(\tH\x00R\rserverVersion\x88\x01\x01\x12\x1c\n" +
 	"\aroom_id\x18\x05 \x01(\tH\x01R\x06roomId\x88\x01\x01\x12\x1c\n" +
-	"\auser_id\x18\x06 \x01(\tH\x02R\x06userId\x88\x01\x01\x12A\n" +
-	"\rnats_subjects\x18\a \x01(\v2\x17.plugnmeet.NatsSubjectsH\x03R\fnatsSubjects\x88\x01\x01\x12O\n" +
-	"\"enabled_self_insert_encryption_key\x18\b \x01(\bH\x04R\x1eenabledSelfInsertEncryptionKey\x88\x01\x01\x12\x1e\n" +
-	"\bis_cloud\x18\t \x01(\bH\x05R\aisCloud\x88\x01\x01B\x11\n" +
+	"\auser_id\x18\x06 \x01(\tH\x02R\x06userId\x88\x01\x01\x12-\n" +
+	"\x10room_stream_name\x18\a \x01(\tH\x03R\x0eroomStreamName\x88\x01\x01\x12A\n" +
+	"\rnats_subjects\x18\b \x01(\v2\x17.plugnmeet.NatsSubjectsH\x04R\fnatsSubjects\x88\x01\x01\x12O\n" +
+	"\"enabled_self_insert_encryption_key\x18\t \x01(\bH\x05R\x1eenabledSelfInsertEncryptionKey\x88\x01\x01\x12\x1e\n" +
+	"\bis_cloud\x18\n" +
+	" \x01(\bH\x06R\aisCloud\x88\x01\x01B\x11\n" +
 	"\x0f_server_versionB\n" +
 	"\n" +
 	"\b_room_idB\n" +
 	"\n" +
-	"\b_user_idB\x10\n" +
+	"\b_user_idB\x13\n" +
+	"\x11_room_stream_nameB\x10\n" +
 	"\x0e_nats_subjectsB%\n" +
 	"#_enabled_self_insert_encryption_keyB\v\n" +
 	"\t_is_cloud\"\xb7\x01\n" +

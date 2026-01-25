@@ -281,6 +281,10 @@ func (m *VerifyTokenRes) validate(all bool) error {
 		// no validation rules for UserId
 	}
 
+	if m.RoomStreamName != nil {
+		// no validation rules for RoomStreamName
+	}
+
 	if m.NatsSubjects != nil {
 
 		if all {
