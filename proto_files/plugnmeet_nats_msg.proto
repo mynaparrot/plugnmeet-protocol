@@ -39,7 +39,8 @@ enum NatsMsgServerToClientEvents {
   TRANSCRIPTION_OUTPUT_TEXT = 16;
   RESP_INSIGHTS_AI_TEXT_CHAT = 17;
 
-  //next ID: 18
+  RESP_ONLINE_USERS_LIST = 18;
+  //next ID: 19
 }
 
 enum NatsMsgClientToServerEvents {
@@ -55,7 +56,8 @@ enum NatsMsgClientToServerEvents {
 
   PUSH_ANALYTICS_DATA = 8;
 
-  //next ID: 9
+  REQ_ONLINE_USERS_LIST = 9;
+  //next ID: 10
 }
 
 message NatsMsgServerToClient {

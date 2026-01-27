@@ -43,6 +43,7 @@ const (
 	NatsMsgServerToClientEvents_SYSTEM_CHAT_MSG            NatsMsgServerToClientEvents = 15 // mostly system message display in chat
 	NatsMsgServerToClientEvents_TRANSCRIPTION_OUTPUT_TEXT  NatsMsgServerToClientEvents = 16
 	NatsMsgServerToClientEvents_RESP_INSIGHTS_AI_TEXT_CHAT NatsMsgServerToClientEvents = 17
+	NatsMsgServerToClientEvents_RESP_ONLINE_USERS_LIST     NatsMsgServerToClientEvents = 18 //next ID: 19
 )
 
 // Enum value maps for NatsMsgServerToClientEvents.
@@ -66,6 +67,7 @@ var (
 		15: "SYSTEM_CHAT_MSG",
 		16: "TRANSCRIPTION_OUTPUT_TEXT",
 		17: "RESP_INSIGHTS_AI_TEXT_CHAT",
+		18: "RESP_ONLINE_USERS_LIST",
 	}
 	NatsMsgServerToClientEvents_value = map[string]int32{
 		"RES_INITIAL_DATA":           0,
@@ -86,6 +88,7 @@ var (
 		"SYSTEM_CHAT_MSG":            15,
 		"TRANSCRIPTION_OUTPUT_TEXT":  16,
 		"RESP_INSIGHTS_AI_TEXT_CHAT": 17,
+		"RESP_ONLINE_USERS_LIST":     18,
 	}
 )
 
@@ -128,6 +131,7 @@ const (
 	NatsMsgClientToServerEvents_REQ_LOWER_HAND            NatsMsgClientToServerEvents = 6
 	NatsMsgClientToServerEvents_REQ_LOWER_OTHER_USER_HAND NatsMsgClientToServerEvents = 7
 	NatsMsgClientToServerEvents_PUSH_ANALYTICS_DATA       NatsMsgClientToServerEvents = 8
+	NatsMsgClientToServerEvents_REQ_ONLINE_USERS_LIST     NatsMsgClientToServerEvents = 9 //next ID: 10
 )
 
 // Enum value maps for NatsMsgClientToServerEvents.
@@ -142,6 +146,7 @@ var (
 		6: "REQ_LOWER_HAND",
 		7: "REQ_LOWER_OTHER_USER_HAND",
 		8: "PUSH_ANALYTICS_DATA",
+		9: "REQ_ONLINE_USERS_LIST",
 	}
 	NatsMsgClientToServerEvents_value = map[string]int32{
 		"REQ_INITIAL_DATA":          0,
@@ -153,6 +158,7 @@ var (
 		"REQ_LOWER_HAND":            6,
 		"REQ_LOWER_OTHER_USER_HAND": 7,
 		"PUSH_ANALYTICS_DATA":       8,
+		"REQ_ONLINE_USERS_LIST":     9,
 	}
 )
 
@@ -1109,7 +1115,7 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
 	"\v_to_user_idB\x0e\n" +
-	"\f_source_lang*\xc5\x03\n" +
+	"\f_source_lang*\xe1\x03\n" +
 	"\x1bNatsMsgServerToClientEvents\x12\x14\n" +
 	"\x10RES_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15RES_JOINED_USERS_LIST\x10\x01\x12\x19\n" +
@@ -1129,7 +1135,8 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x13BREAKOUT_ROOM_ENDED\x10\x0e\x12\x13\n" +
 	"\x0fSYSTEM_CHAT_MSG\x10\x0f\x12\x1d\n" +
 	"\x19TRANSCRIPTION_OUTPUT_TEXT\x10\x10\x12\x1e\n" +
-	"\x1aRESP_INSIGHTS_AI_TEXT_CHAT\x10\x11*\xec\x01\n" +
+	"\x1aRESP_INSIGHTS_AI_TEXT_CHAT\x10\x11\x12\x1a\n" +
+	"\x16RESP_ONLINE_USERS_LIST\x10\x12*\x87\x02\n" +
 	"\x1bNatsMsgClientToServerEvents\x12\x14\n" +
 	"\x10REQ_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15REQ_MEDIA_SERVER_DATA\x10\x01\x12\x19\n" +
@@ -1139,7 +1146,8 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x0eREQ_RAISE_HAND\x10\x05\x12\x12\n" +
 	"\x0eREQ_LOWER_HAND\x10\x06\x12\x1d\n" +
 	"\x19REQ_LOWER_OTHER_USER_HAND\x10\a\x12\x17\n" +
-	"\x13PUSH_ANALYTICS_DATA\x10\b*\x8a\x01\n" +
+	"\x13PUSH_ANALYTICS_DATA\x10\b\x12\x19\n" +
+	"\x15REQ_ONLINE_USERS_LIST\x10\t*\x8a\x01\n" +
 	"\x1bNatsSystemNotificationTypes\x12!\n" +
 	"\x1dNATS_SYSTEM_NOTIFICATION_INFO\x10\x00\x12$\n" +
 	" NATS_SYSTEM_NOTIFICATION_WARNING\x10\x01\x12\"\n" +
