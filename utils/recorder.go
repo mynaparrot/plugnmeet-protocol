@@ -5,6 +5,7 @@ import (
 )
 
 const (
+	TranscoderConsumerDurable = "transcoderWorker"
 	// RecorderKeyPrefix format: recorder_<recorderId>-FIELD_<field>
 	RecorderKeyPrefix = "recorder_"
 	// RecorderKeyFieldPrefix is the separator between the recorderId and the field.
