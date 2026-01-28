@@ -11,6 +11,13 @@ const (
 	RecorderKeyFieldPrefix = "-FIELD_"
 )
 
+type RecorderInfo struct {
+	RecorderId      string
+	MaxLimit        int64
+	CurrentProgress int64
+	LastPing        int64
+}
+
 // FormatRecorderKey generates a key for a specific recorder's field within the consolidated bucket.
 // The format will be `recorder_<recorderId>-FIELD_<field>`.
 func FormatRecorderKey(recorderId, field string) string {
