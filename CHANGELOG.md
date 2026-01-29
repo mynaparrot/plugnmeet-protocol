@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.1](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.2.0...v1.2.1) (2026-01-29)
+
+
+### Bug Fixes
+
+* added option `room_stream_name` and chat `REQ/RES` ([4d9b163](https://github.com/mynaparrot/plugnmeet-protocol/commit/4d9b163b3453e732b2e61648bbe7a72760d5cceb))
+* added recorder's KV fields helper methods ([9b2c18e](https://github.com/mynaparrot/plugnmeet-protocol/commit/9b2c18eded4ebfd0b60bb102a17fb4f931e01aac))
+* bump deps ([37912d4](https://github.com/mynaparrot/plugnmeet-protocol/commit/37912d49fb59a6519bb999fcfdea61680df67a4d))
+* cleaning up ([43b2532](https://github.com/mynaparrot/plugnmeet-protocol/commit/43b2532ad657d00aa1e6104806c47c122eb21f0c))
+* moved RecorderInfo as well ([708ae46](https://github.com/mynaparrot/plugnmeet-protocol/commit/708ae46235cf570c4cb74cfadddae20a52c8f831))
+* open to req/res `ONLINE_USERS_LIST` ([1a95c77](https://github.com/mynaparrot/plugnmeet-protocol/commit/1a95c77fe733dabd35ce9faba4457554b78f5830))
+* remove deprecated code ([9cf10b8](https://github.com/mynaparrot/plugnmeet-protocol/commit/9cf10b8a2e99f19ea7357dbe90cb313ce4050058))
+
 ## [1.2.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.1.0...v1.2.0) (2026-01-20)
 
 
