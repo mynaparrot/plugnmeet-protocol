@@ -5,10 +5,11 @@ import (
 	"crypto/subtle"
 	"encoding/base64"
 	"errors"
+	"time"
+
 	"github.com/go-jose/go-jose/v4"
 	"github.com/go-jose/go-jose/v4/jwt"
 	"github.com/livekit/protocol/auth"
-	"time"
 )
 
 // VerifyRequest will verify webhook request both for livekit & plugNmeet

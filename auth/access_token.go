@@ -35,7 +35,7 @@ func GenerateLivekitAccessToken(apiKey, secret string, tokenValidity time.Durati
 		Hidden:    c.IsHidden,
 	}
 
-	at.AddGrant(grant).
+	at.SetVideoGrant(grant).
 		SetIdentity(c.UserId).
 		SetName(c.Name).
 		SetValidFor(tokenValidity)
