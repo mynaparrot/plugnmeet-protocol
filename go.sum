@@ -106,6 +106,8 @@ github.com/livekit/mageutil v0.0.0-20250511045019-0f1ff63f7731 h1:9x+U2HGLrSw5AT
 github.com/livekit/mageutil v0.0.0-20250511045019-0f1ff63f7731/go.mod h1:Rs3MhFwutWhGwmY1VQsygw28z5bWcnEYmS1OG9OxjOQ=
 github.com/livekit/protocol v1.44.1-0.20260120134243-0914cc74653e h1:ClpOUpIDcIT/fKh66kOlO4b7fj47ApsITOwCOlvFrGc=
 github.com/livekit/protocol v1.44.1-0.20260120134243-0914cc74653e/go.mod h1:BLJHYHErQTu3+fnmfGrzN6CbHxNYiooFIIYGYxXxotw=
+github.com/livekit/protocol v1.44.1-0.20260130111706-f89fa20a25d7 h1:QR2/HZMoV86vP21EYaC70O5gs7twe477VHbwTF8E37k=
+github.com/livekit/protocol v1.44.1-0.20260130111706-f89fa20a25d7/go.mod h1:BLJHYHErQTu3+fnmfGrzN6CbHxNYiooFIIYGYxXxotw=
 github.com/livekit/psrpc v0.7.1 h1:ms37az0QTD3UXIWuUC5D/SkmKOlRMVRsI261eBWu/Vw=
 github.com/livekit/psrpc v0.7.1/go.mod h1:bZ4iHFQptTkbPnB0LasvRNu/OBYXEu1NA6O5BMFo9kk=
 github.com/mattn/go-colorable v0.1.14 h1:9A9LHSqF/7dyVVX6g0U9cwm9pG3kP9gSzcuIPHPsaIE=
