@@ -40,7 +40,8 @@ enum NatsMsgServerToClientEvents {
   RESP_INSIGHTS_AI_TEXT_CHAT = 17;
 
   RESP_ONLINE_USERS_LIST = 18;
-  //next ID: 19
+  DELIVERY_PRIVATE_DATA = 19;
+  //next ID: 20
 }
 
 enum NatsMsgClientToServerEvents {
@@ -57,13 +58,21 @@ enum NatsMsgClientToServerEvents {
   PUSH_ANALYTICS_DATA = 8;
 
   REQ_ONLINE_USERS_LIST = 9;
-  //next ID: 10
+  REQ_PRIVATE_DATA_DELIVERY = 10;
+  //next ID: 11
+}
+
+message PrivateDataDelivery {
+  string to_user_id = 1;
+  bool echo_to_sender = 2;
+  string type = 3;
 }
 
 message NatsMsgServerToClient {
   string id = 1;
   NatsMsgServerToClientEvents event = 2;
   string msg = 3;
+  bytes bin_msg = 4;
 }
 
 message NatsMsgClientToServer {

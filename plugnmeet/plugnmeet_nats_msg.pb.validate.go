@@ -148,6 +148,114 @@ var _ interface {
 	ErrorName() string
 } = NatsSubjectsValidationError{}
 
+// Validate checks the field values on PrivateDataDelivery with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PrivateDataDelivery) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PrivateDataDelivery with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PrivateDataDeliveryMultiError, or nil if none found.
+func (m *PrivateDataDelivery) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PrivateDataDelivery) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ToUserId
+
+	// no validation rules for EchoToSender
+
+	// no validation rules for Type
+
+	if len(errors) > 0 {
+		return PrivateDataDeliveryMultiError(errors)
+	}
+
+	return nil
+}
+
+// PrivateDataDeliveryMultiError is an error wrapping multiple validation
+// errors returned by PrivateDataDelivery.ValidateAll() if the designated
+// constraints aren't met.
+type PrivateDataDeliveryMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PrivateDataDeliveryMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PrivateDataDeliveryMultiError) AllErrors() []error { return m }
+
+// PrivateDataDeliveryValidationError is the validation error returned by
+// PrivateDataDelivery.Validate if the designated constraints aren't met.
+type PrivateDataDeliveryValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PrivateDataDeliveryValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PrivateDataDeliveryValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PrivateDataDeliveryValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PrivateDataDeliveryValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PrivateDataDeliveryValidationError) ErrorName() string {
+	return "PrivateDataDeliveryValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PrivateDataDeliveryValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPrivateDataDelivery.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PrivateDataDeliveryValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PrivateDataDeliveryValidationError{}
+
 // Validate checks the field values on NatsMsgServerToClient with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -175,6 +283,8 @@ func (m *NatsMsgServerToClient) validate(all bool) error {
 	// no validation rules for Event
 
 	// no validation rules for Msg
+
+	// no validation rules for BinMsg
 
 	if len(errors) > 0 {
 		return NatsMsgServerToClientMultiError(errors)
