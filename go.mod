@@ -12,7 +12,7 @@ require (
 	github.com/livekit/protocol v1.44.1-0.20260120134243-0914cc74653e
 	github.com/nats-io/jwt/v2 v2.8.0
 	github.com/nats-io/nats.go v1.48.0
-	github.com/nats-io/nkeys v0.4.14
+	github.com/nats-io/nkeys v0.4.15
 	github.com/sirupsen/logrus v1.9.4
 	google.golang.org/protobuf v1.36.11
 )
