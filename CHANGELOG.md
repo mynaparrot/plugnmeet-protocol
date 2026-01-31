@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.2](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.2.1...v1.2.2) (2026-01-31)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/nats-io/nkeys to v0.4.15 ([0afa376](https://github.com/mynaparrot/plugnmeet-protocol/commit/0afa3765f02a8959e220b6d3ffc70a5befa27504))
+* **deps:** update module github.com/nats-io/nkeys to v0.4.15 ([4c099b7](https://github.com/mynaparrot/plugnmeet-protocol/commit/4c099b78a5474357745e2ea06a35abeb7298bf33))
+* option to deliver private messages ([3727f9a](https://github.com/mynaparrot/plugnmeet-protocol/commit/3727f9a7d80e5e60eb47f3c6be74765be476240d))
+
 ## [1.2.1](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.2.0...v1.2.1) (2026-01-29)
 
 
