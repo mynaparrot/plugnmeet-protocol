@@ -41,7 +41,8 @@ enum NatsMsgServerToClientEvents {
 
   RESP_ONLINE_USERS_LIST = 18;
   DELIVERY_PRIVATE_DATA = 19;
-  //next ID: 20
+  PONG = 20;
+  //next ID: 21
 }
 
 enum NatsMsgClientToServerEvents {

@@ -44,7 +44,8 @@ const (
 	NatsMsgServerToClientEvents_TRANSCRIPTION_OUTPUT_TEXT  NatsMsgServerToClientEvents = 16
 	NatsMsgServerToClientEvents_RESP_INSIGHTS_AI_TEXT_CHAT NatsMsgServerToClientEvents = 17
 	NatsMsgServerToClientEvents_RESP_ONLINE_USERS_LIST     NatsMsgServerToClientEvents = 18
-	NatsMsgServerToClientEvents_DELIVERY_PRIVATE_DATA      NatsMsgServerToClientEvents = 19 //next ID: 20
+	NatsMsgServerToClientEvents_DELIVERY_PRIVATE_DATA      NatsMsgServerToClientEvents = 19
+	NatsMsgServerToClientEvents_PONG                       NatsMsgServerToClientEvents = 20 //next ID: 21
 )
 
 // Enum value maps for NatsMsgServerToClientEvents.
@@ -70,6 +71,7 @@ var (
 		17: "RESP_INSIGHTS_AI_TEXT_CHAT",
 		18: "RESP_ONLINE_USERS_LIST",
 		19: "DELIVERY_PRIVATE_DATA",
+		20: "PONG",
 	}
 	NatsMsgServerToClientEvents_value = map[string]int32{
 		"RES_INITIAL_DATA":           0,
@@ -92,6 +94,7 @@ var (
 		"RESP_INSIGHTS_AI_TEXT_CHAT": 17,
 		"RESP_ONLINE_USERS_LIST":     18,
 		"DELIVERY_PRIVATE_DATA":      19,
+		"PONG":                       20,
 	}
 )
 
@@ -1195,7 +1198,7 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
 	"\v_to_user_idB\x0e\n" +
-	"\f_source_lang*\xfc\x03\n" +
+	"\f_source_lang*\x86\x04\n" +
 	"\x1bNatsMsgServerToClientEvents\x12\x14\n" +
 	"\x10RES_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15RES_JOINED_USERS_LIST\x10\x01\x12\x19\n" +
@@ -1217,7 +1220,8 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x19TRANSCRIPTION_OUTPUT_TEXT\x10\x10\x12\x1e\n" +
 	"\x1aRESP_INSIGHTS_AI_TEXT_CHAT\x10\x11\x12\x1a\n" +
 	"\x16RESP_ONLINE_USERS_LIST\x10\x12\x12\x19\n" +
-	"\x15DELIVERY_PRIVATE_DATA\x10\x13*\xa6\x02\n" +
+	"\x15DELIVERY_PRIVATE_DATA\x10\x13\x12\b\n" +
+	"\x04PONG\x10\x14*\xa6\x02\n" +
 	"\x1bNatsMsgClientToServerEvents\x12\x14\n" +
 	"\x10REQ_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15REQ_MEDIA_SERVER_DATA\x10\x01\x12\x19\n" +
