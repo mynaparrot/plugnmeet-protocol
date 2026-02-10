@@ -3,10 +3,10 @@ module github.com/mynaparrot/plugnmeet-protocol
 go 1.25.5
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20251209175733-2a1774d88802.1
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260209202127-80ab13bee0bf.1
 	github.com/DeRuina/timberjack v1.3.9
 	github.com/go-jose/go-jose/v4 v4.1.3
-	github.com/gofiber/fiber/v2 v2.52.10
+	github.com/gofiber/fiber/v2 v2.52.11
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-retryablehttp v0.7.8
 	github.com/livekit/protocol v1.44.1-0.20260120134243-0914cc74653e
@@ -18,7 +18,7 @@ require (
 )
 
 require (
-	buf.build/go/protovalidate v1.1.0 // indirect
+	buf.build/go/protovalidate v1.1.1 // indirect
 	buf.build/go/protoyaml v0.6.0 // indirect
 	cel.dev/expr v0.25.1 // indirect
 	github.com/andybalholm/brotli v1.2.0 // indirect
