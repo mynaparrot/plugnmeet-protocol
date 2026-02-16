@@ -751,18 +751,87 @@ func (x *NatsKvUserInfo) GetDisconnectedAt() uint64 {
 	return 0
 }
 
-type MediaServerConnInfo struct {
+type TurnCredentials struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	Token         string                 `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
-	EnabledE2Ee   bool                   `protobuf:"varint,3,opt,name=enabled_e2ee,json=enabledE2ee,proto3" json:"enabled_e2ee,omitempty"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	Uris          []string               `protobuf:"bytes,3,rep,name=uris,proto3" json:"uris,omitempty"`
+	ForceTurn     bool                   `protobuf:"varint,4,opt,name=force_turn,json=forceTurn,proto3" json:"force_turn,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
+func (x *TurnCredentials) Reset() {
+	*x = TurnCredentials{}
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TurnCredentials) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TurnCredentials) ProtoMessage() {}
+
+func (x *TurnCredentials) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TurnCredentials.ProtoReflect.Descriptor instead.
+func (*TurnCredentials) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *TurnCredentials) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *TurnCredentials) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *TurnCredentials) GetUris() []string {
+	if x != nil {
+		return x.Uris
+	}
+	return nil
+}
+
+func (x *TurnCredentials) GetForceTurn() bool {
+	if x != nil {
+		return x.ForceTurn
+	}
+	return false
+}
+
+type MediaServerConnInfo struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Url             string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	Token           string                 `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
+	EnabledE2Ee     bool                   `protobuf:"varint,3,opt,name=enabled_e2ee,json=enabledE2ee,proto3" json:"enabled_e2ee,omitempty"`
+	TurnCredentials *TurnCredentials       `protobuf:"bytes,4,opt,name=turn_credentials,json=turnCredentials,proto3,oneof" json:"turn_credentials,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
 func (x *MediaServerConnInfo) Reset() {
 	*x = MediaServerConnInfo{}
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[6]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -774,7 +843,7 @@ func (x *MediaServerConnInfo) String() string {
 func (*MediaServerConnInfo) ProtoMessage() {}
 
 func (x *MediaServerConnInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[6]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -787,7 +856,7 @@ func (x *MediaServerConnInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MediaServerConnInfo.ProtoReflect.Descriptor instead.
 func (*MediaServerConnInfo) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{6}
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *MediaServerConnInfo) GetUrl() string {
@@ -811,6 +880,13 @@ func (x *MediaServerConnInfo) GetEnabledE2Ee() bool {
 	return false
 }
 
+func (x *MediaServerConnInfo) GetTurnCredentials() *TurnCredentials {
+	if x != nil {
+		return x.TurnCredentials
+	}
+	return nil
+}
+
 type NatsInitialData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Room          *NatsKvRoomInfo        `protobuf:"bytes,1,opt,name=room,proto3" json:"room,omitempty"`
@@ -821,7 +897,7 @@ type NatsInitialData struct {
 
 func (x *NatsInitialData) Reset() {
 	*x = NatsInitialData{}
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[7]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -833,7 +909,7 @@ func (x *NatsInitialData) String() string {
 func (*NatsInitialData) ProtoMessage() {}
 
 func (x *NatsInitialData) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[7]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -846,7 +922,7 @@ func (x *NatsInitialData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NatsInitialData.ProtoReflect.Descriptor instead.
 func (*NatsInitialData) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{7}
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *NatsInitialData) GetRoom() *NatsKvRoomInfo {
@@ -876,7 +952,7 @@ type NatsSystemNotification struct {
 
 func (x *NatsSystemNotification) Reset() {
 	*x = NatsSystemNotification{}
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[8]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -888,7 +964,7 @@ func (x *NatsSystemNotification) String() string {
 func (*NatsSystemNotification) ProtoMessage() {}
 
 func (x *NatsSystemNotification) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[8]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -901,7 +977,7 @@ func (x *NatsSystemNotification) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NatsSystemNotification.ProtoReflect.Descriptor instead.
 func (*NatsSystemNotification) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{8}
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *NatsSystemNotification) GetId() string {
@@ -949,7 +1025,7 @@ type NatsUserMetadataUpdate struct {
 
 func (x *NatsUserMetadataUpdate) Reset() {
 	*x = NatsUserMetadataUpdate{}
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[9]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -961,7 +1037,7 @@ func (x *NatsUserMetadataUpdate) String() string {
 func (*NatsUserMetadataUpdate) ProtoMessage() {}
 
 func (x *NatsUserMetadataUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[9]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -974,7 +1050,7 @@ func (x *NatsUserMetadataUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NatsUserMetadataUpdate.ProtoReflect.Descriptor instead.
 func (*NatsUserMetadataUpdate) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{9}
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *NatsUserMetadataUpdate) GetUserId() string {
@@ -1009,7 +1085,7 @@ type ChatMessage struct {
 
 func (x *ChatMessage) Reset() {
 	*x = ChatMessage{}
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[10]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1021,7 +1097,7 @@ func (x *ChatMessage) String() string {
 func (*ChatMessage) ProtoMessage() {}
 
 func (x *ChatMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[10]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1034,7 +1110,7 @@ func (x *ChatMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChatMessage.ProtoReflect.Descriptor instead.
 func (*ChatMessage) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{10}
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ChatMessage) GetId() string {
@@ -1158,11 +1234,19 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\tjoined_at\x18\b \x01(\x04R\bjoinedAt\x12%\n" +
 	"\x0ereconnected_at\x18\t \x01(\x04R\rreconnectedAt\x12'\n" +
 	"\x0fdisconnected_at\x18\n" +
-	" \x01(\x04R\x0edisconnectedAt\"`\n" +
+	" \x01(\x04R\x0edisconnectedAt\"|\n" +
+	"\x0fTurnCredentials\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x12\n" +
+	"\x04uris\x18\x03 \x03(\tR\x04uris\x12\x1d\n" +
+	"\n" +
+	"force_turn\x18\x04 \x01(\bR\tforceTurn\"\xc1\x01\n" +
 	"\x13MediaServerConnInfo\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12!\n" +
-	"\fenabled_e2ee\x18\x03 \x01(\bR\venabledE2ee\"z\n" +
+	"\fenabled_e2ee\x18\x03 \x01(\bR\venabledE2ee\x12J\n" +
+	"\x10turn_credentials\x18\x04 \x01(\v2\x1a.plugnmeet.TurnCredentialsH\x00R\x0fturnCredentials\x88\x01\x01B\x13\n" +
+	"\x11_turn_credentials\"z\n" +
 	"\x0fNatsInitialData\x12-\n" +
 	"\x04room\x18\x01 \x01(\v2\x19.plugnmeet.NatsKvRoomInfoR\x04room\x128\n" +
 	"\n" +
@@ -1254,7 +1338,7 @@ func file_plugnmeet_nats_msg_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_nats_msg_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_plugnmeet_nats_msg_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_plugnmeet_nats_msg_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_plugnmeet_nats_msg_proto_goTypes = []any{
 	(NatsMsgServerToClientEvents)(0), // 0: plugnmeet.NatsMsgServerToClientEvents
 	(NatsMsgClientToServerEvents)(0), // 1: plugnmeet.NatsMsgClientToServerEvents
@@ -1265,25 +1349,27 @@ var file_plugnmeet_nats_msg_proto_goTypes = []any{
 	(*NatsMsgClientToServer)(nil),    // 6: plugnmeet.NatsMsgClientToServer
 	(*NatsKvRoomInfo)(nil),           // 7: plugnmeet.NatsKvRoomInfo
 	(*NatsKvUserInfo)(nil),           // 8: plugnmeet.NatsKvUserInfo
-	(*MediaServerConnInfo)(nil),      // 9: plugnmeet.MediaServerConnInfo
-	(*NatsInitialData)(nil),          // 10: plugnmeet.NatsInitialData
-	(*NatsSystemNotification)(nil),   // 11: plugnmeet.NatsSystemNotification
-	(*NatsUserMetadataUpdate)(nil),   // 12: plugnmeet.NatsUserMetadataUpdate
-	(*ChatMessage)(nil),              // 13: plugnmeet.ChatMessage
-	nil,                              // 14: plugnmeet.ChatMessage.TranslationsEntry
+	(*TurnCredentials)(nil),          // 9: plugnmeet.TurnCredentials
+	(*MediaServerConnInfo)(nil),      // 10: plugnmeet.MediaServerConnInfo
+	(*NatsInitialData)(nil),          // 11: plugnmeet.NatsInitialData
+	(*NatsSystemNotification)(nil),   // 12: plugnmeet.NatsSystemNotification
+	(*NatsUserMetadataUpdate)(nil),   // 13: plugnmeet.NatsUserMetadataUpdate
+	(*ChatMessage)(nil),              // 14: plugnmeet.ChatMessage
+	nil,                              // 15: plugnmeet.ChatMessage.TranslationsEntry
 }
 var file_plugnmeet_nats_msg_proto_depIdxs = []int32{
 	0,  // 0: plugnmeet.NatsMsgServerToClient.event:type_name -> plugnmeet.NatsMsgServerToClientEvents
 	1,  // 1: plugnmeet.NatsMsgClientToServer.event:type_name -> plugnmeet.NatsMsgClientToServerEvents
-	7,  // 2: plugnmeet.NatsInitialData.room:type_name -> plugnmeet.NatsKvRoomInfo
-	8,  // 3: plugnmeet.NatsInitialData.local_user:type_name -> plugnmeet.NatsKvUserInfo
-	2,  // 4: plugnmeet.NatsSystemNotification.type:type_name -> plugnmeet.NatsSystemNotificationTypes
-	14, // 5: plugnmeet.ChatMessage.translations:type_name -> plugnmeet.ChatMessage.TranslationsEntry
-	6,  // [6:6] is the sub-list for method output_type
-	6,  // [6:6] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	9,  // 2: plugnmeet.MediaServerConnInfo.turn_credentials:type_name -> plugnmeet.TurnCredentials
+	7,  // 3: plugnmeet.NatsInitialData.room:type_name -> plugnmeet.NatsKvRoomInfo
+	8,  // 4: plugnmeet.NatsInitialData.local_user:type_name -> plugnmeet.NatsKvUserInfo
+	2,  // 5: plugnmeet.NatsSystemNotification.type:type_name -> plugnmeet.NatsSystemNotificationTypes
+	15, // 6: plugnmeet.ChatMessage.translations:type_name -> plugnmeet.ChatMessage.TranslationsEntry
+	7,  // [7:7] is the sub-list for method output_type
+	7,  // [7:7] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_nats_msg_proto_init() }
@@ -1291,14 +1377,15 @@ func file_plugnmeet_nats_msg_proto_init() {
 	if File_plugnmeet_nats_msg_proto != nil {
 		return
 	}
-	file_plugnmeet_nats_msg_proto_msgTypes[10].OneofWrappers = []any{}
+	file_plugnmeet_nats_msg_proto_msgTypes[7].OneofWrappers = []any{}
+	file_plugnmeet_nats_msg_proto_msgTypes[11].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_nats_msg_proto_rawDesc), len(file_plugnmeet_nats_msg_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   12,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -107,10 +107,18 @@ message NatsKvUserInfo {
   uint64 disconnected_at = 10;
 }
 
+message TurnCredentials {
+  string username = 1;
+  string password = 2;
+  repeated string uris = 3;
+  bool force_turn = 4;
+}
+
 message MediaServerConnInfo {
   string url = 1;
   string token = 2;
   bool enabled_e2ee = 3;
+  optional TurnCredentials turn_credentials = 4;
 }
 
 message NatsInitialData {
