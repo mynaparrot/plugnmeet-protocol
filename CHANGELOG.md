@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.2.2](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.2.1...v1.2.2) (2026-02-17)
+
+
+### Bug Fixes
+
+* added option ([e72444d](https://github.com/mynaparrot/plugnmeet-protocol/commit/e72444dfabd851ee708c8a3923631f55053e3610))
+* added option `fallback_timer_duration` ([20a8917](https://github.com/mynaparrot/plugnmeet-protocol/commit/20a8917641ffd0453ee0bbd82833dfaa593c149c))
+* added pong ([cc85685](https://github.com/mynaparrot/plugnmeet-protocol/commit/cc856852dad1cbcee6a1d9cb0b1b73f38d53fa42))
+* deps update ([adcf6ca](https://github.com/mynaparrot/plugnmeet-protocol/commit/adcf6ca1c8b9b3090b790dd5f6593b61f5ef782a))
+* **deps:** update module github.com/nats-io/nkeys to v0.4.15 ([0afa376](https://github.com/mynaparrot/plugnmeet-protocol/commit/0afa3765f02a8959e220b6d3ffc70a5befa27504))
+* **deps:** update module github.com/nats-io/nkeys to v0.4.15 ([4c099b7](https://github.com/mynaparrot/plugnmeet-protocol/commit/4c099b78a5474357745e2ea06a35abeb7298bf33))
+* **feat:** option to configure custom turn servers ([aa92a14](https://github.com/mynaparrot/plugnmeet-protocol/commit/aa92a14682e42a0cf0056456136f914ca4b2a92d))
+* option to deliver private messages ([3727f9a](https://github.com/mynaparrot/plugnmeet-protocol/commit/3727f9a7d80e5e60eb47f3c6be74765be476240d))
+
 ## [1.2.1](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.2.0...v1.2.1) (2026-01-29)
 
 
