@@ -112,6 +112,7 @@ message TurnCredentials {
   string password = 2;
   repeated string uris = 3;
   bool force_turn = 4;
+  bool fallback_turn = 5;
 }
 
 message MediaServerConnInfo {

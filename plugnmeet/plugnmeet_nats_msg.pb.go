@@ -757,6 +757,7 @@ type TurnCredentials struct {
 	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	Uris          []string               `protobuf:"bytes,3,rep,name=uris,proto3" json:"uris,omitempty"`
 	ForceTurn     bool                   `protobuf:"varint,4,opt,name=force_turn,json=forceTurn,proto3" json:"force_turn,omitempty"`
+	FallbackTurn  bool                   `protobuf:"varint,5,opt,name=fallback_turn,json=fallbackTurn,proto3" json:"fallback_turn,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -815,6 +816,13 @@ func (x *TurnCredentials) GetUris() []string {
 func (x *TurnCredentials) GetForceTurn() bool {
 	if x != nil {
 		return x.ForceTurn
+	}
+	return false
+}
+
+func (x *TurnCredentials) GetFallbackTurn() bool {
+	if x != nil {
+		return x.FallbackTurn
 	}
 	return false
 }
@@ -1234,13 +1242,14 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\tjoined_at\x18\b \x01(\x04R\bjoinedAt\x12%\n" +
 	"\x0ereconnected_at\x18\t \x01(\x04R\rreconnectedAt\x12'\n" +
 	"\x0fdisconnected_at\x18\n" +
-	" \x01(\x04R\x0edisconnectedAt\"|\n" +
+	" \x01(\x04R\x0edisconnectedAt\"\xa1\x01\n" +
 	"\x0fTurnCredentials\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x12\n" +
 	"\x04uris\x18\x03 \x03(\tR\x04uris\x12\x1d\n" +
 	"\n" +
-	"force_turn\x18\x04 \x01(\bR\tforceTurn\"\xc1\x01\n" +
+	"force_turn\x18\x04 \x01(\bR\tforceTurn\x12#\n" +
+	"\rfallback_turn\x18\x05 \x01(\bR\ffallbackTurn\"\xc1\x01\n" +
 	"\x13MediaServerConnInfo\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12!\n" +
