@@ -742,6 +742,8 @@ func (m *TurnCredentials) validate(all bool) error {
 
 	// no validation rules for FallbackTurn
 
+	// no validation rules for FallbackTimerDuration
+
 	if len(errors) > 0 {
 		return TurnCredentialsMultiError(errors)
 	}

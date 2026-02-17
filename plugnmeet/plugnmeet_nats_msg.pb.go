@@ -752,14 +752,16 @@ func (x *NatsKvUserInfo) GetDisconnectedAt() uint64 {
 }
 
 type TurnCredentials struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
-	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
-	Uris          []string               `protobuf:"bytes,3,rep,name=uris,proto3" json:"uris,omitempty"`
-	ForceTurn     bool                   `protobuf:"varint,4,opt,name=force_turn,json=forceTurn,proto3" json:"force_turn,omitempty"`
-	FallbackTurn  bool                   `protobuf:"varint,5,opt,name=fallback_turn,json=fallbackTurn,proto3" json:"fallback_turn,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	Username     string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Password     string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	Uris         []string               `protobuf:"bytes,3,rep,name=uris,proto3" json:"uris,omitempty"`
+	ForceTurn    bool                   `protobuf:"varint,4,opt,name=force_turn,json=forceTurn,proto3" json:"force_turn,omitempty"`
+	FallbackTurn bool                   `protobuf:"varint,5,opt,name=fallback_turn,json=fallbackTurn,proto3" json:"fallback_turn,omitempty"`
+	// The duration in MILLISECONDS to wait with a poor connection before triggering the fallback.
+	FallbackTimerDuration int64 `protobuf:"varint,6,opt,name=fallback_timer_duration,json=fallbackTimerDuration,proto3" json:"fallback_timer_duration,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *TurnCredentials) Reset() {
@@ -825,6 +827,13 @@ func (x *TurnCredentials) GetFallbackTurn() bool {
 		return x.FallbackTurn
 	}
 	return false
+}
+
+func (x *TurnCredentials) GetFallbackTimerDuration() int64 {
+	if x != nil {
+		return x.FallbackTimerDuration
+	}
+	return 0
 }
 
 type MediaServerConnInfo struct {
@@ -1242,14 +1251,15 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\tjoined_at\x18\b \x01(\x04R\bjoinedAt\x12%\n" +
 	"\x0ereconnected_at\x18\t \x01(\x04R\rreconnectedAt\x12'\n" +
 	"\x0fdisconnected_at\x18\n" +
-	" \x01(\x04R\x0edisconnectedAt\"\xa1\x01\n" +
+	" \x01(\x04R\x0edisconnectedAt\"\xd9\x01\n" +
 	"\x0fTurnCredentials\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x12\n" +
 	"\x04uris\x18\x03 \x03(\tR\x04uris\x12\x1d\n" +
 	"\n" +
 	"force_turn\x18\x04 \x01(\bR\tforceTurn\x12#\n" +
-	"\rfallback_turn\x18\x05 \x01(\bR\ffallbackTurn\"\xc1\x01\n" +
+	"\rfallback_turn\x18\x05 \x01(\bR\ffallbackTurn\x126\n" +
+	"\x17fallback_timer_duration\x18\x06 \x01(\x03R\x15fallbackTimerDuration\"\xc1\x01\n" +
 	"\x13MediaServerConnInfo\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12!\n" +
