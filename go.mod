@@ -9,7 +9,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.52.12
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-retryablehttp v0.7.8
-	github.com/livekit/protocol v1.44.1-0.20260223055551-e05f7b7a6146
+	github.com/livekit/protocol v1.45.1
 	github.com/nats-io/nats.go v1.49.0
 	github.com/nats-io/nkeys v0.4.15
 	github.com/sirupsen/logrus v1.9.4
