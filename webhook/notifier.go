@@ -143,7 +143,6 @@ func (n *Notifier) sendWebhookRequest(event *plugnmeet.CommonNotifyEvent, apiKey
 	}
 
 	if err != nil {
-		l.WithError(err).Error("Failed to send request")
 		return statusCode, err
 	}
 
