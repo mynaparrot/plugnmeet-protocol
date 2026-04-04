@@ -39,7 +39,7 @@ type Notifier struct {
 	logger *logrus.Entry
 }
 
-func NewNotifier(ctx context.Context, queueSize int, logger *logrus.Logger) *Notifier {
+func NewNotifier(ctx context.Context, queueSize int, logger *logrus.Entry) *Notifier {
 	loggerEntry := logger.WithField("component", "webhook-notifier")
 	w := &Notifier{
 		logger: loggerEntry,
@@ -56,19 +56,18 @@ func (n *Notifier) AddInNotifyQueue(event *plugnmeet.CommonNotifyEvent, apiKey, 
 
 	for _, u := range urls {
 		n.worker.Submit(func() {
-			logFields := logrus.Fields{
+			l := n.logger.WithFields(logrus.Fields{
 				"url":   u,
 				"event": event.GetEvent(),
 				"room":  event.GetRoom().GetRoomId(),
 				"sid":   event.GetRoom().GetSid(),
-			}
+			})
 
-			statusCode, err := n.sendWebhookRequest(event, apiKey, apiSecret, u)
+			statusCode, err := n.sendWebhookRequest(event, apiKey, apiSecret, u, l)
 			if err != nil {
-				n.logger.WithFields(logFields).WithError(err).Error("failed to send webhook")
+				l.WithError(err).Error("Failed to send webhook")
 			} else {
-				logFields["http_status_code"] = statusCode
-				n.logger.WithFields(logFields).Info("webhook sent successfully")
+				l.WithField("http_status_code", statusCode).Infof("Successfully sent webhook with status code %d", statusCode)
 			}
 		})
 	}
@@ -89,7 +88,7 @@ func (n *Notifier) Kill() {
 }
 
 // sendWebhookRequest sends a single webhook event synchronously.
-func (n *Notifier) sendWebhookRequest(event *plugnmeet.CommonNotifyEvent, apiKey, apiSecret, url string) (int, error) {
+func (n *Notifier) sendWebhookRequest(event *plugnmeet.CommonNotifyEvent, apiKey, apiSecret, url string, l *logrus.Entry) (int, error) {
 	op := protojson.MarshalOptions{
 		EmitUnpopulated: false,
 		UseProtoNames:   true,
@@ -109,6 +108,7 @@ func (n *Notifier) sendWebhookRequest(event *plugnmeet.CommonNotifyEvent, apiKey
 
 	encoded, err := op.Marshal(event)
 	if err != nil {
+		l.WithError(err).Error("Failed to marshal event")
 		return 0, err
 	}
 	// sign payload
@@ -120,11 +120,13 @@ func (n *Notifier) sendWebhookRequest(event *plugnmeet.CommonNotifyEvent, apiKey
 		SetSha256(b64)
 	token, err := at.ToJWT()
 	if err != nil {
+		l.WithError(err).Error("Failed to generate token")
 		return 0, err
 	}
 
 	r, err := retryablehttp.NewRequest("POST", url, bytes.NewReader(encoded))
 	if err != nil {
+		l.WithError(err).Error("Failed to create request")
 		return 0, err
 	}
 	r.Header.Set(authHeader, token)
@@ -141,6 +143,7 @@ func (n *Notifier) sendWebhookRequest(event *plugnmeet.CommonNotifyEvent, apiKey
 	}
 
 	if err != nil {
+		l.WithError(err).Error("Failed to send request")
 		return statusCode, err
 	}
 

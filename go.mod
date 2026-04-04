@@ -4,8 +4,8 @@ go 1.25.7
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260209202127-80ab13bee0bf.1
-	github.com/DeRuina/timberjack v1.4.0
-	github.com/go-jose/go-jose/v4 v4.1.3
+	github.com/DeRuina/timberjack v1.4.1
+	github.com/go-jose/go-jose/v4 v4.1.4
 	github.com/gofiber/fiber/v2 v2.52.12
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-retryablehttp v0.7.8
