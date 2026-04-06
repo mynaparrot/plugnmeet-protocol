@@ -4,11 +4,14 @@ import (
 	"bytes"
 	"context"
 	"crypto/sha256"
+	"crypto/tls"
 	"encoding/base64"
 	"io"
+	"net/http"
 	"strings"
 	"time"
 
+	"github.com/gammazero/workerpool"
 	"github.com/google/uuid"
 	"github.com/hashicorp/go-retryablehttp"
 	"github.com/livekit/protocol/auth"
@@ -19,31 +22,37 @@ import (
 
 const (
 	authHeader = "Authorization"
-	// in various Apache modules will strip the Authorization header,
-	// so we'll use additional one
-	hashToken = "Hash-Token"
-	maxRetry  = 2 // retryablehttp will use maxRetry + 1
+	hashToken  = "Hash-Token"
 )
 
-// sharedClient is a reusable HTTP client for all webhook requests.
-var sharedClient *retryablehttp.Client
-
-func init() {
-	sharedClient = retryablehttp.NewClient()
-	sharedClient.Logger = nil
-	sharedClient.RetryMax = maxRetry
-}
-
 type Notifier struct {
-	worker *SimpleQueueWorker
+	wp     *workerpool.WorkerPool
 	logger *logrus.Entry
+	ctx    context.Context
+	cancel context.CancelFunc
+	client *retryablehttp.Client
 }
 
-func NewNotifier(ctx context.Context, queueSize int, logger *logrus.Entry) *Notifier {
+// NewNotifier creates a new Notifier with a specified worker count and max retry attempts.
+func NewNotifier(ctx context.Context, workerCount int, maxRetry int, logger *logrus.Entry) *Notifier {
+	client := retryablehttp.NewClient()
+	client.Logger = nil
+	client.RetryMax = maxRetry
+	// Create custom transport with InsecureSkipVerify
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	client.HTTPClient.Transport = tr
+
+	ctx, cancel := context.WithCancel(ctx)
 	loggerEntry := logger.WithField("component", "webhook-notifier")
+
 	w := &Notifier{
+		wp:     workerpool.New(workerCount),
 		logger: loggerEntry,
-		worker: NewSimpleQueueWorker(ctx, queueSize, loggerEntry.WithField("sub-component", "queue-worker")),
+		ctx:    ctx,
+		cancel: cancel,
+		client: client,
 	}
 
 	return w
@@ -55,15 +64,16 @@ func (n *Notifier) AddInNotifyQueue(event *plugnmeet.CommonNotifyEvent, apiKey, 
 	}
 
 	for _, u := range urls {
-		n.worker.Submit(func() {
+		url := u // create a new variable for the closure
+		n.wp.Submit(func() {
 			l := n.logger.WithFields(logrus.Fields{
-				"url":   u,
+				"url":   url,
 				"event": event.GetEvent(),
 				"room":  event.GetRoom().GetRoomId(),
 				"sid":   event.GetRoom().GetSid(),
 			})
 
-			statusCode, err := n.sendWebhookRequest(event, apiKey, apiSecret, u, l)
+			statusCode, err := n.sendWebhookRequest(event, apiKey, apiSecret, url, l)
 			if err != nil {
 				l.WithError(err).Error("Failed to send webhook")
 			} else {
@@ -75,16 +85,18 @@ func (n *Notifier) AddInNotifyQueue(event *plugnmeet.CommonNotifyEvent, apiKey, 
 
 // StopGracefully waits for all queued items to be processed before stopping.
 func (n *Notifier) StopGracefully() {
-	if n.worker != nil {
-		n.worker.StopGracefully()
+	if n.wp != nil {
+		n.wp.StopWait()
 	}
+	n.cancel()
 }
 
 // Kill stops the worker immediately, dropping any unprocessed items in the queue.
 func (n *Notifier) Kill() {
-	if n.worker != nil {
-		n.worker.Kill()
+	if n.wp != nil {
+		n.wp.Stop()
 	}
+	n.cancel()
 }
 
 // sendWebhookRequest sends a single webhook event synchronously.
@@ -124,7 +136,7 @@ func (n *Notifier) sendWebhookRequest(event *plugnmeet.CommonNotifyEvent, apiKey
 		return 0, err
 	}
 
-	r, err := retryablehttp.NewRequest("POST", url, bytes.NewReader(encoded))
+	r, err := retryablehttp.NewRequestWithContext(n.ctx, "POST", url, bytes.NewReader(encoded))
 	if err != nil {
 		l.WithError(err).Error("Failed to create request")
 		return 0, err
@@ -133,7 +145,7 @@ func (n *Notifier) sendWebhookRequest(event *plugnmeet.CommonNotifyEvent, apiKey
 	r.Header.Set(hashToken, token)
 	r.Header.Set("content-type", "application/webhook+json")
 
-	res, err := sharedClient.Do(r)
+	res, err := n.client.Do(r)
 	statusCode := 0
 	if res != nil {
 		statusCode = res.StatusCode
