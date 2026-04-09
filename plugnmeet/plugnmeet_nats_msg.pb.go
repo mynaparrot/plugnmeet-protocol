@@ -248,16 +248,17 @@ func (NatsSystemNotificationTypes) EnumDescriptor() ([]byte, []int) {
 }
 
 type NatsSubjects struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	SystemApiWorker string                 `protobuf:"bytes,1,opt,name=system_api_worker,json=systemApiWorker,proto3" json:"system_api_worker,omitempty"`
-	SystemJsWorker  string                 `protobuf:"bytes,2,opt,name=system_js_worker,json=systemJsWorker,proto3" json:"system_js_worker,omitempty"`
-	SystemPublic    string                 `protobuf:"bytes,3,opt,name=system_public,json=systemPublic,proto3" json:"system_public,omitempty"`
-	SystemPrivate   string                 `protobuf:"bytes,4,opt,name=system_private,json=systemPrivate,proto3" json:"system_private,omitempty"`
-	Chat            string                 `protobuf:"bytes,5,opt,name=chat,proto3" json:"chat,omitempty"`
-	Whiteboard      string                 `protobuf:"bytes,6,opt,name=whiteboard,proto3" json:"whiteboard,omitempty"`
-	DataChannel     string                 `protobuf:"bytes,7,opt,name=data_channel,json=dataChannel,proto3" json:"data_channel,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	SystemApiWorker  string                 `protobuf:"bytes,1,opt,name=system_api_worker,json=systemApiWorker,proto3" json:"system_api_worker,omitempty"`
+	SystemJsWorker   string                 `protobuf:"bytes,2,opt,name=system_js_worker,json=systemJsWorker,proto3" json:"system_js_worker,omitempty"`       // jetstream worker
+	SystemCoreWorker string                 `protobuf:"bytes,3,opt,name=system_core_worker,json=systemCoreWorker,proto3" json:"system_core_worker,omitempty"` // core pub/sub worker
+	SystemPublic     string                 `protobuf:"bytes,4,opt,name=system_public,json=systemPublic,proto3" json:"system_public,omitempty"`
+	SystemPrivate    string                 `protobuf:"bytes,5,opt,name=system_private,json=systemPrivate,proto3" json:"system_private,omitempty"`
+	Chat             string                 `protobuf:"bytes,6,opt,name=chat,proto3" json:"chat,omitempty"`
+	Whiteboard       string                 `protobuf:"bytes,7,opt,name=whiteboard,proto3" json:"whiteboard,omitempty"`
+	DataChannel      string                 `protobuf:"bytes,8,opt,name=data_channel,json=dataChannel,proto3" json:"data_channel,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *NatsSubjects) Reset() {
@@ -300,6 +301,13 @@ func (x *NatsSubjects) GetSystemApiWorker() string {
 func (x *NatsSubjects) GetSystemJsWorker() string {
 	if x != nil {
 		return x.SystemJsWorker
+	}
+	return ""
+}
+
+func (x *NatsSubjects) GetSystemCoreWorker() string {
+	if x != nil {
+		return x.SystemCoreWorker
 	}
 	return ""
 }
@@ -1204,17 +1212,18 @@ var File_plugnmeet_nats_msg_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\n" +
-	"\x18plugnmeet_nats_msg.proto\x12\tplugnmeet\"\x87\x02\n" +
+	"\x18plugnmeet_nats_msg.proto\x12\tplugnmeet\"\xb5\x02\n" +
 	"\fNatsSubjects\x12*\n" +
 	"\x11system_api_worker\x18\x01 \x01(\tR\x0fsystemApiWorker\x12(\n" +
-	"\x10system_js_worker\x18\x02 \x01(\tR\x0esystemJsWorker\x12#\n" +
-	"\rsystem_public\x18\x03 \x01(\tR\fsystemPublic\x12%\n" +
-	"\x0esystem_private\x18\x04 \x01(\tR\rsystemPrivate\x12\x12\n" +
-	"\x04chat\x18\x05 \x01(\tR\x04chat\x12\x1e\n" +
+	"\x10system_js_worker\x18\x02 \x01(\tR\x0esystemJsWorker\x12,\n" +
+	"\x12system_core_worker\x18\x03 \x01(\tR\x10systemCoreWorker\x12#\n" +
+	"\rsystem_public\x18\x04 \x01(\tR\fsystemPublic\x12%\n" +
+	"\x0esystem_private\x18\x05 \x01(\tR\rsystemPrivate\x12\x12\n" +
+	"\x04chat\x18\x06 \x01(\tR\x04chat\x12\x1e\n" +
 	"\n" +
-	"whiteboard\x18\x06 \x01(\tR\n" +
+	"whiteboard\x18\a \x01(\tR\n" +
 	"whiteboard\x12!\n" +
-	"\fdata_channel\x18\a \x01(\tR\vdataChannel\"m\n" +
+	"\fdata_channel\x18\b \x01(\tR\vdataChannel\"m\n" +
 	"\x13PrivateDataDelivery\x12\x1c\n" +
 	"\n" +
 	"to_user_id\x18\x01 \x01(\tR\btoUserId\x12$\n" +

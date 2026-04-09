@@ -61,6 +61,8 @@ func (m *NatsSubjects) validate(all bool) error {
 
 	// no validation rules for SystemJsWorker
 
+	// no validation rules for SystemCoreWorker
+
 	// no validation rules for SystemPublic
 
 	// no validation rules for SystemPrivate
