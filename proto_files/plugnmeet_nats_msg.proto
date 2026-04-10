@@ -122,7 +122,7 @@ message TurnCredentials {
   repeated string uris = 3;
   bool force_turn = 4;
   bool fallback_turn = 5;
-  // The duration in MILLISECONDS to wait with a poor connection before triggering the fallback.
+  // The duration in Seconds to wait with a poor connection before triggering the fallback.
   int64 fallback_timer_duration = 6;
   optional FallbackOnFlapping fallback_on_flapping = 7;
 }
