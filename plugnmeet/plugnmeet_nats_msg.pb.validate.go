@@ -714,6 +714,114 @@ var _ interface {
 	ErrorName() string
 } = NatsKvUserInfoValidationError{}
 
+// Validate checks the field values on FallbackOnFlapping with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *FallbackOnFlapping) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on FallbackOnFlapping with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// FallbackOnFlappingMultiError, or nil if none found.
+func (m *FallbackOnFlapping) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *FallbackOnFlapping) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Enabled
+
+	// no validation rules for MaxPoorConnCount
+
+	// no validation rules for CheckDurationInSec
+
+	if len(errors) > 0 {
+		return FallbackOnFlappingMultiError(errors)
+	}
+
+	return nil
+}
+
+// FallbackOnFlappingMultiError is an error wrapping multiple validation errors
+// returned by FallbackOnFlapping.ValidateAll() if the designated constraints
+// aren't met.
+type FallbackOnFlappingMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m FallbackOnFlappingMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m FallbackOnFlappingMultiError) AllErrors() []error { return m }
+
+// FallbackOnFlappingValidationError is the validation error returned by
+// FallbackOnFlapping.Validate if the designated constraints aren't met.
+type FallbackOnFlappingValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e FallbackOnFlappingValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e FallbackOnFlappingValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e FallbackOnFlappingValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e FallbackOnFlappingValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e FallbackOnFlappingValidationError) ErrorName() string {
+	return "FallbackOnFlappingValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e FallbackOnFlappingValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sFallbackOnFlapping.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = FallbackOnFlappingValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = FallbackOnFlappingValidationError{}
+
 // Validate checks the field values on TurnCredentials with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -745,6 +853,39 @@ func (m *TurnCredentials) validate(all bool) error {
 	// no validation rules for FallbackTurn
 
 	// no validation rules for FallbackTimerDuration
+
+	if m.FallbackOnFlapping != nil {
+
+		if all {
+			switch v := interface{}(m.GetFallbackOnFlapping()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, TurnCredentialsValidationError{
+						field:  "FallbackOnFlapping",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, TurnCredentialsValidationError{
+						field:  "FallbackOnFlapping",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetFallbackOnFlapping()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return TurnCredentialsValidationError{
+					field:  "FallbackOnFlapping",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return TurnCredentialsMultiError(errors)

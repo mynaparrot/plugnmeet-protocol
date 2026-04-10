@@ -108,6 +108,14 @@ message NatsKvUserInfo {
   uint64 disconnected_at = 10;
 }
 
+message FallbackOnFlapping {
+  bool enabled = 1;
+  // max number of times connection can be poor
+  int32 max_poor_conn_count = 2;
+  // duration in seconds to check for poor connections
+  int32 check_duration_in_sec = 3;
+}
+
 message TurnCredentials {
   string username = 1;
   string password = 2;
@@ -116,6 +124,7 @@ message TurnCredentials {
   bool fallback_turn = 5;
   // The duration in MILLISECONDS to wait with a poor connection before triggering the fallback.
   int64 fallback_timer_duration = 6;
+  optional FallbackOnFlapping fallback_on_flapping = 7;
 }
 
 message MediaServerConnInfo {

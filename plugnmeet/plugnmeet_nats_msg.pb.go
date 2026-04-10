@@ -759,6 +759,68 @@ func (x *NatsKvUserInfo) GetDisconnectedAt() uint64 {
 	return 0
 }
 
+type FallbackOnFlapping struct {
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Enabled bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// max number of times connection can be poor
+	MaxPoorConnCount int32 `protobuf:"varint,2,opt,name=max_poor_conn_count,json=maxPoorConnCount,proto3" json:"max_poor_conn_count,omitempty"`
+	// duration in seconds to check for poor connections
+	CheckDurationInSec int32 `protobuf:"varint,3,opt,name=check_duration_in_sec,json=checkDurationInSec,proto3" json:"check_duration_in_sec,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *FallbackOnFlapping) Reset() {
+	*x = FallbackOnFlapping{}
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FallbackOnFlapping) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FallbackOnFlapping) ProtoMessage() {}
+
+func (x *FallbackOnFlapping) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FallbackOnFlapping.ProtoReflect.Descriptor instead.
+func (*FallbackOnFlapping) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *FallbackOnFlapping) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *FallbackOnFlapping) GetMaxPoorConnCount() int32 {
+	if x != nil {
+		return x.MaxPoorConnCount
+	}
+	return 0
+}
+
+func (x *FallbackOnFlapping) GetCheckDurationInSec() int32 {
+	if x != nil {
+		return x.CheckDurationInSec
+	}
+	return 0
+}
+
 type TurnCredentials struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
 	Username     string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
@@ -767,14 +829,15 @@ type TurnCredentials struct {
 	ForceTurn    bool                   `protobuf:"varint,4,opt,name=force_turn,json=forceTurn,proto3" json:"force_turn,omitempty"`
 	FallbackTurn bool                   `protobuf:"varint,5,opt,name=fallback_turn,json=fallbackTurn,proto3" json:"fallback_turn,omitempty"`
 	// The duration in MILLISECONDS to wait with a poor connection before triggering the fallback.
-	FallbackTimerDuration int64 `protobuf:"varint,6,opt,name=fallback_timer_duration,json=fallbackTimerDuration,proto3" json:"fallback_timer_duration,omitempty"`
+	FallbackTimerDuration int64               `protobuf:"varint,6,opt,name=fallback_timer_duration,json=fallbackTimerDuration,proto3" json:"fallback_timer_duration,omitempty"`
+	FallbackOnFlapping    *FallbackOnFlapping `protobuf:"bytes,7,opt,name=fallback_on_flapping,json=fallbackOnFlapping,proto3,oneof" json:"fallback_on_flapping,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
 func (x *TurnCredentials) Reset() {
 	*x = TurnCredentials{}
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[6]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -786,7 +849,7 @@ func (x *TurnCredentials) String() string {
 func (*TurnCredentials) ProtoMessage() {}
 
 func (x *TurnCredentials) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[6]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -799,7 +862,7 @@ func (x *TurnCredentials) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TurnCredentials.ProtoReflect.Descriptor instead.
 func (*TurnCredentials) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{6}
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *TurnCredentials) GetUsername() string {
@@ -844,6 +907,13 @@ func (x *TurnCredentials) GetFallbackTimerDuration() int64 {
 	return 0
 }
 
+func (x *TurnCredentials) GetFallbackOnFlapping() *FallbackOnFlapping {
+	if x != nil {
+		return x.FallbackOnFlapping
+	}
+	return nil
+}
+
 type MediaServerConnInfo struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Url             string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
@@ -856,7 +926,7 @@ type MediaServerConnInfo struct {
 
 func (x *MediaServerConnInfo) Reset() {
 	*x = MediaServerConnInfo{}
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[7]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -868,7 +938,7 @@ func (x *MediaServerConnInfo) String() string {
 func (*MediaServerConnInfo) ProtoMessage() {}
 
 func (x *MediaServerConnInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[7]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -881,7 +951,7 @@ func (x *MediaServerConnInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MediaServerConnInfo.ProtoReflect.Descriptor instead.
 func (*MediaServerConnInfo) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{7}
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *MediaServerConnInfo) GetUrl() string {
@@ -922,7 +992,7 @@ type NatsInitialData struct {
 
 func (x *NatsInitialData) Reset() {
 	*x = NatsInitialData{}
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[8]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -934,7 +1004,7 @@ func (x *NatsInitialData) String() string {
 func (*NatsInitialData) ProtoMessage() {}
 
 func (x *NatsInitialData) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[8]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -947,7 +1017,7 @@ func (x *NatsInitialData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NatsInitialData.ProtoReflect.Descriptor instead.
 func (*NatsInitialData) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{8}
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *NatsInitialData) GetRoom() *NatsKvRoomInfo {
@@ -977,7 +1047,7 @@ type NatsSystemNotification struct {
 
 func (x *NatsSystemNotification) Reset() {
 	*x = NatsSystemNotification{}
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[9]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -989,7 +1059,7 @@ func (x *NatsSystemNotification) String() string {
 func (*NatsSystemNotification) ProtoMessage() {}
 
 func (x *NatsSystemNotification) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[9]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1002,7 +1072,7 @@ func (x *NatsSystemNotification) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NatsSystemNotification.ProtoReflect.Descriptor instead.
 func (*NatsSystemNotification) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{9}
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *NatsSystemNotification) GetId() string {
@@ -1050,7 +1120,7 @@ type NatsUserMetadataUpdate struct {
 
 func (x *NatsUserMetadataUpdate) Reset() {
 	*x = NatsUserMetadataUpdate{}
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[10]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1062,7 +1132,7 @@ func (x *NatsUserMetadataUpdate) String() string {
 func (*NatsUserMetadataUpdate) ProtoMessage() {}
 
 func (x *NatsUserMetadataUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[10]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1075,7 +1145,7 @@ func (x *NatsUserMetadataUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NatsUserMetadataUpdate.ProtoReflect.Descriptor instead.
 func (*NatsUserMetadataUpdate) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{10}
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *NatsUserMetadataUpdate) GetUserId() string {
@@ -1110,7 +1180,7 @@ type ChatMessage struct {
 
 func (x *ChatMessage) Reset() {
 	*x = ChatMessage{}
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[11]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1122,7 +1192,7 @@ func (x *ChatMessage) String() string {
 func (*ChatMessage) ProtoMessage() {}
 
 func (x *ChatMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[11]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1135,7 +1205,7 @@ func (x *ChatMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChatMessage.ProtoReflect.Descriptor instead.
 func (*ChatMessage) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{11}
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ChatMessage) GetId() string {
@@ -1260,7 +1330,11 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\tjoined_at\x18\b \x01(\x04R\bjoinedAt\x12%\n" +
 	"\x0ereconnected_at\x18\t \x01(\x04R\rreconnectedAt\x12'\n" +
 	"\x0fdisconnected_at\x18\n" +
-	" \x01(\x04R\x0edisconnectedAt\"\xd9\x01\n" +
+	" \x01(\x04R\x0edisconnectedAt\"\x90\x01\n" +
+	"\x12FallbackOnFlapping\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12-\n" +
+	"\x13max_poor_conn_count\x18\x02 \x01(\x05R\x10maxPoorConnCount\x121\n" +
+	"\x15check_duration_in_sec\x18\x03 \x01(\x05R\x12checkDurationInSec\"\xc8\x02\n" +
 	"\x0fTurnCredentials\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x12\n" +
@@ -1268,7 +1342,9 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\n" +
 	"force_turn\x18\x04 \x01(\bR\tforceTurn\x12#\n" +
 	"\rfallback_turn\x18\x05 \x01(\bR\ffallbackTurn\x126\n" +
-	"\x17fallback_timer_duration\x18\x06 \x01(\x03R\x15fallbackTimerDuration\"\xc1\x01\n" +
+	"\x17fallback_timer_duration\x18\x06 \x01(\x03R\x15fallbackTimerDuration\x12T\n" +
+	"\x14fallback_on_flapping\x18\a \x01(\v2\x1d.plugnmeet.FallbackOnFlappingH\x00R\x12fallbackOnFlapping\x88\x01\x01B\x17\n" +
+	"\x15_fallback_on_flapping\"\xc1\x01\n" +
 	"\x13MediaServerConnInfo\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12!\n" +
@@ -1366,7 +1442,7 @@ func file_plugnmeet_nats_msg_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_nats_msg_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_plugnmeet_nats_msg_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_plugnmeet_nats_msg_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_plugnmeet_nats_msg_proto_goTypes = []any{
 	(NatsMsgServerToClientEvents)(0), // 0: plugnmeet.NatsMsgServerToClientEvents
 	(NatsMsgClientToServerEvents)(0), // 1: plugnmeet.NatsMsgClientToServerEvents
@@ -1377,27 +1453,29 @@ var file_plugnmeet_nats_msg_proto_goTypes = []any{
 	(*NatsMsgClientToServer)(nil),    // 6: plugnmeet.NatsMsgClientToServer
 	(*NatsKvRoomInfo)(nil),           // 7: plugnmeet.NatsKvRoomInfo
 	(*NatsKvUserInfo)(nil),           // 8: plugnmeet.NatsKvUserInfo
-	(*TurnCredentials)(nil),          // 9: plugnmeet.TurnCredentials
-	(*MediaServerConnInfo)(nil),      // 10: plugnmeet.MediaServerConnInfo
-	(*NatsInitialData)(nil),          // 11: plugnmeet.NatsInitialData
-	(*NatsSystemNotification)(nil),   // 12: plugnmeet.NatsSystemNotification
-	(*NatsUserMetadataUpdate)(nil),   // 13: plugnmeet.NatsUserMetadataUpdate
-	(*ChatMessage)(nil),              // 14: plugnmeet.ChatMessage
-	nil,                              // 15: plugnmeet.ChatMessage.TranslationsEntry
+	(*FallbackOnFlapping)(nil),       // 9: plugnmeet.FallbackOnFlapping
+	(*TurnCredentials)(nil),          // 10: plugnmeet.TurnCredentials
+	(*MediaServerConnInfo)(nil),      // 11: plugnmeet.MediaServerConnInfo
+	(*NatsInitialData)(nil),          // 12: plugnmeet.NatsInitialData
+	(*NatsSystemNotification)(nil),   // 13: plugnmeet.NatsSystemNotification
+	(*NatsUserMetadataUpdate)(nil),   // 14: plugnmeet.NatsUserMetadataUpdate
+	(*ChatMessage)(nil),              // 15: plugnmeet.ChatMessage
+	nil,                              // 16: plugnmeet.ChatMessage.TranslationsEntry
 }
 var file_plugnmeet_nats_msg_proto_depIdxs = []int32{
 	0,  // 0: plugnmeet.NatsMsgServerToClient.event:type_name -> plugnmeet.NatsMsgServerToClientEvents
 	1,  // 1: plugnmeet.NatsMsgClientToServer.event:type_name -> plugnmeet.NatsMsgClientToServerEvents
-	9,  // 2: plugnmeet.MediaServerConnInfo.turn_credentials:type_name -> plugnmeet.TurnCredentials
-	7,  // 3: plugnmeet.NatsInitialData.room:type_name -> plugnmeet.NatsKvRoomInfo
-	8,  // 4: plugnmeet.NatsInitialData.local_user:type_name -> plugnmeet.NatsKvUserInfo
-	2,  // 5: plugnmeet.NatsSystemNotification.type:type_name -> plugnmeet.NatsSystemNotificationTypes
-	15, // 6: plugnmeet.ChatMessage.translations:type_name -> plugnmeet.ChatMessage.TranslationsEntry
-	7,  // [7:7] is the sub-list for method output_type
-	7,  // [7:7] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	9,  // 2: plugnmeet.TurnCredentials.fallback_on_flapping:type_name -> plugnmeet.FallbackOnFlapping
+	10, // 3: plugnmeet.MediaServerConnInfo.turn_credentials:type_name -> plugnmeet.TurnCredentials
+	7,  // 4: plugnmeet.NatsInitialData.room:type_name -> plugnmeet.NatsKvRoomInfo
+	8,  // 5: plugnmeet.NatsInitialData.local_user:type_name -> plugnmeet.NatsKvUserInfo
+	2,  // 6: plugnmeet.NatsSystemNotification.type:type_name -> plugnmeet.NatsSystemNotificationTypes
+	16, // 7: plugnmeet.ChatMessage.translations:type_name -> plugnmeet.ChatMessage.TranslationsEntry
+	8,  // [8:8] is the sub-list for method output_type
+	8,  // [8:8] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_nats_msg_proto_init() }
@@ -1406,14 +1484,15 @@ func file_plugnmeet_nats_msg_proto_init() {
 		return
 	}
 	file_plugnmeet_nats_msg_proto_msgTypes[7].OneofWrappers = []any{}
-	file_plugnmeet_nats_msg_proto_msgTypes[11].OneofWrappers = []any{}
+	file_plugnmeet_nats_msg_proto_msgTypes[8].OneofWrappers = []any{}
+	file_plugnmeet_nats_msg_proto_msgTypes[12].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_nats_msg_proto_rawDesc), len(file_plugnmeet_nats_msg_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   13,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
