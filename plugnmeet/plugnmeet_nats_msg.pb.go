@@ -828,7 +828,7 @@ type TurnCredentials struct {
 	Uris         []string               `protobuf:"bytes,3,rep,name=uris,proto3" json:"uris,omitempty"`
 	ForceTurn    bool                   `protobuf:"varint,4,opt,name=force_turn,json=forceTurn,proto3" json:"force_turn,omitempty"`
 	FallbackTurn bool                   `protobuf:"varint,5,opt,name=fallback_turn,json=fallbackTurn,proto3" json:"fallback_turn,omitempty"`
-	// The duration in MILLISECONDS to wait with a poor connection before triggering the fallback.
+	// The duration in Seconds to wait with a poor connection before triggering the fallback.
 	FallbackTimerDuration int64               `protobuf:"varint,6,opt,name=fallback_timer_duration,json=fallbackTimerDuration,proto3" json:"fallback_timer_duration,omitempty"`
 	FallbackOnFlapping    *FallbackOnFlapping `protobuf:"bytes,7,opt,name=fallback_on_flapping,json=fallbackOnFlapping,proto3,oneof" json:"fallback_on_flapping,omitempty"`
 	unknownFields         protoimpl.UnknownFields
