@@ -65,7 +65,9 @@ enum RecordingTasks {
 enum RecorderInfoKeys {
   RECORDER_INFO_MAX_LIMIT = 0;
   RECORDER_INFO_LAST_PING = 1;
+  RECORDER_INFO_TOTAL_CORES = 2; // Total CPU cores
   RECORDER_INFO_CURRENT_PROGRESS = 3;
+  RECORDER_INFO_CPU_SCORE = 4;
 }
 
 enum CloudRecordingVariants {

@@ -90,7 +90,9 @@ type RecorderInfoKeys int32
 const (
 	RecorderInfoKeys_RECORDER_INFO_MAX_LIMIT        RecorderInfoKeys = 0
 	RecorderInfoKeys_RECORDER_INFO_LAST_PING        RecorderInfoKeys = 1
+	RecorderInfoKeys_RECORDER_INFO_TOTAL_CORES      RecorderInfoKeys = 2 // Total CPU cores
 	RecorderInfoKeys_RECORDER_INFO_CURRENT_PROGRESS RecorderInfoKeys = 3
+	RecorderInfoKeys_RECORDER_INFO_CPU_SCORE        RecorderInfoKeys = 4
 )
 
 // Enum value maps for RecorderInfoKeys.
@@ -98,12 +100,16 @@ var (
 	RecorderInfoKeys_name = map[int32]string{
 		0: "RECORDER_INFO_MAX_LIMIT",
 		1: "RECORDER_INFO_LAST_PING",
+		2: "RECORDER_INFO_TOTAL_CORES",
 		3: "RECORDER_INFO_CURRENT_PROGRESS",
+		4: "RECORDER_INFO_CPU_SCORE",
 	}
 	RecorderInfoKeys_value = map[string]int32{
 		"RECORDER_INFO_MAX_LIMIT":        0,
 		"RECORDER_INFO_LAST_PING":        1,
+		"RECORDER_INFO_TOTAL_CORES":      2,
 		"RECORDER_INFO_CURRENT_PROGRESS": 3,
+		"RECORDER_INFO_CPU_SCORE":        4,
 	}
 )
 
@@ -577,11 +583,13 @@ const file_plugnmeet_recorder_proto_rawDesc = "" +
 	"\rEND_RECORDING\x10\x04\x12\f\n" +
 	"\bEND_RTMP\x10\x05\x12\x17\n" +
 	"\x13RECORDING_PROCEEDED\x10\x06\x12\b\n" +
-	"\x04STOP\x10\a*p\n" +
+	"\x04STOP\x10\a*\xac\x01\n" +
 	"\x10RecorderInfoKeys\x12\x1b\n" +
 	"\x17RECORDER_INFO_MAX_LIMIT\x10\x00\x12\x1b\n" +
-	"\x17RECORDER_INFO_LAST_PING\x10\x01\x12\"\n" +
-	"\x1eRECORDER_INFO_CURRENT_PROGRESS\x10\x03*Y\n" +
+	"\x17RECORDER_INFO_LAST_PING\x10\x01\x12\x1d\n" +
+	"\x19RECORDER_INFO_TOTAL_CORES\x10\x02\x12\"\n" +
+	"\x1eRECORDER_INFO_CURRENT_PROGRESS\x10\x03\x12\x1b\n" +
+	"\x17RECORDER_INFO_CPU_SCORE\x10\x04*Y\n" +
 	"\x16CloudRecordingVariants\x12\x1f\n" +
 	"\x1bFULL_SCREEN_CLOUD_RECORDING\x10\x00\x12\x1e\n" +
 	"\x1aMEDIA_ONLY_CLOUD_RECORDING\x10\x01B\x9f\x01\n" +

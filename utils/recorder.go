@@ -17,6 +17,8 @@ type RecorderInfo struct {
 	MaxLimit        int64
 	CurrentProgress int64
 	LastPing        int64
+	TotalCores      int64
+	CpuScore        float64
 }
 
 // FormatRecorderKey generates a key for a specific recorder's field within the consolidated bucket.
