@@ -5,6 +5,7 @@ option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 option php_namespace = "Mynaparrot\\PlugnmeetProto";
 
 import "buf/validate/validate.proto";
+import "plugnmeet_common_api.proto";
 
 message FetchAnalyticsReq {
   repeated string room_ids = 1;
@@ -32,7 +33,8 @@ message FetchAnalyticsResult {
 message FetchAnalyticsRes{
   bool status = 1;
   string msg = 2;
-  FetchAnalyticsResult result = 3;
+  StatusCode status_code = 3;
+  FetchAnalyticsResult result = 4;
 }
 
 message DeleteAnalyticsReq {
@@ -42,6 +44,7 @@ message DeleteAnalyticsReq {
 message DeleteAnalyticsRes {
   bool status = 1;
   string msg = 2;
+  StatusCode status_code = 3;
 }
 
 message GetAnalyticsDownloadTokenReq {
@@ -51,5 +54,6 @@ message GetAnalyticsDownloadTokenReq {
 message GetAnalyticsDownloadTokenRes {
   bool status = 1;
   string msg = 2;
-  optional string token = 3;
+  StatusCode status_code = 3;
+  optional string token = 4;
 }

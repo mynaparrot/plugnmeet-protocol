@@ -7,6 +7,7 @@ option php_namespace = "Mynaparrot\\PlugnmeetProto";
 import "buf/validate/validate.proto";
 import "plugnmeet_room_artifacts.proto";
 import "plugnmeet_auth_room.proto";
+import "plugnmeet_common_api.proto";
 
 // Request to fetch a list of artifacts
 message FetchArtifactsReq {
@@ -42,7 +43,8 @@ message FetchArtifactsResult {
 message FetchArtifactsRes {
   bool status = 1;
   string msg = 2;
-  FetchArtifactsResult result = 3;
+  StatusCode status_code = 3;
+  FetchArtifactsResult result = 4;
 }
 
 // Request to get a download token for an artifact
@@ -54,7 +56,8 @@ message GetArtifactDownloadTokenReq {
 message GetArtifactDownloadTokenRes {
   bool status = 1;
   string msg = 2;
-  optional string token = 3;
+  StatusCode status_code = 3;
+  optional string token = 4;
 }
 
 // Request to delete an artifact
@@ -66,6 +69,7 @@ message DeleteArtifactReq {
 message DeleteArtifactRes {
   bool status = 1;
   string msg = 2;
+  StatusCode status_code = 3;
 }
 
 message ArtifactInfoReq {
@@ -75,6 +79,7 @@ message ArtifactInfoReq {
 message ArtifactInfoRes {
   bool status = 1;
   string msg = 2;
-  optional ArtifactInfo artifact_info = 3;
-  optional PastRoomInfo room_info = 4;
+  StatusCode status_code = 3;
+  optional ArtifactInfo artifact_info = 4;
+  optional PastRoomInfo room_info = 5;
 }

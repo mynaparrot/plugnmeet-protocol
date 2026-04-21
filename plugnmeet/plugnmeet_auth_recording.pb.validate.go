@@ -464,6 +464,8 @@ func (m *FetchRecordingsRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	// no validation rules for StatusCode
+
 	if all {
 		switch v := interface{}(m.GetResult()).(type) {
 		case interface{ ValidateAll() error }:
@@ -700,6 +702,8 @@ func (m *RecordingInfoRes) validate(all bool) error {
 	// no validation rules for Status
 
 	// no validation rules for Msg
+
+	// no validation rules for StatusCode
 
 	if all {
 		switch v := interface{}(m.GetRecordingInfo()).(type) {
@@ -967,6 +971,8 @@ func (m *DeleteRecordingRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	// no validation rules for StatusCode
+
 	if len(errors) > 0 {
 		return DeleteRecordingResMultiError(errors)
 	}
@@ -1176,6 +1182,8 @@ func (m *GetDownloadTokenRes) validate(all bool) error {
 	// no validation rules for Status
 
 	// no validation rules for Msg
+
+	// no validation rules for StatusCode
 
 	if m.Token != nil {
 		// no validation rules for Token
@@ -1419,6 +1427,8 @@ func (m *UpdateRecordingMetadataRes) validate(all bool) error {
 	// no validation rules for Status
 
 	// no validation rules for Msg
+
+	// no validation rules for StatusCode
 
 	if len(errors) > 0 {
 		return UpdateRecordingMetadataResMultiError(errors)

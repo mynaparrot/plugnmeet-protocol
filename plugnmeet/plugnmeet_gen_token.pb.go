@@ -464,7 +464,8 @@ type GenerateTokenRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	Token         *string                `protobuf:"bytes,3,opt,name=token,proto3,oneof" json:"token,omitempty"`
+	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	Token         *string                `protobuf:"bytes,4,opt,name=token,proto3,oneof" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -511,6 +512,13 @@ func (x *GenerateTokenRes) GetMsg() string {
 		return x.Msg
 	}
 	return ""
+}
+
+func (x *GenerateTokenRes) GetStatusCode() StatusCode {
+	if x != nil {
+		return x.StatusCode
+	}
+	return StatusCode_UNKNOWN_STATUS
 }
 
 func (x *GenerateTokenRes) GetToken() string {
@@ -640,7 +648,7 @@ var File_plugnmeet_gen_token_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"\n" +
-	"\x19plugnmeet_gen_token.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\"\xe3\x01\n" +
+	"\x19plugnmeet_gen_token.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\x1a\x1aplugnmeet_common_api.proto\"\xe3\x01\n" +
 	"\x10GenerateTokenReq\x12\x94\x01\n" +
 	"\aroom_id\x18\x01 \x01(\tB{\xbaHx\xba\x01u\n" +
 	"\x0eroom_id_format\x12Aroom_id should only contain letters (a-z A-Z), digits (0-9) or -_\x1a this.matches('^[a-zA-Z0-9-_]+$')R\x06roomId\x128\n" +
@@ -704,11 +712,13 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"\x15_lock_chat_file_shareB\x14\n" +
 	"\x12_lock_private_chatB\x12\n" +
 	"\x10_lock_whiteboardB\x16\n" +
-	"\x14_lock_shared_notepad\"a\n" +
+	"\x14_lock_shared_notepad\"\x99\x01\n" +
 	"\x10GenerateTokenRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x19\n" +
-	"\x05token\x18\x03 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
+	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
+	"statusCode\x12\x19\n" +
+	"\x05token\x18\x04 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
 	"\x06_token\"\xa7\x05\n" +
 	"\x12CustomDesignParams\x12(\n" +
 	"\rprimary_color\x18\x01 \x01(\tH\x00R\fprimaryColor\x88\x01\x01\x12,\n" +
@@ -757,17 +767,19 @@ var file_plugnmeet_gen_token_proto_goTypes = []any{
 	(*GenerateTokenRes)(nil),     // 5: plugnmeet.GenerateTokenRes
 	(*CustomDesignParams)(nil),   // 6: plugnmeet.CustomDesignParams
 	nil,                          // 7: plugnmeet.UserMetadata.ExtraDataEntry
+	(StatusCode)(0),              // 8: plugnmeet.StatusCode
 }
 var file_plugnmeet_gen_token_proto_depIdxs = []int32{
 	1, // 0: plugnmeet.GenerateTokenReq.user_info:type_name -> plugnmeet.UserInfo
 	2, // 1: plugnmeet.UserInfo.user_metadata:type_name -> plugnmeet.UserMetadata
 	4, // 2: plugnmeet.UserMetadata.lock_settings:type_name -> plugnmeet.LockSettings
 	7, // 3: plugnmeet.UserMetadata.extra_data:type_name -> plugnmeet.UserMetadata.ExtraDataEntry
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	8, // 4: plugnmeet.GenerateTokenRes.status_code:type_name -> plugnmeet.StatusCode
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_gen_token_proto_init() }
@@ -775,6 +787,7 @@ func file_plugnmeet_gen_token_proto_init() {
 	if File_plugnmeet_gen_token_proto != nil {
 		return
 	}
+	file_plugnmeet_common_api_proto_init()
 	file_plugnmeet_gen_token_proto_msgTypes[2].OneofWrappers = []any{}
 	file_plugnmeet_gen_token_proto_msgTypes[4].OneofWrappers = []any{}
 	file_plugnmeet_gen_token_proto_msgTypes[5].OneofWrappers = []any{}

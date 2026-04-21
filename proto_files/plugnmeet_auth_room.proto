@@ -6,6 +6,7 @@ option php_namespace = "Mynaparrot\\PlugnmeetProto";
 
 import "livekit_models.proto";
 import "buf/validate/validate.proto";
+import "plugnmeet_common_api.proto";
 
 message GetActiveRoomInfoReq {
   string room_id = 1 [(buf.validate.field).required = true];
@@ -14,8 +15,9 @@ message GetActiveRoomInfoReq {
 message ActiveRoomInfoRes {
   bool status = 1;
   string msg = 2;
-  optional ActiveRoomInfo room_info = 3;
-  repeated livekit.ParticipantInfo participants_info = 4;
+  StatusCode status_code = 3;
+  optional ActiveRoomInfo room_info = 4;
+  repeated livekit.ParticipantInfo participants_info = 5;
 }
 
 message ActiveRoomInfo {
@@ -40,6 +42,7 @@ message RoomEndReq {
 message RoomEndRes {
   bool status = 1;
   string msg = 2;
+  StatusCode status_code = 3;
 }
 
 message IsRoomActiveReq {
@@ -48,8 +51,9 @@ message IsRoomActiveReq {
 
 message IsRoomActiveRes {
   bool status = 1;
-  bool is_active = 2;
-  string msg = 3;
+  string msg = 2;
+  StatusCode status_code = 3;
+  bool is_active = 4;
 }
 
 message ActiveRoomWithParticipant {
@@ -60,13 +64,15 @@ message ActiveRoomWithParticipant {
 message GetActiveRoomInfoRes {
   bool status = 1;
   string msg = 2;
-  ActiveRoomWithParticipant room = 3;
+  StatusCode status_code = 3;
+  ActiveRoomWithParticipant room = 4;
 }
 
 message GetActiveRoomsInfoRes {
   bool status = 1;
   string msg = 2;
-  repeated ActiveRoomWithParticipant rooms = 3;
+  StatusCode status_code = 3;
+  repeated ActiveRoomWithParticipant rooms = 4;
 }
 
 message PastRoomInfo {
@@ -98,15 +104,17 @@ message FetchPastRoomsResult {
 message FetchPastRoomsRes{
   bool status = 1;
   string msg = 2;
-  FetchPastRoomsResult result = 3;
+  StatusCode status_code = 3;
+  FetchPastRoomsResult result = 4;
 }
 
 message GetClientFilesRes {
   bool status = 1;
   string msg = 2;
-  repeated string css = 3 [deprecated = true];
-  repeated string js = 4 [deprecated = true];
-  repeated string css_files = 5;
-  repeated string js_files = 6;
-  optional string static_assets_path = 7;
+  StatusCode status_code = 3;
+  repeated string css = 4 [deprecated = true];
+  repeated string js = 5 [deprecated = true];
+  repeated string css_files = 6;
+  repeated string js_files = 7;
+  optional string static_assets_path = 8;
 }

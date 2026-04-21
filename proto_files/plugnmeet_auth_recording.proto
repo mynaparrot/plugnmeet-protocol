@@ -7,6 +7,7 @@ option php_namespace = "Mynaparrot\\PlugnmeetProto";
 import "buf/validate/validate.proto";
 import "plugnmeet_auth_room.proto";
 import "plugnmeet_recording.proto";
+import "plugnmeet_common_api.proto";
 
 message FetchRecordingsReq {
   repeated string room_ids = 1;
@@ -39,7 +40,8 @@ message FetchRecordingsResult {
 message FetchRecordingsRes{
   bool status = 1;
   string msg = 2;
-  FetchRecordingsResult result = 3;
+  StatusCode status_code = 3;
+  FetchRecordingsResult result = 4;
 }
 
 message RecordingInfoReq {
@@ -49,8 +51,9 @@ message RecordingInfoReq {
 message RecordingInfoRes {
   bool status = 1;
   string msg = 2;
-  RecordingInfo recording_info = 3;
-  PastRoomInfo room_info = 4;
+  StatusCode status_code = 3;
+  RecordingInfo recording_info = 4;
+  PastRoomInfo room_info = 5;
 }
 
 message DeleteRecordingReq {
@@ -60,6 +63,7 @@ message DeleteRecordingReq {
 message DeleteRecordingRes {
   bool status = 1;
   string msg = 2;
+  StatusCode status_code = 3;
 }
 
 message GetDownloadTokenReq {
@@ -69,7 +73,8 @@ message GetDownloadTokenReq {
 message GetDownloadTokenRes {
   bool status = 1;
   string msg = 2;
-  optional string token = 3;
+  StatusCode status_code = 3;
+  optional string token = 4;
 }
 
 message UpdateRecordingMetadataReq {
@@ -80,4 +85,5 @@ message UpdateRecordingMetadataReq {
 message UpdateRecordingMetadataRes {
   bool status = 1;
   string msg = 2;
+  StatusCode status_code = 3;
 }

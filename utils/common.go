@@ -66,10 +66,11 @@ func SendProtobufResponse(c *fiber.Ctx, res proto.Message) error {
 	return c.Send(marshal)
 }
 
-func SendCommonProtoJsonResponse(c *fiber.Ctx, s bool, m string) error {
+func SendCommonProtoJsonResponse(c *fiber.Ctx, s bool, m string, statusCode plugnmeet.StatusCode) error {
 	res := &plugnmeet.CommonResponse{
-		Status: s,
-		Msg:    m,
+		Status:     s,
+		Msg:        m,
+		StatusCode: statusCode,
 	}
 	marshal, err := op.Marshal(res)
 	if err != nil {

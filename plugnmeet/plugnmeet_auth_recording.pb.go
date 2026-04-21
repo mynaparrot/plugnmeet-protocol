@@ -279,7 +279,8 @@ type FetchRecordingsRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	Result        *FetchRecordingsResult `protobuf:"bytes,3,opt,name=result,proto3" json:"result,omitempty"`
+	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	Result        *FetchRecordingsResult `protobuf:"bytes,4,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -326,6 +327,13 @@ func (x *FetchRecordingsRes) GetMsg() string {
 		return x.Msg
 	}
 	return ""
+}
+
+func (x *FetchRecordingsRes) GetStatusCode() StatusCode {
+	if x != nil {
+		return x.StatusCode
+	}
+	return StatusCode_UNKNOWN_STATUS
 }
 
 func (x *FetchRecordingsRes) GetResult() *FetchRecordingsResult {
@@ -383,8 +391,9 @@ type RecordingInfoRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	RecordingInfo *RecordingInfo         `protobuf:"bytes,3,opt,name=recording_info,json=recordingInfo,proto3" json:"recording_info,omitempty"`
-	RoomInfo      *PastRoomInfo          `protobuf:"bytes,4,opt,name=room_info,json=roomInfo,proto3" json:"room_info,omitempty"`
+	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	RecordingInfo *RecordingInfo         `protobuf:"bytes,4,opt,name=recording_info,json=recordingInfo,proto3" json:"recording_info,omitempty"`
+	RoomInfo      *PastRoomInfo          `protobuf:"bytes,5,opt,name=room_info,json=roomInfo,proto3" json:"room_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -431,6 +440,13 @@ func (x *RecordingInfoRes) GetMsg() string {
 		return x.Msg
 	}
 	return ""
+}
+
+func (x *RecordingInfoRes) GetStatusCode() StatusCode {
+	if x != nil {
+		return x.StatusCode
+	}
+	return StatusCode_UNKNOWN_STATUS
 }
 
 func (x *RecordingInfoRes) GetRecordingInfo() *RecordingInfo {
@@ -495,6 +511,7 @@ type DeleteRecordingRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -541,6 +558,13 @@ func (x *DeleteRecordingRes) GetMsg() string {
 		return x.Msg
 	}
 	return ""
+}
+
+func (x *DeleteRecordingRes) GetStatusCode() StatusCode {
+	if x != nil {
+		return x.StatusCode
+	}
+	return StatusCode_UNKNOWN_STATUS
 }
 
 type GetDownloadTokenReq struct {
@@ -591,7 +615,8 @@ type GetDownloadTokenRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	Token         *string                `protobuf:"bytes,3,opt,name=token,proto3,oneof" json:"token,omitempty"`
+	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	Token         *string                `protobuf:"bytes,4,opt,name=token,proto3,oneof" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -638,6 +663,13 @@ func (x *GetDownloadTokenRes) GetMsg() string {
 		return x.Msg
 	}
 	return ""
+}
+
+func (x *GetDownloadTokenRes) GetStatusCode() StatusCode {
+	if x != nil {
+		return x.StatusCode
+	}
+	return StatusCode_UNKNOWN_STATUS
 }
 
 func (x *GetDownloadTokenRes) GetToken() string {
@@ -703,6 +735,7 @@ type UpdateRecordingMetadataRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -751,11 +784,18 @@ func (x *UpdateRecordingMetadataRes) GetMsg() string {
 	return ""
 }
 
+func (x *UpdateRecordingMetadataRes) GetStatusCode() StatusCode {
+	if x != nil {
+		return x.StatusCode
+	}
+	return StatusCode_UNKNOWN_STATUS
+}
+
 var File_plugnmeet_auth_recording_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_auth_recording_proto_rawDesc = "" +
 	"\n" +
-	"\x1eplugnmeet_auth_recording.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\x1a\x19plugnmeet_auth_room.proto\x1a\x19plugnmeet_recording.proto\"\xa1\x01\n" +
+	"\x1eplugnmeet_auth_recording.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\x1a\x19plugnmeet_auth_room.proto\x1a\x19plugnmeet_recording.proto\x1a\x1aplugnmeet_common_api.proto\"\xa1\x01\n" +
 	"\x12FetchRecordingsReq\x12\x19\n" +
 	"\broom_ids\x18\x01 \x03(\tR\aroomIds\x12\x1e\n" +
 	"\broom_sid\x18\x02 \x01(\tH\x00R\aroomSid\x88\x01\x01\x12\x12\n" +
@@ -778,36 +818,46 @@ const file_plugnmeet_auth_recording_proto_rawDesc = "" +
 	"\x04from\x18\x02 \x01(\rR\x04from\x12\x14\n" +
 	"\x05limit\x18\x03 \x01(\rR\x05limit\x12\x19\n" +
 	"\border_by\x18\x04 \x01(\tR\aorderBy\x12A\n" +
-	"\x0frecordings_list\x18\x05 \x03(\v2\x18.plugnmeet.RecordingInfoR\x0erecordingsList\"x\n" +
+	"\x0frecordings_list\x18\x05 \x03(\v2\x18.plugnmeet.RecordingInfoR\x0erecordingsList\"\xb0\x01\n" +
 	"\x12FetchRecordingsRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\x128\n" +
-	"\x06result\x18\x03 \x01(\v2 .plugnmeet.FetchRecordingsResultR\x06result\"7\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
+	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
+	"statusCode\x128\n" +
+	"\x06result\x18\x04 \x01(\v2 .plugnmeet.FetchRecordingsResultR\x06result\"7\n" +
 	"\x10RecordingInfoReq\x12#\n" +
-	"\trecord_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\brecordId\"\xb3\x01\n" +
+	"\trecord_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\brecordId\"\xeb\x01\n" +
 	"\x10RecordingInfoRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\x12?\n" +
-	"\x0erecording_info\x18\x03 \x01(\v2\x18.plugnmeet.RecordingInfoR\rrecordingInfo\x124\n" +
-	"\troom_info\x18\x04 \x01(\v2\x17.plugnmeet.PastRoomInfoR\broomInfo\"9\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
+	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
+	"statusCode\x12?\n" +
+	"\x0erecording_info\x18\x04 \x01(\v2\x18.plugnmeet.RecordingInfoR\rrecordingInfo\x124\n" +
+	"\troom_info\x18\x05 \x01(\v2\x17.plugnmeet.PastRoomInfoR\broomInfo\"9\n" +
 	"\x12DeleteRecordingReq\x12#\n" +
-	"\trecord_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\brecordId\">\n" +
+	"\trecord_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\brecordId\"v\n" +
 	"\x12DeleteRecordingRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\":\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
+	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
+	"statusCode\":\n" +
 	"\x13GetDownloadTokenReq\x12#\n" +
-	"\trecord_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\brecordId\"d\n" +
+	"\trecord_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\brecordId\"\x9c\x01\n" +
 	"\x13GetDownloadTokenRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x19\n" +
-	"\x05token\x18\x03 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
+	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
+	"statusCode\x12\x19\n" +
+	"\x05token\x18\x04 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
 	"\x06_token\"{\n" +
 	"\x1aUpdateRecordingMetadataReq\x12#\n" +
 	"\trecord_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\brecordId\x128\n" +
-	"\bmetadata\x18\x02 \x01(\v2\x1c.plugnmeet.RecordingMetadataR\bmetadata\"F\n" +
+	"\bmetadata\x18\x02 \x01(\v2\x1c.plugnmeet.RecordingMetadataR\bmetadata\"~\n" +
 	"\x1aUpdateRecordingMetadataRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msgB\xa4\x01\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
+	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
+	"statusCodeB\xa4\x01\n" +
 	"\rcom.plugnmeetB\x1bPlugnmeetAuthRecordingProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -837,20 +887,26 @@ var file_plugnmeet_auth_recording_proto_goTypes = []any{
 	(*UpdateRecordingMetadataReq)(nil), // 10: plugnmeet.UpdateRecordingMetadataReq
 	(*UpdateRecordingMetadataRes)(nil), // 11: plugnmeet.UpdateRecordingMetadataRes
 	(*RecordingMetadata)(nil),          // 12: plugnmeet.RecordingMetadata
-	(*PastRoomInfo)(nil),               // 13: plugnmeet.PastRoomInfo
+	(StatusCode)(0),                    // 13: plugnmeet.StatusCode
+	(*PastRoomInfo)(nil),               // 14: plugnmeet.PastRoomInfo
 }
 var file_plugnmeet_auth_recording_proto_depIdxs = []int32{
 	12, // 0: plugnmeet.RecordingInfo.metadata:type_name -> plugnmeet.RecordingMetadata
 	1,  // 1: plugnmeet.FetchRecordingsResult.recordings_list:type_name -> plugnmeet.RecordingInfo
-	2,  // 2: plugnmeet.FetchRecordingsRes.result:type_name -> plugnmeet.FetchRecordingsResult
-	1,  // 3: plugnmeet.RecordingInfoRes.recording_info:type_name -> plugnmeet.RecordingInfo
-	13, // 4: plugnmeet.RecordingInfoRes.room_info:type_name -> plugnmeet.PastRoomInfo
-	12, // 5: plugnmeet.UpdateRecordingMetadataReq.metadata:type_name -> plugnmeet.RecordingMetadata
-	6,  // [6:6] is the sub-list for method output_type
-	6,  // [6:6] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	13, // 2: plugnmeet.FetchRecordingsRes.status_code:type_name -> plugnmeet.StatusCode
+	2,  // 3: plugnmeet.FetchRecordingsRes.result:type_name -> plugnmeet.FetchRecordingsResult
+	13, // 4: plugnmeet.RecordingInfoRes.status_code:type_name -> plugnmeet.StatusCode
+	1,  // 5: plugnmeet.RecordingInfoRes.recording_info:type_name -> plugnmeet.RecordingInfo
+	14, // 6: plugnmeet.RecordingInfoRes.room_info:type_name -> plugnmeet.PastRoomInfo
+	13, // 7: plugnmeet.DeleteRecordingRes.status_code:type_name -> plugnmeet.StatusCode
+	13, // 8: plugnmeet.GetDownloadTokenRes.status_code:type_name -> plugnmeet.StatusCode
+	12, // 9: plugnmeet.UpdateRecordingMetadataReq.metadata:type_name -> plugnmeet.RecordingMetadata
+	13, // 10: plugnmeet.UpdateRecordingMetadataRes.status_code:type_name -> plugnmeet.StatusCode
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_auth_recording_proto_init() }
@@ -860,6 +916,7 @@ func file_plugnmeet_auth_recording_proto_init() {
 	}
 	file_plugnmeet_auth_room_proto_init()
 	file_plugnmeet_recording_proto_init()
+	file_plugnmeet_common_api_proto_init()
 	file_plugnmeet_auth_recording_proto_msgTypes[0].OneofWrappers = []any{}
 	file_plugnmeet_auth_recording_proto_msgTypes[1].OneofWrappers = []any{}
 	file_plugnmeet_auth_recording_proto_msgTypes[9].OneofWrappers = []any{}

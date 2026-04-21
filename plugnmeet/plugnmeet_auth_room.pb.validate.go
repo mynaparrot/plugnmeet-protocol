@@ -165,6 +165,8 @@ func (m *ActiveRoomInfoRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	// no validation rules for StatusCode
+
 	for idx, item := range m.GetParticipantsInfo() {
 		_, _ = idx, item
 
@@ -563,6 +565,8 @@ func (m *RoomEndRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	// no validation rules for StatusCode
+
 	if len(errors) > 0 {
 		return RoomEndResMultiError(errors)
 	}
@@ -766,9 +770,11 @@ func (m *IsRoomActiveRes) validate(all bool) error {
 
 	// no validation rules for Status
 
-	// no validation rules for IsActive
-
 	// no validation rules for Msg
+
+	// no validation rules for StatusCode
+
+	// no validation rules for IsActive
 
 	if len(errors) > 0 {
 		return IsRoomActiveResMultiError(errors)
@@ -1043,6 +1049,8 @@ func (m *GetActiveRoomInfoRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	// no validation rules for StatusCode
+
 	if all {
 		switch v := interface{}(m.GetRoom()).(type) {
 		case interface{ ValidateAll() error }:
@@ -1177,6 +1185,8 @@ func (m *GetActiveRoomsInfoRes) validate(all bool) error {
 	// no validation rules for Status
 
 	// no validation rules for Msg
+
+	// no validation rules for StatusCode
 
 	for idx, item := range m.GetRooms() {
 		_, _ = idx, item
@@ -1687,6 +1697,8 @@ func (m *FetchPastRoomsRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	// no validation rules for StatusCode
+
 	if all {
 		switch v := interface{}(m.GetResult()).(type) {
 		case interface{ ValidateAll() error }:
@@ -1821,6 +1833,8 @@ func (m *GetClientFilesRes) validate(all bool) error {
 	// no validation rules for Status
 
 	// no validation rules for Msg
+
+	// no validation rules for StatusCode
 
 	if m.StaticAssetsPath != nil {
 		// no validation rules for StaticAssetsPath

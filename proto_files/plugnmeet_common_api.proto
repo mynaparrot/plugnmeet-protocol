@@ -7,9 +7,27 @@ option php_namespace = "Mynaparrot\\PlugnmeetProto";
 import "plugnmeet_datamessage.proto";
 import "plugnmeet_nats_msg.proto";
 
+enum StatusCode {
+  UNKNOWN_STATUS = 0;
+  SUCCESS = 1;
+  PERMISSION_DENIED = 2;
+  NOT_FOUND = 3;
+  CONFLICT = 4;
+  INVALID_TOKEN_OR_SIGNATURE = 5;
+  INVALID_API_KEY = 6;
+  INTERNAL_SERVER_ERROR = 7;
+  INVALID_PARAMETERS = 8;
+  MISSING_REQUIRED_PARAMETER = 9;
+  ROOM_NOT_FOUND = 10;
+  USER_NOT_FOUND = 11;
+  USER_BLOCKED = 12;
+  USER_NOT_ACTIVE = 13;
+}
+
 message CommonResponse {
   bool status = 1;
   string msg = 2;
+  StatusCode status_code = 3;
 }
 
 message VerifyTokenReq {

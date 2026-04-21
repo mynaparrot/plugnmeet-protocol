@@ -21,6 +21,88 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type StatusCode int32
+
+const (
+	StatusCode_UNKNOWN_STATUS             StatusCode = 0
+	StatusCode_SUCCESS                    StatusCode = 1
+	StatusCode_PERMISSION_DENIED          StatusCode = 2
+	StatusCode_NOT_FOUND                  StatusCode = 3
+	StatusCode_CONFLICT                   StatusCode = 4
+	StatusCode_INVALID_TOKEN_OR_SIGNATURE StatusCode = 5
+	StatusCode_INVALID_API_KEY            StatusCode = 6
+	StatusCode_INTERNAL_SERVER_ERROR      StatusCode = 7
+	StatusCode_INVALID_PARAMETERS         StatusCode = 8
+	StatusCode_MISSING_REQUIRED_PARAMETER StatusCode = 9
+	StatusCode_ROOM_NOT_FOUND             StatusCode = 10
+	StatusCode_USER_NOT_FOUND             StatusCode = 11
+	StatusCode_USER_BLOCKED               StatusCode = 12
+	StatusCode_USER_NOT_ACTIVE            StatusCode = 13
+)
+
+// Enum value maps for StatusCode.
+var (
+	StatusCode_name = map[int32]string{
+		0:  "UNKNOWN_STATUS",
+		1:  "SUCCESS",
+		2:  "PERMISSION_DENIED",
+		3:  "NOT_FOUND",
+		4:  "CONFLICT",
+		5:  "INVALID_TOKEN_OR_SIGNATURE",
+		6:  "INVALID_API_KEY",
+		7:  "INTERNAL_SERVER_ERROR",
+		8:  "INVALID_PARAMETERS",
+		9:  "MISSING_REQUIRED_PARAMETER",
+		10: "ROOM_NOT_FOUND",
+		11: "USER_NOT_FOUND",
+		12: "USER_BLOCKED",
+		13: "USER_NOT_ACTIVE",
+	}
+	StatusCode_value = map[string]int32{
+		"UNKNOWN_STATUS":             0,
+		"SUCCESS":                    1,
+		"PERMISSION_DENIED":          2,
+		"NOT_FOUND":                  3,
+		"CONFLICT":                   4,
+		"INVALID_TOKEN_OR_SIGNATURE": 5,
+		"INVALID_API_KEY":            6,
+		"INTERNAL_SERVER_ERROR":      7,
+		"INVALID_PARAMETERS":         8,
+		"MISSING_REQUIRED_PARAMETER": 9,
+		"ROOM_NOT_FOUND":             10,
+		"USER_NOT_FOUND":             11,
+		"USER_BLOCKED":               12,
+		"USER_NOT_ACTIVE":            13,
+	}
+)
+
+func (x StatusCode) Enum() *StatusCode {
+	p := new(StatusCode)
+	*p = x
+	return p
+}
+
+func (x StatusCode) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (StatusCode) Descriptor() protoreflect.EnumDescriptor {
+	return file_plugnmeet_common_api_proto_enumTypes[0].Descriptor()
+}
+
+func (StatusCode) Type() protoreflect.EnumType {
+	return &file_plugnmeet_common_api_proto_enumTypes[0]
+}
+
+func (x StatusCode) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use StatusCode.Descriptor instead.
+func (StatusCode) EnumDescriptor() ([]byte, []int) {
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{0}
+}
+
 type SwitchPresenterTask int32
 
 const (
@@ -51,11 +133,11 @@ func (x SwitchPresenterTask) String() string {
 }
 
 func (SwitchPresenterTask) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugnmeet_common_api_proto_enumTypes[0].Descriptor()
+	return file_plugnmeet_common_api_proto_enumTypes[1].Descriptor()
 }
 
 func (SwitchPresenterTask) Type() protoreflect.EnumType {
-	return &file_plugnmeet_common_api_proto_enumTypes[0]
+	return &file_plugnmeet_common_api_proto_enumTypes[1]
 }
 
 func (x SwitchPresenterTask) Number() protoreflect.EnumNumber {
@@ -64,7 +146,7 @@ func (x SwitchPresenterTask) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SwitchPresenterTask.Descriptor instead.
 func (SwitchPresenterTask) EnumDescriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{0}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{1}
 }
 
 type ExternalMediaPlayerTask int32
@@ -97,11 +179,11 @@ func (x ExternalMediaPlayerTask) String() string {
 }
 
 func (ExternalMediaPlayerTask) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugnmeet_common_api_proto_enumTypes[1].Descriptor()
+	return file_plugnmeet_common_api_proto_enumTypes[2].Descriptor()
 }
 
 func (ExternalMediaPlayerTask) Type() protoreflect.EnumType {
-	return &file_plugnmeet_common_api_proto_enumTypes[1]
+	return &file_plugnmeet_common_api_proto_enumTypes[2]
 }
 
 func (x ExternalMediaPlayerTask) Number() protoreflect.EnumNumber {
@@ -110,7 +192,7 @@ func (x ExternalMediaPlayerTask) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ExternalMediaPlayerTask.Descriptor instead.
 func (ExternalMediaPlayerTask) EnumDescriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{1}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{2}
 }
 
 type ExternalDisplayLinkTask int32
@@ -143,11 +225,11 @@ func (x ExternalDisplayLinkTask) String() string {
 }
 
 func (ExternalDisplayLinkTask) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugnmeet_common_api_proto_enumTypes[2].Descriptor()
+	return file_plugnmeet_common_api_proto_enumTypes[3].Descriptor()
 }
 
 func (ExternalDisplayLinkTask) Type() protoreflect.EnumType {
-	return &file_plugnmeet_common_api_proto_enumTypes[2]
+	return &file_plugnmeet_common_api_proto_enumTypes[3]
 }
 
 func (x ExternalDisplayLinkTask) Number() protoreflect.EnumNumber {
@@ -156,7 +238,7 @@ func (x ExternalDisplayLinkTask) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ExternalDisplayLinkTask.Descriptor instead.
 func (ExternalDisplayLinkTask) EnumDescriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{2}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{3}
 }
 
 type RoomUploadedFileType int32
@@ -198,11 +280,11 @@ func (x RoomUploadedFileType) String() string {
 }
 
 func (RoomUploadedFileType) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugnmeet_common_api_proto_enumTypes[3].Descriptor()
+	return file_plugnmeet_common_api_proto_enumTypes[4].Descriptor()
 }
 
 func (RoomUploadedFileType) Type() protoreflect.EnumType {
-	return &file_plugnmeet_common_api_proto_enumTypes[3]
+	return &file_plugnmeet_common_api_proto_enumTypes[4]
 }
 
 func (x RoomUploadedFileType) Number() protoreflect.EnumNumber {
@@ -211,13 +293,14 @@ func (x RoomUploadedFileType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RoomUploadedFileType.Descriptor instead.
 func (RoomUploadedFileType) EnumDescriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{3}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{4}
 }
 
 type CommonResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -264,6 +347,13 @@ func (x *CommonResponse) GetMsg() string {
 		return x.Msg
 	}
 	return ""
+}
+
+func (x *CommonResponse) GetStatusCode() StatusCode {
+	if x != nil {
+		return x.StatusCode
+	}
+	return StatusCode_UNKNOWN_STATUS
 }
 
 type VerifyTokenReq struct {
@@ -1982,10 +2072,12 @@ var File_plugnmeet_common_api_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_common_api_proto_rawDesc = "" +
 	"\n" +
-	"\x1aplugnmeet_common_api.proto\x12\tplugnmeet\x1a\x1bplugnmeet_datamessage.proto\x1a\x18plugnmeet_nats_msg.proto\":\n" +
+	"\x1aplugnmeet_common_api.proto\x12\tplugnmeet\x1a\x1bplugnmeet_datamessage.proto\x1a\x18plugnmeet_nats_msg.proto\"r\n" +
 	"\x0eCommonResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\"L\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
+	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
+	"statusCode\"L\n" +
 	"\x0eVerifyTokenReq\x12(\n" +
 	"\ris_production\x18\x01 \x01(\bH\x00R\fisProduction\x88\x01\x01B\x10\n" +
 	"\x0e_is_production\"\xad\x04\n" +
@@ -2138,7 +2230,24 @@ const file_plugnmeet_common_api_proto_rawDesc = "" +
 	"\x05files\x18\x03 \x03(\v2#.plugnmeet.RoomUploadedFileMetadataR\x05files\"Y\n" +
 	"\x12EnableSipDialInReq\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12*\n" +
-	"\x11hide_phone_number\x18\x02 \x01(\bR\x0fhidePhoneNumber*.\n" +
+	"\x11hide_phone_number\x18\x02 \x01(\bR\x0fhidePhoneNumber*\xb8\x02\n" +
+	"\n" +
+	"StatusCode\x12\x12\n" +
+	"\x0eUNKNOWN_STATUS\x10\x00\x12\v\n" +
+	"\aSUCCESS\x10\x01\x12\x15\n" +
+	"\x11PERMISSION_DENIED\x10\x02\x12\r\n" +
+	"\tNOT_FOUND\x10\x03\x12\f\n" +
+	"\bCONFLICT\x10\x04\x12\x1e\n" +
+	"\x1aINVALID_TOKEN_OR_SIGNATURE\x10\x05\x12\x13\n" +
+	"\x0fINVALID_API_KEY\x10\x06\x12\x19\n" +
+	"\x15INTERNAL_SERVER_ERROR\x10\a\x12\x16\n" +
+	"\x12INVALID_PARAMETERS\x10\b\x12\x1e\n" +
+	"\x1aMISSING_REQUIRED_PARAMETER\x10\t\x12\x12\n" +
+	"\x0eROOM_NOT_FOUND\x10\n" +
+	"\x12\x12\n" +
+	"\x0eUSER_NOT_FOUND\x10\v\x12\x10\n" +
+	"\fUSER_BLOCKED\x10\f\x12\x13\n" +
+	"\x0fUSER_NOT_ACTIVE\x10\r*.\n" +
 	"\x13SwitchPresenterTask\x12\v\n" +
 	"\aPROMOTE\x10\x00\x12\n" +
 	"\n" +
@@ -2169,58 +2278,60 @@ func file_plugnmeet_common_api_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_common_api_proto_rawDescData
 }
 
-var file_plugnmeet_common_api_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_plugnmeet_common_api_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
 var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_plugnmeet_common_api_proto_goTypes = []any{
-	(SwitchPresenterTask)(0),            // 0: plugnmeet.SwitchPresenterTask
-	(ExternalMediaPlayerTask)(0),        // 1: plugnmeet.ExternalMediaPlayerTask
-	(ExternalDisplayLinkTask)(0),        // 2: plugnmeet.ExternalDisplayLinkTask
-	(RoomUploadedFileType)(0),           // 3: plugnmeet.RoomUploadedFileType
-	(*CommonResponse)(nil),              // 4: plugnmeet.CommonResponse
-	(*VerifyTokenReq)(nil),              // 5: plugnmeet.VerifyTokenReq
-	(*VerifyTokenRes)(nil),              // 6: plugnmeet.VerifyTokenRes
-	(*MuteUnMuteTrackReq)(nil),          // 7: plugnmeet.MuteUnMuteTrackReq
-	(*RemoveParticipantReq)(nil),        // 8: plugnmeet.RemoveParticipantReq
-	(*DataMessageReq)(nil),              // 9: plugnmeet.DataMessageReq
-	(*RoomEndAPIReq)(nil),               // 10: plugnmeet.RoomEndAPIReq
-	(*ChangeVisibilityRes)(nil),         // 11: plugnmeet.ChangeVisibilityRes
-	(*SwitchPresenterReq)(nil),          // 12: plugnmeet.SwitchPresenterReq
-	(*ExternalMediaPlayerReq)(nil),      // 13: plugnmeet.ExternalMediaPlayerReq
-	(*ExternalDisplayLinkReq)(nil),      // 14: plugnmeet.ExternalDisplayLinkReq
-	(*CreateEtherpadSessionRes)(nil),    // 15: plugnmeet.CreateEtherpadSessionRes
-	(*CleanEtherpadReq)(nil),            // 16: plugnmeet.CleanEtherpadReq
-	(*ChangeEtherpadStatusReq)(nil),     // 17: plugnmeet.ChangeEtherpadStatusReq
-	(*ApproveWaitingUsersReq)(nil),      // 18: plugnmeet.ApproveWaitingUsersReq
-	(*UpdateWaitingRoomMessageReq)(nil), // 19: plugnmeet.UpdateWaitingRoomMessageReq
-	(*UpdateUserLockSettingsReq)(nil),   // 20: plugnmeet.UpdateUserLockSettingsReq
-	(*UploadBase64EncodedDataReq)(nil),  // 21: plugnmeet.UploadBase64EncodedDataReq
-	(*UploadBase64EncodedDataRes)(nil),  // 22: plugnmeet.UploadBase64EncodedDataRes
-	(*UploadedFileMergeReq)(nil),        // 23: plugnmeet.UploadedFileMergeReq
-	(*UploadedFileRes)(nil),             // 24: plugnmeet.UploadedFileRes
-	(*RoomUploadedFileMetadata)(nil),    // 25: plugnmeet.RoomUploadedFileMetadata
-	(*GetRoomUploadedFilesReq)(nil),     // 26: plugnmeet.GetRoomUploadedFilesReq
-	(*GetRoomUploadedFilesRes)(nil),     // 27: plugnmeet.GetRoomUploadedFilesRes
-	(*EnableSipDialInReq)(nil),          // 28: plugnmeet.EnableSipDialInReq
-	(*NatsSubjects)(nil),                // 29: plugnmeet.NatsSubjects
-	(DataMsgBodyType)(0),                // 30: plugnmeet.DataMsgBodyType
+	(StatusCode)(0),                     // 0: plugnmeet.StatusCode
+	(SwitchPresenterTask)(0),            // 1: plugnmeet.SwitchPresenterTask
+	(ExternalMediaPlayerTask)(0),        // 2: plugnmeet.ExternalMediaPlayerTask
+	(ExternalDisplayLinkTask)(0),        // 3: plugnmeet.ExternalDisplayLinkTask
+	(RoomUploadedFileType)(0),           // 4: plugnmeet.RoomUploadedFileType
+	(*CommonResponse)(nil),              // 5: plugnmeet.CommonResponse
+	(*VerifyTokenReq)(nil),              // 6: plugnmeet.VerifyTokenReq
+	(*VerifyTokenRes)(nil),              // 7: plugnmeet.VerifyTokenRes
+	(*MuteUnMuteTrackReq)(nil),          // 8: plugnmeet.MuteUnMuteTrackReq
+	(*RemoveParticipantReq)(nil),        // 9: plugnmeet.RemoveParticipantReq
+	(*DataMessageReq)(nil),              // 10: plugnmeet.DataMessageReq
+	(*RoomEndAPIReq)(nil),               // 11: plugnmeet.RoomEndAPIReq
+	(*ChangeVisibilityRes)(nil),         // 12: plugnmeet.ChangeVisibilityRes
+	(*SwitchPresenterReq)(nil),          // 13: plugnmeet.SwitchPresenterReq
+	(*ExternalMediaPlayerReq)(nil),      // 14: plugnmeet.ExternalMediaPlayerReq
+	(*ExternalDisplayLinkReq)(nil),      // 15: plugnmeet.ExternalDisplayLinkReq
+	(*CreateEtherpadSessionRes)(nil),    // 16: plugnmeet.CreateEtherpadSessionRes
+	(*CleanEtherpadReq)(nil),            // 17: plugnmeet.CleanEtherpadReq
+	(*ChangeEtherpadStatusReq)(nil),     // 18: plugnmeet.ChangeEtherpadStatusReq
+	(*ApproveWaitingUsersReq)(nil),      // 19: plugnmeet.ApproveWaitingUsersReq
+	(*UpdateWaitingRoomMessageReq)(nil), // 20: plugnmeet.UpdateWaitingRoomMessageReq
+	(*UpdateUserLockSettingsReq)(nil),   // 21: plugnmeet.UpdateUserLockSettingsReq
+	(*UploadBase64EncodedDataReq)(nil),  // 22: plugnmeet.UploadBase64EncodedDataReq
+	(*UploadBase64EncodedDataRes)(nil),  // 23: plugnmeet.UploadBase64EncodedDataRes
+	(*UploadedFileMergeReq)(nil),        // 24: plugnmeet.UploadedFileMergeReq
+	(*UploadedFileRes)(nil),             // 25: plugnmeet.UploadedFileRes
+	(*RoomUploadedFileMetadata)(nil),    // 26: plugnmeet.RoomUploadedFileMetadata
+	(*GetRoomUploadedFilesReq)(nil),     // 27: plugnmeet.GetRoomUploadedFilesReq
+	(*GetRoomUploadedFilesRes)(nil),     // 28: plugnmeet.GetRoomUploadedFilesRes
+	(*EnableSipDialInReq)(nil),          // 29: plugnmeet.EnableSipDialInReq
+	(*NatsSubjects)(nil),                // 30: plugnmeet.NatsSubjects
+	(DataMsgBodyType)(0),                // 31: plugnmeet.DataMsgBodyType
 }
 var file_plugnmeet_common_api_proto_depIdxs = []int32{
-	29, // 0: plugnmeet.VerifyTokenRes.nats_subjects:type_name -> plugnmeet.NatsSubjects
-	30, // 1: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
-	0,  // 2: plugnmeet.SwitchPresenterReq.task:type_name -> plugnmeet.SwitchPresenterTask
-	1,  // 3: plugnmeet.ExternalMediaPlayerReq.task:type_name -> plugnmeet.ExternalMediaPlayerTask
-	2,  // 4: plugnmeet.ExternalDisplayLinkReq.task:type_name -> plugnmeet.ExternalDisplayLinkTask
-	3,  // 5: plugnmeet.UploadBase64EncodedDataReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
-	3,  // 6: plugnmeet.UploadedFileMergeReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
-	3,  // 7: plugnmeet.UploadedFileRes.file_type:type_name -> plugnmeet.RoomUploadedFileType
-	3,  // 8: plugnmeet.RoomUploadedFileMetadata.file_type:type_name -> plugnmeet.RoomUploadedFileType
-	3,  // 9: plugnmeet.GetRoomUploadedFilesReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
-	25, // 10: plugnmeet.GetRoomUploadedFilesRes.files:type_name -> plugnmeet.RoomUploadedFileMetadata
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	0,  // 0: plugnmeet.CommonResponse.status_code:type_name -> plugnmeet.StatusCode
+	30, // 1: plugnmeet.VerifyTokenRes.nats_subjects:type_name -> plugnmeet.NatsSubjects
+	31, // 2: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
+	1,  // 3: plugnmeet.SwitchPresenterReq.task:type_name -> plugnmeet.SwitchPresenterTask
+	2,  // 4: plugnmeet.ExternalMediaPlayerReq.task:type_name -> plugnmeet.ExternalMediaPlayerTask
+	3,  // 5: plugnmeet.ExternalDisplayLinkReq.task:type_name -> plugnmeet.ExternalDisplayLinkTask
+	4,  // 6: plugnmeet.UploadBase64EncodedDataReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
+	4,  // 7: plugnmeet.UploadedFileMergeReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
+	4,  // 8: plugnmeet.UploadedFileRes.file_type:type_name -> plugnmeet.RoomUploadedFileType
+	4,  // 9: plugnmeet.RoomUploadedFileMetadata.file_type:type_name -> plugnmeet.RoomUploadedFileType
+	4,  // 10: plugnmeet.GetRoomUploadedFilesReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
+	26, // 11: plugnmeet.GetRoomUploadedFilesRes.files:type_name -> plugnmeet.RoomUploadedFileMetadata
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_common_api_proto_init() }
@@ -2242,7 +2353,7 @@ func file_plugnmeet_common_api_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_common_api_proto_rawDesc), len(file_plugnmeet_common_api_proto_rawDesc)),
-			NumEnums:      4,
+			NumEnums:      5,
 			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   0,

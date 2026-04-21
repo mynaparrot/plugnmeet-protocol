@@ -8,6 +8,7 @@ import "plugnmeet_gen_token.proto";
 import "buf/validate/validate.proto";
 import "plugnmeet_ingress.proto";
 import "plugnmeet_auth_room.proto";
+import "plugnmeet_common_api.proto";
 
 message CreateRoomReq {
   string room_id = 1 [(buf.validate.field).cel = {
@@ -333,5 +334,6 @@ message CopyrightConf {
 message CreateRoomRes {
   bool status = 1;
   string msg = 2;
-  ActiveRoomInfo room_info = 3;
+  StatusCode status_code = 3;
+  ActiveRoomInfo room_info = 4;
 }

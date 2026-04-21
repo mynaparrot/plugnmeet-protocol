@@ -3371,6 +3371,8 @@ func (m *CreateRoomRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	// no validation rules for StatusCode
+
 	if all {
 		switch v := interface{}(m.GetRoomInfo()).(type) {
 		case interface{ ValidateAll() error }:

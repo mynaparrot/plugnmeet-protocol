@@ -5,6 +5,7 @@ option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 option php_namespace = "Mynaparrot\\PlugnmeetProto";
 
 import "buf/validate/validate.proto";
+import "plugnmeet_common_api.proto";
 
 message GenerateTokenReq {
   string room_id = 1 [(buf.validate.field).cel = {
@@ -67,7 +68,8 @@ message LockSettings {
 message GenerateTokenRes {
   bool status = 1;
   string msg = 2;
-  optional string token = 3;
+  StatusCode status_code = 3;
+  optional string token = 4;
 }
 
 message CustomDesignParams {

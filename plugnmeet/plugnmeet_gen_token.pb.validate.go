@@ -733,6 +733,8 @@ func (m *GenerateTokenRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	// no validation rules for StatusCode
+
 	if m.Token != nil {
 		// no validation rules for Token
 	}

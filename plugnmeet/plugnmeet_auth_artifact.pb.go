@@ -275,7 +275,8 @@ type FetchArtifactsRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	Result        *FetchArtifactsResult  `protobuf:"bytes,3,opt,name=result,proto3" json:"result,omitempty"`
+	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	Result        *FetchArtifactsResult  `protobuf:"bytes,4,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -322,6 +323,13 @@ func (x *FetchArtifactsRes) GetMsg() string {
 		return x.Msg
 	}
 	return ""
+}
+
+func (x *FetchArtifactsRes) GetStatusCode() StatusCode {
+	if x != nil {
+		return x.StatusCode
+	}
+	return StatusCode_UNKNOWN_STATUS
 }
 
 func (x *FetchArtifactsRes) GetResult() *FetchArtifactsResult {
@@ -381,7 +389,8 @@ type GetArtifactDownloadTokenRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	Token         *string                `protobuf:"bytes,3,opt,name=token,proto3,oneof" json:"token,omitempty"`
+	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	Token         *string                `protobuf:"bytes,4,opt,name=token,proto3,oneof" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -428,6 +437,13 @@ func (x *GetArtifactDownloadTokenRes) GetMsg() string {
 		return x.Msg
 	}
 	return ""
+}
+
+func (x *GetArtifactDownloadTokenRes) GetStatusCode() StatusCode {
+	if x != nil {
+		return x.StatusCode
+	}
+	return StatusCode_UNKNOWN_STATUS
 }
 
 func (x *GetArtifactDownloadTokenRes) GetToken() string {
@@ -487,6 +503,7 @@ type DeleteArtifactRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -533,6 +550,13 @@ func (x *DeleteArtifactRes) GetMsg() string {
 		return x.Msg
 	}
 	return ""
+}
+
+func (x *DeleteArtifactRes) GetStatusCode() StatusCode {
+	if x != nil {
+		return x.StatusCode
+	}
+	return StatusCode_UNKNOWN_STATUS
 }
 
 type ArtifactInfoReq struct {
@@ -583,8 +607,9 @@ type ArtifactInfoRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	ArtifactInfo  *ArtifactInfo          `protobuf:"bytes,3,opt,name=artifact_info,json=artifactInfo,proto3,oneof" json:"artifact_info,omitempty"`
-	RoomInfo      *PastRoomInfo          `protobuf:"bytes,4,opt,name=room_info,json=roomInfo,proto3,oneof" json:"room_info,omitempty"`
+	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	ArtifactInfo  *ArtifactInfo          `protobuf:"bytes,4,opt,name=artifact_info,json=artifactInfo,proto3,oneof" json:"artifact_info,omitempty"`
+	RoomInfo      *PastRoomInfo          `protobuf:"bytes,5,opt,name=room_info,json=roomInfo,proto3,oneof" json:"room_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -633,6 +658,13 @@ func (x *ArtifactInfoRes) GetMsg() string {
 	return ""
 }
 
+func (x *ArtifactInfoRes) GetStatusCode() StatusCode {
+	if x != nil {
+		return x.StatusCode
+	}
+	return StatusCode_UNKNOWN_STATUS
+}
+
 func (x *ArtifactInfoRes) GetArtifactInfo() *ArtifactInfo {
 	if x != nil {
 		return x.ArtifactInfo
@@ -651,7 +683,7 @@ var File_plugnmeet_auth_artifact_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_auth_artifact_proto_rawDesc = "" +
 	"\n" +
-	"\x1dplugnmeet_auth_artifact.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\x1a\x1eplugnmeet_room_artifacts.proto\x1a\x19plugnmeet_auth_room.proto\"\xdf\x01\n" +
+	"\x1dplugnmeet_auth_artifact.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\x1a\x1eplugnmeet_room_artifacts.proto\x1a\x19plugnmeet_auth_room.proto\x1a\x1aplugnmeet_common_api.proto\"\xdf\x01\n" +
 	"\x11FetchArtifactsReq\x12\x19\n" +
 	"\broom_ids\x18\x01 \x03(\tR\aroomIds\x12\x1e\n" +
 	"\broom_sid\x18\x02 \x01(\tH\x00R\aroomSid\x88\x01\x01\x124\n" +
@@ -675,33 +707,41 @@ const file_plugnmeet_auth_artifact_proto_rawDesc = "" +
 	"\border_by\x18\x04 \x01(\tR\aorderBy\x124\n" +
 	"\x04type\x18\x05 \x01(\x0e2\x1b.plugnmeet.RoomArtifactTypeH\x00R\x04type\x88\x01\x01\x12>\n" +
 	"\x0eartifacts_list\x18\x06 \x03(\v2\x17.plugnmeet.ArtifactInfoR\rartifactsListB\a\n" +
-	"\x05_type\"v\n" +
+	"\x05_type\"\xae\x01\n" +
 	"\x11FetchArtifactsRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\x127\n" +
-	"\x06result\x18\x03 \x01(\v2\x1f.plugnmeet.FetchArtifactsResultR\x06result\"F\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
+	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
+	"statusCode\x127\n" +
+	"\x06result\x18\x04 \x01(\v2\x1f.plugnmeet.FetchArtifactsResultR\x06result\"F\n" +
 	"\x1bGetArtifactDownloadTokenReq\x12'\n" +
 	"\vartifact_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\n" +
-	"artifactId\"l\n" +
+	"artifactId\"\xa4\x01\n" +
 	"\x1bGetArtifactDownloadTokenRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x19\n" +
-	"\x05token\x18\x03 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
+	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
+	"statusCode\x12\x19\n" +
+	"\x05token\x18\x04 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
 	"\x06_token\"<\n" +
 	"\x11DeleteArtifactReq\x12'\n" +
 	"\vartifact_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\n" +
-	"artifactId\"=\n" +
+	"artifactId\"u\n" +
 	"\x11DeleteArtifactRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\":\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
+	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
+	"statusCode\":\n" +
 	"\x0fArtifactInfoReq\x12'\n" +
 	"\vartifact_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\n" +
-	"artifactId\"\xd9\x01\n" +
+	"artifactId\"\x91\x02\n" +
 	"\x0fArtifactInfoRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\x12A\n" +
-	"\rartifact_info\x18\x03 \x01(\v2\x17.plugnmeet.ArtifactInfoH\x00R\fartifactInfo\x88\x01\x01\x129\n" +
-	"\troom_info\x18\x04 \x01(\v2\x17.plugnmeet.PastRoomInfoH\x01R\broomInfo\x88\x01\x01B\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
+	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
+	"statusCode\x12A\n" +
+	"\rartifact_info\x18\x04 \x01(\v2\x17.plugnmeet.ArtifactInfoH\x00R\fartifactInfo\x88\x01\x01\x129\n" +
+	"\troom_info\x18\x05 \x01(\v2\x17.plugnmeet.PastRoomInfoH\x01R\broomInfo\x88\x01\x01B\x10\n" +
 	"\x0e_artifact_infoB\f\n" +
 	"\n" +
 	"_room_infoB\xa3\x01\n" +
@@ -733,7 +773,8 @@ var file_plugnmeet_auth_artifact_proto_goTypes = []any{
 	(*ArtifactInfoRes)(nil),             // 9: plugnmeet.ArtifactInfoRes
 	(RoomArtifactType)(0),               // 10: plugnmeet.RoomArtifactType
 	(*RoomArtifactMetadata)(nil),        // 11: plugnmeet.RoomArtifactMetadata
-	(*PastRoomInfo)(nil),                // 12: plugnmeet.PastRoomInfo
+	(StatusCode)(0),                     // 12: plugnmeet.StatusCode
+	(*PastRoomInfo)(nil),                // 13: plugnmeet.PastRoomInfo
 }
 var file_plugnmeet_auth_artifact_proto_depIdxs = []int32{
 	10, // 0: plugnmeet.FetchArtifactsReq.type:type_name -> plugnmeet.RoomArtifactType
@@ -741,14 +782,18 @@ var file_plugnmeet_auth_artifact_proto_depIdxs = []int32{
 	11, // 2: plugnmeet.ArtifactInfo.metadata:type_name -> plugnmeet.RoomArtifactMetadata
 	10, // 3: plugnmeet.FetchArtifactsResult.type:type_name -> plugnmeet.RoomArtifactType
 	1,  // 4: plugnmeet.FetchArtifactsResult.artifacts_list:type_name -> plugnmeet.ArtifactInfo
-	2,  // 5: plugnmeet.FetchArtifactsRes.result:type_name -> plugnmeet.FetchArtifactsResult
-	1,  // 6: plugnmeet.ArtifactInfoRes.artifact_info:type_name -> plugnmeet.ArtifactInfo
-	12, // 7: plugnmeet.ArtifactInfoRes.room_info:type_name -> plugnmeet.PastRoomInfo
-	8,  // [8:8] is the sub-list for method output_type
-	8,  // [8:8] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	12, // 5: plugnmeet.FetchArtifactsRes.status_code:type_name -> plugnmeet.StatusCode
+	2,  // 6: plugnmeet.FetchArtifactsRes.result:type_name -> plugnmeet.FetchArtifactsResult
+	12, // 7: plugnmeet.GetArtifactDownloadTokenRes.status_code:type_name -> plugnmeet.StatusCode
+	12, // 8: plugnmeet.DeleteArtifactRes.status_code:type_name -> plugnmeet.StatusCode
+	12, // 9: plugnmeet.ArtifactInfoRes.status_code:type_name -> plugnmeet.StatusCode
+	1,  // 10: plugnmeet.ArtifactInfoRes.artifact_info:type_name -> plugnmeet.ArtifactInfo
+	13, // 11: plugnmeet.ArtifactInfoRes.room_info:type_name -> plugnmeet.PastRoomInfo
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_auth_artifact_proto_init() }
@@ -758,6 +803,7 @@ func file_plugnmeet_auth_artifact_proto_init() {
 	}
 	file_plugnmeet_room_artifacts_proto_init()
 	file_plugnmeet_auth_room_proto_init()
+	file_plugnmeet_common_api_proto_init()
 	file_plugnmeet_auth_artifact_proto_msgTypes[0].OneofWrappers = []any{}
 	file_plugnmeet_auth_artifact_proto_msgTypes[2].OneofWrappers = []any{}
 	file_plugnmeet_auth_artifact_proto_msgTypes[5].OneofWrappers = []any{}

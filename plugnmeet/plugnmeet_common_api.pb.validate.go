@@ -61,6 +61,8 @@ func (m *CommonResponse) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	// no validation rules for StatusCode
+
 	if len(errors) > 0 {
 		return CommonResponseMultiError(errors)
 	}

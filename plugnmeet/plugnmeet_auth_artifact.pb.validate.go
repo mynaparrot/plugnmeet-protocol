@@ -461,6 +461,8 @@ func (m *FetchArtifactsRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	// no validation rules for StatusCode
+
 	if all {
 		switch v := interface{}(m.GetResult()).(type) {
 		case interface{ ValidateAll() error }:
@@ -701,6 +703,8 @@ func (m *GetArtifactDownloadTokenRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	// no validation rules for StatusCode
+
 	if m.Token != nil {
 		// no validation rules for Token
 	}
@@ -916,6 +920,8 @@ func (m *DeleteArtifactRes) validate(all bool) error {
 
 	// no validation rules for Msg
 
+	// no validation rules for StatusCode
+
 	if len(errors) > 0 {
 		return DeleteArtifactResMultiError(errors)
 	}
@@ -1123,6 +1129,8 @@ func (m *ArtifactInfoRes) validate(all bool) error {
 	// no validation rules for Status
 
 	// no validation rules for Msg
+
+	// no validation rules for StatusCode
 
 	if m.ArtifactInfo != nil {
 

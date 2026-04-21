@@ -2051,7 +2051,8 @@ type CreateRoomRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	RoomInfo      *ActiveRoomInfo        `protobuf:"bytes,3,opt,name=room_info,json=roomInfo,proto3" json:"room_info,omitempty"`
+	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	RoomInfo      *ActiveRoomInfo        `protobuf:"bytes,4,opt,name=room_info,json=roomInfo,proto3" json:"room_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2100,6 +2101,13 @@ func (x *CreateRoomRes) GetMsg() string {
 	return ""
 }
 
+func (x *CreateRoomRes) GetStatusCode() StatusCode {
+	if x != nil {
+		return x.StatusCode
+	}
+	return StatusCode_UNKNOWN_STATUS
+}
+
 func (x *CreateRoomRes) GetRoomInfo() *ActiveRoomInfo {
 	if x != nil {
 		return x.RoomInfo
@@ -2111,7 +2119,7 @@ var File_plugnmeet_create_room_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\n" +
-	"\x1bplugnmeet_create_room.proto\x12\tplugnmeet\x1a\x19plugnmeet_gen_token.proto\x1a\x1bbuf/validate/validate.proto\x1a\x17plugnmeet_ingress.proto\x1a\x19plugnmeet_auth_room.proto\"\xfd\x02\n" +
+	"\x1bplugnmeet_create_room.proto\x12\tplugnmeet\x1a\x19plugnmeet_gen_token.proto\x1a\x1bbuf/validate/validate.proto\x1a\x17plugnmeet_ingress.proto\x1a\x19plugnmeet_auth_room.proto\x1a\x1aplugnmeet_common_api.proto\"\xfd\x02\n" +
 	"\rCreateRoomReq\x12\x9b\x01\n" +
 	"\aroom_id\x18\x01 \x01(\tB\x81\x01\xbaH~\xba\x01{\n" +
 	"\x0eroom_id_format\x12Groom_id should only contain ASCII letters (a-z A-Z), digits (0-9) or -_\x1a this.matches('^[a-zA-Z0-9-_]+$')R\x06roomId\x121\n" +
@@ -2365,11 +2373,13 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"is_enabled\x18\x03 \x01(\bB\a\xbaH\x04j\x02\b\x00R\tisEnabled\"=\n" +
 	"\rCopyrightConf\x12\x18\n" +
 	"\adisplay\x18\x01 \x01(\bR\adisplay\x12\x12\n" +
-	"\x04text\x18\x03 \x01(\tR\x04text\"q\n" +
+	"\x04text\x18\x03 \x01(\tR\x04text\"\xa9\x01\n" +
 	"\rCreateRoomRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
-	"\troom_info\x18\x03 \x01(\v2\x19.plugnmeet.ActiveRoomInfoR\broomInfoB\xa1\x01\n" +
+	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
+	"statusCode\x126\n" +
+	"\troom_info\x18\x04 \x01(\v2\x19.plugnmeet.ActiveRoomInfoR\broomInfoB\xa1\x01\n" +
 	"\rcom.plugnmeetB\x18PlugnmeetCreateRoomProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -2413,7 +2423,8 @@ var file_plugnmeet_create_room_proto_goTypes = []any{
 	nil,                                            // 24: plugnmeet.RoomMetadata.ExtraDataEntry
 	(*LockSettings)(nil),                           // 25: plugnmeet.LockSettings
 	(IngressInput)(0),                              // 26: plugnmeet.IngressInput
-	(*ActiveRoomInfo)(nil),                         // 27: plugnmeet.ActiveRoomInfo
+	(StatusCode)(0),                                // 27: plugnmeet.StatusCode
+	(*ActiveRoomInfo)(nil),                         // 28: plugnmeet.ActiveRoomInfo
 }
 var file_plugnmeet_create_room_proto_depIdxs = []int32{
 	1,  // 0: plugnmeet.CreateRoomReq.metadata:type_name -> plugnmeet.RoomMetadata
@@ -2441,12 +2452,13 @@ var file_plugnmeet_create_room_proto_depIdxs = []int32{
 	19, // 22: plugnmeet.InsightsFeatures.ai_features:type_name -> plugnmeet.InsightsAIFeatures
 	20, // 23: plugnmeet.InsightsAIFeatures.ai_text_chat_features:type_name -> plugnmeet.InsightsAITextChatFeatures
 	21, // 24: plugnmeet.InsightsAIFeatures.meeting_summarization_features:type_name -> plugnmeet.InsightsAIMeetingSummarizationFeatures
-	27, // 25: plugnmeet.CreateRoomRes.room_info:type_name -> plugnmeet.ActiveRoomInfo
-	26, // [26:26] is the sub-list for method output_type
-	26, // [26:26] is the sub-list for method input_type
-	26, // [26:26] is the sub-list for extension type_name
-	26, // [26:26] is the sub-list for extension extendee
-	0,  // [0:26] is the sub-list for field type_name
+	27, // 25: plugnmeet.CreateRoomRes.status_code:type_name -> plugnmeet.StatusCode
+	28, // 26: plugnmeet.CreateRoomRes.room_info:type_name -> plugnmeet.ActiveRoomInfo
+	27, // [27:27] is the sub-list for method output_type
+	27, // [27:27] is the sub-list for method input_type
+	27, // [27:27] is the sub-list for extension type_name
+	27, // [27:27] is the sub-list for extension extendee
+	0,  // [0:27] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_create_room_proto_init() }
@@ -2457,6 +2469,7 @@ func file_plugnmeet_create_room_proto_init() {
 	file_plugnmeet_gen_token_proto_init()
 	file_plugnmeet_ingress_proto_init()
 	file_plugnmeet_auth_room_proto_init()
+	file_plugnmeet_common_api_proto_init()
 	file_plugnmeet_create_room_proto_msgTypes[0].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[1].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[2].OneofWrappers = []any{}

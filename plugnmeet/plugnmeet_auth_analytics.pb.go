@@ -246,7 +246,8 @@ type FetchAnalyticsRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	Result        *FetchAnalyticsResult  `protobuf:"bytes,3,opt,name=result,proto3" json:"result,omitempty"`
+	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	Result        *FetchAnalyticsResult  `protobuf:"bytes,4,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -293,6 +294,13 @@ func (x *FetchAnalyticsRes) GetMsg() string {
 		return x.Msg
 	}
 	return ""
+}
+
+func (x *FetchAnalyticsRes) GetStatusCode() StatusCode {
+	if x != nil {
+		return x.StatusCode
+	}
+	return StatusCode_UNKNOWN_STATUS
 }
 
 func (x *FetchAnalyticsRes) GetResult() *FetchAnalyticsResult {
@@ -350,6 +358,7 @@ type DeleteAnalyticsRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -396,6 +405,13 @@ func (x *DeleteAnalyticsRes) GetMsg() string {
 		return x.Msg
 	}
 	return ""
+}
+
+func (x *DeleteAnalyticsRes) GetStatusCode() StatusCode {
+	if x != nil {
+		return x.StatusCode
+	}
+	return StatusCode_UNKNOWN_STATUS
 }
 
 type GetAnalyticsDownloadTokenReq struct {
@@ -446,7 +462,8 @@ type GetAnalyticsDownloadTokenRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	Token         *string                `protobuf:"bytes,3,opt,name=token,proto3,oneof" json:"token,omitempty"`
+	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	Token         *string                `protobuf:"bytes,4,opt,name=token,proto3,oneof" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -495,6 +512,13 @@ func (x *GetAnalyticsDownloadTokenRes) GetMsg() string {
 	return ""
 }
 
+func (x *GetAnalyticsDownloadTokenRes) GetStatusCode() StatusCode {
+	if x != nil {
+		return x.StatusCode
+	}
+	return StatusCode_UNKNOWN_STATUS
+}
+
 func (x *GetAnalyticsDownloadTokenRes) GetToken() string {
 	if x != nil && x.Token != nil {
 		return *x.Token
@@ -506,7 +530,7 @@ var File_plugnmeet_auth_analytics_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_auth_analytics_proto_rawDesc = "" +
 	"\n" +
-	"\x1eplugnmeet_auth_analytics.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\"s\n" +
+	"\x1eplugnmeet_auth_analytics.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\x1a\x1aplugnmeet_common_api.proto\"s\n" +
 	"\x11FetchAnalyticsReq\x12\x19\n" +
 	"\broom_ids\x18\x01 \x03(\tR\aroomIds\x12\x12\n" +
 	"\x04from\x18\x02 \x01(\rR\x04from\x12\x14\n" +
@@ -523,22 +547,28 @@ const file_plugnmeet_auth_analytics_proto_rawDesc = "" +
 	"\x04from\x18\x02 \x01(\rR\x04from\x12\x14\n" +
 	"\x05limit\x18\x03 \x01(\rR\x05limit\x12\x19\n" +
 	"\border_by\x18\x04 \x01(\tR\aorderBy\x12?\n" +
-	"\x0eanalytics_list\x18\x05 \x03(\v2\x18.plugnmeet.AnalyticsInfoR\ranalyticsList\"v\n" +
+	"\x0eanalytics_list\x18\x05 \x03(\v2\x18.plugnmeet.AnalyticsInfoR\ranalyticsList\"\xae\x01\n" +
 	"\x11FetchAnalyticsRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\x127\n" +
-	"\x06result\x18\x03 \x01(\v2\x1f.plugnmeet.FetchAnalyticsResultR\x06result\"5\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
+	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
+	"statusCode\x127\n" +
+	"\x06result\x18\x04 \x01(\v2\x1f.plugnmeet.FetchAnalyticsResultR\x06result\"5\n" +
 	"\x12DeleteAnalyticsReq\x12\x1f\n" +
-	"\afile_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x06fileId\">\n" +
+	"\afile_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x06fileId\"v\n" +
 	"\x12DeleteAnalyticsRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\"?\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
+	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
+	"statusCode\"?\n" +
 	"\x1cGetAnalyticsDownloadTokenReq\x12\x1f\n" +
-	"\afile_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x06fileId\"m\n" +
+	"\afile_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x06fileId\"\xa5\x01\n" +
 	"\x1cGetAnalyticsDownloadTokenRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x19\n" +
-	"\x05token\x18\x03 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
+	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
+	"statusCode\x12\x19\n" +
+	"\x05token\x18\x04 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
 	"\x06_tokenB\xa4\x01\n" +
 	"\rcom.plugnmeetB\x1bPlugnmeetAuthAnalyticsProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
@@ -564,15 +594,19 @@ var file_plugnmeet_auth_analytics_proto_goTypes = []any{
 	(*DeleteAnalyticsRes)(nil),           // 5: plugnmeet.DeleteAnalyticsRes
 	(*GetAnalyticsDownloadTokenReq)(nil), // 6: plugnmeet.GetAnalyticsDownloadTokenReq
 	(*GetAnalyticsDownloadTokenRes)(nil), // 7: plugnmeet.GetAnalyticsDownloadTokenRes
+	(StatusCode)(0),                      // 8: plugnmeet.StatusCode
 }
 var file_plugnmeet_auth_analytics_proto_depIdxs = []int32{
 	1, // 0: plugnmeet.FetchAnalyticsResult.analytics_list:type_name -> plugnmeet.AnalyticsInfo
-	2, // 1: plugnmeet.FetchAnalyticsRes.result:type_name -> plugnmeet.FetchAnalyticsResult
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	8, // 1: plugnmeet.FetchAnalyticsRes.status_code:type_name -> plugnmeet.StatusCode
+	2, // 2: plugnmeet.FetchAnalyticsRes.result:type_name -> plugnmeet.FetchAnalyticsResult
+	8, // 3: plugnmeet.DeleteAnalyticsRes.status_code:type_name -> plugnmeet.StatusCode
+	8, // 4: plugnmeet.GetAnalyticsDownloadTokenRes.status_code:type_name -> plugnmeet.StatusCode
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_auth_analytics_proto_init() }
@@ -580,6 +614,7 @@ func file_plugnmeet_auth_analytics_proto_init() {
 	if File_plugnmeet_auth_analytics_proto != nil {
 		return
 	}
+	file_plugnmeet_common_api_proto_init()
 	file_plugnmeet_auth_analytics_proto_msgTypes[7].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
