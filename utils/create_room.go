@@ -226,9 +226,11 @@ func SetRoomDefaultLockSettings(r *plugnmeet.CreateRoomReq) {
 }
 
 type RoomDefaultSettings struct {
-	MaxParticipants     *uint32 `yaml:"max_participants"`
-	MaxDuration         *uint64 `yaml:"max_duration"`
-	MaxNumBreakoutRooms *uint32 `yaml:"max_num_breakout_rooms"`
+	MaxParticipants                    *uint32 `yaml:"max_participants"`
+	MaxDuration                        *uint64 `yaml:"max_duration"`
+	MaxNumBreakoutRooms                *uint32 `yaml:"max_num_breakout_rooms"`
+	MaxPreloadedWhiteboardFileSize     *string `yaml:"max_preloaded_wb_file_size"`
+	MaxPreloadedWhiteboardFileSizeByte *uint64 `yaml:"-"`
 }
 
 func SetDefaultRoomSettings(s *RoomDefaultSettings, r *plugnmeet.CreateRoomReq) {

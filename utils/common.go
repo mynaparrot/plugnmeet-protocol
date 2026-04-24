@@ -8,8 +8,10 @@ import (
 	rd "math/rand"
 	"path/filepath"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
+	"unicode"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/livekit/protocol/livekit"
@@ -140,4 +142,44 @@ func GenerateRandomStrings(n int) string {
 	b := make([]byte, n+2)
 	r.Read(b)
 	return fmt.Sprintf("%x", b)[2 : n+2]
+}
+
+func ParseFileSizeToBytes(sizeStr string) (uint64, error) {
+	sizeStr = strings.TrimSpace(strings.ToLower(sizeStr))
+	var multiplier uint64 = 1
+	var numPart string
+
+	for i, r := range sizeStr {
+		if unicode.IsDigit(r) || r == '.' {
+			numPart += string(r)
+		} else {
+			unit := strings.TrimSpace(sizeStr[i:])
+			switch unit {
+			case "kb", "k":
+				multiplier = 1024
+			case "mb", "m":
+				multiplier = 1024 * 1024
+			case "gb", "g":
+				multiplier = 1024 * 1024 * 1024
+			case "tb", "t":
+				multiplier = 1024 * 1024 * 1024 * 1024
+			case "b", "":
+				multiplier = 1
+			default:
+				return 0, fmt.Errorf("invalid size unit: %s", unit)
+			}
+			break
+		}
+	}
+
+	if numPart == "" {
+		return 0, fmt.Errorf("invalid size format: no number found")
+	}
+
+	size, err := strconv.ParseFloat(numPart, 64)
+	if err != nil {
+		return 0, fmt.Errorf("invalid size format: %w", err)
+	}
+
+	return uint64(size * float64(multiplier)), nil
 }
