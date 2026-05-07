@@ -8,6 +8,7 @@ require (
 	github.com/gammazero/workerpool v1.2.1
 	github.com/go-jose/go-jose/v4 v4.1.4
 	github.com/gofiber/fiber/v2 v2.52.13
+	github.com/gofiber/fiber/v3 v3.2.0
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-retryablehttp v0.7.8
 	github.com/livekit/protocol v1.45.8
@@ -65,7 +66,7 @@ require (
 	github.com/redis/go-redis/v9 v9.18.0 // indirect
 	github.com/twitchtv/twirp v8.1.3+incompatible // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.69.0 // indirect
+	github.com/valyala/fasthttp v1.70.0 // indirect
 	github.com/wlynxg/anet v0.0.5 // indirect
 	github.com/zeebo/xxh3 v1.1.0 // indirect
 	go.opentelemetry.io/otel v1.43.0 // indirect
