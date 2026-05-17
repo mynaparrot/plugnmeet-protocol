@@ -22,6 +22,7 @@ enum StatusCode {
   USER_NOT_FOUND = 11;
   USER_BLOCKED = 12;
   USER_NOT_ACTIVE = 13;
+  ROOM_NOT_ACTIVE = 14;
 }
 
 message CommonResponse {

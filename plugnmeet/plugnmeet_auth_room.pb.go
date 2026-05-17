@@ -1095,11 +1095,229 @@ func (x *GetClientFilesRes) GetStaticAssetsPath() string {
 	return ""
 }
 
+type BroadcastToRoomReq struct {
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	RoomId       string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	OnlyToAdmins bool                   `protobuf:"varint,2,opt,name=only_to_admins,json=onlyToAdmins,proto3" json:"only_to_admins,omitempty"`
+	// Types that are valid to be assigned to Payload:
+	//
+	//	*BroadcastToRoomReq_ChatMsg
+	//	*BroadcastToRoomReq_NotificationMsg
+	Payload       isBroadcastToRoomReq_Payload `protobuf_oneof:"payload"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BroadcastToRoomReq) Reset() {
+	*x = BroadcastToRoomReq{}
+	mi := &file_plugnmeet_auth_room_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BroadcastToRoomReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BroadcastToRoomReq) ProtoMessage() {}
+
+func (x *BroadcastToRoomReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_auth_room_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BroadcastToRoomReq.ProtoReflect.Descriptor instead.
+func (*BroadcastToRoomReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_auth_room_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *BroadcastToRoomReq) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
+func (x *BroadcastToRoomReq) GetOnlyToAdmins() bool {
+	if x != nil {
+		return x.OnlyToAdmins
+	}
+	return false
+}
+
+func (x *BroadcastToRoomReq) GetPayload() isBroadcastToRoomReq_Payload {
+	if x != nil {
+		return x.Payload
+	}
+	return nil
+}
+
+func (x *BroadcastToRoomReq) GetChatMsg() *BroadcastToRoomChatMessage {
+	if x != nil {
+		if x, ok := x.Payload.(*BroadcastToRoomReq_ChatMsg); ok {
+			return x.ChatMsg
+		}
+	}
+	return nil
+}
+
+func (x *BroadcastToRoomReq) GetNotificationMsg() *BroadcastToRoomNotificationMsg {
+	if x != nil {
+		if x, ok := x.Payload.(*BroadcastToRoomReq_NotificationMsg); ok {
+			return x.NotificationMsg
+		}
+	}
+	return nil
+}
+
+type isBroadcastToRoomReq_Payload interface {
+	isBroadcastToRoomReq_Payload()
+}
+
+type BroadcastToRoomReq_ChatMsg struct {
+	ChatMsg *BroadcastToRoomChatMessage `protobuf:"bytes,3,opt,name=chat_msg,json=chatMsg,proto3,oneof"`
+}
+
+type BroadcastToRoomReq_NotificationMsg struct {
+	NotificationMsg *BroadcastToRoomNotificationMsg `protobuf:"bytes,4,opt,name=notification_msg,json=notificationMsg,proto3,oneof"`
+}
+
+func (*BroadcastToRoomReq_ChatMsg) isBroadcastToRoomReq_Payload() {}
+
+func (*BroadcastToRoomReq_NotificationMsg) isBroadcastToRoomReq_Payload() {}
+
+type BroadcastToRoomChatMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	ToUserId      *string                `protobuf:"bytes,2,opt,name=to_user_id,json=toUserId,proto3,oneof" json:"to_user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BroadcastToRoomChatMessage) Reset() {
+	*x = BroadcastToRoomChatMessage{}
+	mi := &file_plugnmeet_auth_room_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BroadcastToRoomChatMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BroadcastToRoomChatMessage) ProtoMessage() {}
+
+func (x *BroadcastToRoomChatMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_auth_room_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BroadcastToRoomChatMessage.ProtoReflect.Descriptor instead.
+func (*BroadcastToRoomChatMessage) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_auth_room_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *BroadcastToRoomChatMessage) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *BroadcastToRoomChatMessage) GetToUserId() string {
+	if x != nil && x.ToUserId != nil {
+		return *x.ToUserId
+	}
+	return ""
+}
+
+type BroadcastToRoomNotificationMsg struct {
+	state         protoimpl.MessageState      `protogen:"open.v1"`
+	Text          string                      `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
+	Type          NatsSystemNotificationTypes `protobuf:"varint,2,opt,name=type,proto3,enum=plugnmeet.NatsSystemNotificationTypes" json:"type,omitempty"`
+	WithSound     bool                        `protobuf:"varint,3,opt,name=with_sound,json=withSound,proto3" json:"with_sound,omitempty"`
+	ToUserId      *string                     `protobuf:"bytes,4,opt,name=to_user_id,json=toUserId,proto3,oneof" json:"to_user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BroadcastToRoomNotificationMsg) Reset() {
+	*x = BroadcastToRoomNotificationMsg{}
+	mi := &file_plugnmeet_auth_room_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BroadcastToRoomNotificationMsg) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BroadcastToRoomNotificationMsg) ProtoMessage() {}
+
+func (x *BroadcastToRoomNotificationMsg) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_auth_room_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BroadcastToRoomNotificationMsg.ProtoReflect.Descriptor instead.
+func (*BroadcastToRoomNotificationMsg) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_auth_room_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *BroadcastToRoomNotificationMsg) GetText() string {
+	if x != nil {
+		return x.Text
+	}
+	return ""
+}
+
+func (x *BroadcastToRoomNotificationMsg) GetType() NatsSystemNotificationTypes {
+	if x != nil {
+		return x.Type
+	}
+	return NatsSystemNotificationTypes_NATS_SYSTEM_NOTIFICATION_INFO
+}
+
+func (x *BroadcastToRoomNotificationMsg) GetWithSound() bool {
+	if x != nil {
+		return x.WithSound
+	}
+	return false
+}
+
+func (x *BroadcastToRoomNotificationMsg) GetToUserId() string {
+	if x != nil && x.ToUserId != nil {
+		return *x.ToUserId
+	}
+	return ""
+}
+
 var File_plugnmeet_auth_room_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_auth_room_proto_rawDesc = "" +
 	"\n" +
-	"\x19plugnmeet_auth_room.proto\x12\tplugnmeet\x1a\x14livekit_models.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1aplugnmeet_common_api.proto\"7\n" +
+	"\x19plugnmeet_auth_room.proto\x12\tplugnmeet\x1a\x14livekit_models.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1aplugnmeet_common_api.proto\x1a\x18plugnmeet_nats_msg.proto\"7\n" +
 	"\x14GetActiveRoomInfoReq\x12\x1f\n" +
 	"\aroom_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x06roomId\"\x87\x02\n" +
 	"\x11ActiveRoomInfoRes\x12\x16\n" +
@@ -1203,7 +1421,28 @@ const file_plugnmeet_auth_room_proto_rawDesc = "" +
 	"\tcss_files\x18\x06 \x03(\tR\bcssFiles\x12\x19\n" +
 	"\bjs_files\x18\a \x03(\tR\ajsFiles\x121\n" +
 	"\x12static_assets_path\x18\b \x01(\tH\x00R\x10staticAssetsPath\x88\x01\x01B\x15\n" +
-	"\x13_static_assets_pathB\x9f\x01\n" +
+	"\x13_static_assets_path\"\xa7\x02\n" +
+	"\x12BroadcastToRoomReq\x12\x1f\n" +
+	"\aroom_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x06roomId\x12$\n" +
+	"\x0eonly_to_admins\x18\x02 \x01(\bR\fonlyToAdmins\x12B\n" +
+	"\bchat_msg\x18\x03 \x01(\v2%.plugnmeet.BroadcastToRoomChatMessageH\x00R\achatMsg\x12V\n" +
+	"\x10notification_msg\x18\x04 \x01(\v2).plugnmeet.BroadcastToRoomNotificationMsgH\x00R\x0fnotificationMsg:#\xbaH \"\x1e\n" +
+	"\bchat_msg\n" +
+	"\x10notification_msg\x10\x01B\t\n" +
+	"\apayload\"p\n" +
+	"\x1aBroadcastToRoomChatMessage\x12 \n" +
+	"\amessage\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\amessage\x12!\n" +
+	"\n" +
+	"to_user_id\x18\x02 \x01(\tH\x00R\btoUserId\x88\x01\x01B\r\n" +
+	"\v_to_user_id\"\xc9\x01\n" +
+	"\x1eBroadcastToRoomNotificationMsg\x12\x1a\n" +
+	"\x04text\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x04text\x12:\n" +
+	"\x04type\x18\x02 \x01(\x0e2&.plugnmeet.NatsSystemNotificationTypesR\x04type\x12\x1d\n" +
+	"\n" +
+	"with_sound\x18\x03 \x01(\bR\twithSound\x12!\n" +
+	"\n" +
+	"to_user_id\x18\x04 \x01(\tH\x00R\btoUserId\x88\x01\x01B\r\n" +
+	"\v_to_user_idB\x9f\x01\n" +
 	"\rcom.plugnmeetB\x16PlugnmeetAuthRoomProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -1218,47 +1457,54 @@ func file_plugnmeet_auth_room_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_auth_room_proto_rawDescData
 }
 
-var file_plugnmeet_auth_room_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_plugnmeet_auth_room_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_plugnmeet_auth_room_proto_goTypes = []any{
-	(*GetActiveRoomInfoReq)(nil),      // 0: plugnmeet.GetActiveRoomInfoReq
-	(*ActiveRoomInfoRes)(nil),         // 1: plugnmeet.ActiveRoomInfoRes
-	(*ActiveRoomInfo)(nil),            // 2: plugnmeet.ActiveRoomInfo
-	(*RoomEndReq)(nil),                // 3: plugnmeet.RoomEndReq
-	(*RoomEndRes)(nil),                // 4: plugnmeet.RoomEndRes
-	(*IsRoomActiveReq)(nil),           // 5: plugnmeet.IsRoomActiveReq
-	(*IsRoomActiveRes)(nil),           // 6: plugnmeet.IsRoomActiveRes
-	(*ActiveRoomWithParticipant)(nil), // 7: plugnmeet.ActiveRoomWithParticipant
-	(*GetActiveRoomInfoRes)(nil),      // 8: plugnmeet.GetActiveRoomInfoRes
-	(*GetActiveRoomsInfoRes)(nil),     // 9: plugnmeet.GetActiveRoomsInfoRes
-	(*PastRoomInfo)(nil),              // 10: plugnmeet.PastRoomInfo
-	(*FetchPastRoomsReq)(nil),         // 11: plugnmeet.FetchPastRoomsReq
-	(*FetchPastRoomsResult)(nil),      // 12: plugnmeet.FetchPastRoomsResult
-	(*FetchPastRoomsRes)(nil),         // 13: plugnmeet.FetchPastRoomsRes
-	(*GetClientFilesRes)(nil),         // 14: plugnmeet.GetClientFilesRes
-	(StatusCode)(0),                   // 15: plugnmeet.StatusCode
-	(*livekit.ParticipantInfo)(nil),   // 16: livekit.ParticipantInfo
+	(*GetActiveRoomInfoReq)(nil),           // 0: plugnmeet.GetActiveRoomInfoReq
+	(*ActiveRoomInfoRes)(nil),              // 1: plugnmeet.ActiveRoomInfoRes
+	(*ActiveRoomInfo)(nil),                 // 2: plugnmeet.ActiveRoomInfo
+	(*RoomEndReq)(nil),                     // 3: plugnmeet.RoomEndReq
+	(*RoomEndRes)(nil),                     // 4: plugnmeet.RoomEndRes
+	(*IsRoomActiveReq)(nil),                // 5: plugnmeet.IsRoomActiveReq
+	(*IsRoomActiveRes)(nil),                // 6: plugnmeet.IsRoomActiveRes
+	(*ActiveRoomWithParticipant)(nil),      // 7: plugnmeet.ActiveRoomWithParticipant
+	(*GetActiveRoomInfoRes)(nil),           // 8: plugnmeet.GetActiveRoomInfoRes
+	(*GetActiveRoomsInfoRes)(nil),          // 9: plugnmeet.GetActiveRoomsInfoRes
+	(*PastRoomInfo)(nil),                   // 10: plugnmeet.PastRoomInfo
+	(*FetchPastRoomsReq)(nil),              // 11: plugnmeet.FetchPastRoomsReq
+	(*FetchPastRoomsResult)(nil),           // 12: plugnmeet.FetchPastRoomsResult
+	(*FetchPastRoomsRes)(nil),              // 13: plugnmeet.FetchPastRoomsRes
+	(*GetClientFilesRes)(nil),              // 14: plugnmeet.GetClientFilesRes
+	(*BroadcastToRoomReq)(nil),             // 15: plugnmeet.BroadcastToRoomReq
+	(*BroadcastToRoomChatMessage)(nil),     // 16: plugnmeet.BroadcastToRoomChatMessage
+	(*BroadcastToRoomNotificationMsg)(nil), // 17: plugnmeet.BroadcastToRoomNotificationMsg
+	(StatusCode)(0),                        // 18: plugnmeet.StatusCode
+	(*livekit.ParticipantInfo)(nil),        // 19: livekit.ParticipantInfo
+	(NatsSystemNotificationTypes)(0),       // 20: plugnmeet.NatsSystemNotificationTypes
 }
 var file_plugnmeet_auth_room_proto_depIdxs = []int32{
-	15, // 0: plugnmeet.ActiveRoomInfoRes.status_code:type_name -> plugnmeet.StatusCode
+	18, // 0: plugnmeet.ActiveRoomInfoRes.status_code:type_name -> plugnmeet.StatusCode
 	2,  // 1: plugnmeet.ActiveRoomInfoRes.room_info:type_name -> plugnmeet.ActiveRoomInfo
-	16, // 2: plugnmeet.ActiveRoomInfoRes.participants_info:type_name -> livekit.ParticipantInfo
-	15, // 3: plugnmeet.RoomEndRes.status_code:type_name -> plugnmeet.StatusCode
-	15, // 4: plugnmeet.IsRoomActiveRes.status_code:type_name -> plugnmeet.StatusCode
+	19, // 2: plugnmeet.ActiveRoomInfoRes.participants_info:type_name -> livekit.ParticipantInfo
+	18, // 3: plugnmeet.RoomEndRes.status_code:type_name -> plugnmeet.StatusCode
+	18, // 4: plugnmeet.IsRoomActiveRes.status_code:type_name -> plugnmeet.StatusCode
 	2,  // 5: plugnmeet.ActiveRoomWithParticipant.room_info:type_name -> plugnmeet.ActiveRoomInfo
-	16, // 6: plugnmeet.ActiveRoomWithParticipant.participants_info:type_name -> livekit.ParticipantInfo
-	15, // 7: plugnmeet.GetActiveRoomInfoRes.status_code:type_name -> plugnmeet.StatusCode
+	19, // 6: plugnmeet.ActiveRoomWithParticipant.participants_info:type_name -> livekit.ParticipantInfo
+	18, // 7: plugnmeet.GetActiveRoomInfoRes.status_code:type_name -> plugnmeet.StatusCode
 	7,  // 8: plugnmeet.GetActiveRoomInfoRes.room:type_name -> plugnmeet.ActiveRoomWithParticipant
-	15, // 9: plugnmeet.GetActiveRoomsInfoRes.status_code:type_name -> plugnmeet.StatusCode
+	18, // 9: plugnmeet.GetActiveRoomsInfoRes.status_code:type_name -> plugnmeet.StatusCode
 	7,  // 10: plugnmeet.GetActiveRoomsInfoRes.rooms:type_name -> plugnmeet.ActiveRoomWithParticipant
 	10, // 11: plugnmeet.FetchPastRoomsResult.rooms_list:type_name -> plugnmeet.PastRoomInfo
-	15, // 12: plugnmeet.FetchPastRoomsRes.status_code:type_name -> plugnmeet.StatusCode
+	18, // 12: plugnmeet.FetchPastRoomsRes.status_code:type_name -> plugnmeet.StatusCode
 	12, // 13: plugnmeet.FetchPastRoomsRes.result:type_name -> plugnmeet.FetchPastRoomsResult
-	15, // 14: plugnmeet.GetClientFilesRes.status_code:type_name -> plugnmeet.StatusCode
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	18, // 14: plugnmeet.GetClientFilesRes.status_code:type_name -> plugnmeet.StatusCode
+	16, // 15: plugnmeet.BroadcastToRoomReq.chat_msg:type_name -> plugnmeet.BroadcastToRoomChatMessage
+	17, // 16: plugnmeet.BroadcastToRoomReq.notification_msg:type_name -> plugnmeet.BroadcastToRoomNotificationMsg
+	20, // 17: plugnmeet.BroadcastToRoomNotificationMsg.type:type_name -> plugnmeet.NatsSystemNotificationTypes
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_auth_room_proto_init() }
@@ -1267,17 +1513,24 @@ func file_plugnmeet_auth_room_proto_init() {
 		return
 	}
 	file_plugnmeet_common_api_proto_init()
+	file_plugnmeet_nats_msg_proto_init()
 	file_plugnmeet_auth_room_proto_msgTypes[1].OneofWrappers = []any{}
 	file_plugnmeet_auth_room_proto_msgTypes[7].OneofWrappers = []any{}
 	file_plugnmeet_auth_room_proto_msgTypes[10].OneofWrappers = []any{}
 	file_plugnmeet_auth_room_proto_msgTypes[14].OneofWrappers = []any{}
+	file_plugnmeet_auth_room_proto_msgTypes[15].OneofWrappers = []any{
+		(*BroadcastToRoomReq_ChatMsg)(nil),
+		(*BroadcastToRoomReq_NotificationMsg)(nil),
+	}
+	file_plugnmeet_auth_room_proto_msgTypes[16].OneofWrappers = []any{}
+	file_plugnmeet_auth_room_proto_msgTypes[17].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_auth_room_proto_rawDesc), len(file_plugnmeet_auth_room_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

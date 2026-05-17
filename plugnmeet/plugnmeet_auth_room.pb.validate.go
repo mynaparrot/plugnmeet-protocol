@@ -1919,3 +1919,417 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetClientFilesResValidationError{}
+
+// Validate checks the field values on BroadcastToRoomReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BroadcastToRoomReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BroadcastToRoomReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BroadcastToRoomReqMultiError, or nil if none found.
+func (m *BroadcastToRoomReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BroadcastToRoomReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomId
+
+	// no validation rules for OnlyToAdmins
+
+	switch v := m.Payload.(type) {
+	case *BroadcastToRoomReq_ChatMsg:
+		if v == nil {
+			err := BroadcastToRoomReqValidationError{
+				field:  "Payload",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetChatMsg()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, BroadcastToRoomReqValidationError{
+						field:  "ChatMsg",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, BroadcastToRoomReqValidationError{
+						field:  "ChatMsg",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetChatMsg()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return BroadcastToRoomReqValidationError{
+					field:  "ChatMsg",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *BroadcastToRoomReq_NotificationMsg:
+		if v == nil {
+			err := BroadcastToRoomReqValidationError{
+				field:  "Payload",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetNotificationMsg()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, BroadcastToRoomReqValidationError{
+						field:  "NotificationMsg",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, BroadcastToRoomReqValidationError{
+						field:  "NotificationMsg",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetNotificationMsg()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return BroadcastToRoomReqValidationError{
+					field:  "NotificationMsg",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		_ = v // ensures v is used
+	}
+
+	if len(errors) > 0 {
+		return BroadcastToRoomReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// BroadcastToRoomReqMultiError is an error wrapping multiple validation errors
+// returned by BroadcastToRoomReq.ValidateAll() if the designated constraints
+// aren't met.
+type BroadcastToRoomReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BroadcastToRoomReqMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BroadcastToRoomReqMultiError) AllErrors() []error { return m }
+
+// BroadcastToRoomReqValidationError is the validation error returned by
+// BroadcastToRoomReq.Validate if the designated constraints aren't met.
+type BroadcastToRoomReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BroadcastToRoomReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BroadcastToRoomReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BroadcastToRoomReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BroadcastToRoomReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BroadcastToRoomReqValidationError) ErrorName() string {
+	return "BroadcastToRoomReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BroadcastToRoomReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBroadcastToRoomReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BroadcastToRoomReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BroadcastToRoomReqValidationError{}
+
+// Validate checks the field values on BroadcastToRoomChatMessage with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BroadcastToRoomChatMessage) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BroadcastToRoomChatMessage with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BroadcastToRoomChatMessageMultiError, or nil if none found.
+func (m *BroadcastToRoomChatMessage) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BroadcastToRoomChatMessage) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Message
+
+	if m.ToUserId != nil {
+		// no validation rules for ToUserId
+	}
+
+	if len(errors) > 0 {
+		return BroadcastToRoomChatMessageMultiError(errors)
+	}
+
+	return nil
+}
+
+// BroadcastToRoomChatMessageMultiError is an error wrapping multiple
+// validation errors returned by BroadcastToRoomChatMessage.ValidateAll() if
+// the designated constraints aren't met.
+type BroadcastToRoomChatMessageMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BroadcastToRoomChatMessageMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BroadcastToRoomChatMessageMultiError) AllErrors() []error { return m }
+
+// BroadcastToRoomChatMessageValidationError is the validation error returned
+// by BroadcastToRoomChatMessage.Validate if the designated constraints aren't met.
+type BroadcastToRoomChatMessageValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BroadcastToRoomChatMessageValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BroadcastToRoomChatMessageValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BroadcastToRoomChatMessageValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BroadcastToRoomChatMessageValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BroadcastToRoomChatMessageValidationError) ErrorName() string {
+	return "BroadcastToRoomChatMessageValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BroadcastToRoomChatMessageValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBroadcastToRoomChatMessage.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BroadcastToRoomChatMessageValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BroadcastToRoomChatMessageValidationError{}
+
+// Validate checks the field values on BroadcastToRoomNotificationMsg with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BroadcastToRoomNotificationMsg) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BroadcastToRoomNotificationMsg with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// BroadcastToRoomNotificationMsgMultiError, or nil if none found.
+func (m *BroadcastToRoomNotificationMsg) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BroadcastToRoomNotificationMsg) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Text
+
+	// no validation rules for Type
+
+	// no validation rules for WithSound
+
+	if m.ToUserId != nil {
+		// no validation rules for ToUserId
+	}
+
+	if len(errors) > 0 {
+		return BroadcastToRoomNotificationMsgMultiError(errors)
+	}
+
+	return nil
+}
+
+// BroadcastToRoomNotificationMsgMultiError is an error wrapping multiple
+// validation errors returned by BroadcastToRoomNotificationMsg.ValidateAll()
+// if the designated constraints aren't met.
+type BroadcastToRoomNotificationMsgMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BroadcastToRoomNotificationMsgMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BroadcastToRoomNotificationMsgMultiError) AllErrors() []error { return m }
+
+// BroadcastToRoomNotificationMsgValidationError is the validation error
+// returned by BroadcastToRoomNotificationMsg.Validate if the designated
+// constraints aren't met.
+type BroadcastToRoomNotificationMsgValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BroadcastToRoomNotificationMsgValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BroadcastToRoomNotificationMsgValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BroadcastToRoomNotificationMsgValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BroadcastToRoomNotificationMsgValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BroadcastToRoomNotificationMsgValidationError) ErrorName() string {
+	return "BroadcastToRoomNotificationMsgValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BroadcastToRoomNotificationMsgValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBroadcastToRoomNotificationMsg.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BroadcastToRoomNotificationMsgValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BroadcastToRoomNotificationMsgValidationError{}

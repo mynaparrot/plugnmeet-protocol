@@ -38,6 +38,7 @@ const (
 	StatusCode_USER_NOT_FOUND             StatusCode = 11
 	StatusCode_USER_BLOCKED               StatusCode = 12
 	StatusCode_USER_NOT_ACTIVE            StatusCode = 13
+	StatusCode_ROOM_NOT_ACTIVE            StatusCode = 14
 )
 
 // Enum value maps for StatusCode.
@@ -57,6 +58,7 @@ var (
 		11: "USER_NOT_FOUND",
 		12: "USER_BLOCKED",
 		13: "USER_NOT_ACTIVE",
+		14: "ROOM_NOT_ACTIVE",
 	}
 	StatusCode_value = map[string]int32{
 		"UNKNOWN_STATUS":             0,
@@ -73,6 +75,7 @@ var (
 		"USER_NOT_FOUND":             11,
 		"USER_BLOCKED":               12,
 		"USER_NOT_ACTIVE":            13,
+		"ROOM_NOT_ACTIVE":            14,
 	}
 )
 
@@ -2230,7 +2233,7 @@ const file_plugnmeet_common_api_proto_rawDesc = "" +
 	"\x05files\x18\x03 \x03(\v2#.plugnmeet.RoomUploadedFileMetadataR\x05files\"Y\n" +
 	"\x12EnableSipDialInReq\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12*\n" +
-	"\x11hide_phone_number\x18\x02 \x01(\bR\x0fhidePhoneNumber*\xb8\x02\n" +
+	"\x11hide_phone_number\x18\x02 \x01(\bR\x0fhidePhoneNumber*\xcd\x02\n" +
 	"\n" +
 	"StatusCode\x12\x12\n" +
 	"\x0eUNKNOWN_STATUS\x10\x00\x12\v\n" +
@@ -2247,7 +2250,8 @@ const file_plugnmeet_common_api_proto_rawDesc = "" +
 	"\x12\x12\n" +
 	"\x0eUSER_NOT_FOUND\x10\v\x12\x10\n" +
 	"\fUSER_BLOCKED\x10\f\x12\x13\n" +
-	"\x0fUSER_NOT_ACTIVE\x10\r*.\n" +
+	"\x0fUSER_NOT_ACTIVE\x10\r\x12\x13\n" +
+	"\x0fROOM_NOT_ACTIVE\x10\x0e*.\n" +
 	"\x13SwitchPresenterTask\x12\v\n" +
 	"\aPROMOTE\x10\x00\x12\n" +
 	"\n" +

@@ -7,6 +7,7 @@ option php_namespace = "Mynaparrot\\PlugnmeetProto";
 import "livekit_models.proto";
 import "buf/validate/validate.proto";
 import "plugnmeet_common_api.proto";
+import "plugnmeet_nats_msg.proto";
 
 message GetActiveRoomInfoReq {
   string room_id = 1 [(buf.validate.field).required = true];
@@ -117,4 +118,31 @@ message GetClientFilesRes {
   repeated string css_files = 6;
   repeated string js_files = 7;
   optional string static_assets_path = 8;
+}
+
+message BroadcastToRoomReq {
+  option (buf.validate.message).oneof = {
+    fields: ["chat_msg", "notification_msg"],
+    required: true
+  };
+
+  string room_id = 1 [(buf.validate.field).required = true];
+  bool only_to_admins = 2;
+
+  oneof payload {
+    BroadcastToRoomChatMessage chat_msg = 3;
+    BroadcastToRoomNotificationMsg notification_msg = 4;
+  }
+}
+
+message BroadcastToRoomChatMessage {
+  string message = 1 [(buf.validate.field).required = true];
+  optional string to_user_id = 2;
+}
+
+message BroadcastToRoomNotificationMsg {
+  string text = 1 [(buf.validate.field).required = true];
+  NatsSystemNotificationTypes type = 2;
+  bool with_sound = 3;
+  optional string to_user_id = 4;
 }
