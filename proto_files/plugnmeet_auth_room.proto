@@ -128,21 +128,20 @@ message BroadcastToRoomReq {
 
   string room_id = 1 [(buf.validate.field).required = true];
   bool only_to_admins = 2;
+  optional string to_user_id = 3;
 
   oneof payload {
-    BroadcastToRoomChatMessage chat_msg = 3;
-    BroadcastToRoomNotificationMsg notification_msg = 4;
+    BroadcastToRoomChatMessage chat_msg = 4;
+    BroadcastToRoomNotificationMsg notification_msg = 5;
   }
 }
 
 message BroadcastToRoomChatMessage {
   string message = 1 [(buf.validate.field).required = true];
-  optional string to_user_id = 2;
 }
 
 message BroadcastToRoomNotificationMsg {
   string text = 1 [(buf.validate.field).required = true];
   NatsSystemNotificationTypes type = 2;
   bool with_sound = 3;
-  optional string to_user_id = 4;
 }

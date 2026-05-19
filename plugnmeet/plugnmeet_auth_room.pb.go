@@ -1099,6 +1099,7 @@ type BroadcastToRoomReq struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
 	RoomId       string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
 	OnlyToAdmins bool                   `protobuf:"varint,2,opt,name=only_to_admins,json=onlyToAdmins,proto3" json:"only_to_admins,omitempty"`
+	ToUserId     *string                `protobuf:"bytes,3,opt,name=to_user_id,json=toUserId,proto3,oneof" json:"to_user_id,omitempty"`
 	// Types that are valid to be assigned to Payload:
 	//
 	//	*BroadcastToRoomReq_ChatMsg
@@ -1152,6 +1153,13 @@ func (x *BroadcastToRoomReq) GetOnlyToAdmins() bool {
 	return false
 }
 
+func (x *BroadcastToRoomReq) GetToUserId() string {
+	if x != nil && x.ToUserId != nil {
+		return *x.ToUserId
+	}
+	return ""
+}
+
 func (x *BroadcastToRoomReq) GetPayload() isBroadcastToRoomReq_Payload {
 	if x != nil {
 		return x.Payload
@@ -1182,11 +1190,11 @@ type isBroadcastToRoomReq_Payload interface {
 }
 
 type BroadcastToRoomReq_ChatMsg struct {
-	ChatMsg *BroadcastToRoomChatMessage `protobuf:"bytes,3,opt,name=chat_msg,json=chatMsg,proto3,oneof"`
+	ChatMsg *BroadcastToRoomChatMessage `protobuf:"bytes,4,opt,name=chat_msg,json=chatMsg,proto3,oneof"`
 }
 
 type BroadcastToRoomReq_NotificationMsg struct {
-	NotificationMsg *BroadcastToRoomNotificationMsg `protobuf:"bytes,4,opt,name=notification_msg,json=notificationMsg,proto3,oneof"`
+	NotificationMsg *BroadcastToRoomNotificationMsg `protobuf:"bytes,5,opt,name=notification_msg,json=notificationMsg,proto3,oneof"`
 }
 
 func (*BroadcastToRoomReq_ChatMsg) isBroadcastToRoomReq_Payload() {}
@@ -1196,7 +1204,6 @@ func (*BroadcastToRoomReq_NotificationMsg) isBroadcastToRoomReq_Payload() {}
 type BroadcastToRoomChatMessage struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
-	ToUserId      *string                `protobuf:"bytes,2,opt,name=to_user_id,json=toUserId,proto3,oneof" json:"to_user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1238,19 +1245,11 @@ func (x *BroadcastToRoomChatMessage) GetMessage() string {
 	return ""
 }
 
-func (x *BroadcastToRoomChatMessage) GetToUserId() string {
-	if x != nil && x.ToUserId != nil {
-		return *x.ToUserId
-	}
-	return ""
-}
-
 type BroadcastToRoomNotificationMsg struct {
 	state         protoimpl.MessageState      `protogen:"open.v1"`
 	Text          string                      `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
 	Type          NatsSystemNotificationTypes `protobuf:"varint,2,opt,name=type,proto3,enum=plugnmeet.NatsSystemNotificationTypes" json:"type,omitempty"`
 	WithSound     bool                        `protobuf:"varint,3,opt,name=with_sound,json=withSound,proto3" json:"with_sound,omitempty"`
-	ToUserId      *string                     `protobuf:"bytes,4,opt,name=to_user_id,json=toUserId,proto3,oneof" json:"to_user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1304,13 +1303,6 @@ func (x *BroadcastToRoomNotificationMsg) GetWithSound() bool {
 		return x.WithSound
 	}
 	return false
-}
-
-func (x *BroadcastToRoomNotificationMsg) GetToUserId() string {
-	if x != nil && x.ToUserId != nil {
-		return *x.ToUserId
-	}
-	return ""
 }
 
 var File_plugnmeet_auth_room_proto protoreflect.FileDescriptor
@@ -1421,28 +1413,25 @@ const file_plugnmeet_auth_room_proto_rawDesc = "" +
 	"\tcss_files\x18\x06 \x03(\tR\bcssFiles\x12\x19\n" +
 	"\bjs_files\x18\a \x03(\tR\ajsFiles\x121\n" +
 	"\x12static_assets_path\x18\b \x01(\tH\x00R\x10staticAssetsPath\x88\x01\x01B\x15\n" +
-	"\x13_static_assets_path\"\xa7\x02\n" +
+	"\x13_static_assets_path\"\xd9\x02\n" +
 	"\x12BroadcastToRoomReq\x12\x1f\n" +
 	"\aroom_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x06roomId\x12$\n" +
-	"\x0eonly_to_admins\x18\x02 \x01(\bR\fonlyToAdmins\x12B\n" +
-	"\bchat_msg\x18\x03 \x01(\v2%.plugnmeet.BroadcastToRoomChatMessageH\x00R\achatMsg\x12V\n" +
-	"\x10notification_msg\x18\x04 \x01(\v2).plugnmeet.BroadcastToRoomNotificationMsgH\x00R\x0fnotificationMsg:#\xbaH \"\x1e\n" +
+	"\x0eonly_to_admins\x18\x02 \x01(\bR\fonlyToAdmins\x12!\n" +
+	"\n" +
+	"to_user_id\x18\x03 \x01(\tH\x01R\btoUserId\x88\x01\x01\x12B\n" +
+	"\bchat_msg\x18\x04 \x01(\v2%.plugnmeet.BroadcastToRoomChatMessageH\x00R\achatMsg\x12V\n" +
+	"\x10notification_msg\x18\x05 \x01(\v2).plugnmeet.BroadcastToRoomNotificationMsgH\x00R\x0fnotificationMsg:#\xbaH \"\x1e\n" +
 	"\bchat_msg\n" +
 	"\x10notification_msg\x10\x01B\t\n" +
-	"\apayload\"p\n" +
+	"\apayloadB\r\n" +
+	"\v_to_user_id\">\n" +
 	"\x1aBroadcastToRoomChatMessage\x12 \n" +
-	"\amessage\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\amessage\x12!\n" +
-	"\n" +
-	"to_user_id\x18\x02 \x01(\tH\x00R\btoUserId\x88\x01\x01B\r\n" +
-	"\v_to_user_id\"\xc9\x01\n" +
+	"\amessage\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\amessage\"\x97\x01\n" +
 	"\x1eBroadcastToRoomNotificationMsg\x12\x1a\n" +
 	"\x04text\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x04text\x12:\n" +
 	"\x04type\x18\x02 \x01(\x0e2&.plugnmeet.NatsSystemNotificationTypesR\x04type\x12\x1d\n" +
 	"\n" +
-	"with_sound\x18\x03 \x01(\bR\twithSound\x12!\n" +
-	"\n" +
-	"to_user_id\x18\x04 \x01(\tH\x00R\btoUserId\x88\x01\x01B\r\n" +
-	"\v_to_user_idB\x9f\x01\n" +
+	"with_sound\x18\x03 \x01(\bR\twithSoundB\x9f\x01\n" +
 	"\rcom.plugnmeetB\x16PlugnmeetAuthRoomProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -1522,8 +1511,6 @@ func file_plugnmeet_auth_room_proto_init() {
 		(*BroadcastToRoomReq_ChatMsg)(nil),
 		(*BroadcastToRoomReq_NotificationMsg)(nil),
 	}
-	file_plugnmeet_auth_room_proto_msgTypes[16].OneofWrappers = []any{}
-	file_plugnmeet_auth_room_proto_msgTypes[17].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -2033,6 +2033,10 @@ func (m *BroadcastToRoomReq) validate(all bool) error {
 		_ = v // ensures v is used
 	}
 
+	if m.ToUserId != nil {
+		// no validation rules for ToUserId
+	}
+
 	if len(errors) > 0 {
 		return BroadcastToRoomReqMultiError(errors)
 	}
@@ -2136,10 +2140,6 @@ func (m *BroadcastToRoomChatMessage) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for Message
-
-	if m.ToUserId != nil {
-		// no validation rules for ToUserId
-	}
 
 	if len(errors) > 0 {
 		return BroadcastToRoomChatMessageMultiError(errors)
@@ -2248,10 +2248,6 @@ func (m *BroadcastToRoomNotificationMsg) validate(all bool) error {
 	// no validation rules for Type
 
 	// no validation rules for WithSound
-
-	if m.ToUserId != nil {
-		// no validation rules for ToUserId
-	}
 
 	if len(errors) > 0 {
 		return BroadcastToRoomNotificationMsgMultiError(errors)
