@@ -167,6 +167,8 @@ func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhit
 		} else {
 			// if self insert key enabled
 			r.Metadata.RoomFeatures.AllowRtmp = false
+			r.Metadata.RoomFeatures.RecordingFeatures.IsAllowCloud = false
+			r.Metadata.RoomFeatures.RecordingFeatures.EnableAutoCloudRecording = false
 
 			insightsFeatures := r.Metadata.RoomFeatures.InsightsFeatures
 			if insightsFeatures.TranscriptionFeatures != nil {
