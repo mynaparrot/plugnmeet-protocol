@@ -134,9 +134,9 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 	if rf.ExternalBroadcastingFeatures == nil {
 		rf.ExternalBroadcastingFeatures = proto.Clone(defaultExternalBroadcastingFeatures).(*plugnmeet.ExternalBroadcastingFeatures)
 	}
-	if rf.AllowRtmp != nil && *rf.AllowRtmp {
-		rf.ExternalBroadcastingFeatures.IsAllow = true
-		rf.ExternalBroadcastingFeatures.IsAllowRtmp = true
+	if rf.AllowRtmp != nil {
+		rf.ExternalBroadcastingFeatures.IsAllow = *rf.AllowRtmp
+		rf.ExternalBroadcastingFeatures.IsAllowRtmp = *rf.AllowRtmp
 	}
 
 	r.Metadata.StartedAt = uint64(time.Now().UTC().Unix())
