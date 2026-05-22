@@ -84,70 +84,17 @@ type PreUploadWhiteboardPostFile struct {
 }
 
 func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*plugnmeet.CreateRoomReq, error) {
-	b := true
 	req := plugnmeet.CreateRoomReq{
 		RoomId: CheckMeetingIdToMatchFormat(r.MeetingID),
 		Metadata: &plugnmeet.RoomMetadata{
-			RoomTitle: r.Name,
-			RoomFeatures: &plugnmeet.RoomCreateFeatures{
-				AllowWebcams:     true,
-				AdminOnlyWebcams: r.WebcamsOnlyForModerator,
-				EnableAnalytics:  true,
-				MuteOnStart:      r.MuteOnStart,
-				AllowScreenShare: true,
-				AllowRaiseHand:   &b,
-				AllowVirtualBg:   &b,
-				AutoGenUserId:    &b,
-				RecordingFeatures: &plugnmeet.RecordingFeatures{
-					IsAllow:                  r.Record,
-					IsAllowCloud:             r.Record,
-					EnableAutoCloudRecording: r.AutoStartRecording,
-				},
-				ChatFeatures: &plugnmeet.ChatFeatures{
-					IsAllow:           true,
-					IsAllowFileUpload: true,
-				},
-				SharedNotePadFeatures: &plugnmeet.SharedNotePadFeatures{
-					IsAllow: true,
-				},
-				WhiteboardFeatures: &plugnmeet.WhiteboardFeatures{
-					IsAllow: true,
-				},
-				ExternalMediaPlayerFeatures: &plugnmeet.ExternalMediaPlayerFeatures{
-					IsAllow: true,
-				},
-				BreakoutRoomFeatures: &plugnmeet.BreakoutRoomFeatures{
-					IsAllow: true,
-				},
-				DisplayExternalLinkFeatures: &plugnmeet.DisplayExternalLinkFeatures{
-					IsAllow: true,
-				},
-				IngressFeatures: &plugnmeet.IngressFeatures{
-					IsAllow: true,
-				},
-				InsightsFeatures: &plugnmeet.InsightsFeatures{
-					IsAllow: true,
-					TranscriptionFeatures: &plugnmeet.InsightsTranscriptionFeatures{
-						IsAllow:            true,
-						IsAllowTranslation: true,
-					},
-					ChatTranslationFeatures: &plugnmeet.InsightsChatTranslationFeatures{
-						IsAllow: true,
-					},
-				},
-				PollsFeatures: &plugnmeet.PollsFeatures{
-					IsAllow: true,
-				},
-				SipDialInFeatures: &plugnmeet.SipDialInFeatures{
-					IsAllow: true,
-				},
-				ExternalBroadcastingFeatures: &plugnmeet.ExternalBroadcastingFeatures{
-					IsAllow: true,
-				},
-			},
-			DefaultLockSettings: &plugnmeet.LockSettings{},
+			RoomTitle:    r.Name,
+			RoomFeatures: new(plugnmeet.RoomCreateFeatures),
 		},
 	}
+	// set defaults
+	utils.PrepareDefaultRoomFeatures(&req)
+	// now we can customize features
+	setFeatures(r, req.Metadata.RoomFeatures)
 
 	if r.MaxParticipants > 0 {
 		req.MaxParticipants = &r.MaxParticipants
@@ -189,9 +136,7 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 	if r.LockSettingsHideUserList {
 		req.Metadata.RoomFeatures.AllowViewOtherUsersList = false
 	}
-	// first let's set default
-	utils.SetRoomDefaultLockSettings(&req)
-	// now from the request
+	// now adjust lock settings
 	setLockSettings(req.Metadata.DefaultLockSettings, r)
 
 	meta := map[string]string{}
@@ -221,6 +166,22 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 	}
 
 	return &req, nil
+}
+
+func setFeatures(r *CreateMeetingReq, f *plugnmeet.RoomCreateFeatures) {
+	b := true
+	f.AllowWebcams = true
+	f.AdminOnlyWebcams = r.WebcamsOnlyForModerator
+	f.EnableAnalytics = true
+	f.MuteOnStart = r.MuteOnStart
+	f.AllowScreenShare = true
+	f.AllowRaiseHand = &b
+	f.AllowVirtualBg = &b
+	f.AutoGenUserId = &b
+
+	f.RecordingFeatures.IsAllow = r.Record
+	f.RecordingFeatures.IsAllowCloud = r.Record
+	f.RecordingFeatures.EnableAutoCloudRecording = r.AutoStartRecording
 }
 
 func setDifferentFeatures(f *plugnmeet.RoomCreateFeatures, disabledFeatures string) {

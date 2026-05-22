@@ -11,52 +11,37 @@ var (
 	}
 
 	defaultChatFeatures = &plugnmeet.ChatFeatures{
-		IsAllow:           false,
-		IsAllowFileUpload: false,
+		IsAllow:           true,
+		IsAllowFileUpload: true,
 	}
 
 	defaultSharedNotePadFeatures = &plugnmeet.SharedNotePadFeatures{
-		IsAllow:  false,
-		IsActive: false,
-		Visible:  false,
+		IsAllow: true,
 	}
 
 	defaultWhiteboardFeatures = &plugnmeet.WhiteboardFeatures{
-		IsAllow:          false,
-		Visible:          false,
-		WhiteboardFileId: "default",
-		FileName:         "default",
-		TotalPages:       10,
+		IsAllow: true,
 	}
 
 	defaultExternalMediaPlayerFeatures = &plugnmeet.ExternalMediaPlayerFeatures{
-		IsAllow:  false,
-		IsActive: false,
+		IsAllow: true,
 	}
 
 	defaultWaitingRoomFeatures = &plugnmeet.WaitingRoomFeatures{
-		IsActive:       false,
-		WaitingRoomMsg: "",
+		IsActive: false,
 	}
 
 	defaultBreakoutRoomFeatures = &plugnmeet.BreakoutRoomFeatures{
-		IsAllow:            false,
-		IsActive:           false,
+		IsAllow:            true,
 		AllowedNumberRooms: 6,
 	}
 
 	defaultDisplayExternalLinkFeatures = &plugnmeet.DisplayExternalLinkFeatures{
-		IsAllow:  false,
-		IsActive: false,
+		IsAllow: true,
 	}
 
 	defaultIngressFeatures = &plugnmeet.IngressFeatures{
-		IsAllow: false,
-	}
-
-	defaultSpeechToTextTranslationFeatures = &plugnmeet.SpeechToTextTranslationFeatures{
-		IsAllow:            false,
-		IsAllowTranslation: false,
+		IsAllow: true,
 	}
 
 	defaultEndToEndEncryptionFeatures = &plugnmeet.EndToEndEncryptionFeatures{
@@ -64,35 +49,47 @@ var (
 	}
 
 	defaultPollsFeatures = &plugnmeet.PollsFeatures{
-		IsAllow: false,
+		IsAllow: true,
 	}
 
 	defaultInsightsFeatures = &plugnmeet.InsightsFeatures{
-		IsAllow: false,
+		IsAllow: true,
 		TranscriptionFeatures: &plugnmeet.InsightsTranscriptionFeatures{
-			IsAllow:               false,
+			IsAllow:               true,
 			MaxSelectedTransLangs: 2,
 		},
 		ChatTranslationFeatures: &plugnmeet.InsightsChatTranslationFeatures{
-			IsAllow:               false,
+			IsAllow:               true,
 			MaxSelectedTransLangs: 5,
 		},
 		AiFeatures: &plugnmeet.InsightsAIFeatures{
-			IsAllow: false,
+			IsAllow: true,
 			AiTextChatFeatures: &plugnmeet.InsightsAITextChatFeatures{
-				IsAllow: false,
+				IsAllow: true,
 			},
 			MeetingSummarizationFeatures: &plugnmeet.InsightsAIMeetingSummarizationFeatures{
-				IsAllow: false,
+				IsAllow: true,
 			},
 		},
 	}
 
 	defaultSipDialInFeatures = &plugnmeet.SipDialInFeatures{
-		IsAllow: false,
+		IsAllow: true,
 	}
 
 	defaultExternalBroadcastingFeatures = &plugnmeet.ExternalBroadcastingFeatures{
-		IsAllow: false,
+		IsAllow:     true,
+		IsAllowRtmp: true,
+	}
+
+	defaultLockSettings = &plugnmeet.LockSettings{
+		LockWhiteboard:    new(true),
+		LockScreenSharing: new(true),
+		LockSharedNotepad: new(true),
+	}
+
+	defaultCopyrightConf = &plugnmeet.CopyrightConf{
+		Display: true,
+		Text:    "Powered by <a href=\"https://www.plugnmeet.org\" target=\"_blank\">plugNmeet</a>",
 	}
 )
