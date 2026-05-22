@@ -22,16 +22,17 @@ const (
 )
 
 type RecordingReq struct {
-	state            protoimpl.MessageState  `protogen:"open.v1"`
-	Task             RecordingTasks          `protobuf:"varint,1,opt,name=task,proto3,enum=plugnmeet.RecordingTasks" json:"task,omitempty"`
-	RoomId           string                  `protobuf:"bytes,2,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
-	RoomTableId      int64                   `protobuf:"varint,3,opt,name=room_table_id,json=roomTableId,proto3" json:"room_table_id,omitempty"`
-	Sid              string                  `protobuf:"bytes,4,opt,name=sid,proto3" json:"sid,omitempty"`
-	RtmpUrl          *string                 `protobuf:"bytes,5,opt,name=rtmp_url,json=rtmpUrl,proto3,oneof" json:"rtmp_url,omitempty"`
-	CustomDesign     *string                 `protobuf:"bytes,6,opt,name=custom_design,json=customDesign,proto3,oneof" json:"custom_design,omitempty"`
-	RecordingVariant *CloudRecordingVariants `protobuf:"varint,7,opt,name=recording_variant,json=recordingVariant,proto3,enum=plugnmeet.CloudRecordingVariants,oneof" json:"recording_variant,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state              protoimpl.MessageState  `protogen:"open.v1"`
+	Task               RecordingTasks          `protobuf:"varint,1,opt,name=task,proto3,enum=plugnmeet.RecordingTasks" json:"task,omitempty"`
+	RoomId             string                  `protobuf:"bytes,2,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	RoomTableId        int64                   `protobuf:"varint,3,opt,name=room_table_id,json=roomTableId,proto3" json:"room_table_id,omitempty"`
+	Sid                string                  `protobuf:"bytes,4,opt,name=sid,proto3" json:"sid,omitempty"`
+	RtmpUrl            *string                 `protobuf:"bytes,5,opt,name=rtmp_url,json=rtmpUrl,proto3,oneof" json:"rtmp_url,omitempty"`
+	CustomDesign       *string                 `protobuf:"bytes,6,opt,name=custom_design,json=customDesign,proto3,oneof" json:"custom_design,omitempty"`
+	RecordingVariant   *CloudRecordingVariants `protobuf:"varint,7,opt,name=recording_variant,json=recordingVariant,proto3,enum=plugnmeet.CloudRecordingVariants,oneof" json:"recording_variant,omitempty"`
+	RecorderBotOptions *RecorderBotOptions     `protobuf:"bytes,8,opt,name=recorder_bot_options,json=recorderBotOptions,proto3,oneof" json:"recorder_bot_options,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *RecordingReq) Reset() {
@@ -111,6 +112,13 @@ func (x *RecordingReq) GetRecordingVariant() CloudRecordingVariants {
 		return *x.RecordingVariant
 	}
 	return CloudRecordingVariants_FULL_SCREEN_CLOUD_RECORDING
+}
+
+func (x *RecordingReq) GetRecorderBotOptions() *RecorderBotOptions {
+	if x != nil {
+		return x.RecorderBotOptions
+	}
+	return nil
 }
 
 type RecordingInfoFile struct {
@@ -358,11 +366,65 @@ func (x *RecordingMetadata) GetExtraData() map[string]string {
 	return nil
 }
 
+type RecorderBotOptions struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// if true, chat panel will be closed automatically after a certain duration
+	EnableAutoCloseChatPanel bool `protobuf:"varint,1,opt,name=enable_auto_close_chat_panel,json=enableAutoCloseChatPanel,proto3" json:"enable_auto_close_chat_panel,omitempty"`
+	// duration in seconds. After this duration, the chat panel will be closed.
+	DurationAfterLastMessage *uint32 `protobuf:"varint,2,opt,name=duration_after_last_message,json=durationAfterLastMessage,proto3,oneof" json:"duration_after_last_message,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *RecorderBotOptions) Reset() {
+	*x = RecorderBotOptions{}
+	mi := &file_plugnmeet_recording_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RecorderBotOptions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RecorderBotOptions) ProtoMessage() {}
+
+func (x *RecorderBotOptions) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_recording_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RecorderBotOptions.ProtoReflect.Descriptor instead.
+func (*RecorderBotOptions) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_recording_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *RecorderBotOptions) GetEnableAutoCloseChatPanel() bool {
+	if x != nil {
+		return x.EnableAutoCloseChatPanel
+	}
+	return false
+}
+
+func (x *RecorderBotOptions) GetDurationAfterLastMessage() uint32 {
+	if x != nil && x.DurationAfterLastMessage != nil {
+		return *x.DurationAfterLastMessage
+	}
+	return 0
+}
+
 var File_plugnmeet_recording_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_recording_proto_rawDesc = "" +
 	"\n" +
-	"\x19plugnmeet_recording.proto\x12\tplugnmeet\x1a\x18plugnmeet_recorder.proto\"\xe0\x02\n" +
+	"\x19plugnmeet_recording.proto\x12\tplugnmeet\x1a\x18plugnmeet_recorder.proto\"\xcf\x03\n" +
 	"\fRecordingReq\x12-\n" +
 	"\x04task\x18\x01 \x01(\x0e2\x19.plugnmeet.RecordingTasksR\x04task\x12\x17\n" +
 	"\aroom_id\x18\x02 \x01(\tR\x06roomId\x12\"\n" +
@@ -370,10 +432,12 @@ const file_plugnmeet_recording_proto_rawDesc = "" +
 	"\x03sid\x18\x04 \x01(\tR\x03sid\x12\x1e\n" +
 	"\brtmp_url\x18\x05 \x01(\tH\x00R\artmpUrl\x88\x01\x01\x12(\n" +
 	"\rcustom_design\x18\x06 \x01(\tH\x01R\fcustomDesign\x88\x01\x01\x12S\n" +
-	"\x11recording_variant\x18\a \x01(\x0e2!.plugnmeet.CloudRecordingVariantsH\x02R\x10recordingVariant\x88\x01\x01B\v\n" +
+	"\x11recording_variant\x18\a \x01(\x0e2!.plugnmeet.CloudRecordingVariantsH\x02R\x10recordingVariant\x88\x01\x01\x12T\n" +
+	"\x14recorder_bot_options\x18\b \x01(\v2\x1d.plugnmeet.RecorderBotOptionsH\x03R\x12recorderBotOptions\x88\x01\x01B\v\n" +
 	"\t_rtmp_urlB\x10\n" +
 	"\x0e_custom_designB\x14\n" +
-	"\x12_recording_variant\"\xfa\x02\n" +
+	"\x12_recording_variantB\x17\n" +
+	"\x15_recorder_bot_options\"\xfa\x02\n" +
 	"\x11RecordingInfoFile\x12\"\n" +
 	"\rroom_table_id\x18\x01 \x01(\x03R\vroomTableId\x12\x17\n" +
 	"\aroom_id\x18\x02 \x01(\tR\x06roomId\x12\x1d\n" +
@@ -406,7 +470,11 @@ const file_plugnmeet_recording_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
 	"\x06_titleB\x0e\n" +
-	"\f_descriptionB\xa0\x01\n" +
+	"\f_description\"\xb8\x01\n" +
+	"\x12RecorderBotOptions\x12>\n" +
+	"\x1cenable_auto_close_chat_panel\x18\x01 \x01(\bR\x18enableAutoCloseChatPanel\x12B\n" +
+	"\x1bduration_after_last_message\x18\x02 \x01(\rH\x00R\x18durationAfterLastMessage\x88\x01\x01B\x1e\n" +
+	"\x1c_duration_after_last_messageB\xa0\x01\n" +
 	"\rcom.plugnmeetB\x17PlugnmeetRecordingProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -421,28 +489,30 @@ func file_plugnmeet_recording_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_recording_proto_rawDescData
 }
 
-var file_plugnmeet_recording_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_plugnmeet_recording_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_plugnmeet_recording_proto_goTypes = []any{
 	(*RecordingReq)(nil),        // 0: plugnmeet.RecordingReq
 	(*RecordingInfoFile)(nil),   // 1: plugnmeet.RecordingInfoFile
 	(*RecordingSubtitle)(nil),   // 2: plugnmeet.RecordingSubtitle
 	(*RecordingMetadata)(nil),   // 3: plugnmeet.RecordingMetadata
-	nil,                         // 4: plugnmeet.RecordingMetadata.SubtitlesEntry
-	nil,                         // 5: plugnmeet.RecordingMetadata.ExtraDataEntry
-	(RecordingTasks)(0),         // 6: plugnmeet.RecordingTasks
-	(CloudRecordingVariants)(0), // 7: plugnmeet.CloudRecordingVariants
+	(*RecorderBotOptions)(nil),  // 4: plugnmeet.RecorderBotOptions
+	nil,                         // 5: plugnmeet.RecordingMetadata.SubtitlesEntry
+	nil,                         // 6: plugnmeet.RecordingMetadata.ExtraDataEntry
+	(RecordingTasks)(0),         // 7: plugnmeet.RecordingTasks
+	(CloudRecordingVariants)(0), // 8: plugnmeet.CloudRecordingVariants
 }
 var file_plugnmeet_recording_proto_depIdxs = []int32{
-	6, // 0: plugnmeet.RecordingReq.task:type_name -> plugnmeet.RecordingTasks
-	7, // 1: plugnmeet.RecordingReq.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
-	4, // 2: plugnmeet.RecordingMetadata.subtitles:type_name -> plugnmeet.RecordingMetadata.SubtitlesEntry
-	5, // 3: plugnmeet.RecordingMetadata.extra_data:type_name -> plugnmeet.RecordingMetadata.ExtraDataEntry
-	2, // 4: plugnmeet.RecordingMetadata.SubtitlesEntry.value:type_name -> plugnmeet.RecordingSubtitle
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	7, // 0: plugnmeet.RecordingReq.task:type_name -> plugnmeet.RecordingTasks
+	8, // 1: plugnmeet.RecordingReq.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
+	4, // 2: plugnmeet.RecordingReq.recorder_bot_options:type_name -> plugnmeet.RecorderBotOptions
+	5, // 3: plugnmeet.RecordingMetadata.subtitles:type_name -> plugnmeet.RecordingMetadata.SubtitlesEntry
+	6, // 4: plugnmeet.RecordingMetadata.extra_data:type_name -> plugnmeet.RecordingMetadata.ExtraDataEntry
+	2, // 5: plugnmeet.RecordingMetadata.SubtitlesEntry.value:type_name -> plugnmeet.RecordingSubtitle
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_recording_proto_init() }
@@ -453,13 +523,14 @@ func file_plugnmeet_recording_proto_init() {
 	file_plugnmeet_recorder_proto_init()
 	file_plugnmeet_recording_proto_msgTypes[0].OneofWrappers = []any{}
 	file_plugnmeet_recording_proto_msgTypes[3].OneofWrappers = []any{}
+	file_plugnmeet_recording_proto_msgTypes[4].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_recording_proto_rawDesc), len(file_plugnmeet_recording_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

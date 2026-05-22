@@ -14,6 +14,7 @@ message RecordingReq {
   optional string rtmp_url = 5;
   optional string custom_design = 6;
   optional CloudRecordingVariants recording_variant = 7;
+  optional RecorderBotOptions recorder_bot_options = 8;
 }
 
 message RecordingInfoFile {
@@ -41,4 +42,11 @@ message RecordingMetadata {
   //e.g. map<language, RecordingSubtitle>
   map<string, RecordingSubtitle> subtitles = 3;
   map<string, string> extra_data = 4;
+}
+
+message RecorderBotOptions {
+  // if true, chat panel will be closed automatically after a certain duration
+  bool enable_auto_close_chat_panel = 1;
+  // duration in seconds. After this duration, the chat panel will be closed.
+  optional uint32 duration_after_last_message = 2;
 }

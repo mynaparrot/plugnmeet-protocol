@@ -418,8 +418,6 @@ func (m *RoomCreateFeatures) validate(all bool) error {
 
 	// no validation rules for AllowScreenShare
 
-	// no validation rules for AllowRtmp
-
 	// no validation rules for AllowViewOtherWebcams
 
 	// no validation rules for AllowViewOtherUsersList
@@ -832,6 +830,39 @@ func (m *RoomCreateFeatures) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetExternalBroadcastingFeatures()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RoomCreateFeaturesValidationError{
+					field:  "ExternalBroadcastingFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RoomCreateFeaturesValidationError{
+					field:  "ExternalBroadcastingFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExternalBroadcastingFeatures()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RoomCreateFeaturesValidationError{
+				field:  "ExternalBroadcastingFeatures",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.AllowRtmp != nil {
+		// no validation rules for AllowRtmp
 	}
 
 	if m.AllowPolls != nil {
@@ -1743,6 +1774,146 @@ var _ interface {
 	ErrorName() string
 } = DisplayExternalLinkFeaturesValidationError{}
 
+// Validate checks the field values on ExternalBroadcastingFeatures with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ExternalBroadcastingFeatures) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ExternalBroadcastingFeatures with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ExternalBroadcastingFeaturesMultiError, or nil if none found.
+func (m *ExternalBroadcastingFeatures) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ExternalBroadcastingFeatures) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsAllow
+
+	// no validation rules for IsAllowRtmp
+
+	if m.RecorderBotOptions != nil {
+
+		if all {
+			switch v := interface{}(m.GetRecorderBotOptions()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ExternalBroadcastingFeaturesValidationError{
+						field:  "RecorderBotOptions",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ExternalBroadcastingFeaturesValidationError{
+						field:  "RecorderBotOptions",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetRecorderBotOptions()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ExternalBroadcastingFeaturesValidationError{
+					field:  "RecorderBotOptions",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ExternalBroadcastingFeaturesMultiError(errors)
+	}
+
+	return nil
+}
+
+// ExternalBroadcastingFeaturesMultiError is an error wrapping multiple
+// validation errors returned by ExternalBroadcastingFeatures.ValidateAll() if
+// the designated constraints aren't met.
+type ExternalBroadcastingFeaturesMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ExternalBroadcastingFeaturesMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ExternalBroadcastingFeaturesMultiError) AllErrors() []error { return m }
+
+// ExternalBroadcastingFeaturesValidationError is the validation error returned
+// by ExternalBroadcastingFeatures.Validate if the designated constraints
+// aren't met.
+type ExternalBroadcastingFeaturesValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExternalBroadcastingFeaturesValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExternalBroadcastingFeaturesValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExternalBroadcastingFeaturesValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExternalBroadcastingFeaturesValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExternalBroadcastingFeaturesValidationError) ErrorName() string {
+	return "ExternalBroadcastingFeaturesValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ExternalBroadcastingFeaturesValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExternalBroadcastingFeatures.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExternalBroadcastingFeaturesValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExternalBroadcastingFeaturesValidationError{}
+
 // Validate checks the field values on RecordingFeatures with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -1774,6 +1945,39 @@ func (m *RecordingFeatures) validate(all bool) error {
 	// no validation rules for IsAllowLocal
 
 	// no validation rules for OnlyRecordAdminWebcams
+
+	if m.RecorderBotOptions != nil {
+
+		if all {
+			switch v := interface{}(m.GetRecorderBotOptions()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, RecordingFeaturesValidationError{
+						field:  "RecorderBotOptions",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, RecordingFeaturesValidationError{
+						field:  "RecorderBotOptions",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetRecorderBotOptions()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return RecordingFeaturesValidationError{
+					field:  "RecorderBotOptions",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return RecordingFeaturesMultiError(errors)
