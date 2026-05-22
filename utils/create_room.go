@@ -114,6 +114,13 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 	if rf.SipDialInFeatures == nil {
 		rf.SipDialInFeatures = proto.Clone(defaultSipDialInFeatures).(*plugnmeet.SipDialInFeatures)
 	}
+	if rf.ExternalBroadcastingFeatures == nil {
+		rf.ExternalBroadcastingFeatures = proto.Clone(defaultExternalBroadcastingFeatures).(*plugnmeet.ExternalBroadcastingFeatures)
+	}
+	if rf.AllowRtmp != nil && *rf.AllowRtmp {
+		rf.ExternalBroadcastingFeatures.IsAllow = true
+		rf.ExternalBroadcastingFeatures.IsAllowRtmp = true
+	}
 
 	if r.Metadata.DefaultLockSettings == nil {
 		r.Metadata.DefaultLockSettings = new(plugnmeet.LockSettings)
@@ -166,7 +173,7 @@ func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhit
 			rf.EndToEndEncryptionFeatures.EncryptionKey = &randomKey
 		} else {
 			// if self insert key enabled
-			r.Metadata.RoomFeatures.AllowRtmp = false
+			r.Metadata.RoomFeatures.ExternalBroadcastingFeatures.IsAllow = false
 			r.Metadata.RoomFeatures.RecordingFeatures.IsAllowCloud = false
 			r.Metadata.RoomFeatures.RecordingFeatures.EnableAutoCloudRecording = false
 

@@ -91,4 +91,8 @@ var (
 	defaultSipDialInFeatures = &plugnmeet.SipDialInFeatures{
 		IsAllow: false,
 	}
+
+	defaultExternalBroadcastingFeatures = &plugnmeet.ExternalBroadcastingFeatures{
+		IsAllow: false,
+	}
 )

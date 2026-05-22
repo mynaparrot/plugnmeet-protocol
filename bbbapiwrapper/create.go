@@ -94,7 +94,6 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 				AdminOnlyWebcams: r.WebcamsOnlyForModerator,
 				EnableAnalytics:  true,
 				MuteOnStart:      r.MuteOnStart,
-				AllowRtmp:        true,
 				AllowScreenShare: true,
 				AllowRaiseHand:   &b,
 				AllowVirtualBg:   &b,
@@ -137,6 +136,12 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 					},
 				},
 				PollsFeatures: &plugnmeet.PollsFeatures{
+					IsAllow: true,
+				},
+				SipDialInFeatures: &plugnmeet.SipDialInFeatures{
+					IsAllow: true,
+				},
+				ExternalBroadcastingFeatures: &plugnmeet.ExternalBroadcastingFeatures{
 					IsAllow: true,
 				},
 			},
