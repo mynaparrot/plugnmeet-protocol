@@ -50,14 +50,6 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 
 	if rf.ChatFeatures == nil {
 		rf.ChatFeatures = proto.Clone(defaultChatFeatures).(*plugnmeet.ChatFeatures)
-	} else {
-		// backward compatibility
-		if rf.ChatFeatures.AllowChat != nil {
-			rf.ChatFeatures.IsAllow = *rf.ChatFeatures.AllowChat
-		}
-		if rf.ChatFeatures.AllowFileUpload != nil {
-			rf.ChatFeatures.IsAllowFileUpload = *rf.ChatFeatures.AllowFileUpload
-		}
 	}
 	if !rf.ChatFeatures.IsAllow {
 		rf.ChatFeatures.IsAllowFileUpload = false
@@ -65,29 +57,14 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 
 	if rf.SharedNotePadFeatures == nil {
 		rf.SharedNotePadFeatures = proto.Clone(defaultSharedNotePadFeatures).(*plugnmeet.SharedNotePadFeatures)
-	} else {
-		// backward compatibility
-		if rf.SharedNotePadFeatures.AllowedSharedNotePad != nil {
-			rf.SharedNotePadFeatures.IsAllow = *rf.SharedNotePadFeatures.AllowedSharedNotePad
-		}
 	}
 
 	if rf.WhiteboardFeatures == nil {
 		rf.WhiteboardFeatures = proto.Clone(defaultWhiteboardFeatures).(*plugnmeet.WhiteboardFeatures)
-	} else {
-		// backward compatibility
-		if rf.WhiteboardFeatures.AllowedWhiteboard != nil {
-			rf.WhiteboardFeatures.IsAllow = *rf.WhiteboardFeatures.AllowedWhiteboard
-		}
 	}
 
 	if rf.ExternalMediaPlayerFeatures == nil {
 		rf.ExternalMediaPlayerFeatures = proto.Clone(defaultExternalMediaPlayerFeatures).(*plugnmeet.ExternalMediaPlayerFeatures)
-	} else {
-		// backward compatibility
-		if rf.ExternalMediaPlayerFeatures.AllowedExternalMediaPlayer != nil {
-			rf.ExternalMediaPlayerFeatures.IsAllow = *rf.ExternalMediaPlayerFeatures.AllowedExternalMediaPlayer
-		}
 	}
 
 	if rf.WaitingRoomFeatures == nil {
@@ -117,10 +94,6 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 
 	if rf.PollsFeatures == nil {
 		rf.PollsFeatures = proto.Clone(defaultPollsFeatures).(*plugnmeet.PollsFeatures)
-		// for backward compatibility {
-		if rf.AllowPolls != nil {
-			rf.PollsFeatures.IsAllow = *rf.AllowPolls
-		}
 	}
 
 	if rf.InsightsFeatures == nil {
@@ -138,6 +111,9 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 		rf.ExternalBroadcastingFeatures.IsAllow = *rf.AllowRtmp
 		rf.ExternalBroadcastingFeatures.IsAllowRtmp = *rf.AllowRtmp
 	}
+	if !rf.ExternalBroadcastingFeatures.IsAllow {
+		rf.ExternalBroadcastingFeatures.IsAllowRtmp = false
+	}
 
 	r.Metadata.StartedAt = uint64(time.Now().UTC().Unix())
 	r.Metadata.RoomFeatures = rf
@@ -148,8 +124,7 @@ func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhit
 
 	if rf.AutoGenUserId == nil {
 		// by default, auto user id generation will be disabled
-		ff := new(bool)
-		rf.AutoGenUserId = ff
+		rf.AutoGenUserId = new(false)
 	}
 
 	if rf.SharedNotePadFeatures.IsAllow && !allowedNotepad {

@@ -247,39 +247,31 @@ type RoomCreateFeatures struct {
 	// deprecated use external_broadcasting_features
 	//
 	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-	AllowRtmp               *bool `protobuf:"varint,4,opt,name=allow_rtmp,json=allowRtmp,proto3,oneof" json:"allow_rtmp,omitempty"`
-	AllowViewOtherWebcams   bool  `protobuf:"varint,5,opt,name=allow_view_other_webcams,json=allowViewOtherWebcams,proto3" json:"allow_view_other_webcams,omitempty"`
-	AllowViewOtherUsersList bool  `protobuf:"varint,6,opt,name=allow_view_other_users_list,json=allowViewOtherUsersList,proto3" json:"allow_view_other_users_list,omitempty"`
-	AdminOnlyWebcams        bool  `protobuf:"varint,7,opt,name=admin_only_webcams,json=adminOnlyWebcams,proto3" json:"admin_only_webcams,omitempty"`
-	// deprecated use polls_features
-	//
-	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-	AllowPolls                  *bool                        `protobuf:"varint,8,opt,name=allow_polls,json=allowPolls,proto3,oneof" json:"allow_polls,omitempty"`
-	RoomDuration                *uint64                      `protobuf:"varint,9,opt,name=room_duration,json=roomDuration,proto3,oneof" json:"room_duration,omitempty"`
-	EnableAnalytics             bool                         `protobuf:"varint,10,opt,name=enable_analytics,json=enableAnalytics,proto3" json:"enable_analytics,omitempty"`
-	AllowVirtualBg              *bool                        `protobuf:"varint,11,opt,name=allow_virtual_bg,json=allowVirtualBg,proto3,oneof" json:"allow_virtual_bg,omitempty"`
-	AllowRaiseHand              *bool                        `protobuf:"varint,12,opt,name=allow_raise_hand,json=allowRaiseHand,proto3,oneof" json:"allow_raise_hand,omitempty"`
-	AutoGenUserId               *bool                        `protobuf:"varint,13,opt,name=auto_gen_user_id,json=autoGenUserId,proto3,oneof" json:"auto_gen_user_id,omitempty"`
-	RecordingFeatures           *RecordingFeatures           `protobuf:"bytes,14,opt,name=recording_features,json=recordingFeatures,proto3" json:"recording_features,omitempty"`
-	ChatFeatures                *ChatFeatures                `protobuf:"bytes,15,opt,name=chat_features,json=chatFeatures,proto3" json:"chat_features,omitempty"`
-	SharedNotePadFeatures       *SharedNotePadFeatures       `protobuf:"bytes,16,opt,name=shared_note_pad_features,json=sharedNotePadFeatures,proto3" json:"shared_note_pad_features,omitempty"`
-	WhiteboardFeatures          *WhiteboardFeatures          `protobuf:"bytes,17,opt,name=whiteboard_features,json=whiteboardFeatures,proto3" json:"whiteboard_features,omitempty"`
-	ExternalMediaPlayerFeatures *ExternalMediaPlayerFeatures `protobuf:"bytes,18,opt,name=external_media_player_features,json=externalMediaPlayerFeatures,proto3" json:"external_media_player_features,omitempty"`
-	WaitingRoomFeatures         *WaitingRoomFeatures         `protobuf:"bytes,19,opt,name=waiting_room_features,json=waitingRoomFeatures,proto3" json:"waiting_room_features,omitempty"`
-	BreakoutRoomFeatures        *BreakoutRoomFeatures        `protobuf:"bytes,20,opt,name=breakout_room_features,json=breakoutRoomFeatures,proto3" json:"breakout_room_features,omitempty"`
-	DisplayExternalLinkFeatures *DisplayExternalLinkFeatures `protobuf:"bytes,21,opt,name=display_external_link_features,json=displayExternalLinkFeatures,proto3" json:"display_external_link_features,omitempty"`
-	IngressFeatures             *IngressFeatures             `protobuf:"bytes,22,opt,name=ingress_features,json=ingressFeatures,proto3" json:"ingress_features,omitempty"`
-	// deprecated use insights_features
-	//
-	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-	SpeechToTextTranslationFeatures *SpeechToTextTranslationFeatures `protobuf:"bytes,23,opt,name=speech_to_text_translation_features,json=speechToTextTranslationFeatures,proto3" json:"speech_to_text_translation_features,omitempty"`
-	EndToEndEncryptionFeatures      *EndToEndEncryptionFeatures      `protobuf:"bytes,24,opt,name=end_to_end_encryption_features,json=endToEndEncryptionFeatures,proto3" json:"end_to_end_encryption_features,omitempty"`
-	PollsFeatures                   *PollsFeatures                   `protobuf:"bytes,25,opt,name=polls_features,json=pollsFeatures,proto3" json:"polls_features,omitempty"`
-	InsightsFeatures                *InsightsFeatures                `protobuf:"bytes,26,opt,name=insights_features,json=insightsFeatures,proto3" json:"insights_features,omitempty"`
-	SipDialInFeatures               *SipDialInFeatures               `protobuf:"bytes,27,opt,name=sip_dial_in_features,json=sipDialInFeatures,proto3" json:"sip_dial_in_features,omitempty"`
-	ExternalBroadcastingFeatures    *ExternalBroadcastingFeatures    `protobuf:"bytes,28,opt,name=external_broadcasting_features,json=externalBroadcastingFeatures,proto3" json:"external_broadcasting_features,omitempty"` // next ID: 29
-	unknownFields                   protoimpl.UnknownFields
-	sizeCache                       protoimpl.SizeCache
+	AllowRtmp                    *bool                         `protobuf:"varint,4,opt,name=allow_rtmp,json=allowRtmp,proto3,oneof" json:"allow_rtmp,omitempty"`
+	AllowViewOtherWebcams        bool                          `protobuf:"varint,5,opt,name=allow_view_other_webcams,json=allowViewOtherWebcams,proto3" json:"allow_view_other_webcams,omitempty"`
+	AllowViewOtherUsersList      bool                          `protobuf:"varint,6,opt,name=allow_view_other_users_list,json=allowViewOtherUsersList,proto3" json:"allow_view_other_users_list,omitempty"`
+	AdminOnlyWebcams             bool                          `protobuf:"varint,7,opt,name=admin_only_webcams,json=adminOnlyWebcams,proto3" json:"admin_only_webcams,omitempty"`
+	RoomDuration                 *uint64                       `protobuf:"varint,8,opt,name=room_duration,json=roomDuration,proto3,oneof" json:"room_duration,omitempty"`
+	EnableAnalytics              bool                          `protobuf:"varint,9,opt,name=enable_analytics,json=enableAnalytics,proto3" json:"enable_analytics,omitempty"`
+	AllowVirtualBg               *bool                         `protobuf:"varint,10,opt,name=allow_virtual_bg,json=allowVirtualBg,proto3,oneof" json:"allow_virtual_bg,omitempty"`
+	AllowRaiseHand               *bool                         `protobuf:"varint,11,opt,name=allow_raise_hand,json=allowRaiseHand,proto3,oneof" json:"allow_raise_hand,omitempty"`
+	AutoGenUserId                *bool                         `protobuf:"varint,12,opt,name=auto_gen_user_id,json=autoGenUserId,proto3,oneof" json:"auto_gen_user_id,omitempty"`
+	RecordingFeatures            *RecordingFeatures            `protobuf:"bytes,13,opt,name=recording_features,json=recordingFeatures,proto3" json:"recording_features,omitempty"`
+	ChatFeatures                 *ChatFeatures                 `protobuf:"bytes,14,opt,name=chat_features,json=chatFeatures,proto3" json:"chat_features,omitempty"`
+	SharedNotePadFeatures        *SharedNotePadFeatures        `protobuf:"bytes,15,opt,name=shared_note_pad_features,json=sharedNotePadFeatures,proto3" json:"shared_note_pad_features,omitempty"`
+	WhiteboardFeatures           *WhiteboardFeatures           `protobuf:"bytes,16,opt,name=whiteboard_features,json=whiteboardFeatures,proto3" json:"whiteboard_features,omitempty"`
+	ExternalMediaPlayerFeatures  *ExternalMediaPlayerFeatures  `protobuf:"bytes,17,opt,name=external_media_player_features,json=externalMediaPlayerFeatures,proto3" json:"external_media_player_features,omitempty"`
+	WaitingRoomFeatures          *WaitingRoomFeatures          `protobuf:"bytes,18,opt,name=waiting_room_features,json=waitingRoomFeatures,proto3" json:"waiting_room_features,omitempty"`
+	BreakoutRoomFeatures         *BreakoutRoomFeatures         `protobuf:"bytes,19,opt,name=breakout_room_features,json=breakoutRoomFeatures,proto3" json:"breakout_room_features,omitempty"`
+	DisplayExternalLinkFeatures  *DisplayExternalLinkFeatures  `protobuf:"bytes,20,opt,name=display_external_link_features,json=displayExternalLinkFeatures,proto3" json:"display_external_link_features,omitempty"`
+	IngressFeatures              *IngressFeatures              `protobuf:"bytes,21,opt,name=ingress_features,json=ingressFeatures,proto3" json:"ingress_features,omitempty"`
+	EndToEndEncryptionFeatures   *EndToEndEncryptionFeatures   `protobuf:"bytes,22,opt,name=end_to_end_encryption_features,json=endToEndEncryptionFeatures,proto3" json:"end_to_end_encryption_features,omitempty"`
+	PollsFeatures                *PollsFeatures                `protobuf:"bytes,23,opt,name=polls_features,json=pollsFeatures,proto3" json:"polls_features,omitempty"`
+	InsightsFeatures             *InsightsFeatures             `protobuf:"bytes,24,opt,name=insights_features,json=insightsFeatures,proto3" json:"insights_features,omitempty"`
+	SipDialInFeatures            *SipDialInFeatures            `protobuf:"bytes,25,opt,name=sip_dial_in_features,json=sipDialInFeatures,proto3" json:"sip_dial_in_features,omitempty"`
+	ExternalBroadcastingFeatures *ExternalBroadcastingFeatures `protobuf:"bytes,26,opt,name=external_broadcasting_features,json=externalBroadcastingFeatures,proto3" json:"external_broadcasting_features,omitempty"` // next ID: 27
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *RoomCreateFeatures) Reset() {
@@ -358,14 +350,6 @@ func (x *RoomCreateFeatures) GetAllowViewOtherUsersList() bool {
 func (x *RoomCreateFeatures) GetAdminOnlyWebcams() bool {
 	if x != nil {
 		return x.AdminOnlyWebcams
-	}
-	return false
-}
-
-// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-func (x *RoomCreateFeatures) GetAllowPolls() bool {
-	if x != nil && x.AllowPolls != nil {
-		return *x.AllowPolls
 	}
 	return false
 }
@@ -468,14 +452,6 @@ func (x *RoomCreateFeatures) GetIngressFeatures() *IngressFeatures {
 	return nil
 }
 
-// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-func (x *RoomCreateFeatures) GetSpeechToTextTranslationFeatures() *SpeechToTextTranslationFeatures {
-	if x != nil {
-		return x.SpeechToTextTranslationFeatures
-	}
-	return nil
-}
-
 func (x *RoomCreateFeatures) GetEndToEndEncryptionFeatures() *EndToEndEncryptionFeatures {
 	if x != nil {
 		return x.EndToEndEncryptionFeatures
@@ -512,15 +488,11 @@ func (x *RoomCreateFeatures) GetExternalBroadcastingFeatures() *ExternalBroadcas
 }
 
 type ChatFeatures struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-	AllowChat *bool `protobuf:"varint,1,opt,name=allow_chat,json=allowChat,proto3,oneof" json:"allow_chat,omitempty"`
-	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-	AllowFileUpload   *bool    `protobuf:"varint,2,opt,name=allow_file_upload,json=allowFileUpload,proto3,oneof" json:"allow_file_upload,omitempty"`
-	IsAllow           bool     `protobuf:"varint,5,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
-	IsAllowFileUpload bool     `protobuf:"varint,6,opt,name=is_allow_file_upload,json=isAllowFileUpload,proto3" json:"is_allow_file_upload,omitempty"`
-	AllowedFileTypes  []string `protobuf:"bytes,3,rep,name=allowed_file_types,json=allowedFileTypes,proto3" json:"allowed_file_types,omitempty"`
-	MaxFileSize       *uint64  `protobuf:"varint,4,opt,name=max_file_size,json=maxFileSize,proto3,oneof" json:"max_file_size,omitempty"`
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	IsAllow           bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
+	IsAllowFileUpload bool                   `protobuf:"varint,2,opt,name=is_allow_file_upload,json=isAllowFileUpload,proto3" json:"is_allow_file_upload,omitempty"`
+	AllowedFileTypes  []string               `protobuf:"bytes,3,rep,name=allowed_file_types,json=allowedFileTypes,proto3" json:"allowed_file_types,omitempty"`
+	MaxFileSize       *uint64                `protobuf:"varint,4,opt,name=max_file_size,json=maxFileSize,proto3,oneof" json:"max_file_size,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -555,22 +527,6 @@ func (*ChatFeatures) Descriptor() ([]byte, []int) {
 	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{3}
 }
 
-// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-func (x *ChatFeatures) GetAllowChat() bool {
-	if x != nil && x.AllowChat != nil {
-		return *x.AllowChat
-	}
-	return false
-}
-
-// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-func (x *ChatFeatures) GetAllowFileUpload() bool {
-	if x != nil && x.AllowFileUpload != nil {
-		return *x.AllowFileUpload
-	}
-	return false
-}
-
 func (x *ChatFeatures) GetIsAllow() bool {
 	if x != nil {
 		return x.IsAllow
@@ -600,18 +556,16 @@ func (x *ChatFeatures) GetMaxFileSize() uint64 {
 }
 
 type SharedNotePadFeatures struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-	AllowedSharedNotePad *bool  `protobuf:"varint,1,opt,name=allowed_shared_note_pad,json=allowedSharedNotePad,proto3,oneof" json:"allowed_shared_note_pad,omitempty"`
-	IsAllow              bool   `protobuf:"varint,8,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
-	IsActive             bool   `protobuf:"varint,2,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
-	Visible              bool   `protobuf:"varint,3,opt,name=visible,proto3" json:"visible,omitempty"`
-	NodeId               string `protobuf:"bytes,4,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
-	Host                 string `protobuf:"bytes,5,opt,name=host,proto3" json:"host,omitempty"`
-	NotePadId            string `protobuf:"bytes,6,opt,name=note_pad_id,json=notePadId,proto3" json:"note_pad_id,omitempty"`
-	ReadOnlyPadId        string `protobuf:"bytes,7,opt,name=read_only_pad_id,json=readOnlyPadId,proto3" json:"read_only_pad_id,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	IsAllow       bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
+	IsActive      bool                   `protobuf:"varint,2,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	Visible       bool                   `protobuf:"varint,3,opt,name=visible,proto3" json:"visible,omitempty"`
+	NodeId        string                 `protobuf:"bytes,4,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
+	Host          string                 `protobuf:"bytes,5,opt,name=host,proto3" json:"host,omitempty"`
+	NotePadId     string                 `protobuf:"bytes,6,opt,name=note_pad_id,json=notePadId,proto3" json:"note_pad_id,omitempty"`
+	ReadOnlyPadId string                 `protobuf:"bytes,7,opt,name=read_only_pad_id,json=readOnlyPadId,proto3" json:"read_only_pad_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SharedNotePadFeatures) Reset() {
@@ -642,14 +596,6 @@ func (x *SharedNotePadFeatures) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SharedNotePadFeatures.ProtoReflect.Descriptor instead.
 func (*SharedNotePadFeatures) Descriptor() ([]byte, []int) {
 	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{4}
-}
-
-// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-func (x *SharedNotePadFeatures) GetAllowedSharedNotePad() bool {
-	if x != nil && x.AllowedSharedNotePad != nil {
-		return *x.AllowedSharedNotePad
-	}
-	return false
 }
 
 func (x *SharedNotePadFeatures) GetIsAllow() bool {
@@ -702,17 +648,15 @@ func (x *SharedNotePadFeatures) GetReadOnlyPadId() string {
 }
 
 type WhiteboardFeatures struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-	AllowedWhiteboard  *bool   `protobuf:"varint,1,opt,name=allowed_whiteboard,json=allowedWhiteboard,proto3,oneof" json:"allowed_whiteboard,omitempty"`
-	IsAllow            bool    `protobuf:"varint,9,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
-	Visible            bool    `protobuf:"varint,2,opt,name=visible,proto3" json:"visible,omitempty"`
-	PreloadFile        *string `protobuf:"bytes,3,opt,name=preload_file,json=preloadFile,proto3,oneof" json:"preload_file,omitempty"`
-	WhiteboardFileId   string  `protobuf:"bytes,4,opt,name=whiteboard_file_id,json=whiteboardFileId,proto3" json:"whiteboard_file_id,omitempty"`
-	FileName           string  `protobuf:"bytes,5,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
-	FilePath           string  `protobuf:"bytes,6,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
-	TotalPages         uint32  `protobuf:"varint,7,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
-	MaxAllowedFileSize *uint64 `protobuf:"varint,8,opt,name=max_allowed_file_size,json=maxAllowedFileSize,proto3,oneof" json:"max_allowed_file_size,omitempty"`
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	IsAllow            bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
+	Visible            bool                   `protobuf:"varint,2,opt,name=visible,proto3" json:"visible,omitempty"`
+	PreloadFile        *string                `protobuf:"bytes,3,opt,name=preload_file,json=preloadFile,proto3,oneof" json:"preload_file,omitempty"`
+	WhiteboardFileId   string                 `protobuf:"bytes,4,opt,name=whiteboard_file_id,json=whiteboardFileId,proto3" json:"whiteboard_file_id,omitempty"`
+	FileName           string                 `protobuf:"bytes,5,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	FilePath           string                 `protobuf:"bytes,6,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
+	TotalPages         uint32                 `protobuf:"varint,7,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
+	MaxAllowedFileSize *uint64                `protobuf:"varint,8,opt,name=max_allowed_file_size,json=maxAllowedFileSize,proto3,oneof" json:"max_allowed_file_size,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -745,14 +689,6 @@ func (x *WhiteboardFeatures) ProtoReflect() protoreflect.Message {
 // Deprecated: Use WhiteboardFeatures.ProtoReflect.Descriptor instead.
 func (*WhiteboardFeatures) Descriptor() ([]byte, []int) {
 	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{5}
-}
-
-// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-func (x *WhiteboardFeatures) GetAllowedWhiteboard() bool {
-	if x != nil && x.AllowedWhiteboard != nil {
-		return *x.AllowedWhiteboard
-	}
-	return false
 }
 
 func (x *WhiteboardFeatures) GetIsAllow() bool {
@@ -812,15 +748,13 @@ func (x *WhiteboardFeatures) GetMaxAllowedFileSize() uint64 {
 }
 
 type ExternalMediaPlayerFeatures struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-	AllowedExternalMediaPlayer *bool   `protobuf:"varint,1,opt,name=allowed_external_media_player,json=allowedExternalMediaPlayer,proto3,oneof" json:"allowed_external_media_player,omitempty"`
-	IsAllow                    bool    `protobuf:"varint,5,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
-	IsActive                   bool    `protobuf:"varint,2,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
-	SharedBy                   *string `protobuf:"bytes,3,opt,name=shared_by,json=sharedBy,proto3,oneof" json:"shared_by,omitempty"`
-	Url                        *string `protobuf:"bytes,4,opt,name=url,proto3,oneof" json:"url,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	IsAllow       bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
+	IsActive      bool                   `protobuf:"varint,2,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	SharedBy      *string                `protobuf:"bytes,3,opt,name=shared_by,json=sharedBy,proto3,oneof" json:"shared_by,omitempty"`
+	Url           *string                `protobuf:"bytes,4,opt,name=url,proto3,oneof" json:"url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ExternalMediaPlayerFeatures) Reset() {
@@ -851,14 +785,6 @@ func (x *ExternalMediaPlayerFeatures) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ExternalMediaPlayerFeatures.ProtoReflect.Descriptor instead.
 func (*ExternalMediaPlayerFeatures) Descriptor() ([]byte, []int) {
 	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{6}
-}
-
-// Deprecated: Marked as deprecated in plugnmeet_create_room.proto.
-func (x *ExternalMediaPlayerFeatures) GetAllowedExternalMediaPlayer() bool {
-	if x != nil && x.AllowedExternalMediaPlayer != nil {
-		return *x.AllowedExternalMediaPlayer
-	}
-	return false
 }
 
 func (x *ExternalMediaPlayerFeatures) GetIsAllow() bool {
@@ -1281,115 +1207,6 @@ func (x *IngressFeatures) GetStreamKey() string {
 	return ""
 }
 
-// deprecated use insights_features
-type SpeechToTextTranslationFeatures struct {
-	state                         protoimpl.MessageState `protogen:"open.v1"`
-	IsAllow                       bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
-	IsAllowTranslation            bool                   `protobuf:"varint,2,opt,name=is_allow_translation,json=isAllowTranslation,proto3" json:"is_allow_translation,omitempty"`
-	IsEnabled                     bool                   `protobuf:"varint,3,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
-	IsEnabledTranslation          bool                   `protobuf:"varint,4,opt,name=is_enabled_translation,json=isEnabledTranslation,proto3" json:"is_enabled_translation,omitempty"`
-	MaxNumTranLangsAllowSelecting int32                  `protobuf:"varint,11,opt,name=max_num_tran_langs_allow_selecting,json=maxNumTranLangsAllowSelecting,proto3" json:"max_num_tran_langs_allow_selecting,omitempty"`
-	AllowedSpeechLangs            []string               `protobuf:"bytes,7,rep,name=allowed_speech_langs,json=allowedSpeechLangs,proto3" json:"allowed_speech_langs,omitempty"`
-	AllowedSpeechUsers            []string               `protobuf:"bytes,8,rep,name=allowed_speech_users,json=allowedSpeechUsers,proto3" json:"allowed_speech_users,omitempty"`
-	AllowedTransLangs             []string               `protobuf:"bytes,9,rep,name=allowed_trans_langs,json=allowedTransLangs,proto3" json:"allowed_trans_langs,omitempty"`
-	DefaultSubtitleLang           *string                `protobuf:"bytes,10,opt,name=default_subtitle_lang,json=defaultSubtitleLang,proto3,oneof" json:"default_subtitle_lang,omitempty"` // next ID: 12
-	unknownFields                 protoimpl.UnknownFields
-	sizeCache                     protoimpl.SizeCache
-}
-
-func (x *SpeechToTextTranslationFeatures) Reset() {
-	*x = SpeechToTextTranslationFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SpeechToTextTranslationFeatures) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SpeechToTextTranslationFeatures) ProtoMessage() {}
-
-func (x *SpeechToTextTranslationFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SpeechToTextTranslationFeatures.ProtoReflect.Descriptor instead.
-func (*SpeechToTextTranslationFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *SpeechToTextTranslationFeatures) GetIsAllow() bool {
-	if x != nil {
-		return x.IsAllow
-	}
-	return false
-}
-
-func (x *SpeechToTextTranslationFeatures) GetIsAllowTranslation() bool {
-	if x != nil {
-		return x.IsAllowTranslation
-	}
-	return false
-}
-
-func (x *SpeechToTextTranslationFeatures) GetIsEnabled() bool {
-	if x != nil {
-		return x.IsEnabled
-	}
-	return false
-}
-
-func (x *SpeechToTextTranslationFeatures) GetIsEnabledTranslation() bool {
-	if x != nil {
-		return x.IsEnabledTranslation
-	}
-	return false
-}
-
-func (x *SpeechToTextTranslationFeatures) GetMaxNumTranLangsAllowSelecting() int32 {
-	if x != nil {
-		return x.MaxNumTranLangsAllowSelecting
-	}
-	return 0
-}
-
-func (x *SpeechToTextTranslationFeatures) GetAllowedSpeechLangs() []string {
-	if x != nil {
-		return x.AllowedSpeechLangs
-	}
-	return nil
-}
-
-func (x *SpeechToTextTranslationFeatures) GetAllowedSpeechUsers() []string {
-	if x != nil {
-		return x.AllowedSpeechUsers
-	}
-	return nil
-}
-
-func (x *SpeechToTextTranslationFeatures) GetAllowedTransLangs() []string {
-	if x != nil {
-		return x.AllowedTransLangs
-	}
-	return nil
-}
-
-func (x *SpeechToTextTranslationFeatures) GetDefaultSubtitleLang() string {
-	if x != nil && x.DefaultSubtitleLang != nil {
-		return *x.DefaultSubtitleLang
-	}
-	return ""
-}
-
 type EndToEndEncryptionFeatures struct {
 	state                          protoimpl.MessageState `protogen:"open.v1"`
 	IsEnabled                      bool                   `protobuf:"varint,1,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
@@ -1404,7 +1221,7 @@ type EndToEndEncryptionFeatures struct {
 
 func (x *EndToEndEncryptionFeatures) Reset() {
 	*x = EndToEndEncryptionFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[14]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1416,7 +1233,7 @@ func (x *EndToEndEncryptionFeatures) String() string {
 func (*EndToEndEncryptionFeatures) ProtoMessage() {}
 
 func (x *EndToEndEncryptionFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[14]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1429,7 +1246,7 @@ func (x *EndToEndEncryptionFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EndToEndEncryptionFeatures.ProtoReflect.Descriptor instead.
 func (*EndToEndEncryptionFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{14}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *EndToEndEncryptionFeatures) GetIsEnabled() bool {
@@ -1477,7 +1294,7 @@ type PollsFeatures struct {
 
 func (x *PollsFeatures) Reset() {
 	*x = PollsFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[15]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1489,7 +1306,7 @@ func (x *PollsFeatures) String() string {
 func (*PollsFeatures) ProtoMessage() {}
 
 func (x *PollsFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[15]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1502,7 +1319,7 @@ func (x *PollsFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PollsFeatures.ProtoReflect.Descriptor instead.
 func (*PollsFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{15}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *PollsFeatures) GetIsAllow() bool {
@@ -1538,7 +1355,7 @@ type SipDialInFeatures struct {
 
 func (x *SipDialInFeatures) Reset() {
 	*x = SipDialInFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[16]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1550,7 +1367,7 @@ func (x *SipDialInFeatures) String() string {
 func (*SipDialInFeatures) ProtoMessage() {}
 
 func (x *SipDialInFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[16]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1563,7 +1380,7 @@ func (x *SipDialInFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SipDialInFeatures.ProtoReflect.Descriptor instead.
 func (*SipDialInFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{16}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SipDialInFeatures) GetIsAllow() bool {
@@ -1627,7 +1444,7 @@ type InsightsFeatures struct {
 
 func (x *InsightsFeatures) Reset() {
 	*x = InsightsFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[17]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1639,7 +1456,7 @@ func (x *InsightsFeatures) String() string {
 func (*InsightsFeatures) ProtoMessage() {}
 
 func (x *InsightsFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[17]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1652,7 +1469,7 @@ func (x *InsightsFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsFeatures.ProtoReflect.Descriptor instead.
 func (*InsightsFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{17}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *InsightsFeatures) GetIsAllow() bool {
@@ -1703,7 +1520,7 @@ type InsightsTranscriptionFeatures struct {
 
 func (x *InsightsTranscriptionFeatures) Reset() {
 	*x = InsightsTranscriptionFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[18]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1715,7 +1532,7 @@ func (x *InsightsTranscriptionFeatures) String() string {
 func (*InsightsTranscriptionFeatures) ProtoMessage() {}
 
 func (x *InsightsTranscriptionFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[18]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1728,7 +1545,7 @@ func (x *InsightsTranscriptionFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsTranscriptionFeatures.ProtoReflect.Descriptor instead.
 func (*InsightsTranscriptionFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{18}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *InsightsTranscriptionFeatures) GetIsAllow() bool {
@@ -1822,7 +1639,7 @@ type InsightsChatTranslationFeatures struct {
 
 func (x *InsightsChatTranslationFeatures) Reset() {
 	*x = InsightsChatTranslationFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[19]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1834,7 +1651,7 @@ func (x *InsightsChatTranslationFeatures) String() string {
 func (*InsightsChatTranslationFeatures) ProtoMessage() {}
 
 func (x *InsightsChatTranslationFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[19]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1847,7 +1664,7 @@ func (x *InsightsChatTranslationFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsChatTranslationFeatures.ProtoReflect.Descriptor instead.
 func (*InsightsChatTranslationFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{19}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *InsightsChatTranslationFeatures) GetIsAllow() bool {
@@ -1896,7 +1713,7 @@ type InsightsAIFeatures struct {
 
 func (x *InsightsAIFeatures) Reset() {
 	*x = InsightsAIFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[20]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1908,7 +1725,7 @@ func (x *InsightsAIFeatures) String() string {
 func (*InsightsAIFeatures) ProtoMessage() {}
 
 func (x *InsightsAIFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[20]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1921,7 +1738,7 @@ func (x *InsightsAIFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsAIFeatures.ProtoReflect.Descriptor instead.
 func (*InsightsAIFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{20}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *InsightsAIFeatures) GetIsAllow() bool {
@@ -1958,7 +1775,7 @@ type InsightsAITextChatFeatures struct {
 
 func (x *InsightsAITextChatFeatures) Reset() {
 	*x = InsightsAITextChatFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[21]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1970,7 +1787,7 @@ func (x *InsightsAITextChatFeatures) String() string {
 func (*InsightsAITextChatFeatures) ProtoMessage() {}
 
 func (x *InsightsAITextChatFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[21]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1983,7 +1800,7 @@ func (x *InsightsAITextChatFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsAITextChatFeatures.ProtoReflect.Descriptor instead.
 func (*InsightsAITextChatFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{21}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *InsightsAITextChatFeatures) GetIsAllow() bool {
@@ -2026,7 +1843,7 @@ type InsightsAIMeetingSummarizationFeatures struct {
 
 func (x *InsightsAIMeetingSummarizationFeatures) Reset() {
 	*x = InsightsAIMeetingSummarizationFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[22]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2038,7 +1855,7 @@ func (x *InsightsAIMeetingSummarizationFeatures) String() string {
 func (*InsightsAIMeetingSummarizationFeatures) ProtoMessage() {}
 
 func (x *InsightsAIMeetingSummarizationFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[22]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2051,7 +1868,7 @@ func (x *InsightsAIMeetingSummarizationFeatures) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use InsightsAIMeetingSummarizationFeatures.ProtoReflect.Descriptor instead.
 func (*InsightsAIMeetingSummarizationFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{22}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *InsightsAIMeetingSummarizationFeatures) GetIsAllow() bool {
@@ -2085,7 +1902,7 @@ type CopyrightConf struct {
 
 func (x *CopyrightConf) Reset() {
 	*x = CopyrightConf{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[23]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2097,7 +1914,7 @@ func (x *CopyrightConf) String() string {
 func (*CopyrightConf) ProtoMessage() {}
 
 func (x *CopyrightConf) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[23]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2110,7 +1927,7 @@ func (x *CopyrightConf) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CopyrightConf.ProtoReflect.Descriptor instead.
 func (*CopyrightConf) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{23}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *CopyrightConf) GetDisplay() bool {
@@ -2139,7 +1956,7 @@ type CreateRoomRes struct {
 
 func (x *CreateRoomRes) Reset() {
 	*x = CreateRoomRes{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[24]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2151,7 +1968,7 @@ func (x *CreateRoomRes) String() string {
 func (*CreateRoomRes) ProtoMessage() {}
 
 func (x *CreateRoomRes) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[24]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2164,7 +1981,7 @@ func (x *CreateRoomRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateRoomRes.ProtoReflect.Descriptor instead.
 func (*CreateRoomRes) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{24}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *CreateRoomRes) GetStatus() bool {
@@ -2238,7 +2055,7 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x10_welcome_messageB\x0e\n" +
 	"\f_webhook_urlB\r\n" +
 	"\v_logout_urlB\x0e\n" +
-	"\f_metadata_id\"\x87\x10\n" +
+	"\f_metadata_id\"\xcf\x0e\n" +
 	"\x12RoomCreateFeatures\x12#\n" +
 	"\rallow_webcams\x18\x01 \x01(\bR\fallowWebcams\x12\"\n" +
 	"\rmute_on_start\x18\x02 \x01(\bR\vmuteOnStart\x12,\n" +
@@ -2248,49 +2065,39 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x18allow_view_other_webcams\x18\x05 \x01(\bR\x15allowViewOtherWebcams\x12<\n" +
 	"\x1ballow_view_other_users_list\x18\x06 \x01(\bR\x17allowViewOtherUsersList\x12,\n" +
 	"\x12admin_only_webcams\x18\a \x01(\bR\x10adminOnlyWebcams\x12(\n" +
-	"\vallow_polls\x18\b \x01(\bB\x02\x18\x01H\x01R\n" +
-	"allowPolls\x88\x01\x01\x12(\n" +
-	"\rroom_duration\x18\t \x01(\x04H\x02R\froomDuration\x88\x01\x01\x12)\n" +
-	"\x10enable_analytics\x18\n" +
-	" \x01(\bR\x0fenableAnalytics\x12-\n" +
-	"\x10allow_virtual_bg\x18\v \x01(\bH\x03R\x0eallowVirtualBg\x88\x01\x01\x12-\n" +
-	"\x10allow_raise_hand\x18\f \x01(\bH\x04R\x0eallowRaiseHand\x88\x01\x01\x12,\n" +
-	"\x10auto_gen_user_id\x18\r \x01(\bH\x05R\rautoGenUserId\x88\x01\x01\x12K\n" +
-	"\x12recording_features\x18\x0e \x01(\v2\x1c.plugnmeet.RecordingFeaturesR\x11recordingFeatures\x12<\n" +
-	"\rchat_features\x18\x0f \x01(\v2\x17.plugnmeet.ChatFeaturesR\fchatFeatures\x12Y\n" +
-	"\x18shared_note_pad_features\x18\x10 \x01(\v2 .plugnmeet.SharedNotePadFeaturesR\x15sharedNotePadFeatures\x12N\n" +
-	"\x13whiteboard_features\x18\x11 \x01(\v2\x1d.plugnmeet.WhiteboardFeaturesR\x12whiteboardFeatures\x12k\n" +
-	"\x1eexternal_media_player_features\x18\x12 \x01(\v2&.plugnmeet.ExternalMediaPlayerFeaturesR\x1bexternalMediaPlayerFeatures\x12R\n" +
-	"\x15waiting_room_features\x18\x13 \x01(\v2\x1e.plugnmeet.WaitingRoomFeaturesR\x13waitingRoomFeatures\x12U\n" +
-	"\x16breakout_room_features\x18\x14 \x01(\v2\x1f.plugnmeet.BreakoutRoomFeaturesR\x14breakoutRoomFeatures\x12k\n" +
-	"\x1edisplay_external_link_features\x18\x15 \x01(\v2&.plugnmeet.DisplayExternalLinkFeaturesR\x1bdisplayExternalLinkFeatures\x12E\n" +
-	"\x10ingress_features\x18\x16 \x01(\v2\x1a.plugnmeet.IngressFeaturesR\x0fingressFeatures\x12|\n" +
-	"#speech_to_text_translation_features\x18\x17 \x01(\v2*.plugnmeet.SpeechToTextTranslationFeaturesB\x02\x18\x01R\x1fspeechToTextTranslationFeatures\x12i\n" +
-	"\x1eend_to_end_encryption_features\x18\x18 \x01(\v2%.plugnmeet.EndToEndEncryptionFeaturesR\x1aendToEndEncryptionFeatures\x12?\n" +
-	"\x0epolls_features\x18\x19 \x01(\v2\x18.plugnmeet.PollsFeaturesR\rpollsFeatures\x12H\n" +
-	"\x11insights_features\x18\x1a \x01(\v2\x1b.plugnmeet.InsightsFeaturesR\x10insightsFeatures\x12M\n" +
-	"\x14sip_dial_in_features\x18\x1b \x01(\v2\x1c.plugnmeet.SipDialInFeaturesR\x11sipDialInFeatures\x12m\n" +
-	"\x1eexternal_broadcasting_features\x18\x1c \x01(\v2'.plugnmeet.ExternalBroadcastingFeaturesR\x1cexternalBroadcastingFeaturesB\r\n" +
-	"\v_allow_rtmpB\x0e\n" +
-	"\f_allow_pollsB\x10\n" +
+	"\rroom_duration\x18\b \x01(\x04H\x01R\froomDuration\x88\x01\x01\x12)\n" +
+	"\x10enable_analytics\x18\t \x01(\bR\x0fenableAnalytics\x12-\n" +
+	"\x10allow_virtual_bg\x18\n" +
+	" \x01(\bH\x02R\x0eallowVirtualBg\x88\x01\x01\x12-\n" +
+	"\x10allow_raise_hand\x18\v \x01(\bH\x03R\x0eallowRaiseHand\x88\x01\x01\x12,\n" +
+	"\x10auto_gen_user_id\x18\f \x01(\bH\x04R\rautoGenUserId\x88\x01\x01\x12K\n" +
+	"\x12recording_features\x18\r \x01(\v2\x1c.plugnmeet.RecordingFeaturesR\x11recordingFeatures\x12<\n" +
+	"\rchat_features\x18\x0e \x01(\v2\x17.plugnmeet.ChatFeaturesR\fchatFeatures\x12Y\n" +
+	"\x18shared_note_pad_features\x18\x0f \x01(\v2 .plugnmeet.SharedNotePadFeaturesR\x15sharedNotePadFeatures\x12N\n" +
+	"\x13whiteboard_features\x18\x10 \x01(\v2\x1d.plugnmeet.WhiteboardFeaturesR\x12whiteboardFeatures\x12k\n" +
+	"\x1eexternal_media_player_features\x18\x11 \x01(\v2&.plugnmeet.ExternalMediaPlayerFeaturesR\x1bexternalMediaPlayerFeatures\x12R\n" +
+	"\x15waiting_room_features\x18\x12 \x01(\v2\x1e.plugnmeet.WaitingRoomFeaturesR\x13waitingRoomFeatures\x12U\n" +
+	"\x16breakout_room_features\x18\x13 \x01(\v2\x1f.plugnmeet.BreakoutRoomFeaturesR\x14breakoutRoomFeatures\x12k\n" +
+	"\x1edisplay_external_link_features\x18\x14 \x01(\v2&.plugnmeet.DisplayExternalLinkFeaturesR\x1bdisplayExternalLinkFeatures\x12E\n" +
+	"\x10ingress_features\x18\x15 \x01(\v2\x1a.plugnmeet.IngressFeaturesR\x0fingressFeatures\x12i\n" +
+	"\x1eend_to_end_encryption_features\x18\x16 \x01(\v2%.plugnmeet.EndToEndEncryptionFeaturesR\x1aendToEndEncryptionFeatures\x12?\n" +
+	"\x0epolls_features\x18\x17 \x01(\v2\x18.plugnmeet.PollsFeaturesR\rpollsFeatures\x12H\n" +
+	"\x11insights_features\x18\x18 \x01(\v2\x1b.plugnmeet.InsightsFeaturesR\x10insightsFeatures\x12M\n" +
+	"\x14sip_dial_in_features\x18\x19 \x01(\v2\x1c.plugnmeet.SipDialInFeaturesR\x11sipDialInFeatures\x12m\n" +
+	"\x1eexternal_broadcasting_features\x18\x1a \x01(\v2'.plugnmeet.ExternalBroadcastingFeaturesR\x1cexternalBroadcastingFeaturesB\r\n" +
+	"\v_allow_rtmpB\x10\n" +
 	"\x0e_room_durationB\x13\n" +
 	"\x11_allow_virtual_bgB\x13\n" +
 	"\x11_allow_raise_handB\x13\n" +
-	"\x11_auto_gen_user_id\"\xc5\x02\n" +
-	"\fChatFeatures\x12&\n" +
-	"\n" +
-	"allow_chat\x18\x01 \x01(\bB\x02\x18\x01H\x00R\tallowChat\x88\x01\x01\x123\n" +
-	"\x11allow_file_upload\x18\x02 \x01(\bB\x02\x18\x01H\x01R\x0fallowFileUpload\x88\x01\x01\x12\x19\n" +
-	"\bis_allow\x18\x05 \x01(\bR\aisAllow\x12/\n" +
-	"\x14is_allow_file_upload\x18\x06 \x01(\bR\x11isAllowFileUpload\x12,\n" +
+	"\x11_auto_gen_user_id\"\xc3\x01\n" +
+	"\fChatFeatures\x12\x19\n" +
+	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12/\n" +
+	"\x14is_allow_file_upload\x18\x02 \x01(\bR\x11isAllowFileUpload\x12,\n" +
 	"\x12allowed_file_types\x18\x03 \x03(\tR\x10allowedFileTypes\x12'\n" +
-	"\rmax_file_size\x18\x04 \x01(\x04H\x02R\vmaxFileSize\x88\x01\x01B\r\n" +
-	"\v_allow_chatB\x14\n" +
-	"\x12_allow_file_uploadB\x10\n" +
-	"\x0e_max_file_size\"\xaa\x05\n" +
-	"\x15SharedNotePadFeatures\x12>\n" +
-	"\x17allowed_shared_note_pad\x18\x01 \x01(\bB\x02\x18\x01H\x00R\x14allowedSharedNotePad\x88\x01\x01\x12\x19\n" +
-	"\bis_allow\x18\b \x01(\bR\aisAllow\x12$\n" +
+	"\rmax_file_size\x18\x04 \x01(\x04H\x00R\vmaxFileSize\x88\x01\x01B\x10\n" +
+	"\x0e_max_file_size\"\xce\x04\n" +
+	"\x15SharedNotePadFeatures\x12\x19\n" +
+	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12$\n" +
 	"\tis_active\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisActive\x12!\n" +
 	"\avisible\x18\x03 \x01(\bB\a\xbaH\x04j\x02\b\x00R\avisible\x12i\n" +
 	"\anode_id\x18\x04 \x01(\tBP\xbaHM\xba\x01J\n" +
@@ -2300,13 +2107,11 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\vnote_pad_id\x18\x06 \x01(\tBX\xbaHU\xba\x01R\n" +
 	"\x12note_pad_id_format\x12(note_pad_id should not contain any value\x1a\x12this.matches('^$')R\tnotePadId\x12\x8b\x01\n" +
 	"\x10read_only_pad_id\x18\a \x01(\tBb\xbaH_\xba\x01\\\n" +
-	"\x17read_only_pad_id_format\x12-read_only_pad_id should not contain any value\x1a\x12this.matches('^$')R\rreadOnlyPadIdB\x1a\n" +
-	"\x18_allowed_shared_note_pad\"\xdd\x05\n" +
-	"\x12WhiteboardFeatures\x126\n" +
-	"\x12allowed_whiteboard\x18\x01 \x01(\bB\x02\x18\x01H\x00R\x11allowedWhiteboard\x88\x01\x01\x12\x19\n" +
-	"\bis_allow\x18\t \x01(\bR\aisAllow\x12!\n" +
+	"\x17read_only_pad_id_format\x12-read_only_pad_id should not contain any value\x1a\x12this.matches('^$')R\rreadOnlyPadId\"\x8e\x05\n" +
+	"\x12WhiteboardFeatures\x12\x19\n" +
+	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12!\n" +
 	"\avisible\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\avisible\x120\n" +
-	"\fpreload_file\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x01R\vpreloadFile\x88\x01\x01\x12\x94\x01\n" +
+	"\fpreload_file\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x00R\vpreloadFile\x88\x01\x01\x12\x94\x01\n" +
 	"\x12whiteboard_file_id\x18\x04 \x01(\tBf\xbaHc\xba\x01`\n" +
 	"\x19whiteboard_file_id_format\x12/whiteboard_file_id should not contain any value\x1a\x12this.matches('^$')R\x10whiteboardFileId\x12q\n" +
 	"\tfile_name\x18\x05 \x01(\tBT\xbaHQ\xba\x01N\n" +
@@ -2315,20 +2120,17 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x10file_path_format\x12&file_path should not contain any value\x1a\x12this.matches('^$')R\bfilePath\x12\x1f\n" +
 	"\vtotal_pages\x18\a \x01(\rR\n" +
 	"totalPages\x12?\n" +
-	"\x15max_allowed_file_size\x18\b \x01(\x04B\a\xbaH\x042\x02\b\x00H\x02R\x12maxAllowedFileSize\x88\x01\x01B\x15\n" +
-	"\x13_allowed_whiteboardB\x0f\n" +
+	"\x15max_allowed_file_size\x18\b \x01(\x04B\a\xbaH\x042\x02\b\x00H\x01R\x12maxAllowedFileSize\x88\x01\x01B\x0f\n" +
 	"\r_preload_fileB\x18\n" +
-	"\x16_max_allowed_file_size\"\xbb\x03\n" +
-	"\x1bExternalMediaPlayerFeatures\x12J\n" +
-	"\x1dallowed_external_media_player\x18\x01 \x01(\bB\x02\x18\x01H\x00R\x1aallowedExternalMediaPlayer\x88\x01\x01\x12\x19\n" +
-	"\bis_allow\x18\x05 \x01(\bR\aisAllow\x12$\n" +
+	"\x16_max_allowed_file_size\"\xcd\x02\n" +
+	"\x1bExternalMediaPlayerFeatures\x12\x19\n" +
+	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12$\n" +
 	"\tis_active\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisActive\x12v\n" +
 	"\tshared_by\x18\x03 \x01(\tBT\xbaHQ\xba\x01N\n" +
-	"\x10shared_by_format\x12&shared_by should not contain any value\x1a\x12this.matches('^$')H\x01R\bsharedBy\x88\x01\x01\x12_\n" +
+	"\x10shared_by_format\x12&shared_by should not contain any value\x1a\x12this.matches('^$')H\x00R\bsharedBy\x88\x01\x01\x12_\n" +
 	"\x03url\x18\x04 \x01(\tBH\xbaHE\xba\x01B\n" +
 	"\n" +
-	"url_format\x12 url should not contain any value\x1a\x12this.matches('^$')H\x02R\x03url\x88\x01\x01B \n" +
-	"\x1e_allowed_external_media_playerB\f\n" +
+	"url_format\x12 url should not contain any value\x1a\x12this.matches('^$')H\x01R\x03url\x88\x01\x01B\f\n" +
 	"\n" +
 	"_shared_byB\x06\n" +
 	"\x04_url\"\\\n" +
@@ -2369,21 +2171,7 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"url_format\x12 url should not contain any value\x1a\x12this.matches('^$')R\x03url\x12u\n" +
 	"\n" +
 	"stream_key\x18\x04 \x01(\tBV\xbaHS\xba\x01P\n" +
-	"\x11stream_key_format\x12'stream_key should not contain any value\x1a\x12this.matches('^$')R\tstreamKey\"\x94\x05\n" +
-	"\x1fSpeechToTextTranslationFeatures\x12\x19\n" +
-	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x120\n" +
-	"\x14is_allow_translation\x18\x02 \x01(\bR\x12isAllowTranslation\x12&\n" +
-	"\n" +
-	"is_enabled\x18\x03 \x01(\bB\a\xbaH\x04j\x02\b\x00R\tisEnabled\x12=\n" +
-	"\x16is_enabled_translation\x18\x04 \x01(\bB\a\xbaH\x04j\x02\b\x00R\x14isEnabledTranslation\x12I\n" +
-	"\"max_num_tran_langs_allow_selecting\x18\v \x01(\x05R\x1dmaxNumTranLangsAllowSelecting\x12:\n" +
-	"\x14allowed_speech_langs\x18\a \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x12allowedSpeechLangs\x12:\n" +
-	"\x14allowed_speech_users\x18\b \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x12allowedSpeechUsers\x128\n" +
-	"\x13allowed_trans_langs\x18\t \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x11allowedTransLangs\x12\xa5\x01\n" +
-	"\x15default_subtitle_lang\x18\n" +
-	" \x01(\tBl\xbaHi\xba\x01f\n" +
-	"\x1cdefault_subtitle_lang_format\x122default_subtitle_lang should not contain any value\x1a\x12this.matches('^$')H\x00R\x13defaultSubtitleLang\x88\x01\x01B\x18\n" +
-	"\x16_default_subtitle_lang\"\x8e\x03\n" +
+	"\x11stream_key_format\x12'stream_key should not contain any value\x1a\x12this.matches('^$')R\tstreamKey\"\x8e\x03\n" +
 	"\x1aEndToEndEncryptionFeatures\x12\x1d\n" +
 	"\n" +
 	"is_enabled\x18\x01 \x01(\bR\tisEnabled\x124\n" +
@@ -2483,7 +2271,7 @@ func file_plugnmeet_create_room_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_create_room_proto_rawDescData
 }
 
-var file_plugnmeet_create_room_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_plugnmeet_create_room_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_plugnmeet_create_room_proto_goTypes = []any{
 	(*CreateRoomReq)(nil),                          // 0: plugnmeet.CreateRoomReq
 	(*RoomMetadata)(nil),                           // 1: plugnmeet.RoomMetadata
@@ -2498,31 +2286,30 @@ var file_plugnmeet_create_room_proto_goTypes = []any{
 	(*ExternalBroadcastingFeatures)(nil),           // 10: plugnmeet.ExternalBroadcastingFeatures
 	(*RecordingFeatures)(nil),                      // 11: plugnmeet.RecordingFeatures
 	(*IngressFeatures)(nil),                        // 12: plugnmeet.IngressFeatures
-	(*SpeechToTextTranslationFeatures)(nil),        // 13: plugnmeet.SpeechToTextTranslationFeatures
-	(*EndToEndEncryptionFeatures)(nil),             // 14: plugnmeet.EndToEndEncryptionFeatures
-	(*PollsFeatures)(nil),                          // 15: plugnmeet.PollsFeatures
-	(*SipDialInFeatures)(nil),                      // 16: plugnmeet.SipDialInFeatures
-	(*InsightsFeatures)(nil),                       // 17: plugnmeet.InsightsFeatures
-	(*InsightsTranscriptionFeatures)(nil),          // 18: plugnmeet.InsightsTranscriptionFeatures
-	(*InsightsChatTranslationFeatures)(nil),        // 19: plugnmeet.InsightsChatTranslationFeatures
-	(*InsightsAIFeatures)(nil),                     // 20: plugnmeet.InsightsAIFeatures
-	(*InsightsAITextChatFeatures)(nil),             // 21: plugnmeet.InsightsAITextChatFeatures
-	(*InsightsAIMeetingSummarizationFeatures)(nil), // 22: plugnmeet.InsightsAIMeetingSummarizationFeatures
-	(*CopyrightConf)(nil),                          // 23: plugnmeet.CopyrightConf
-	(*CreateRoomRes)(nil),                          // 24: plugnmeet.CreateRoomRes
-	nil,                                            // 25: plugnmeet.RoomMetadata.ExtraDataEntry
-	(*LockSettings)(nil),                           // 26: plugnmeet.LockSettings
-	(*RecorderBotOptions)(nil),                     // 27: plugnmeet.RecorderBotOptions
-	(IngressInput)(0),                              // 28: plugnmeet.IngressInput
-	(StatusCode)(0),                                // 29: plugnmeet.StatusCode
-	(*ActiveRoomInfo)(nil),                         // 30: plugnmeet.ActiveRoomInfo
+	(*EndToEndEncryptionFeatures)(nil),             // 13: plugnmeet.EndToEndEncryptionFeatures
+	(*PollsFeatures)(nil),                          // 14: plugnmeet.PollsFeatures
+	(*SipDialInFeatures)(nil),                      // 15: plugnmeet.SipDialInFeatures
+	(*InsightsFeatures)(nil),                       // 16: plugnmeet.InsightsFeatures
+	(*InsightsTranscriptionFeatures)(nil),          // 17: plugnmeet.InsightsTranscriptionFeatures
+	(*InsightsChatTranslationFeatures)(nil),        // 18: plugnmeet.InsightsChatTranslationFeatures
+	(*InsightsAIFeatures)(nil),                     // 19: plugnmeet.InsightsAIFeatures
+	(*InsightsAITextChatFeatures)(nil),             // 20: plugnmeet.InsightsAITextChatFeatures
+	(*InsightsAIMeetingSummarizationFeatures)(nil), // 21: plugnmeet.InsightsAIMeetingSummarizationFeatures
+	(*CopyrightConf)(nil),                          // 22: plugnmeet.CopyrightConf
+	(*CreateRoomRes)(nil),                          // 23: plugnmeet.CreateRoomRes
+	nil,                                            // 24: plugnmeet.RoomMetadata.ExtraDataEntry
+	(*LockSettings)(nil),                           // 25: plugnmeet.LockSettings
+	(*RecorderBotOptions)(nil),                     // 26: plugnmeet.RecorderBotOptions
+	(IngressInput)(0),                              // 27: plugnmeet.IngressInput
+	(StatusCode)(0),                                // 28: plugnmeet.StatusCode
+	(*ActiveRoomInfo)(nil),                         // 29: plugnmeet.ActiveRoomInfo
 }
 var file_plugnmeet_create_room_proto_depIdxs = []int32{
 	1,  // 0: plugnmeet.CreateRoomReq.metadata:type_name -> plugnmeet.RoomMetadata
 	2,  // 1: plugnmeet.RoomMetadata.room_features:type_name -> plugnmeet.RoomCreateFeatures
-	26, // 2: plugnmeet.RoomMetadata.default_lock_settings:type_name -> plugnmeet.LockSettings
-	23, // 3: plugnmeet.RoomMetadata.copyright_conf:type_name -> plugnmeet.CopyrightConf
-	25, // 4: plugnmeet.RoomMetadata.extra_data:type_name -> plugnmeet.RoomMetadata.ExtraDataEntry
+	25, // 2: plugnmeet.RoomMetadata.default_lock_settings:type_name -> plugnmeet.LockSettings
+	22, // 3: plugnmeet.RoomMetadata.copyright_conf:type_name -> plugnmeet.CopyrightConf
+	24, // 4: plugnmeet.RoomMetadata.extra_data:type_name -> plugnmeet.RoomMetadata.ExtraDataEntry
 	11, // 5: plugnmeet.RoomCreateFeatures.recording_features:type_name -> plugnmeet.RecordingFeatures
 	3,  // 6: plugnmeet.RoomCreateFeatures.chat_features:type_name -> plugnmeet.ChatFeatures
 	4,  // 7: plugnmeet.RoomCreateFeatures.shared_note_pad_features:type_name -> plugnmeet.SharedNotePadFeatures
@@ -2532,27 +2319,26 @@ var file_plugnmeet_create_room_proto_depIdxs = []int32{
 	8,  // 11: plugnmeet.RoomCreateFeatures.breakout_room_features:type_name -> plugnmeet.BreakoutRoomFeatures
 	9,  // 12: plugnmeet.RoomCreateFeatures.display_external_link_features:type_name -> plugnmeet.DisplayExternalLinkFeatures
 	12, // 13: plugnmeet.RoomCreateFeatures.ingress_features:type_name -> plugnmeet.IngressFeatures
-	13, // 14: plugnmeet.RoomCreateFeatures.speech_to_text_translation_features:type_name -> plugnmeet.SpeechToTextTranslationFeatures
-	14, // 15: plugnmeet.RoomCreateFeatures.end_to_end_encryption_features:type_name -> plugnmeet.EndToEndEncryptionFeatures
-	15, // 16: plugnmeet.RoomCreateFeatures.polls_features:type_name -> plugnmeet.PollsFeatures
-	17, // 17: plugnmeet.RoomCreateFeatures.insights_features:type_name -> plugnmeet.InsightsFeatures
-	16, // 18: plugnmeet.RoomCreateFeatures.sip_dial_in_features:type_name -> plugnmeet.SipDialInFeatures
-	10, // 19: plugnmeet.RoomCreateFeatures.external_broadcasting_features:type_name -> plugnmeet.ExternalBroadcastingFeatures
-	27, // 20: plugnmeet.ExternalBroadcastingFeatures.recorder_bot_options:type_name -> plugnmeet.RecorderBotOptions
-	27, // 21: plugnmeet.RecordingFeatures.recorder_bot_options:type_name -> plugnmeet.RecorderBotOptions
-	28, // 22: plugnmeet.IngressFeatures.input_type:type_name -> plugnmeet.IngressInput
-	18, // 23: plugnmeet.InsightsFeatures.transcription_features:type_name -> plugnmeet.InsightsTranscriptionFeatures
-	19, // 24: plugnmeet.InsightsFeatures.chat_translation_features:type_name -> plugnmeet.InsightsChatTranslationFeatures
-	20, // 25: plugnmeet.InsightsFeatures.ai_features:type_name -> plugnmeet.InsightsAIFeatures
-	21, // 26: plugnmeet.InsightsAIFeatures.ai_text_chat_features:type_name -> plugnmeet.InsightsAITextChatFeatures
-	22, // 27: plugnmeet.InsightsAIFeatures.meeting_summarization_features:type_name -> plugnmeet.InsightsAIMeetingSummarizationFeatures
-	29, // 28: plugnmeet.CreateRoomRes.status_code:type_name -> plugnmeet.StatusCode
-	30, // 29: plugnmeet.CreateRoomRes.room_info:type_name -> plugnmeet.ActiveRoomInfo
-	30, // [30:30] is the sub-list for method output_type
-	30, // [30:30] is the sub-list for method input_type
-	30, // [30:30] is the sub-list for extension type_name
-	30, // [30:30] is the sub-list for extension extendee
-	0,  // [0:30] is the sub-list for field type_name
+	13, // 14: plugnmeet.RoomCreateFeatures.end_to_end_encryption_features:type_name -> plugnmeet.EndToEndEncryptionFeatures
+	14, // 15: plugnmeet.RoomCreateFeatures.polls_features:type_name -> plugnmeet.PollsFeatures
+	16, // 16: plugnmeet.RoomCreateFeatures.insights_features:type_name -> plugnmeet.InsightsFeatures
+	15, // 17: plugnmeet.RoomCreateFeatures.sip_dial_in_features:type_name -> plugnmeet.SipDialInFeatures
+	10, // 18: plugnmeet.RoomCreateFeatures.external_broadcasting_features:type_name -> plugnmeet.ExternalBroadcastingFeatures
+	26, // 19: plugnmeet.ExternalBroadcastingFeatures.recorder_bot_options:type_name -> plugnmeet.RecorderBotOptions
+	26, // 20: plugnmeet.RecordingFeatures.recorder_bot_options:type_name -> plugnmeet.RecorderBotOptions
+	27, // 21: plugnmeet.IngressFeatures.input_type:type_name -> plugnmeet.IngressInput
+	17, // 22: plugnmeet.InsightsFeatures.transcription_features:type_name -> plugnmeet.InsightsTranscriptionFeatures
+	18, // 23: plugnmeet.InsightsFeatures.chat_translation_features:type_name -> plugnmeet.InsightsChatTranslationFeatures
+	19, // 24: plugnmeet.InsightsFeatures.ai_features:type_name -> plugnmeet.InsightsAIFeatures
+	20, // 25: plugnmeet.InsightsAIFeatures.ai_text_chat_features:type_name -> plugnmeet.InsightsAITextChatFeatures
+	21, // 26: plugnmeet.InsightsAIFeatures.meeting_summarization_features:type_name -> plugnmeet.InsightsAIMeetingSummarizationFeatures
+	28, // 27: plugnmeet.CreateRoomRes.status_code:type_name -> plugnmeet.StatusCode
+	29, // 28: plugnmeet.CreateRoomRes.room_info:type_name -> plugnmeet.ActiveRoomInfo
+	29, // [29:29] is the sub-list for method output_type
+	29, // [29:29] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_create_room_proto_init() }
@@ -2569,26 +2355,24 @@ func file_plugnmeet_create_room_proto_init() {
 	file_plugnmeet_create_room_proto_msgTypes[1].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[2].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[3].OneofWrappers = []any{}
-	file_plugnmeet_create_room_proto_msgTypes[4].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[5].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[6].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[9].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[10].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[11].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[13].OneofWrappers = []any{}
-	file_plugnmeet_create_room_proto_msgTypes[14].OneofWrappers = []any{}
+	file_plugnmeet_create_room_proto_msgTypes[15].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[16].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[17].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[18].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[19].OneofWrappers = []any{}
-	file_plugnmeet_create_room_proto_msgTypes[20].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_create_room_proto_rawDesc), len(file_plugnmeet_create_room_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   26,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

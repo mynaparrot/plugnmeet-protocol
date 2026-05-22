@@ -992,17 +992,13 @@ func (x *FetchPastRoomsRes) GetResult() *FetchPastRoomsResult {
 }
 
 type GetClientFilesRes struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	Status     bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
-	Msg        string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	StatusCode StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
-	// Deprecated: Marked as deprecated in plugnmeet_auth_room.proto.
-	Css []string `protobuf:"bytes,4,rep,name=css,proto3" json:"css,omitempty"`
-	// Deprecated: Marked as deprecated in plugnmeet_auth_room.proto.
-	Js               []string `protobuf:"bytes,5,rep,name=js,proto3" json:"js,omitempty"`
-	CssFiles         []string `protobuf:"bytes,6,rep,name=css_files,json=cssFiles,proto3" json:"css_files,omitempty"`
-	JsFiles          []string `protobuf:"bytes,7,rep,name=js_files,json=jsFiles,proto3" json:"js_files,omitempty"`
-	StaticAssetsPath *string  `protobuf:"bytes,8,opt,name=static_assets_path,json=staticAssetsPath,proto3,oneof" json:"static_assets_path,omitempty"`
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Status           bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	Msg              string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	StatusCode       StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	CssFiles         []string               `protobuf:"bytes,6,rep,name=css_files,json=cssFiles,proto3" json:"css_files,omitempty"`
+	JsFiles          []string               `protobuf:"bytes,7,rep,name=js_files,json=jsFiles,proto3" json:"js_files,omitempty"`
+	StaticAssetsPath *string                `protobuf:"bytes,8,opt,name=static_assets_path,json=staticAssetsPath,proto3,oneof" json:"static_assets_path,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1056,22 +1052,6 @@ func (x *GetClientFilesRes) GetStatusCode() StatusCode {
 		return x.StatusCode
 	}
 	return StatusCode_UNKNOWN_STATUS
-}
-
-// Deprecated: Marked as deprecated in plugnmeet_auth_room.proto.
-func (x *GetClientFilesRes) GetCss() []string {
-	if x != nil {
-		return x.Css
-	}
-	return nil
-}
-
-// Deprecated: Marked as deprecated in plugnmeet_auth_room.proto.
-func (x *GetClientFilesRes) GetJs() []string {
-	if x != nil {
-		return x.Js
-	}
-	return nil
 }
 
 func (x *GetClientFilesRes) GetCssFiles() []string {
@@ -1402,14 +1382,12 @@ const file_plugnmeet_auth_room_proto_rawDesc = "" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
 	"statusCode\x127\n" +
-	"\x06result\x18\x04 \x01(\v2\x1f.plugnmeet.FetchPastRoomsResultR\x06result\"\xa1\x02\n" +
+	"\x06result\x18\x04 \x01(\v2\x1f.plugnmeet.FetchPastRoomsResultR\x06result\"\xf7\x01\n" +
 	"\x11GetClientFilesRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
-	"statusCode\x12\x14\n" +
-	"\x03css\x18\x04 \x03(\tB\x02\x18\x01R\x03css\x12\x12\n" +
-	"\x02js\x18\x05 \x03(\tB\x02\x18\x01R\x02js\x12\x1b\n" +
+	"statusCode\x12\x1b\n" +
 	"\tcss_files\x18\x06 \x03(\tR\bcssFiles\x12\x19\n" +
 	"\bjs_files\x18\a \x03(\tR\ajsFiles\x121\n" +
 	"\x12static_assets_path\x18\b \x01(\tH\x00R\x10staticAssetsPath\x88\x01\x01B\x15\n" +

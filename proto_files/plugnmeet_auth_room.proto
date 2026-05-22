@@ -113,8 +113,6 @@ message GetClientFilesRes {
   bool status = 1;
   string msg = 2;
   StatusCode status_code = 3;
-  repeated string css = 4 [deprecated = true];
-  repeated string js = 5 [deprecated = true];
   repeated string css_files = 6;
   repeated string js_files = 7;
   optional string static_assets_path = 8;

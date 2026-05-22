@@ -67,15 +67,15 @@ func AssignLTIV1CustomParams(params *url.Values, claims *plugnmeet.LtiClaims) {
 }
 
 func PrepareLTIV1RoomCreateReq(c *plugnmeet.LtiClaims) *plugnmeet.CreateRoomReq {
+	// minimum initialization
 	req := &plugnmeet.CreateRoomReq{
 		RoomId: c.RoomId,
 		Metadata: &plugnmeet.RoomMetadata{
-			RoomTitle:    c.RoomTitle,
-			RoomFeatures: new(plugnmeet.RoomCreateFeatures),
+			RoomTitle: c.RoomTitle,
 		},
 	}
 
-	// LTI will enable most of the features by default
+	// set all default room features
 	PrepareDefaultRoomFeatures(req)
 
 	if c.LtiCustomParameters != nil {

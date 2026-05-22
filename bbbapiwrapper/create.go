@@ -84,14 +84,14 @@ type PreUploadWhiteboardPostFile struct {
 }
 
 func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*plugnmeet.CreateRoomReq, error) {
+	// minimum initialization
 	req := plugnmeet.CreateRoomReq{
 		RoomId: CheckMeetingIdToMatchFormat(r.MeetingID),
 		Metadata: &plugnmeet.RoomMetadata{
-			RoomTitle:    r.Name,
-			RoomFeatures: new(plugnmeet.RoomCreateFeatures),
+			RoomTitle: r.Name,
 		},
 	}
-	// set defaults
+	// set all default room features
 	utils.PrepareDefaultRoomFeatures(&req)
 	// now we can customize features
 	setFeatures(r, req.Metadata.RoomFeatures)
@@ -169,15 +169,10 @@ func ConvertCreateRequest(r *CreateMeetingReq, rawQueries map[string]string) (*p
 }
 
 func setFeatures(r *CreateMeetingReq, f *plugnmeet.RoomCreateFeatures) {
-	b := true
-	f.AllowWebcams = true
 	f.AdminOnlyWebcams = r.WebcamsOnlyForModerator
-	f.EnableAnalytics = true
 	f.MuteOnStart = r.MuteOnStart
-	f.AllowScreenShare = true
-	f.AllowRaiseHand = &b
-	f.AllowVirtualBg = &b
-	f.AutoGenUserId = &b
+	// for BBB we need auto generate userId
+	f.AutoGenUserId = new(true)
 
 	f.RecordingFeatures.IsAllow = r.Record
 	f.RecordingFeatures.IsAllowCloud = r.Record

@@ -57,45 +57,38 @@ message RoomCreateFeatures {
   bool allow_view_other_webcams = 5;
   bool allow_view_other_users_list = 6;
   bool admin_only_webcams = 7;
-  // deprecated use polls_features
-  optional bool allow_polls = 8 [deprecated = true];
-  optional uint64 room_duration = 9;
-  bool enable_analytics = 10;
-  optional bool allow_virtual_bg = 11;
-  optional bool allow_raise_hand = 12;
-  optional bool auto_gen_user_id = 13;
-  RecordingFeatures recording_features = 14;
-  ChatFeatures chat_features = 15;
-  SharedNotePadFeatures shared_note_pad_features = 16;
-  WhiteboardFeatures whiteboard_features = 17;
-  ExternalMediaPlayerFeatures external_media_player_features = 18;
-  WaitingRoomFeatures waiting_room_features = 19;
-  BreakoutRoomFeatures breakout_room_features = 20;
-  DisplayExternalLinkFeatures display_external_link_features = 21;
-  IngressFeatures ingress_features = 22;
-  // deprecated use insights_features
-  SpeechToTextTranslationFeatures speech_to_text_translation_features = 23 [deprecated = true];
-  EndToEndEncryptionFeatures end_to_end_encryption_features = 24;
-  PollsFeatures polls_features = 25;
-  InsightsFeatures insights_features = 26;
-  SipDialInFeatures sip_dial_in_features = 27;
-  ExternalBroadcastingFeatures external_broadcasting_features = 28;
-  // next ID: 29
+  optional uint64 room_duration = 8;
+  bool enable_analytics = 9;
+  optional bool allow_virtual_bg = 10;
+  optional bool allow_raise_hand = 11;
+  optional bool auto_gen_user_id = 12;
+  RecordingFeatures recording_features = 13;
+  ChatFeatures chat_features = 14;
+  SharedNotePadFeatures shared_note_pad_features = 15;
+  WhiteboardFeatures whiteboard_features = 16;
+  ExternalMediaPlayerFeatures external_media_player_features = 17;
+  WaitingRoomFeatures waiting_room_features = 18;
+  BreakoutRoomFeatures breakout_room_features = 19;
+  DisplayExternalLinkFeatures display_external_link_features = 20;
+  IngressFeatures ingress_features = 21;
+  EndToEndEncryptionFeatures end_to_end_encryption_features = 22;
+  PollsFeatures polls_features = 23;
+  InsightsFeatures insights_features = 24;
+  SipDialInFeatures sip_dial_in_features = 25;
+  ExternalBroadcastingFeatures external_broadcasting_features = 26;
+  // next ID: 27
 }
 
 message ChatFeatures {
-  optional bool allow_chat = 1 [deprecated = true];
-  optional bool allow_file_upload = 2 [deprecated = true];
-  bool is_allow = 5;
-  bool is_allow_file_upload = 6;
+  bool is_allow = 1;
+  bool is_allow_file_upload = 2;
 
   repeated string allowed_file_types = 3;
   optional uint64 max_file_size = 4;
 }
 
 message SharedNotePadFeatures {
-  optional bool allowed_shared_note_pad = 1 [deprecated = true];
-  bool is_allow = 8;
+  bool is_allow = 1;
 
   bool is_active = 2 [(buf.validate.field).bool.const = false];
   bool visible = 3 [(buf.validate.field).bool.const = false];
@@ -122,8 +115,7 @@ message SharedNotePadFeatures {
 }
 
 message WhiteboardFeatures {
-  optional bool allowed_whiteboard = 1 [deprecated = true];
-  bool is_allow = 9;
+  bool is_allow = 1;
 
   bool visible = 2 [(buf.validate.field).bool.const = false];
   optional string preload_file = 3 [(buf.validate.field).string.uri = true];
@@ -147,8 +139,7 @@ message WhiteboardFeatures {
 }
 
 message ExternalMediaPlayerFeatures {
-  optional bool allowed_external_media_player = 1 [deprecated = true];
-  bool is_allow = 5;
+  bool is_allow = 1;
 
   bool is_active = 2 [(buf.validate.field).bool.const = false];
   optional string shared_by = 3 [(buf.validate.field).cel = {
@@ -209,24 +200,6 @@ message IngressFeatures {
     message: "stream_key should not contain any value",
     expression: "this.matches('^$')"
   }];
-}
-
-// deprecated use insights_features
-message SpeechToTextTranslationFeatures {
-  bool is_allow = 1;
-  bool is_allow_translation = 2;
-  bool is_enabled = 3 [(buf.validate.field).bool.const = false];
-  bool is_enabled_translation = 4 [(buf.validate.field).bool.const = false];
-  int32 max_num_tran_langs_allow_selecting = 11;
-  repeated string allowed_speech_langs = 7 [(buf.validate.field).repeated.max_items = 0];
-  repeated string allowed_speech_users = 8 [(buf.validate.field).repeated.max_items = 0];
-  repeated string allowed_trans_langs = 9 [(buf.validate.field).repeated.max_items = 0];
-  optional string default_subtitle_lang = 10 [(buf.validate.field).cel = {
-    id: "default_subtitle_lang_format",
-    message: "default_subtitle_lang should not contain any value",
-    expression: "this.matches('^$')"
-  }];
-  // next ID: 12
 }
 
 message EndToEndEncryptionFeatures {
