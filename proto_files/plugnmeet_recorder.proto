@@ -32,20 +32,31 @@ message RecorderToPlugNmeet {
   // next key 13
 }
 
+message TranscodingTaskPostRecording {
+  // directory where raw file is stored
+  string file_path = 1;
+  // raw file name e.g. rec-xxx_raw.mp4
+  string file_name = 2;
+  // The variant of the recording
+  CloudRecordingVariants recording_variant = 3;
+}
+
+message TranscodingTaskMergeRecordings {
+  repeated string file_paths = 1;
+}
+
 // TranscodingTask will be the job for the transcoding worker.
 message TranscodingTask {
   string recording_id = 1;
   string room_id = 2;
   string room_sid = 3;
-  // directory where raw file is stored
-  string file_path = 4;
-  // raw file name e.g. rec-xxx_raw.mp4
-  string file_name = 5;
-  int64 room_table_id = 6;
+  int64 room_table_id = 4;
   // ID of the original recorder that captured the file
-  string recorder_id = 7;
-  // The variant of the recording
-  CloudRecordingVariants recording_variant = 8;
+  string recorder_id = 5;
+  oneof task_details {
+    TranscodingTaskPostRecording post_recording = 6;
+    TranscodingTaskMergeRecordings merge_recordings = 7;
+  }
 }
 
 enum RecordingTasks {
@@ -60,6 +71,7 @@ enum RecordingTasks {
   RECORDING_PROCEEDED = 6;
 
   STOP = 7;
+  RECORDING_TRANSCODING_FINISHED = 8;
 }
 
 enum RecorderInfoKeys {

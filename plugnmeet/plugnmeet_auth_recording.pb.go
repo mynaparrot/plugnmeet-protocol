@@ -791,6 +791,58 @@ func (x *UpdateRecordingMetadataRes) GetStatusCode() StatusCode {
 	return StatusCode_UNKNOWN_STATUS
 }
 
+type MergeRecordingsReq struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	RoomSid             string                 `protobuf:"bytes,1,opt,name=room_sid,json=roomSid,proto3" json:"room_sid,omitempty"`
+	ExcludeRecordingIds []string               `protobuf:"bytes,2,rep,name=exclude_recording_ids,json=excludeRecordingIds,proto3" json:"exclude_recording_ids,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *MergeRecordingsReq) Reset() {
+	*x = MergeRecordingsReq{}
+	mi := &file_plugnmeet_auth_recording_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MergeRecordingsReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MergeRecordingsReq) ProtoMessage() {}
+
+func (x *MergeRecordingsReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_auth_recording_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MergeRecordingsReq.ProtoReflect.Descriptor instead.
+func (*MergeRecordingsReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_auth_recording_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *MergeRecordingsReq) GetRoomSid() string {
+	if x != nil {
+		return x.RoomSid
+	}
+	return ""
+}
+
+func (x *MergeRecordingsReq) GetExcludeRecordingIds() []string {
+	if x != nil {
+		return x.ExcludeRecordingIds
+	}
+	return nil
+}
+
 var File_plugnmeet_auth_recording_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_auth_recording_proto_rawDesc = "" +
@@ -857,7 +909,10 @@ const file_plugnmeet_auth_recording_proto_rawDesc = "" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
-	"statusCodeB\xa4\x01\n" +
+	"statusCode\"k\n" +
+	"\x12MergeRecordingsReq\x12!\n" +
+	"\broom_sid\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\aroomSid\x122\n" +
+	"\x15exclude_recording_ids\x18\x02 \x03(\tR\x13excludeRecordingIdsB\xa4\x01\n" +
 	"\rcom.plugnmeetB\x1bPlugnmeetAuthRecordingProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -872,7 +927,7 @@ func file_plugnmeet_auth_recording_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_auth_recording_proto_rawDescData
 }
 
-var file_plugnmeet_auth_recording_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_plugnmeet_auth_recording_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_plugnmeet_auth_recording_proto_goTypes = []any{
 	(*FetchRecordingsReq)(nil),         // 0: plugnmeet.FetchRecordingsReq
 	(*RecordingInfo)(nil),              // 1: plugnmeet.RecordingInfo
@@ -886,22 +941,23 @@ var file_plugnmeet_auth_recording_proto_goTypes = []any{
 	(*GetDownloadTokenRes)(nil),        // 9: plugnmeet.GetDownloadTokenRes
 	(*UpdateRecordingMetadataReq)(nil), // 10: plugnmeet.UpdateRecordingMetadataReq
 	(*UpdateRecordingMetadataRes)(nil), // 11: plugnmeet.UpdateRecordingMetadataRes
-	(*RecordingMetadata)(nil),          // 12: plugnmeet.RecordingMetadata
-	(StatusCode)(0),                    // 13: plugnmeet.StatusCode
-	(*PastRoomInfo)(nil),               // 14: plugnmeet.PastRoomInfo
+	(*MergeRecordingsReq)(nil),         // 12: plugnmeet.MergeRecordingsReq
+	(*RecordingMetadata)(nil),          // 13: plugnmeet.RecordingMetadata
+	(StatusCode)(0),                    // 14: plugnmeet.StatusCode
+	(*PastRoomInfo)(nil),               // 15: plugnmeet.PastRoomInfo
 }
 var file_plugnmeet_auth_recording_proto_depIdxs = []int32{
-	12, // 0: plugnmeet.RecordingInfo.metadata:type_name -> plugnmeet.RecordingMetadata
+	13, // 0: plugnmeet.RecordingInfo.metadata:type_name -> plugnmeet.RecordingMetadata
 	1,  // 1: plugnmeet.FetchRecordingsResult.recordings_list:type_name -> plugnmeet.RecordingInfo
-	13, // 2: plugnmeet.FetchRecordingsRes.status_code:type_name -> plugnmeet.StatusCode
+	14, // 2: plugnmeet.FetchRecordingsRes.status_code:type_name -> plugnmeet.StatusCode
 	2,  // 3: plugnmeet.FetchRecordingsRes.result:type_name -> plugnmeet.FetchRecordingsResult
-	13, // 4: plugnmeet.RecordingInfoRes.status_code:type_name -> plugnmeet.StatusCode
+	14, // 4: plugnmeet.RecordingInfoRes.status_code:type_name -> plugnmeet.StatusCode
 	1,  // 5: plugnmeet.RecordingInfoRes.recording_info:type_name -> plugnmeet.RecordingInfo
-	14, // 6: plugnmeet.RecordingInfoRes.room_info:type_name -> plugnmeet.PastRoomInfo
-	13, // 7: plugnmeet.DeleteRecordingRes.status_code:type_name -> plugnmeet.StatusCode
-	13, // 8: plugnmeet.GetDownloadTokenRes.status_code:type_name -> plugnmeet.StatusCode
-	12, // 9: plugnmeet.UpdateRecordingMetadataReq.metadata:type_name -> plugnmeet.RecordingMetadata
-	13, // 10: plugnmeet.UpdateRecordingMetadataRes.status_code:type_name -> plugnmeet.StatusCode
+	15, // 6: plugnmeet.RecordingInfoRes.room_info:type_name -> plugnmeet.PastRoomInfo
+	14, // 7: plugnmeet.DeleteRecordingRes.status_code:type_name -> plugnmeet.StatusCode
+	14, // 8: plugnmeet.GetDownloadTokenRes.status_code:type_name -> plugnmeet.StatusCode
+	13, // 9: plugnmeet.UpdateRecordingMetadataReq.metadata:type_name -> plugnmeet.RecordingMetadata
+	14, // 10: plugnmeet.UpdateRecordingMetadataRes.status_code:type_name -> plugnmeet.StatusCode
 	11, // [11:11] is the sub-list for method output_type
 	11, // [11:11] is the sub-list for method input_type
 	11, // [11:11] is the sub-list for extension type_name
@@ -926,7 +982,7 @@ func file_plugnmeet_auth_recording_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_auth_recording_proto_rawDesc), len(file_plugnmeet_auth_recording_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

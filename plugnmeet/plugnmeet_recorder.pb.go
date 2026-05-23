@@ -24,14 +24,15 @@ const (
 type RecordingTasks int32
 
 const (
-	RecordingTasks_START_RECORDING     RecordingTasks = 0
-	RecordingTasks_STOP_RECORDING      RecordingTasks = 1
-	RecordingTasks_START_RTMP          RecordingTasks = 2
-	RecordingTasks_STOP_RTMP           RecordingTasks = 3
-	RecordingTasks_END_RECORDING       RecordingTasks = 4
-	RecordingTasks_END_RTMP            RecordingTasks = 5
-	RecordingTasks_RECORDING_PROCEEDED RecordingTasks = 6
-	RecordingTasks_STOP                RecordingTasks = 7
+	RecordingTasks_START_RECORDING                RecordingTasks = 0
+	RecordingTasks_STOP_RECORDING                 RecordingTasks = 1
+	RecordingTasks_START_RTMP                     RecordingTasks = 2
+	RecordingTasks_STOP_RTMP                      RecordingTasks = 3
+	RecordingTasks_END_RECORDING                  RecordingTasks = 4
+	RecordingTasks_END_RTMP                       RecordingTasks = 5
+	RecordingTasks_RECORDING_PROCEEDED            RecordingTasks = 6
+	RecordingTasks_STOP                           RecordingTasks = 7
+	RecordingTasks_RECORDING_TRANSCODING_FINISHED RecordingTasks = 8
 )
 
 // Enum value maps for RecordingTasks.
@@ -45,16 +46,18 @@ var (
 		5: "END_RTMP",
 		6: "RECORDING_PROCEEDED",
 		7: "STOP",
+		8: "RECORDING_TRANSCODING_FINISHED",
 	}
 	RecordingTasks_value = map[string]int32{
-		"START_RECORDING":     0,
-		"STOP_RECORDING":      1,
-		"START_RTMP":          2,
-		"STOP_RTMP":           3,
-		"END_RECORDING":       4,
-		"END_RTMP":            5,
-		"RECORDING_PROCEEDED": 6,
-		"STOP":                7,
+		"START_RECORDING":                0,
+		"STOP_RECORDING":                 1,
+		"START_RTMP":                     2,
+		"STOP_RTMP":                      3,
+		"END_RECORDING":                  4,
+		"END_RTMP":                       5,
+		"RECORDING_PROCEEDED":            6,
+		"STOP":                           7,
+		"RECORDING_TRANSCODING_FINISHED": 8,
 	}
 )
 
@@ -426,28 +429,134 @@ func (x *RecorderToPlugNmeet) GetRecordingVariant() CloudRecordingVariants {
 	return CloudRecordingVariants_FULL_SCREEN_CLOUD_RECORDING
 }
 
+type TranscodingTaskPostRecording struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// directory where raw file is stored
+	FilePath string `protobuf:"bytes,1,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
+	// raw file name e.g. rec-xxx_raw.mp4
+	FileName string `protobuf:"bytes,2,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	// The variant of the recording
+	RecordingVariant CloudRecordingVariants `protobuf:"varint,3,opt,name=recording_variant,json=recordingVariant,proto3,enum=plugnmeet.CloudRecordingVariants" json:"recording_variant,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *TranscodingTaskPostRecording) Reset() {
+	*x = TranscodingTaskPostRecording{}
+	mi := &file_plugnmeet_recorder_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TranscodingTaskPostRecording) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TranscodingTaskPostRecording) ProtoMessage() {}
+
+func (x *TranscodingTaskPostRecording) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_recorder_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TranscodingTaskPostRecording.ProtoReflect.Descriptor instead.
+func (*TranscodingTaskPostRecording) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_recorder_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *TranscodingTaskPostRecording) GetFilePath() string {
+	if x != nil {
+		return x.FilePath
+	}
+	return ""
+}
+
+func (x *TranscodingTaskPostRecording) GetFileName() string {
+	if x != nil {
+		return x.FileName
+	}
+	return ""
+}
+
+func (x *TranscodingTaskPostRecording) GetRecordingVariant() CloudRecordingVariants {
+	if x != nil {
+		return x.RecordingVariant
+	}
+	return CloudRecordingVariants_FULL_SCREEN_CLOUD_RECORDING
+}
+
+type TranscodingTaskMergeRecordings struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FilePaths     []string               `protobuf:"bytes,1,rep,name=file_paths,json=filePaths,proto3" json:"file_paths,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TranscodingTaskMergeRecordings) Reset() {
+	*x = TranscodingTaskMergeRecordings{}
+	mi := &file_plugnmeet_recorder_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TranscodingTaskMergeRecordings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TranscodingTaskMergeRecordings) ProtoMessage() {}
+
+func (x *TranscodingTaskMergeRecordings) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_recorder_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TranscodingTaskMergeRecordings.ProtoReflect.Descriptor instead.
+func (*TranscodingTaskMergeRecordings) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_recorder_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *TranscodingTaskMergeRecordings) GetFilePaths() []string {
+	if x != nil {
+		return x.FilePaths
+	}
+	return nil
+}
+
 // TranscodingTask will be the job for the transcoding worker.
 type TranscodingTask struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
 	RecordingId string                 `protobuf:"bytes,1,opt,name=recording_id,json=recordingId,proto3" json:"recording_id,omitempty"`
 	RoomId      string                 `protobuf:"bytes,2,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
 	RoomSid     string                 `protobuf:"bytes,3,opt,name=room_sid,json=roomSid,proto3" json:"room_sid,omitempty"`
-	// directory where raw file is stored
-	FilePath string `protobuf:"bytes,4,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
-	// raw file name e.g. rec-xxx_raw.mp4
-	FileName    string `protobuf:"bytes,5,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
-	RoomTableId int64  `protobuf:"varint,6,opt,name=room_table_id,json=roomTableId,proto3" json:"room_table_id,omitempty"`
+	RoomTableId int64                  `protobuf:"varint,4,opt,name=room_table_id,json=roomTableId,proto3" json:"room_table_id,omitempty"`
 	// ID of the original recorder that captured the file
-	RecorderId string `protobuf:"bytes,7,opt,name=recorder_id,json=recorderId,proto3" json:"recorder_id,omitempty"`
-	// The variant of the recording
-	RecordingVariant CloudRecordingVariants `protobuf:"varint,8,opt,name=recording_variant,json=recordingVariant,proto3,enum=plugnmeet.CloudRecordingVariants" json:"recording_variant,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	RecorderId string `protobuf:"bytes,5,opt,name=recorder_id,json=recorderId,proto3" json:"recorder_id,omitempty"`
+	// Types that are valid to be assigned to TaskDetails:
+	//
+	//	*TranscodingTask_PostRecording
+	//	*TranscodingTask_MergeRecordings
+	TaskDetails   isTranscodingTask_TaskDetails `protobuf_oneof:"task_details"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TranscodingTask) Reset() {
 	*x = TranscodingTask{}
-	mi := &file_plugnmeet_recorder_proto_msgTypes[2]
+	mi := &file_plugnmeet_recorder_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -459,7 +568,7 @@ func (x *TranscodingTask) String() string {
 func (*TranscodingTask) ProtoMessage() {}
 
 func (x *TranscodingTask) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_recorder_proto_msgTypes[2]
+	mi := &file_plugnmeet_recorder_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -472,7 +581,7 @@ func (x *TranscodingTask) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TranscodingTask.ProtoReflect.Descriptor instead.
 func (*TranscodingTask) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_recorder_proto_rawDescGZIP(), []int{2}
+	return file_plugnmeet_recorder_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *TranscodingTask) GetRecordingId() string {
@@ -496,20 +605,6 @@ func (x *TranscodingTask) GetRoomSid() string {
 	return ""
 }
 
-func (x *TranscodingTask) GetFilePath() string {
-	if x != nil {
-		return x.FilePath
-	}
-	return ""
-}
-
-func (x *TranscodingTask) GetFileName() string {
-	if x != nil {
-		return x.FileName
-	}
-	return ""
-}
-
 func (x *TranscodingTask) GetRoomTableId() int64 {
 	if x != nil {
 		return x.RoomTableId
@@ -524,12 +619,46 @@ func (x *TranscodingTask) GetRecorderId() string {
 	return ""
 }
 
-func (x *TranscodingTask) GetRecordingVariant() CloudRecordingVariants {
+func (x *TranscodingTask) GetTaskDetails() isTranscodingTask_TaskDetails {
 	if x != nil {
-		return x.RecordingVariant
+		return x.TaskDetails
 	}
-	return CloudRecordingVariants_FULL_SCREEN_CLOUD_RECORDING
+	return nil
 }
+
+func (x *TranscodingTask) GetPostRecording() *TranscodingTaskPostRecording {
+	if x != nil {
+		if x, ok := x.TaskDetails.(*TranscodingTask_PostRecording); ok {
+			return x.PostRecording
+		}
+	}
+	return nil
+}
+
+func (x *TranscodingTask) GetMergeRecordings() *TranscodingTaskMergeRecordings {
+	if x != nil {
+		if x, ok := x.TaskDetails.(*TranscodingTask_MergeRecordings); ok {
+			return x.MergeRecordings
+		}
+	}
+	return nil
+}
+
+type isTranscodingTask_TaskDetails interface {
+	isTranscodingTask_TaskDetails()
+}
+
+type TranscodingTask_PostRecording struct {
+	PostRecording *TranscodingTaskPostRecording `protobuf:"bytes,6,opt,name=post_recording,json=postRecording,proto3,oneof"`
+}
+
+type TranscodingTask_MergeRecordings struct {
+	MergeRecordings *TranscodingTaskMergeRecordings `protobuf:"bytes,7,opt,name=merge_recordings,json=mergeRecordings,proto3,oneof"`
+}
+
+func (*TranscodingTask_PostRecording) isTranscodingTask_TaskDetails() {}
+
+func (*TranscodingTask_MergeRecordings) isTranscodingTask_TaskDetails() {}
 
 var File_plugnmeet_recorder_proto protoreflect.FileDescriptor
 
@@ -563,17 +692,24 @@ const file_plugnmeet_recorder_proto_rawDesc = "" +
 	"\tfile_size\x18\n" +
 	" \x01(\x02R\bfileSize\x12S\n" +
 	"\x11recording_variant\x18\f \x01(\x0e2!.plugnmeet.CloudRecordingVariantsH\x00R\x10recordingVariant\x88\x01\x01B\x14\n" +
-	"\x12_recording_variant\"\xb7\x02\n" +
+	"\x12_recording_variant\"\xa8\x01\n" +
+	"\x1cTranscodingTaskPostRecording\x12\x1b\n" +
+	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x1b\n" +
+	"\tfile_name\x18\x02 \x01(\tR\bfileName\x12N\n" +
+	"\x11recording_variant\x18\x03 \x01(\x0e2!.plugnmeet.CloudRecordingVariantsR\x10recordingVariant\"?\n" +
+	"\x1eTranscodingTaskMergeRecordings\x12\x1d\n" +
+	"\n" +
+	"file_paths\x18\x01 \x03(\tR\tfilePaths\"\xe7\x02\n" +
 	"\x0fTranscodingTask\x12!\n" +
 	"\frecording_id\x18\x01 \x01(\tR\vrecordingId\x12\x17\n" +
 	"\aroom_id\x18\x02 \x01(\tR\x06roomId\x12\x19\n" +
-	"\broom_sid\x18\x03 \x01(\tR\aroomSid\x12\x1b\n" +
-	"\tfile_path\x18\x04 \x01(\tR\bfilePath\x12\x1b\n" +
-	"\tfile_name\x18\x05 \x01(\tR\bfileName\x12\"\n" +
-	"\rroom_table_id\x18\x06 \x01(\x03R\vroomTableId\x12\x1f\n" +
-	"\vrecorder_id\x18\a \x01(\tR\n" +
-	"recorderId\x12N\n" +
-	"\x11recording_variant\x18\b \x01(\x0e2!.plugnmeet.CloudRecordingVariantsR\x10recordingVariant*\x9c\x01\n" +
+	"\broom_sid\x18\x03 \x01(\tR\aroomSid\x12\"\n" +
+	"\rroom_table_id\x18\x04 \x01(\x03R\vroomTableId\x12\x1f\n" +
+	"\vrecorder_id\x18\x05 \x01(\tR\n" +
+	"recorderId\x12P\n" +
+	"\x0epost_recording\x18\x06 \x01(\v2'.plugnmeet.TranscodingTaskPostRecordingH\x00R\rpostRecording\x12V\n" +
+	"\x10merge_recordings\x18\a \x01(\v2).plugnmeet.TranscodingTaskMergeRecordingsH\x00R\x0fmergeRecordingsB\x0e\n" +
+	"\ftask_details*\xc0\x01\n" +
 	"\x0eRecordingTasks\x12\x13\n" +
 	"\x0fSTART_RECORDING\x10\x00\x12\x12\n" +
 	"\x0eSTOP_RECORDING\x10\x01\x12\x0e\n" +
@@ -583,7 +719,8 @@ const file_plugnmeet_recorder_proto_rawDesc = "" +
 	"\rEND_RECORDING\x10\x04\x12\f\n" +
 	"\bEND_RTMP\x10\x05\x12\x17\n" +
 	"\x13RECORDING_PROCEEDED\x10\x06\x12\b\n" +
-	"\x04STOP\x10\a*\xac\x01\n" +
+	"\x04STOP\x10\a\x12\"\n" +
+	"\x1eRECORDING_TRANSCODING_FINISHED\x10\b*\xac\x01\n" +
 	"\x10RecorderInfoKeys\x12\x1b\n" +
 	"\x17RECORDER_INFO_MAX_LIMIT\x10\x00\x12\x1b\n" +
 	"\x17RECORDER_INFO_LAST_PING\x10\x01\x12\x1d\n" +
@@ -608,25 +745,29 @@ func file_plugnmeet_recorder_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_recorder_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_plugnmeet_recorder_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_plugnmeet_recorder_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_plugnmeet_recorder_proto_goTypes = []any{
-	(RecordingTasks)(0),         // 0: plugnmeet.RecordingTasks
-	(RecorderInfoKeys)(0),       // 1: plugnmeet.RecorderInfoKeys
-	(CloudRecordingVariants)(0), // 2: plugnmeet.CloudRecordingVariants
-	(*PlugNmeetToRecorder)(nil), // 3: plugnmeet.PlugNmeetToRecorder
-	(*RecorderToPlugNmeet)(nil), // 4: plugnmeet.RecorderToPlugNmeet
-	(*TranscodingTask)(nil),     // 5: plugnmeet.TranscodingTask
+	(RecordingTasks)(0),                    // 0: plugnmeet.RecordingTasks
+	(RecorderInfoKeys)(0),                  // 1: plugnmeet.RecorderInfoKeys
+	(CloudRecordingVariants)(0),            // 2: plugnmeet.CloudRecordingVariants
+	(*PlugNmeetToRecorder)(nil),            // 3: plugnmeet.PlugNmeetToRecorder
+	(*RecorderToPlugNmeet)(nil),            // 4: plugnmeet.RecorderToPlugNmeet
+	(*TranscodingTaskPostRecording)(nil),   // 5: plugnmeet.TranscodingTaskPostRecording
+	(*TranscodingTaskMergeRecordings)(nil), // 6: plugnmeet.TranscodingTaskMergeRecordings
+	(*TranscodingTask)(nil),                // 7: plugnmeet.TranscodingTask
 }
 var file_plugnmeet_recorder_proto_depIdxs = []int32{
 	0, // 0: plugnmeet.PlugNmeetToRecorder.task:type_name -> plugnmeet.RecordingTasks
 	0, // 1: plugnmeet.RecorderToPlugNmeet.task:type_name -> plugnmeet.RecordingTasks
 	2, // 2: plugnmeet.RecorderToPlugNmeet.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
-	2, // 3: plugnmeet.TranscodingTask.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	2, // 3: plugnmeet.TranscodingTaskPostRecording.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
+	5, // 4: plugnmeet.TranscodingTask.post_recording:type_name -> plugnmeet.TranscodingTaskPostRecording
+	6, // 5: plugnmeet.TranscodingTask.merge_recordings:type_name -> plugnmeet.TranscodingTaskMergeRecordings
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_recorder_proto_init() }
@@ -636,13 +777,17 @@ func file_plugnmeet_recorder_proto_init() {
 	}
 	file_plugnmeet_recorder_proto_msgTypes[0].OneofWrappers = []any{}
 	file_plugnmeet_recorder_proto_msgTypes[1].OneofWrappers = []any{}
+	file_plugnmeet_recorder_proto_msgTypes[4].OneofWrappers = []any{
+		(*TranscodingTask_PostRecording)(nil),
+		(*TranscodingTask_MergeRecordings)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_recorder_proto_rawDesc), len(file_plugnmeet_recorder_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
