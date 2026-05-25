@@ -1510,6 +1510,211 @@ var _ interface {
 	ErrorName() string
 } = UpdateRecordingMetadataResValidationError{}
 
+// Validate checks the field values on MergeByRoomSession with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MergeByRoomSession) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MergeByRoomSession with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MergeByRoomSessionMultiError, or nil if none found.
+func (m *MergeByRoomSession) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MergeByRoomSession) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomSid
+
+	if len(errors) > 0 {
+		return MergeByRoomSessionMultiError(errors)
+	}
+
+	return nil
+}
+
+// MergeByRoomSessionMultiError is an error wrapping multiple validation errors
+// returned by MergeByRoomSession.ValidateAll() if the designated constraints
+// aren't met.
+type MergeByRoomSessionMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MergeByRoomSessionMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MergeByRoomSessionMultiError) AllErrors() []error { return m }
+
+// MergeByRoomSessionValidationError is the validation error returned by
+// MergeByRoomSession.Validate if the designated constraints aren't met.
+type MergeByRoomSessionValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MergeByRoomSessionValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MergeByRoomSessionValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MergeByRoomSessionValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MergeByRoomSessionValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MergeByRoomSessionValidationError) ErrorName() string {
+	return "MergeByRoomSessionValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MergeByRoomSessionValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMergeByRoomSession.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MergeByRoomSessionValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MergeByRoomSessionValidationError{}
+
+// Validate checks the field values on MergeByIds with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *MergeByIds) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MergeByIds with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in MergeByIdsMultiError, or
+// nil if none found.
+func (m *MergeByIds) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MergeByIds) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomId
+
+	if len(errors) > 0 {
+		return MergeByIdsMultiError(errors)
+	}
+
+	return nil
+}
+
+// MergeByIdsMultiError is an error wrapping multiple validation errors
+// returned by MergeByIds.ValidateAll() if the designated constraints aren't met.
+type MergeByIdsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MergeByIdsMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MergeByIdsMultiError) AllErrors() []error { return m }
+
+// MergeByIdsValidationError is the validation error returned by
+// MergeByIds.Validate if the designated constraints aren't met.
+type MergeByIdsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MergeByIdsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MergeByIdsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MergeByIdsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MergeByIdsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MergeByIdsValidationError) ErrorName() string { return "MergeByIdsValidationError" }
+
+// Error satisfies the builtin error interface
+func (e MergeByIdsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMergeByIds.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MergeByIdsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MergeByIdsValidationError{}
+
 // Validate checks the field values on MergeRecordingsReq with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -1532,7 +1737,92 @@ func (m *MergeRecordingsReq) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for RoomSid
+	switch v := m.MergeScope.(type) {
+	case *MergeRecordingsReq_BySession:
+		if v == nil {
+			err := MergeRecordingsReqValidationError{
+				field:  "MergeScope",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetBySession()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MergeRecordingsReqValidationError{
+						field:  "BySession",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MergeRecordingsReqValidationError{
+						field:  "BySession",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetBySession()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MergeRecordingsReqValidationError{
+					field:  "BySession",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *MergeRecordingsReq_ByIds:
+		if v == nil {
+			err := MergeRecordingsReqValidationError{
+				field:  "MergeScope",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetByIds()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MergeRecordingsReqValidationError{
+						field:  "ByIds",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MergeRecordingsReqValidationError{
+						field:  "ByIds",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetByIds()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MergeRecordingsReqValidationError{
+					field:  "ByIds",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		_ = v // ensures v is used
+	}
 
 	if len(errors) > 0 {
 		return MergeRecordingsReqMultiError(errors)
