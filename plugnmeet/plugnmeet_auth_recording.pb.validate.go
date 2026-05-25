@@ -1510,22 +1510,22 @@ var _ interface {
 	ErrorName() string
 } = UpdateRecordingMetadataResValidationError{}
 
-// Validate checks the field values on MergeByRoomSession with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on MergeRecordingsByRoomSession with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *MergeByRoomSession) Validate() error {
+func (m *MergeRecordingsByRoomSession) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on MergeByRoomSession with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on MergeRecordingsByRoomSession with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// MergeByRoomSessionMultiError, or nil if none found.
-func (m *MergeByRoomSession) ValidateAll() error {
+// MergeRecordingsByRoomSessionMultiError, or nil if none found.
+func (m *MergeRecordingsByRoomSession) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *MergeByRoomSession) validate(all bool) error {
+func (m *MergeRecordingsByRoomSession) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1535,19 +1535,19 @@ func (m *MergeByRoomSession) validate(all bool) error {
 	// no validation rules for RoomSid
 
 	if len(errors) > 0 {
-		return MergeByRoomSessionMultiError(errors)
+		return MergeRecordingsByRoomSessionMultiError(errors)
 	}
 
 	return nil
 }
 
-// MergeByRoomSessionMultiError is an error wrapping multiple validation errors
-// returned by MergeByRoomSession.ValidateAll() if the designated constraints
-// aren't met.
-type MergeByRoomSessionMultiError []error
+// MergeRecordingsByRoomSessionMultiError is an error wrapping multiple
+// validation errors returned by MergeRecordingsByRoomSession.ValidateAll() if
+// the designated constraints aren't met.
+type MergeRecordingsByRoomSessionMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m MergeByRoomSessionMultiError) Error() string {
+func (m MergeRecordingsByRoomSessionMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1556,11 +1556,12 @@ func (m MergeByRoomSessionMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m MergeByRoomSessionMultiError) AllErrors() []error { return m }
+func (m MergeRecordingsByRoomSessionMultiError) AllErrors() []error { return m }
 
-// MergeByRoomSessionValidationError is the validation error returned by
-// MergeByRoomSession.Validate if the designated constraints aren't met.
-type MergeByRoomSessionValidationError struct {
+// MergeRecordingsByRoomSessionValidationError is the validation error returned
+// by MergeRecordingsByRoomSession.Validate if the designated constraints
+// aren't met.
+type MergeRecordingsByRoomSessionValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1568,24 +1569,24 @@ type MergeByRoomSessionValidationError struct {
 }
 
 // Field function returns field value.
-func (e MergeByRoomSessionValidationError) Field() string { return e.field }
+func (e MergeRecordingsByRoomSessionValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e MergeByRoomSessionValidationError) Reason() string { return e.reason }
+func (e MergeRecordingsByRoomSessionValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e MergeByRoomSessionValidationError) Cause() error { return e.cause }
+func (e MergeRecordingsByRoomSessionValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e MergeByRoomSessionValidationError) Key() bool { return e.key }
+func (e MergeRecordingsByRoomSessionValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e MergeByRoomSessionValidationError) ErrorName() string {
-	return "MergeByRoomSessionValidationError"
+func (e MergeRecordingsByRoomSessionValidationError) ErrorName() string {
+	return "MergeRecordingsByRoomSessionValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e MergeByRoomSessionValidationError) Error() string {
+func (e MergeRecordingsByRoomSessionValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1597,14 +1598,14 @@ func (e MergeByRoomSessionValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sMergeByRoomSession.%s: %s%s",
+		"invalid %sMergeRecordingsByRoomSession.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = MergeByRoomSessionValidationError{}
+var _ error = MergeRecordingsByRoomSessionValidationError{}
 
 var _ interface {
 	Field() string
@@ -1612,24 +1613,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = MergeByRoomSessionValidationError{}
+} = MergeRecordingsByRoomSessionValidationError{}
 
-// Validate checks the field values on MergeByIds with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *MergeByIds) Validate() error {
+// Validate checks the field values on MergeRecordingsByIds with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MergeRecordingsByIds) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on MergeByIds with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in MergeByIdsMultiError, or
-// nil if none found.
-func (m *MergeByIds) ValidateAll() error {
+// ValidateAll checks the field values on MergeRecordingsByIds with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MergeRecordingsByIdsMultiError, or nil if none found.
+func (m *MergeRecordingsByIds) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *MergeByIds) validate(all bool) error {
+func (m *MergeRecordingsByIds) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1639,18 +1640,19 @@ func (m *MergeByIds) validate(all bool) error {
 	// no validation rules for RoomId
 
 	if len(errors) > 0 {
-		return MergeByIdsMultiError(errors)
+		return MergeRecordingsByIdsMultiError(errors)
 	}
 
 	return nil
 }
 
-// MergeByIdsMultiError is an error wrapping multiple validation errors
-// returned by MergeByIds.ValidateAll() if the designated constraints aren't met.
-type MergeByIdsMultiError []error
+// MergeRecordingsByIdsMultiError is an error wrapping multiple validation
+// errors returned by MergeRecordingsByIds.ValidateAll() if the designated
+// constraints aren't met.
+type MergeRecordingsByIdsMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m MergeByIdsMultiError) Error() string {
+func (m MergeRecordingsByIdsMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1659,11 +1661,11 @@ func (m MergeByIdsMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m MergeByIdsMultiError) AllErrors() []error { return m }
+func (m MergeRecordingsByIdsMultiError) AllErrors() []error { return m }
 
-// MergeByIdsValidationError is the validation error returned by
-// MergeByIds.Validate if the designated constraints aren't met.
-type MergeByIdsValidationError struct {
+// MergeRecordingsByIdsValidationError is the validation error returned by
+// MergeRecordingsByIds.Validate if the designated constraints aren't met.
+type MergeRecordingsByIdsValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1671,22 +1673,24 @@ type MergeByIdsValidationError struct {
 }
 
 // Field function returns field value.
-func (e MergeByIdsValidationError) Field() string { return e.field }
+func (e MergeRecordingsByIdsValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e MergeByIdsValidationError) Reason() string { return e.reason }
+func (e MergeRecordingsByIdsValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e MergeByIdsValidationError) Cause() error { return e.cause }
+func (e MergeRecordingsByIdsValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e MergeByIdsValidationError) Key() bool { return e.key }
+func (e MergeRecordingsByIdsValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e MergeByIdsValidationError) ErrorName() string { return "MergeByIdsValidationError" }
+func (e MergeRecordingsByIdsValidationError) ErrorName() string {
+	return "MergeRecordingsByIdsValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e MergeByIdsValidationError) Error() string {
+func (e MergeRecordingsByIdsValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1698,14 +1702,14 @@ func (e MergeByIdsValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sMergeByIds.%s: %s%s",
+		"invalid %sMergeRecordingsByIds.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = MergeByIdsValidationError{}
+var _ error = MergeRecordingsByIdsValidationError{}
 
 var _ interface {
 	Field() string
@@ -1713,7 +1717,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = MergeByIdsValidationError{}
+} = MergeRecordingsByIdsValidationError{}
 
 // Validate checks the field values on MergeRecordingsReq with the rules
 // defined in the proto definition for this message. If any rules are

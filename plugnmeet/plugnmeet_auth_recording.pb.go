@@ -791,7 +791,7 @@ func (x *UpdateRecordingMetadataRes) GetStatusCode() StatusCode {
 	return StatusCode_UNKNOWN_STATUS
 }
 
-type MergeByRoomSession struct {
+type MergeRecordingsByRoomSession struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Merge all recordings from a single room session.
 	RoomSid string `protobuf:"bytes,1,opt,name=room_sid,json=roomSid,proto3" json:"room_sid,omitempty"`
@@ -801,20 +801,20 @@ type MergeByRoomSession struct {
 	sizeCache           protoimpl.SizeCache
 }
 
-func (x *MergeByRoomSession) Reset() {
-	*x = MergeByRoomSession{}
+func (x *MergeRecordingsByRoomSession) Reset() {
+	*x = MergeRecordingsByRoomSession{}
 	mi := &file_plugnmeet_auth_recording_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *MergeByRoomSession) String() string {
+func (x *MergeRecordingsByRoomSession) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MergeByRoomSession) ProtoMessage() {}
+func (*MergeRecordingsByRoomSession) ProtoMessage() {}
 
-func (x *MergeByRoomSession) ProtoReflect() protoreflect.Message {
+func (x *MergeRecordingsByRoomSession) ProtoReflect() protoreflect.Message {
 	mi := &file_plugnmeet_auth_recording_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -826,26 +826,26 @@ func (x *MergeByRoomSession) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MergeByRoomSession.ProtoReflect.Descriptor instead.
-func (*MergeByRoomSession) Descriptor() ([]byte, []int) {
+// Deprecated: Use MergeRecordingsByRoomSession.ProtoReflect.Descriptor instead.
+func (*MergeRecordingsByRoomSession) Descriptor() ([]byte, []int) {
 	return file_plugnmeet_auth_recording_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *MergeByRoomSession) GetRoomSid() string {
+func (x *MergeRecordingsByRoomSession) GetRoomSid() string {
 	if x != nil {
 		return x.RoomSid
 	}
 	return ""
 }
 
-func (x *MergeByRoomSession) GetExcludeRecordingIds() []string {
+func (x *MergeRecordingsByRoomSession) GetExcludeRecordingIds() []string {
 	if x != nil {
 		return x.ExcludeRecordingIds
 	}
 	return nil
 }
 
-type MergeByIds struct {
+type MergeRecordingsByIds struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The room_id that all recording_ids belong to.
 	RoomId string `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
@@ -857,20 +857,20 @@ type MergeByIds struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *MergeByIds) Reset() {
-	*x = MergeByIds{}
+func (x *MergeRecordingsByIds) Reset() {
+	*x = MergeRecordingsByIds{}
 	mi := &file_plugnmeet_auth_recording_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *MergeByIds) String() string {
+func (x *MergeRecordingsByIds) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MergeByIds) ProtoMessage() {}
+func (*MergeRecordingsByIds) ProtoMessage() {}
 
-func (x *MergeByIds) ProtoReflect() protoreflect.Message {
+func (x *MergeRecordingsByIds) ProtoReflect() protoreflect.Message {
 	mi := &file_plugnmeet_auth_recording_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -882,19 +882,19 @@ func (x *MergeByIds) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MergeByIds.ProtoReflect.Descriptor instead.
-func (*MergeByIds) Descriptor() ([]byte, []int) {
+// Deprecated: Use MergeRecordingsByIds.ProtoReflect.Descriptor instead.
+func (*MergeRecordingsByIds) Descriptor() ([]byte, []int) {
 	return file_plugnmeet_auth_recording_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *MergeByIds) GetRoomId() string {
+func (x *MergeRecordingsByIds) GetRoomId() string {
 	if x != nil {
 		return x.RoomId
 	}
 	return ""
 }
 
-func (x *MergeByIds) GetRecordingIds() []string {
+func (x *MergeRecordingsByIds) GetRecordingIds() []string {
 	if x != nil {
 		return x.RecordingIds
 	}
@@ -949,7 +949,7 @@ func (x *MergeRecordingsReq) GetMergeScope() isMergeRecordingsReq_MergeScope {
 	return nil
 }
 
-func (x *MergeRecordingsReq) GetBySession() *MergeByRoomSession {
+func (x *MergeRecordingsReq) GetBySession() *MergeRecordingsByRoomSession {
 	if x != nil {
 		if x, ok := x.MergeScope.(*MergeRecordingsReq_BySession); ok {
 			return x.BySession
@@ -958,7 +958,7 @@ func (x *MergeRecordingsReq) GetBySession() *MergeByRoomSession {
 	return nil
 }
 
-func (x *MergeRecordingsReq) GetByIds() *MergeByIds {
+func (x *MergeRecordingsReq) GetByIds() *MergeRecordingsByIds {
 	if x != nil {
 		if x, ok := x.MergeScope.(*MergeRecordingsReq_ByIds); ok {
 			return x.ByIds
@@ -973,12 +973,12 @@ type isMergeRecordingsReq_MergeScope interface {
 
 type MergeRecordingsReq_BySession struct {
 	// Merge recordings based on a single room session.
-	BySession *MergeByRoomSession `protobuf:"bytes,1,opt,name=by_session,json=bySession,proto3,oneof"`
+	BySession *MergeRecordingsByRoomSession `protobuf:"bytes,1,opt,name=by_session,json=bySession,proto3,oneof"`
 }
 
 type MergeRecordingsReq_ByIds struct {
 	// Merge a specific list of recordings from the same room.
-	ByIds *MergeByIds `protobuf:"bytes,2,opt,name=by_ids,json=byIds,proto3,oneof"`
+	ByIds *MergeRecordingsByIds `protobuf:"bytes,2,opt,name=by_ids,json=byIds,proto3,oneof"`
 }
 
 func (*MergeRecordingsReq_BySession) isMergeRecordingsReq_MergeScope() {}
@@ -1051,18 +1051,17 @@ const file_plugnmeet_auth_recording_proto_rawDesc = "" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
-	"statusCode\"k\n" +
-	"\x12MergeByRoomSession\x12!\n" +
+	"statusCode\"u\n" +
+	"\x1cMergeRecordingsByRoomSession\x12!\n" +
 	"\broom_sid\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\aroomSid\x122\n" +
-	"\x15exclude_recording_ids\x18\x02 \x03(\tR\x13excludeRecordingIds\"\\\n" +
-	"\n" +
-	"MergeByIds\x12\x1f\n" +
+	"\x15exclude_recording_ids\x18\x02 \x03(\tR\x13excludeRecordingIds\"f\n" +
+	"\x14MergeRecordingsByIds\x12\x1f\n" +
 	"\aroom_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x06roomId\x12-\n" +
-	"\rrecording_ids\x18\x02 \x03(\tB\b\xbaH\x05\x92\x01\x02\b\x02R\frecordingIds\"\x93\x01\n" +
-	"\x12MergeRecordingsReq\x12>\n" +
+	"\rrecording_ids\x18\x02 \x03(\tB\b\xbaH\x05\x92\x01\x02\b\x02R\frecordingIds\"\xa7\x01\n" +
+	"\x12MergeRecordingsReq\x12H\n" +
 	"\n" +
-	"by_session\x18\x01 \x01(\v2\x1d.plugnmeet.MergeByRoomSessionH\x00R\tbySession\x12.\n" +
-	"\x06by_ids\x18\x02 \x01(\v2\x15.plugnmeet.MergeByIdsH\x00R\x05byIdsB\r\n" +
+	"by_session\x18\x01 \x01(\v2'.plugnmeet.MergeRecordingsByRoomSessionH\x00R\tbySession\x128\n" +
+	"\x06by_ids\x18\x02 \x01(\v2\x1f.plugnmeet.MergeRecordingsByIdsH\x00R\x05byIdsB\r\n" +
 	"\vmerge_scopeB\xa4\x01\n" +
 	"\rcom.plugnmeetB\x1bPlugnmeetAuthRecordingProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
@@ -1080,24 +1079,24 @@ func file_plugnmeet_auth_recording_proto_rawDescGZIP() []byte {
 
 var file_plugnmeet_auth_recording_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_plugnmeet_auth_recording_proto_goTypes = []any{
-	(*FetchRecordingsReq)(nil),         // 0: plugnmeet.FetchRecordingsReq
-	(*RecordingInfo)(nil),              // 1: plugnmeet.RecordingInfo
-	(*FetchRecordingsResult)(nil),      // 2: plugnmeet.FetchRecordingsResult
-	(*FetchRecordingsRes)(nil),         // 3: plugnmeet.FetchRecordingsRes
-	(*RecordingInfoReq)(nil),           // 4: plugnmeet.RecordingInfoReq
-	(*RecordingInfoRes)(nil),           // 5: plugnmeet.RecordingInfoRes
-	(*DeleteRecordingReq)(nil),         // 6: plugnmeet.DeleteRecordingReq
-	(*DeleteRecordingRes)(nil),         // 7: plugnmeet.DeleteRecordingRes
-	(*GetDownloadTokenReq)(nil),        // 8: plugnmeet.GetDownloadTokenReq
-	(*GetDownloadTokenRes)(nil),        // 9: plugnmeet.GetDownloadTokenRes
-	(*UpdateRecordingMetadataReq)(nil), // 10: plugnmeet.UpdateRecordingMetadataReq
-	(*UpdateRecordingMetadataRes)(nil), // 11: plugnmeet.UpdateRecordingMetadataRes
-	(*MergeByRoomSession)(nil),         // 12: plugnmeet.MergeByRoomSession
-	(*MergeByIds)(nil),                 // 13: plugnmeet.MergeByIds
-	(*MergeRecordingsReq)(nil),         // 14: plugnmeet.MergeRecordingsReq
-	(*RecordingMetadata)(nil),          // 15: plugnmeet.RecordingMetadata
-	(StatusCode)(0),                    // 16: plugnmeet.StatusCode
-	(*PastRoomInfo)(nil),               // 17: plugnmeet.PastRoomInfo
+	(*FetchRecordingsReq)(nil),           // 0: plugnmeet.FetchRecordingsReq
+	(*RecordingInfo)(nil),                // 1: plugnmeet.RecordingInfo
+	(*FetchRecordingsResult)(nil),        // 2: plugnmeet.FetchRecordingsResult
+	(*FetchRecordingsRes)(nil),           // 3: plugnmeet.FetchRecordingsRes
+	(*RecordingInfoReq)(nil),             // 4: plugnmeet.RecordingInfoReq
+	(*RecordingInfoRes)(nil),             // 5: plugnmeet.RecordingInfoRes
+	(*DeleteRecordingReq)(nil),           // 6: plugnmeet.DeleteRecordingReq
+	(*DeleteRecordingRes)(nil),           // 7: plugnmeet.DeleteRecordingRes
+	(*GetDownloadTokenReq)(nil),          // 8: plugnmeet.GetDownloadTokenReq
+	(*GetDownloadTokenRes)(nil),          // 9: plugnmeet.GetDownloadTokenRes
+	(*UpdateRecordingMetadataReq)(nil),   // 10: plugnmeet.UpdateRecordingMetadataReq
+	(*UpdateRecordingMetadataRes)(nil),   // 11: plugnmeet.UpdateRecordingMetadataRes
+	(*MergeRecordingsByRoomSession)(nil), // 12: plugnmeet.MergeRecordingsByRoomSession
+	(*MergeRecordingsByIds)(nil),         // 13: plugnmeet.MergeRecordingsByIds
+	(*MergeRecordingsReq)(nil),           // 14: plugnmeet.MergeRecordingsReq
+	(*RecordingMetadata)(nil),            // 15: plugnmeet.RecordingMetadata
+	(StatusCode)(0),                      // 16: plugnmeet.StatusCode
+	(*PastRoomInfo)(nil),                 // 17: plugnmeet.PastRoomInfo
 }
 var file_plugnmeet_auth_recording_proto_depIdxs = []int32{
 	15, // 0: plugnmeet.RecordingInfo.metadata:type_name -> plugnmeet.RecordingMetadata
@@ -1111,8 +1110,8 @@ var file_plugnmeet_auth_recording_proto_depIdxs = []int32{
 	16, // 8: plugnmeet.GetDownloadTokenRes.status_code:type_name -> plugnmeet.StatusCode
 	15, // 9: plugnmeet.UpdateRecordingMetadataReq.metadata:type_name -> plugnmeet.RecordingMetadata
 	16, // 10: plugnmeet.UpdateRecordingMetadataRes.status_code:type_name -> plugnmeet.StatusCode
-	12, // 11: plugnmeet.MergeRecordingsReq.by_session:type_name -> plugnmeet.MergeByRoomSession
-	13, // 12: plugnmeet.MergeRecordingsReq.by_ids:type_name -> plugnmeet.MergeByIds
+	12, // 11: plugnmeet.MergeRecordingsReq.by_session:type_name -> plugnmeet.MergeRecordingsByRoomSession
+	13, // 12: plugnmeet.MergeRecordingsReq.by_ids:type_name -> plugnmeet.MergeRecordingsByIds
 	13, // [13:13] is the sub-list for method output_type
 	13, // [13:13] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name
