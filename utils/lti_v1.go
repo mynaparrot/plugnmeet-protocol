@@ -13,8 +13,7 @@ func AssignLTIV1CustomParams(params *url.Values, claims *plugnmeet.LtiClaims) {
 
 	if params.Get("custom_room_duration") != "" {
 		duration, _ := strconv.Atoi(params.Get("custom_room_duration"))
-		d := uint64(duration)
-		customPara.RoomDuration = &d
+		customPara.RoomDuration = new(uint64(duration))
 	}
 	if params.Get("custom_allow_polls") == "false" {
 		customPara.AllowPolls = b
@@ -46,20 +45,16 @@ func AssignLTIV1CustomParams(params *url.Values, claims *plugnmeet.LtiClaims) {
 	// custom design
 	customDesign := new(plugnmeet.LtiCustomDesign)
 	if params.Get("custom_primary_color") != "" {
-		pc := params.Get("custom_primary_color")
-		customDesign.PrimaryColor = &pc
+		customDesign.PrimaryColor = new(params.Get("custom_primary_color"))
 	}
 	if params.Get("custom_secondary_color") != "" {
-		sc := params.Get("custom_secondary_color")
-		customDesign.SecondaryColor = &sc
+		customDesign.SecondaryColor = new(params.Get("custom_secondary_color"))
 	}
 	if params.Get("custom_background_color") != "" {
-		bc := params.Get("custom_background_color")
-		customDesign.BackgroundColor = &bc
+		customDesign.BackgroundColor = new(params.Get("custom_background_color"))
 	}
 	if params.Get("custom_custom_logo") != "" {
-		cl := params.Get("custom_custom_logo")
-		customDesign.CustomLogo = &cl
+		customDesign.CustomLogo = new(params.Get("custom_custom_logo"))
 	}
 
 	claims.LtiCustomParameters = customPara

@@ -25,6 +25,11 @@ const (
 	hashToken  = "Hash-Token"
 )
 
+var op = protojson.MarshalOptions{
+	EmitUnpopulated: false,
+	UseProtoNames:   true,
+}
+
 type Notifier struct {
 	wp     *workerpool.WorkerPool
 	logger *logrus.Entry
@@ -101,21 +106,14 @@ func (n *Notifier) Kill() {
 
 // sendWebhookRequest sends a single webhook event synchronously.
 func (n *Notifier) sendWebhookRequest(event *plugnmeet.CommonNotifyEvent, apiKey, apiSecret, url string, l *logrus.Entry) (int, error) {
-	op := protojson.MarshalOptions{
-		EmitUnpopulated: false,
-		UseProtoNames:   true,
-	}
 	// make sure the event name is lowercase
-	ev := strings.ToLower(event.GetEvent())
-	event.Event = &ev
+	event.Event = new(strings.ToLower(event.GetEvent()))
 
 	if event.CreatedAt == nil {
-		now := time.Now().UTC().Unix()
-		event.CreatedAt = &now
+		event.CreatedAt = new(time.Now().UTC().Unix())
 	}
 	if event.Id == nil {
-		mId := uuid.NewString()
-		event.Id = &mId
+		event.Id = new(uuid.NewString())
 	}
 
 	encoded, err := op.Marshal(event)
@@ -142,7 +140,7 @@ func (n *Notifier) sendWebhookRequest(event *plugnmeet.CommonNotifyEvent, apiKey
 		return 0, err
 	}
 	r.Header.Set(authHeader, token)
-	r.Header.Set(hashToken, token)
+	r.Header.Set(hashToken, token) // same as auth header
 	r.Header.Set("content-type", "application/webhook+json")
 
 	res, err := n.client.Do(r)
