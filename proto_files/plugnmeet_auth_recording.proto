@@ -105,6 +105,11 @@ message MergeRecordingsByIds {
 }
 
 message MergeRecordingsReq {
+  option (buf.validate.message).oneof = {
+    fields: ["by_session", "by_ids"],
+    required: true
+  };
+
   oneof merge_scope {
     // Merge recordings based on a single room session.
     MergeRecordingsByRoomSession by_session = 1;
