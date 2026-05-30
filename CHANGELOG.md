@@ -1,5 +1,49 @@
 # Changelog
 
+## [1.3.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.2.1...v1.3.0) (2026-05-26)
+
+
+### Features
+
+* added recorder bot options ([610bafd](https://github.com/mynaparrot/plugnmeet-protocol/commit/610bafdbd16145776ef8495d3bd4ff5d940c1d18))
+* added recorder bot options ([4e7dc6a](https://github.com/mynaparrot/plugnmeet-protocol/commit/4e7dc6aae99cd720c2e3894bae15f4429312c8d2))
+* **API:** merge recordings API ([1c3db18](https://github.com/mynaparrot/plugnmeet-protocol/commit/1c3db182a535dae5d0e712074c1868b8be35f0a7))
+* new API `BroadcastToRoom` ([0748d0a](https://github.com/mynaparrot/plugnmeet-protocol/commit/0748d0a44d33ec212dab3a062324b01cdb07cabd))
+
+
+### Bug Fixes
+
+* add last dir path with filename ([e364a8b](https://github.com/mynaparrot/plugnmeet-protocol/commit/e364a8b521fbf063319bf43eb475fd97aa2dba9e))
+* added better logs ([8eba50b](https://github.com/mynaparrot/plugnmeet-protocol/commit/8eba50bb0231b325cfab5d306b8258f2d03091fb))
+* added fields for CPU ([87fa483](https://github.com/mynaparrot/plugnmeet-protocol/commit/87fa4831118758aa4a08f4758b580f621bbabc48))
+* added new option max_preloaded_wb_file_size ([f2fdd32](https://github.com/mynaparrot/plugnmeet-protocol/commit/f2fdd32400a651497e33e8c60819e5269dd3528f))
+* added option ([e72444d](https://github.com/mynaparrot/plugnmeet-protocol/commit/e72444dfabd851ee708c8a3923631f55053e3610))
+* added option `fallback_timer_duration` ([20a8917](https://github.com/mynaparrot/plugnmeet-protocol/commit/20a8917641ffd0453ee0bbd82833dfaa593c149c))
+* added pong ([cc85685](https://github.com/mynaparrot/plugnmeet-protocol/commit/cc856852dad1cbcee6a1d9cb0b1b73f38d53fa42))
+* added seperate subject for system_core_worker ([85b2b90](https://github.com/mynaparrot/plugnmeet-protocol/commit/85b2b900f7498a1726daf3b54ad53459427fec58))
+* added StatusCode ([1fcae9b](https://github.com/mynaparrot/plugnmeet-protocol/commit/1fcae9b9441ed8f4603be5a07c7c4173a6eb15de))
+* backed previous value will delete upcoming releases ([53b9c95](https://github.com/mynaparrot/plugnmeet-protocol/commit/53b9c95206b6d6ed725a33d9495cce09b8d854c0))
+* bump dependencies ([e79fb34](https://github.com/mynaparrot/plugnmeet-protocol/commit/e79fb34c4d362aa1717676a6c81b6fa0ccaa0b0d))
+* bump proto ([53593ce](https://github.com/mynaparrot/plugnmeet-protocol/commit/53593ce87dbec0e941ad7fec152a00f773742d01))
+* deps update ([adcf6ca](https://github.com/mynaparrot/plugnmeet-protocol/commit/adcf6ca1c8b9b3090b790dd5f6593b61f5ef782a))
+* **deps:** update module github.com/gofiber/fiber/v2 to v3 ([9f877fb](https://github.com/mynaparrot/plugnmeet-protocol/commit/9f877fbe384cf8d49f2e0924c92ccf2121110647))
+* **deps:** update module github.com/gofiber/fiber/v2 to v3 ([e4648f4](https://github.com/mynaparrot/plugnmeet-protocol/commit/e4648f43dbccf5d5bce3b58601f95d45479e23dc))
+* **deps:** update module github.com/nats-io/nkeys to v0.4.15 ([0afa376](https://github.com/mynaparrot/plugnmeet-protocol/commit/0afa3765f02a8959e220b6d3ffc70a5befa27504))
+* **deps:** update module github.com/nats-io/nkeys to v0.4.15 ([4c099b7](https://github.com/mynaparrot/plugnmeet-protocol/commit/4c099b78a5474357745e2ea06a35abeb7298bf33))
+* **feat:** option to configure custom turn servers ([aa92a14](https://github.com/mynaparrot/plugnmeet-protocol/commit/aa92a14682e42a0cf0056456136f914ca4b2a92d))
+* initializing values better way ([7c2478e](https://github.com/mynaparrot/plugnmeet-protocol/commit/7c2478e2b0cc84e110acc1c95b38231906c7bfd6))
+* invalid value was passing ([fdc9f2a](https://github.com/mynaparrot/plugnmeet-protocol/commit/fdc9f2a232816f54973e2c631de655c0c0184b4d))
+* moved to_user_id to root ([c77d7dd](https://github.com/mynaparrot/plugnmeet-protocol/commit/c77d7dd7d3d7b058d6bf4ddf5c059ebf960b4a25))
+* option fallback_on_flapping ([00d728e](https://github.com/mynaparrot/plugnmeet-protocol/commit/00d728e4f564f3662978ac3d78ae99cef38a0914))
+* option to deliver private messages ([3727f9a](https://github.com/mynaparrot/plugnmeet-protocol/commit/3727f9a7d80e5e60eb47f3c6be74765be476240d))
+* removed detracted code ([fbed9ac](https://github.com/mynaparrot/plugnmeet-protocol/commit/fbed9ac5168f2d207cef12aaf4cd5cb8f759e676))
+* renamed to proper format ([b41181f](https://github.com/mynaparrot/plugnmeet-protocol/commit/b41181f39b4bf10b8447f106f36ed2fd74b420f7))
+* separate default values + clean up ([11c8f0a](https://github.com/mynaparrot/plugnmeet-protocol/commit/11c8f0a9ef770d618e13fffbc6e3e73b77ba45fe))
+* update `NkeyOptionFromSeedText` to handle raw key better way ([8f375e8](https://github.com/mynaparrot/plugnmeet-protocol/commit/8f375e8ff2152ecd6ce0c9493bd7101cab8775ff))
+* updated to support roomId as well ([3bedcbb](https://github.com/mynaparrot/plugnmeet-protocol/commit/3bedcbbabb6dba324efcb4fc99a37c214cf50fc1))
+* upgrade to fiber v3 ([aee556b](https://github.com/mynaparrot/plugnmeet-protocol/commit/aee556bb5bb4dc3211e98b32dbb224c824df5cfc))
+* use workerpool library ([e4cdbb1](https://github.com/mynaparrot/plugnmeet-protocol/commit/e4cdbb15b0fc90ea71050dc958d7be658e513a11))
+
 ## [1.2.1](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.2.0...v1.2.1) (2026-01-29)
 
 
