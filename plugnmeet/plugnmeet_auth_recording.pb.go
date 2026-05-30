@@ -1057,11 +1057,14 @@ const file_plugnmeet_auth_recording_proto_rawDesc = "" +
 	"\x15exclude_recording_ids\x18\x02 \x03(\tR\x13excludeRecordingIds\"f\n" +
 	"\x14MergeRecordingsByIds\x12\x1f\n" +
 	"\aroom_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x06roomId\x12-\n" +
-	"\rrecording_ids\x18\x02 \x03(\tB\b\xbaH\x05\x92\x01\x02\b\x02R\frecordingIds\"\xa7\x01\n" +
+	"\rrecording_ids\x18\x02 \x03(\tB\b\xbaH\x05\x92\x01\x02\b\x02R\frecordingIds\"\xc4\x01\n" +
 	"\x12MergeRecordingsReq\x12H\n" +
 	"\n" +
 	"by_session\x18\x01 \x01(\v2'.plugnmeet.MergeRecordingsByRoomSessionH\x00R\tbySession\x128\n" +
-	"\x06by_ids\x18\x02 \x01(\v2\x1f.plugnmeet.MergeRecordingsByIdsH\x00R\x05byIdsB\r\n" +
+	"\x06by_ids\x18\x02 \x01(\v2\x1f.plugnmeet.MergeRecordingsByIdsH\x00R\x05byIds:\x1b\xbaH\x18\"\x16\n" +
+	"\n" +
+	"by_session\n" +
+	"\x06by_ids\x10\x01B\r\n" +
 	"\vmerge_scopeB\xa4\x01\n" +
 	"\rcom.plugnmeetB\x1bPlugnmeetAuthRecordingProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
