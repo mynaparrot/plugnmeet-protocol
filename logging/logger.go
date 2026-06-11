@@ -1,15 +1,12 @@
 package logging
 
 import (
-	"errors"
-	"strings"
-
-	"github.com/DeRuina/timberjack"
-
 	"io"
 	"os"
 	"runtime"
+	"strings"
 
+	"github.com/DeRuina/timberjack"
 	"github.com/sirupsen/logrus"
 )
 
@@ -19,13 +16,24 @@ type LogSettings struct {
 	MaxBackups int     `yaml:"max_backups"`
 	MaxAge     int     `yaml:"max_age"`
 	LogLevel   *string `yaml:"log_level"`
+	LogOutput  *string `yaml:"log_output,omitempty"` // "stdout" or "stderr"
 }
 
-// NewLogger creates and configures a new logrus.Logger based on the provided configuration.
-func NewLogger(cfg *LogSettings) (*logrus.Logger, error) {
+// LoggerOption defines a functional option for configuring a logger.
+type LoggerOption func(*logrus.Logger)
+
+// WithOutput sets the output destination for the logger.
+func WithOutput(w io.Writer) LoggerOption {
+	return func(l *logrus.Logger) {
+		l.SetOutput(w)
+	}
+}
+
+// NewLogger creates and configures a new logrus.Logger based on the provided configuration and options.
+func NewLogger(cfg *LogSettings, opts ...LoggerOption) (*logrus.Logger, error) {
 	logger := logrus.New()
 
-	// 1. Set Log Level
+	// Set Log Level
 	logLevel := logrus.InfoLevel
 	if cfg.LogLevel != nil && *cfg.LogLevel != "" {
 		if lv, err := logrus.ParseLevel(strings.ToLower(*cfg.LogLevel)); err == nil {
@@ -34,46 +42,51 @@ func NewLogger(cfg *LogSettings) (*logrus.Logger, error) {
 	}
 	logger.SetLevel(logLevel)
 
-	// 2. Setup Output
-	// By default, log to standard output.
+	// Setup Output
 	var output io.Writer = os.Stdout
-
-	// If file logging is enabled, create a multi-writer to log to both stdout and the file.
-	if cfg.LogFile != "" {
-		if cfg.LogFile == "" {
-			return nil, errors.New("file logging is enabled but no filepath is provided")
+	if cfg.LogOutput != nil {
+		switch *cfg.LogOutput {
+		case "stderr":
+			output = os.Stderr
+		case "stdout":
+			output = os.Stdout
 		}
+	}
 
+	// If file logging is enabled, create a multi-writer to log to both the configured output and the file.
+	if cfg.LogFile != "" {
 		fileLogger := &timberjack.Logger{
 			Filename:   cfg.LogFile,
 			MaxSize:    cfg.MaxSize,
 			MaxBackups: cfg.MaxBackups,
 			MaxAge:     cfg.MaxAge,
 		}
-		// Write to both stdout and the file.
-		output = io.MultiWriter(os.Stdout, fileLogger)
-		// Use a temporary logger to announce this, as the main logger isn't fully configured yet.
+		output = io.MultiWriter(output, fileLogger)
 		logrus.New().Infof("File logging enabled, writing to %s", cfg.LogFile)
 	}
 	logger.SetOutput(output)
 
-	// 3. Set Formatter
+	// Apply functional options
+	for _, opt := range opts {
+		opt(logger)
+	}
+
+	// Set Formatter
 	textFormatter := &logrus.TextFormatter{
 		FullTimestamp: true,
-		// Disable the default caller prettyfier to let our custom one take over.
 		CallerPrettyfier: func(f *runtime.Frame) (string, string) {
 			return "", ""
 		},
 		ForceColors: true,
 	}
 
-	// 4. Wrap with our custom source formatter
+	// Wrap with our custom source formatter
 	logger.SetFormatter(&SourceFormatter{
 		Underlying: textFormatter,
 		AddSpace:   true,
 	})
 
-	// 5. Set Caller Reporting
+	// Set Caller Reporting
 	logger.SetReportCaller(true)
 
 	return logger, nil
