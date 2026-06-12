@@ -9,6 +9,7 @@ import (
 	"io"
 	"os/exec"
 	"sync"
+	"time"
 
 	"github.com/sirupsen/logrus"
 	"mvdan.cc/sh/v3/shell"
@@ -115,8 +116,8 @@ func (h *HookProcessManager) startProcess(script string) error {
 	return nil
 }
 
-// ExecuteHook sends already marshaled JSON data to a long-lived hook script and reads its response.
-func (h *HookProcessManager) ExecuteHook(script string, jsonData json.RawMessage) (json.RawMessage, error) {
+// ExecuteHook sends already marshaled JSON data to a long-lived hook script and reads its response with a timeout.
+func (h *HookProcessManager) ExecuteHook(script string, jsonData json.RawMessage, timeout time.Duration) (json.RawMessage, error) {
 	p, ok := h.processes[script]
 	if !ok {
 		return nil, fmt.Errorf("hook script '%s' not found or not started", script)
@@ -125,24 +126,47 @@ func (h *HookProcessManager) ExecuteHook(script string, jsonData json.RawMessage
 	p.mutex.Lock()
 	defer p.mutex.Unlock()
 
-	_, err := p.stdin.Write(append(jsonData, '\n'))
-	if err != nil {
-		// If the pipe is broken, the process likely crashed.
-		return nil, fmt.Errorf("failed to write to stdin for script '%s' (process may have crashed): %w", script, err)
+	// Create a context with a timeout for this specific execution.
+	ctx, cancel := context.WithTimeout(h.ctx, timeout)
+	defer cancel()
+
+	// Channel to receive the result from the blocking read operation.
+	type result struct {
+		data  []byte
+		error error
 	}
+	resultChan := make(chan result, 1)
 
-	responseLine, err := p.reader.ReadBytes('\n')
-	if err != nil {
-		return nil, fmt.Errorf("failed to read from stdout for script '%s' (process may have crashed): %w", script, err)
+	// Perform the write and blocking read in a separate goroutine.
+	go func() {
+		_, err := p.stdin.Write(append(jsonData, '\n'))
+		if err != nil {
+			resultChan <- result{nil, fmt.Errorf("failed to write to stdin for script '%s': %w", script, err)}
+			return
+		}
+
+		responseLine, err := p.reader.ReadBytes('\n')
+		if err != nil {
+			resultChan <- result{nil, fmt.Errorf("failed to read from stdout for script '%s': %w", script, err)}
+			return
+		}
+		resultChan <- result{responseLine, nil}
+	}()
+
+	// Wait for either the result or the timeout.
+	select {
+	case <-ctx.Done():
+		return nil, fmt.Errorf("hook script '%s' timed out after %s", script, timeout)
+	case res := <-resultChan:
+		if res.error != nil {
+			return nil, res.error
+		}
+		responseLine := bytes.TrimSuffix(res.data, []byte{'\n'})
+		if !json.Valid(responseLine) {
+			return nil, fmt.Errorf("script '%s' returned invalid JSON: %s", script, string(responseLine))
+		}
+		return responseLine, nil
 	}
-
-	responseLine = bytes.TrimSuffix(responseLine, []byte{'\n'})
-
-	if !json.Valid(responseLine) {
-		return nil, fmt.Errorf("script '%s' returned invalid JSON: %s", script, string(responseLine))
-	}
-
-	return responseLine, nil
 }
 
 // stopAll terminates all managed hook processes. This is now an internal method.

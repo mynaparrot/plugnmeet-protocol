@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/sirupsen/logrus"
 	"mvdan.cc/sh/v3/shell"
@@ -40,7 +41,7 @@ func ValidateHookScript(scriptFullCommand string, hookType string) error {
 
 // ExecuteHookPipeline runs a series of scripts using the HookProcessManager.
 // The manager will decide whether to use a long-lived process or a one-shot command.
-func ExecuteHookPipeline(manager *HookProcessManager, scripts []string, initialData interface{}, log *logrus.Entry) (json.RawMessage, error) {
+func ExecuteHookPipeline(manager *HookProcessManager, scripts []string, initialData interface{}, timeout time.Duration, log *logrus.Entry) (json.RawMessage, error) {
 	if manager == nil {
 		return nil, fmt.Errorf("hook manager is nil")
 	}
@@ -52,7 +53,7 @@ func ExecuteHookPipeline(manager *HookProcessManager, scripts []string, initialD
 
 	for _, script := range scripts {
 		log.Infof("Executing hook script via manager: %s", script)
-		res, err := manager.ExecuteHook(script, jsonData)
+		res, err := manager.ExecuteHook(script, jsonData, timeout)
 		if err != nil {
 			return nil, fmt.Errorf("failed to execute hook '%s': %w", script, err)
 		}
