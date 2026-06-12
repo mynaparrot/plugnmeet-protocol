@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.3.1](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.3.0...v1.3.1) (2026-06-12)
+
+
+### Bug Fixes
+
+* added `Error` field to response with common error message ([a6681c1](https://github.com/mynaparrot/plugnmeet-protocol/commit/a6681c16ee70a3a444747e8ca88c70c840146040))
+* added `ShouldCleanup` filed ([6034086](https://github.com/mynaparrot/plugnmeet-protocol/commit/60340864e10109dabcec7949eb627eff93160299))
+* added `SourceForCleanup` field ([54a703b](https://github.com/mynaparrot/plugnmeet-protocol/commit/54a703ba7cd5bbfb8b0a5a85239c417d4c9b96c1))
+* added option to set `LogOutput` ([a3039b0](https://github.com/mynaparrot/plugnmeet-protocol/commit/a3039b095c753377d46bb9d2754ae164c447f59e))
+* changes hooks fields to make universal ([dabb274](https://github.com/mynaparrot/plugnmeet-protocol/commit/dabb2744cf2f1c321ba7ba50e4092ed7de31acc1))
+* implemented process manager ([efff9a5](https://github.com/mynaparrot/plugnmeet-protocol/commit/efff9a53e6fe5331b988ee36013b7b8c615fbd3c))
+* moved hooks related code to proto ([974aa69](https://github.com/mynaparrot/plugnmeet-protocol/commit/974aa69a88a7a574192149e046771681c3c2f4f4))
+* use timeout to prevent infinitive hang ([3f9bafc](https://github.com/mynaparrot/plugnmeet-protocol/commit/3f9bafcd9f9f762635e7d0d7a7f0ad55dc45a6a7))
+
 ## [1.3.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.2.1...v1.3.0) (2026-05-26)
 
 
