@@ -2,11 +2,9 @@ package hooks
 
 import (
 	"bytes"
-	"context"
 	"encoding/json"
 	"fmt"
 	"os"
-	"os/exec"
 
 	"github.com/sirupsen/logrus"
 	"mvdan.cc/sh/v3/shell"
@@ -40,44 +38,26 @@ func ValidateHookScript(scriptFullCommand string, hookType string) error {
 	return nil
 }
 
-// ExecuteHookPipeline runs a series of scripts, passing data from one to the next.
-func ExecuteHookPipeline(ctx context.Context, scripts []string, initialData interface{}, log *logrus.Entry) (json.RawMessage, error) {
+// ExecuteHookPipeline runs a series of scripts using the HookProcessManager.
+// The manager will decide whether to use a long-lived process or a one-shot command.
+func ExecuteHookPipeline(manager *HookProcessManager, scripts []string, initialData interface{}, log *logrus.Entry) (json.RawMessage, error) {
+	if manager == nil {
+		return nil, fmt.Errorf("hook manager is nil")
+	}
+
 	jsonData, err := json.Marshal(initialData)
 	if err != nil {
 		return nil, fmt.Errorf("failed to marshal initial data for hook script: %w", err)
 	}
 
 	for _, script := range scripts {
-		log.Infof("Running storage hook script: %s", script)
-
-		// Use mvdan.cc/sh/v3/shell to parse the command string robustly
-		parts, err := shell.Fields(script, nil)
+		log.Infof("Executing hook script via manager: %s", script)
+		res, err := manager.ExecuteHook(script, jsonData)
 		if err != nil {
-			return nil, fmt.Errorf("failed to parse script command '%s': %w", script, err)
+			return nil, fmt.Errorf("failed to execute hook '%s': %w", script, err)
 		}
-		if len(parts) == 0 {
-			return nil, fmt.Errorf("empty script command provided")
-		}
-
-		cmdPath := parts[0]
-		cmdArgs := parts[1:]
-
-		cmd := exec.CommandContext(ctx, cmdPath, cmdArgs...)
-		cmd.Stdin = bytes.NewReader(jsonData)
-		var out bytes.Buffer
-		var stderr bytes.Buffer
-		cmd.Stdout = &out
-		cmd.Stderr = &stderr
-
-		if err := cmd.Run(); err != nil {
-			return nil, fmt.Errorf("storage hook script '%s' failed: %w, stderr: %s", script, err, stderr.String())
-		}
-
-		if len(bytes.TrimSpace(out.Bytes())) > 0 {
-			if !json.Valid(out.Bytes()) {
-				return nil, fmt.Errorf("storage hook script '%s' returned invalid JSON: %s", script, out.String())
-			}
-			jsonData = out.Bytes()
+		if len(bytes.TrimSpace(res)) > 0 {
+			jsonData = res
 		}
 	}
 
