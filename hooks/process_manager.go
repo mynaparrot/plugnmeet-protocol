@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"os/exec"
+	"strings"
 	"sync"
 	"time"
 
@@ -15,23 +16,27 @@ import (
 	"mvdan.cc/sh/v3/shell"
 )
 
+const maxRecoveryAttempts = 3
+
 // ManagedHookProcess holds the state for a long-lived hook script.
 type ManagedHookProcess struct {
-	cmd    *exec.Cmd
-	stdin  io.WriteCloser
-	stdout io.ReadCloser
-	reader *bufio.Reader
-	mutex  sync.Mutex
-	log    *logrus.Entry
+	cmd              *exec.Cmd
+	stdin            io.WriteCloser
+	stdout           io.ReadCloser
+	reader           *bufio.Reader
+	mutex            sync.Mutex
+	log              *logrus.Entry
+	recoveryAttempts int
 }
 
 // HookProcessManager manages all the long-lived hook processes.
 type HookProcessManager struct {
-	processes map[string]*ManagedHookProcess
-	log       *logrus.Entry
-	ctx       context.Context
-	startOnce sync.Once
-	startErr  error
+	processes    map[string]*ManagedHookProcess
+	managerMutex sync.Mutex // To protect the 'processes' map itself
+	log          *logrus.Entry
+	ctx          context.Context
+	startOnce    sync.Once
+	startErr     error
 }
 
 // NewHookProcessManager creates a new manager.
@@ -56,7 +61,7 @@ func (h *HookProcessManager) StartHookProcesses(scripts []string) error {
 		}
 
 		for script := range uniqueScripts {
-			if err := h.startProcess(script); err != nil {
+			if err := h.startProcess(script, 0); err != nil {
 				h.stopAll() // Clean up any processes that might have started
 				h.startErr = err
 				return
@@ -66,7 +71,7 @@ func (h *HookProcessManager) StartHookProcesses(scripts []string) error {
 		// Start a goroutine to listen for context cancellation and trigger a graceful shutdown.
 		go func() {
 			<-h.ctx.Done()
-			h.log.Info("main context cancelled, stopping all long-lived hook processes.")
+			h.log.Info("Main context cancelled, stopping all long-lived hook processes.")
 			h.stopAll()
 		}()
 	})
@@ -74,7 +79,9 @@ func (h *HookProcessManager) StartHookProcesses(scripts []string) error {
 	return h.startErr
 }
 
-func (h *HookProcessManager) startProcess(script string) error {
+// startProcess will bootup the long-lived hook process.
+// it's assume that caller have hold the mutex lock, if needed.
+func (h *HookProcessManager) startProcess(script string, attempt int) error {
 	log := h.log.WithField("hook_script", script)
 	log.Info("starting long-lived hook process")
 
@@ -105,85 +112,143 @@ func (h *HookProcessManager) startProcess(script string) error {
 	}
 
 	h.processes[script] = &ManagedHookProcess{
-		cmd:    cmd,
-		stdin:  stdin,
-		stdout: stdout,
-		reader: bufio.NewReader(stdout),
-		log:    log,
+		cmd:              cmd,
+		stdin:            stdin,
+		stdout:           stdout,
+		reader:           bufio.NewReader(stdout),
+		log:              log,
+		recoveryAttempts: attempt,
 	}
 
 	log.Info("long-lived hook process started successfully")
 	return nil
 }
 
-// ExecuteHook sends already marshaled JSON data to a long-lived hook script and reads its response with a timeout.
-func (h *HookProcessManager) ExecuteHook(script string, jsonData json.RawMessage, timeout time.Duration, log *logrus.Entry) (json.RawMessage, error) {
+// recoverProcess attempts to restart a failed hook process.
+func (h *HookProcessManager) recoverProcess(script string) error {
+	h.managerMutex.Lock()
+	defer h.managerMutex.Unlock()
+
 	p, ok := h.processes[script]
 	if !ok {
-		return nil, fmt.Errorf("hook script '%s' not found or not started", script)
+		return fmt.Errorf("process %s not found for recovery", script)
 	}
 
-	p.mutex.Lock()
-	defer p.mutex.Unlock()
-
-	// Create a context with a timeout for this specific execution.
-	ctx, cancel := context.WithTimeout(h.ctx, timeout)
-	defer cancel()
-
-	// Channel to receive the result from the blocking read operation.
-	type result struct {
-		data  []byte
-		error error
+	p.recoveryAttempts++
+	if p.recoveryAttempts > maxRecoveryAttempts {
+		return fmt.Errorf("exceeded max recovery attempts (%d) for script %s", maxRecoveryAttempts, script)
 	}
-	resultChan := make(chan result, 1)
 
-	// Perform the write and blocking read in a separate goroutine.
-	go func() {
-		_, err := p.stdin.Write(append(jsonData, '\n'))
-		if err != nil {
-			log.WithError(err).Errorf("failed to write to stdin for script '%s'", script)
-			resultChan <- result{nil, fmt.Errorf("failed to write to stdin for script '%s': %w", script, err)}
-			return
-		}
+	p.log.Warnf("Attempting recovery %d/%d for script", p.recoveryAttempts, maxRecoveryAttempts)
 
-		responseLine, err := p.reader.ReadBytes('\n')
-		if err != nil {
-			log.WithError(err).Errorf("failed to read from stdout for script '%s'", script)
-			resultChan <- result{nil, fmt.Errorf("failed to read from stdout for script '%s': %w", script, err)}
-			return
-		}
-		resultChan <- result{responseLine, nil}
-	}()
-
-	// Wait for either the result or the timeout.
-	select {
-	case <-ctx.Done():
-		return nil, fmt.Errorf("hook script '%s' timed out after %s", script, timeout)
-	case res := <-resultChan:
-		if res.error != nil {
-			return nil, res.error
-		}
-		responseLine := bytes.TrimSuffix(res.data, []byte{'\n'})
-		if !json.Valid(responseLine) {
-			return nil, fmt.Errorf("script '%s' returned invalid JSON: %s", script, string(responseLine))
-		}
-		return responseLine, nil
+	// Clean up the old process just in case it's lingering.
+	if p.cmd.Process != nil {
+		_ = p.cmd.Process.Kill()
+		_, _ = p.cmd.Process.Wait()
 	}
+	_ = p.stdin.Close()
+	_ = p.stdout.Close()
+
+	// Start a new process and replace the old one in the map.
+	return h.startProcess(script, p.recoveryAttempts)
+}
+
+// isRecoverableError checks if an error indicates a crashed process.
+func isRecoverableError(err error) bool {
+	if err == io.EOF {
+		return true
+	}
+	// "broken pipe" and "pipe is being closed" are common symptoms of a crashed process.
+	return strings.Contains(err.Error(), "broken pipe") || strings.Contains(err.Error(), "pipe is being closed")
+}
+
+// ExecuteHook sends already marshaled JSON data to a long-lived hook script and reads its response with a timeout.
+// It includes a retry mechanism for crashed scripts.
+func (h *HookProcessManager) ExecuteHook(script string, jsonData json.RawMessage, timeout time.Duration, log *logrus.Entry) (json.RawMessage, error) {
+	for i := 0; i <= maxRecoveryAttempts; i++ {
+		h.managerMutex.Lock()
+		p, ok := h.processes[script]
+		h.managerMutex.Unlock()
+
+		if !ok {
+			return nil, fmt.Errorf("hook script '%s' not found or not started", script)
+		}
+
+		p.mutex.Lock()
+
+		ctx, cancel := context.WithTimeout(h.ctx, timeout)
+
+		type result struct {
+			data  []byte
+			error error
+		}
+		resultChan := make(chan result, 1)
+
+		go func() {
+			_, err := p.stdin.Write(append(jsonData, '\n'))
+			if err != nil {
+				resultChan <- result{nil, err}
+				return
+			}
+
+			responseLine, err := p.reader.ReadBytes('\n')
+			if err != nil {
+				resultChan <- result{nil, err}
+				return
+			}
+			resultChan <- result{responseLine, nil}
+		}()
+
+		select {
+		case <-ctx.Done():
+			p.mutex.Unlock()
+			cancel() // Clean up the context
+			return nil, fmt.Errorf("hook script '%s' timed out after %s", script, timeout)
+		case res := <-resultChan:
+			p.mutex.Unlock() // Unlock before potentially recovering
+			cancel()         // Clean up the context
+
+			if res.error != nil {
+				if isRecoverableError(res.error) {
+					log.WithError(res.error).Warn("recoverable error detected, attempting to restart process")
+					if recoveryErr := h.recoverProcess(script); recoveryErr != nil {
+						return nil, recoveryErr // Recovery failed, so we exit.
+					}
+					continue // Retry the operation in the next loop iteration.
+				}
+				return nil, res.error // Unrecoverable error.
+			}
+
+			// Success
+			responseLine := bytes.TrimSuffix(res.data, []byte{'\n'})
+			if !json.Valid(responseLine) {
+				return nil, fmt.Errorf("script '%s' returned invalid JSON: %s", script, string(responseLine))
+			}
+			// On success, reset the recovery counter for the process.
+			p.recoveryAttempts = 0
+			return responseLine, nil
+		}
+	}
+
+	return nil, fmt.Errorf("hook script '%s' failed after %d retries", script, maxRecoveryAttempts)
 }
 
 // stopAll terminates all managed hook processes. This is now an internal method.
 func (h *HookProcessManager) stopAll() {
-	h.log.Info("internal stopAll called for hook processes")
+	h.log.Info("Internal stopAll called for hook processes")
+	h.managerMutex.Lock()
+	defer h.managerMutex.Unlock()
+
 	for _, p := range h.processes {
 		p.mutex.Lock()
-		p.stdin.Close()
-		p.stdout.Close()
+		_ = p.stdin.Close()
+		_ = p.stdout.Close()
 		p.mutex.Unlock()
 		if p.cmd.Process != nil {
 			// The context cancellation should have already signaled the process to stop.
 			// Killing is a fallback.
-			p.cmd.Process.Kill()
-			p.cmd.Wait()
+			_ = p.cmd.Process.Kill()
+			_, _ = p.cmd.Process.Wait()
 		}
 	}
 }
