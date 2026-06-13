@@ -117,7 +117,7 @@ func (h *HookProcessManager) startProcess(script string) error {
 }
 
 // ExecuteHook sends already marshaled JSON data to a long-lived hook script and reads its response with a timeout.
-func (h *HookProcessManager) ExecuteHook(script string, jsonData json.RawMessage, timeout time.Duration) (json.RawMessage, error) {
+func (h *HookProcessManager) ExecuteHook(script string, jsonData json.RawMessage, timeout time.Duration, log *logrus.Entry) (json.RawMessage, error) {
 	p, ok := h.processes[script]
 	if !ok {
 		return nil, fmt.Errorf("hook script '%s' not found or not started", script)
@@ -141,12 +141,14 @@ func (h *HookProcessManager) ExecuteHook(script string, jsonData json.RawMessage
 	go func() {
 		_, err := p.stdin.Write(append(jsonData, '\n'))
 		if err != nil {
+			log.WithError(err).Errorf("failed to write to stdin for script '%s'", script)
 			resultChan <- result{nil, fmt.Errorf("failed to write to stdin for script '%s': %w", script, err)}
 			return
 		}
 
 		responseLine, err := p.reader.ReadBytes('\n')
 		if err != nil {
+			log.WithError(err).Errorf("failed to read from stdout for script '%s'", script)
 			resultChan <- result{nil, fmt.Errorf("failed to read from stdout for script '%s': %w", script, err)}
 			return
 		}

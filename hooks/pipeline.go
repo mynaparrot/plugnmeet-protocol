@@ -53,7 +53,7 @@ func ExecuteHookPipeline(manager *HookProcessManager, scripts []string, initialD
 
 	for _, script := range scripts {
 		log.Infof("Executing hook script via manager: %s", script)
-		res, err := manager.ExecuteHook(script, jsonData, timeout)
+		res, err := manager.ExecuteHook(script, jsonData, timeout, log)
 		if err != nil {
 			return nil, fmt.Errorf("failed to execute hook '%s': %w", script, err)
 		}
