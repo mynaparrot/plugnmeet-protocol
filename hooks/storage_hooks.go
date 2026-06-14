@@ -18,7 +18,8 @@ type UploadHookData struct {
 	HookFileType       HookFileType `json:"hook_file_type"`
 	RoomId             string       `json:"room_id"`
 	RoomSid            string       `json:"room_sid"`
-	RoomTableId        uint64       `json:"room_table_id"`
+	RoomTableId        uint64       `json:"room_table_id,omitempty"`
+	FileId             string       `json:"file_id,omitempty"`
 
 	// Fields below are typically set by the script as output, or can be passed along in a chain.
 	Error      string `json:"error,omitempty"`       // Error message from the script.
@@ -102,9 +103,11 @@ type ResumableUploadHookData struct {
 	// --- Fields set by the script as output ---
 	Error              string                    `json:"error,omitempty"`
 	OutputResponseType ResumableUploadOutputType `json:"output_response_type,omitempty"`
-	OutputPath         string                    `json:"output_path,omitempty"` // Final URL/path of the merged file
-	FileMimeType       string                    `json:"file_mime_type,omitempty"`
-	FileExtension      string                    `json:"file_extension,omitempty"`
+	// OutputPath should return Final URL/path of the merged file. The format should be roomSid/other parts
+	// for example: roomSid/fileName or in case converted images dir roomSid/FileId/page_1.png ...
+	OutputPath    string `json:"output_path,omitempty"`
+	FileMimeType  string `json:"file_mime_type,omitempty"`
+	FileExtension string `json:"file_extension,omitempty"`
 }
 
 type RoomEndHookData struct {
