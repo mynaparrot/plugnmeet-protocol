@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"net/http"
 	"os/exec"
 	"strings"
 	"sync"
@@ -40,6 +41,7 @@ type HookProcessManager struct {
 	ctx          context.Context
 	startOnce    sync.Once
 	startErr     error
+	httpClient   *http.Client
 }
 
 // NewHookProcessManager creates a new manager.
@@ -50,27 +52,17 @@ func NewHookProcessManager(ctx context.Context, log *logrus.Entry) *HookProcessM
 		allProcesses: make([]*ManagedHookProcess, 0),
 		log:          log,
 		ctx:          ctx,
+		httpClient:   &http.Client{},
 	}
 }
 
-// isOneShotScript checks if the script is a one-shot command like curl.
-func isOneShotScript(script string) bool {
-	return strings.Contains(script, "curl") || strings.Contains(script, "wget")
-}
-
 // StartHookProcesses starts pools of long-lived processes for each unique script.
-// It intelligently ignores one-shot scripts like 'curl'.
 // It is protected by a sync.Once to ensure it only runs once.
 func (h *HookProcessManager) StartHookProcesses(scriptsWithPoolSize map[string]int) error {
 	h.startOnce.Do(func() {
 		// This block is guaranteed to run exactly once.
 		// No lock is needed here as no other goroutine can access the maps yet.
 		for script, poolSize := range scriptsWithPoolSize {
-			if isOneShotScript(script) {
-				h.log.Infof("script '%s' is a one-shot command, skipping process pool creation", script)
-				continue
-			}
-
 			if poolSize <= 0 {
 				poolSize = 1
 			}
@@ -146,7 +138,7 @@ func (h *HookProcessManager) startNativeProcess(script string, instanceId int) (
 		scanner := bufio.NewScanner(stderr)
 		log := log.WithField("pipe", "stderr")
 		for scanner.Scan() {
-			log.Infoln(scanner.Text())
+			log.Debugln(scanner.Text())
 		}
 	}()
 
@@ -166,23 +158,64 @@ func (h *HookProcessManager) startNativeProcess(script string, instanceId int) (
 
 // executeHook acts as a dispatcher. It executes one-shot commands directly
 // and uses the process pool for long-lived scripts.
-func (h *HookProcessManager) executeHook(script string, jsonData json.RawMessage, timeout time.Duration, log *logrus.Entry) (json.RawMessage, error) {
-	if isOneShotScript(script) {
+func (h *HookProcessManager) executeHook(script HookScript, jsonData json.RawMessage, timeout time.Duration, log *logrus.Entry) (json.RawMessage, error) {
+	if script.IsOneShot {
 		return h.executeOneShotCommand(script, jsonData, timeout, log)
 	}
-	return h.executePooledProcess(script, jsonData, timeout, log)
+	return h.executePooledProcess(script.Script, jsonData, timeout, log)
 }
 
-// executeOneShotCommand executes a command like 'curl' directly.
-func (h *HookProcessManager) executeOneShotCommand(script string, jsonData json.RawMessage, timeout time.Duration, log *logrus.Entry) (json.RawMessage, error) {
-	log.Infof("executing one-shot command: %s", script)
+func (h *HookProcessManager) executeHttpRequest(script HookScript, jsonData json.RawMessage, timeout time.Duration, log *logrus.Entry) (json.RawMessage, error) {
+	log.Infof("executing %s: %s", HookCommandHttpRequest, script.Script)
 
 	ctx, cancel := context.WithTimeout(h.ctx, timeout)
 	defer cancel()
 
-	parts, err := shell.Fields(script, nil)
+	parts, err := shell.Fields(script.Script, nil)
 	if err != nil {
-		return nil, fmt.Errorf("failed to parse one-shot script command '%s': %w", script, err)
+		return nil, fmt.Errorf("failed to parse %s script command '%s': %w", HookCommandHttpRequest, script.Script, err)
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "POST", parts[1], bytes.NewReader(jsonData))
+	if err != nil {
+		return nil, fmt.Errorf("failed to create http request: %w", err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+
+	h.httpClient.Timeout = timeout
+	resp, err := h.httpClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("http request execution failed: %w", err)
+	}
+	defer resp.Body.Close()
+
+	output, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read http response body: %w", err)
+	}
+
+	responseLine := bytes.TrimSuffix(output, []byte{'\n'})
+	if len(responseLine) > 0 && !json.Valid(responseLine) {
+		return nil, fmt.Errorf("%s '%s' returned invalid JSON: %s", HookCommandHttpRequest, script.Script, string(responseLine))
+	}
+
+	return responseLine, nil
+}
+
+// executeOneShotCommand executes a command like 'curl' directly.
+func (h *HookProcessManager) executeOneShotCommand(script HookScript, jsonData json.RawMessage, timeout time.Duration, log *logrus.Entry) (json.RawMessage, error) {
+	if strings.HasPrefix(script.Script, HookCommandHttpRequest) {
+		return h.executeHttpRequest(script, jsonData, timeout, log)
+	}
+
+	log.Infof("executing one-shot command: %s", script.Script)
+
+	ctx, cancel := context.WithTimeout(h.ctx, timeout)
+	defer cancel()
+
+	parts, err := shell.Fields(script.Script, nil)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse one-shot script command '%s': %w", script.Script, err)
 	}
 
 	cmd := exec.CommandContext(ctx, parts[0], parts[1:]...)
@@ -195,7 +228,7 @@ func (h *HookProcessManager) executeOneShotCommand(script string, jsonData json.
 
 	responseLine := bytes.TrimSuffix(output, []byte{'\n'})
 	if len(responseLine) > 0 && !json.Valid(responseLine) {
-		return nil, fmt.Errorf("one-shot script '%s' returned invalid JSON: %s", script, string(responseLine))
+		return nil, fmt.Errorf("one-shot script '%s' returned invalid JSON: %s", script.Script, string(responseLine))
 	}
 
 	return responseLine, nil
@@ -205,7 +238,10 @@ func (h *HookProcessManager) executeOneShotCommand(script string, jsonData json.
 func (h *HookProcessManager) executePooledProcess(script string, jsonData json.RawMessage, timeout time.Duration, log *logrus.Entry) (json.RawMessage, error) {
 	pool, ok := h.processPools[script]
 	if !ok {
-		return nil, fmt.Errorf("no process pool found for hook script '%s'", script)
+		// this can be the case where user define all one-shot scripts
+		// in that case, we don't need to return error
+		// we'll simply return original data
+		return jsonData, nil
 	}
 
 	var process *ManagedHookProcess
