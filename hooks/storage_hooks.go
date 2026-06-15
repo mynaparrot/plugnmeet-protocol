@@ -5,6 +5,7 @@ type HookFileType string
 const (
 	HookFileTypeArtifact                HookFileType = "artifact"
 	HookFileTypeRecording               HookFileType = "recording"
+	HookFileTypeRecordingMetadata       HookFileType = "recording-metadata"
 	HookFileTypeRoomFile                HookFileType = "room-file"
 	HookFileTypeWhiteboardConvertedImgs HookFileType = "whiteboard-converted-imgs"
 )
