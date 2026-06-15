@@ -168,6 +168,9 @@ func (h *HookProcessManager) executeHook(script HookScript, jsonData json.RawMes
 func (h *HookProcessManager) executeHttpRequest(script HookScript, jsonData json.RawMessage, timeout time.Duration, log *logrus.Entry) (json.RawMessage, error) {
 	log.Infof("executing %s: %s", HookCommandHttpRequest, script.Script)
 
+	if timeout == 0 {
+		timeout = 5 * time.Minute
+	}
 	ctx, cancel := context.WithTimeout(h.ctx, timeout)
 	defer cancel()
 
@@ -182,7 +185,6 @@ func (h *HookProcessManager) executeHttpRequest(script HookScript, jsonData json
 	}
 	req.Header.Set("Content-Type", "application/json")
 
-	h.httpClient.Timeout = timeout
 	resp, err := h.httpClient.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("http request execution failed: %w", err)
@@ -210,6 +212,9 @@ func (h *HookProcessManager) executeOneShotCommand(script HookScript, jsonData j
 
 	log.Infof("executing one-shot command: %s", script.Script)
 
+	if timeout == 0 {
+		timeout = 5 * time.Minute
+	}
 	ctx, cancel := context.WithTimeout(h.ctx, timeout)
 	defer cancel()
 
@@ -251,6 +256,9 @@ func (h *HookProcessManager) executePooledProcess(script string, jsonData json.R
 		return nil, fmt.Errorf("server is shutting down; could not get process for script '%s'", script)
 	}
 
+	if timeout == 0 {
+		timeout = 5 * time.Minute
+	}
 	// This context is for the request's timeout.
 	ctx, cancel := context.WithTimeout(h.ctx, timeout)
 	defer cancel()
