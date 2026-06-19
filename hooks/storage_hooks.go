@@ -85,21 +85,21 @@ type ResumableUploadHookData struct {
 	Type ResumableUploadHookType `json:"type"`
 
 	// Identifiers, always present
-	RoomSid             string `json:"room_sid"`
-	RoomId              string `json:"room_id"`
-	UserId              string `json:"user_id"`
-	FileType            string `json:"file_type,omitempty"`
-	ResumableIdentifier string `json:"resumable_identifier"`
-	ResumableFilename   string `json:"resumable_filename,omitempty"`
-
-	// Present for "part-check" and "part-upload"
-	ResumableChunkNumber int `json:"resumable_chunk_number,omitempty"`
-
+	RoomSid  string `json:"room_sid"`
+	RoomId   string `json:"room_id"`
+	UserId   string `json:"user_id"`
+	FileType string `json:"file_type,omitempty"`
 	// Present for "part-upload"
 	InputPath string `json:"input_path,omitempty"` // Path to the temporary local chunk file
 
+	ResumableIdentifier string `json:"resumable_identifier"`
+	ResumableFilename   string `json:"resumable_filename,omitempty"`
+	// Present for "part-check" and "part-upload"
+	ResumableChunkNumber int `json:"resumable_chunk_number,omitempty"`
 	// Present for "merge"
-	ResumableTotalChunks int32 `json:"resumable_total_chunks,omitempty"`
+	ResumableTotalChunks      int32 `json:"resumable_total_chunks,omitempty"`
+	ResumableCurrentChunkSize int64 `json:"resumable_current_chunk_size,omitempty"`
+	ResumableTotalSize        int64 `json:"resumable_total_size,omitempty"`
 
 	// --- Fields set by the script as output ---
 	Error              string                    `json:"error,omitempty"`
