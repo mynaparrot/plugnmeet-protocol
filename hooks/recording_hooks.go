@@ -8,7 +8,7 @@ const (
 )
 
 // RecordingHookData defines the JSON payload passed to and from external scripts for recorder operations.
-// It serves as both input to the script (from the server) and output from the script (back to the server).
+// It serves as both input to the script (from the recorder) and output from the script (back to the recorder).
 // In a script chain, subsequent scripts receive the modified data from the previous script.
 type RecordingHookData struct {
 	Task        RecordingHookTask `json:"task,omitempty"` // e.g., "single", "merge".
@@ -16,9 +16,10 @@ type RecordingHookData struct {
 	RoomTableID int64             `json:"room_table_id"`
 	RoomID      string            `json:"room_id"`
 	RoomSID     string            `json:"room_sid"`
-	FileName    string            `json:"file_name,omitempty"` // Original file name, for single file tasks.
 	RecorderID  string            `json:"recorder_id"`
-	FileSize    float32           `json:"file_size,omitempty"`
+
+	FileName string  `json:"file_name,omitempty"` // Original or expected file name
+	FileSize float32 `json:"file_size,omitempty"`
 
 	// Input paths for the script. Can be local file paths or remote storage URLs.
 	InputPath  string   `json:"input_path,omitempty"`  // Primary input path for single file tasks.
