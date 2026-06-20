@@ -275,8 +275,15 @@ func (h *HookProcessManager) executePooledProcess(script string, jsonData json.R
 		// This defer block ensures the process is always either returned or recovered.
 		defer func() {
 			if err != nil {
-				log.WithError(err).Error("process execution failed, attempting to recover")
-				go h.recoverProcess(script, process)
+				if h.isRecoverableError(err) {
+					log.WithError(err).Warn("process connection appears to be lost, attempting to recover")
+					go h.recoverProcess(script, process)
+				} else {
+					// For other errors (e.g., buffer full), the process is likely still alive.
+					// We failed this request, but the process can be reused.
+					log.WithError(err).Error("process execution failed with a non-fatal error, returning process to pool")
+					pool <- process
+				}
 			} else {
 				pool <- process
 			}
@@ -383,4 +390,20 @@ func (h *HookProcessManager) stopAll() {
 	// Clear the lists.
 	h.allProcesses = make([]*ManagedHookProcess, 0)
 	h.processPools = make(map[string]chan *ManagedHookProcess)
+}
+
+// isRecoverableError checks if an error indicates a crashed process that needs recovery.
+func (h *HookProcessManager) isRecoverableError(err error) bool {
+	if err == io.EOF {
+		// EOF means the process closed its stdout stream, likely by exiting,
+		// before sending a complete newline-terminated response.
+		return true
+	}
+	if err != nil {
+		// "broken pipe" and "pipe is being closed" are common symptoms of a crashed process
+		// when we try to write to its stdin.
+		errMsg := err.Error()
+		return strings.Contains(errMsg, "broken pipe") || strings.Contains(errMsg, "pipe is being closed")
+	}
+	return false
 }
