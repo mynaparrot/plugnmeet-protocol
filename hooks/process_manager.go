@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -394,7 +395,7 @@ func (h *HookProcessManager) stopAll() {
 
 // isRecoverableError checks if an error indicates a crashed process that needs recovery.
 func (h *HookProcessManager) isRecoverableError(err error) bool {
-	if err == io.EOF {
+	if errors.Is(err, io.EOF) {
 		// EOF means the process closed its stdout stream, likely by exiting,
 		// before sending a complete newline-terminated response.
 		return true
