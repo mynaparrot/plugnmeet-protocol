@@ -37,7 +37,7 @@ type HookProcessManager struct {
 	// allProcesses holds all created processes for cleanup purposes.
 	allProcesses []*ManagedHookProcess
 	// managerMutex protects the process maps/slices during concurrent operations like recovery and shutdown.
-	managerMutex sync.Mutex
+	managerMutex sync.RWMutex // Use RWMutex for better read performance
 	log          *logrus.Entry
 	ctx          context.Context
 	startOnce    sync.Once
@@ -242,11 +242,14 @@ func (h *HookProcessManager) executeOneShotCommand(script HookScript, jsonData j
 
 // executePooledProcess executes a command using the long-lived process pool.
 func (h *HookProcessManager) executePooledProcess(script string, jsonData json.RawMessage, timeout time.Duration, log *logrus.Entry) (json.RawMessage, error) {
+	h.managerMutex.RLock()
 	pool, ok := h.processPools[script]
+	h.managerMutex.RUnlock()
+
 	if !ok {
-		// this can be the case where user define all one-shot scripts
-		// in that case, we don't need to return error
-		// we'll simply return original data
+		// This can be the case where a user defines only one-shot scripts,
+		// or a script is misconfigured. Log a warning and return.
+		h.log.Warnf("no process pool found for long-lived script '%s', it will be skipped", script)
 		return jsonData, nil
 	}
 
@@ -278,7 +281,7 @@ func (h *HookProcessManager) executePooledProcess(script string, jsonData json.R
 			if err != nil {
 				if h.isRecoverableError(err) {
 					log.WithError(err).Warn("process connection appears to be lost, attempting to recover")
-					go h.recoverProcess(script, process)
+					h.recoverProcess(script, process)
 				} else {
 					// For other errors (e.g., buffer full), the process is likely still alive.
 					// We failed this request, but the process can be reused.
