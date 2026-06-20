@@ -37,7 +37,7 @@ type HookProcessManager struct {
 	// allProcesses holds all created processes for cleanup purposes.
 	allProcesses []*ManagedHookProcess
 	// managerMutex protects the process maps/slices during concurrent operations like recovery and shutdown.
-	managerMutex sync.RWMutex // Use RWMutex for better read performance
+	managerMutex sync.RWMutex
 	log          *logrus.Entry
 	ctx          context.Context
 	startOnce    sync.Once
@@ -166,6 +166,41 @@ func (h *HookProcessManager) executeHook(script HookScript, jsonData json.RawMes
 	return h.executePooledProcess(script.Script, jsonData, timeout, log)
 }
 
+// executeOneShotCommand executes a command like 'curl' directly.
+func (h *HookProcessManager) executeOneShotCommand(script HookScript, jsonData json.RawMessage, timeout time.Duration, log *logrus.Entry) (json.RawMessage, error) {
+	if strings.HasPrefix(script.Script, HookCommandHttpRequest) {
+		return h.executeHttpRequest(script, jsonData, timeout, log)
+	}
+
+	log.Infof("executing one-shot command: %s", script.Script)
+
+	if timeout == 0 {
+		timeout = 5 * time.Minute
+	}
+	ctx, cancel := context.WithTimeout(h.ctx, timeout)
+	defer cancel()
+
+	parts, err := shell.Fields(script.Script, nil)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse one-shot script command '%s': %w", script.Script, err)
+	}
+
+	cmd := exec.CommandContext(ctx, parts[0], parts[1:]...)
+	cmd.Stdin = bytes.NewReader(jsonData)
+
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		return nil, fmt.Errorf("one-shot script execution failed: %w, output: %s", err, string(output))
+	}
+
+	responseLine := bytes.TrimSuffix(output, []byte{'\n'})
+	if len(responseLine) > 0 && !json.Valid(responseLine) {
+		return nil, fmt.Errorf("one-shot script '%s' returned invalid JSON: %s", script.Script, string(responseLine))
+	}
+
+	return responseLine, nil
+}
+
 func (h *HookProcessManager) executeHttpRequest(script HookScript, jsonData json.RawMessage, timeout time.Duration, log *logrus.Entry) (json.RawMessage, error) {
 	log.Infof("executing %s: %s", HookCommandHttpRequest, script.Script)
 
@@ -200,41 +235,6 @@ func (h *HookProcessManager) executeHttpRequest(script HookScript, jsonData json
 	responseLine := bytes.TrimSuffix(output, []byte{'\n'})
 	if len(responseLine) > 0 && !json.Valid(responseLine) {
 		return nil, fmt.Errorf("%s '%s' returned invalid JSON: %s", HookCommandHttpRequest, script.Script, string(responseLine))
-	}
-
-	return responseLine, nil
-}
-
-// executeOneShotCommand executes a command like 'curl' directly.
-func (h *HookProcessManager) executeOneShotCommand(script HookScript, jsonData json.RawMessage, timeout time.Duration, log *logrus.Entry) (json.RawMessage, error) {
-	if strings.HasPrefix(script.Script, HookCommandHttpRequest) {
-		return h.executeHttpRequest(script, jsonData, timeout, log)
-	}
-
-	log.Infof("executing one-shot command: %s", script.Script)
-
-	if timeout == 0 {
-		timeout = 5 * time.Minute
-	}
-	ctx, cancel := context.WithTimeout(h.ctx, timeout)
-	defer cancel()
-
-	parts, err := shell.Fields(script.Script, nil)
-	if err != nil {
-		return nil, fmt.Errorf("failed to parse one-shot script command '%s': %w", script.Script, err)
-	}
-
-	cmd := exec.CommandContext(ctx, parts[0], parts[1:]...)
-	cmd.Stdin = bytes.NewReader(jsonData)
-
-	output, err := cmd.CombinedOutput()
-	if err != nil {
-		return nil, fmt.Errorf("one-shot script execution failed: %w, output: %s", err, string(output))
-	}
-
-	responseLine := bytes.TrimSuffix(output, []byte{'\n'})
-	if len(responseLine) > 0 && !json.Valid(responseLine) {
-		return nil, fmt.Errorf("one-shot script '%s' returned invalid JSON: %s", script.Script, string(responseLine))
 	}
 
 	return responseLine, nil
@@ -293,8 +293,7 @@ func (h *HookProcessManager) executePooledProcess(script string, jsonData json.R
 			}
 		}()
 
-		_, err = process.stdin.Write(append(jsonData, '\n'))
-		if err != nil {
+		if _, err = process.stdin.Write(append(jsonData, '\n')); err != nil {
 			resultChan <- result{nil, err}
 			return
 		}

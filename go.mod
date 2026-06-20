@@ -19,7 +19,7 @@ require (
 )
 
 require (
-	buf.build/go/protovalidate v1.1.3 // indirect
+	buf.build/go/protovalidate v1.2.0 // indirect
 	buf.build/go/protoyaml v0.6.0 // indirect
 	cel.dev/expr v0.25.1 // indirect
 	github.com/andybalholm/brotli v1.2.1 // indirect
@@ -35,7 +35,7 @@ require (
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/gofiber/schema v1.7.1 // indirect
 	github.com/gofiber/utils/v2 v2.0.6 // indirect
-	github.com/google/cel-go v0.27.0 // indirect
+	github.com/google/cel-go v0.28.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/jxskiss/base62 v1.1.0 // indirect
 	github.com/klauspost/compress v1.18.6 // indirect
