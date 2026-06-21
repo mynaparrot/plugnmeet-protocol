@@ -188,10 +188,10 @@ func (h *HookProcessManager) monitorProcess(p *ManagedHookProcess) {
 	// Wait() will block until the process exits. When it returns, the process is dead.
 	// We must now trigger recovery.
 
-	p.log.WithError(err).Warn("process has exited unexpectedly. Triggering recovery.")
+	p.log.WithError(err).Debug("Process has exited unexpectedly. Triggering recovery.")
 
 	// The existing recoverProcess function is already safe for concurrent calls.
-	h.recoverProcess(p.script, p)
+	h.recoverProcess(p.script, p, err)
 }
 
 // executeHook acts as a dispatcher. It executes one-shot commands directly
@@ -361,34 +361,34 @@ func (h *HookProcessManager) executePooledProcess(script string, jsonData json.R
 }
 
 // recoverProcess rebuilds the entire process pool for a script when one instance fails.
-func (h *HookProcessManager) recoverProcess(script string, oldProcess *ManagedHookProcess) {
+func (h *HookProcessManager) recoverProcess(script string, oldProcess *ManagedHookProcess, err error) {
+	log := h.log.WithField("hook_script", script)
+
 	// 1. Atomically check and mark the process. This is a fast, non-blocking operation.
 	if !oldProcess.state.CompareAndSwap(ProcessStateHealthy, ProcessStateRecovering) {
-		h.log.Debugf("process instance %d for script '%s' is already being recovered. Skipping.", oldProcess.instanceId, script)
+		log.Debugf("Process instance %d for script '%s' is already being recovered. Skipping.", oldProcess.instanceId, script)
 		return
 	}
 
 	// 2. Check for server shutdown before sleeping.
 	if h.ctx.Err() != nil {
-		h.log.Warnf("server is shutting down, skipping recovery for process instance %d", oldProcess.instanceId)
+		log.Debugf("Server is shutting down, skipping recovery for process instance %d", oldProcess.instanceId)
 		return
 	}
-
-	log := h.log.WithField("hook_script", script)
-	log.Warnf("process instance %d crashed. Waiting 5s before attempting pool rebuild...", oldProcess.instanceId)
 
 	// 3. Perform the sleep BEFORE acquiring the global lock.
 	time.Sleep(5 * time.Second)
 
-	// 4. NOW, acquire the global lock to perform the disruptive pool rebuild.
-	h.managerMutex.Lock()
-
-	// 5. After sleeping and getting the lock, we must re-validate.
+	// 4. After sleeping, we must re-validate.
 	if h.ctx.Err() != nil {
-		h.log.Warnf("server is shutting down, aborting recovery for process instance %d", oldProcess.instanceId)
-		h.managerMutex.Unlock()
+		log.Warnf("Server is shutting down, aborting recovery for process instance %d", oldProcess.instanceId)
 		return
 	}
+
+	log.WithError(err).Warnf("Process instance %d crashed, attempting pool rebuild...", oldProcess.instanceId)
+
+	// 5. NOW, acquire the global lock to perform the disruptive pool rebuild.
+	h.managerMutex.Lock()
 
 	var isStillPresent = false
 	if processes, ok := h.allProcesses[script]; ok {
@@ -400,14 +400,14 @@ func (h *HookProcessManager) recoverProcess(script string, oldProcess *ManagedHo
 		}
 	}
 	if !isStillPresent {
-		log.Warnf("process for script '%s' was already removed during sleep. Aborting rebuild.", script)
+		log.Warnf("Process for script '%s' was already removed during sleep. Aborting rebuild.", script)
 		h.managerMutex.Unlock()
 		return
 	}
 
 	// --- Proceed with the rebuild logic ---
 	newRecoveryCount := oldProcess.recoveryCount + 1
-	log.Warnf("rebuilding process pool for script '%s' (rebuild attempt %d)", script, newRecoveryCount)
+	log.Warnf("Rebuilding process pool for script '%s' (rebuild attempt %d)", script, newRecoveryCount)
 
 	pool, ok := h.processPools[script]
 	if !ok {
@@ -454,7 +454,7 @@ func (h *HookProcessManager) recoverProcess(script string, oldProcess *ManagedHo
 		go h.monitorProcess(p)
 	}
 
-	log.Infof("successfully rebuilt process pool for script '%s' with %d instances (now at %d rebuilds).", script, len(newLiveProcesses), newRecoveryCount)
+	log.Infof("Successfully rebuilt process pool for script '%s' with %d instances (now at %d rebuilds).", script, len(newLiveProcesses), newRecoveryCount)
 }
 
 // stopAll terminates all managed hook processes.
