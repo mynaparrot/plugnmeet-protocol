@@ -40,6 +40,8 @@ type ManagedHookProcess struct {
 	script string
 	// The current state of the process (Healthy, Recovering).
 	state atomic.Int32
+	// How many times this process slot has been recovered.
+	recoveryCount int
 }
 
 // HookProcessManager manages all the long-lived hook processes.
@@ -158,14 +160,15 @@ func (h *HookProcessManager) startNativeProcess(script string, instanceId int) (
 	}()
 
 	process := &ManagedHookProcess{
-		cmd:        cmd,
-		stdin:      stdin,
-		stdout:     stdout,
-		stderr:     stderr,
-		reader:     bufio.NewReader(stdout),
-		log:        log,
-		instanceId: instanceId,
-		script:     script,
+		cmd:           cmd,
+		stdin:         stdin,
+		stdout:        stdout,
+		stderr:        stderr,
+		reader:        bufio.NewReader(stdout),
+		log:           log,
+		instanceId:    instanceId,
+		script:        script,
+		recoveryCount: 0,
 	}
 
 	log.Info("native long-lived process instance started successfully")
@@ -372,8 +375,12 @@ func (h *HookProcessManager) recoverProcess(script string, oldProcess *ManagedHo
 		return
 	}
 
+	// Add a simple sleep to prevent a tight crash loop from overwhelming the CPU.
+	// This gives a cool-down period before we attempt to restart the process.
+	time.Sleep(5 * time.Second)
+
 	log := h.log.WithField("hook_script", script)
-	log.Warnf("attempting to recover failed process instance %d", oldProcess.instanceId)
+	log.Warnf("attempting to recover failed process instance %d (attempt %d)", oldProcess.instanceId, oldProcess.recoveryCount+1)
 
 	// Clean up the old process's pipes. The OS process is already reaped by the Wait() call in the monitor.
 	if oldProcess.cmd != nil {
@@ -401,6 +408,9 @@ func (h *HookProcessManager) recoverProcess(script string, oldProcess *ManagedHo
 		return
 	}
 
+	// Set the correct recovery count before adding it to the list.
+	newProcess.recoveryCount = oldProcess.recoveryCount + 1
+
 	// Replace the old process with the new one in the global list.
 	for i, p := range h.allProcesses {
 		if p == oldProcess {
@@ -415,7 +425,7 @@ func (h *HookProcessManager) recoverProcess(script string, oldProcess *ManagedHo
 	// NOW, with the state fully updated, launch the monitor for the new process.
 	go h.monitorProcess(newProcess)
 
-	log.Info("Successfully recovered process instance")
+	log.Infof("Successfully recovered process instance %d (now at %d recoveries)", newProcess.instanceId, newProcess.recoveryCount)
 }
 
 // stopAll terminates all managed hook processes.
