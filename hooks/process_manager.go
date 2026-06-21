@@ -48,8 +48,8 @@ type ManagedHookProcess struct {
 type HookProcessManager struct {
 	// processPools holds a channel for each script, which acts as a pool of available processes.
 	processPools map[string]chan *ManagedHookProcess
-	// allProcesses holds all created processes for cleanup purposes.
-	allProcesses []*ManagedHookProcess
+	// allProcesses maps a script string to its list of running processes.
+	allProcesses map[string][]*ManagedHookProcess
 	// managerMutex protects the process maps/slices during concurrent operations like recovery and shutdown.
 	managerMutex sync.RWMutex
 	log          *logrus.Entry
@@ -64,7 +64,7 @@ type HookProcessManager struct {
 func NewHookProcessManager(ctx context.Context, log *logrus.Entry) *HookProcessManager {
 	return &HookProcessManager{
 		processPools: make(map[string]chan *ManagedHookProcess),
-		allProcesses: make([]*ManagedHookProcess, 0),
+		allProcesses: make(map[string][]*ManagedHookProcess),
 		log:          log,
 		ctx:          ctx,
 		httpClient:   &http.Client{},
@@ -84,15 +84,20 @@ func (h *HookProcessManager) StartHookProcesses(scriptsWithPoolSize map[string]i
 			h.log.Infof("starting process pool for script '%s' with size %d", script, poolSize)
 			h.processPools[script] = make(chan *ManagedHookProcess, poolSize)
 
+			scriptProcesses := make([]*ManagedHookProcess, 0, poolSize)
 			for i := 0; i < poolSize; i++ {
-				process, err := h.startNativeProcess(script, i)
+				process, err := h.startNativeProcess(script, i, 0)
 				if err != nil {
 					h.startErr = fmt.Errorf("failed to start instance %d for script '%s': %w", i, script, err)
 					return // Exit the Do func immediately on error.
 				}
 				h.processPools[script] <- process
-				h.allProcesses = append(h.allProcesses, process)
-				// Launch the definitive monitor for this process.
+				scriptProcesses = append(scriptProcesses, process)
+			}
+			h.allProcesses[script] = scriptProcesses
+
+			// Launch monitors only after the initial state is fully consistent.
+			for _, process := range scriptProcesses {
 				go h.monitorProcess(process)
 			}
 		}
@@ -114,10 +119,11 @@ func (h *HookProcessManager) StartHookProcesses(scriptsWithPoolSize map[string]i
 }
 
 // startNativeProcess boots up a true long-lived OS process.
-func (h *HookProcessManager) startNativeProcess(script string, instanceId int) (*ManagedHookProcess, error) {
+func (h *HookProcessManager) startNativeProcess(script string, instanceId int, recoveryCount int) (*ManagedHookProcess, error) {
 	log := h.log.WithFields(logrus.Fields{
-		"hook_script": script,
-		"instance_id": instanceId,
+		"hook_script":    script,
+		"instance_id":    instanceId,
+		"recovery_count": recoveryCount,
 	})
 	log.Info("starting native long-lived process instance")
 
@@ -168,7 +174,7 @@ func (h *HookProcessManager) startNativeProcess(script string, instanceId int) (
 		log:           log,
 		instanceId:    instanceId,
 		script:        script,
-		recoveryCount: 0,
+		recoveryCount: recoveryCount,
 	}
 
 	log.Info("native long-lived process instance started successfully")
@@ -278,8 +284,6 @@ func (h *HookProcessManager) executePooledProcess(script string, jsonData json.R
 	h.managerMutex.RUnlock()
 
 	if !ok {
-		// This can be the case where a user defines only one-shot scripts,
-		// or a script is misconfigured. Log a warning and return.
 		h.log.Warnf("no process pool found for long-lived script '%s', it will be skipped", script)
 		return jsonData, nil
 	}
@@ -287,6 +291,8 @@ func (h *HookProcessManager) executePooledProcess(script string, jsonData json.R
 	var process *ManagedHookProcess
 	select {
 	case process = <-pool:
+	// It's possible to get a process that has just crashed, before the monitor triggers.
+	// The isRecoverableError check below will handle this.
 	case <-h.ctx.Done():
 		return nil, fmt.Errorf("server is shutting down; could not get process for script '%s'", script)
 	}
@@ -307,19 +313,13 @@ func (h *HookProcessManager) executePooledProcess(script string, jsonData json.R
 	// This worker goroutine is responsible for the entire lifecycle of the process for this request.
 	go func() {
 		var err error
-		// This defer block ensures the process is always either returned or recovered.
 		defer func() {
 			if err != nil {
-				if h.isRecoverableError(err) {
-					log.WithError(err).Warn("process connection appears to be lost, attempting to recover")
-					h.recoverProcess(script, process)
-				} else {
-					// For other errors (e.g., buffer full), the process is likely still alive.
-					// We failed this request, but the process can be reused.
-					log.WithError(err).Error("process execution failed with a non-fatal error, returning process to pool")
-					pool <- process
-				}
+				// If an error occurs, we assume the process is compromised.
+				// We DO NOT return it to the pool. The monitor will handle recovery.
+				log.WithError(err).Warn("Request failed and process will be abandoned. The process will be recovered by its monitor if it has crashed.")
 			} else {
+				// Success, return the process to the pool.
 				pool <- process
 			}
 		}()
@@ -360,72 +360,101 @@ func (h *HookProcessManager) executePooledProcess(script string, jsonData json.R
 	}
 }
 
-// recoverProcess attempts to restart a failed hook process and returns it to the pool.
-// It is protected by an atomic flag to prevent concurrent recovery of the same process.
+// recoverProcess rebuilds the entire process pool for a script when one instance fails.
 func (h *HookProcessManager) recoverProcess(script string, oldProcess *ManagedHookProcess) {
-	// Try to mark the process as "recovering". If another goroutine has already started recovery, skip.
+	// 1. Atomically check and mark the process. This is a fast, non-blocking operation.
 	if !oldProcess.state.CompareAndSwap(ProcessStateHealthy, ProcessStateRecovering) {
 		h.log.Debugf("process instance %d for script '%s' is already being recovered. Skipping.", oldProcess.instanceId, script)
 		return
 	}
 
-	// Before recovering, check if the main context is done.
+	// 2. Check for server shutdown before sleeping.
 	if h.ctx.Err() != nil {
 		h.log.Warnf("server is shutting down, skipping recovery for process instance %d", oldProcess.instanceId)
 		return
 	}
 
-	// Add a simple sleep to prevent a tight crash loop from overwhelming the CPU.
-	// This gives a cool-down period before we attempt to restart the process.
+	log := h.log.WithField("hook_script", script)
+	log.Warnf("process instance %d crashed. Waiting 5s before attempting pool rebuild...", oldProcess.instanceId)
+
+	// 3. Perform the sleep BEFORE acquiring the global lock.
 	time.Sleep(5 * time.Second)
 
-	log := h.log.WithField("hook_script", script)
-	log.Warnf("attempting to recover failed process instance %d (attempt %d)", oldProcess.instanceId, oldProcess.recoveryCount+1)
-
-	// Clean up the old process's pipes. The OS process is already reaped by the Wait() call in the monitor.
-	if oldProcess.cmd != nil {
-		_ = oldProcess.stdin.Close()
-		_ = oldProcess.stdout.Close()
-		_ = oldProcess.stderr.Close()
-	}
-
-	// Attempt to start a new process. This does NOT launch a monitor.
-	newProcess, err := h.startNativeProcess(script, oldProcess.instanceId)
-
-	// Lock the manager strictly to update the state collections.
+	// 4. NOW, acquire the global lock to perform the disruptive pool rebuild.
 	h.managerMutex.Lock()
-	defer h.managerMutex.Unlock()
 
-	if err != nil {
-		log.WithError(err).Error("failed to recover process; pool size for this script will be reduced")
-		// Remove the failed process from the master list.
-		for i, p := range h.allProcesses {
-			if p == oldProcess {
-				h.allProcesses = append(h.allProcesses[:i], h.allProcesses[i+1:]...)
-				break
-			}
-		}
+	// 5. After sleeping and getting the lock, we must re-validate.
+	if h.ctx.Err() != nil {
+		h.log.Warnf("server is shutting down, aborting recovery for process instance %d", oldProcess.instanceId)
+		h.managerMutex.Unlock()
 		return
 	}
 
-	// Set the correct recovery count before adding it to the list.
-	newProcess.recoveryCount = oldProcess.recoveryCount + 1
+	var isStillPresent = false
+	if processes, ok := h.allProcesses[script]; ok {
+		for _, p := range processes {
+			if p == oldProcess {
+				isStillPresent = true
+				break
+			}
+		}
+	}
+	if !isStillPresent {
+		log.Warnf("process for script '%s' was already removed during sleep. Aborting rebuild.", script)
+		h.managerMutex.Unlock()
+		return
+	}
 
-	// Replace the old process with the new one in the global list.
-	for i, p := range h.allProcesses {
-		if p == oldProcess {
-			h.allProcesses[i] = newProcess
-			break
+	// --- Proceed with the rebuild logic ---
+	newRecoveryCount := oldProcess.recoveryCount + 1
+	log.Warnf("rebuilding process pool for script '%s' (rebuild attempt %d)", script, newRecoveryCount)
+
+	pool, ok := h.processPools[script]
+	if !ok {
+		log.Warnf("pool for script '%s' disappeared during recovery. Aborting.", script)
+		h.managerMutex.Unlock()
+		return
+	}
+	poolSize := cap(pool)
+
+	newPool := make(chan *ManagedHookProcess, poolSize)
+	newLiveProcesses := make([]*ManagedHookProcess, 0, poolSize)
+
+	// Kill old processes
+	if oldProcesses, ok := h.allProcesses[script]; ok {
+		for _, p := range oldProcesses {
+			if p.cmd != nil && p.cmd.Process != nil {
+				_ = p.cmd.Process.Kill()
+			}
 		}
 	}
 
-	// Return the newly recovered process to the pool.
-	h.processPools[script] <- newProcess
+	// Create new processes, but DO NOT start monitors yet.
+	for i := 0; i < poolSize; i++ {
+		process, err := h.startNativeProcess(script, i, newRecoveryCount)
+		if err != nil {
+			log.WithError(err).Errorf("failed to start instance %d during pool rebuild. Pool size will be reduced.", i)
+			continue
+		}
+		newPool <- process
+		newLiveProcesses = append(newLiveProcesses, process)
+	}
 
-	// NOW, with the state fully updated, launch the monitor for the new process.
-	go h.monitorProcess(newProcess)
+	// Update the master lists
+	h.allProcesses[script] = newLiveProcesses
+	h.processPools[script] = newPool
 
-	log.Infof("Successfully recovered process instance %d (now at %d recoveries)", newProcess.instanceId, newProcess.recoveryCount)
+	// Release the lock BEFORE launching the new monitors.
+	h.managerMutex.Unlock()
+
+	// --- Post-Lock Operations ---
+
+	// NOW, with the lock released, it is safe to start the monitors.
+	for _, p := range newLiveProcesses {
+		go h.monitorProcess(p)
+	}
+
+	log.Infof("successfully rebuilt process pool for script '%s' with %d instances (now at %d rebuilds).", script, len(newLiveProcesses), newRecoveryCount)
 }
 
 // stopAll terminates all managed hook processes.
@@ -433,21 +462,23 @@ func (h *HookProcessManager) stopAll() {
 	h.managerMutex.Lock()
 	defer h.managerMutex.Unlock()
 
-	for _, p := range h.allProcesses {
-		if p.cmd != nil {
-			_ = p.stdin.Close()
-			_ = p.stdout.Close()
-			_ = p.stderr.Close()
-			if p.cmd.Process != nil {
-				_ = p.cmd.Process.Kill()
-				// We don't need to wait here. The `cmd.Wait()` in the monitor will still
-				// return, and its call to `recoverProcess` will be safely aborted
-				// by the `h.ctx.Err() != nil` check.
+	for _, processes := range h.allProcesses {
+		for _, p := range processes {
+			if p.cmd != nil {
+				_ = p.stdin.Close()
+				_ = p.stdout.Close()
+				_ = p.stderr.Close()
+				if p.cmd.Process != nil {
+					_ = p.cmd.Process.Kill()
+					// We don't need to wait here. The `cmd.Wait()` in the monitor will still
+					// return, and its call to `recoverProcess` will be safely aborted
+					// by the `h.ctx.Err() != nil` check.
+				}
 			}
 		}
 	}
-	// Clear the lists.
-	h.allProcesses = make([]*ManagedHookProcess, 0)
+	// Clear the maps.
+	h.allProcesses = make(map[string][]*ManagedHookProcess)
 	h.processPools = make(map[string]chan *ManagedHookProcess)
 }
 
