@@ -363,6 +363,8 @@ func (m *UserMetadata) validate(all bool) error {
 
 	// no validation rules for ExtraData
 
+	// no validation rules for RaisedHandAt
+
 	if m.ProfilePic != nil {
 		// no validation rules for ProfilePic
 	}

@@ -164,7 +164,9 @@ type UserMetadata struct {
 	MetadataId *string           `protobuf:"bytes,9,opt,name=metadata_id,json=metadataId,proto3,oneof" json:"metadata_id,omitempty"`
 	ExtraData  map[string]string `protobuf:"bytes,10,rep,name=extra_data,json=extraData,proto3" json:"extra_data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// if remain empty then will use value from user_id
-	ExUserId      *string `protobuf:"bytes,11,opt,name=ex_user_id,json=exUserId,proto3,oneof" json:"ex_user_id,omitempty"` // Next ID: 12
+	ExUserId *string `protobuf:"bytes,11,opt,name=ex_user_id,json=exUserId,proto3,oneof" json:"ex_user_id,omitempty"`
+	// unix ms timestamp when the hand was raised; 0 = not raised
+	RaisedHandAt  int64 `protobuf:"varint,12,opt,name=raised_hand_at,json=raisedHandAt,proto3" json:"raised_hand_at,omitempty"` // Next ID: 13
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -274,6 +276,13 @@ func (x *UserMetadata) GetExUserId() string {
 		return *x.ExUserId
 	}
 	return ""
+}
+
+func (x *UserMetadata) GetRaisedHandAt() int64 {
+	if x != nil {
+		return x.RaisedHandAt
+	}
+	return 0
 }
 
 type PlugNmeetTokenClaims struct {
@@ -658,7 +667,7 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x19\n" +
 	"\bis_admin\x18\x03 \x01(\bR\aisAdmin\x12\x1b\n" +
 	"\tis_hidden\x18\x04 \x01(\bR\bisHidden\x12<\n" +
-	"\ruser_metadata\x18\x05 \x01(\v2\x17.plugnmeet.UserMetadataR\fuserMetadata\"\xf4\x05\n" +
+	"\ruser_metadata\x18\x05 \x01(\v2\x17.plugnmeet.UserMetadataR\fuserMetadata\"\xa3\x06\n" +
 	"\fUserMetadata\x12.\n" +
 	"\vprofile_pic\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x00R\n" +
 	"profilePic\x88\x01\x01\x12\x19\n" +
@@ -677,7 +686,8 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"extra_data\x18\n" +
 	" \x03(\v2&.plugnmeet.UserMetadata.ExtraDataEntryR\textraData\x12!\n" +
 	"\n" +
-	"ex_user_id\x18\v \x01(\tH\x04R\bexUserId\x88\x01\x01\x1a<\n" +
+	"ex_user_id\x18\v \x01(\tH\x04R\bexUserId\x88\x01\x01\x12-\n" +
+	"\x0eraised_hand_at\x18\f \x01(\x03B\a\xbaH\x04\"\x02\b\x00R\fraisedHandAt\x1a<\n" +
 	"\x0eExtraDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
