@@ -24,12 +24,19 @@ message UserInfo {
   UserMetadata user_metadata = 5;
 }
 
+message UserRaisedHand {
+  bool is_raised = 1 [(buf.validate.field).bool.const = false];
+  // Unix timestamp (in milliseconds)
+  int64 raised_at = 2 [(buf.validate.field).int64.const = 0];
+}
+
 message UserMetadata {
   optional string profile_pic = 1 [(buf.validate.field).string.uri = true];
   bool is_admin = 2;
   optional bool record_webcam = 3;
   bool is_presenter = 4 [(buf.validate.field).bool.const = false];
-  bool raised_hand = 5 [(buf.validate.field).bool.const = false];
+  // This field is managed by the server and cannot be set by clients.
+  UserRaisedHand raised_hand = 5;
   bool wait_for_approval = 6 [(buf.validate.field).bool.const = false];
   optional string preferred_lang = 7;
   LockSettings lock_settings = 8;
@@ -42,9 +49,7 @@ message UserMetadata {
   map<string,string> extra_data = 10;
   // if remain empty then will use value from user_id
   optional string ex_user_id = 11;
-  // unix ms timestamp when the hand was raised; 0 = not raised
-  int64 raised_hand_at = 12 [(buf.validate.field).int64.const = 0];
-  // Next ID: 13
+  // Next ID: 12
 }
 
 message PlugNmeetTokenClaims {

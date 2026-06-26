@@ -150,30 +150,82 @@ func (x *UserInfo) GetUserMetadata() *UserMetadata {
 	return nil
 }
 
+type UserRaisedHand struct {
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	IsRaised bool                   `protobuf:"varint,1,opt,name=is_raised,json=isRaised,proto3" json:"is_raised,omitempty"`
+	// Unix timestamp (in milliseconds)
+	RaisedAt      int64 `protobuf:"varint,2,opt,name=raised_at,json=raisedAt,proto3" json:"raised_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserRaisedHand) Reset() {
+	*x = UserRaisedHand{}
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserRaisedHand) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserRaisedHand) ProtoMessage() {}
+
+func (x *UserRaisedHand) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserRaisedHand.ProtoReflect.Descriptor instead.
+func (*UserRaisedHand) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UserRaisedHand) GetIsRaised() bool {
+	if x != nil {
+		return x.IsRaised
+	}
+	return false
+}
+
+func (x *UserRaisedHand) GetRaisedAt() int64 {
+	if x != nil {
+		return x.RaisedAt
+	}
+	return 0
+}
+
 type UserMetadata struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	ProfilePic      *string                `protobuf:"bytes,1,opt,name=profile_pic,json=profilePic,proto3,oneof" json:"profile_pic,omitempty"`
-	IsAdmin         bool                   `protobuf:"varint,2,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`
-	RecordWebcam    *bool                  `protobuf:"varint,3,opt,name=record_webcam,json=recordWebcam,proto3,oneof" json:"record_webcam,omitempty"`
-	IsPresenter     bool                   `protobuf:"varint,4,opt,name=is_presenter,json=isPresenter,proto3" json:"is_presenter,omitempty"`
-	RaisedHand      bool                   `protobuf:"varint,5,opt,name=raised_hand,json=raisedHand,proto3" json:"raised_hand,omitempty"`
-	WaitForApproval bool                   `protobuf:"varint,6,opt,name=wait_for_approval,json=waitForApproval,proto3" json:"wait_for_approval,omitempty"`
-	PreferredLang   *string                `protobuf:"bytes,7,opt,name=preferred_lang,json=preferredLang,proto3,oneof" json:"preferred_lang,omitempty"`
-	LockSettings    *LockSettings          `protobuf:"bytes,8,opt,name=lock_settings,json=lockSettings,proto3" json:"lock_settings,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	ProfilePic   *string                `protobuf:"bytes,1,opt,name=profile_pic,json=profilePic,proto3,oneof" json:"profile_pic,omitempty"`
+	IsAdmin      bool                   `protobuf:"varint,2,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`
+	RecordWebcam *bool                  `protobuf:"varint,3,opt,name=record_webcam,json=recordWebcam,proto3,oneof" json:"record_webcam,omitempty"`
+	IsPresenter  bool                   `protobuf:"varint,4,opt,name=is_presenter,json=isPresenter,proto3" json:"is_presenter,omitempty"`
+	// This field is managed by the server and cannot be set by clients.
+	RaisedHand      *UserRaisedHand `protobuf:"bytes,5,opt,name=raised_hand,json=raisedHand,proto3" json:"raised_hand,omitempty"`
+	WaitForApproval bool            `protobuf:"varint,6,opt,name=wait_for_approval,json=waitForApproval,proto3" json:"wait_for_approval,omitempty"`
+	PreferredLang   *string         `protobuf:"bytes,7,opt,name=preferred_lang,json=preferredLang,proto3,oneof" json:"preferred_lang,omitempty"`
+	LockSettings    *LockSettings   `protobuf:"bytes,8,opt,name=lock_settings,json=lockSettings,proto3" json:"lock_settings,omitempty"`
 	// we'll use this as version control
 	MetadataId *string           `protobuf:"bytes,9,opt,name=metadata_id,json=metadataId,proto3,oneof" json:"metadata_id,omitempty"`
 	ExtraData  map[string]string `protobuf:"bytes,10,rep,name=extra_data,json=extraData,proto3" json:"extra_data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// if remain empty then will use value from user_id
-	ExUserId *string `protobuf:"bytes,11,opt,name=ex_user_id,json=exUserId,proto3,oneof" json:"ex_user_id,omitempty"`
-	// unix ms timestamp when the hand was raised; 0 = not raised
-	RaisedHandAt  int64 `protobuf:"varint,12,opt,name=raised_hand_at,json=raisedHandAt,proto3" json:"raised_hand_at,omitempty"` // Next ID: 13
+	ExUserId      *string `protobuf:"bytes,11,opt,name=ex_user_id,json=exUserId,proto3,oneof" json:"ex_user_id,omitempty"` // Next ID: 12
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UserMetadata) Reset() {
 	*x = UserMetadata{}
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[2]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -185,7 +237,7 @@ func (x *UserMetadata) String() string {
 func (*UserMetadata) ProtoMessage() {}
 
 func (x *UserMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[2]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -198,7 +250,7 @@ func (x *UserMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserMetadata.ProtoReflect.Descriptor instead.
 func (*UserMetadata) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{2}
+	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *UserMetadata) GetProfilePic() string {
@@ -229,11 +281,11 @@ func (x *UserMetadata) GetIsPresenter() bool {
 	return false
 }
 
-func (x *UserMetadata) GetRaisedHand() bool {
+func (x *UserMetadata) GetRaisedHand() *UserRaisedHand {
 	if x != nil {
 		return x.RaisedHand
 	}
-	return false
+	return nil
 }
 
 func (x *UserMetadata) GetWaitForApproval() bool {
@@ -278,13 +330,6 @@ func (x *UserMetadata) GetExUserId() string {
 	return ""
 }
 
-func (x *UserMetadata) GetRaisedHandAt() int64 {
-	if x != nil {
-		return x.RaisedHandAt
-	}
-	return 0
-}
-
 type PlugNmeetTokenClaims struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -298,7 +343,7 @@ type PlugNmeetTokenClaims struct {
 
 func (x *PlugNmeetTokenClaims) Reset() {
 	*x = PlugNmeetTokenClaims{}
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[3]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -310,7 +355,7 @@ func (x *PlugNmeetTokenClaims) String() string {
 func (*PlugNmeetTokenClaims) ProtoMessage() {}
 
 func (x *PlugNmeetTokenClaims) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[3]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -323,7 +368,7 @@ func (x *PlugNmeetTokenClaims) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlugNmeetTokenClaims.ProtoReflect.Descriptor instead.
 func (*PlugNmeetTokenClaims) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{3}
+	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *PlugNmeetTokenClaims) GetName() string {
@@ -378,7 +423,7 @@ type LockSettings struct {
 
 func (x *LockSettings) Reset() {
 	*x = LockSettings{}
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[4]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -390,7 +435,7 @@ func (x *LockSettings) String() string {
 func (*LockSettings) ProtoMessage() {}
 
 func (x *LockSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[4]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -403,7 +448,7 @@ func (x *LockSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LockSettings.ProtoReflect.Descriptor instead.
 func (*LockSettings) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{4}
+	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *LockSettings) GetLockMicrophone() bool {
@@ -481,7 +526,7 @@ type GenerateTokenRes struct {
 
 func (x *GenerateTokenRes) Reset() {
 	*x = GenerateTokenRes{}
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[5]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -493,7 +538,7 @@ func (x *GenerateTokenRes) String() string {
 func (*GenerateTokenRes) ProtoMessage() {}
 
 func (x *GenerateTokenRes) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[5]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -506,7 +551,7 @@ func (x *GenerateTokenRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateTokenRes.ProtoReflect.Descriptor instead.
 func (*GenerateTokenRes) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{5}
+	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GenerateTokenRes) GetStatus() bool {
@@ -555,7 +600,7 @@ type CustomDesignParams struct {
 
 func (x *CustomDesignParams) Reset() {
 	*x = CustomDesignParams{}
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[6]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -567,7 +612,7 @@ func (x *CustomDesignParams) String() string {
 func (*CustomDesignParams) ProtoMessage() {}
 
 func (x *CustomDesignParams) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[6]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -580,7 +625,7 @@ func (x *CustomDesignParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomDesignParams.ProtoReflect.Descriptor instead.
 func (*CustomDesignParams) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{6}
+	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CustomDesignParams) GetPrimaryColor() string {
@@ -667,14 +712,17 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x19\n" +
 	"\bis_admin\x18\x03 \x01(\bR\aisAdmin\x12\x1b\n" +
 	"\tis_hidden\x18\x04 \x01(\bR\bisHidden\x12<\n" +
-	"\ruser_metadata\x18\x05 \x01(\v2\x17.plugnmeet.UserMetadataR\fuserMetadata\"\xa3\x06\n" +
+	"\ruser_metadata\x18\x05 \x01(\v2\x17.plugnmeet.UserMetadataR\fuserMetadata\"\\\n" +
+	"\x0eUserRaisedHand\x12$\n" +
+	"\tis_raised\x18\x01 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisRaised\x12$\n" +
+	"\traised_at\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02\b\x00R\braisedAt\"\x86\x06\n" +
 	"\fUserMetadata\x12.\n" +
 	"\vprofile_pic\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x00R\n" +
 	"profilePic\x88\x01\x01\x12\x19\n" +
 	"\bis_admin\x18\x02 \x01(\bR\aisAdmin\x12(\n" +
 	"\rrecord_webcam\x18\x03 \x01(\bH\x01R\frecordWebcam\x88\x01\x01\x12*\n" +
-	"\fis_presenter\x18\x04 \x01(\bB\a\xbaH\x04j\x02\b\x00R\visPresenter\x12(\n" +
-	"\vraised_hand\x18\x05 \x01(\bB\a\xbaH\x04j\x02\b\x00R\n" +
+	"\fis_presenter\x18\x04 \x01(\bB\a\xbaH\x04j\x02\b\x00R\visPresenter\x12:\n" +
+	"\vraised_hand\x18\x05 \x01(\v2\x19.plugnmeet.UserRaisedHandR\n" +
 	"raisedHand\x123\n" +
 	"\x11wait_for_approval\x18\x06 \x01(\bB\a\xbaH\x04j\x02\b\x00R\x0fwaitForApproval\x12*\n" +
 	"\x0epreferred_lang\x18\a \x01(\tH\x02R\rpreferredLang\x88\x01\x01\x12<\n" +
@@ -686,8 +734,7 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"extra_data\x18\n" +
 	" \x03(\v2&.plugnmeet.UserMetadata.ExtraDataEntryR\textraData\x12!\n" +
 	"\n" +
-	"ex_user_id\x18\v \x01(\tH\x04R\bexUserId\x88\x01\x01\x12-\n" +
-	"\x0eraised_hand_at\x18\f \x01(\x03B\a\xbaH\x04\"\x02\b\x00R\fraisedHandAt\x1a<\n" +
+	"ex_user_id\x18\v \x01(\tH\x04R\bexUserId\x88\x01\x01\x1a<\n" +
 	"\x0eExtraDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
@@ -767,29 +814,31 @@ func file_plugnmeet_gen_token_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_gen_token_proto_rawDescData
 }
 
-var file_plugnmeet_gen_token_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_plugnmeet_gen_token_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_plugnmeet_gen_token_proto_goTypes = []any{
 	(*GenerateTokenReq)(nil),     // 0: plugnmeet.GenerateTokenReq
 	(*UserInfo)(nil),             // 1: plugnmeet.UserInfo
-	(*UserMetadata)(nil),         // 2: plugnmeet.UserMetadata
-	(*PlugNmeetTokenClaims)(nil), // 3: plugnmeet.PlugNmeetTokenClaims
-	(*LockSettings)(nil),         // 4: plugnmeet.LockSettings
-	(*GenerateTokenRes)(nil),     // 5: plugnmeet.GenerateTokenRes
-	(*CustomDesignParams)(nil),   // 6: plugnmeet.CustomDesignParams
-	nil,                          // 7: plugnmeet.UserMetadata.ExtraDataEntry
-	(StatusCode)(0),              // 8: plugnmeet.StatusCode
+	(*UserRaisedHand)(nil),       // 2: plugnmeet.UserRaisedHand
+	(*UserMetadata)(nil),         // 3: plugnmeet.UserMetadata
+	(*PlugNmeetTokenClaims)(nil), // 4: plugnmeet.PlugNmeetTokenClaims
+	(*LockSettings)(nil),         // 5: plugnmeet.LockSettings
+	(*GenerateTokenRes)(nil),     // 6: plugnmeet.GenerateTokenRes
+	(*CustomDesignParams)(nil),   // 7: plugnmeet.CustomDesignParams
+	nil,                          // 8: plugnmeet.UserMetadata.ExtraDataEntry
+	(StatusCode)(0),              // 9: plugnmeet.StatusCode
 }
 var file_plugnmeet_gen_token_proto_depIdxs = []int32{
 	1, // 0: plugnmeet.GenerateTokenReq.user_info:type_name -> plugnmeet.UserInfo
-	2, // 1: plugnmeet.UserInfo.user_metadata:type_name -> plugnmeet.UserMetadata
-	4, // 2: plugnmeet.UserMetadata.lock_settings:type_name -> plugnmeet.LockSettings
-	7, // 3: plugnmeet.UserMetadata.extra_data:type_name -> plugnmeet.UserMetadata.ExtraDataEntry
-	8, // 4: plugnmeet.GenerateTokenRes.status_code:type_name -> plugnmeet.StatusCode
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	3, // 1: plugnmeet.UserInfo.user_metadata:type_name -> plugnmeet.UserMetadata
+	2, // 2: plugnmeet.UserMetadata.raised_hand:type_name -> plugnmeet.UserRaisedHand
+	5, // 3: plugnmeet.UserMetadata.lock_settings:type_name -> plugnmeet.LockSettings
+	8, // 4: plugnmeet.UserMetadata.extra_data:type_name -> plugnmeet.UserMetadata.ExtraDataEntry
+	9, // 5: plugnmeet.GenerateTokenRes.status_code:type_name -> plugnmeet.StatusCode
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_gen_token_proto_init() }
@@ -798,17 +847,17 @@ func file_plugnmeet_gen_token_proto_init() {
 		return
 	}
 	file_plugnmeet_common_api_proto_init()
-	file_plugnmeet_gen_token_proto_msgTypes[2].OneofWrappers = []any{}
-	file_plugnmeet_gen_token_proto_msgTypes[4].OneofWrappers = []any{}
+	file_plugnmeet_gen_token_proto_msgTypes[3].OneofWrappers = []any{}
 	file_plugnmeet_gen_token_proto_msgTypes[5].OneofWrappers = []any{}
 	file_plugnmeet_gen_token_proto_msgTypes[6].OneofWrappers = []any{}
+	file_plugnmeet_gen_token_proto_msgTypes[7].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_gen_token_proto_rawDesc), len(file_plugnmeet_gen_token_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

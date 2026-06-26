@@ -302,6 +302,110 @@ var _ interface {
 	ErrorName() string
 } = UserInfoValidationError{}
 
+// Validate checks the field values on UserRaisedHand with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *UserRaisedHand) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UserRaisedHand with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in UserRaisedHandMultiError,
+// or nil if none found.
+func (m *UserRaisedHand) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UserRaisedHand) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsRaised
+
+	// no validation rules for RaisedAt
+
+	if len(errors) > 0 {
+		return UserRaisedHandMultiError(errors)
+	}
+
+	return nil
+}
+
+// UserRaisedHandMultiError is an error wrapping multiple validation errors
+// returned by UserRaisedHand.ValidateAll() if the designated constraints
+// aren't met.
+type UserRaisedHandMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UserRaisedHandMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UserRaisedHandMultiError) AllErrors() []error { return m }
+
+// UserRaisedHandValidationError is the validation error returned by
+// UserRaisedHand.Validate if the designated constraints aren't met.
+type UserRaisedHandValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UserRaisedHandValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UserRaisedHandValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UserRaisedHandValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UserRaisedHandValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UserRaisedHandValidationError) ErrorName() string { return "UserRaisedHandValidationError" }
+
+// Error satisfies the builtin error interface
+func (e UserRaisedHandValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUserRaisedHand.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UserRaisedHandValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UserRaisedHandValidationError{}
+
 // Validate checks the field values on UserMetadata with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -328,7 +432,34 @@ func (m *UserMetadata) validate(all bool) error {
 
 	// no validation rules for IsPresenter
 
-	// no validation rules for RaisedHand
+	if all {
+		switch v := interface{}(m.GetRaisedHand()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UserMetadataValidationError{
+					field:  "RaisedHand",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UserMetadataValidationError{
+					field:  "RaisedHand",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRaisedHand()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UserMetadataValidationError{
+				field:  "RaisedHand",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for WaitForApproval
 
@@ -362,8 +493,6 @@ func (m *UserMetadata) validate(all bool) error {
 	}
 
 	// no validation rules for ExtraData
-
-	// no validation rules for RaisedHandAt
 
 	if m.ProfilePic != nil {
 		// no validation rules for ProfilePic
