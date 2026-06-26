@@ -42,7 +42,9 @@ message UserMetadata {
   map<string,string> extra_data = 10;
   // if remain empty then will use value from user_id
   optional string ex_user_id = 11;
-  // Next ID: 12
+  // unix ms timestamp when the hand was raised; 0 = not raised
+  int64 raised_hand_at = 12 [(buf.validate.field).int64.const = 0];
+  // Next ID: 13
 }
 
 message PlugNmeetTokenClaims {
