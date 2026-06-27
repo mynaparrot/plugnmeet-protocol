@@ -8,6 +8,9 @@ const (
 	HookFileTypeRecordingMetadata       HookFileType = "recording-metadata"
 	HookFileTypeRoomFile                HookFileType = "room-file"
 	HookFileTypeWhiteboardConvertedImgs HookFileType = "whiteboard-converted-imgs"
+	// HookFileTypeFileGroup is used for operations where GroupId identifies a logical group of files.
+	// whose contents are to be uploaded into the remote file group identified by GroupId.
+	HookFileTypeFileGroup HookFileType = "file-group"
 )
 
 // UploadHookData is used for the upload pipeline.
@@ -18,7 +21,9 @@ type UploadHookData struct {
 	RoomId       string       `json:"room_id"`
 	RoomSid      string       `json:"room_sid"`
 	RoomTableId  uint64       `json:"room_table_id,omitempty"`
-	FileId       string       `json:"file_id,omitempty"`
+
+	FileId  string `json:"file_id,omitempty"`
+	GroupId string `json:"group_id,omitempty"` // Unique identifier for the upload operation (single file or file group)
 
 	InputPath          string `json:"input_path"` // Path to the file on the local system to be uploaded.
 	InputDirectoryPath string `json:"input_directory_path,omitempty"`
@@ -39,8 +44,12 @@ const (
 // It serves as both input to the script (from the server) and output from the script (back to the server).
 // In a script chain, subsequent scripts receive the modified data from the previous script.
 type DownloadHookData struct {
-	InputPath    string       `json:"input_path"` // Path/URL of the file in remote storage to be downloaded.
 	HookFileType HookFileType `json:"hook_file_type"`
+	InputPath    string       `json:"input_path"` // Path/URL of the file in remote storage to be downloaded.
+
+	RoomId  string `json:"room_id,omitempty"`
+	RoomSid string `json:"room_sid,omitempty"`
+	GroupId string `json:"group_id,omitempty"` // Unique identifier for the download operation (single file or file group)
 
 	// Fields below are typically set by the script as output, or can be passed along in a chain.
 	Error       string                 `json:"error,omitempty"`        // Error message from the script.
