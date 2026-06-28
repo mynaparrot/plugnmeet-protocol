@@ -63,8 +63,12 @@ type DownloadHookData struct {
 // It serves as both input to the script (from the server) and output from the script (back to the server).
 // In a script chain, subsequent scripts receive the modified data from the previous script.
 type DeleteHookData struct {
-	InputPath    string       `json:"input_path"` // Path/URL of the file in remote storage to be deleted.
 	HookFileType HookFileType `json:"hook_file_type"`
+	InputPath    string       `json:"input_path"` // Path/URL of the file in remote storage to be deleted.
+
+	RoomId  string `json:"room_id,omitempty"`
+	RoomSid string `json:"room_sid,omitempty"`
+	GroupId string `json:"group_id,omitempty"` // Unique identifier for the download operation (single file or file group)
 
 	// Fields below are typically set by the script as output, or can be passed along in a chain.
 	Error string `json:"error,omitempty"` // Error message from the script.
