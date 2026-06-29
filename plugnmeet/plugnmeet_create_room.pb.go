@@ -255,6 +255,7 @@ type RoomCreateFeatures struct {
 	EnableAnalytics              bool                          `protobuf:"varint,9,opt,name=enable_analytics,json=enableAnalytics,proto3" json:"enable_analytics,omitempty"`
 	AllowVirtualBg               *bool                         `protobuf:"varint,10,opt,name=allow_virtual_bg,json=allowVirtualBg,proto3,oneof" json:"allow_virtual_bg,omitempty"`
 	AllowRaiseHand               *bool                         `protobuf:"varint,11,opt,name=allow_raise_hand,json=allowRaiseHand,proto3,oneof" json:"allow_raise_hand,omitempty"`
+	AllowReactions               *bool                         `protobuf:"varint,27,opt,name=allow_reactions,json=allowReactions,proto3,oneof" json:"allow_reactions,omitempty"`
 	AutoGenUserId                *bool                         `protobuf:"varint,12,opt,name=auto_gen_user_id,json=autoGenUserId,proto3,oneof" json:"auto_gen_user_id,omitempty"`
 	RecordingFeatures            *RecordingFeatures            `protobuf:"bytes,13,opt,name=recording_features,json=recordingFeatures,proto3" json:"recording_features,omitempty"`
 	ChatFeatures                 *ChatFeatures                 `protobuf:"bytes,14,opt,name=chat_features,json=chatFeatures,proto3" json:"chat_features,omitempty"`
@@ -269,7 +270,7 @@ type RoomCreateFeatures struct {
 	PollsFeatures                *PollsFeatures                `protobuf:"bytes,23,opt,name=polls_features,json=pollsFeatures,proto3" json:"polls_features,omitempty"`
 	InsightsFeatures             *InsightsFeatures             `protobuf:"bytes,24,opt,name=insights_features,json=insightsFeatures,proto3" json:"insights_features,omitempty"`
 	SipDialInFeatures            *SipDialInFeatures            `protobuf:"bytes,25,opt,name=sip_dial_in_features,json=sipDialInFeatures,proto3" json:"sip_dial_in_features,omitempty"`
-	ExternalBroadcastingFeatures *ExternalBroadcastingFeatures `protobuf:"bytes,26,opt,name=external_broadcasting_features,json=externalBroadcastingFeatures,proto3" json:"external_broadcasting_features,omitempty"` // next ID: 27
+	ExternalBroadcastingFeatures *ExternalBroadcastingFeatures `protobuf:"bytes,26,opt,name=external_broadcasting_features,json=externalBroadcastingFeatures,proto3" json:"external_broadcasting_features,omitempty"` // next ID: 28
 	unknownFields                protoimpl.UnknownFields
 	sizeCache                    protoimpl.SizeCache
 }
@@ -378,6 +379,13 @@ func (x *RoomCreateFeatures) GetAllowVirtualBg() bool {
 func (x *RoomCreateFeatures) GetAllowRaiseHand() bool {
 	if x != nil && x.AllowRaiseHand != nil {
 		return *x.AllowRaiseHand
+	}
+	return false
+}
+
+func (x *RoomCreateFeatures) GetAllowReactions() bool {
+	if x != nil && x.AllowReactions != nil {
+		return *x.AllowReactions
 	}
 	return false
 }
@@ -2055,7 +2063,7 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x10_welcome_messageB\x0e\n" +
 	"\f_webhook_urlB\r\n" +
 	"\v_logout_urlB\x0e\n" +
-	"\f_metadata_id\"\xcf\x0e\n" +
+	"\f_metadata_id\"\x91\x0f\n" +
 	"\x12RoomCreateFeatures\x12#\n" +
 	"\rallow_webcams\x18\x01 \x01(\bR\fallowWebcams\x12\"\n" +
 	"\rmute_on_start\x18\x02 \x01(\bR\vmuteOnStart\x12,\n" +
@@ -2070,7 +2078,8 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x10allow_virtual_bg\x18\n" +
 	" \x01(\bH\x02R\x0eallowVirtualBg\x88\x01\x01\x12-\n" +
 	"\x10allow_raise_hand\x18\v \x01(\bH\x03R\x0eallowRaiseHand\x88\x01\x01\x12,\n" +
-	"\x10auto_gen_user_id\x18\f \x01(\bH\x04R\rautoGenUserId\x88\x01\x01\x12K\n" +
+	"\x0fallow_reactions\x18\x1b \x01(\bH\x04R\x0eallowReactions\x88\x01\x01\x12,\n" +
+	"\x10auto_gen_user_id\x18\f \x01(\bH\x05R\rautoGenUserId\x88\x01\x01\x12K\n" +
 	"\x12recording_features\x18\r \x01(\v2\x1c.plugnmeet.RecordingFeaturesR\x11recordingFeatures\x12<\n" +
 	"\rchat_features\x18\x0e \x01(\v2\x17.plugnmeet.ChatFeaturesR\fchatFeatures\x12Y\n" +
 	"\x18shared_note_pad_features\x18\x0f \x01(\v2 .plugnmeet.SharedNotePadFeaturesR\x15sharedNotePadFeatures\x12N\n" +
@@ -2088,7 +2097,8 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\v_allow_rtmpB\x10\n" +
 	"\x0e_room_durationB\x13\n" +
 	"\x11_allow_virtual_bgB\x13\n" +
-	"\x11_allow_raise_handB\x13\n" +
+	"\x11_allow_raise_handB\x12\n" +
+	"\x10_allow_reactionsB\x13\n" +
 	"\x11_auto_gen_user_id\"\xc3\x01\n" +
 	"\fChatFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12/\n" +

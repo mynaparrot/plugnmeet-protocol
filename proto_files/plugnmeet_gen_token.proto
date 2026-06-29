@@ -70,6 +70,7 @@ message LockSettings {
   optional bool lock_private_chat = 7;
   optional bool lock_whiteboard = 8;
   optional bool lock_shared_notepad = 9;
+  optional bool lock_reactions = 10;
 }
 
 message GenerateTokenRes {

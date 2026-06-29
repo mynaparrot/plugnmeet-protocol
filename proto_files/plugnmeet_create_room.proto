@@ -61,6 +61,7 @@ message RoomCreateFeatures {
   bool enable_analytics = 9;
   optional bool allow_virtual_bg = 10;
   optional bool allow_raise_hand = 11;
+  optional bool allow_reactions = 27;
   optional bool auto_gen_user_id = 12;
   RecordingFeatures recording_features = 13;
   ChatFeatures chat_features = 14;
@@ -76,7 +77,7 @@ message RoomCreateFeatures {
   InsightsFeatures insights_features = 24;
   SipDialInFeatures sip_dial_in_features = 25;
   ExternalBroadcastingFeatures external_broadcasting_features = 26;
-  // next ID: 27
+  // next ID: 28
 }
 
 message ChatFeatures {
