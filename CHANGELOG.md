@@ -1,5 +1,42 @@
 # Changelog
 
+## [1.4.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.3.0...v1.4.0) (2026-07-01)
+
+
+### Features
+
+* add emoji reaction ([11cd9ec](https://github.com/mynaparrot/plugnmeet-protocol/commit/11cd9ec0de0ccdb4a827e2650e4b1f875227bfd1))
+* add emoji reaction ([83751f2](https://github.com/mynaparrot/plugnmeet-protocol/commit/83751f22c05b302b7f5bbe47e2b15de311f231b5))
+* add raised_hand_at to UserMetadata ([4b9c36b](https://github.com/mynaparrot/plugnmeet-protocol/commit/4b9c36b8f2b7fff669dffbc77f13f6fd797f850a))
+* add raised_hand_at to UserMetadata ([f11dfc3](https://github.com/mynaparrot/plugnmeet-protocol/commit/f11dfc38b9787d3f08d2fea02e26e775d9a231a6))
+* storage hook ([1c87725](https://github.com/mynaparrot/plugnmeet-protocol/commit/1c8772501aef86146ddfa880ab14b92e39ba2aa6))
+* storage hook ([b47de63](https://github.com/mynaparrot/plugnmeet-protocol/commit/b47de63a6a89d352500b9be4160c05f896f3c324))
+
+
+### Bug Fixes
+
+* added `Error` field to response with common error message ([a6681c1](https://github.com/mynaparrot/plugnmeet-protocol/commit/a6681c16ee70a3a444747e8ca88c70c840146040))
+* added `ShouldCleanup` filed ([6034086](https://github.com/mynaparrot/plugnmeet-protocol/commit/60340864e10109dabcec7949eb627eff93160299))
+* added `SourceForCleanup` field ([54a703b](https://github.com/mynaparrot/plugnmeet-protocol/commit/54a703ba7cd5bbfb8b0a5a85239c417d4c9b96c1))
+* added option to execute one short comment as well like for `curl`, `wget` ([8b0c139](https://github.com/mynaparrot/plugnmeet-protocol/commit/8b0c139676bd9be69182cb3731f22be359c00649))
+* added option to set `LogOutput` ([a3039b0](https://github.com/mynaparrot/plugnmeet-protocol/commit/a3039b095c753377d46bb9d2754ae164c447f59e))
+* added recovery counter as well cool-down period of 5s ([6cd6c18](https://github.com/mynaparrot/plugnmeet-protocol/commit/6cd6c1825790eac3f850fa3903f5c6c2a7fe741a))
+* changes hooks fields to make universal ([dabb274](https://github.com/mynaparrot/plugnmeet-protocol/commit/dabb2744cf2f1c321ba7ba50e4092ed7de31acc1))
+* check the error's nature before recover ([135d330](https://github.com/mynaparrot/plugnmeet-protocol/commit/135d330886b4958a118038f1a3060659f22d35c7))
+* extended `DeleteHookData` to delete by `GroupId` ([a08b455](https://github.com/mynaparrot/plugnmeet-protocol/commit/a08b455d221d877fb84c54aa14708e962ab90a6a))
+* implemented process manager ([efff9a5](https://github.com/mynaparrot/plugnmeet-protocol/commit/efff9a53e6fe5331b988ee36013b7b8c615fbd3c))
+* implemented self recovery if script exit ([2434379](https://github.com/mynaparrot/plugnmeet-protocol/commit/24343792ff71ca312d24f89a0304ad5af4b4d08f))
+* logs + order of code ([884bde2](https://github.com/mynaparrot/plugnmeet-protocol/commit/884bde2a76c7a60b61d058080c18b9f300310345))
+* moved `raised_hand` to its own `UserRaisedHand` message ([71b87d6](https://github.com/mynaparrot/plugnmeet-protocol/commit/71b87d60fd1271212812bce316c91de3039d7d6e))
+* moved hooks related code to proto ([974aa69](https://github.com/mynaparrot/plugnmeet-protocol/commit/974aa69a88a7a574192149e046771681c3c2f4f4))
+* new `HookFileType` for `file-group` ([01682c4](https://github.com/mynaparrot/plugnmeet-protocol/commit/01682c4cfc1b98ef3d46668b70a6c23abc200db3))
+* possible race condition ([f497a0a](https://github.com/mynaparrot/plugnmeet-protocol/commit/f497a0aff46b49d65a30fe58e08a104fe901d915))
+* **refactor:** implemented multi pools hook script ([dc07cad](https://github.com/mynaparrot/plugnmeet-protocol/commit/dc07cad99a54eb2739b0363b664f4301f7ecc32a))
+* **refactor:** refactored recovery process in better way ([dde34d2](https://github.com/mynaparrot/plugnmeet-protocol/commit/dde34d23ebc56a45342e9e4b0e137e573f5b59be))
+* **refactor:** support for both `long-lived` and `one-shot` commands ([f8c758f](https://github.com/mynaparrot/plugnmeet-protocol/commit/f8c758fb58caebdda78808a53c1a99721f5cd990))
+* use `cmd.Wait()` to determine if the process still healthy otherwise recover ([6296f24](https://github.com/mynaparrot/plugnmeet-protocol/commit/6296f247d3a6e3cce39f8e17c59afa16c313b04d))
+* use timeout to prevent infinitive hang ([3f9bafc](https://github.com/mynaparrot/plugnmeet-protocol/commit/3f9bafcd9f9f762635e7d0d7a7f0ad55dc45a6a7))
+
 ## [1.3.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.2.1...v1.3.0) (2026-05-26)
 
 
