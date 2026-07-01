@@ -46,6 +46,7 @@ const (
 	DataMsgBodyType_USER_CONNECTION_QUALITY_CHANGE   DataMsgBodyType = 17
 	DataMsgBodyType_REQ_PUBLIC_CHAT_DATA             DataMsgBodyType = 18
 	DataMsgBodyType_RES_PUBLIC_CHAT_DATA             DataMsgBodyType = 19
+	DataMsgBodyType_REACTION                         DataMsgBodyType = 20
 )
 
 // Enum value maps for DataMsgBodyType.
@@ -71,6 +72,7 @@ var (
 		17: "USER_CONNECTION_QUALITY_CHANGE",
 		18: "REQ_PUBLIC_CHAT_DATA",
 		19: "RES_PUBLIC_CHAT_DATA",
+		20: "REACTION",
 	}
 	DataMsgBodyType_value = map[string]int32{
 		"UNKNOWN":                          0,
@@ -93,6 +95,7 @@ var (
 		"USER_CONNECTION_QUALITY_CHANGE":   17,
 		"REQ_PUBLIC_CHAT_DATA":             18,
 		"RES_PUBLIC_CHAT_DATA":             19,
+		"REACTION":                         20,
 	}
 )
 
@@ -212,7 +215,7 @@ const file_plugnmeet_datamessage_proto_rawDesc = "" +
 	"\n" +
 	"to_user_id\x18\x04 \x01(\tH\x00R\btoUserId\x88\x01\x01\x12\x18\n" +
 	"\amessage\x18\x05 \x01(\tR\amessageB\r\n" +
-	"\v_to_user_id*\xef\x03\n" +
+	"\v_to_user_id*\xfd\x03\n" +
 	"\x0fDataMsgBodyType\x12\v\n" +
 	"\aUNKNOWN\x10\x00\x12\x0f\n" +
 	"\vFILE_UPLOAD\x10\x01\x12\b\n" +
@@ -234,7 +237,8 @@ const file_plugnmeet_datamessage_proto_rawDesc = "" +
 	"\x10WHITEBOARD_RESET\x10\x10\x12\"\n" +
 	"\x1eUSER_CONNECTION_QUALITY_CHANGE\x10\x11\x12\x18\n" +
 	"\x14REQ_PUBLIC_CHAT_DATA\x10\x12\x12\x18\n" +
-	"\x14RES_PUBLIC_CHAT_DATA\x10\x13B\xa2\x01\n" +
+	"\x14RES_PUBLIC_CHAT_DATA\x10\x13\x12\f\n" +
+	"\bREACTION\x10\x14B\xa2\x01\n" +
 	"\rcom.plugnmeetB\x19PlugnmeetDatamessageProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (

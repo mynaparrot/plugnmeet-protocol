@@ -761,6 +761,10 @@ func (m *LockSettings) validate(all bool) error {
 		// no validation rules for LockSharedNotepad
 	}
 
+	if m.LockReactions != nil {
+		// no validation rules for LockReactions
+	}
+
 	if len(errors) > 0 {
 		return LockSettingsMultiError(errors)
 	}

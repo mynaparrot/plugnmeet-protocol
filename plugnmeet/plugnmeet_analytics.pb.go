@@ -123,6 +123,7 @@ const (
 	AnalyticsEvents_ANALYTICS_EVENT_USER_INTERFACE_VISIBILITY AnalyticsEvents = 28
 	AnalyticsEvents_ANALYTICS_EVENT_USER_RAISE_HAND           AnalyticsEvents = 29
 	AnalyticsEvents_ANALYTICS_EVENT_USER_CONNECTION_QUALITY   AnalyticsEvents = 30
+	AnalyticsEvents_ANALYTICS_EVENT_USER_REACTION             AnalyticsEvents = 40
 )
 
 // Enum value maps for AnalyticsEvents.
@@ -168,6 +169,7 @@ var (
 		28: "ANALYTICS_EVENT_USER_INTERFACE_VISIBILITY",
 		29: "ANALYTICS_EVENT_USER_RAISE_HAND",
 		30: "ANALYTICS_EVENT_USER_CONNECTION_QUALITY",
+		40: "ANALYTICS_EVENT_USER_REACTION",
 	}
 	AnalyticsEvents_value = map[string]int32{
 		"ANALYTICS_EVENT_UNKNOWN":                                              0,
@@ -210,6 +212,7 @@ var (
 		"ANALYTICS_EVENT_USER_INTERFACE_VISIBILITY":                            28,
 		"ANALYTICS_EVENT_USER_RAISE_HAND":                                      29,
 		"ANALYTICS_EVENT_USER_CONNECTION_QUALITY":                              30,
+		"ANALYTICS_EVENT_USER_REACTION":                                        40,
 	}
 )
 
@@ -913,7 +916,7 @@ const file_plugnmeet_analytics_proto_rawDesc = "" +
 	"\v_ex_user_id*R\n" +
 	"\x12AnalyticsEventType\x12\x1d\n" +
 	"\x19ANALYTICS_EVENT_TYPE_ROOM\x10\x00\x12\x1d\n" +
-	"\x19ANALYTICS_EVENT_TYPE_USER\x10\x01*\xda\x0e\n" +
+	"\x19ANALYTICS_EVENT_TYPE_USER\x10\x01*\xfd\x0e\n" +
 	"\x0fAnalyticsEvents\x12\x1b\n" +
 	"\x17ANALYTICS_EVENT_UNKNOWN\x10\x00\x12#\n" +
 	"\x1fANALYTICS_EVENT_ROOM_POLL_ADDED\x10\x01\x12#\n" +
@@ -955,7 +958,8 @@ const file_plugnmeet_analytics_proto_rawDesc = "" +
 	"+ANALYTICS_EVENT_USER_SPEECH_SERVICES_STATUS\x10\x1b\x12-\n" +
 	")ANALYTICS_EVENT_USER_INTERFACE_VISIBILITY\x10\x1c\x12#\n" +
 	"\x1fANALYTICS_EVENT_USER_RAISE_HAND\x10\x1d\x12+\n" +
-	"'ANALYTICS_EVENT_USER_CONNECTION_QUALITY\x10\x1e*\x85\x01\n" +
+	"'ANALYTICS_EVENT_USER_CONNECTION_QUALITY\x10\x1e\x12!\n" +
+	"\x1dANALYTICS_EVENT_USER_REACTION\x10(*\x85\x01\n" +
 	"\x0fAnalyticsStatus\x12\x1c\n" +
 	"\x18ANALYTICS_STATUS_STARTED\x10\x00\x12\x1a\n" +
 	"\x16ANALYTICS_STATUS_ENDED\x10\x01\x12\x1a\n" +

@@ -417,6 +417,7 @@ type LockSettings struct {
 	LockPrivateChat     *bool                  `protobuf:"varint,7,opt,name=lock_private_chat,json=lockPrivateChat,proto3,oneof" json:"lock_private_chat,omitempty"`
 	LockWhiteboard      *bool                  `protobuf:"varint,8,opt,name=lock_whiteboard,json=lockWhiteboard,proto3,oneof" json:"lock_whiteboard,omitempty"`
 	LockSharedNotepad   *bool                  `protobuf:"varint,9,opt,name=lock_shared_notepad,json=lockSharedNotepad,proto3,oneof" json:"lock_shared_notepad,omitempty"`
+	LockReactions       *bool                  `protobuf:"varint,10,opt,name=lock_reactions,json=lockReactions,proto3,oneof" json:"lock_reactions,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -510,6 +511,13 @@ func (x *LockSettings) GetLockWhiteboard() bool {
 func (x *LockSettings) GetLockSharedNotepad() bool {
 	if x != nil && x.LockSharedNotepad != nil {
 		return *x.LockSharedNotepad
+	}
+	return false
+}
+
+func (x *LockSettings) GetLockReactions() bool {
+	if x != nil && x.LockReactions != nil {
+		return *x.LockReactions
 	}
 	return false
 }
@@ -748,7 +756,7 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x17\n" +
 	"\aroom_id\x18\x03 \x01(\tR\x06roomId\x12\x19\n" +
 	"\bis_admin\x18\x04 \x01(\bR\aisAdmin\x12\x1b\n" +
-	"\tis_hidden\x18\x05 \x01(\bR\bisHidden\"\xfd\x04\n" +
+	"\tis_hidden\x18\x05 \x01(\bR\bisHidden\"\xbc\x05\n" +
 	"\fLockSettings\x12,\n" +
 	"\x0flock_microphone\x18\x01 \x01(\bH\x00R\x0elockMicrophone\x88\x01\x01\x12$\n" +
 	"\vlock_webcam\x18\x02 \x01(\bH\x01R\n" +
@@ -759,7 +767,9 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"\x14lock_chat_file_share\x18\x06 \x01(\bH\x05R\x11lockChatFileShare\x88\x01\x01\x12/\n" +
 	"\x11lock_private_chat\x18\a \x01(\bH\x06R\x0flockPrivateChat\x88\x01\x01\x12,\n" +
 	"\x0flock_whiteboard\x18\b \x01(\bH\aR\x0elockWhiteboard\x88\x01\x01\x123\n" +
-	"\x13lock_shared_notepad\x18\t \x01(\bH\bR\x11lockSharedNotepad\x88\x01\x01B\x12\n" +
+	"\x13lock_shared_notepad\x18\t \x01(\bH\bR\x11lockSharedNotepad\x88\x01\x01\x12*\n" +
+	"\x0elock_reactions\x18\n" +
+	" \x01(\bH\tR\rlockReactions\x88\x01\x01B\x12\n" +
 	"\x10_lock_microphoneB\x0e\n" +
 	"\f_lock_webcamB\x16\n" +
 	"\x14_lock_screen_sharingB\f\n" +
@@ -769,7 +779,8 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"\x15_lock_chat_file_shareB\x14\n" +
 	"\x12_lock_private_chatB\x12\n" +
 	"\x10_lock_whiteboardB\x16\n" +
-	"\x14_lock_shared_notepad\"\x99\x01\n" +
+	"\x14_lock_shared_notepadB\x11\n" +
+	"\x0f_lock_reactions\"\x99\x01\n" +
 	"\x10GenerateTokenRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +

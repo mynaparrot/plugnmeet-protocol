@@ -35,6 +35,7 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 			EnableAnalytics:         true,
 			AllowVirtualBg:          new(true),
 			AllowRaiseHand:          new(true),
+			AllowReactions:          new(false),
 		}
 	}
 	rf := r.Metadata.RoomFeatures

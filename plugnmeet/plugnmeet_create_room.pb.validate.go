@@ -848,6 +848,10 @@ func (m *RoomCreateFeatures) validate(all bool) error {
 		// no validation rules for AllowRaiseHand
 	}
 
+	if m.AllowReactions != nil {
+		// no validation rules for AllowReactions
+	}
+
 	if m.AutoGenUserId != nil {
 		// no validation rules for AutoGenUserId
 	}
