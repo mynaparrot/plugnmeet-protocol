@@ -82,6 +82,33 @@ var (
 		IsAllowRtmp: true,
 	}
 
+	defaultRoomFeatures = &plugnmeet.RoomCreateFeatures{
+		AllowWebcams:                 true,
+		MuteOnStart:                  false,
+		AllowScreenShare:             true,
+		AllowViewOtherWebcams:        true,
+		AllowViewOtherUsersList:      true,
+		AdminOnlyWebcams:             false,
+		EnableAnalytics:              true,
+		AllowVirtualBg:               new(true),
+		AllowRaiseHand:               new(true),
+		AllowReactions:               new(true),
+		RecordingFeatures:            defaultRecordingFeatures,
+		ChatFeatures:                 defaultChatFeatures,
+		SharedNotePadFeatures:        defaultSharedNotePadFeatures,
+		WhiteboardFeatures:           defaultWhiteboardFeatures,
+		ExternalMediaPlayerFeatures:  defaultExternalMediaPlayerFeatures,
+		WaitingRoomFeatures:          defaultWaitingRoomFeatures,
+		BreakoutRoomFeatures:         defaultBreakoutRoomFeatures,
+		DisplayExternalLinkFeatures:  defaultDisplayExternalLinkFeatures,
+		IngressFeatures:              defaultIngressFeatures,
+		EndToEndEncryptionFeatures:   defaultEndToEndEncryptionFeatures,
+		PollsFeatures:                defaultPollsFeatures,
+		InsightsFeatures:             defaultInsightsFeatures,
+		SipDialInFeatures:            defaultSipDialInFeatures,
+		ExternalBroadcastingFeatures: defaultExternalBroadcastingFeatures,
+	}
+
 	defaultLockSettings = &plugnmeet.LockSettings{
 		LockWhiteboard:    new(true),
 		LockScreenSharing: new(true),

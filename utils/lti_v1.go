@@ -8,38 +8,47 @@ import (
 )
 
 func AssignLTIV1CustomParams(params *url.Values, claims *plugnmeet.LtiClaims) {
-	b := new(bool)
 	customPara := new(plugnmeet.LtiCustomParameters)
 
 	if params.Get("custom_room_duration") != "" {
 		duration, _ := strconv.Atoi(params.Get("custom_room_duration"))
 		customPara.RoomDuration = new(uint64(duration))
 	}
-	if params.Get("custom_allow_polls") == "false" {
-		customPara.AllowPolls = b
+
+	// helper function to safely parse boolean params
+	parseBool := func(param string) *bool {
+		if val := params.Get(param); val != "" {
+			b, err := strconv.ParseBool(val)
+			if err == nil {
+				return &b
+			}
+		}
+		return nil
 	}
-	if params.Get("custom_allow_shared_note_pad") == "false" {
-		customPara.AllowSharedNotePad = b
+
+	if val := parseBool("custom_allow_polls"); val != nil && !*val {
+		customPara.AllowPolls = val
 	}
-	if params.Get("custom_allow_breakout_room") == "false" {
-		customPara.AllowBreakoutRoom = b
+	if val := parseBool("custom_allow_shared_note_pad"); val != nil && !*val {
+		customPara.AllowSharedNotePad = val
 	}
-	if params.Get("custom_allow_recording") == "false" {
-		customPara.AllowRecording = b
+	if val := parseBool("custom_allow_breakout_room"); val != nil && !*val {
+		customPara.AllowBreakoutRoom = val
 	}
-	if params.Get("custom_allow_rtmp") == "false" {
-		customPara.AllowRtmp = b
+	if val := parseBool("custom_allow_recording"); val != nil && !*val {
+		customPara.AllowRecording = val
 	}
-	if params.Get("custom_allow_view_other_webcams") == "false" {
-		customPara.AllowViewOtherWebcams = b
+	if val := parseBool("custom_allow_rtmp"); val != nil && !*val {
+		customPara.AllowRtmp = val
 	}
-	if params.Get("custom_allow_view_other_users_list") == "false" {
-		customPara.AllowViewOtherUsersList = b
+	if val := parseBool("custom_allow_view_other_webcams"); val != nil && !*val {
+		customPara.AllowViewOtherWebcams = val
 	}
-	// this should be last bool
-	if params.Get("custom_mute_on_start") == "true" {
-		*b = true
-		customPara.MuteOnStart = b
+	if val := parseBool("custom_allow_view_other_users_list"); val != nil && !*val {
+		customPara.AllowViewOtherUsersList = val
+	}
+	if val := parseBool("custom_mute_on_start"); val != nil && *val {
+		customPara.MuteOnStart = val
 	}
 
 	// custom design

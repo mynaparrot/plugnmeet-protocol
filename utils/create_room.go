@@ -24,90 +24,31 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 	}
 
 	// now with all room features
-	if r.Metadata.RoomFeatures == nil {
-		r.Metadata.RoomFeatures = &plugnmeet.RoomCreateFeatures{
-			AllowWebcams:            true,
-			MuteOnStart:             false,
-			AllowScreenShare:        true,
-			AllowViewOtherWebcams:   true,
-			AllowViewOtherUsersList: true,
-			AdminOnlyWebcams:        false,
-			EnableAnalytics:         true,
-			AllowVirtualBg:          new(true),
-			AllowRaiseHand:          new(true),
-			AllowReactions:          new(false),
-		}
-	}
+	// First, we'll clone the default features to create a base.
+	newRf := proto.Clone(defaultRoomFeatures).(*plugnmeet.RoomCreateFeatures)
+	// Then, we'll merge the user's request on top of the defaults.
+	// This ensures user-defined values overwrite the defaults.
+	proto.Merge(newRf, r.Metadata.RoomFeatures)
+	// Finally, assign the merged features back to the request.
+	r.Metadata.RoomFeatures = newRf
 	rf := r.Metadata.RoomFeatures
 
-	if rf.RecordingFeatures == nil {
-		rf.RecordingFeatures = proto.Clone(defaultRecordingFeatures).(*plugnmeet.RecordingFeatures)
-	}
 	if !rf.RecordingFeatures.IsAllow {
 		rf.RecordingFeatures.IsAllowCloud = false
 		rf.RecordingFeatures.IsAllowLocal = false
 		rf.RecordingFeatures.EnableAutoCloudRecording = false
 	}
 
-	if rf.ChatFeatures == nil {
-		rf.ChatFeatures = proto.Clone(defaultChatFeatures).(*plugnmeet.ChatFeatures)
-	}
 	if !rf.ChatFeatures.IsAllow {
 		rf.ChatFeatures.IsAllowFileUpload = false
 	}
 
-	if rf.SharedNotePadFeatures == nil {
-		rf.SharedNotePadFeatures = proto.Clone(defaultSharedNotePadFeatures).(*plugnmeet.SharedNotePadFeatures)
-	}
-
-	if rf.WhiteboardFeatures == nil {
-		rf.WhiteboardFeatures = proto.Clone(defaultWhiteboardFeatures).(*plugnmeet.WhiteboardFeatures)
-	}
-
-	if rf.ExternalMediaPlayerFeatures == nil {
-		rf.ExternalMediaPlayerFeatures = proto.Clone(defaultExternalMediaPlayerFeatures).(*plugnmeet.ExternalMediaPlayerFeatures)
-	}
-
-	if rf.WaitingRoomFeatures == nil {
-		rf.WaitingRoomFeatures = proto.Clone(defaultWaitingRoomFeatures).(*plugnmeet.WaitingRoomFeatures)
-	}
-
-	if rf.BreakoutRoomFeatures == nil {
-		rf.BreakoutRoomFeatures = proto.Clone(defaultBreakoutRoomFeatures).(*plugnmeet.BreakoutRoomFeatures)
-	}
-
-	if rf.DisplayExternalLinkFeatures == nil {
-		rf.DisplayExternalLinkFeatures = proto.Clone(defaultDisplayExternalLinkFeatures).(*plugnmeet.DisplayExternalLinkFeatures)
-	}
-
-	if rf.IngressFeatures == nil {
-		rf.IngressFeatures = proto.Clone(defaultIngressFeatures).(*plugnmeet.IngressFeatures)
-	}
-
-	if rf.EndToEndEncryptionFeatures == nil {
-		rf.EndToEndEncryptionFeatures = proto.Clone(defaultEndToEndEncryptionFeatures).(*plugnmeet.EndToEndEncryptionFeatures)
-	}
 	if !rf.EndToEndEncryptionFeatures.IsEnabled {
 		rf.EndToEndEncryptionFeatures.EnabledSelfInsertEncryptionKey = false
 		rf.EndToEndEncryptionFeatures.IncludedChatMessages = false
 		rf.EndToEndEncryptionFeatures.IncludedWhiteboard = false
 	}
 
-	if rf.PollsFeatures == nil {
-		rf.PollsFeatures = proto.Clone(defaultPollsFeatures).(*plugnmeet.PollsFeatures)
-	}
-
-	if rf.InsightsFeatures == nil {
-		rf.InsightsFeatures = proto.Clone(defaultInsightsFeatures).(*plugnmeet.InsightsFeatures)
-	}
-
-	if rf.SipDialInFeatures == nil {
-		rf.SipDialInFeatures = proto.Clone(defaultSipDialInFeatures).(*plugnmeet.SipDialInFeatures)
-	}
-
-	if rf.ExternalBroadcastingFeatures == nil {
-		rf.ExternalBroadcastingFeatures = proto.Clone(defaultExternalBroadcastingFeatures).(*plugnmeet.ExternalBroadcastingFeatures)
-	}
 	if rf.AllowRtmp != nil {
 		rf.ExternalBroadcastingFeatures.IsAllow = *rf.AllowRtmp
 		rf.ExternalBroadcastingFeatures.IsAllowRtmp = *rf.AllowRtmp
@@ -117,7 +58,6 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 	}
 
 	r.Metadata.StartedAt = uint64(time.Now().UTC().Unix())
-	r.Metadata.RoomFeatures = rf
 }
 
 func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhiteboardFile uint64, allowedTypes []string, allowedNotepad bool) {
