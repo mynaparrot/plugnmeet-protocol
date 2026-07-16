@@ -141,7 +141,7 @@ func (n *Notifier) sendWebhookRequest(event *plugnmeet.CommonNotifyEvent, apiKey
 	}
 	r.Header.Set(authHeader, token)
 	r.Header.Set(hashToken, token) // same as auth header
-	r.Header.Set("content-type", "application/webhook+json")
+	r.Header.Set("Content-Type", "application/json")
 
 	res, err := n.client.Do(r)
 	statusCode := 0
