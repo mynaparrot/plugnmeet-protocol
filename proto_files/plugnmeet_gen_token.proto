@@ -6,6 +6,7 @@ option php_namespace = "Mynaparrot\\PlugnmeetProto";
 
 import "buf/validate/validate.proto";
 import "plugnmeet_common_api.proto";
+import "plugnmeet_nats_msg.proto";
 
 message GenerateTokenReq {
   string room_id = 1 [(buf.validate.field).cel = {
@@ -22,6 +23,7 @@ message UserInfo {
   bool is_admin = 3;
   bool is_hidden = 4;
   UserMetadata user_metadata = 5;
+  ClientType client_type = 6; // default WEB; customer backend sets HYBRID_WEB for native-shell joins
 }
 
 message UserRaisedHand {
@@ -58,6 +60,7 @@ message PlugNmeetTokenClaims {
   string room_id = 3;
   bool is_admin = 4;
   bool is_hidden = 5;
+  ClientType client_type = 6; // copied from UserInfo at join-token generation
 }
 
 message LockSettings {

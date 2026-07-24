@@ -415,6 +415,7 @@ type VerifyTokenRes struct {
 	NatsSubjects                   *NatsSubjects          `protobuf:"bytes,8,opt,name=nats_subjects,json=natsSubjects,proto3,oneof" json:"nats_subjects,omitempty"`
 	EnabledSelfInsertEncryptionKey *bool                  `protobuf:"varint,9,opt,name=enabled_self_insert_encryption_key,json=enabledSelfInsertEncryptionKey,proto3,oneof" json:"enabled_self_insert_encryption_key,omitempty"`
 	IsCloud                        *bool                  `protobuf:"varint,10,opt,name=is_cloud,json=isCloud,proto3,oneof" json:"is_cloud,omitempty"`
+	ClientType                     ClientType             `protobuf:"varint,11,opt,name=client_type,json=clientType,proto3,enum=plugnmeet.ClientType" json:"client_type,omitempty"` // echoed from the token claims; web client enters hybrid UI when HYBRID_WEB
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -517,6 +518,13 @@ func (x *VerifyTokenRes) GetIsCloud() bool {
 		return *x.IsCloud
 	}
 	return false
+}
+
+func (x *VerifyTokenRes) GetClientType() ClientType {
+	if x != nil {
+		return x.ClientType
+	}
+	return ClientType_WEB
 }
 
 type MuteUnMuteTrackReq struct {
@@ -2083,7 +2091,7 @@ const file_plugnmeet_common_api_proto_rawDesc = "" +
 	"statusCode\"L\n" +
 	"\x0eVerifyTokenReq\x12(\n" +
 	"\ris_production\x18\x01 \x01(\bH\x00R\fisProduction\x88\x01\x01B\x10\n" +
-	"\x0e_is_production\"\xad\x04\n" +
+	"\x0e_is_production\"\xe5\x04\n" +
 	"\x0eVerifyTokenRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12 \n" +
@@ -2096,7 +2104,9 @@ const file_plugnmeet_common_api_proto_rawDesc = "" +
 	"\rnats_subjects\x18\b \x01(\v2\x17.plugnmeet.NatsSubjectsH\x04R\fnatsSubjects\x88\x01\x01\x12O\n" +
 	"\"enabled_self_insert_encryption_key\x18\t \x01(\bH\x05R\x1eenabledSelfInsertEncryptionKey\x88\x01\x01\x12\x1e\n" +
 	"\bis_cloud\x18\n" +
-	" \x01(\bH\x06R\aisCloud\x88\x01\x01B\x11\n" +
+	" \x01(\bH\x06R\aisCloud\x88\x01\x01\x126\n" +
+	"\vclient_type\x18\v \x01(\x0e2\x15.plugnmeet.ClientTypeR\n" +
+	"clientTypeB\x11\n" +
 	"\x0f_server_versionB\n" +
 	"\n" +
 	"\b_room_idB\n" +
@@ -2316,26 +2326,28 @@ var file_plugnmeet_common_api_proto_goTypes = []any{
 	(*GetRoomUploadedFilesRes)(nil),     // 28: plugnmeet.GetRoomUploadedFilesRes
 	(*EnableSipDialInReq)(nil),          // 29: plugnmeet.EnableSipDialInReq
 	(*NatsSubjects)(nil),                // 30: plugnmeet.NatsSubjects
-	(DataMsgBodyType)(0),                // 31: plugnmeet.DataMsgBodyType
+	(ClientType)(0),                     // 31: plugnmeet.ClientType
+	(DataMsgBodyType)(0),                // 32: plugnmeet.DataMsgBodyType
 }
 var file_plugnmeet_common_api_proto_depIdxs = []int32{
 	0,  // 0: plugnmeet.CommonResponse.status_code:type_name -> plugnmeet.StatusCode
 	30, // 1: plugnmeet.VerifyTokenRes.nats_subjects:type_name -> plugnmeet.NatsSubjects
-	31, // 2: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
-	1,  // 3: plugnmeet.SwitchPresenterReq.task:type_name -> plugnmeet.SwitchPresenterTask
-	2,  // 4: plugnmeet.ExternalMediaPlayerReq.task:type_name -> plugnmeet.ExternalMediaPlayerTask
-	3,  // 5: plugnmeet.ExternalDisplayLinkReq.task:type_name -> plugnmeet.ExternalDisplayLinkTask
-	4,  // 6: plugnmeet.UploadBase64EncodedDataReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
-	4,  // 7: plugnmeet.UploadedFileMergeReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
-	4,  // 8: plugnmeet.UploadedFileRes.file_type:type_name -> plugnmeet.RoomUploadedFileType
-	4,  // 9: plugnmeet.RoomUploadedFileMetadata.file_type:type_name -> plugnmeet.RoomUploadedFileType
-	4,  // 10: plugnmeet.GetRoomUploadedFilesReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
-	26, // 11: plugnmeet.GetRoomUploadedFilesRes.files:type_name -> plugnmeet.RoomUploadedFileMetadata
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	31, // 2: plugnmeet.VerifyTokenRes.client_type:type_name -> plugnmeet.ClientType
+	32, // 3: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
+	1,  // 4: plugnmeet.SwitchPresenterReq.task:type_name -> plugnmeet.SwitchPresenterTask
+	2,  // 5: plugnmeet.ExternalMediaPlayerReq.task:type_name -> plugnmeet.ExternalMediaPlayerTask
+	3,  // 6: plugnmeet.ExternalDisplayLinkReq.task:type_name -> plugnmeet.ExternalDisplayLinkTask
+	4,  // 7: plugnmeet.UploadBase64EncodedDataReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
+	4,  // 8: plugnmeet.UploadedFileMergeReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
+	4,  // 9: plugnmeet.UploadedFileRes.file_type:type_name -> plugnmeet.RoomUploadedFileType
+	4,  // 10: plugnmeet.RoomUploadedFileMetadata.file_type:type_name -> plugnmeet.RoomUploadedFileType
+	4,  // 11: plugnmeet.GetRoomUploadedFilesReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
+	26, // 12: plugnmeet.GetRoomUploadedFilesRes.files:type_name -> plugnmeet.RoomUploadedFileMetadata
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_common_api_proto_init() }

@@ -636,6 +636,8 @@ func (m *NatsKvUserInfo) validate(all bool) error {
 
 	// no validation rules for DisconnectedAt
 
+	// no validation rules for ClientType
+
 	if len(errors) > 0 {
 		return NatsKvUserInfoMultiError(errors)
 	}
@@ -992,6 +994,8 @@ func (m *MediaServerConnInfo) validate(all bool) error {
 	// no validation rules for Token
 
 	// no validation rules for EnabledE2Ee
+
+	// no validation rules for NativeToken
 
 	if m.TurnCredentials != nil {
 

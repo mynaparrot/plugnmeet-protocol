@@ -10,6 +10,7 @@ export * from "./gen/plugnmeet_datamessage_pb";
 export * from "./gen/plugnmeet_gen_token_pb";
 export * from "./gen/plugnmeet_ingress_pb";
 export * from "./gen/plugnmeet_lti_v1_pb";
+export * from "./gen/plugnmeet_native_bridge_pb";
 export * from "./gen/plugnmeet_nats_msg_pb";
 export * from "./gen/plugnmeet_polls_pb";
 export * from "./gen/plugnmeet_recorder_pb";
