@@ -81,6 +81,7 @@ type UserInfo struct {
 	IsAdmin       bool                   `protobuf:"varint,3,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`
 	IsHidden      bool                   `protobuf:"varint,4,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`
 	UserMetadata  *UserMetadata          `protobuf:"bytes,5,opt,name=user_metadata,json=userMetadata,proto3" json:"user_metadata,omitempty"`
+	ClientType    ClientType             `protobuf:"varint,6,opt,name=client_type,json=clientType,proto3,enum=plugnmeet.ClientType" json:"client_type,omitempty"` // default WEB; customer backend sets HYBRID_WEB for native-shell joins
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -148,6 +149,13 @@ func (x *UserInfo) GetUserMetadata() *UserMetadata {
 		return x.UserMetadata
 	}
 	return nil
+}
+
+func (x *UserInfo) GetClientType() ClientType {
+	if x != nil {
+		return x.ClientType
+	}
+	return ClientType_WEB
 }
 
 type UserRaisedHand struct {
@@ -337,6 +345,7 @@ type PlugNmeetTokenClaims struct {
 	RoomId        string                 `protobuf:"bytes,3,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
 	IsAdmin       bool                   `protobuf:"varint,4,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`
 	IsHidden      bool                   `protobuf:"varint,5,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`
+	ClientType    ClientType             `protobuf:"varint,6,opt,name=client_type,json=clientType,proto3,enum=plugnmeet.ClientType" json:"client_type,omitempty"` // copied from UserInfo at join-token generation
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -404,6 +413,13 @@ func (x *PlugNmeetTokenClaims) GetIsHidden() bool {
 		return x.IsHidden
 	}
 	return false
+}
+
+func (x *PlugNmeetTokenClaims) GetClientType() ClientType {
+	if x != nil {
+		return x.ClientType
+	}
+	return ClientType_WEB
 }
 
 type LockSettings struct {
@@ -710,17 +726,19 @@ var File_plugnmeet_gen_token_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"\n" +
-	"\x19plugnmeet_gen_token.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\x1a\x1aplugnmeet_common_api.proto\"\xe3\x01\n" +
+	"\x19plugnmeet_gen_token.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\x1a\x1aplugnmeet_common_api.proto\x1a\x18plugnmeet_nats_msg.proto\"\xe3\x01\n" +
 	"\x10GenerateTokenReq\x12\x94\x01\n" +
 	"\aroom_id\x18\x01 \x01(\tB{\xbaHx\xba\x01u\n" +
 	"\x0eroom_id_format\x12Aroom_id should only contain letters (a-z A-Z), digits (0-9) or -_\x1a this.matches('^[a-zA-Z0-9-_]+$')R\x06roomId\x128\n" +
-	"\tuser_info\x18\x02 \x01(\v2\x13.plugnmeet.UserInfoB\x06\xbaH\x03\xc8\x01\x01R\buserInfo\"\xb5\x01\n" +
+	"\tuser_info\x18\x02 \x01(\v2\x13.plugnmeet.UserInfoB\x06\xbaH\x03\xc8\x01\x01R\buserInfo\"\xed\x01\n" +
 	"\bUserInfo\x12\x1a\n" +
 	"\x04name\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x04name\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x19\n" +
 	"\bis_admin\x18\x03 \x01(\bR\aisAdmin\x12\x1b\n" +
 	"\tis_hidden\x18\x04 \x01(\bR\bisHidden\x12<\n" +
-	"\ruser_metadata\x18\x05 \x01(\v2\x17.plugnmeet.UserMetadataR\fuserMetadata\"\\\n" +
+	"\ruser_metadata\x18\x05 \x01(\v2\x17.plugnmeet.UserMetadataR\fuserMetadata\x126\n" +
+	"\vclient_type\x18\x06 \x01(\x0e2\x15.plugnmeet.ClientTypeR\n" +
+	"clientType\"\\\n" +
 	"\x0eUserRaisedHand\x12$\n" +
 	"\tis_raised\x18\x01 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisRaised\x12$\n" +
 	"\traised_at\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02\b\x00R\braisedAt\"\x86\x06\n" +
@@ -750,13 +768,15 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"\x0e_record_webcamB\x11\n" +
 	"\x0f_preferred_langB\x0e\n" +
 	"\f_metadata_idB\r\n" +
-	"\v_ex_user_id\"\x94\x01\n" +
+	"\v_ex_user_id\"\xcc\x01\n" +
 	"\x14PlugNmeetTokenClaims\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x17\n" +
 	"\aroom_id\x18\x03 \x01(\tR\x06roomId\x12\x19\n" +
 	"\bis_admin\x18\x04 \x01(\bR\aisAdmin\x12\x1b\n" +
-	"\tis_hidden\x18\x05 \x01(\bR\bisHidden\"\xbc\x05\n" +
+	"\tis_hidden\x18\x05 \x01(\bR\bisHidden\x126\n" +
+	"\vclient_type\x18\x06 \x01(\x0e2\x15.plugnmeet.ClientTypeR\n" +
+	"clientType\"\xbc\x05\n" +
 	"\fLockSettings\x12,\n" +
 	"\x0flock_microphone\x18\x01 \x01(\bH\x00R\x0elockMicrophone\x88\x01\x01\x12$\n" +
 	"\vlock_webcam\x18\x02 \x01(\bH\x01R\n" +
@@ -836,20 +856,23 @@ var file_plugnmeet_gen_token_proto_goTypes = []any{
 	(*GenerateTokenRes)(nil),     // 6: plugnmeet.GenerateTokenRes
 	(*CustomDesignParams)(nil),   // 7: plugnmeet.CustomDesignParams
 	nil,                          // 8: plugnmeet.UserMetadata.ExtraDataEntry
-	(StatusCode)(0),              // 9: plugnmeet.StatusCode
+	(ClientType)(0),              // 9: plugnmeet.ClientType
+	(StatusCode)(0),              // 10: plugnmeet.StatusCode
 }
 var file_plugnmeet_gen_token_proto_depIdxs = []int32{
-	1, // 0: plugnmeet.GenerateTokenReq.user_info:type_name -> plugnmeet.UserInfo
-	3, // 1: plugnmeet.UserInfo.user_metadata:type_name -> plugnmeet.UserMetadata
-	2, // 2: plugnmeet.UserMetadata.raised_hand:type_name -> plugnmeet.UserRaisedHand
-	5, // 3: plugnmeet.UserMetadata.lock_settings:type_name -> plugnmeet.LockSettings
-	8, // 4: plugnmeet.UserMetadata.extra_data:type_name -> plugnmeet.UserMetadata.ExtraDataEntry
-	9, // 5: plugnmeet.GenerateTokenRes.status_code:type_name -> plugnmeet.StatusCode
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	1,  // 0: plugnmeet.GenerateTokenReq.user_info:type_name -> plugnmeet.UserInfo
+	3,  // 1: plugnmeet.UserInfo.user_metadata:type_name -> plugnmeet.UserMetadata
+	9,  // 2: plugnmeet.UserInfo.client_type:type_name -> plugnmeet.ClientType
+	2,  // 3: plugnmeet.UserMetadata.raised_hand:type_name -> plugnmeet.UserRaisedHand
+	5,  // 4: plugnmeet.UserMetadata.lock_settings:type_name -> plugnmeet.LockSettings
+	8,  // 5: plugnmeet.UserMetadata.extra_data:type_name -> plugnmeet.UserMetadata.ExtraDataEntry
+	9,  // 6: plugnmeet.PlugNmeetTokenClaims.client_type:type_name -> plugnmeet.ClientType
+	10, // 7: plugnmeet.GenerateTokenRes.status_code:type_name -> plugnmeet.StatusCode
+	8,  // [8:8] is the sub-list for method output_type
+	8,  // [8:8] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_gen_token_proto_init() }
@@ -858,6 +881,7 @@ func file_plugnmeet_gen_token_proto_init() {
 		return
 	}
 	file_plugnmeet_common_api_proto_init()
+	file_plugnmeet_nats_msg_proto_init()
 	file_plugnmeet_gen_token_proto_msgTypes[3].OneofWrappers = []any{}
 	file_plugnmeet_gen_token_proto_msgTypes[5].OneofWrappers = []any{}
 	file_plugnmeet_gen_token_proto_msgTypes[6].OneofWrappers = []any{}

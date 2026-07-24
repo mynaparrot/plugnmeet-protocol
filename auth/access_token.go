@@ -26,19 +26,31 @@ func GeneratePlugNmeetJWTAccessToken(apiKey, secret, userId string, tokenValidit
 	return jwt.Signed(sig).Claims(cl).Claims(c).Serialize()
 }
 
-func GenerateLivekitAccessToken(apiKey, secret string, tokenValidity time.Duration, c *plugnmeet.PlugNmeetTokenClaims) (string, error) {
+func GenerateLivekitAccessToken(apiKey, secret string, tokenValidity time.Duration, c *plugnmeet.PlugNmeetTokenClaims, canPublish, canSubscribe bool, originalUserId string) (string, error) {
 	at := auth.NewAccessToken(apiKey, secret)
 	grant := &auth.VideoGrant{
-		RoomJoin:  true,
-		Room:      c.RoomId,
-		RoomAdmin: c.IsAdmin,
-		Hidden:    c.IsHidden,
+		RoomJoin:     true,
+		Room:         c.RoomId,
+		RoomAdmin:    c.IsAdmin,
+		Hidden:       c.IsHidden,
+		CanPublish:   &canPublish,
+		CanSubscribe: &canSubscribe,
 	}
 
 	at.SetVideoGrant(grant).
 		SetIdentity(c.UserId).
 		SetName(c.Name).
 		SetValidFor(tokenValidity)
+
+	// If originalUserId is not empty we are minting a token for the native twin
+	// (identity [userId]-native). Tag the participant with an attribute so
+	// webhook handlers can identify the twin without relying on the identity
+	// suffix alone. This attribute is NOT part of the plugNmeet JWT claims.
+	if originalUserId != "" {
+		at.SetAttributes(map[string]string{
+			"original_user_id": originalUserId,
+		})
+	}
 
 	return at.ToJWT()
 }

@@ -1,0 +1,94 @@
+syntax = "proto3";
+package plugnmeet;
+
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+option php_namespace = "Mynaparrot\\PlugnmeetProto";
+
+// Wire format for communication between the webview and the native host.
+// Messages are encoded as proto3 JSON (not binary).
+message NativeBridgeMsg {
+  NativeBridgeActions action = 1;
+  oneof payload {
+    NativeBridgeInitializePublisher initialize_native_publisher = 2;
+    NativeBridgeMediaSource media_source = 3;
+    NativeBridgeHeartbeat heartbeat = 4;
+    NativeBridgeMediaStatus media_status = 5;
+    NativeBridgeTrackState track_state = 6;
+    NativeBridgeMediaMuted media_muted = 7;
+  }
+}
+
+enum NativeBridgeActions {
+  NATIVE_BRIDGE_ACTION_UNSPECIFIED = 0;
+
+  // web app -> native host
+  INITIALIZE_NATIVE_PUBLISHER = 1;
+  PUBLISH_NATIVE_MEDIA = 2;
+  UNPUBLISH_NATIVE_MEDIA = 3;
+  MUTE_NATIVE_MEDIA = 4;
+  UNMUTE_NATIVE_MEDIA = 5;
+  TEARDOWN_NATIVE_PUBLISHER = 6;
+  NATIVE_HEARTBEAT_PING = 7;
+
+  // native host -> web app
+  NATIVE_MEDIA_STATUS = 20;
+  NATIVE_TRACK_PUBLISHED = 21;
+  NATIVE_TRACK_UNPUBLISHED = 22;
+  NATIVE_MEDIA_MUTED = 23;
+  NATIVE_HEARTBEAT_PONG = 24;
+}
+
+enum NativeMediaSource {
+  NATIVE_MEDIA_SOURCE_UNSPECIFIED = 0;
+  MIC = 1;
+  WEBCAM = 2;
+  SCREENSHARE = 3;
+}
+
+enum NativeTrackKind {
+  NATIVE_TRACK_KIND_UNSPECIFIED = 0;
+  AUDIO = 1;
+  VIDEO = 2;
+}
+
+message NativeBridgeInitializePublisher {
+  string livekit_url = 1;
+  string token = 2;
+  string native_user_id = 3;
+  optional NativeBridgeE2EE e2ee = 4;
+}
+
+message NativeBridgeE2EE {
+  bool enabled = 1;
+  optional string key = 2;
+}
+
+// Used for PUBLISH/UNPUBLISH/MUTE/UNMUTE actions (web -> native).
+message NativeBridgeMediaSource {
+  NativeMediaSource source = 1;
+}
+
+// Unix milliseconds.
+message NativeBridgeHeartbeat {
+  int64 ts = 1;
+}
+
+// Native -> web: action confirmation or error report.
+message NativeBridgeMediaStatus {
+  NativeMediaSource source = 1;
+  optional string device_id = 2;
+  optional string error = 3;
+}
+
+// Native -> web: track published/unpublished notification.
+message NativeBridgeTrackState {
+  string user_id = 1;
+  NativeTrackKind kind = 2;
+  NativeMediaSource source = 3;
+}
+
+// Native -> web: mute state confirmation.
+message NativeBridgeMediaMuted {
+  NativeMediaSource source = 1;
+  bool muted = 2;
+}
