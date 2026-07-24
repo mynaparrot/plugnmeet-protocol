@@ -4,14 +4,6 @@ package plugnmeet;
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 option php_namespace = "Mynaparrot\\PlugnmeetProto";
 
-// ClientType identifies which client shell is joining.
-// WEB = standard plugNmeet web client (default).
-// HYBRID_WEB = web client running inside a native app's webview (hybrid mode:
-// subscribe-only; media publishing is delegated to the native host app).
-enum ClientType {
-  WEB = 0;
-  HYBRID_WEB = 1;
-}
 
 message NatsSubjects {
   string system_api_worker = 1;
@@ -104,6 +96,11 @@ message NatsKvRoomInfo {
   uint64 created_at = 8;
 }
 
+enum ClientType {
+  WEB = 0; // standard plugNmeet web client (default).
+  HYBRID_WEB = 1; // web client running inside a native app's webview
+}
+
 message NatsKvUserInfo {
   string user_id = 1;
   string user_sid = 2;
@@ -115,7 +112,7 @@ message NatsKvUserInfo {
   uint64 joined_at = 8;
   uint64 reconnected_at = 9;
   uint64 disconnected_at = 10;
-  ClientType client_type = 11; // session client type; WEB when absent (backward compatible)
+  ClientType client_type = 11; // session client type; Default: WEB
 }
 
 message FallbackOnFlapping {
