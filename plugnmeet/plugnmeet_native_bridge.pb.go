@@ -39,6 +39,7 @@ const (
 	NativeBridgeActions_NATIVE_TRACK_UNPUBLISHED NativeBridgeActions = 22
 	NativeBridgeActions_NATIVE_MEDIA_MUTED       NativeBridgeActions = 23
 	NativeBridgeActions_NATIVE_HEARTBEAT_PONG    NativeBridgeActions = 24
+	NativeBridgeActions_NATIVE_ERROR             NativeBridgeActions = 25
 )
 
 // Enum value maps for NativeBridgeActions.
@@ -57,6 +58,7 @@ var (
 		22: "NATIVE_TRACK_UNPUBLISHED",
 		23: "NATIVE_MEDIA_MUTED",
 		24: "NATIVE_HEARTBEAT_PONG",
+		25: "NATIVE_ERROR",
 	}
 	NativeBridgeActions_value = map[string]int32{
 		"NATIVE_BRIDGE_ACTION_UNSPECIFIED": 0,
@@ -72,6 +74,7 @@ var (
 		"NATIVE_TRACK_UNPUBLISHED":         22,
 		"NATIVE_MEDIA_MUTED":               23,
 		"NATIVE_HEARTBEAT_PONG":            24,
+		"NATIVE_ERROR":                     25,
 	}
 )
 
@@ -216,6 +219,7 @@ type NativeBridgeMsg struct {
 	//	*NativeBridgeMsg_MediaStatus
 	//	*NativeBridgeMsg_TrackState
 	//	*NativeBridgeMsg_MediaMuted
+	//	*NativeBridgeMsg_Error
 	Payload       isNativeBridgeMsg_Payload `protobuf_oneof:"payload"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -319,6 +323,15 @@ func (x *NativeBridgeMsg) GetMediaMuted() *NativeBridgeMediaMuted {
 	return nil
 }
 
+func (x *NativeBridgeMsg) GetError() *NativeBridgeError {
+	if x != nil {
+		if x, ok := x.Payload.(*NativeBridgeMsg_Error); ok {
+			return x.Error
+		}
+	}
+	return nil
+}
+
 type isNativeBridgeMsg_Payload interface {
 	isNativeBridgeMsg_Payload()
 }
@@ -347,6 +360,10 @@ type NativeBridgeMsg_MediaMuted struct {
 	MediaMuted *NativeBridgeMediaMuted `protobuf:"bytes,7,opt,name=media_muted,json=mediaMuted,proto3,oneof"`
 }
 
+type NativeBridgeMsg_Error struct {
+	Error *NativeBridgeError `protobuf:"bytes,8,opt,name=error,proto3,oneof"`
+}
+
 func (*NativeBridgeMsg_InitializeNativePublisher) isNativeBridgeMsg_Payload() {}
 
 func (*NativeBridgeMsg_MediaSource) isNativeBridgeMsg_Payload() {}
@@ -358,6 +375,8 @@ func (*NativeBridgeMsg_MediaStatus) isNativeBridgeMsg_Payload() {}
 func (*NativeBridgeMsg_TrackState) isNativeBridgeMsg_Payload() {}
 
 func (*NativeBridgeMsg_MediaMuted) isNativeBridgeMsg_Payload() {}
+
+func (*NativeBridgeMsg_Error) isNativeBridgeMsg_Payload() {}
 
 type NativeBridgeInitializePublisher struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -744,11 +763,64 @@ func (x *NativeBridgeMediaMuted) GetMuted() bool {
 	return false
 }
 
+// Native -> web: For reporting generic errors.
+type NativeBridgeError struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Msg           string                 `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
+	Context       *string                `protobuf:"bytes,2,opt,name=context,proto3,oneof" json:"context,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NativeBridgeError) Reset() {
+	*x = NativeBridgeError{}
+	mi := &file_plugnmeet_native_bridge_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NativeBridgeError) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NativeBridgeError) ProtoMessage() {}
+
+func (x *NativeBridgeError) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_native_bridge_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NativeBridgeError.ProtoReflect.Descriptor instead.
+func (*NativeBridgeError) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_native_bridge_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *NativeBridgeError) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *NativeBridgeError) GetContext() string {
+	if x != nil && x.Context != nil {
+		return *x.Context
+	}
+	return ""
+}
+
 var File_plugnmeet_native_bridge_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_native_bridge_proto_rawDesc = "" +
 	"\n" +
-	"\x1dplugnmeet_native_bridge.proto\x12\tplugnmeet\"\xa2\x04\n" +
+	"\x1dplugnmeet_native_bridge.proto\x12\tplugnmeet\"\xd8\x04\n" +
 	"\x0fNativeBridgeMsg\x126\n" +
 	"\x06action\x18\x01 \x01(\x0e2\x1e.plugnmeet.NativeBridgeActionsR\x06action\x12l\n" +
 	"\x1binitialize_native_publisher\x18\x02 \x01(\v2*.plugnmeet.NativeBridgeInitializePublisherH\x00R\x19initializeNativePublisher\x12G\n" +
@@ -758,7 +830,8 @@ const file_plugnmeet_native_bridge_proto_rawDesc = "" +
 	"\vtrack_state\x18\x06 \x01(\v2!.plugnmeet.NativeBridgeTrackStateH\x00R\n" +
 	"trackState\x12D\n" +
 	"\vmedia_muted\x18\a \x01(\v2!.plugnmeet.NativeBridgeMediaMutedH\x00R\n" +
-	"mediaMutedB\t\n" +
+	"mediaMuted\x124\n" +
+	"\x05error\x18\b \x01(\v2\x1c.plugnmeet.NativeBridgeErrorH\x00R\x05errorB\t\n" +
 	"\apayload\"\xbd\x01\n" +
 	"\x1fNativeBridgeInitializePublisher\x12\x1f\n" +
 	"\vlivekit_url\x18\x01 \x01(\tR\n" +
@@ -788,7 +861,12 @@ const file_plugnmeet_native_bridge_proto_rawDesc = "" +
 	"\x06source\x18\x03 \x01(\x0e2\x1c.plugnmeet.NativeMediaSourceR\x06source\"d\n" +
 	"\x16NativeBridgeMediaMuted\x124\n" +
 	"\x06source\x18\x01 \x01(\x0e2\x1c.plugnmeet.NativeMediaSourceR\x06source\x12\x14\n" +
-	"\x05muted\x18\x02 \x01(\bR\x05muted*\x82\x03\n" +
+	"\x05muted\x18\x02 \x01(\bR\x05muted\"P\n" +
+	"\x11NativeBridgeError\x12\x10\n" +
+	"\x03msg\x18\x01 \x01(\tR\x03msg\x12\x1d\n" +
+	"\acontext\x18\x02 \x01(\tH\x00R\acontext\x88\x01\x01B\n" +
+	"\n" +
+	"\b_context*\x94\x03\n" +
 	"\x13NativeBridgeActions\x12$\n" +
 	" NATIVE_BRIDGE_ACTION_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bINITIALIZE_NATIVE_PUBLISHER\x10\x01\x12\x18\n" +
@@ -802,7 +880,8 @@ const file_plugnmeet_native_bridge_proto_rawDesc = "" +
 	"\x16NATIVE_TRACK_PUBLISHED\x10\x15\x12\x1c\n" +
 	"\x18NATIVE_TRACK_UNPUBLISHED\x10\x16\x12\x16\n" +
 	"\x12NATIVE_MEDIA_MUTED\x10\x17\x12\x19\n" +
-	"\x15NATIVE_HEARTBEAT_PONG\x10\x18*^\n" +
+	"\x15NATIVE_HEARTBEAT_PONG\x10\x18\x12\x10\n" +
+	"\fNATIVE_ERROR\x10\x19*^\n" +
 	"\x11NativeMediaSource\x12#\n" +
 	"\x1fNATIVE_MEDIA_SOURCE_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03MIC\x10\x01\x12\n" +
@@ -828,7 +907,7 @@ func file_plugnmeet_native_bridge_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_native_bridge_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_plugnmeet_native_bridge_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_plugnmeet_native_bridge_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_plugnmeet_native_bridge_proto_goTypes = []any{
 	(NativeBridgeActions)(0),                // 0: plugnmeet.NativeBridgeActions
 	(NativeMediaSource)(0),                  // 1: plugnmeet.NativeMediaSource
@@ -841,6 +920,7 @@ var file_plugnmeet_native_bridge_proto_goTypes = []any{
 	(*NativeBridgeMediaStatus)(nil),         // 8: plugnmeet.NativeBridgeMediaStatus
 	(*NativeBridgeTrackState)(nil),          // 9: plugnmeet.NativeBridgeTrackState
 	(*NativeBridgeMediaMuted)(nil),          // 10: plugnmeet.NativeBridgeMediaMuted
+	(*NativeBridgeError)(nil),               // 11: plugnmeet.NativeBridgeError
 }
 var file_plugnmeet_native_bridge_proto_depIdxs = []int32{
 	0,  // 0: plugnmeet.NativeBridgeMsg.action:type_name -> plugnmeet.NativeBridgeActions
@@ -850,17 +930,18 @@ var file_plugnmeet_native_bridge_proto_depIdxs = []int32{
 	8,  // 4: plugnmeet.NativeBridgeMsg.media_status:type_name -> plugnmeet.NativeBridgeMediaStatus
 	9,  // 5: plugnmeet.NativeBridgeMsg.track_state:type_name -> plugnmeet.NativeBridgeTrackState
 	10, // 6: plugnmeet.NativeBridgeMsg.media_muted:type_name -> plugnmeet.NativeBridgeMediaMuted
-	5,  // 7: plugnmeet.NativeBridgeInitializePublisher.e2ee:type_name -> plugnmeet.NativeBridgeE2EE
-	1,  // 8: plugnmeet.NativeBridgeMediaSource.source:type_name -> plugnmeet.NativeMediaSource
-	1,  // 9: plugnmeet.NativeBridgeMediaStatus.source:type_name -> plugnmeet.NativeMediaSource
-	2,  // 10: plugnmeet.NativeBridgeTrackState.kind:type_name -> plugnmeet.NativeTrackKind
-	1,  // 11: plugnmeet.NativeBridgeTrackState.source:type_name -> plugnmeet.NativeMediaSource
-	1,  // 12: plugnmeet.NativeBridgeMediaMuted.source:type_name -> plugnmeet.NativeMediaSource
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	11, // 7: plugnmeet.NativeBridgeMsg.error:type_name -> plugnmeet.NativeBridgeError
+	5,  // 8: plugnmeet.NativeBridgeInitializePublisher.e2ee:type_name -> plugnmeet.NativeBridgeE2EE
+	1,  // 9: plugnmeet.NativeBridgeMediaSource.source:type_name -> plugnmeet.NativeMediaSource
+	1,  // 10: plugnmeet.NativeBridgeMediaStatus.source:type_name -> plugnmeet.NativeMediaSource
+	2,  // 11: plugnmeet.NativeBridgeTrackState.kind:type_name -> plugnmeet.NativeTrackKind
+	1,  // 12: plugnmeet.NativeBridgeTrackState.source:type_name -> plugnmeet.NativeMediaSource
+	1,  // 13: plugnmeet.NativeBridgeMediaMuted.source:type_name -> plugnmeet.NativeMediaSource
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_native_bridge_proto_init() }
@@ -875,17 +956,19 @@ func file_plugnmeet_native_bridge_proto_init() {
 		(*NativeBridgeMsg_MediaStatus)(nil),
 		(*NativeBridgeMsg_TrackState)(nil),
 		(*NativeBridgeMsg_MediaMuted)(nil),
+		(*NativeBridgeMsg_Error)(nil),
 	}
 	file_plugnmeet_native_bridge_proto_msgTypes[1].OneofWrappers = []any{}
 	file_plugnmeet_native_bridge_proto_msgTypes[2].OneofWrappers = []any{}
 	file_plugnmeet_native_bridge_proto_msgTypes[5].OneofWrappers = []any{}
+	file_plugnmeet_native_bridge_proto_msgTypes[8].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_native_bridge_proto_rawDesc), len(file_plugnmeet_native_bridge_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

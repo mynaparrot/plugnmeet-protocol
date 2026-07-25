@@ -15,6 +15,7 @@ message NativeBridgeMsg {
     NativeBridgeMediaStatus media_status = 5;
     NativeBridgeTrackState track_state = 6;
     NativeBridgeMediaMuted media_muted = 7;
+    NativeBridgeError error = 8;
   }
 }
 
@@ -36,6 +37,7 @@ enum NativeBridgeActions {
   NATIVE_TRACK_UNPUBLISHED = 22;
   NATIVE_MEDIA_MUTED = 23;
   NATIVE_HEARTBEAT_PONG = 24;
+  NATIVE_ERROR = 25;
 }
 
 enum NativeMediaSource {
@@ -91,4 +93,10 @@ message NativeBridgeTrackState {
 message NativeBridgeMediaMuted {
   NativeMediaSource source = 1;
   bool muted = 2;
+}
+
+// Native -> web: For reporting generic errors.
+message NativeBridgeError {
+  string msg = 1;
+  optional string context = 2;
 }

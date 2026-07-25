@@ -21,56 +21,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// ClientType identifies which client shell is joining.
-// WEB = standard plugNmeet web client (default).
-// HYBRID_WEB = web client running inside a native app's webview (hybrid mode:
-// subscribe-only; media publishing is delegated to the native host app).
-type ClientType int32
-
-const (
-	ClientType_WEB        ClientType = 0
-	ClientType_HYBRID_WEB ClientType = 1
-)
-
-// Enum value maps for ClientType.
-var (
-	ClientType_name = map[int32]string{
-		0: "WEB",
-		1: "HYBRID_WEB",
-	}
-	ClientType_value = map[string]int32{
-		"WEB":        0,
-		"HYBRID_WEB": 1,
-	}
-)
-
-func (x ClientType) Enum() *ClientType {
-	p := new(ClientType)
-	*p = x
-	return p
-}
-
-func (x ClientType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ClientType) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugnmeet_nats_msg_proto_enumTypes[0].Descriptor()
-}
-
-func (ClientType) Type() protoreflect.EnumType {
-	return &file_plugnmeet_nats_msg_proto_enumTypes[0]
-}
-
-func (x ClientType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ClientType.Descriptor instead.
-func (ClientType) EnumDescriptor() ([]byte, []int) {
-	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{0}
-}
-
 type NatsMsgServerToClientEvents int32
 
 const (
@@ -159,11 +109,11 @@ func (x NatsMsgServerToClientEvents) String() string {
 }
 
 func (NatsMsgServerToClientEvents) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugnmeet_nats_msg_proto_enumTypes[1].Descriptor()
+	return file_plugnmeet_nats_msg_proto_enumTypes[0].Descriptor()
 }
 
 func (NatsMsgServerToClientEvents) Type() protoreflect.EnumType {
-	return &file_plugnmeet_nats_msg_proto_enumTypes[1]
+	return &file_plugnmeet_nats_msg_proto_enumTypes[0]
 }
 
 func (x NatsMsgServerToClientEvents) Number() protoreflect.EnumNumber {
@@ -172,7 +122,7 @@ func (x NatsMsgServerToClientEvents) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use NatsMsgServerToClientEvents.Descriptor instead.
 func (NatsMsgServerToClientEvents) EnumDescriptor() ([]byte, []int) {
-	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{1}
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{0}
 }
 
 type NatsMsgClientToServerEvents int32
@@ -232,11 +182,11 @@ func (x NatsMsgClientToServerEvents) String() string {
 }
 
 func (NatsMsgClientToServerEvents) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugnmeet_nats_msg_proto_enumTypes[2].Descriptor()
+	return file_plugnmeet_nats_msg_proto_enumTypes[1].Descriptor()
 }
 
 func (NatsMsgClientToServerEvents) Type() protoreflect.EnumType {
-	return &file_plugnmeet_nats_msg_proto_enumTypes[2]
+	return &file_plugnmeet_nats_msg_proto_enumTypes[1]
 }
 
 func (x NatsMsgClientToServerEvents) Number() protoreflect.EnumNumber {
@@ -245,6 +195,52 @@ func (x NatsMsgClientToServerEvents) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use NatsMsgClientToServerEvents.Descriptor instead.
 func (NatsMsgClientToServerEvents) EnumDescriptor() ([]byte, []int) {
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{1}
+}
+
+type ClientType int32
+
+const (
+	ClientType_WEB        ClientType = 0 // standard plugNmeet web client (default).
+	ClientType_HYBRID_WEB ClientType = 1 // web client running inside a native app's webview
+)
+
+// Enum value maps for ClientType.
+var (
+	ClientType_name = map[int32]string{
+		0: "WEB",
+		1: "HYBRID_WEB",
+	}
+	ClientType_value = map[string]int32{
+		"WEB":        0,
+		"HYBRID_WEB": 1,
+	}
+)
+
+func (x ClientType) Enum() *ClientType {
+	p := new(ClientType)
+	*p = x
+	return p
+}
+
+func (x ClientType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ClientType) Descriptor() protoreflect.EnumDescriptor {
+	return file_plugnmeet_nats_msg_proto_enumTypes[2].Descriptor()
+}
+
+func (ClientType) Type() protoreflect.EnumType {
+	return &file_plugnmeet_nats_msg_proto_enumTypes[2]
+}
+
+func (x ClientType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ClientType.Descriptor instead.
+func (ClientType) EnumDescriptor() ([]byte, []int) {
 	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{2}
 }
 
@@ -705,7 +701,7 @@ type NatsKvUserInfo struct {
 	JoinedAt       uint64                 `protobuf:"varint,8,opt,name=joined_at,json=joinedAt,proto3" json:"joined_at,omitempty"`
 	ReconnectedAt  uint64                 `protobuf:"varint,9,opt,name=reconnected_at,json=reconnectedAt,proto3" json:"reconnected_at,omitempty"`
 	DisconnectedAt uint64                 `protobuf:"varint,10,opt,name=disconnected_at,json=disconnectedAt,proto3" json:"disconnected_at,omitempty"`
-	ClientType     ClientType             `protobuf:"varint,11,opt,name=client_type,json=clientType,proto3,enum=plugnmeet.ClientType" json:"client_type,omitempty"` // session client type; WEB when absent (backward compatible)
+	ClientType     ClientType             `protobuf:"varint,11,opt,name=client_type,json=clientType,proto3,enum=plugnmeet.ClientType" json:"client_type,omitempty"` // session client type; Default: WEB
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1455,12 +1451,7 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
 	"\v_to_user_idB\x0e\n" +
-	"\f_source_lang*%\n" +
-	"\n" +
-	"ClientType\x12\a\n" +
-	"\x03WEB\x10\x00\x12\x0e\n" +
-	"\n" +
-	"HYBRID_WEB\x10\x01*\x86\x04\n" +
+	"\f_source_lang*\x86\x04\n" +
 	"\x1bNatsMsgServerToClientEvents\x12\x14\n" +
 	"\x10RES_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15RES_JOINED_USERS_LIST\x10\x01\x12\x19\n" +
@@ -1496,7 +1487,12 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x13PUSH_ANALYTICS_DATA\x10\b\x12\x19\n" +
 	"\x15REQ_ONLINE_USERS_LIST\x10\t\x12\x1d\n" +
 	"\x19REQ_PRIVATE_DATA_DELIVERY\x10\n" +
-	"*\x8a\x01\n" +
+	"*%\n" +
+	"\n" +
+	"ClientType\x12\a\n" +
+	"\x03WEB\x10\x00\x12\x0e\n" +
+	"\n" +
+	"HYBRID_WEB\x10\x01*\x8a\x01\n" +
 	"\x1bNatsSystemNotificationTypes\x12!\n" +
 	"\x1dNATS_SYSTEM_NOTIFICATION_INFO\x10\x00\x12$\n" +
 	" NATS_SYSTEM_NOTIFICATION_WARNING\x10\x01\x12\"\n" +
@@ -1518,9 +1514,9 @@ func file_plugnmeet_nats_msg_proto_rawDescGZIP() []byte {
 var file_plugnmeet_nats_msg_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_plugnmeet_nats_msg_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_plugnmeet_nats_msg_proto_goTypes = []any{
-	(ClientType)(0),                  // 0: plugnmeet.ClientType
-	(NatsMsgServerToClientEvents)(0), // 1: plugnmeet.NatsMsgServerToClientEvents
-	(NatsMsgClientToServerEvents)(0), // 2: plugnmeet.NatsMsgClientToServerEvents
+	(NatsMsgServerToClientEvents)(0), // 0: plugnmeet.NatsMsgServerToClientEvents
+	(NatsMsgClientToServerEvents)(0), // 1: plugnmeet.NatsMsgClientToServerEvents
+	(ClientType)(0),                  // 2: plugnmeet.ClientType
 	(NatsSystemNotificationTypes)(0), // 3: plugnmeet.NatsSystemNotificationTypes
 	(*NatsSubjects)(nil),             // 4: plugnmeet.NatsSubjects
 	(*PrivateDataDelivery)(nil),      // 5: plugnmeet.PrivateDataDelivery
@@ -1538,9 +1534,9 @@ var file_plugnmeet_nats_msg_proto_goTypes = []any{
 	nil,                              // 17: plugnmeet.ChatMessage.TranslationsEntry
 }
 var file_plugnmeet_nats_msg_proto_depIdxs = []int32{
-	1,  // 0: plugnmeet.NatsMsgServerToClient.event:type_name -> plugnmeet.NatsMsgServerToClientEvents
-	2,  // 1: plugnmeet.NatsMsgClientToServer.event:type_name -> plugnmeet.NatsMsgClientToServerEvents
-	0,  // 2: plugnmeet.NatsKvUserInfo.client_type:type_name -> plugnmeet.ClientType
+	0,  // 0: plugnmeet.NatsMsgServerToClient.event:type_name -> plugnmeet.NatsMsgServerToClientEvents
+	1,  // 1: plugnmeet.NatsMsgClientToServer.event:type_name -> plugnmeet.NatsMsgClientToServerEvents
+	2,  // 2: plugnmeet.NatsKvUserInfo.client_type:type_name -> plugnmeet.ClientType
 	10, // 3: plugnmeet.TurnCredentials.fallback_on_flapping:type_name -> plugnmeet.FallbackOnFlapping
 	11, // 4: plugnmeet.MediaServerConnInfo.turn_credentials:type_name -> plugnmeet.TurnCredentials
 	8,  // 5: plugnmeet.NatsInitialData.room:type_name -> plugnmeet.NatsKvRoomInfo
