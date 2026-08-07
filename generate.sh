@@ -1,29 +1,80 @@
 #!/usr/bin/env sh
+set -euo pipefail
 
-PROTO_TMP_DIR="./tmp"
-PROTO_VALIDATOR_DIR="${PROTO_TMP_DIR}/protovalidate"
-LIVEKIT_PROTO_DIR="${PROTO_TMP_DIR}/livekit-protocol"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$SCRIPT_DIR"
 
-if [ ! -d ${PROTO_TMP_DIR} ]; then
-  mkdir -p ${PROTO_TMP_DIR}
+# Absolute tmp dir; already gitignored.
+PROTO_TMP_DIR="${SCRIPT_DIR}/tmp"
+
+# -------------------------------------------------------------------
+# Ensure required tooling is available
+# -------------------------------------------------------------------
+if ! which jq >/dev/null 2>&1; then
+  echo "ERROR: jq is required but not installed."
+  echo "       Install it (e.g. 'apt install jq' or 'brew install jq') and re-run."
+  exit 1
 fi
 
-if [ ! -d ${PROTO_VALIDATOR_DIR} ]; then
-  git clone https://github.com/bufbuild/protovalidate ${PROTO_VALIDATOR_DIR}
-fi
-
-if [ ! -d ${LIVEKIT_PROTO_DIR} ]; then
-  git clone https://github.com/livekit/protocol ${LIVEKIT_PROTO_DIR}
-fi
-
-
-if ! which buf >/dev/null; then
-  printf "buf not installed, installing using go install"
+if ! which buf >/dev/null 2>&1; then
+  echo "buf not found, installing using go install"
   go install github.com/bufbuild/buf/cmd/buf@latest
 fi
 
-buf dep update
+# -------------------------------------------------------------------
+# Clean and recreate tmp
+# -------------------------------------------------------------------
+rm -rf "${PROTO_TMP_DIR}"
+mkdir -p "${PROTO_TMP_DIR}"
+
+# -------------------------------------------------------------------
+# Resolve livekit/protocol version from go.mod → Go module cache
+# -------------------------------------------------------------------
+LIVEKIT_VERSION=$(grep 'github.com/livekit/protocol ' go.mod | awk '{print $2}')
+echo "→ Resolving livekit/protocol ${LIVEKIT_VERSION} from Go module cache..."
+go mod download github.com/livekit/protocol
+LIVEKIT_DIR=$(go list -m -json "github.com/livekit/protocol@${LIVEKIT_VERSION}" | jq -r .Dir)
+echo "  ${LIVEKIT_DIR}"
+
+if [ ! -d "${LIVEKIT_DIR}/protobufs" ]; then
+  echo "ERROR: livekit protobufs not found at ${LIVEKIT_DIR}/protobufs"
+  exit 1
+fi
+
+# -------------------------------------------------------------------
+# Resolve protovalidate version from go.mod → buf export from BSR
+# -------------------------------------------------------------------
+PROTOVALIDATE_VERSION=$(grep 'buf.build/go/protovalidate ' go.mod | awk '{print $2}')
+echo "→ Exporting buf.build/bufbuild/protovalidate:${PROTOVALIDATE_VERSION} from BSR..."
+PROTOVALIDATE_DIR="${PROTO_TMP_DIR}/protovalidate-proto"
+buf export "buf.build/bufbuild/protovalidate:${PROTOVALIDATE_VERSION}" -o "${PROTOVALIDATE_DIR}"
+echo "  ${PROTOVALIDATE_DIR}"
+
+# -------------------------------------------------------------------
+# Create symlinks so buf.yaml relative paths resolve correctly
+# -------------------------------------------------------------------
+# livekit: buf.yaml expects ./tmp/livekit-protocol/protobufs
+mkdir -p "${PROTO_TMP_DIR}/livekit-protocol"
+ln -sf "${LIVEKIT_DIR}/protobufs" "${PROTO_TMP_DIR}/livekit-protocol/protobufs"
+
+# protovalidate: buf.yaml expects ./tmp/protovalidate/proto/protovalidate
+mkdir -p "${PROTO_TMP_DIR}/protovalidate/proto"
+ln -sf "${PROTOVALIDATE_DIR}" "${PROTO_TMP_DIR}/protovalidate/proto/protovalidate"
+
+# -------------------------------------------------------------------
+# Run Go proto generation
+# -------------------------------------------------------------------
+echo "→ Running buf dep update..."
+buf dep update || echo "⚠ buf dep update had warnings (non-fatal)"
+echo "→ Running buf generate (Go)..."
 buf generate
 
+# -------------------------------------------------------------------
+# Run JS proto generation
+# -------------------------------------------------------------------
+echo "→ Generating JS..."
 cd js
 ./generate.sh
+cd ..
+
+echo "✓ Done"
