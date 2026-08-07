@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.5.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.4.0...v1.5.0) (2026-08-07)
+
+
+### Features
+
+* Native Bridge for Hybrid Integration. ([b1e1809](https://github.com/mynaparrot/plugnmeet-protocol/commit/b1e1809432581956cd74cad9693c54dcee2028d7))
+
+
+### Bug Fixes
+
+* added error message notifier ([6be08cb](https://github.com/mynaparrot/plugnmeet-protocol/commit/6be08cbead2ed587289741e42a295f795cfc1ae7))
+* **feat:** new feature nativeBridge ([#316](https://github.com/mynaparrot/plugnmeet-protocol/issues/316)) ([ed382f4](https://github.com/mynaparrot/plugnmeet-protocol/commit/ed382f48e26f806a911f608c3ca83bee283d353b))
+* generation script should follow version from go.md ([76296d0](https://github.com/mynaparrot/plugnmeet-protocol/commit/76296d0201841f8dac8eb3dcd71033f363e99c9d))
+* use proper `Content-Type` otherwise may blocked by firewall ([8e8f655](https://github.com/mynaparrot/plugnmeet-protocol/commit/8e8f6551c814b01ce36289dcd5e3391b07b65454))
+
 ## [1.4.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.3.0...v1.4.0) (2026-07-04)
 
 
