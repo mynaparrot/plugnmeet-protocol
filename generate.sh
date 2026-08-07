@@ -16,6 +16,12 @@ if ! which jq >/dev/null 2>&1; then
   exit 1
 fi
 
+if ! which go >/dev/null 2>&1; then
+  echo "ERROR: go is required but not installed."
+  echo "       Install it (e.g. from https://go.dev/dl/) and re-run."
+  exit 1
+fi
+
 if ! which buf >/dev/null 2>&1; then
   echo "buf not found, installing using go install"
   go install github.com/bufbuild/buf/cmd/buf@latest
@@ -32,7 +38,7 @@ mkdir -p "${PROTO_TMP_DIR}"
 # -------------------------------------------------------------------
 LIVEKIT_VERSION=$(grep 'github.com/livekit/protocol ' go.mod | awk '{print $2}')
 echo "→ Resolving livekit/protocol ${LIVEKIT_VERSION} from Go module cache..."
-go mod download github.com/livekit/protocol
+go mod download
 LIVEKIT_DIR=$(go list -m -json "github.com/livekit/protocol@${LIVEKIT_VERSION}" | jq -r .Dir)
 echo "  ${LIVEKIT_DIR}"
 
