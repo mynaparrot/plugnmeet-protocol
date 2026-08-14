@@ -1750,11 +1750,12 @@ type InsightsAITextChatFeatures struct {
 	state   protoimpl.MessageState `protogen:"open.v1"`
 	IsAllow bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
 	// all internal usage fields
-	IsEnabled         bool     `protobuf:"varint,2,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
-	IsAllowedEveryone bool     `protobuf:"varint,3,opt,name=is_allowed_everyone,json=isAllowedEveryone,proto3" json:"is_allowed_everyone,omitempty"`
-	AllowedUserIds    []string `protobuf:"bytes,4,rep,name=allowed_user_ids,json=allowedUserIds,proto3" json:"allowed_user_ids,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	IsEnabled           bool     `protobuf:"varint,2,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
+	IsAllowedEveryone   bool     `protobuf:"varint,3,opt,name=is_allowed_everyone,json=isAllowedEveryone,proto3" json:"is_allowed_everyone,omitempty"`
+	AllowedUserIds      []string `protobuf:"bytes,4,rep,name=allowed_user_ids,json=allowedUserIds,proto3" json:"allowed_user_ids,omitempty"`
+	IsNotepadAiDisabled bool     `protobuf:"varint,5,opt,name=is_notepad_ai_disabled,json=isNotepadAiDisabled,proto3" json:"is_notepad_ai_disabled,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *InsightsAITextChatFeatures) Reset() {
@@ -1813,6 +1814,13 @@ func (x *InsightsAITextChatFeatures) GetAllowedUserIds() []string {
 		return x.AllowedUserIds
 	}
 	return nil
+}
+
+func (x *InsightsAITextChatFeatures) GetIsNotepadAiDisabled() bool {
+	if x != nil {
+		return x.IsNotepadAiDisabled
+	}
+	return false
 }
 
 type InsightsAIMeetingSummarizationFeatures struct {
@@ -2216,13 +2224,14 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x15ai_text_chat_features\x18\x02 \x01(\v2%.plugnmeet.InsightsAITextChatFeaturesH\x00R\x12aiTextChatFeatures\x88\x01\x01\x12|\n" +
 	"\x1emeeting_summarization_features\x18\x03 \x01(\v21.plugnmeet.InsightsAIMeetingSummarizationFeaturesH\x01R\x1cmeetingSummarizationFeatures\x88\x01\x01B\x18\n" +
 	"\x16_ai_text_chat_featuresB!\n" +
-	"\x1f_meeting_summarization_features\"\xcc\x01\n" +
+	"\x1f_meeting_summarization_features\"\x8a\x02\n" +
 	"\x1aInsightsAITextChatFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12&\n" +
 	"\n" +
 	"is_enabled\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\tisEnabled\x127\n" +
 	"\x13is_allowed_everyone\x18\x03 \x01(\bB\a\xbaH\x04j\x02\b\x00R\x11isAllowedEveryone\x122\n" +
-	"\x10allowed_user_ids\x18\x04 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x0eallowedUserIds\"\x9e\x01\n" +
+	"\x10allowed_user_ids\x18\x04 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x0eallowedUserIds\x12<\n" +
+	"\x16is_notepad_ai_disabled\x18\x05 \x01(\bB\a\xbaH\x04j\x02\b\x00R\x13isNotepadAiDisabled\"\x9e\x01\n" +
 	"&InsightsAIMeetingSummarizationFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x121\n" +
 	"\x14summarization_prompt\x18\x02 \x01(\tR\x13summarizationPrompt\x12&\n" +

@@ -3081,6 +3081,8 @@ func (m *InsightsAITextChatFeatures) validate(all bool) error {
 
 	// no validation rules for IsAllowedEveryone
 
+	// no validation rules for IsNotepadAiDisabled
+
 	if len(errors) > 0 {
 		return InsightsAITextChatFeaturesMultiError(errors)
 	}

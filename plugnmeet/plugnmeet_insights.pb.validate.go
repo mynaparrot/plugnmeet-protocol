@@ -1349,6 +1349,10 @@ func (m *InsightsAITextChatContent) validate(all bool) error {
 		// no validation rules for StreamId
 	}
 
+	if m.RequestFrom != nil {
+		// no validation rules for RequestFrom
+	}
+
 	if len(errors) > 0 {
 		return InsightsAITextChatContentMultiError(errors)
 	}
@@ -1465,6 +1469,10 @@ func (m *InsightsAITextChatStreamResult) validate(all bool) error {
 
 	// no validation rules for CreatedAt
 
+	if m.RequestFrom != nil {
+		// no validation rules for RequestFrom
+	}
+
 	if len(errors) > 0 {
 		return InsightsAITextChatStreamResultMultiError(errors)
 	}
@@ -1571,6 +1579,8 @@ func (m *InsightsAITextChatConfigReq) validate(all bool) error {
 	// no validation rules for IsEnabled
 
 	// no validation rules for IsAllowedEveryone
+
+	// no validation rules for IsNotepadAiDisabled
 
 	if len(errors) > 0 {
 		return InsightsAITextChatConfigReqMultiError(errors)

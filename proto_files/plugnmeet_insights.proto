@@ -97,6 +97,11 @@ message InsightsGetUserStatusRes {
   optional bool allowed_transcription_storage = 6;
 }
 
+enum InsightsAIRequestSource {
+  INSIGHTS_AI_REQUEST_SOURCE_CHAT = 0;
+  INSIGHTS_AI_REQUEST_SOURCE_NOTEPAD = 1;
+}
+
 // start AI Text Chat
 enum InsightsAITextChatRole {
   INSIGHTS_AI_TEXT_CHAT_ROLE_UNSPECIFIED = 0;
@@ -109,6 +114,7 @@ message InsightsAITextChatContent {
   InsightsAITextChatRole role = 1;
   string text = 2;
   optional string stream_id = 3;
+  optional InsightsAIRequestSource request_from = 4;
 }
 
 message InsightsAITextChatStreamResult {
@@ -119,12 +125,14 @@ message InsightsAITextChatStreamResult {
   uint32 completion_tokens = 5;
   uint32 total_tokens = 6;
   string createdAt = 7;
+  optional InsightsAIRequestSource request_from = 8;
 }
 
 message InsightsAITextChatConfigReq {
   bool is_enabled = 1;
   bool is_allowed_everyone = 3;
   repeated string allowed_user_ids = 4;
+  bool is_notepad_ai_disabled = 5;
 }
 // end AI Text Chat
 
