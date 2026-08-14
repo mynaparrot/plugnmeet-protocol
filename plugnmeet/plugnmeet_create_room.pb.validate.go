@@ -1071,13 +1071,7 @@ func (m *SharedNotePadFeatures) validate(all bool) error {
 
 	// no validation rules for Visible
 
-	// no validation rules for NodeId
-
-	// no validation rules for Host
-
 	// no validation rules for NotePadId
-
-	// no validation rules for ReadOnlyPadId
 
 	if len(errors) > 0 {
 		return SharedNotePadFeaturesMultiError(errors)
