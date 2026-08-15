@@ -10,6 +10,7 @@ message DataChannelMessage {
   string from_user_id = 3;
   optional string to_user_id = 4;
   string message = 5;
+  optional bytes bin_message = 6;
 }
 
 enum DataMsgBodyType {
@@ -45,5 +46,10 @@ enum DataMsgBodyType {
 
   REACTION = 20;
 
-  // next ID: 21
+  NOTEPAD_SYNC_REQUEST = 21;
+  NOTEPAD_SYNC_RESPONSE = 22;
+  NOTEPAD_UPDATE = 23;
+  NOTEPAD_AWARENESS = 24;
+
+  // next ID: 25
 }

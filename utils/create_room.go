@@ -60,16 +60,12 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 	r.Metadata.StartedAt = uint64(time.Now().UTC().Unix())
 }
 
-func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhiteboardFile uint64, allowedTypes []string, allowedNotepad bool) {
+func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhiteboardFile uint64, allowedTypes []string) {
 	rf := r.Metadata.RoomFeatures
 
 	if rf.AutoGenUserId == nil {
 		// by default, auto user id generation will be disabled
 		rf.AutoGenUserId = new(false)
-	}
-
-	if rf.SharedNotePadFeatures.IsAllow && !allowedNotepad {
-		rf.SharedNotePadFeatures.IsAllow = false
 	}
 
 	if rf.ChatFeatures.IsAllowFileUpload {

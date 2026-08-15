@@ -48,12 +48,11 @@ if [ ! -d "${LIVEKIT_DIR}/protobufs" ]; then
 fi
 
 # -------------------------------------------------------------------
-# Resolve protovalidate version from go.mod → buf export from BSR
+# Export protovalidate protos from BSR (latest commit)
 # -------------------------------------------------------------------
-PROTOVALIDATE_VERSION=$(grep 'buf.build/go/protovalidate ' go.mod | awk '{print $2}')
-echo "→ Exporting buf.build/bufbuild/protovalidate:${PROTOVALIDATE_VERSION} from BSR..."
 PROTOVALIDATE_DIR="${PROTO_TMP_DIR}/protovalidate-proto"
-buf export "buf.build/bufbuild/protovalidate:${PROTOVALIDATE_VERSION}" -o "${PROTOVALIDATE_DIR}"
+echo "→ Exporting buf.build/bufbuild/protovalidate from BSR..."
+buf export "buf.build/bufbuild/protovalidate" -o "${PROTOVALIDATE_DIR}"
 echo "  ${PROTOVALIDATE_DIR}"
 
 # -------------------------------------------------------------------

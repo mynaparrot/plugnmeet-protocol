@@ -93,24 +93,9 @@ message SharedNotePadFeatures {
 
   bool is_active = 2 [(buf.validate.field).bool.const = false];
   bool visible = 3 [(buf.validate.field).bool.const = false];
-  string node_id = 4 [(buf.validate.field).cel = {
-    id: "node_id_format",
-    message: "node_id should not contain any value",
-    expression: "this.matches('^$')"
-  }];
-  string host = 5 [(buf.validate.field).cel = {
-    id: "host_format",
-    message: "host should not contain any value",
-    expression: "this.matches('^$')"
-  }];
-  string note_pad_id = 6 [(buf.validate.field).cel = {
+  string note_pad_id = 4 [(buf.validate.field).cel = {
     id: "note_pad_id_format",
     message: "note_pad_id should not contain any value",
-    expression: "this.matches('^$')"
-  }];
-  string read_only_pad_id = 7 [(buf.validate.field).cel = {
-    id: "read_only_pad_id_format",
-    message: "read_only_pad_id should not contain any value",
     expression: "this.matches('^$')"
   }];
 }
@@ -300,6 +285,7 @@ message InsightsAITextChatFeatures {
   bool is_enabled = 2 [(buf.validate.field).bool.const = false];
   bool is_allowed_everyone = 3 [(buf.validate.field).bool.const = false];
   repeated string allowed_user_ids = 4 [(buf.validate.field).repeated.max_items = 0];
+  bool is_notepad_ai_disabled = 5 [(buf.validate.field).bool.const = false];
 }
 
 message InsightsAIMeetingSummarizationFeatures {
