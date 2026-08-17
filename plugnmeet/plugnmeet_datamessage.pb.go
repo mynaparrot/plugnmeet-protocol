@@ -34,8 +34,8 @@ const (
 	DataMsgBodyType_NEW_POLL_RESPONSE            DataMsgBodyType = 6
 	DataMsgBodyType_PUSH_JOIN_BREAKOUT_ROOM      DataMsgBodyType = 7
 	// WHITEBOARD type
-	DataMsgBodyType_REQ_FULL_WHITEBOARD_DATA         DataMsgBodyType = 8
-	DataMsgBodyType_RES_FULL_WHITEBOARD_DATA         DataMsgBodyType = 9
+	DataMsgBodyType_WHITEBOARD_SYNC_REQUEST          DataMsgBodyType = 8
+	DataMsgBodyType_WHITEBOARD_SYNC_RESPONSE         DataMsgBodyType = 9
 	DataMsgBodyType_SCENE_UPDATE                     DataMsgBodyType = 10
 	DataMsgBodyType_POINTER_UPDATE                   DataMsgBodyType = 11
 	DataMsgBodyType_WHITEBOARD_APP_STATE_CHANGE      DataMsgBodyType = 12
@@ -64,8 +64,8 @@ var (
 		5:  "EXTERNAL_MEDIA_PLAYER_EVENTS",
 		6:  "NEW_POLL_RESPONSE",
 		7:  "PUSH_JOIN_BREAKOUT_ROOM",
-		8:  "REQ_FULL_WHITEBOARD_DATA",
-		9:  "RES_FULL_WHITEBOARD_DATA",
+		8:  "WHITEBOARD_SYNC_REQUEST",
+		9:  "WHITEBOARD_SYNC_RESPONSE",
 		10: "SCENE_UPDATE",
 		11: "POINTER_UPDATE",
 		12: "WHITEBOARD_APP_STATE_CHANGE",
@@ -91,8 +91,8 @@ var (
 		"EXTERNAL_MEDIA_PLAYER_EVENTS":     5,
 		"NEW_POLL_RESPONSE":                6,
 		"PUSH_JOIN_BREAKOUT_ROOM":          7,
-		"REQ_FULL_WHITEBOARD_DATA":         8,
-		"RES_FULL_WHITEBOARD_DATA":         9,
+		"WHITEBOARD_SYNC_REQUEST":          8,
+		"WHITEBOARD_SYNC_RESPONSE":         9,
 		"SCENE_UPDATE":                     10,
 		"POINTER_UPDATE":                   11,
 		"WHITEBOARD_APP_STATE_CHANGE":      12,
@@ -238,7 +238,7 @@ const file_plugnmeet_datamessage_proto_rawDesc = "" +
 	"\vbin_message\x18\x06 \x01(\fH\x01R\n" +
 	"binMessage\x88\x01\x01B\r\n" +
 	"\v_to_user_idB\x0e\n" +
-	"\f_bin_message*\xdd\x04\n" +
+	"\f_bin_message*\xdc\x04\n" +
 	"\x0fDataMsgBodyType\x12\v\n" +
 	"\aUNKNOWN\x10\x00\x12\x0f\n" +
 	"\vFILE_UPLOAD\x10\x01\x12\b\n" +
@@ -247,9 +247,9 @@ const file_plugnmeet_datamessage_proto_rawDesc = "" +
 	"\x16USER_VISIBILITY_CHANGE\x10\x04\x12 \n" +
 	"\x1cEXTERNAL_MEDIA_PLAYER_EVENTS\x10\x05\x12\x15\n" +
 	"\x11NEW_POLL_RESPONSE\x10\x06\x12\x1b\n" +
-	"\x17PUSH_JOIN_BREAKOUT_ROOM\x10\a\x12\x1c\n" +
-	"\x18REQ_FULL_WHITEBOARD_DATA\x10\b\x12\x1c\n" +
-	"\x18RES_FULL_WHITEBOARD_DATA\x10\t\x12\x10\n" +
+	"\x17PUSH_JOIN_BREAKOUT_ROOM\x10\a\x12\x1b\n" +
+	"\x17WHITEBOARD_SYNC_REQUEST\x10\b\x12\x1c\n" +
+	"\x18WHITEBOARD_SYNC_RESPONSE\x10\t\x12\x10\n" +
 	"\fSCENE_UPDATE\x10\n" +
 	"\x12\x12\n" +
 	"\x0ePOINTER_UPDATE\x10\v\x12\x1f\n" +
