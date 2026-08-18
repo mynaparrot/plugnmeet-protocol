@@ -134,8 +134,9 @@ func (InsightsUserSessionAction) EnumDescriptor() ([]byte, []int) {
 type InsightsAIRequestSource int32
 
 const (
-	InsightsAIRequestSource_INSIGHTS_AI_REQUEST_SOURCE_CHAT    InsightsAIRequestSource = 0
-	InsightsAIRequestSource_INSIGHTS_AI_REQUEST_SOURCE_NOTEPAD InsightsAIRequestSource = 1
+	InsightsAIRequestSource_INSIGHTS_AI_REQUEST_SOURCE_CHAT       InsightsAIRequestSource = 0
+	InsightsAIRequestSource_INSIGHTS_AI_REQUEST_SOURCE_NOTEPAD    InsightsAIRequestSource = 1
+	InsightsAIRequestSource_INSIGHTS_AI_REQUEST_SOURCE_WHITEBOARD InsightsAIRequestSource = 2
 )
 
 // Enum value maps for InsightsAIRequestSource.
@@ -143,10 +144,12 @@ var (
 	InsightsAIRequestSource_name = map[int32]string{
 		0: "INSIGHTS_AI_REQUEST_SOURCE_CHAT",
 		1: "INSIGHTS_AI_REQUEST_SOURCE_NOTEPAD",
+		2: "INSIGHTS_AI_REQUEST_SOURCE_WHITEBOARD",
 	}
 	InsightsAIRequestSource_value = map[string]int32{
-		"INSIGHTS_AI_REQUEST_SOURCE_CHAT":    0,
-		"INSIGHTS_AI_REQUEST_SOURCE_NOTEPAD": 1,
+		"INSIGHTS_AI_REQUEST_SOURCE_CHAT":       0,
+		"INSIGHTS_AI_REQUEST_SOURCE_NOTEPAD":    1,
+		"INSIGHTS_AI_REQUEST_SOURCE_WHITEBOARD": 2,
 	}
 )
 
@@ -1131,13 +1134,14 @@ func (x *InsightsAITextChatStreamResult) GetRequestFrom() InsightsAIRequestSourc
 }
 
 type InsightsAITextChatConfigReq struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	IsEnabled           bool                   `protobuf:"varint,1,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
-	IsAllowedEveryone   bool                   `protobuf:"varint,3,opt,name=is_allowed_everyone,json=isAllowedEveryone,proto3" json:"is_allowed_everyone,omitempty"`
-	AllowedUserIds      []string               `protobuf:"bytes,4,rep,name=allowed_user_ids,json=allowedUserIds,proto3" json:"allowed_user_ids,omitempty"`
-	IsNotepadAiDisabled bool                   `protobuf:"varint,5,opt,name=is_notepad_ai_disabled,json=isNotepadAiDisabled,proto3" json:"is_notepad_ai_disabled,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	IsEnabled              bool                   `protobuf:"varint,1,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
+	IsAllowedEveryone      bool                   `protobuf:"varint,3,opt,name=is_allowed_everyone,json=isAllowedEveryone,proto3" json:"is_allowed_everyone,omitempty"`
+	AllowedUserIds         []string               `protobuf:"bytes,4,rep,name=allowed_user_ids,json=allowedUserIds,proto3" json:"allowed_user_ids,omitempty"`
+	IsNotepadAiDisabled    bool                   `protobuf:"varint,5,opt,name=is_notepad_ai_disabled,json=isNotepadAiDisabled,proto3" json:"is_notepad_ai_disabled,omitempty"`
+	IsWhiteboardAiDisabled bool                   `protobuf:"varint,6,opt,name=is_whiteboard_ai_disabled,json=isWhiteboardAiDisabled,proto3" json:"is_whiteboard_ai_disabled,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *InsightsAITextChatConfigReq) Reset() {
@@ -1194,6 +1198,13 @@ func (x *InsightsAITextChatConfigReq) GetAllowedUserIds() []string {
 func (x *InsightsAITextChatConfigReq) GetIsNotepadAiDisabled() bool {
 	if x != nil {
 		return x.IsNotepadAiDisabled
+	}
+	return false
+}
+
+func (x *InsightsAITextChatConfigReq) GetIsWhiteboardAiDisabled() bool {
+	if x != nil {
+		return x.IsWhiteboardAiDisabled
 	}
 	return false
 }
@@ -1346,13 +1357,14 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"\ftotal_tokens\x18\x06 \x01(\rR\vtotalTokens\x12\x1c\n" +
 	"\tcreatedAt\x18\a \x01(\tR\tcreatedAt\x12J\n" +
 	"\frequest_from\x18\b \x01(\x0e2\".plugnmeet.InsightsAIRequestSourceH\x00R\vrequestFrom\x88\x01\x01B\x0f\n" +
-	"\r_request_from\"\xcb\x01\n" +
+	"\r_request_from\"\x86\x02\n" +
 	"\x1bInsightsAITextChatConfigReq\x12\x1d\n" +
 	"\n" +
 	"is_enabled\x18\x01 \x01(\bR\tisEnabled\x12.\n" +
 	"\x13is_allowed_everyone\x18\x03 \x01(\bR\x11isAllowedEveryone\x12(\n" +
 	"\x10allowed_user_ids\x18\x04 \x03(\tR\x0eallowedUserIds\x123\n" +
-	"\x16is_notepad_ai_disabled\x18\x05 \x01(\bR\x13isNotepadAiDisabled\"{\n" +
+	"\x16is_notepad_ai_disabled\x18\x05 \x01(\bR\x13isNotepadAiDisabled\x129\n" +
+	"\x19is_whiteboard_ai_disabled\x18\x06 \x01(\bR\x16isWhiteboardAiDisabled\"{\n" +
 	"'InsightsAIMeetingSummarizationConfigReq\x12\x1d\n" +
 	"\n" +
 	"is_enabled\x18\x01 \x01(\bR\tisEnabled\x121\n" +
@@ -1368,10 +1380,11 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"\x19InsightsUserSessionAction\x12#\n" +
 	"\x1fUSER_SESSION_ACTION_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19USER_SESSION_ACTION_START\x10\x01\x12\x1c\n" +
-	"\x18USER_SESSION_ACTION_STOP\x10\x02*f\n" +
+	"\x18USER_SESSION_ACTION_STOP\x10\x02*\x91\x01\n" +
 	"\x17InsightsAIRequestSource\x12#\n" +
 	"\x1fINSIGHTS_AI_REQUEST_SOURCE_CHAT\x10\x00\x12&\n" +
-	"\"INSIGHTS_AI_REQUEST_SOURCE_NOTEPAD\x10\x01*\xb6\x01\n" +
+	"\"INSIGHTS_AI_REQUEST_SOURCE_NOTEPAD\x10\x01\x12)\n" +
+	"%INSIGHTS_AI_REQUEST_SOURCE_WHITEBOARD\x10\x02*\xb6\x01\n" +
 	"\x16InsightsAITextChatRole\x12*\n" +
 	"&INSIGHTS_AI_TEXT_CHAT_ROLE_UNSPECIFIED\x10\x00\x12%\n" +
 	"!INSIGHTS_AI_TEXT_CHAT_ROLE_SYSTEM\x10\x01\x12#\n" +

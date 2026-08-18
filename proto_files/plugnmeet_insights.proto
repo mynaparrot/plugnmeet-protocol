@@ -100,6 +100,7 @@ message InsightsGetUserStatusRes {
 enum InsightsAIRequestSource {
   INSIGHTS_AI_REQUEST_SOURCE_CHAT = 0;
   INSIGHTS_AI_REQUEST_SOURCE_NOTEPAD = 1;
+  INSIGHTS_AI_REQUEST_SOURCE_WHITEBOARD = 2;
 }
 
 // start AI Text Chat
@@ -133,6 +134,7 @@ message InsightsAITextChatConfigReq {
   bool is_allowed_everyone = 3;
   repeated string allowed_user_ids = 4;
   bool is_notepad_ai_disabled = 5;
+  bool is_whiteboard_ai_disabled = 6;
 }
 // end AI Text Chat
 

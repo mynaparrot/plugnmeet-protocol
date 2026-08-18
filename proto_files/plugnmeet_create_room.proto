@@ -286,6 +286,7 @@ message InsightsAITextChatFeatures {
   bool is_allowed_everyone = 3 [(buf.validate.field).bool.const = false];
   repeated string allowed_user_ids = 4 [(buf.validate.field).repeated.max_items = 0];
   bool is_notepad_ai_disabled = 5 [(buf.validate.field).bool.const = false];
+  bool is_whiteboard_ai_disabled = 6 [(buf.validate.field).bool.const = false];
 }
 
 message InsightsAIMeetingSummarizationFeatures {
