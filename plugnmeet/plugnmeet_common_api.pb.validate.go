@@ -1302,22 +1302,22 @@ var _ interface {
 	ErrorName() string
 } = ExternalDisplayLinkReqValidationError{}
 
-// Validate checks the field values on ChangeEtherpadStatusReq with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on ChangeSharedNotepadStatusReq with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ChangeEtherpadStatusReq) Validate() error {
+func (m *ChangeSharedNotepadStatusReq) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ChangeEtherpadStatusReq with the
+// ValidateAll checks the field values on ChangeSharedNotepadStatusReq with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ChangeEtherpadStatusReqMultiError, or nil if none found.
-func (m *ChangeEtherpadStatusReq) ValidateAll() error {
+// ChangeSharedNotepadStatusReqMultiError, or nil if none found.
+func (m *ChangeSharedNotepadStatusReq) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ChangeEtherpadStatusReq) validate(all bool) error {
+func (m *ChangeSharedNotepadStatusReq) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1329,19 +1329,19 @@ func (m *ChangeEtherpadStatusReq) validate(all bool) error {
 	// no validation rules for IsActive
 
 	if len(errors) > 0 {
-		return ChangeEtherpadStatusReqMultiError(errors)
+		return ChangeSharedNotepadStatusReqMultiError(errors)
 	}
 
 	return nil
 }
 
-// ChangeEtherpadStatusReqMultiError is an error wrapping multiple validation
-// errors returned by ChangeEtherpadStatusReq.ValidateAll() if the designated
-// constraints aren't met.
-type ChangeEtherpadStatusReqMultiError []error
+// ChangeSharedNotepadStatusReqMultiError is an error wrapping multiple
+// validation errors returned by ChangeSharedNotepadStatusReq.ValidateAll() if
+// the designated constraints aren't met.
+type ChangeSharedNotepadStatusReqMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ChangeEtherpadStatusReqMultiError) Error() string {
+func (m ChangeSharedNotepadStatusReqMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1350,11 +1350,12 @@ func (m ChangeEtherpadStatusReqMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ChangeEtherpadStatusReqMultiError) AllErrors() []error { return m }
+func (m ChangeSharedNotepadStatusReqMultiError) AllErrors() []error { return m }
 
-// ChangeEtherpadStatusReqValidationError is the validation error returned by
-// ChangeEtherpadStatusReq.Validate if the designated constraints aren't met.
-type ChangeEtherpadStatusReqValidationError struct {
+// ChangeSharedNotepadStatusReqValidationError is the validation error returned
+// by ChangeSharedNotepadStatusReq.Validate if the designated constraints
+// aren't met.
+type ChangeSharedNotepadStatusReqValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1362,24 +1363,24 @@ type ChangeEtherpadStatusReqValidationError struct {
 }
 
 // Field function returns field value.
-func (e ChangeEtherpadStatusReqValidationError) Field() string { return e.field }
+func (e ChangeSharedNotepadStatusReqValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ChangeEtherpadStatusReqValidationError) Reason() string { return e.reason }
+func (e ChangeSharedNotepadStatusReqValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ChangeEtherpadStatusReqValidationError) Cause() error { return e.cause }
+func (e ChangeSharedNotepadStatusReqValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ChangeEtherpadStatusReqValidationError) Key() bool { return e.key }
+func (e ChangeSharedNotepadStatusReqValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ChangeEtherpadStatusReqValidationError) ErrorName() string {
-	return "ChangeEtherpadStatusReqValidationError"
+func (e ChangeSharedNotepadStatusReqValidationError) ErrorName() string {
+	return "ChangeSharedNotepadStatusReqValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ChangeEtherpadStatusReqValidationError) Error() string {
+func (e ChangeSharedNotepadStatusReqValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1391,14 +1392,14 @@ func (e ChangeEtherpadStatusReqValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sChangeEtherpadStatusReq.%s: %s%s",
+		"invalid %sChangeSharedNotepadStatusReq.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ChangeEtherpadStatusReqValidationError{}
+var _ error = ChangeSharedNotepadStatusReqValidationError{}
 
 var _ interface {
 	Field() string
@@ -1406,7 +1407,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ChangeEtherpadStatusReqValidationError{}
+} = ChangeSharedNotepadStatusReqValidationError{}
 
 // Validate checks the field values on ApproveWaitingUsersReq with the rules
 // defined in the proto definition for this message. If any rules are

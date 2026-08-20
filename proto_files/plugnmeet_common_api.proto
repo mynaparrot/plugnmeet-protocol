@@ -125,7 +125,7 @@ message ExternalDisplayLinkReq {
   string user_id = 5;
 }
 
-message ChangeEtherpadStatusReq {
+message ChangeSharedNotepadStatusReq {
   string room_id = 1;
   bool is_active = 2;
 }

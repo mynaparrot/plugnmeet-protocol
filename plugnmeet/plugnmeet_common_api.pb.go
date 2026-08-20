@@ -1111,7 +1111,7 @@ func (x *ExternalDisplayLinkReq) GetUserId() string {
 	return ""
 }
 
-type ChangeEtherpadStatusReq struct {
+type ChangeSharedNotepadStatusReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RoomId        string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
 	IsActive      bool                   `protobuf:"varint,2,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
@@ -1119,20 +1119,20 @@ type ChangeEtherpadStatusReq struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ChangeEtherpadStatusReq) Reset() {
-	*x = ChangeEtherpadStatusReq{}
+func (x *ChangeSharedNotepadStatusReq) Reset() {
+	*x = ChangeSharedNotepadStatusReq{}
 	mi := &file_plugnmeet_common_api_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ChangeEtherpadStatusReq) String() string {
+func (x *ChangeSharedNotepadStatusReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ChangeEtherpadStatusReq) ProtoMessage() {}
+func (*ChangeSharedNotepadStatusReq) ProtoMessage() {}
 
-func (x *ChangeEtherpadStatusReq) ProtoReflect() protoreflect.Message {
+func (x *ChangeSharedNotepadStatusReq) ProtoReflect() protoreflect.Message {
 	mi := &file_plugnmeet_common_api_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1144,19 +1144,19 @@ func (x *ChangeEtherpadStatusReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ChangeEtherpadStatusReq.ProtoReflect.Descriptor instead.
-func (*ChangeEtherpadStatusReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use ChangeSharedNotepadStatusReq.ProtoReflect.Descriptor instead.
+func (*ChangeSharedNotepadStatusReq) Descriptor() ([]byte, []int) {
 	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *ChangeEtherpadStatusReq) GetRoomId() string {
+func (x *ChangeSharedNotepadStatusReq) GetRoomId() string {
 	if x != nil {
 		return x.RoomId
 	}
 	return ""
 }
 
-func (x *ChangeEtherpadStatusReq) GetIsActive() bool {
+func (x *ChangeSharedNotepadStatusReq) GetIsActive() bool {
 	if x != nil {
 		return x.IsActive
 	}
@@ -2039,8 +2039,8 @@ const file_plugnmeet_common_api_proto_rawDesc = "" +
 	"\x03url\x18\x02 \x01(\tH\x00R\x03url\x88\x01\x01\x12\x17\n" +
 	"\aroom_id\x18\x04 \x01(\tR\x06roomId\x12\x17\n" +
 	"\auser_id\x18\x05 \x01(\tR\x06userIdB\x06\n" +
-	"\x04_url\"O\n" +
-	"\x17ChangeEtherpadStatusReq\x12\x17\n" +
+	"\x04_url\"T\n" +
+	"\x1cChangeSharedNotepadStatusReq\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x1b\n" +
 	"\tis_active\x18\x02 \x01(\bR\bisActive\"J\n" +
 	"\x16ApproveWaitingUsersReq\x12\x17\n" +
@@ -2156,37 +2156,37 @@ func file_plugnmeet_common_api_proto_rawDescGZIP() []byte {
 var file_plugnmeet_common_api_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
 var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_plugnmeet_common_api_proto_goTypes = []any{
-	(StatusCode)(0),                     // 0: plugnmeet.StatusCode
-	(SwitchPresenterTask)(0),            // 1: plugnmeet.SwitchPresenterTask
-	(ExternalMediaPlayerTask)(0),        // 2: plugnmeet.ExternalMediaPlayerTask
-	(ExternalDisplayLinkTask)(0),        // 3: plugnmeet.ExternalDisplayLinkTask
-	(RoomUploadedFileType)(0),           // 4: plugnmeet.RoomUploadedFileType
-	(*CommonResponse)(nil),              // 5: plugnmeet.CommonResponse
-	(*VerifyTokenReq)(nil),              // 6: plugnmeet.VerifyTokenReq
-	(*VerifyTokenRes)(nil),              // 7: plugnmeet.VerifyTokenRes
-	(*MuteUnMuteTrackReq)(nil),          // 8: plugnmeet.MuteUnMuteTrackReq
-	(*RemoveParticipantReq)(nil),        // 9: plugnmeet.RemoveParticipantReq
-	(*DataMessageReq)(nil),              // 10: plugnmeet.DataMessageReq
-	(*RoomEndAPIReq)(nil),               // 11: plugnmeet.RoomEndAPIReq
-	(*ChangeVisibilityRes)(nil),         // 12: plugnmeet.ChangeVisibilityRes
-	(*SwitchPresenterReq)(nil),          // 13: plugnmeet.SwitchPresenterReq
-	(*ExternalMediaPlayerReq)(nil),      // 14: plugnmeet.ExternalMediaPlayerReq
-	(*ExternalDisplayLinkReq)(nil),      // 15: plugnmeet.ExternalDisplayLinkReq
-	(*ChangeEtherpadStatusReq)(nil),     // 16: plugnmeet.ChangeEtherpadStatusReq
-	(*ApproveWaitingUsersReq)(nil),      // 17: plugnmeet.ApproveWaitingUsersReq
-	(*UpdateWaitingRoomMessageReq)(nil), // 18: plugnmeet.UpdateWaitingRoomMessageReq
-	(*UpdateUserLockSettingsReq)(nil),   // 19: plugnmeet.UpdateUserLockSettingsReq
-	(*UploadBase64EncodedDataReq)(nil),  // 20: plugnmeet.UploadBase64EncodedDataReq
-	(*UploadBase64EncodedDataRes)(nil),  // 21: plugnmeet.UploadBase64EncodedDataRes
-	(*UploadedFileMergeReq)(nil),        // 22: plugnmeet.UploadedFileMergeReq
-	(*UploadedFileRes)(nil),             // 23: plugnmeet.UploadedFileRes
-	(*RoomUploadedFileMetadata)(nil),    // 24: plugnmeet.RoomUploadedFileMetadata
-	(*GetRoomUploadedFilesReq)(nil),     // 25: plugnmeet.GetRoomUploadedFilesReq
-	(*GetRoomUploadedFilesRes)(nil),     // 26: plugnmeet.GetRoomUploadedFilesRes
-	(*EnableSipDialInReq)(nil),          // 27: plugnmeet.EnableSipDialInReq
-	(*NatsSubjects)(nil),                // 28: plugnmeet.NatsSubjects
-	(ClientType)(0),                     // 29: plugnmeet.ClientType
-	(DataMsgBodyType)(0),                // 30: plugnmeet.DataMsgBodyType
+	(StatusCode)(0),                      // 0: plugnmeet.StatusCode
+	(SwitchPresenterTask)(0),             // 1: plugnmeet.SwitchPresenterTask
+	(ExternalMediaPlayerTask)(0),         // 2: plugnmeet.ExternalMediaPlayerTask
+	(ExternalDisplayLinkTask)(0),         // 3: plugnmeet.ExternalDisplayLinkTask
+	(RoomUploadedFileType)(0),            // 4: plugnmeet.RoomUploadedFileType
+	(*CommonResponse)(nil),               // 5: plugnmeet.CommonResponse
+	(*VerifyTokenReq)(nil),               // 6: plugnmeet.VerifyTokenReq
+	(*VerifyTokenRes)(nil),               // 7: plugnmeet.VerifyTokenRes
+	(*MuteUnMuteTrackReq)(nil),           // 8: plugnmeet.MuteUnMuteTrackReq
+	(*RemoveParticipantReq)(nil),         // 9: plugnmeet.RemoveParticipantReq
+	(*DataMessageReq)(nil),               // 10: plugnmeet.DataMessageReq
+	(*RoomEndAPIReq)(nil),                // 11: plugnmeet.RoomEndAPIReq
+	(*ChangeVisibilityRes)(nil),          // 12: plugnmeet.ChangeVisibilityRes
+	(*SwitchPresenterReq)(nil),           // 13: plugnmeet.SwitchPresenterReq
+	(*ExternalMediaPlayerReq)(nil),       // 14: plugnmeet.ExternalMediaPlayerReq
+	(*ExternalDisplayLinkReq)(nil),       // 15: plugnmeet.ExternalDisplayLinkReq
+	(*ChangeSharedNotepadStatusReq)(nil), // 16: plugnmeet.ChangeSharedNotepadStatusReq
+	(*ApproveWaitingUsersReq)(nil),       // 17: plugnmeet.ApproveWaitingUsersReq
+	(*UpdateWaitingRoomMessageReq)(nil),  // 18: plugnmeet.UpdateWaitingRoomMessageReq
+	(*UpdateUserLockSettingsReq)(nil),    // 19: plugnmeet.UpdateUserLockSettingsReq
+	(*UploadBase64EncodedDataReq)(nil),   // 20: plugnmeet.UploadBase64EncodedDataReq
+	(*UploadBase64EncodedDataRes)(nil),   // 21: plugnmeet.UploadBase64EncodedDataRes
+	(*UploadedFileMergeReq)(nil),         // 22: plugnmeet.UploadedFileMergeReq
+	(*UploadedFileRes)(nil),              // 23: plugnmeet.UploadedFileRes
+	(*RoomUploadedFileMetadata)(nil),     // 24: plugnmeet.RoomUploadedFileMetadata
+	(*GetRoomUploadedFilesReq)(nil),      // 25: plugnmeet.GetRoomUploadedFilesReq
+	(*GetRoomUploadedFilesRes)(nil),      // 26: plugnmeet.GetRoomUploadedFilesRes
+	(*EnableSipDialInReq)(nil),           // 27: plugnmeet.EnableSipDialInReq
+	(*NatsSubjects)(nil),                 // 28: plugnmeet.NatsSubjects
+	(ClientType)(0),                      // 29: plugnmeet.ClientType
+	(DataMsgBodyType)(0),                 // 30: plugnmeet.DataMsgBodyType
 }
 var file_plugnmeet_common_api_proto_depIdxs = []int32{
 	0,  // 0: plugnmeet.CommonResponse.status_code:type_name -> plugnmeet.StatusCode

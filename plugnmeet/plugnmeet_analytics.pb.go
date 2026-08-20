@@ -81,7 +81,7 @@ const (
 	AnalyticsEvents_ANALYTICS_EVENT_ROOM_RECORDING_STATUS                                AnalyticsEvents = 4
 	AnalyticsEvents_ANALYTICS_EVENT_ROOM_RTMP_STATUS                                     AnalyticsEvents = 5
 	AnalyticsEvents_ANALYTICS_EVENT_ROOM_BREAKOUT_ROOM                                   AnalyticsEvents = 6
-	AnalyticsEvents_ANALYTICS_EVENT_ROOM_ETHERPAD_STATUS                                 AnalyticsEvents = 7
+	AnalyticsEvents_ANALYTICS_EVENT_ROOM_SHARED_NOTEPAD_STATUS                           AnalyticsEvents = 7
 	AnalyticsEvents_ANALYTICS_EVENT_ROOM_EXTERNAL_DISPLAY_LINK_STATUS                    AnalyticsEvents = 8
 	AnalyticsEvents_ANALYTICS_EVENT_ROOM_EXTERNAL_MEDIA_PLAYER_STATUS                    AnalyticsEvents = 9
 	AnalyticsEvents_ANALYTICS_EVENT_ROOM_SPEECH_SERVICE_STATUS                           AnalyticsEvents = 10
@@ -136,7 +136,7 @@ var (
 		4:  "ANALYTICS_EVENT_ROOM_RECORDING_STATUS",
 		5:  "ANALYTICS_EVENT_ROOM_RTMP_STATUS",
 		6:  "ANALYTICS_EVENT_ROOM_BREAKOUT_ROOM",
-		7:  "ANALYTICS_EVENT_ROOM_ETHERPAD_STATUS",
+		7:  "ANALYTICS_EVENT_ROOM_SHARED_NOTEPAD_STATUS",
 		8:  "ANALYTICS_EVENT_ROOM_EXTERNAL_DISPLAY_LINK_STATUS",
 		9:  "ANALYTICS_EVENT_ROOM_EXTERNAL_MEDIA_PLAYER_STATUS",
 		10: "ANALYTICS_EVENT_ROOM_SPEECH_SERVICE_STATUS",
@@ -179,7 +179,7 @@ var (
 		"ANALYTICS_EVENT_ROOM_RECORDING_STATUS":                                4,
 		"ANALYTICS_EVENT_ROOM_RTMP_STATUS":                                     5,
 		"ANALYTICS_EVENT_ROOM_BREAKOUT_ROOM":                                   6,
-		"ANALYTICS_EVENT_ROOM_ETHERPAD_STATUS":                                 7,
+		"ANALYTICS_EVENT_ROOM_SHARED_NOTEPAD_STATUS":                           7,
 		"ANALYTICS_EVENT_ROOM_EXTERNAL_DISPLAY_LINK_STATUS":                    8,
 		"ANALYTICS_EVENT_ROOM_EXTERNAL_MEDIA_PLAYER_STATUS":                    9,
 		"ANALYTICS_EVENT_ROOM_SPEECH_SERVICE_STATUS":                           10,
@@ -916,7 +916,7 @@ const file_plugnmeet_analytics_proto_rawDesc = "" +
 	"\v_ex_user_id*R\n" +
 	"\x12AnalyticsEventType\x12\x1d\n" +
 	"\x19ANALYTICS_EVENT_TYPE_ROOM\x10\x00\x12\x1d\n" +
-	"\x19ANALYTICS_EVENT_TYPE_USER\x10\x01*\xfd\x0e\n" +
+	"\x19ANALYTICS_EVENT_TYPE_USER\x10\x01*\x83\x0f\n" +
 	"\x0fAnalyticsEvents\x12\x1b\n" +
 	"\x17ANALYTICS_EVENT_UNKNOWN\x10\x00\x12#\n" +
 	"\x1fANALYTICS_EVENT_ROOM_POLL_ADDED\x10\x01\x12#\n" +
@@ -924,8 +924,8 @@ const file_plugnmeet_analytics_proto_rawDesc = "" +
 	"\x1bANALYTICS_EVENT_USER_JOINED\x10\x03\x12)\n" +
 	"%ANALYTICS_EVENT_ROOM_RECORDING_STATUS\x10\x04\x12$\n" +
 	" ANALYTICS_EVENT_ROOM_RTMP_STATUS\x10\x05\x12&\n" +
-	"\"ANALYTICS_EVENT_ROOM_BREAKOUT_ROOM\x10\x06\x12(\n" +
-	"$ANALYTICS_EVENT_ROOM_ETHERPAD_STATUS\x10\a\x125\n" +
+	"\"ANALYTICS_EVENT_ROOM_BREAKOUT_ROOM\x10\x06\x12.\n" +
+	"*ANALYTICS_EVENT_ROOM_SHARED_NOTEPAD_STATUS\x10\a\x125\n" +
 	"1ANALYTICS_EVENT_ROOM_EXTERNAL_DISPLAY_LINK_STATUS\x10\b\x125\n" +
 	"1ANALYTICS_EVENT_ROOM_EXTERNAL_MEDIA_PLAYER_STATUS\x10\t\x12.\n" +
 	"*ANALYTICS_EVENT_ROOM_SPEECH_SERVICE_STATUS\x10\n" +
