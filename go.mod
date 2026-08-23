@@ -13,7 +13,7 @@ require (
 	github.com/livekit/protocol v1.49.0
 	github.com/nats-io/nats.go v1.53.1
 	github.com/nats-io/nkeys v0.4.16
-	github.com/sirupsen/logrus v1.10.0
+	github.com/sirupsen/logrus v1.10.1
 	google.golang.org/protobuf v1.36.12
 	mvdan.cc/sh/v3 v3.13.1
 )
