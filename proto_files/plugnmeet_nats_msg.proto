@@ -44,7 +44,8 @@ enum NatsMsgServerToClientEvents {
   RESP_ONLINE_USERS_LIST = 18;
   DELIVERY_PRIVATE_DATA = 19;
   PONG = 20;
-  //next ID: 21
+  SESSION_DATA_FETCH_RESPONSE = 21;
+  //next ID: 22
 }
 
 enum NatsMsgClientToServerEvents {
@@ -62,7 +63,9 @@ enum NatsMsgClientToServerEvents {
 
   REQ_ONLINE_USERS_LIST = 9;
   REQ_PRIVATE_DATA_DELIVERY = 10;
-  //next ID: 11
+  SESSION_DATA_SAVE          = 11;
+  SESSION_DATA_FETCH_REQUEST = 12;
+  //next ID: 13
 }
 
 message PrivateDataDelivery {
@@ -177,4 +180,16 @@ message ChatMessage {
   bool from_admin = 8;
   optional string source_lang = 9;
   map<string, string> translations = 10;
+}
+
+enum SessionDataType {
+  SESSION_DATA_TYPE_UNSPECIFIED = 0;
+  SESSION_DATA_TYPE_WHITEBOARD  = 1;
+  SESSION_DATA_TYPE_NOTEPAD     = 2;
+}
+
+message SessionDataHeader {
+  SessionDataType data_type = 1;
+  optional string key       = 2;   // request: unset => all, set => one; response: always set
+  bool last                 = 3;   // response only: true on the final streamed entry
 }

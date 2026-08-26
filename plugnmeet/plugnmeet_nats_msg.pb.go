@@ -25,27 +25,28 @@ type NatsMsgServerToClientEvents int32
 
 const (
 	// initial data
-	NatsMsgServerToClientEvents_RES_INITIAL_DATA           NatsMsgServerToClientEvents = 0
-	NatsMsgServerToClientEvents_RES_JOINED_USERS_LIST      NatsMsgServerToClientEvents = 1
-	NatsMsgServerToClientEvents_RES_MEDIA_SERVER_DATA      NatsMsgServerToClientEvents = 2
-	NatsMsgServerToClientEvents_ROOM_METADATA_UPDATE       NatsMsgServerToClientEvents = 3
-	NatsMsgServerToClientEvents_USER_METADATA_UPDATE       NatsMsgServerToClientEvents = 4
-	NatsMsgServerToClientEvents_USER_JOINED                NatsMsgServerToClientEvents = 5
-	NatsMsgServerToClientEvents_USER_DISCONNECTED          NatsMsgServerToClientEvents = 6
-	NatsMsgServerToClientEvents_USER_OFFLINE               NatsMsgServerToClientEvents = 7
-	NatsMsgServerToClientEvents_RESP_RENEW_PNM_TOKEN       NatsMsgServerToClientEvents = 8
-	NatsMsgServerToClientEvents_SYSTEM_NOTIFICATION        NatsMsgServerToClientEvents = 9
-	NatsMsgServerToClientEvents_SESSION_ENDED              NatsMsgServerToClientEvents = 10
-	NatsMsgServerToClientEvents_POLL_CLOSED                NatsMsgServerToClientEvents = 11
-	NatsMsgServerToClientEvents_POLL_CREATED               NatsMsgServerToClientEvents = 12
-	NatsMsgServerToClientEvents_JOIN_BREAKOUT_ROOM         NatsMsgServerToClientEvents = 13
-	NatsMsgServerToClientEvents_BREAKOUT_ROOM_ENDED        NatsMsgServerToClientEvents = 14
-	NatsMsgServerToClientEvents_SYSTEM_CHAT_MSG            NatsMsgServerToClientEvents = 15 // mostly system message display in chat
-	NatsMsgServerToClientEvents_TRANSCRIPTION_OUTPUT_TEXT  NatsMsgServerToClientEvents = 16
-	NatsMsgServerToClientEvents_RESP_INSIGHTS_AI_TEXT_CHAT NatsMsgServerToClientEvents = 17
-	NatsMsgServerToClientEvents_RESP_ONLINE_USERS_LIST     NatsMsgServerToClientEvents = 18
-	NatsMsgServerToClientEvents_DELIVERY_PRIVATE_DATA      NatsMsgServerToClientEvents = 19
-	NatsMsgServerToClientEvents_PONG                       NatsMsgServerToClientEvents = 20 //next ID: 21
+	NatsMsgServerToClientEvents_RES_INITIAL_DATA            NatsMsgServerToClientEvents = 0
+	NatsMsgServerToClientEvents_RES_JOINED_USERS_LIST       NatsMsgServerToClientEvents = 1
+	NatsMsgServerToClientEvents_RES_MEDIA_SERVER_DATA       NatsMsgServerToClientEvents = 2
+	NatsMsgServerToClientEvents_ROOM_METADATA_UPDATE        NatsMsgServerToClientEvents = 3
+	NatsMsgServerToClientEvents_USER_METADATA_UPDATE        NatsMsgServerToClientEvents = 4
+	NatsMsgServerToClientEvents_USER_JOINED                 NatsMsgServerToClientEvents = 5
+	NatsMsgServerToClientEvents_USER_DISCONNECTED           NatsMsgServerToClientEvents = 6
+	NatsMsgServerToClientEvents_USER_OFFLINE                NatsMsgServerToClientEvents = 7
+	NatsMsgServerToClientEvents_RESP_RENEW_PNM_TOKEN        NatsMsgServerToClientEvents = 8
+	NatsMsgServerToClientEvents_SYSTEM_NOTIFICATION         NatsMsgServerToClientEvents = 9
+	NatsMsgServerToClientEvents_SESSION_ENDED               NatsMsgServerToClientEvents = 10
+	NatsMsgServerToClientEvents_POLL_CLOSED                 NatsMsgServerToClientEvents = 11
+	NatsMsgServerToClientEvents_POLL_CREATED                NatsMsgServerToClientEvents = 12
+	NatsMsgServerToClientEvents_JOIN_BREAKOUT_ROOM          NatsMsgServerToClientEvents = 13
+	NatsMsgServerToClientEvents_BREAKOUT_ROOM_ENDED         NatsMsgServerToClientEvents = 14
+	NatsMsgServerToClientEvents_SYSTEM_CHAT_MSG             NatsMsgServerToClientEvents = 15 // mostly system message display in chat
+	NatsMsgServerToClientEvents_TRANSCRIPTION_OUTPUT_TEXT   NatsMsgServerToClientEvents = 16
+	NatsMsgServerToClientEvents_RESP_INSIGHTS_AI_TEXT_CHAT  NatsMsgServerToClientEvents = 17
+	NatsMsgServerToClientEvents_RESP_ONLINE_USERS_LIST      NatsMsgServerToClientEvents = 18
+	NatsMsgServerToClientEvents_DELIVERY_PRIVATE_DATA       NatsMsgServerToClientEvents = 19
+	NatsMsgServerToClientEvents_PONG                        NatsMsgServerToClientEvents = 20
+	NatsMsgServerToClientEvents_SESSION_DATA_FETCH_RESPONSE NatsMsgServerToClientEvents = 21 //next ID: 22
 )
 
 // Enum value maps for NatsMsgServerToClientEvents.
@@ -72,29 +73,31 @@ var (
 		18: "RESP_ONLINE_USERS_LIST",
 		19: "DELIVERY_PRIVATE_DATA",
 		20: "PONG",
+		21: "SESSION_DATA_FETCH_RESPONSE",
 	}
 	NatsMsgServerToClientEvents_value = map[string]int32{
-		"RES_INITIAL_DATA":           0,
-		"RES_JOINED_USERS_LIST":      1,
-		"RES_MEDIA_SERVER_DATA":      2,
-		"ROOM_METADATA_UPDATE":       3,
-		"USER_METADATA_UPDATE":       4,
-		"USER_JOINED":                5,
-		"USER_DISCONNECTED":          6,
-		"USER_OFFLINE":               7,
-		"RESP_RENEW_PNM_TOKEN":       8,
-		"SYSTEM_NOTIFICATION":        9,
-		"SESSION_ENDED":              10,
-		"POLL_CLOSED":                11,
-		"POLL_CREATED":               12,
-		"JOIN_BREAKOUT_ROOM":         13,
-		"BREAKOUT_ROOM_ENDED":        14,
-		"SYSTEM_CHAT_MSG":            15,
-		"TRANSCRIPTION_OUTPUT_TEXT":  16,
-		"RESP_INSIGHTS_AI_TEXT_CHAT": 17,
-		"RESP_ONLINE_USERS_LIST":     18,
-		"DELIVERY_PRIVATE_DATA":      19,
-		"PONG":                       20,
+		"RES_INITIAL_DATA":            0,
+		"RES_JOINED_USERS_LIST":       1,
+		"RES_MEDIA_SERVER_DATA":       2,
+		"ROOM_METADATA_UPDATE":        3,
+		"USER_METADATA_UPDATE":        4,
+		"USER_JOINED":                 5,
+		"USER_DISCONNECTED":           6,
+		"USER_OFFLINE":                7,
+		"RESP_RENEW_PNM_TOKEN":        8,
+		"SYSTEM_NOTIFICATION":         9,
+		"SESSION_ENDED":               10,
+		"POLL_CLOSED":                 11,
+		"POLL_CREATED":                12,
+		"JOIN_BREAKOUT_ROOM":          13,
+		"BREAKOUT_ROOM_ENDED":         14,
+		"SYSTEM_CHAT_MSG":             15,
+		"TRANSCRIPTION_OUTPUT_TEXT":   16,
+		"RESP_INSIGHTS_AI_TEXT_CHAT":  17,
+		"RESP_ONLINE_USERS_LIST":      18,
+		"DELIVERY_PRIVATE_DATA":       19,
+		"PONG":                        20,
+		"SESSION_DATA_FETCH_RESPONSE": 21,
 	}
 )
 
@@ -128,17 +131,19 @@ func (NatsMsgServerToClientEvents) EnumDescriptor() ([]byte, []int) {
 type NatsMsgClientToServerEvents int32
 
 const (
-	NatsMsgClientToServerEvents_REQ_INITIAL_DATA          NatsMsgClientToServerEvents = 0
-	NatsMsgClientToServerEvents_REQ_MEDIA_SERVER_DATA     NatsMsgClientToServerEvents = 1
-	NatsMsgClientToServerEvents_REQ_JOINED_USERS_LIST     NatsMsgClientToServerEvents = 2
-	NatsMsgClientToServerEvents_REQ_RENEW_PNM_TOKEN       NatsMsgClientToServerEvents = 3
-	NatsMsgClientToServerEvents_PING                      NatsMsgClientToServerEvents = 4
-	NatsMsgClientToServerEvents_REQ_RAISE_HAND            NatsMsgClientToServerEvents = 5
-	NatsMsgClientToServerEvents_REQ_LOWER_HAND            NatsMsgClientToServerEvents = 6
-	NatsMsgClientToServerEvents_REQ_LOWER_OTHER_USER_HAND NatsMsgClientToServerEvents = 7
-	NatsMsgClientToServerEvents_PUSH_ANALYTICS_DATA       NatsMsgClientToServerEvents = 8
-	NatsMsgClientToServerEvents_REQ_ONLINE_USERS_LIST     NatsMsgClientToServerEvents = 9
-	NatsMsgClientToServerEvents_REQ_PRIVATE_DATA_DELIVERY NatsMsgClientToServerEvents = 10 //next ID: 11
+	NatsMsgClientToServerEvents_REQ_INITIAL_DATA           NatsMsgClientToServerEvents = 0
+	NatsMsgClientToServerEvents_REQ_MEDIA_SERVER_DATA      NatsMsgClientToServerEvents = 1
+	NatsMsgClientToServerEvents_REQ_JOINED_USERS_LIST      NatsMsgClientToServerEvents = 2
+	NatsMsgClientToServerEvents_REQ_RENEW_PNM_TOKEN        NatsMsgClientToServerEvents = 3
+	NatsMsgClientToServerEvents_PING                       NatsMsgClientToServerEvents = 4
+	NatsMsgClientToServerEvents_REQ_RAISE_HAND             NatsMsgClientToServerEvents = 5
+	NatsMsgClientToServerEvents_REQ_LOWER_HAND             NatsMsgClientToServerEvents = 6
+	NatsMsgClientToServerEvents_REQ_LOWER_OTHER_USER_HAND  NatsMsgClientToServerEvents = 7
+	NatsMsgClientToServerEvents_PUSH_ANALYTICS_DATA        NatsMsgClientToServerEvents = 8
+	NatsMsgClientToServerEvents_REQ_ONLINE_USERS_LIST      NatsMsgClientToServerEvents = 9
+	NatsMsgClientToServerEvents_REQ_PRIVATE_DATA_DELIVERY  NatsMsgClientToServerEvents = 10
+	NatsMsgClientToServerEvents_SESSION_DATA_SAVE          NatsMsgClientToServerEvents = 11
+	NatsMsgClientToServerEvents_SESSION_DATA_FETCH_REQUEST NatsMsgClientToServerEvents = 12 //next ID: 13
 )
 
 // Enum value maps for NatsMsgClientToServerEvents.
@@ -155,19 +160,23 @@ var (
 		8:  "PUSH_ANALYTICS_DATA",
 		9:  "REQ_ONLINE_USERS_LIST",
 		10: "REQ_PRIVATE_DATA_DELIVERY",
+		11: "SESSION_DATA_SAVE",
+		12: "SESSION_DATA_FETCH_REQUEST",
 	}
 	NatsMsgClientToServerEvents_value = map[string]int32{
-		"REQ_INITIAL_DATA":          0,
-		"REQ_MEDIA_SERVER_DATA":     1,
-		"REQ_JOINED_USERS_LIST":     2,
-		"REQ_RENEW_PNM_TOKEN":       3,
-		"PING":                      4,
-		"REQ_RAISE_HAND":            5,
-		"REQ_LOWER_HAND":            6,
-		"REQ_LOWER_OTHER_USER_HAND": 7,
-		"PUSH_ANALYTICS_DATA":       8,
-		"REQ_ONLINE_USERS_LIST":     9,
-		"REQ_PRIVATE_DATA_DELIVERY": 10,
+		"REQ_INITIAL_DATA":           0,
+		"REQ_MEDIA_SERVER_DATA":      1,
+		"REQ_JOINED_USERS_LIST":      2,
+		"REQ_RENEW_PNM_TOKEN":        3,
+		"PING":                       4,
+		"REQ_RAISE_HAND":             5,
+		"REQ_LOWER_HAND":             6,
+		"REQ_LOWER_OTHER_USER_HAND":  7,
+		"PUSH_ANALYTICS_DATA":        8,
+		"REQ_ONLINE_USERS_LIST":      9,
+		"REQ_PRIVATE_DATA_DELIVERY":  10,
+		"SESSION_DATA_SAVE":          11,
+		"SESSION_DATA_FETCH_REQUEST": 12,
 	}
 )
 
@@ -291,6 +300,55 @@ func (x NatsSystemNotificationTypes) Number() protoreflect.EnumNumber {
 // Deprecated: Use NatsSystemNotificationTypes.Descriptor instead.
 func (NatsSystemNotificationTypes) EnumDescriptor() ([]byte, []int) {
 	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{3}
+}
+
+type SessionDataType int32
+
+const (
+	SessionDataType_SESSION_DATA_TYPE_UNSPECIFIED SessionDataType = 0
+	SessionDataType_SESSION_DATA_TYPE_WHITEBOARD  SessionDataType = 1
+	SessionDataType_SESSION_DATA_TYPE_NOTEPAD     SessionDataType = 2
+)
+
+// Enum value maps for SessionDataType.
+var (
+	SessionDataType_name = map[int32]string{
+		0: "SESSION_DATA_TYPE_UNSPECIFIED",
+		1: "SESSION_DATA_TYPE_WHITEBOARD",
+		2: "SESSION_DATA_TYPE_NOTEPAD",
+	}
+	SessionDataType_value = map[string]int32{
+		"SESSION_DATA_TYPE_UNSPECIFIED": 0,
+		"SESSION_DATA_TYPE_WHITEBOARD":  1,
+		"SESSION_DATA_TYPE_NOTEPAD":     2,
+	}
+)
+
+func (x SessionDataType) Enum() *SessionDataType {
+	p := new(SessionDataType)
+	*p = x
+	return p
+}
+
+func (x SessionDataType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SessionDataType) Descriptor() protoreflect.EnumDescriptor {
+	return file_plugnmeet_nats_msg_proto_enumTypes[4].Descriptor()
+}
+
+func (SessionDataType) Type() protoreflect.EnumType {
+	return &file_plugnmeet_nats_msg_proto_enumTypes[4]
+}
+
+func (x SessionDataType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SessionDataType.Descriptor instead.
+func (SessionDataType) EnumDescriptor() ([]byte, []int) {
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{4}
 }
 
 type NatsSubjects struct {
@@ -1340,6 +1398,66 @@ func (x *ChatMessage) GetTranslations() map[string]string {
 	return nil
 }
 
+type SessionDataHeader struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DataType      SessionDataType        `protobuf:"varint,1,opt,name=data_type,json=dataType,proto3,enum=plugnmeet.SessionDataType" json:"data_type,omitempty"`
+	Key           *string                `protobuf:"bytes,2,opt,name=key,proto3,oneof" json:"key,omitempty"` // request: unset => all, set => one; response: always set
+	Last          bool                   `protobuf:"varint,3,opt,name=last,proto3" json:"last,omitempty"`    // response only: true on the final streamed entry
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SessionDataHeader) Reset() {
+	*x = SessionDataHeader{}
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SessionDataHeader) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SessionDataHeader) ProtoMessage() {}
+
+func (x *SessionDataHeader) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SessionDataHeader.ProtoReflect.Descriptor instead.
+func (*SessionDataHeader) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *SessionDataHeader) GetDataType() SessionDataType {
+	if x != nil {
+		return x.DataType
+	}
+	return SessionDataType_SESSION_DATA_TYPE_UNSPECIFIED
+}
+
+func (x *SessionDataHeader) GetKey() string {
+	if x != nil && x.Key != nil {
+		return *x.Key
+	}
+	return ""
+}
+
+func (x *SessionDataHeader) GetLast() bool {
+	if x != nil {
+		return x.Last
+	}
+	return false
+}
+
 var File_plugnmeet_nats_msg_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_nats_msg_proto_rawDesc = "" +
@@ -1451,7 +1569,12 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
 	"\v_to_user_idB\x0e\n" +
-	"\f_source_lang*\x86\x04\n" +
+	"\f_source_lang\"\x7f\n" +
+	"\x11SessionDataHeader\x127\n" +
+	"\tdata_type\x18\x01 \x01(\x0e2\x1a.plugnmeet.SessionDataTypeR\bdataType\x12\x15\n" +
+	"\x03key\x18\x02 \x01(\tH\x00R\x03key\x88\x01\x01\x12\x12\n" +
+	"\x04last\x18\x03 \x01(\bR\x04lastB\x06\n" +
+	"\x04_key*\xa7\x04\n" +
 	"\x1bNatsMsgServerToClientEvents\x12\x14\n" +
 	"\x10RES_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15RES_JOINED_USERS_LIST\x10\x01\x12\x19\n" +
@@ -1474,7 +1597,8 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x1aRESP_INSIGHTS_AI_TEXT_CHAT\x10\x11\x12\x1a\n" +
 	"\x16RESP_ONLINE_USERS_LIST\x10\x12\x12\x19\n" +
 	"\x15DELIVERY_PRIVATE_DATA\x10\x13\x12\b\n" +
-	"\x04PONG\x10\x14*\xa6\x02\n" +
+	"\x04PONG\x10\x14\x12\x1f\n" +
+	"\x1bSESSION_DATA_FETCH_RESPONSE\x10\x15*\xdd\x02\n" +
 	"\x1bNatsMsgClientToServerEvents\x12\x14\n" +
 	"\x10REQ_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15REQ_MEDIA_SERVER_DATA\x10\x01\x12\x19\n" +
@@ -1487,7 +1611,9 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x13PUSH_ANALYTICS_DATA\x10\b\x12\x19\n" +
 	"\x15REQ_ONLINE_USERS_LIST\x10\t\x12\x1d\n" +
 	"\x19REQ_PRIVATE_DATA_DELIVERY\x10\n" +
-	"*%\n" +
+	"\x12\x15\n" +
+	"\x11SESSION_DATA_SAVE\x10\v\x12\x1e\n" +
+	"\x1aSESSION_DATA_FETCH_REQUEST\x10\f*%\n" +
 	"\n" +
 	"ClientType\x12\a\n" +
 	"\x03WEB\x10\x00\x12\x0e\n" +
@@ -1496,7 +1622,11 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x1bNatsSystemNotificationTypes\x12!\n" +
 	"\x1dNATS_SYSTEM_NOTIFICATION_INFO\x10\x00\x12$\n" +
 	" NATS_SYSTEM_NOTIFICATION_WARNING\x10\x01\x12\"\n" +
-	"\x1eNATS_SYSTEM_NOTIFICATION_ERROR\x10\x02B\x9e\x01\n" +
+	"\x1eNATS_SYSTEM_NOTIFICATION_ERROR\x10\x02*u\n" +
+	"\x0fSessionDataType\x12!\n" +
+	"\x1dSESSION_DATA_TYPE_UNSPECIFIED\x10\x00\x12 \n" +
+	"\x1cSESSION_DATA_TYPE_WHITEBOARD\x10\x01\x12\x1d\n" +
+	"\x19SESSION_DATA_TYPE_NOTEPAD\x10\x02B\x9e\x01\n" +
 	"\rcom.plugnmeetB\x15PlugnmeetNatsMsgProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -1511,43 +1641,46 @@ func file_plugnmeet_nats_msg_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_nats_msg_proto_rawDescData
 }
 
-var file_plugnmeet_nats_msg_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_plugnmeet_nats_msg_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_plugnmeet_nats_msg_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_plugnmeet_nats_msg_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_plugnmeet_nats_msg_proto_goTypes = []any{
 	(NatsMsgServerToClientEvents)(0), // 0: plugnmeet.NatsMsgServerToClientEvents
 	(NatsMsgClientToServerEvents)(0), // 1: plugnmeet.NatsMsgClientToServerEvents
 	(ClientType)(0),                  // 2: plugnmeet.ClientType
 	(NatsSystemNotificationTypes)(0), // 3: plugnmeet.NatsSystemNotificationTypes
-	(*NatsSubjects)(nil),             // 4: plugnmeet.NatsSubjects
-	(*PrivateDataDelivery)(nil),      // 5: plugnmeet.PrivateDataDelivery
-	(*NatsMsgServerToClient)(nil),    // 6: plugnmeet.NatsMsgServerToClient
-	(*NatsMsgClientToServer)(nil),    // 7: plugnmeet.NatsMsgClientToServer
-	(*NatsKvRoomInfo)(nil),           // 8: plugnmeet.NatsKvRoomInfo
-	(*NatsKvUserInfo)(nil),           // 9: plugnmeet.NatsKvUserInfo
-	(*FallbackOnFlapping)(nil),       // 10: plugnmeet.FallbackOnFlapping
-	(*TurnCredentials)(nil),          // 11: plugnmeet.TurnCredentials
-	(*MediaServerConnInfo)(nil),      // 12: plugnmeet.MediaServerConnInfo
-	(*NatsInitialData)(nil),          // 13: plugnmeet.NatsInitialData
-	(*NatsSystemNotification)(nil),   // 14: plugnmeet.NatsSystemNotification
-	(*NatsUserMetadataUpdate)(nil),   // 15: plugnmeet.NatsUserMetadataUpdate
-	(*ChatMessage)(nil),              // 16: plugnmeet.ChatMessage
-	nil,                              // 17: plugnmeet.ChatMessage.TranslationsEntry
+	(SessionDataType)(0),             // 4: plugnmeet.SessionDataType
+	(*NatsSubjects)(nil),             // 5: plugnmeet.NatsSubjects
+	(*PrivateDataDelivery)(nil),      // 6: plugnmeet.PrivateDataDelivery
+	(*NatsMsgServerToClient)(nil),    // 7: plugnmeet.NatsMsgServerToClient
+	(*NatsMsgClientToServer)(nil),    // 8: plugnmeet.NatsMsgClientToServer
+	(*NatsKvRoomInfo)(nil),           // 9: plugnmeet.NatsKvRoomInfo
+	(*NatsKvUserInfo)(nil),           // 10: plugnmeet.NatsKvUserInfo
+	(*FallbackOnFlapping)(nil),       // 11: plugnmeet.FallbackOnFlapping
+	(*TurnCredentials)(nil),          // 12: plugnmeet.TurnCredentials
+	(*MediaServerConnInfo)(nil),      // 13: plugnmeet.MediaServerConnInfo
+	(*NatsInitialData)(nil),          // 14: plugnmeet.NatsInitialData
+	(*NatsSystemNotification)(nil),   // 15: plugnmeet.NatsSystemNotification
+	(*NatsUserMetadataUpdate)(nil),   // 16: plugnmeet.NatsUserMetadataUpdate
+	(*ChatMessage)(nil),              // 17: plugnmeet.ChatMessage
+	(*SessionDataHeader)(nil),        // 18: plugnmeet.SessionDataHeader
+	nil,                              // 19: plugnmeet.ChatMessage.TranslationsEntry
 }
 var file_plugnmeet_nats_msg_proto_depIdxs = []int32{
 	0,  // 0: plugnmeet.NatsMsgServerToClient.event:type_name -> plugnmeet.NatsMsgServerToClientEvents
 	1,  // 1: plugnmeet.NatsMsgClientToServer.event:type_name -> plugnmeet.NatsMsgClientToServerEvents
 	2,  // 2: plugnmeet.NatsKvUserInfo.client_type:type_name -> plugnmeet.ClientType
-	10, // 3: plugnmeet.TurnCredentials.fallback_on_flapping:type_name -> plugnmeet.FallbackOnFlapping
-	11, // 4: plugnmeet.MediaServerConnInfo.turn_credentials:type_name -> plugnmeet.TurnCredentials
-	8,  // 5: plugnmeet.NatsInitialData.room:type_name -> plugnmeet.NatsKvRoomInfo
-	9,  // 6: plugnmeet.NatsInitialData.local_user:type_name -> plugnmeet.NatsKvUserInfo
+	11, // 3: plugnmeet.TurnCredentials.fallback_on_flapping:type_name -> plugnmeet.FallbackOnFlapping
+	12, // 4: plugnmeet.MediaServerConnInfo.turn_credentials:type_name -> plugnmeet.TurnCredentials
+	9,  // 5: plugnmeet.NatsInitialData.room:type_name -> plugnmeet.NatsKvRoomInfo
+	10, // 6: plugnmeet.NatsInitialData.local_user:type_name -> plugnmeet.NatsKvUserInfo
 	3,  // 7: plugnmeet.NatsSystemNotification.type:type_name -> plugnmeet.NatsSystemNotificationTypes
-	17, // 8: plugnmeet.ChatMessage.translations:type_name -> plugnmeet.ChatMessage.TranslationsEntry
-	9,  // [9:9] is the sub-list for method output_type
-	9,  // [9:9] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	19, // 8: plugnmeet.ChatMessage.translations:type_name -> plugnmeet.ChatMessage.TranslationsEntry
+	4,  // 9: plugnmeet.SessionDataHeader.data_type:type_name -> plugnmeet.SessionDataType
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_nats_msg_proto_init() }
@@ -1558,13 +1691,14 @@ func file_plugnmeet_nats_msg_proto_init() {
 	file_plugnmeet_nats_msg_proto_msgTypes[7].OneofWrappers = []any{}
 	file_plugnmeet_nats_msg_proto_msgTypes[8].OneofWrappers = []any{}
 	file_plugnmeet_nats_msg_proto_msgTypes[12].OneofWrappers = []any{}
+	file_plugnmeet_nats_msg_proto_msgTypes[13].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_nats_msg_proto_rawDesc), len(file_plugnmeet_nats_msg_proto_rawDesc)),
-			NumEnums:      4,
-			NumMessages:   14,
+			NumEnums:      5,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
