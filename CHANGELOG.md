@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.6.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.5.0...v1.6.0) (2026-08-31)
+
+
+### Features
+
+* add server-first session data store for whiteboard and notepad sync ([3e1793c](https://github.com/mynaparrot/plugnmeet-protocol/commit/3e1793c1a271e29fdcc57322818a9a7e25771763))
+* renamed to `SHARED_NOTEPAD` ([cd30ff0](https://github.com/mynaparrot/plugnmeet-protocol/commit/cd30ff05a5e0b37325fe9fff88c81545d2a7ed92))
+* replaced `Etherpad` with `BlockNote` ([#321](https://github.com/mynaparrot/plugnmeet-protocol/issues/321)) ([b21400b](https://github.com/mynaparrot/plugnmeet-protocol/commit/b21400b606599de5ac1d5f476909cc236db68ee5))
+* **whiteboard:** add `AI Text-to-Diagram` support to the whiteboard ([afa7e27](https://github.com/mynaparrot/plugnmeet-protocol/commit/afa7e271e876c07703405a4cee783cf4f862d12d))
+
+
+### Bug Fixes
+
+* renamed to match with notepad ([5eede13](https://github.com/mynaparrot/plugnmeet-protocol/commit/5eede13d26f439f39ea95186a370cfb0c5734aa3))
+
 ## [1.5.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.4.0...v1.5.0) (2026-08-11)
 
 
