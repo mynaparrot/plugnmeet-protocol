@@ -1,6 +1,6 @@
 module github.com/mynaparrot/plugnmeet-protocol
 
-go 1.26
+go 1.26.7
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.12-20260825204119-511051f7f437.1
@@ -13,9 +13,9 @@ require (
 	github.com/livekit/protocol v1.49.0
 	github.com/nats-io/nats.go v1.53.1
 	github.com/nats-io/nkeys v0.4.16
-	github.com/sirupsen/logrus v1.10.1
+	github.com/sirupsen/logrus v1.10.2
 	google.golang.org/protobuf v1.36.12
-	mvdan.cc/sh/v3 v3.13.1
+	mvdan.cc/sh/v3 v3.14.0
 )
 
 require (
