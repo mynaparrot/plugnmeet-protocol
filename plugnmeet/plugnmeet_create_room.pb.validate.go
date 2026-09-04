@@ -1526,6 +1526,8 @@ func (m *BreakoutRoomFeatures) validate(all bool) error {
 
 	// no validation rules for AllowReturnToMainRoom
 
+	// no validation rules for AllowSelfSelect
+
 	if len(errors) > 0 {
 		return BreakoutRoomFeaturesMultiError(errors)
 	}

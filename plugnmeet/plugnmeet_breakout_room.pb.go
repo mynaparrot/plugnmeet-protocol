@@ -32,6 +32,7 @@ type CreateBreakoutRoomsReq struct {
 	PollShare             *PollShare             `protobuf:"bytes,7,opt,name=poll_share,json=pollShare,proto3,oneof" json:"poll_share,omitempty"`
 	ShareNotepad          bool                   `protobuf:"varint,8,opt,name=share_notepad,json=shareNotepad,proto3" json:"share_notepad,omitempty"`
 	AllowReturnToMainRoom bool                   `protobuf:"varint,9,opt,name=allow_return_to_main_room,json=allowReturnToMainRoom,proto3" json:"allow_return_to_main_room,omitempty"`
+	AllowSelfSelect       bool                   `protobuf:"varint,11,opt,name=allow_self_select,json=allowSelfSelect,proto3" json:"allow_self_select,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -125,6 +126,13 @@ func (x *CreateBreakoutRoomsReq) GetShareNotepad() bool {
 func (x *CreateBreakoutRoomsReq) GetAllowReturnToMainRoom() bool {
 	if x != nil {
 		return x.AllowReturnToMainRoom
+	}
+	return false
+}
+
+func (x *CreateBreakoutRoomsReq) GetAllowSelfSelect() bool {
+	if x != nil {
+		return x.AllowSelfSelect
 	}
 	return false
 }
@@ -869,7 +877,7 @@ var File_plugnmeet_breakout_room_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"\n" +
-	"\x1dplugnmeet_breakout_room.proto\x12\tplugnmeet\"\xe7\x03\n" +
+	"\x1dplugnmeet_breakout_room.proto\x12\tplugnmeet\"\x93\x04\n" +
 	"\x16CreateBreakoutRoomsReq\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12*\n" +
 	"\x11requested_user_id\x18\x02 \x01(\tR\x0frequestedUserId\x12\x1a\n" +
@@ -881,7 +889,8 @@ const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"\n" +
 	"poll_share\x18\a \x01(\v2\x14.plugnmeet.PollShareH\x02R\tpollShare\x88\x01\x01\x12#\n" +
 	"\rshare_notepad\x18\b \x01(\bR\fshareNotepad\x128\n" +
-	"\x19allow_return_to_main_room\x18\t \x01(\bR\x15allowReturnToMainRoomB\x0e\n" +
+	"\x19allow_return_to_main_room\x18\t \x01(\bR\x15allowReturnToMainRoom\x12*\n" +
+	"\x11allow_self_select\x18\v \x01(\bR\x0fallowSelfSelectB\x0e\n" +
 	"\f_welcome_msgB\x13\n" +
 	"\x11_whiteboard_shareB\r\n" +
 	"\v_poll_share\"\xd2\x01\n" +

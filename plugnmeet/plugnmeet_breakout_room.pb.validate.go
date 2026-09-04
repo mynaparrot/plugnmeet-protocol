@@ -101,6 +101,8 @@ func (m *CreateBreakoutRoomsReq) validate(all bool) error {
 
 	// no validation rules for AllowReturnToMainRoom
 
+	// no validation rules for AllowSelfSelect
+
 	if m.WelcomeMsg != nil {
 		// no validation rules for WelcomeMsg
 	}

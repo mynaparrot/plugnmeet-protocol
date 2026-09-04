@@ -14,6 +14,7 @@ message CreateBreakoutRoomsReq {
   optional PollShare poll_share = 7;
   bool share_notepad = 8;
   bool allow_return_to_main_room = 9;
+  bool allow_self_select = 11;
 }
 
 message BreakoutRoom {
