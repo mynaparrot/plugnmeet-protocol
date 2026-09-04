@@ -12,6 +12,8 @@ message CreateBreakoutRoomsReq {
   repeated BreakoutRoom rooms = 5;
   optional WhiteboardShare whiteboard_share = 6;
   bool share_notepad = 7;
+  bool share_polls = 8;
+  bool allow_return_to_main_room = 9;
 }
 
 message BreakoutRoom {

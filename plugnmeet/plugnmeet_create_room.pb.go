@@ -852,12 +852,13 @@ func (x *WaitingRoomFeatures) GetWaitingRoomMsg() string {
 }
 
 type BreakoutRoomFeatures struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	IsAllow            bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
-	IsActive           bool                   `protobuf:"varint,2,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
-	AllowedNumberRooms uint32                 `protobuf:"varint,3,opt,name=allowed_number_rooms,json=allowedNumberRooms,proto3" json:"allowed_number_rooms,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	IsAllow               bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
+	IsActive              bool                   `protobuf:"varint,2,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	AllowedNumberRooms    uint32                 `protobuf:"varint,3,opt,name=allowed_number_rooms,json=allowedNumberRooms,proto3" json:"allowed_number_rooms,omitempty"`
+	AllowReturnToMainRoom bool                   `protobuf:"varint,4,opt,name=allow_return_to_main_room,json=allowReturnToMainRoom,proto3" json:"allow_return_to_main_room,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *BreakoutRoomFeatures) Reset() {
@@ -909,6 +910,13 @@ func (x *BreakoutRoomFeatures) GetAllowedNumberRooms() uint32 {
 		return x.AllowedNumberRooms
 	}
 	return 0
+}
+
+func (x *BreakoutRoomFeatures) GetAllowReturnToMainRoom() bool {
+	if x != nil {
+		return x.AllowReturnToMainRoom
+	}
+	return false
 }
 
 type DisplayExternalLinkFeatures struct {
@@ -2132,11 +2140,12 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x04_url\"\\\n" +
 	"\x13WaitingRoomFeatures\x12\x1b\n" +
 	"\tis_active\x18\x01 \x01(\bR\bisActive\x12(\n" +
-	"\x10waiting_room_msg\x18\x02 \x01(\tR\x0ewaitingRoomMsg\"\x89\x01\n" +
+	"\x10waiting_room_msg\x18\x02 \x01(\tR\x0ewaitingRoomMsg\"\xc3\x01\n" +
 	"\x14BreakoutRoomFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12$\n" +
 	"\tis_active\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisActive\x120\n" +
-	"\x14allowed_number_rooms\x18\x03 \x01(\rR\x12allowedNumberRooms\"\xb0\x01\n" +
+	"\x14allowed_number_rooms\x18\x03 \x01(\rR\x12allowedNumberRooms\x128\n" +
+	"\x19allow_return_to_main_room\x18\x04 \x01(\bR\x15allowReturnToMainRoom\"\xb0\x01\n" +
 	"\x1bDisplayExternalLinkFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12$\n" +
 	"\tis_active\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisActive\x12\x17\n" +

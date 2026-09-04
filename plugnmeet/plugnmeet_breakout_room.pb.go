@@ -22,16 +22,18 @@ const (
 )
 
 type CreateBreakoutRoomsReq struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	RoomId          string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
-	RequestedUserId string                 `protobuf:"bytes,2,opt,name=requested_user_id,json=requestedUserId,proto3" json:"requested_user_id,omitempty"`
-	Duration        uint64                 `protobuf:"varint,3,opt,name=duration,proto3" json:"duration,omitempty"`
-	WelcomeMsg      *string                `protobuf:"bytes,4,opt,name=welcome_msg,json=welcomeMsg,proto3,oneof" json:"welcome_msg,omitempty"`
-	Rooms           []*BreakoutRoom        `protobuf:"bytes,5,rep,name=rooms,proto3" json:"rooms,omitempty"`
-	WhiteboardShare *WhiteboardShare       `protobuf:"bytes,6,opt,name=whiteboard_share,json=whiteboardShare,proto3,oneof" json:"whiteboard_share,omitempty"`
-	ShareNotepad    bool                   `protobuf:"varint,7,opt,name=share_notepad,json=shareNotepad,proto3" json:"share_notepad,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	RoomId                string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	RequestedUserId       string                 `protobuf:"bytes,2,opt,name=requested_user_id,json=requestedUserId,proto3" json:"requested_user_id,omitempty"`
+	Duration              uint64                 `protobuf:"varint,3,opt,name=duration,proto3" json:"duration,omitempty"`
+	WelcomeMsg            *string                `protobuf:"bytes,4,opt,name=welcome_msg,json=welcomeMsg,proto3,oneof" json:"welcome_msg,omitempty"`
+	Rooms                 []*BreakoutRoom        `protobuf:"bytes,5,rep,name=rooms,proto3" json:"rooms,omitempty"`
+	WhiteboardShare       *WhiteboardShare       `protobuf:"bytes,6,opt,name=whiteboard_share,json=whiteboardShare,proto3,oneof" json:"whiteboard_share,omitempty"`
+	ShareNotepad          bool                   `protobuf:"varint,7,opt,name=share_notepad,json=shareNotepad,proto3" json:"share_notepad,omitempty"`
+	SharePolls            bool                   `protobuf:"varint,8,opt,name=share_polls,json=sharePolls,proto3" json:"share_polls,omitempty"`
+	AllowReturnToMainRoom bool                   `protobuf:"varint,9,opt,name=allow_return_to_main_room,json=allowReturnToMainRoom,proto3" json:"allow_return_to_main_room,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *CreateBreakoutRoomsReq) Reset() {
@@ -109,6 +111,20 @@ func (x *CreateBreakoutRoomsReq) GetWhiteboardShare() *WhiteboardShare {
 func (x *CreateBreakoutRoomsReq) GetShareNotepad() bool {
 	if x != nil {
 		return x.ShareNotepad
+	}
+	return false
+}
+
+func (x *CreateBreakoutRoomsReq) GetSharePolls() bool {
+	if x != nil {
+		return x.SharePolls
+	}
+	return false
+}
+
+func (x *CreateBreakoutRoomsReq) GetAllowReturnToMainRoom() bool {
+	if x != nil {
+		return x.AllowReturnToMainRoom
 	}
 	return false
 }
@@ -809,7 +825,7 @@ var File_plugnmeet_breakout_room_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"\n" +
-	"\x1dplugnmeet_breakout_room.proto\x12\tplugnmeet\"\xe4\x02\n" +
+	"\x1dplugnmeet_breakout_room.proto\x12\tplugnmeet\"\xbf\x03\n" +
 	"\x16CreateBreakoutRoomsReq\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12*\n" +
 	"\x11requested_user_id\x18\x02 \x01(\tR\x0frequestedUserId\x12\x1a\n" +
@@ -818,7 +834,10 @@ const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"welcomeMsg\x88\x01\x01\x12-\n" +
 	"\x05rooms\x18\x05 \x03(\v2\x17.plugnmeet.BreakoutRoomR\x05rooms\x12J\n" +
 	"\x10whiteboard_share\x18\x06 \x01(\v2\x1a.plugnmeet.WhiteboardShareH\x01R\x0fwhiteboardShare\x88\x01\x01\x12#\n" +
-	"\rshare_notepad\x18\a \x01(\bR\fshareNotepadB\x0e\n" +
+	"\rshare_notepad\x18\a \x01(\bR\fshareNotepad\x12\x1f\n" +
+	"\vshare_polls\x18\b \x01(\bR\n" +
+	"sharePolls\x128\n" +
+	"\x19allow_return_to_main_room\x18\t \x01(\bR\x15allowReturnToMainRoomB\x0e\n" +
 	"\f_welcome_msgB\x13\n" +
 	"\x11_whiteboard_share\"\xd2\x01\n" +
 	"\fBreakoutRoom\x12\x0e\n" +

@@ -149,6 +149,7 @@ message BreakoutRoomFeatures {
   bool is_allow = 1;
   bool is_active = 2 [(buf.validate.field).bool.const = false];
   uint32 allowed_number_rooms = 3;
+  bool allow_return_to_main_room = 4 [(buf.validate.field).bool.const = false];
 }
 
 message DisplayExternalLinkFeatures {

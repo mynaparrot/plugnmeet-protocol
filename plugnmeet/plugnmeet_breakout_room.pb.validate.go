@@ -99,6 +99,10 @@ func (m *CreateBreakoutRoomsReq) validate(all bool) error {
 
 	// no validation rules for ShareNotepad
 
+	// no validation rules for SharePolls
+
+	// no validation rules for AllowReturnToMainRoom
+
 	if m.WelcomeMsg != nil {
 		// no validation rules for WelcomeMsg
 	}
