@@ -29,8 +29,8 @@ type CreateBreakoutRoomsReq struct {
 	WelcomeMsg            *string                `protobuf:"bytes,4,opt,name=welcome_msg,json=welcomeMsg,proto3,oneof" json:"welcome_msg,omitempty"`
 	Rooms                 []*BreakoutRoom        `protobuf:"bytes,5,rep,name=rooms,proto3" json:"rooms,omitempty"`
 	WhiteboardShare       *WhiteboardShare       `protobuf:"bytes,6,opt,name=whiteboard_share,json=whiteboardShare,proto3,oneof" json:"whiteboard_share,omitempty"`
-	ShareNotepad          bool                   `protobuf:"varint,7,opt,name=share_notepad,json=shareNotepad,proto3" json:"share_notepad,omitempty"`
-	SharePolls            bool                   `protobuf:"varint,8,opt,name=share_polls,json=sharePolls,proto3" json:"share_polls,omitempty"`
+	PollShare             *PollShare             `protobuf:"bytes,7,opt,name=poll_share,json=pollShare,proto3,oneof" json:"poll_share,omitempty"`
+	ShareNotepad          bool                   `protobuf:"varint,8,opt,name=share_notepad,json=shareNotepad,proto3" json:"share_notepad,omitempty"`
 	AllowReturnToMainRoom bool                   `protobuf:"varint,9,opt,name=allow_return_to_main_room,json=allowReturnToMainRoom,proto3" json:"allow_return_to_main_room,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
@@ -108,16 +108,16 @@ func (x *CreateBreakoutRoomsReq) GetWhiteboardShare() *WhiteboardShare {
 	return nil
 }
 
+func (x *CreateBreakoutRoomsReq) GetPollShare() *PollShare {
+	if x != nil {
+		return x.PollShare
+	}
+	return nil
+}
+
 func (x *CreateBreakoutRoomsReq) GetShareNotepad() bool {
 	if x != nil {
 		return x.ShareNotepad
-	}
-	return false
-}
-
-func (x *CreateBreakoutRoomsReq) GetSharePolls() bool {
-	if x != nil {
-		return x.SharePolls
 	}
 	return false
 }
@@ -821,11 +821,55 @@ func (x *BackToMainRoomRes) GetToken() string {
 	return ""
 }
 
+type PollShare struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PollIds       []string               `protobuf:"bytes,1,rep,name=poll_ids,json=pollIds,proto3" json:"poll_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PollShare) Reset() {
+	*x = PollShare{}
+	mi := &file_plugnmeet_breakout_room_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PollShare) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PollShare) ProtoMessage() {}
+
+func (x *PollShare) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_breakout_room_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PollShare.ProtoReflect.Descriptor instead.
+func (*PollShare) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_breakout_room_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *PollShare) GetPollIds() []string {
+	if x != nil {
+		return x.PollIds
+	}
+	return nil
+}
+
 var File_plugnmeet_breakout_room_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"\n" +
-	"\x1dplugnmeet_breakout_room.proto\x12\tplugnmeet\"\xbf\x03\n" +
+	"\x1dplugnmeet_breakout_room.proto\x12\tplugnmeet\"\xe7\x03\n" +
 	"\x16CreateBreakoutRoomsReq\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12*\n" +
 	"\x11requested_user_id\x18\x02 \x01(\tR\x0frequestedUserId\x12\x1a\n" +
@@ -833,13 +877,14 @@ const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"\vwelcome_msg\x18\x04 \x01(\tH\x00R\n" +
 	"welcomeMsg\x88\x01\x01\x12-\n" +
 	"\x05rooms\x18\x05 \x03(\v2\x17.plugnmeet.BreakoutRoomR\x05rooms\x12J\n" +
-	"\x10whiteboard_share\x18\x06 \x01(\v2\x1a.plugnmeet.WhiteboardShareH\x01R\x0fwhiteboardShare\x88\x01\x01\x12#\n" +
-	"\rshare_notepad\x18\a \x01(\bR\fshareNotepad\x12\x1f\n" +
-	"\vshare_polls\x18\b \x01(\bR\n" +
-	"sharePolls\x128\n" +
+	"\x10whiteboard_share\x18\x06 \x01(\v2\x1a.plugnmeet.WhiteboardShareH\x01R\x0fwhiteboardShare\x88\x01\x01\x128\n" +
+	"\n" +
+	"poll_share\x18\a \x01(\v2\x14.plugnmeet.PollShareH\x02R\tpollShare\x88\x01\x01\x12#\n" +
+	"\rshare_notepad\x18\b \x01(\bR\fshareNotepad\x128\n" +
 	"\x19allow_return_to_main_room\x18\t \x01(\bR\x15allowReturnToMainRoomB\x0e\n" +
 	"\f_welcome_msgB\x13\n" +
-	"\x11_whiteboard_share\"\xd2\x01\n" +
+	"\x11_whiteboard_shareB\r\n" +
+	"\v_poll_share\"\xd2\x01\n" +
 	"\fBreakoutRoom\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x1a\n" +
@@ -890,7 +935,9 @@ const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x19\n" +
 	"\x05token\x18\x03 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
-	"\x06_tokenB\xa3\x01\n" +
+	"\x06_token\"&\n" +
+	"\tPollShare\x12\x19\n" +
+	"\bpoll_ids\x18\x01 \x03(\tR\apollIdsB\xa3\x01\n" +
 	"\rcom.plugnmeetB\x1aPlugnmeetBreakoutRoomProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -905,7 +952,7 @@ func file_plugnmeet_breakout_room_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_breakout_room_proto_rawDescData
 }
 
-var file_plugnmeet_breakout_room_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_plugnmeet_breakout_room_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_plugnmeet_breakout_room_proto_goTypes = []any{
 	(*CreateBreakoutRoomsReq)(nil),          // 0: plugnmeet.CreateBreakoutRoomsReq
 	(*BreakoutRoom)(nil),                    // 1: plugnmeet.BreakoutRoom
@@ -919,18 +966,20 @@ var file_plugnmeet_breakout_room_proto_goTypes = []any{
 	(*BreakoutRoomRes)(nil),                 // 9: plugnmeet.BreakoutRoomRes
 	(*WhiteboardShare)(nil),                 // 10: plugnmeet.WhiteboardShare
 	(*BackToMainRoomRes)(nil),               // 11: plugnmeet.BackToMainRoomRes
+	(*PollShare)(nil),                       // 12: plugnmeet.PollShare
 }
 var file_plugnmeet_breakout_room_proto_depIdxs = []int32{
 	1,  // 0: plugnmeet.CreateBreakoutRoomsReq.rooms:type_name -> plugnmeet.BreakoutRoom
 	10, // 1: plugnmeet.CreateBreakoutRoomsReq.whiteboard_share:type_name -> plugnmeet.WhiteboardShare
-	2,  // 2: plugnmeet.BreakoutRoom.users:type_name -> plugnmeet.BreakoutRoomUser
-	1,  // 3: plugnmeet.BreakoutRoomRes.room:type_name -> plugnmeet.BreakoutRoom
-	1,  // 4: plugnmeet.BreakoutRoomRes.rooms:type_name -> plugnmeet.BreakoutRoom
-	5,  // [5:5] is the sub-list for method output_type
-	5,  // [5:5] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	12, // 2: plugnmeet.CreateBreakoutRoomsReq.poll_share:type_name -> plugnmeet.PollShare
+	2,  // 3: plugnmeet.BreakoutRoom.users:type_name -> plugnmeet.BreakoutRoomUser
+	1,  // 4: plugnmeet.BreakoutRoomRes.room:type_name -> plugnmeet.BreakoutRoom
+	1,  // 5: plugnmeet.BreakoutRoomRes.rooms:type_name -> plugnmeet.BreakoutRoom
+	6,  // [6:6] is the sub-list for method output_type
+	6,  // [6:6] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_breakout_room_proto_init() }
@@ -947,7 +996,7 @@ func file_plugnmeet_breakout_room_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_breakout_room_proto_rawDesc), len(file_plugnmeet_breakout_room_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

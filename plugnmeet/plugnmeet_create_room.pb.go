@@ -2140,12 +2140,12 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x04_url\"\\\n" +
 	"\x13WaitingRoomFeatures\x12\x1b\n" +
 	"\tis_active\x18\x01 \x01(\bR\bisActive\x12(\n" +
-	"\x10waiting_room_msg\x18\x02 \x01(\tR\x0ewaitingRoomMsg\"\xc3\x01\n" +
+	"\x10waiting_room_msg\x18\x02 \x01(\tR\x0ewaitingRoomMsg\"\xcc\x01\n" +
 	"\x14BreakoutRoomFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12$\n" +
 	"\tis_active\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisActive\x120\n" +
-	"\x14allowed_number_rooms\x18\x03 \x01(\rR\x12allowedNumberRooms\x128\n" +
-	"\x19allow_return_to_main_room\x18\x04 \x01(\bR\x15allowReturnToMainRoom\"\xb0\x01\n" +
+	"\x14allowed_number_rooms\x18\x03 \x01(\rR\x12allowedNumberRooms\x12A\n" +
+	"\x19allow_return_to_main_room\x18\x04 \x01(\bB\a\xbaH\x04j\x02\b\x00R\x15allowReturnToMainRoom\"\xb0\x01\n" +
 	"\x1bDisplayExternalLinkFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12$\n" +
 	"\tis_active\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisActive\x12\x17\n" +
