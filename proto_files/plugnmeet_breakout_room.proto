@@ -10,6 +10,8 @@ message CreateBreakoutRoomsReq {
   uint64 duration = 3;
   optional string welcome_msg = 4;
   repeated BreakoutRoom rooms = 5;
+  optional WhiteboardShare whiteboard_share = 6;
+  bool share_notepad = 7;
 }
 
 message BreakoutRoom {
@@ -19,6 +21,7 @@ message BreakoutRoom {
   bool started = 4;
   uint64 created = 5;
   repeated BreakoutRoomUser users = 6;
+  string room_sid = 7;
 }
 
 message BreakoutRoomUser {
@@ -35,19 +38,30 @@ message IncreaseBreakoutRoomDurationReq {
 
 message BroadcastBreakoutRoomMsgReq {
   string msg = 1;
-  string room_id = 3;
+  string room_id = 2;
 }
 
 message JoinBreakoutRoomReq {
   string breakout_room_id = 1;
   string user_id = 2;
   string room_id = 3;
-  bool is_admin = 4;
 }
 
 message EndBreakoutRoomReq {
   string breakout_room_id = 1;
+  string room_id = 2;
+}
+
+message ReInviteBreakoutRoomReq {
+  string breakout_room_id = 1;
+  string user_id = 2;
   string room_id = 3;
+}
+
+message BackToMainRoomReq {
+  string room_id = 1;
+  string user_id = 2;
+  string parent_room_id = 3;
 }
 
 message BreakoutRoomRes {
@@ -56,4 +70,16 @@ message BreakoutRoomRes {
   optional string token = 3; // join token
   optional BreakoutRoom room = 4; // for my breakout room
   repeated BreakoutRoom rooms = 5; // rooms list
+}
+
+message WhiteboardShare {
+  string file_id = 1;
+  repeated uint32 pages = 2;
+  uint32 current_page = 3;
+}
+
+message BackToMainRoomRes {
+  bool status = 1;
+  string msg = 2;
+  optional string token = 3; // main room access token
 }

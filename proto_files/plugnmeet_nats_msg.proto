@@ -192,4 +192,5 @@ message SessionDataHeader {
   SessionDataType data_type = 1;
   optional string key       = 2;   // request: unset => all, set => one; response: always set
   bool last                 = 3;   // response only: true on the final streamed entry
+  optional string target_room_id = 4; // save only: empty/absent => save to own room; set => seed into target breakout child room
 }

@@ -28,6 +28,8 @@ type CreateBreakoutRoomsReq struct {
 	Duration        uint64                 `protobuf:"varint,3,opt,name=duration,proto3" json:"duration,omitempty"`
 	WelcomeMsg      *string                `protobuf:"bytes,4,opt,name=welcome_msg,json=welcomeMsg,proto3,oneof" json:"welcome_msg,omitempty"`
 	Rooms           []*BreakoutRoom        `protobuf:"bytes,5,rep,name=rooms,proto3" json:"rooms,omitempty"`
+	WhiteboardShare *WhiteboardShare       `protobuf:"bytes,6,opt,name=whiteboard_share,json=whiteboardShare,proto3,oneof" json:"whiteboard_share,omitempty"`
+	ShareNotepad    bool                   `protobuf:"varint,7,opt,name=share_notepad,json=shareNotepad,proto3" json:"share_notepad,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -97,6 +99,20 @@ func (x *CreateBreakoutRoomsReq) GetRooms() []*BreakoutRoom {
 	return nil
 }
 
+func (x *CreateBreakoutRoomsReq) GetWhiteboardShare() *WhiteboardShare {
+	if x != nil {
+		return x.WhiteboardShare
+	}
+	return nil
+}
+
+func (x *CreateBreakoutRoomsReq) GetShareNotepad() bool {
+	if x != nil {
+		return x.ShareNotepad
+	}
+	return false
+}
+
 type BreakoutRoom struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -105,6 +121,7 @@ type BreakoutRoom struct {
 	Started       bool                   `protobuf:"varint,4,opt,name=started,proto3" json:"started,omitempty"`
 	Created       uint64                 `protobuf:"varint,5,opt,name=created,proto3" json:"created,omitempty"`
 	Users         []*BreakoutRoomUser    `protobuf:"bytes,6,rep,name=users,proto3" json:"users,omitempty"`
+	RoomSid       string                 `protobuf:"bytes,7,opt,name=room_sid,json=roomSid,proto3" json:"room_sid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -179,6 +196,13 @@ func (x *BreakoutRoom) GetUsers() []*BreakoutRoomUser {
 		return x.Users
 	}
 	return nil
+}
+
+func (x *BreakoutRoom) GetRoomSid() string {
+	if x != nil {
+		return x.RoomSid
+	}
+	return ""
 }
 
 type BreakoutRoomUser struct {
@@ -304,7 +328,7 @@ func (x *IncreaseBreakoutRoomDurationReq) GetRoomId() string {
 type BroadcastBreakoutRoomMsgReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Msg           string                 `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
-	RoomId        string                 `protobuf:"bytes,3,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	RoomId        string                 `protobuf:"bytes,2,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -358,7 +382,6 @@ type JoinBreakoutRoomReq struct {
 	BreakoutRoomId string                 `protobuf:"bytes,1,opt,name=breakout_room_id,json=breakoutRoomId,proto3" json:"breakout_room_id,omitempty"`
 	UserId         string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	RoomId         string                 `protobuf:"bytes,3,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
-	IsAdmin        bool                   `protobuf:"varint,4,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -414,17 +437,10 @@ func (x *JoinBreakoutRoomReq) GetRoomId() string {
 	return ""
 }
 
-func (x *JoinBreakoutRoomReq) GetIsAdmin() bool {
-	if x != nil {
-		return x.IsAdmin
-	}
-	return false
-}
-
 type EndBreakoutRoomReq struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	BreakoutRoomId string                 `protobuf:"bytes,1,opt,name=breakout_room_id,json=breakoutRoomId,proto3" json:"breakout_room_id,omitempty"`
-	RoomId         string                 `protobuf:"bytes,3,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	RoomId         string                 `protobuf:"bytes,2,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -473,6 +489,126 @@ func (x *EndBreakoutRoomReq) GetRoomId() string {
 	return ""
 }
 
+type ReInviteBreakoutRoomReq struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	BreakoutRoomId string                 `protobuf:"bytes,1,opt,name=breakout_room_id,json=breakoutRoomId,proto3" json:"breakout_room_id,omitempty"`
+	UserId         string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	RoomId         string                 `protobuf:"bytes,3,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ReInviteBreakoutRoomReq) Reset() {
+	*x = ReInviteBreakoutRoomReq{}
+	mi := &file_plugnmeet_breakout_room_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReInviteBreakoutRoomReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReInviteBreakoutRoomReq) ProtoMessage() {}
+
+func (x *ReInviteBreakoutRoomReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_breakout_room_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReInviteBreakoutRoomReq.ProtoReflect.Descriptor instead.
+func (*ReInviteBreakoutRoomReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_breakout_room_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ReInviteBreakoutRoomReq) GetBreakoutRoomId() string {
+	if x != nil {
+		return x.BreakoutRoomId
+	}
+	return ""
+}
+
+func (x *ReInviteBreakoutRoomReq) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *ReInviteBreakoutRoomReq) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
+type BackToMainRoomReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RoomId        string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ParentRoomId  string                 `protobuf:"bytes,3,opt,name=parent_room_id,json=parentRoomId,proto3" json:"parent_room_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BackToMainRoomReq) Reset() {
+	*x = BackToMainRoomReq{}
+	mi := &file_plugnmeet_breakout_room_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BackToMainRoomReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BackToMainRoomReq) ProtoMessage() {}
+
+func (x *BackToMainRoomReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_breakout_room_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BackToMainRoomReq.ProtoReflect.Descriptor instead.
+func (*BackToMainRoomReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_breakout_room_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *BackToMainRoomReq) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
+func (x *BackToMainRoomReq) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *BackToMainRoomReq) GetParentRoomId() string {
+	if x != nil {
+		return x.ParentRoomId
+	}
+	return ""
+}
+
 type BreakoutRoomRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
@@ -486,7 +622,7 @@ type BreakoutRoomRes struct {
 
 func (x *BreakoutRoomRes) Reset() {
 	*x = BreakoutRoomRes{}
-	mi := &file_plugnmeet_breakout_room_proto_msgTypes[7]
+	mi := &file_plugnmeet_breakout_room_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -498,7 +634,7 @@ func (x *BreakoutRoomRes) String() string {
 func (*BreakoutRoomRes) ProtoMessage() {}
 
 func (x *BreakoutRoomRes) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_breakout_room_proto_msgTypes[7]
+	mi := &file_plugnmeet_breakout_room_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -511,7 +647,7 @@ func (x *BreakoutRoomRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BreakoutRoomRes.ProtoReflect.Descriptor instead.
 func (*BreakoutRoomRes) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_breakout_room_proto_rawDescGZIP(), []int{7}
+	return file_plugnmeet_breakout_room_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *BreakoutRoomRes) GetStatus() bool {
@@ -549,26 +685,150 @@ func (x *BreakoutRoomRes) GetRooms() []*BreakoutRoom {
 	return nil
 }
 
+type WhiteboardShare struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FileId        string                 `protobuf:"bytes,1,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
+	Pages         []uint32               `protobuf:"varint,2,rep,packed,name=pages,proto3" json:"pages,omitempty"`
+	CurrentPage   uint32                 `protobuf:"varint,3,opt,name=current_page,json=currentPage,proto3" json:"current_page,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WhiteboardShare) Reset() {
+	*x = WhiteboardShare{}
+	mi := &file_plugnmeet_breakout_room_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WhiteboardShare) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WhiteboardShare) ProtoMessage() {}
+
+func (x *WhiteboardShare) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_breakout_room_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WhiteboardShare.ProtoReflect.Descriptor instead.
+func (*WhiteboardShare) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_breakout_room_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *WhiteboardShare) GetFileId() string {
+	if x != nil {
+		return x.FileId
+	}
+	return ""
+}
+
+func (x *WhiteboardShare) GetPages() []uint32 {
+	if x != nil {
+		return x.Pages
+	}
+	return nil
+}
+
+func (x *WhiteboardShare) GetCurrentPage() uint32 {
+	if x != nil {
+		return x.CurrentPage
+	}
+	return 0
+}
+
+type BackToMainRoomRes struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Token         *string                `protobuf:"bytes,3,opt,name=token,proto3,oneof" json:"token,omitempty"` // main room access token
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BackToMainRoomRes) Reset() {
+	*x = BackToMainRoomRes{}
+	mi := &file_plugnmeet_breakout_room_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BackToMainRoomRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BackToMainRoomRes) ProtoMessage() {}
+
+func (x *BackToMainRoomRes) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_breakout_room_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BackToMainRoomRes.ProtoReflect.Descriptor instead.
+func (*BackToMainRoomRes) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_breakout_room_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *BackToMainRoomRes) GetStatus() bool {
+	if x != nil {
+		return x.Status
+	}
+	return false
+}
+
+func (x *BackToMainRoomRes) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *BackToMainRoomRes) GetToken() string {
+	if x != nil && x.Token != nil {
+		return *x.Token
+	}
+	return ""
+}
+
 var File_plugnmeet_breakout_room_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"\n" +
-	"\x1dplugnmeet_breakout_room.proto\x12\tplugnmeet\"\xde\x01\n" +
+	"\x1dplugnmeet_breakout_room.proto\x12\tplugnmeet\"\xe4\x02\n" +
 	"\x16CreateBreakoutRoomsReq\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12*\n" +
 	"\x11requested_user_id\x18\x02 \x01(\tR\x0frequestedUserId\x12\x1a\n" +
 	"\bduration\x18\x03 \x01(\x04R\bduration\x12$\n" +
 	"\vwelcome_msg\x18\x04 \x01(\tH\x00R\n" +
 	"welcomeMsg\x88\x01\x01\x12-\n" +
-	"\x05rooms\x18\x05 \x03(\v2\x17.plugnmeet.BreakoutRoomR\x05roomsB\x0e\n" +
-	"\f_welcome_msg\"\xb7\x01\n" +
+	"\x05rooms\x18\x05 \x03(\v2\x17.plugnmeet.BreakoutRoomR\x05rooms\x12J\n" +
+	"\x10whiteboard_share\x18\x06 \x01(\v2\x1a.plugnmeet.WhiteboardShareH\x01R\x0fwhiteboardShare\x88\x01\x01\x12#\n" +
+	"\rshare_notepad\x18\a \x01(\bR\fshareNotepadB\x0e\n" +
+	"\f_welcome_msgB\x13\n" +
+	"\x11_whiteboard_share\"\xd2\x01\n" +
 	"\fBreakoutRoom\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x1a\n" +
 	"\bduration\x18\x03 \x01(\x04R\bduration\x12\x18\n" +
 	"\astarted\x18\x04 \x01(\bR\astarted\x12\x18\n" +
 	"\acreated\x18\x05 \x01(\x04R\acreated\x121\n" +
-	"\x05users\x18\x06 \x03(\v2\x1b.plugnmeet.BreakoutRoomUserR\x05users\"N\n" +
+	"\x05users\x18\x06 \x03(\v2\x1b.plugnmeet.BreakoutRoomUserR\x05users\x12\x19\n" +
+	"\broom_sid\x18\a \x01(\tR\aroomSid\"N\n" +
 	"\x10BreakoutRoomUser\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
@@ -579,15 +839,22 @@ const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"\aroom_id\x18\x03 \x01(\tR\x06roomId\"H\n" +
 	"\x1bBroadcastBreakoutRoomMsgReq\x12\x10\n" +
 	"\x03msg\x18\x01 \x01(\tR\x03msg\x12\x17\n" +
-	"\aroom_id\x18\x03 \x01(\tR\x06roomId\"\x8c\x01\n" +
+	"\aroom_id\x18\x02 \x01(\tR\x06roomId\"q\n" +
 	"\x13JoinBreakoutRoomReq\x12(\n" +
 	"\x10breakout_room_id\x18\x01 \x01(\tR\x0ebreakoutRoomId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x17\n" +
-	"\aroom_id\x18\x03 \x01(\tR\x06roomId\x12\x19\n" +
-	"\bis_admin\x18\x04 \x01(\bR\aisAdmin\"W\n" +
+	"\aroom_id\x18\x03 \x01(\tR\x06roomId\"W\n" +
 	"\x12EndBreakoutRoomReq\x12(\n" +
 	"\x10breakout_room_id\x18\x01 \x01(\tR\x0ebreakoutRoomId\x12\x17\n" +
-	"\aroom_id\x18\x03 \x01(\tR\x06roomId\"\xca\x01\n" +
+	"\aroom_id\x18\x02 \x01(\tR\x06roomId\"u\n" +
+	"\x17ReInviteBreakoutRoomReq\x12(\n" +
+	"\x10breakout_room_id\x18\x01 \x01(\tR\x0ebreakoutRoomId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x17\n" +
+	"\aroom_id\x18\x03 \x01(\tR\x06roomId\"k\n" +
+	"\x11BackToMainRoomReq\x12\x17\n" +
+	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12$\n" +
+	"\x0eparent_room_id\x18\x03 \x01(\tR\fparentRoomId\"\xca\x01\n" +
 	"\x0fBreakoutRoomRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x19\n" +
@@ -595,7 +862,16 @@ const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"\x04room\x18\x04 \x01(\v2\x17.plugnmeet.BreakoutRoomH\x01R\x04room\x88\x01\x01\x12-\n" +
 	"\x05rooms\x18\x05 \x03(\v2\x17.plugnmeet.BreakoutRoomR\x05roomsB\b\n" +
 	"\x06_tokenB\a\n" +
-	"\x05_roomB\xa3\x01\n" +
+	"\x05_room\"c\n" +
+	"\x0fWhiteboardShare\x12\x17\n" +
+	"\afile_id\x18\x01 \x01(\tR\x06fileId\x12\x14\n" +
+	"\x05pages\x18\x02 \x03(\rR\x05pages\x12!\n" +
+	"\fcurrent_page\x18\x03 \x01(\rR\vcurrentPage\"b\n" +
+	"\x11BackToMainRoomRes\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x19\n" +
+	"\x05token\x18\x03 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
+	"\x06_tokenB\xa3\x01\n" +
 	"\rcom.plugnmeetB\x1aPlugnmeetBreakoutRoomProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -610,7 +886,7 @@ func file_plugnmeet_breakout_room_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_breakout_room_proto_rawDescData
 }
 
-var file_plugnmeet_breakout_room_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_plugnmeet_breakout_room_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_plugnmeet_breakout_room_proto_goTypes = []any{
 	(*CreateBreakoutRoomsReq)(nil),          // 0: plugnmeet.CreateBreakoutRoomsReq
 	(*BreakoutRoom)(nil),                    // 1: plugnmeet.BreakoutRoom
@@ -619,18 +895,23 @@ var file_plugnmeet_breakout_room_proto_goTypes = []any{
 	(*BroadcastBreakoutRoomMsgReq)(nil),     // 4: plugnmeet.BroadcastBreakoutRoomMsgReq
 	(*JoinBreakoutRoomReq)(nil),             // 5: plugnmeet.JoinBreakoutRoomReq
 	(*EndBreakoutRoomReq)(nil),              // 6: plugnmeet.EndBreakoutRoomReq
-	(*BreakoutRoomRes)(nil),                 // 7: plugnmeet.BreakoutRoomRes
+	(*ReInviteBreakoutRoomReq)(nil),         // 7: plugnmeet.ReInviteBreakoutRoomReq
+	(*BackToMainRoomReq)(nil),               // 8: plugnmeet.BackToMainRoomReq
+	(*BreakoutRoomRes)(nil),                 // 9: plugnmeet.BreakoutRoomRes
+	(*WhiteboardShare)(nil),                 // 10: plugnmeet.WhiteboardShare
+	(*BackToMainRoomRes)(nil),               // 11: plugnmeet.BackToMainRoomRes
 }
 var file_plugnmeet_breakout_room_proto_depIdxs = []int32{
-	1, // 0: plugnmeet.CreateBreakoutRoomsReq.rooms:type_name -> plugnmeet.BreakoutRoom
-	2, // 1: plugnmeet.BreakoutRoom.users:type_name -> plugnmeet.BreakoutRoomUser
-	1, // 2: plugnmeet.BreakoutRoomRes.room:type_name -> plugnmeet.BreakoutRoom
-	1, // 3: plugnmeet.BreakoutRoomRes.rooms:type_name -> plugnmeet.BreakoutRoom
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	1,  // 0: plugnmeet.CreateBreakoutRoomsReq.rooms:type_name -> plugnmeet.BreakoutRoom
+	10, // 1: plugnmeet.CreateBreakoutRoomsReq.whiteboard_share:type_name -> plugnmeet.WhiteboardShare
+	2,  // 2: plugnmeet.BreakoutRoom.users:type_name -> plugnmeet.BreakoutRoomUser
+	1,  // 3: plugnmeet.BreakoutRoomRes.room:type_name -> plugnmeet.BreakoutRoom
+	1,  // 4: plugnmeet.BreakoutRoomRes.rooms:type_name -> plugnmeet.BreakoutRoom
+	5,  // [5:5] is the sub-list for method output_type
+	5,  // [5:5] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_breakout_room_proto_init() }
@@ -639,14 +920,15 @@ func file_plugnmeet_breakout_room_proto_init() {
 		return
 	}
 	file_plugnmeet_breakout_room_proto_msgTypes[0].OneofWrappers = []any{}
-	file_plugnmeet_breakout_room_proto_msgTypes[7].OneofWrappers = []any{}
+	file_plugnmeet_breakout_room_proto_msgTypes[9].OneofWrappers = []any{}
+	file_plugnmeet_breakout_room_proto_msgTypes[11].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_breakout_room_proto_rawDesc), len(file_plugnmeet_breakout_room_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

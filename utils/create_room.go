@@ -91,11 +91,15 @@ func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhit
 		r.Metadata.RoomFeatures.IngressFeatures.IsAllow = false
 
 		if !rf.EndToEndEncryptionFeatures.EnabledSelfInsertEncryptionKey {
-			randomKey, err := GenerateSecureRandomStrings(32)
-			if err != nil {
-				randomKey = GenerateRandomStrings(32)
+			// keep an inherited key: breakout rooms reuse the parent room's key
+			if rf.EndToEndEncryptionFeatures.EncryptionKey == nil ||
+				*rf.EndToEndEncryptionFeatures.EncryptionKey == "" {
+				randomKey, err := GenerateSecureRandomStrings(32)
+				if err != nil {
+					randomKey = GenerateRandomStrings(32)
+				}
+				rf.EndToEndEncryptionFeatures.EncryptionKey = &randomKey
 			}
-			rf.EndToEndEncryptionFeatures.EncryptionKey = &randomKey
 		} else {
 			// if self insert key enabled
 			r.Metadata.RoomFeatures.ExternalBroadcastingFeatures.IsAllow = false

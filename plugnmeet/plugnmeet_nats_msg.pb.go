@@ -1401,8 +1401,9 @@ func (x *ChatMessage) GetTranslations() map[string]string {
 type SessionDataHeader struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	DataType      SessionDataType        `protobuf:"varint,1,opt,name=data_type,json=dataType,proto3,enum=plugnmeet.SessionDataType" json:"data_type,omitempty"`
-	Key           *string                `protobuf:"bytes,2,opt,name=key,proto3,oneof" json:"key,omitempty"` // request: unset => all, set => one; response: always set
-	Last          bool                   `protobuf:"varint,3,opt,name=last,proto3" json:"last,omitempty"`    // response only: true on the final streamed entry
+	Key           *string                `protobuf:"bytes,2,opt,name=key,proto3,oneof" json:"key,omitempty"`                                         // request: unset => all, set => one; response: always set
+	Last          bool                   `protobuf:"varint,3,opt,name=last,proto3" json:"last,omitempty"`                                            // response only: true on the final streamed entry
+	TargetRoomId  *string                `protobuf:"bytes,4,opt,name=target_room_id,json=targetRoomId,proto3,oneof" json:"target_room_id,omitempty"` // save only: empty/absent => save to own room; set => seed into target breakout child room
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1456,6 +1457,13 @@ func (x *SessionDataHeader) GetLast() bool {
 		return x.Last
 	}
 	return false
+}
+
+func (x *SessionDataHeader) GetTargetRoomId() string {
+	if x != nil && x.TargetRoomId != nil {
+		return *x.TargetRoomId
+	}
+	return ""
 }
 
 var File_plugnmeet_nats_msg_proto protoreflect.FileDescriptor
@@ -1569,12 +1577,14 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
 	"\v_to_user_idB\x0e\n" +
-	"\f_source_lang\"\x7f\n" +
+	"\f_source_lang\"\xbd\x01\n" +
 	"\x11SessionDataHeader\x127\n" +
 	"\tdata_type\x18\x01 \x01(\x0e2\x1a.plugnmeet.SessionDataTypeR\bdataType\x12\x15\n" +
 	"\x03key\x18\x02 \x01(\tH\x00R\x03key\x88\x01\x01\x12\x12\n" +
-	"\x04last\x18\x03 \x01(\bR\x04lastB\x06\n" +
-	"\x04_key*\xa7\x04\n" +
+	"\x04last\x18\x03 \x01(\bR\x04last\x12)\n" +
+	"\x0etarget_room_id\x18\x04 \x01(\tH\x01R\ftargetRoomId\x88\x01\x01B\x06\n" +
+	"\x04_keyB\x11\n" +
+	"\x0f_target_room_id*\xa7\x04\n" +
 	"\x1bNatsMsgServerToClientEvents\x12\x14\n" +
 	"\x10RES_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15RES_JOINED_USERS_LIST\x10\x01\x12\x19\n" +
