@@ -73,6 +73,7 @@ message BreakoutRoomRes {
   optional string token = 3; // join token
   optional BreakoutRoom room = 4; // for my breakout room
   repeated BreakoutRoom rooms = 5; // rooms list
+  repeated BreakoutRoomUser unassigned_users = 6; // online main-room users not in any breakout room (admins only)
 }
 
 message WhiteboardShare {
@@ -89,4 +90,10 @@ message BackToMainRoomRes {
 
 message PollShare {
   repeated string poll_ids = 1;
+}
+
+message MoveBreakoutRoomUserReq {
+  string breakout_room_id = 1; // target breakout room; empty means move to the main room
+  string user_id = 2;
+  string room_id = 3;
 }

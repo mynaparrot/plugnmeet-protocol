@@ -634,14 +634,15 @@ func (x *BackToMainRoomReq) GetParentRoomId() string {
 }
 
 type BreakoutRoomRes struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
-	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	Token         *string                `protobuf:"bytes,3,opt,name=token,proto3,oneof" json:"token,omitempty"` // join token
-	Room          *BreakoutRoom          `protobuf:"bytes,4,opt,name=room,proto3,oneof" json:"room,omitempty"`   // for my breakout room
-	Rooms         []*BreakoutRoom        `protobuf:"bytes,5,rep,name=rooms,proto3" json:"rooms,omitempty"`       // rooms list
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Status          bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	Msg             string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Token           *string                `protobuf:"bytes,3,opt,name=token,proto3,oneof" json:"token,omitempty"`                                      // join token
+	Room            *BreakoutRoom          `protobuf:"bytes,4,opt,name=room,proto3,oneof" json:"room,omitempty"`                                        // for my breakout room
+	Rooms           []*BreakoutRoom        `protobuf:"bytes,5,rep,name=rooms,proto3" json:"rooms,omitempty"`                                            // rooms list
+	UnassignedUsers []*BreakoutRoomUser    `protobuf:"bytes,6,rep,name=unassigned_users,json=unassignedUsers,proto3" json:"unassigned_users,omitempty"` // online main-room users not in any breakout room (admins only)
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *BreakoutRoomRes) Reset() {
@@ -705,6 +706,13 @@ func (x *BreakoutRoomRes) GetRoom() *BreakoutRoom {
 func (x *BreakoutRoomRes) GetRooms() []*BreakoutRoom {
 	if x != nil {
 		return x.Rooms
+	}
+	return nil
+}
+
+func (x *BreakoutRoomRes) GetUnassignedUsers() []*BreakoutRoomUser {
+	if x != nil {
+		return x.UnassignedUsers
 	}
 	return nil
 }
@@ -873,6 +881,66 @@ func (x *PollShare) GetPollIds() []string {
 	return nil
 }
 
+type MoveBreakoutRoomUserReq struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	BreakoutRoomId string                 `protobuf:"bytes,1,opt,name=breakout_room_id,json=breakoutRoomId,proto3" json:"breakout_room_id,omitempty"` // target breakout room; empty means move to the main room
+	UserId         string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	RoomId         string                 `protobuf:"bytes,3,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *MoveBreakoutRoomUserReq) Reset() {
+	*x = MoveBreakoutRoomUserReq{}
+	mi := &file_plugnmeet_breakout_room_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MoveBreakoutRoomUserReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MoveBreakoutRoomUserReq) ProtoMessage() {}
+
+func (x *MoveBreakoutRoomUserReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_breakout_room_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MoveBreakoutRoomUserReq.ProtoReflect.Descriptor instead.
+func (*MoveBreakoutRoomUserReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_breakout_room_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *MoveBreakoutRoomUserReq) GetBreakoutRoomId() string {
+	if x != nil {
+		return x.BreakoutRoomId
+	}
+	return ""
+}
+
+func (x *MoveBreakoutRoomUserReq) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *MoveBreakoutRoomUserReq) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
 var File_plugnmeet_breakout_room_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_breakout_room_proto_rawDesc = "" +
@@ -927,13 +995,14 @@ const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"\x11BackToMainRoomReq\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12$\n" +
-	"\x0eparent_room_id\x18\x03 \x01(\tR\fparentRoomId\"\xca\x01\n" +
+	"\x0eparent_room_id\x18\x03 \x01(\tR\fparentRoomId\"\x92\x02\n" +
 	"\x0fBreakoutRoomRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x19\n" +
 	"\x05token\x18\x03 \x01(\tH\x00R\x05token\x88\x01\x01\x120\n" +
 	"\x04room\x18\x04 \x01(\v2\x17.plugnmeet.BreakoutRoomH\x01R\x04room\x88\x01\x01\x12-\n" +
-	"\x05rooms\x18\x05 \x03(\v2\x17.plugnmeet.BreakoutRoomR\x05roomsB\b\n" +
+	"\x05rooms\x18\x05 \x03(\v2\x17.plugnmeet.BreakoutRoomR\x05rooms\x12F\n" +
+	"\x10unassigned_users\x18\x06 \x03(\v2\x1b.plugnmeet.BreakoutRoomUserR\x0funassignedUsersB\b\n" +
 	"\x06_tokenB\a\n" +
 	"\x05_room\"c\n" +
 	"\x0fWhiteboardShare\x12\x17\n" +
@@ -946,7 +1015,11 @@ const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"\x05token\x18\x03 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
 	"\x06_token\"&\n" +
 	"\tPollShare\x12\x19\n" +
-	"\bpoll_ids\x18\x01 \x03(\tR\apollIdsB\xa3\x01\n" +
+	"\bpoll_ids\x18\x01 \x03(\tR\apollIds\"u\n" +
+	"\x17MoveBreakoutRoomUserReq\x12(\n" +
+	"\x10breakout_room_id\x18\x01 \x01(\tR\x0ebreakoutRoomId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x17\n" +
+	"\aroom_id\x18\x03 \x01(\tR\x06roomIdB\xa3\x01\n" +
 	"\rcom.plugnmeetB\x1aPlugnmeetBreakoutRoomProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -961,7 +1034,7 @@ func file_plugnmeet_breakout_room_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_breakout_room_proto_rawDescData
 }
 
-var file_plugnmeet_breakout_room_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_plugnmeet_breakout_room_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_plugnmeet_breakout_room_proto_goTypes = []any{
 	(*CreateBreakoutRoomsReq)(nil),          // 0: plugnmeet.CreateBreakoutRoomsReq
 	(*BreakoutRoom)(nil),                    // 1: plugnmeet.BreakoutRoom
@@ -976,6 +1049,7 @@ var file_plugnmeet_breakout_room_proto_goTypes = []any{
 	(*WhiteboardShare)(nil),                 // 10: plugnmeet.WhiteboardShare
 	(*BackToMainRoomRes)(nil),               // 11: plugnmeet.BackToMainRoomRes
 	(*PollShare)(nil),                       // 12: plugnmeet.PollShare
+	(*MoveBreakoutRoomUserReq)(nil),         // 13: plugnmeet.MoveBreakoutRoomUserReq
 }
 var file_plugnmeet_breakout_room_proto_depIdxs = []int32{
 	1,  // 0: plugnmeet.CreateBreakoutRoomsReq.rooms:type_name -> plugnmeet.BreakoutRoom
@@ -984,11 +1058,12 @@ var file_plugnmeet_breakout_room_proto_depIdxs = []int32{
 	2,  // 3: plugnmeet.BreakoutRoom.users:type_name -> plugnmeet.BreakoutRoomUser
 	1,  // 4: plugnmeet.BreakoutRoomRes.room:type_name -> plugnmeet.BreakoutRoom
 	1,  // 5: plugnmeet.BreakoutRoomRes.rooms:type_name -> plugnmeet.BreakoutRoom
-	6,  // [6:6] is the sub-list for method output_type
-	6,  // [6:6] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	2,  // 6: plugnmeet.BreakoutRoomRes.unassigned_users:type_name -> plugnmeet.BreakoutRoomUser
+	7,  // [7:7] is the sub-list for method output_type
+	7,  // [7:7] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_breakout_room_proto_init() }
@@ -1005,7 +1080,7 @@ func file_plugnmeet_breakout_room_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_breakout_room_proto_rawDesc), len(file_plugnmeet_breakout_room_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

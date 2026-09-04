@@ -45,7 +45,8 @@ enum NatsMsgServerToClientEvents {
   DELIVERY_PRIVATE_DATA = 19;
   PONG = 20;
   SESSION_DATA_FETCH_RESPONSE = 21;
-  //next ID: 22
+  BREAKOUT_ROOM_USER_MOVED = 22;
+  //next ID: 23
 }
 
 enum NatsMsgClientToServerEvents {
