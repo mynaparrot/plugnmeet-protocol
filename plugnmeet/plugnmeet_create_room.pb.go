@@ -1282,11 +1282,10 @@ type EndToEndEncryptionFeatures struct {
 	IsEnabled                      bool                   `protobuf:"varint,1,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
 	IncludedChatMessages           bool                   `protobuf:"varint,2,opt,name=included_chat_messages,json=includedChatMessages,proto3" json:"included_chat_messages,omitempty"`
 	IncludedWhiteboard             bool                   `protobuf:"varint,3,opt,name=included_whiteboard,json=includedWhiteboard,proto3" json:"included_whiteboard,omitempty"`
+	EncryptionKey                  *string                `protobuf:"bytes,4,opt,name=encryption_key,json=encryptionKey,proto3,oneof" json:"encryption_key,omitempty"`
 	EnabledSelfInsertEncryptionKey bool                   `protobuf:"varint,5,opt,name=enabled_self_insert_encryption_key,json=enabledSelfInsertEncryptionKey,proto3" json:"enabled_self_insert_encryption_key,omitempty"`
-	// internal fields
-	EncryptionKey *string `protobuf:"bytes,4,opt,name=encryption_key,json=encryptionKey,proto3,oneof" json:"encryption_key,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *EndToEndEncryptionFeatures) Reset() {
@@ -1340,18 +1339,18 @@ func (x *EndToEndEncryptionFeatures) GetIncludedWhiteboard() bool {
 	return false
 }
 
-func (x *EndToEndEncryptionFeatures) GetEnabledSelfInsertEncryptionKey() bool {
-	if x != nil {
-		return x.EnabledSelfInsertEncryptionKey
-	}
-	return false
-}
-
 func (x *EndToEndEncryptionFeatures) GetEncryptionKey() string {
 	if x != nil && x.EncryptionKey != nil {
 		return *x.EncryptionKey
 	}
 	return ""
+}
+
+func (x *EndToEndEncryptionFeatures) GetEnabledSelfInsertEncryptionKey() bool {
+	if x != nil {
+		return x.EnabledSelfInsertEncryptionKey
+	}
+	return false
 }
 
 type PollsFeatures struct {
@@ -2262,15 +2261,14 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"url_format\x12 url should not contain any value\x1a\x12this.matches('^$')R\x03url\x12u\n" +
 	"\n" +
 	"stream_key\x18\x04 \x01(\tBV\xbaHS\xba\x01P\n" +
-	"\x11stream_key_format\x12'stream_key should not contain any value\x1a\x12this.matches('^$')R\tstreamKey\"\x8e\x03\n" +
+	"\x11stream_key_format\x12'stream_key should not contain any value\x1a\x12this.matches('^$')R\tstreamKey\"\xad\x02\n" +
 	"\x1aEndToEndEncryptionFeatures\x12\x1d\n" +
 	"\n" +
 	"is_enabled\x18\x01 \x01(\bR\tisEnabled\x124\n" +
 	"\x16included_chat_messages\x18\x02 \x01(\bR\x14includedChatMessages\x12/\n" +
-	"\x13included_whiteboard\x18\x03 \x01(\bR\x12includedWhiteboard\x12J\n" +
-	"\"enabled_self_insert_encryption_key\x18\x05 \x01(\bR\x1eenabledSelfInsertEncryptionKey\x12\x8a\x01\n" +
-	"\x0eencryption_key\x18\x04 \x01(\tB^\xbaH[\xba\x01X\n" +
-	"\x15encryption_key_format\x12+encryption_key should not contain any value\x1a\x12this.matches('^$')H\x00R\rencryptionKey\x88\x01\x01B\x11\n" +
+	"\x13included_whiteboard\x18\x03 \x01(\bR\x12includedWhiteboard\x12*\n" +
+	"\x0eencryption_key\x18\x04 \x01(\tH\x00R\rencryptionKey\x88\x01\x01\x12J\n" +
+	"\"enabled_self_insert_encryption_key\x18\x05 \x01(\bR\x1eenabledSelfInsertEncryptionKeyB\x11\n" +
 	"\x0f_encryption_key\"P\n" +
 	"\rPollsFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12$\n" +
