@@ -214,14 +214,8 @@ message EndToEndEncryptionFeatures {
   bool is_enabled = 1;
   bool included_chat_messages = 2;
   bool included_whiteboard = 3;
+  optional string encryption_key = 4;
   bool enabled_self_insert_encryption_key = 5;
-
-  // internal fields
-  optional string encryption_key = 4 [(buf.validate.field).cel = {
-    id: "encryption_key_format",
-    message: "encryption_key should not contain any value",
-    expression: "this.matches('^$')"
-  }];
 }
 
 message PollsFeatures {

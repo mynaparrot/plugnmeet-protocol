@@ -33,20 +33,15 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 	r.Metadata.RoomFeatures = newRf
 	rf := r.Metadata.RoomFeatures
 
+	// reset everything if disabled
 	if !rf.RecordingFeatures.IsAllow {
-		rf.RecordingFeatures.IsAllowCloud = false
-		rf.RecordingFeatures.IsAllowLocal = false
-		rf.RecordingFeatures.EnableAutoCloudRecording = false
+		rf.RecordingFeatures = &plugnmeet.RecordingFeatures{}
 	}
-
 	if !rf.ChatFeatures.IsAllow {
-		rf.ChatFeatures.IsAllowFileUpload = false
+		rf.ChatFeatures = &plugnmeet.ChatFeatures{}
 	}
-
 	if !rf.EndToEndEncryptionFeatures.IsEnabled {
-		rf.EndToEndEncryptionFeatures.EnabledSelfInsertEncryptionKey = false
-		rf.EndToEndEncryptionFeatures.IncludedChatMessages = false
-		rf.EndToEndEncryptionFeatures.IncludedWhiteboard = false
+		rf.EndToEndEncryptionFeatures = &plugnmeet.EndToEndEncryptionFeatures{}
 	}
 
 	if rf.AllowRtmp != nil {
@@ -90,17 +85,7 @@ func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhit
 		r.Metadata.RoomFeatures.SipDialInFeatures.IsAllow = false
 		r.Metadata.RoomFeatures.IngressFeatures.IsAllow = false
 
-		if !rf.EndToEndEncryptionFeatures.EnabledSelfInsertEncryptionKey {
-			// keep an inherited key: breakout rooms reuse the parent room's key
-			if rf.EndToEndEncryptionFeatures.EncryptionKey == nil ||
-				*rf.EndToEndEncryptionFeatures.EncryptionKey == "" {
-				randomKey, err := GenerateSecureRandomStrings(32)
-				if err != nil {
-					randomKey = GenerateRandomStrings(32)
-				}
-				rf.EndToEndEncryptionFeatures.EncryptionKey = &randomKey
-			}
-		} else {
+		if rf.EndToEndEncryptionFeatures.EnabledSelfInsertEncryptionKey {
 			// if self insert key enabled
 			r.Metadata.RoomFeatures.ExternalBroadcastingFeatures.IsAllow = false
 			r.Metadata.RoomFeatures.RecordingFeatures.IsAllowCloud = false
@@ -112,6 +97,16 @@ func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhit
 			}
 			if insightsFeatures.AiFeatures != nil && insightsFeatures.AiFeatures.MeetingSummarizationFeatures != nil {
 				insightsFeatures.AiFeatures.MeetingSummarizationFeatures.IsAllow = false
+			}
+		} else {
+			// only generate key if nothing was delivered
+			if rf.EndToEndEncryptionFeatures.EncryptionKey == nil ||
+				*rf.EndToEndEncryptionFeatures.EncryptionKey == "" {
+				randomKey, err := GenerateSecureRandomStrings(32)
+				if err != nil {
+					randomKey = GenerateRandomStrings(32)
+				}
+				rf.EndToEndEncryptionFeatures.EncryptionKey = &randomKey
 			}
 		}
 	}
