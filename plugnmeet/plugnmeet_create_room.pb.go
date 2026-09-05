@@ -851,18 +851,83 @@ func (x *WaitingRoomFeatures) GetWaitingRoomMsg() string {
 	return ""
 }
 
+type PreassignedBreakoutRoom struct {
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Title   string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	UserIds []string               `protobuf:"bytes,2,rep,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
+	// internal usage field
+	RoomId        string `protobuf:"bytes,3,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PreassignedBreakoutRoom) Reset() {
+	*x = PreassignedBreakoutRoom{}
+	mi := &file_plugnmeet_create_room_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PreassignedBreakoutRoom) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PreassignedBreakoutRoom) ProtoMessage() {}
+
+func (x *PreassignedBreakoutRoom) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_create_room_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PreassignedBreakoutRoom.ProtoReflect.Descriptor instead.
+func (*PreassignedBreakoutRoom) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *PreassignedBreakoutRoom) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *PreassignedBreakoutRoom) GetUserIds() []string {
+	if x != nil {
+		return x.UserIds
+	}
+	return nil
+}
+
+func (x *PreassignedBreakoutRoom) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
 type BreakoutRoomFeatures struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	IsAllow            bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
-	IsActive           bool                   `protobuf:"varint,2,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
-	AllowedNumberRooms uint32                 `protobuf:"varint,3,opt,name=allowed_number_rooms,json=allowedNumberRooms,proto3" json:"allowed_number_rooms,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	IsAllow bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
+	// internal usage field
+	IsActive              bool                       `protobuf:"varint,2,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	AllowedNumberRooms    uint32                     `protobuf:"varint,3,opt,name=allowed_number_rooms,json=allowedNumberRooms,proto3" json:"allowed_number_rooms,omitempty"`
+	AllowReturnToMainRoom bool                       `protobuf:"varint,4,opt,name=allow_return_to_main_room,json=allowReturnToMainRoom,proto3" json:"allow_return_to_main_room,omitempty"`
+	AllowSelfSelect       bool                       `protobuf:"varint,5,opt,name=allow_self_select,json=allowSelfSelect,proto3" json:"allow_self_select,omitempty"`
+	PreassignedRooms      []*PreassignedBreakoutRoom `protobuf:"bytes,6,rep,name=preassigned_rooms,json=preassignedRooms,proto3" json:"preassigned_rooms,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *BreakoutRoomFeatures) Reset() {
 	*x = BreakoutRoomFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[8]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -874,7 +939,7 @@ func (x *BreakoutRoomFeatures) String() string {
 func (*BreakoutRoomFeatures) ProtoMessage() {}
 
 func (x *BreakoutRoomFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[8]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -887,7 +952,7 @@ func (x *BreakoutRoomFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BreakoutRoomFeatures.ProtoReflect.Descriptor instead.
 func (*BreakoutRoomFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{8}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *BreakoutRoomFeatures) GetIsAllow() bool {
@@ -911,6 +976,27 @@ func (x *BreakoutRoomFeatures) GetAllowedNumberRooms() uint32 {
 	return 0
 }
 
+func (x *BreakoutRoomFeatures) GetAllowReturnToMainRoom() bool {
+	if x != nil {
+		return x.AllowReturnToMainRoom
+	}
+	return false
+}
+
+func (x *BreakoutRoomFeatures) GetAllowSelfSelect() bool {
+	if x != nil {
+		return x.AllowSelfSelect
+	}
+	return false
+}
+
+func (x *BreakoutRoomFeatures) GetPreassignedRooms() []*PreassignedBreakoutRoom {
+	if x != nil {
+		return x.PreassignedRooms
+	}
+	return nil
+}
+
 type DisplayExternalLinkFeatures struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	IsAllow       bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
@@ -923,7 +1009,7 @@ type DisplayExternalLinkFeatures struct {
 
 func (x *DisplayExternalLinkFeatures) Reset() {
 	*x = DisplayExternalLinkFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[9]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -935,7 +1021,7 @@ func (x *DisplayExternalLinkFeatures) String() string {
 func (*DisplayExternalLinkFeatures) ProtoMessage() {}
 
 func (x *DisplayExternalLinkFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[9]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -948,7 +1034,7 @@ func (x *DisplayExternalLinkFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DisplayExternalLinkFeatures.ProtoReflect.Descriptor instead.
 func (*DisplayExternalLinkFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{9}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *DisplayExternalLinkFeatures) GetIsAllow() bool {
@@ -990,7 +1076,7 @@ type ExternalBroadcastingFeatures struct {
 
 func (x *ExternalBroadcastingFeatures) Reset() {
 	*x = ExternalBroadcastingFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[10]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1002,7 +1088,7 @@ func (x *ExternalBroadcastingFeatures) String() string {
 func (*ExternalBroadcastingFeatures) ProtoMessage() {}
 
 func (x *ExternalBroadcastingFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[10]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1015,7 +1101,7 @@ func (x *ExternalBroadcastingFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExternalBroadcastingFeatures.ProtoReflect.Descriptor instead.
 func (*ExternalBroadcastingFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{10}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ExternalBroadcastingFeatures) GetIsAllow() bool {
@@ -1053,7 +1139,7 @@ type RecordingFeatures struct {
 
 func (x *RecordingFeatures) Reset() {
 	*x = RecordingFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[11]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1065,7 +1151,7 @@ func (x *RecordingFeatures) String() string {
 func (*RecordingFeatures) ProtoMessage() {}
 
 func (x *RecordingFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[11]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1078,7 +1164,7 @@ func (x *RecordingFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecordingFeatures.ProtoReflect.Descriptor instead.
 func (*RecordingFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{11}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *RecordingFeatures) GetIsAllow() bool {
@@ -1135,7 +1221,7 @@ type IngressFeatures struct {
 
 func (x *IngressFeatures) Reset() {
 	*x = IngressFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[12]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1147,7 +1233,7 @@ func (x *IngressFeatures) String() string {
 func (*IngressFeatures) ProtoMessage() {}
 
 func (x *IngressFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[12]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1160,7 +1246,7 @@ func (x *IngressFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IngressFeatures.ProtoReflect.Descriptor instead.
 func (*IngressFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{12}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *IngressFeatures) GetIsAllow() bool {
@@ -1196,16 +1282,15 @@ type EndToEndEncryptionFeatures struct {
 	IsEnabled                      bool                   `protobuf:"varint,1,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
 	IncludedChatMessages           bool                   `protobuf:"varint,2,opt,name=included_chat_messages,json=includedChatMessages,proto3" json:"included_chat_messages,omitempty"`
 	IncludedWhiteboard             bool                   `protobuf:"varint,3,opt,name=included_whiteboard,json=includedWhiteboard,proto3" json:"included_whiteboard,omitempty"`
+	EncryptionKey                  *string                `protobuf:"bytes,4,opt,name=encryption_key,json=encryptionKey,proto3,oneof" json:"encryption_key,omitempty"`
 	EnabledSelfInsertEncryptionKey bool                   `protobuf:"varint,5,opt,name=enabled_self_insert_encryption_key,json=enabledSelfInsertEncryptionKey,proto3" json:"enabled_self_insert_encryption_key,omitempty"`
-	// internal fields
-	EncryptionKey *string `protobuf:"bytes,4,opt,name=encryption_key,json=encryptionKey,proto3,oneof" json:"encryption_key,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *EndToEndEncryptionFeatures) Reset() {
 	*x = EndToEndEncryptionFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[13]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1217,7 +1302,7 @@ func (x *EndToEndEncryptionFeatures) String() string {
 func (*EndToEndEncryptionFeatures) ProtoMessage() {}
 
 func (x *EndToEndEncryptionFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[13]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1230,7 +1315,7 @@ func (x *EndToEndEncryptionFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EndToEndEncryptionFeatures.ProtoReflect.Descriptor instead.
 func (*EndToEndEncryptionFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{13}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *EndToEndEncryptionFeatures) GetIsEnabled() bool {
@@ -1254,18 +1339,18 @@ func (x *EndToEndEncryptionFeatures) GetIncludedWhiteboard() bool {
 	return false
 }
 
-func (x *EndToEndEncryptionFeatures) GetEnabledSelfInsertEncryptionKey() bool {
-	if x != nil {
-		return x.EnabledSelfInsertEncryptionKey
-	}
-	return false
-}
-
 func (x *EndToEndEncryptionFeatures) GetEncryptionKey() string {
 	if x != nil && x.EncryptionKey != nil {
 		return *x.EncryptionKey
 	}
 	return ""
+}
+
+func (x *EndToEndEncryptionFeatures) GetEnabledSelfInsertEncryptionKey() bool {
+	if x != nil {
+		return x.EnabledSelfInsertEncryptionKey
+	}
+	return false
 }
 
 type PollsFeatures struct {
@@ -1278,7 +1363,7 @@ type PollsFeatures struct {
 
 func (x *PollsFeatures) Reset() {
 	*x = PollsFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[14]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1290,7 +1375,7 @@ func (x *PollsFeatures) String() string {
 func (*PollsFeatures) ProtoMessage() {}
 
 func (x *PollsFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[14]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1303,7 +1388,7 @@ func (x *PollsFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PollsFeatures.ProtoReflect.Descriptor instead.
 func (*PollsFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{14}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *PollsFeatures) GetIsAllow() bool {
@@ -1339,7 +1424,7 @@ type SipDialInFeatures struct {
 
 func (x *SipDialInFeatures) Reset() {
 	*x = SipDialInFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[15]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1351,7 +1436,7 @@ func (x *SipDialInFeatures) String() string {
 func (*SipDialInFeatures) ProtoMessage() {}
 
 func (x *SipDialInFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[15]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1364,7 +1449,7 @@ func (x *SipDialInFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SipDialInFeatures.ProtoReflect.Descriptor instead.
 func (*SipDialInFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{15}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SipDialInFeatures) GetIsAllow() bool {
@@ -1428,7 +1513,7 @@ type InsightsFeatures struct {
 
 func (x *InsightsFeatures) Reset() {
 	*x = InsightsFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[16]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1440,7 +1525,7 @@ func (x *InsightsFeatures) String() string {
 func (*InsightsFeatures) ProtoMessage() {}
 
 func (x *InsightsFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[16]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1453,7 +1538,7 @@ func (x *InsightsFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsFeatures.ProtoReflect.Descriptor instead.
 func (*InsightsFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{16}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *InsightsFeatures) GetIsAllow() bool {
@@ -1504,7 +1589,7 @@ type InsightsTranscriptionFeatures struct {
 
 func (x *InsightsTranscriptionFeatures) Reset() {
 	*x = InsightsTranscriptionFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[17]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1516,7 +1601,7 @@ func (x *InsightsTranscriptionFeatures) String() string {
 func (*InsightsTranscriptionFeatures) ProtoMessage() {}
 
 func (x *InsightsTranscriptionFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[17]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1529,7 +1614,7 @@ func (x *InsightsTranscriptionFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsTranscriptionFeatures.ProtoReflect.Descriptor instead.
 func (*InsightsTranscriptionFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{17}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *InsightsTranscriptionFeatures) GetIsAllow() bool {
@@ -1623,7 +1708,7 @@ type InsightsChatTranslationFeatures struct {
 
 func (x *InsightsChatTranslationFeatures) Reset() {
 	*x = InsightsChatTranslationFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[18]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1635,7 +1720,7 @@ func (x *InsightsChatTranslationFeatures) String() string {
 func (*InsightsChatTranslationFeatures) ProtoMessage() {}
 
 func (x *InsightsChatTranslationFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[18]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1648,7 +1733,7 @@ func (x *InsightsChatTranslationFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsChatTranslationFeatures.ProtoReflect.Descriptor instead.
 func (*InsightsChatTranslationFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{18}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *InsightsChatTranslationFeatures) GetIsAllow() bool {
@@ -1697,7 +1782,7 @@ type InsightsAIFeatures struct {
 
 func (x *InsightsAIFeatures) Reset() {
 	*x = InsightsAIFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[19]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1709,7 +1794,7 @@ func (x *InsightsAIFeatures) String() string {
 func (*InsightsAIFeatures) ProtoMessage() {}
 
 func (x *InsightsAIFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[19]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1722,7 +1807,7 @@ func (x *InsightsAIFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsAIFeatures.ProtoReflect.Descriptor instead.
 func (*InsightsAIFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{19}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *InsightsAIFeatures) GetIsAllow() bool {
@@ -1761,7 +1846,7 @@ type InsightsAITextChatFeatures struct {
 
 func (x *InsightsAITextChatFeatures) Reset() {
 	*x = InsightsAITextChatFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[20]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1773,7 +1858,7 @@ func (x *InsightsAITextChatFeatures) String() string {
 func (*InsightsAITextChatFeatures) ProtoMessage() {}
 
 func (x *InsightsAITextChatFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[20]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1786,7 +1871,7 @@ func (x *InsightsAITextChatFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsAITextChatFeatures.ProtoReflect.Descriptor instead.
 func (*InsightsAITextChatFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{20}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *InsightsAITextChatFeatures) GetIsAllow() bool {
@@ -1843,7 +1928,7 @@ type InsightsAIMeetingSummarizationFeatures struct {
 
 func (x *InsightsAIMeetingSummarizationFeatures) Reset() {
 	*x = InsightsAIMeetingSummarizationFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[21]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1855,7 +1940,7 @@ func (x *InsightsAIMeetingSummarizationFeatures) String() string {
 func (*InsightsAIMeetingSummarizationFeatures) ProtoMessage() {}
 
 func (x *InsightsAIMeetingSummarizationFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[21]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1868,7 +1953,7 @@ func (x *InsightsAIMeetingSummarizationFeatures) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use InsightsAIMeetingSummarizationFeatures.ProtoReflect.Descriptor instead.
 func (*InsightsAIMeetingSummarizationFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{21}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *InsightsAIMeetingSummarizationFeatures) GetIsAllow() bool {
@@ -1902,7 +1987,7 @@ type CopyrightConf struct {
 
 func (x *CopyrightConf) Reset() {
 	*x = CopyrightConf{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[22]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1914,7 +1999,7 @@ func (x *CopyrightConf) String() string {
 func (*CopyrightConf) ProtoMessage() {}
 
 func (x *CopyrightConf) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[22]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1927,7 +2012,7 @@ func (x *CopyrightConf) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CopyrightConf.ProtoReflect.Descriptor instead.
 func (*CopyrightConf) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{22}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *CopyrightConf) GetDisplay() bool {
@@ -1956,7 +2041,7 @@ type CreateRoomRes struct {
 
 func (x *CreateRoomRes) Reset() {
 	*x = CreateRoomRes{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[23]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1968,7 +2053,7 @@ func (x *CreateRoomRes) String() string {
 func (*CreateRoomRes) ProtoMessage() {}
 
 func (x *CreateRoomRes) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[23]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1981,7 +2066,7 @@ func (x *CreateRoomRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateRoomRes.ProtoReflect.Descriptor instead.
 func (*CreateRoomRes) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{23}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *CreateRoomRes) GetStatus() bool {
@@ -2132,11 +2217,20 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x04_url\"\\\n" +
 	"\x13WaitingRoomFeatures\x12\x1b\n" +
 	"\tis_active\x18\x01 \x01(\bR\bisActive\x12(\n" +
-	"\x10waiting_room_msg\x18\x02 \x01(\tR\x0ewaitingRoomMsg\"\x89\x01\n" +
+	"\x10waiting_room_msg\x18\x02 \x01(\tR\x0ewaitingRoomMsg\"\xca\x01\n" +
+	"\x17PreassignedBreakoutRoom\x12\x1d\n" +
+	"\x05title\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05title\x12\x19\n" +
+	"\buser_ids\x18\x02 \x03(\tR\auserIds\x12u\n" +
+	"\aroom_id\x18\x03 \x01(\tB\\\xbaHY\xba\x01V\n" +
+	"\x1apreassigned_room_id_format\x12$room_id should not contain any value\x1a\x12this.matches('^$')R\x06roomId\"\xea\x03\n" +
 	"\x14BreakoutRoomFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12$\n" +
 	"\tis_active\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisActive\x120\n" +
-	"\x14allowed_number_rooms\x18\x03 \x01(\rR\x12allowedNumberRooms\"\xb0\x01\n" +
+	"\x14allowed_number_rooms\x18\x03 \x01(\rR\x12allowedNumberRooms\x128\n" +
+	"\x19allow_return_to_main_room\x18\x04 \x01(\bR\x15allowReturnToMainRoom\x12*\n" +
+	"\x11allow_self_select\x18\x05 \x01(\bR\x0fallowSelfSelect\x12O\n" +
+	"\x11preassigned_rooms\x18\x06 \x03(\v2\".plugnmeet.PreassignedBreakoutRoomR\x10preassignedRooms:\xa7\x01\xbaH\xa3\x01\x1a\xa0\x01\n" +
+	"&breakout_preassigned_requires_is_allow\x12Apreassigned_rooms requires breakout_room_features.is_allow = true\x1a3this.preassigned_rooms.size() == 0 || this.is_allow\"\xb0\x01\n" +
 	"\x1bDisplayExternalLinkFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12$\n" +
 	"\tis_active\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisActive\x12\x17\n" +
@@ -2167,15 +2261,14 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"url_format\x12 url should not contain any value\x1a\x12this.matches('^$')R\x03url\x12u\n" +
 	"\n" +
 	"stream_key\x18\x04 \x01(\tBV\xbaHS\xba\x01P\n" +
-	"\x11stream_key_format\x12'stream_key should not contain any value\x1a\x12this.matches('^$')R\tstreamKey\"\x8e\x03\n" +
+	"\x11stream_key_format\x12'stream_key should not contain any value\x1a\x12this.matches('^$')R\tstreamKey\"\xad\x02\n" +
 	"\x1aEndToEndEncryptionFeatures\x12\x1d\n" +
 	"\n" +
 	"is_enabled\x18\x01 \x01(\bR\tisEnabled\x124\n" +
 	"\x16included_chat_messages\x18\x02 \x01(\bR\x14includedChatMessages\x12/\n" +
-	"\x13included_whiteboard\x18\x03 \x01(\bR\x12includedWhiteboard\x12J\n" +
-	"\"enabled_self_insert_encryption_key\x18\x05 \x01(\bR\x1eenabledSelfInsertEncryptionKey\x12\x8a\x01\n" +
-	"\x0eencryption_key\x18\x04 \x01(\tB^\xbaH[\xba\x01X\n" +
-	"\x15encryption_key_format\x12+encryption_key should not contain any value\x1a\x12this.matches('^$')H\x00R\rencryptionKey\x88\x01\x01B\x11\n" +
+	"\x13included_whiteboard\x18\x03 \x01(\bR\x12includedWhiteboard\x12*\n" +
+	"\x0eencryption_key\x18\x04 \x01(\tH\x00R\rencryptionKey\x88\x01\x01\x12J\n" +
+	"\"enabled_self_insert_encryption_key\x18\x05 \x01(\bR\x1eenabledSelfInsertEncryptionKeyB\x11\n" +
 	"\x0f_encryption_key\"P\n" +
 	"\rPollsFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12$\n" +
@@ -2269,7 +2362,7 @@ func file_plugnmeet_create_room_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_create_room_proto_rawDescData
 }
 
-var file_plugnmeet_create_room_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
+var file_plugnmeet_create_room_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_plugnmeet_create_room_proto_goTypes = []any{
 	(*CreateRoomReq)(nil),                          // 0: plugnmeet.CreateRoomReq
 	(*RoomMetadata)(nil),                           // 1: plugnmeet.RoomMetadata
@@ -2279,64 +2372,66 @@ var file_plugnmeet_create_room_proto_goTypes = []any{
 	(*WhiteboardFeatures)(nil),                     // 5: plugnmeet.WhiteboardFeatures
 	(*ExternalMediaPlayerFeatures)(nil),            // 6: plugnmeet.ExternalMediaPlayerFeatures
 	(*WaitingRoomFeatures)(nil),                    // 7: plugnmeet.WaitingRoomFeatures
-	(*BreakoutRoomFeatures)(nil),                   // 8: plugnmeet.BreakoutRoomFeatures
-	(*DisplayExternalLinkFeatures)(nil),            // 9: plugnmeet.DisplayExternalLinkFeatures
-	(*ExternalBroadcastingFeatures)(nil),           // 10: plugnmeet.ExternalBroadcastingFeatures
-	(*RecordingFeatures)(nil),                      // 11: plugnmeet.RecordingFeatures
-	(*IngressFeatures)(nil),                        // 12: plugnmeet.IngressFeatures
-	(*EndToEndEncryptionFeatures)(nil),             // 13: plugnmeet.EndToEndEncryptionFeatures
-	(*PollsFeatures)(nil),                          // 14: plugnmeet.PollsFeatures
-	(*SipDialInFeatures)(nil),                      // 15: plugnmeet.SipDialInFeatures
-	(*InsightsFeatures)(nil),                       // 16: plugnmeet.InsightsFeatures
-	(*InsightsTranscriptionFeatures)(nil),          // 17: plugnmeet.InsightsTranscriptionFeatures
-	(*InsightsChatTranslationFeatures)(nil),        // 18: plugnmeet.InsightsChatTranslationFeatures
-	(*InsightsAIFeatures)(nil),                     // 19: plugnmeet.InsightsAIFeatures
-	(*InsightsAITextChatFeatures)(nil),             // 20: plugnmeet.InsightsAITextChatFeatures
-	(*InsightsAIMeetingSummarizationFeatures)(nil), // 21: plugnmeet.InsightsAIMeetingSummarizationFeatures
-	(*CopyrightConf)(nil),                          // 22: plugnmeet.CopyrightConf
-	(*CreateRoomRes)(nil),                          // 23: plugnmeet.CreateRoomRes
-	nil,                                            // 24: plugnmeet.RoomMetadata.ExtraDataEntry
-	(*LockSettings)(nil),                           // 25: plugnmeet.LockSettings
-	(*RecorderBotOptions)(nil),                     // 26: plugnmeet.RecorderBotOptions
-	(IngressInput)(0),                              // 27: plugnmeet.IngressInput
-	(StatusCode)(0),                                // 28: plugnmeet.StatusCode
-	(*ActiveRoomInfo)(nil),                         // 29: plugnmeet.ActiveRoomInfo
+	(*PreassignedBreakoutRoom)(nil),                // 8: plugnmeet.PreassignedBreakoutRoom
+	(*BreakoutRoomFeatures)(nil),                   // 9: plugnmeet.BreakoutRoomFeatures
+	(*DisplayExternalLinkFeatures)(nil),            // 10: plugnmeet.DisplayExternalLinkFeatures
+	(*ExternalBroadcastingFeatures)(nil),           // 11: plugnmeet.ExternalBroadcastingFeatures
+	(*RecordingFeatures)(nil),                      // 12: plugnmeet.RecordingFeatures
+	(*IngressFeatures)(nil),                        // 13: plugnmeet.IngressFeatures
+	(*EndToEndEncryptionFeatures)(nil),             // 14: plugnmeet.EndToEndEncryptionFeatures
+	(*PollsFeatures)(nil),                          // 15: plugnmeet.PollsFeatures
+	(*SipDialInFeatures)(nil),                      // 16: plugnmeet.SipDialInFeatures
+	(*InsightsFeatures)(nil),                       // 17: plugnmeet.InsightsFeatures
+	(*InsightsTranscriptionFeatures)(nil),          // 18: plugnmeet.InsightsTranscriptionFeatures
+	(*InsightsChatTranslationFeatures)(nil),        // 19: plugnmeet.InsightsChatTranslationFeatures
+	(*InsightsAIFeatures)(nil),                     // 20: plugnmeet.InsightsAIFeatures
+	(*InsightsAITextChatFeatures)(nil),             // 21: plugnmeet.InsightsAITextChatFeatures
+	(*InsightsAIMeetingSummarizationFeatures)(nil), // 22: plugnmeet.InsightsAIMeetingSummarizationFeatures
+	(*CopyrightConf)(nil),                          // 23: plugnmeet.CopyrightConf
+	(*CreateRoomRes)(nil),                          // 24: plugnmeet.CreateRoomRes
+	nil,                                            // 25: plugnmeet.RoomMetadata.ExtraDataEntry
+	(*LockSettings)(nil),                           // 26: plugnmeet.LockSettings
+	(*RecorderBotOptions)(nil),                     // 27: plugnmeet.RecorderBotOptions
+	(IngressInput)(0),                              // 28: plugnmeet.IngressInput
+	(StatusCode)(0),                                // 29: plugnmeet.StatusCode
+	(*ActiveRoomInfo)(nil),                         // 30: plugnmeet.ActiveRoomInfo
 }
 var file_plugnmeet_create_room_proto_depIdxs = []int32{
 	1,  // 0: plugnmeet.CreateRoomReq.metadata:type_name -> plugnmeet.RoomMetadata
 	2,  // 1: plugnmeet.RoomMetadata.room_features:type_name -> plugnmeet.RoomCreateFeatures
-	25, // 2: plugnmeet.RoomMetadata.default_lock_settings:type_name -> plugnmeet.LockSettings
-	22, // 3: plugnmeet.RoomMetadata.copyright_conf:type_name -> plugnmeet.CopyrightConf
-	24, // 4: plugnmeet.RoomMetadata.extra_data:type_name -> plugnmeet.RoomMetadata.ExtraDataEntry
-	11, // 5: plugnmeet.RoomCreateFeatures.recording_features:type_name -> plugnmeet.RecordingFeatures
+	26, // 2: plugnmeet.RoomMetadata.default_lock_settings:type_name -> plugnmeet.LockSettings
+	23, // 3: plugnmeet.RoomMetadata.copyright_conf:type_name -> plugnmeet.CopyrightConf
+	25, // 4: plugnmeet.RoomMetadata.extra_data:type_name -> plugnmeet.RoomMetadata.ExtraDataEntry
+	12, // 5: plugnmeet.RoomCreateFeatures.recording_features:type_name -> plugnmeet.RecordingFeatures
 	3,  // 6: plugnmeet.RoomCreateFeatures.chat_features:type_name -> plugnmeet.ChatFeatures
 	4,  // 7: plugnmeet.RoomCreateFeatures.shared_note_pad_features:type_name -> plugnmeet.SharedNotePadFeatures
 	5,  // 8: plugnmeet.RoomCreateFeatures.whiteboard_features:type_name -> plugnmeet.WhiteboardFeatures
 	6,  // 9: plugnmeet.RoomCreateFeatures.external_media_player_features:type_name -> plugnmeet.ExternalMediaPlayerFeatures
 	7,  // 10: plugnmeet.RoomCreateFeatures.waiting_room_features:type_name -> plugnmeet.WaitingRoomFeatures
-	8,  // 11: plugnmeet.RoomCreateFeatures.breakout_room_features:type_name -> plugnmeet.BreakoutRoomFeatures
-	9,  // 12: plugnmeet.RoomCreateFeatures.display_external_link_features:type_name -> plugnmeet.DisplayExternalLinkFeatures
-	12, // 13: plugnmeet.RoomCreateFeatures.ingress_features:type_name -> plugnmeet.IngressFeatures
-	13, // 14: plugnmeet.RoomCreateFeatures.end_to_end_encryption_features:type_name -> plugnmeet.EndToEndEncryptionFeatures
-	14, // 15: plugnmeet.RoomCreateFeatures.polls_features:type_name -> plugnmeet.PollsFeatures
-	16, // 16: plugnmeet.RoomCreateFeatures.insights_features:type_name -> plugnmeet.InsightsFeatures
-	15, // 17: plugnmeet.RoomCreateFeatures.sip_dial_in_features:type_name -> plugnmeet.SipDialInFeatures
-	10, // 18: plugnmeet.RoomCreateFeatures.external_broadcasting_features:type_name -> plugnmeet.ExternalBroadcastingFeatures
-	26, // 19: plugnmeet.ExternalBroadcastingFeatures.recorder_bot_options:type_name -> plugnmeet.RecorderBotOptions
-	26, // 20: plugnmeet.RecordingFeatures.recorder_bot_options:type_name -> plugnmeet.RecorderBotOptions
-	27, // 21: plugnmeet.IngressFeatures.input_type:type_name -> plugnmeet.IngressInput
-	17, // 22: plugnmeet.InsightsFeatures.transcription_features:type_name -> plugnmeet.InsightsTranscriptionFeatures
-	18, // 23: plugnmeet.InsightsFeatures.chat_translation_features:type_name -> plugnmeet.InsightsChatTranslationFeatures
-	19, // 24: plugnmeet.InsightsFeatures.ai_features:type_name -> plugnmeet.InsightsAIFeatures
-	20, // 25: plugnmeet.InsightsAIFeatures.ai_text_chat_features:type_name -> plugnmeet.InsightsAITextChatFeatures
-	21, // 26: plugnmeet.InsightsAIFeatures.meeting_summarization_features:type_name -> plugnmeet.InsightsAIMeetingSummarizationFeatures
-	28, // 27: plugnmeet.CreateRoomRes.status_code:type_name -> plugnmeet.StatusCode
-	29, // 28: plugnmeet.CreateRoomRes.room_info:type_name -> plugnmeet.ActiveRoomInfo
-	29, // [29:29] is the sub-list for method output_type
-	29, // [29:29] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	9,  // 11: plugnmeet.RoomCreateFeatures.breakout_room_features:type_name -> plugnmeet.BreakoutRoomFeatures
+	10, // 12: plugnmeet.RoomCreateFeatures.display_external_link_features:type_name -> plugnmeet.DisplayExternalLinkFeatures
+	13, // 13: plugnmeet.RoomCreateFeatures.ingress_features:type_name -> plugnmeet.IngressFeatures
+	14, // 14: plugnmeet.RoomCreateFeatures.end_to_end_encryption_features:type_name -> plugnmeet.EndToEndEncryptionFeatures
+	15, // 15: plugnmeet.RoomCreateFeatures.polls_features:type_name -> plugnmeet.PollsFeatures
+	17, // 16: plugnmeet.RoomCreateFeatures.insights_features:type_name -> plugnmeet.InsightsFeatures
+	16, // 17: plugnmeet.RoomCreateFeatures.sip_dial_in_features:type_name -> plugnmeet.SipDialInFeatures
+	11, // 18: plugnmeet.RoomCreateFeatures.external_broadcasting_features:type_name -> plugnmeet.ExternalBroadcastingFeatures
+	8,  // 19: plugnmeet.BreakoutRoomFeatures.preassigned_rooms:type_name -> plugnmeet.PreassignedBreakoutRoom
+	27, // 20: plugnmeet.ExternalBroadcastingFeatures.recorder_bot_options:type_name -> plugnmeet.RecorderBotOptions
+	27, // 21: plugnmeet.RecordingFeatures.recorder_bot_options:type_name -> plugnmeet.RecorderBotOptions
+	28, // 22: plugnmeet.IngressFeatures.input_type:type_name -> plugnmeet.IngressInput
+	18, // 23: plugnmeet.InsightsFeatures.transcription_features:type_name -> plugnmeet.InsightsTranscriptionFeatures
+	19, // 24: plugnmeet.InsightsFeatures.chat_translation_features:type_name -> plugnmeet.InsightsChatTranslationFeatures
+	20, // 25: plugnmeet.InsightsFeatures.ai_features:type_name -> plugnmeet.InsightsAIFeatures
+	21, // 26: plugnmeet.InsightsAIFeatures.ai_text_chat_features:type_name -> plugnmeet.InsightsAITextChatFeatures
+	22, // 27: plugnmeet.InsightsAIFeatures.meeting_summarization_features:type_name -> plugnmeet.InsightsAIMeetingSummarizationFeatures
+	29, // 28: plugnmeet.CreateRoomRes.status_code:type_name -> plugnmeet.StatusCode
+	30, // 29: plugnmeet.CreateRoomRes.room_info:type_name -> plugnmeet.ActiveRoomInfo
+	30, // [30:30] is the sub-list for method output_type
+	30, // [30:30] is the sub-list for method input_type
+	30, // [30:30] is the sub-list for extension type_name
+	30, // [30:30] is the sub-list for extension extendee
+	0,  // [0:30] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_create_room_proto_init() }
@@ -2355,22 +2450,22 @@ func file_plugnmeet_create_room_proto_init() {
 	file_plugnmeet_create_room_proto_msgTypes[3].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[5].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[6].OneofWrappers = []any{}
-	file_plugnmeet_create_room_proto_msgTypes[9].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[10].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[11].OneofWrappers = []any{}
-	file_plugnmeet_create_room_proto_msgTypes[13].OneofWrappers = []any{}
-	file_plugnmeet_create_room_proto_msgTypes[15].OneofWrappers = []any{}
+	file_plugnmeet_create_room_proto_msgTypes[12].OneofWrappers = []any{}
+	file_plugnmeet_create_room_proto_msgTypes[14].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[16].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[17].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[18].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[19].OneofWrappers = []any{}
+	file_plugnmeet_create_room_proto_msgTypes[20].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_create_room_proto_rawDesc), len(file_plugnmeet_create_room_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   25,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

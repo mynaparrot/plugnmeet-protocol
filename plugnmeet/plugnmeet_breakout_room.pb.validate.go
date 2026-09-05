@@ -97,8 +97,80 @@ func (m *CreateBreakoutRoomsReq) validate(all bool) error {
 
 	}
 
+	// no validation rules for ShareNotepad
+
+	// no validation rules for AllowReturnToMainRoom
+
+	// no validation rules for AllowSelfSelect
+
 	if m.WelcomeMsg != nil {
 		// no validation rules for WelcomeMsg
+	}
+
+	if m.WhiteboardShare != nil {
+
+		if all {
+			switch v := interface{}(m.GetWhiteboardShare()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CreateBreakoutRoomsReqValidationError{
+						field:  "WhiteboardShare",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CreateBreakoutRoomsReqValidationError{
+						field:  "WhiteboardShare",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetWhiteboardShare()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CreateBreakoutRoomsReqValidationError{
+					field:  "WhiteboardShare",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.PollShare != nil {
+
+		if all {
+			switch v := interface{}(m.GetPollShare()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CreateBreakoutRoomsReqValidationError{
+						field:  "PollShare",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CreateBreakoutRoomsReqValidationError{
+						field:  "PollShare",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetPollShare()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CreateBreakoutRoomsReqValidationError{
+					field:  "PollShare",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if len(errors) > 0 {
@@ -246,6 +318,8 @@ func (m *BreakoutRoom) validate(all bool) error {
 		}
 
 	}
+
+	// no validation rules for RoomSid
 
 	if len(errors) > 0 {
 		return BreakoutRoomMultiError(errors)
@@ -674,8 +748,6 @@ func (m *JoinBreakoutRoomReq) validate(all bool) error {
 
 	// no validation rules for RoomId
 
-	// no validation rules for IsAdmin
-
 	if len(errors) > 0 {
 		return JoinBreakoutRoomReqMultiError(errors)
 	}
@@ -862,6 +934,222 @@ var _ interface {
 	ErrorName() string
 } = EndBreakoutRoomReqValidationError{}
 
+// Validate checks the field values on ReInviteBreakoutRoomReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ReInviteBreakoutRoomReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReInviteBreakoutRoomReq with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ReInviteBreakoutRoomReqMultiError, or nil if none found.
+func (m *ReInviteBreakoutRoomReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReInviteBreakoutRoomReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for BreakoutRoomId
+
+	// no validation rules for UserId
+
+	// no validation rules for RoomId
+
+	if len(errors) > 0 {
+		return ReInviteBreakoutRoomReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReInviteBreakoutRoomReqMultiError is an error wrapping multiple validation
+// errors returned by ReInviteBreakoutRoomReq.ValidateAll() if the designated
+// constraints aren't met.
+type ReInviteBreakoutRoomReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReInviteBreakoutRoomReqMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReInviteBreakoutRoomReqMultiError) AllErrors() []error { return m }
+
+// ReInviteBreakoutRoomReqValidationError is the validation error returned by
+// ReInviteBreakoutRoomReq.Validate if the designated constraints aren't met.
+type ReInviteBreakoutRoomReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReInviteBreakoutRoomReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReInviteBreakoutRoomReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReInviteBreakoutRoomReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReInviteBreakoutRoomReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReInviteBreakoutRoomReqValidationError) ErrorName() string {
+	return "ReInviteBreakoutRoomReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ReInviteBreakoutRoomReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReInviteBreakoutRoomReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReInviteBreakoutRoomReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReInviteBreakoutRoomReqValidationError{}
+
+// Validate checks the field values on BackToMainRoomReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *BackToMainRoomReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BackToMainRoomReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BackToMainRoomReqMultiError, or nil if none found.
+func (m *BackToMainRoomReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BackToMainRoomReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomId
+
+	// no validation rules for UserId
+
+	// no validation rules for ParentRoomId
+
+	if len(errors) > 0 {
+		return BackToMainRoomReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// BackToMainRoomReqMultiError is an error wrapping multiple validation errors
+// returned by BackToMainRoomReq.ValidateAll() if the designated constraints
+// aren't met.
+type BackToMainRoomReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BackToMainRoomReqMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BackToMainRoomReqMultiError) AllErrors() []error { return m }
+
+// BackToMainRoomReqValidationError is the validation error returned by
+// BackToMainRoomReq.Validate if the designated constraints aren't met.
+type BackToMainRoomReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BackToMainRoomReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BackToMainRoomReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BackToMainRoomReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BackToMainRoomReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BackToMainRoomReqValidationError) ErrorName() string {
+	return "BackToMainRoomReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BackToMainRoomReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBackToMainRoomReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BackToMainRoomReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BackToMainRoomReqValidationError{}
+
 // Validate checks the field values on BreakoutRoomRes with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -914,6 +1202,40 @@ func (m *BreakoutRoomRes) validate(all bool) error {
 			if err := v.Validate(); err != nil {
 				return BreakoutRoomResValidationError{
 					field:  fmt.Sprintf("Rooms[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetUnassignedUsers() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, BreakoutRoomResValidationError{
+						field:  fmt.Sprintf("UnassignedUsers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, BreakoutRoomResValidationError{
+						field:  fmt.Sprintf("UnassignedUsers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return BreakoutRoomResValidationError{
+					field:  fmt.Sprintf("UnassignedUsers[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -1036,3 +1358,424 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = BreakoutRoomResValidationError{}
+
+// Validate checks the field values on WhiteboardShare with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *WhiteboardShare) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on WhiteboardShare with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// WhiteboardShareMultiError, or nil if none found.
+func (m *WhiteboardShare) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *WhiteboardShare) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for FileId
+
+	// no validation rules for CurrentPage
+
+	if len(errors) > 0 {
+		return WhiteboardShareMultiError(errors)
+	}
+
+	return nil
+}
+
+// WhiteboardShareMultiError is an error wrapping multiple validation errors
+// returned by WhiteboardShare.ValidateAll() if the designated constraints
+// aren't met.
+type WhiteboardShareMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m WhiteboardShareMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m WhiteboardShareMultiError) AllErrors() []error { return m }
+
+// WhiteboardShareValidationError is the validation error returned by
+// WhiteboardShare.Validate if the designated constraints aren't met.
+type WhiteboardShareValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WhiteboardShareValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WhiteboardShareValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WhiteboardShareValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WhiteboardShareValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WhiteboardShareValidationError) ErrorName() string { return "WhiteboardShareValidationError" }
+
+// Error satisfies the builtin error interface
+func (e WhiteboardShareValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWhiteboardShare.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WhiteboardShareValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WhiteboardShareValidationError{}
+
+// Validate checks the field values on BackToMainRoomRes with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *BackToMainRoomRes) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BackToMainRoomRes with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BackToMainRoomResMultiError, or nil if none found.
+func (m *BackToMainRoomRes) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BackToMainRoomRes) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	// no validation rules for Msg
+
+	if m.Token != nil {
+		// no validation rules for Token
+	}
+
+	if len(errors) > 0 {
+		return BackToMainRoomResMultiError(errors)
+	}
+
+	return nil
+}
+
+// BackToMainRoomResMultiError is an error wrapping multiple validation errors
+// returned by BackToMainRoomRes.ValidateAll() if the designated constraints
+// aren't met.
+type BackToMainRoomResMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BackToMainRoomResMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BackToMainRoomResMultiError) AllErrors() []error { return m }
+
+// BackToMainRoomResValidationError is the validation error returned by
+// BackToMainRoomRes.Validate if the designated constraints aren't met.
+type BackToMainRoomResValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BackToMainRoomResValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BackToMainRoomResValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BackToMainRoomResValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BackToMainRoomResValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BackToMainRoomResValidationError) ErrorName() string {
+	return "BackToMainRoomResValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BackToMainRoomResValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBackToMainRoomRes.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BackToMainRoomResValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BackToMainRoomResValidationError{}
+
+// Validate checks the field values on PollShare with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *PollShare) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PollShare with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in PollShareMultiError, or nil
+// if none found.
+func (m *PollShare) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PollShare) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return PollShareMultiError(errors)
+	}
+
+	return nil
+}
+
+// PollShareMultiError is an error wrapping multiple validation errors returned
+// by PollShare.ValidateAll() if the designated constraints aren't met.
+type PollShareMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PollShareMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PollShareMultiError) AllErrors() []error { return m }
+
+// PollShareValidationError is the validation error returned by
+// PollShare.Validate if the designated constraints aren't met.
+type PollShareValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PollShareValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PollShareValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PollShareValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PollShareValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PollShareValidationError) ErrorName() string { return "PollShareValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PollShareValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPollShare.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PollShareValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PollShareValidationError{}
+
+// Validate checks the field values on MoveBreakoutRoomUserReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MoveBreakoutRoomUserReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MoveBreakoutRoomUserReq with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MoveBreakoutRoomUserReqMultiError, or nil if none found.
+func (m *MoveBreakoutRoomUserReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MoveBreakoutRoomUserReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for BreakoutRoomId
+
+	// no validation rules for UserId
+
+	// no validation rules for RoomId
+
+	if len(errors) > 0 {
+		return MoveBreakoutRoomUserReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// MoveBreakoutRoomUserReqMultiError is an error wrapping multiple validation
+// errors returned by MoveBreakoutRoomUserReq.ValidateAll() if the designated
+// constraints aren't met.
+type MoveBreakoutRoomUserReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MoveBreakoutRoomUserReqMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MoveBreakoutRoomUserReqMultiError) AllErrors() []error { return m }
+
+// MoveBreakoutRoomUserReqValidationError is the validation error returned by
+// MoveBreakoutRoomUserReq.Validate if the designated constraints aren't met.
+type MoveBreakoutRoomUserReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MoveBreakoutRoomUserReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MoveBreakoutRoomUserReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MoveBreakoutRoomUserReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MoveBreakoutRoomUserReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MoveBreakoutRoomUserReqValidationError) ErrorName() string {
+	return "MoveBreakoutRoomUserReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MoveBreakoutRoomUserReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMoveBreakoutRoomUserReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MoveBreakoutRoomUserReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MoveBreakoutRoomUserReqValidationError{}

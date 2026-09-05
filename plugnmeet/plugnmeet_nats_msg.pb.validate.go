@@ -1639,6 +1639,10 @@ func (m *SessionDataHeader) validate(all bool) error {
 		// no validation rules for Key
 	}
 
+	if m.TargetRoomId != nil {
+		// no validation rules for TargetRoomId
+	}
+
 	if len(errors) > 0 {
 		return SessionDataHeaderMultiError(errors)
 	}

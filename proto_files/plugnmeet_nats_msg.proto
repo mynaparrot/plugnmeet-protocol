@@ -45,7 +45,8 @@ enum NatsMsgServerToClientEvents {
   DELIVERY_PRIVATE_DATA = 19;
   PONG = 20;
   SESSION_DATA_FETCH_RESPONSE = 21;
-  //next ID: 22
+  BREAKOUT_ROOM_USER_MOVED = 22;
+  //next ID: 23
 }
 
 enum NatsMsgClientToServerEvents {
@@ -192,4 +193,5 @@ message SessionDataHeader {
   SessionDataType data_type = 1;
   optional string key       = 2;   // request: unset => all, set => one; response: always set
   bool last                 = 3;   // response only: true on the final streamed entry
+  optional string target_room_id = 4; // save only: empty/absent => save to own room; set => seed into target breakout child room
 }
