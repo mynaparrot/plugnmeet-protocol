@@ -38,6 +38,7 @@ const (
 	NatsMsgServerToClientEvents_SESSION_ENDED               NatsMsgServerToClientEvents = 10
 	NatsMsgServerToClientEvents_POLL_CLOSED                 NatsMsgServerToClientEvents = 11
 	NatsMsgServerToClientEvents_POLL_CREATED                NatsMsgServerToClientEvents = 12
+	NatsMsgServerToClientEvents_POLL_REOPENED               NatsMsgServerToClientEvents = 23
 	NatsMsgServerToClientEvents_JOIN_BREAKOUT_ROOM          NatsMsgServerToClientEvents = 13
 	NatsMsgServerToClientEvents_BREAKOUT_ROOM_ENDED         NatsMsgServerToClientEvents = 14
 	NatsMsgServerToClientEvents_SYSTEM_CHAT_MSG             NatsMsgServerToClientEvents = 15 // mostly system message display in chat
@@ -47,7 +48,7 @@ const (
 	NatsMsgServerToClientEvents_DELIVERY_PRIVATE_DATA       NatsMsgServerToClientEvents = 19
 	NatsMsgServerToClientEvents_PONG                        NatsMsgServerToClientEvents = 20
 	NatsMsgServerToClientEvents_SESSION_DATA_FETCH_RESPONSE NatsMsgServerToClientEvents = 21
-	NatsMsgServerToClientEvents_BREAKOUT_ROOM_USER_MOVED    NatsMsgServerToClientEvents = 22 //next ID: 23
+	NatsMsgServerToClientEvents_BREAKOUT_ROOM_USER_MOVED    NatsMsgServerToClientEvents = 22 //next ID: 24
 )
 
 // Enum value maps for NatsMsgServerToClientEvents.
@@ -66,6 +67,7 @@ var (
 		10: "SESSION_ENDED",
 		11: "POLL_CLOSED",
 		12: "POLL_CREATED",
+		23: "POLL_REOPENED",
 		13: "JOIN_BREAKOUT_ROOM",
 		14: "BREAKOUT_ROOM_ENDED",
 		15: "SYSTEM_CHAT_MSG",
@@ -91,6 +93,7 @@ var (
 		"SESSION_ENDED":               10,
 		"POLL_CLOSED":                 11,
 		"POLL_CREATED":                12,
+		"POLL_REOPENED":               23,
 		"JOIN_BREAKOUT_ROOM":          13,
 		"BREAKOUT_ROOM_ENDED":         14,
 		"SYSTEM_CHAT_MSG":             15,
@@ -1587,7 +1590,7 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x04last\x18\x03 \x01(\bR\x04last\x12)\n" +
 	"\x0etarget_room_id\x18\x04 \x01(\tH\x01R\ftargetRoomId\x88\x01\x01B\x06\n" +
 	"\x04_keyB\x11\n" +
-	"\x0f_target_room_id*\xc5\x04\n" +
+	"\x0f_target_room_id*\xd8\x04\n" +
 	"\x1bNatsMsgServerToClientEvents\x12\x14\n" +
 	"\x10RES_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15RES_JOINED_USERS_LIST\x10\x01\x12\x19\n" +
@@ -1602,7 +1605,8 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\rSESSION_ENDED\x10\n" +
 	"\x12\x0f\n" +
 	"\vPOLL_CLOSED\x10\v\x12\x10\n" +
-	"\fPOLL_CREATED\x10\f\x12\x16\n" +
+	"\fPOLL_CREATED\x10\f\x12\x11\n" +
+	"\rPOLL_REOPENED\x10\x17\x12\x16\n" +
 	"\x12JOIN_BREAKOUT_ROOM\x10\r\x12\x17\n" +
 	"\x13BREAKOUT_ROOM_ENDED\x10\x0e\x12\x13\n" +
 	"\x0fSYSTEM_CHAT_MSG\x10\x0f\x12\x1d\n" +

@@ -15,11 +15,16 @@ message CreatePollReq {
   string poll_id = 3;
   string question = 4;
   repeated CreatePollOptions options = 5;
+  bool is_anonymous = 6;
+  bool is_multiple = 7;
+  bool is_quiz = 8;
+  uint32 duration = 9;
 }
 
 message CreatePollOptions {
   uint32 id = 1;
   string text = 2;
+  bool is_correct = 3;
 }
 
 message PollInfo {
@@ -31,6 +36,11 @@ message PollInfo {
   int64 created = 6;
   string created_by = 7;
   string closed_by = 8;
+  bool is_anonymous = 9;
+  bool is_multiple = 10;
+  bool is_quiz = 11;
+  int64 expires_at = 12;
+  uint32 duration = 13;
 }
 
 message SubmitPollResponseReq {
@@ -38,7 +48,13 @@ message SubmitPollResponseReq {
   string user_id = 2;
   string name = 3;
   string poll_id = 4;
-  uint64 selected_option = 5;
+  repeated uint64 selected_options = 5;
+}
+
+message ReopenPollReq {
+  string room_id = 1;
+  string user_id = 2;
+  string poll_id = 3;
 }
 
 message ClosePollReq {
@@ -51,12 +67,14 @@ message PollResponsesResultOptions {
   uint64 id = 1;
   string text = 2;
   uint64 vote_count = 3;
+  bool is_correct = 4;
 }
 
 message PollResponsesResult {
   string question = 1;
-  uint64  total_responses = 2;
-  repeated PollResponsesResultOptions options = 3;
+  uint64 total_responses = 2;
+  uint64 total_votes = 3;
+  repeated PollResponsesResultOptions options = 4;
 }
 
 message PollsStats {
@@ -69,11 +87,12 @@ message PollResponse {
   string msg = 2;
   optional string poll_id = 3;
   optional uint64 total_responses = 4;
-  optional uint64 voted = 5;
+  repeated uint64 voted = 5;
   map<string, string> responses = 6;
   repeated PollInfo polls = 7;
   optional PollsStats stats = 8;
   optional uint64 total_polls = 9;
   optional uint64 total_running = 10;
   optional PollResponsesResult poll_responses_result = 11;
+  optional bool has_voted = 12;
 }

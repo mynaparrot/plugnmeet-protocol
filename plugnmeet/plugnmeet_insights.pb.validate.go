@@ -1584,6 +1584,8 @@ func (m *InsightsAITextChatConfigReq) validate(all bool) error {
 
 	// no validation rules for IsWhiteboardAiDisabled
 
+	// no validation rules for IsPollAiDisabled
+
 	if len(errors) > 0 {
 		return InsightsAITextChatConfigReqMultiError(errors)
 	}

@@ -77,6 +77,7 @@ enum AnalyticsEvents {
   // room related
   ANALYTICS_EVENT_ROOM_POLL_ADDED = 1;
   ANALYTICS_EVENT_ROOM_POLL_ENDED = 2;
+  ANALYTICS_EVENT_ROOM_POLL_REOPENED = 41;
   // user join will be room related
   // after take record it will pass to user
   ANALYTICS_EVENT_USER_JOINED  = 3;
@@ -138,7 +139,7 @@ enum AnalyticsEvents {
   ANALYTICS_EVENT_USER_CONNECTION_QUALITY = 30;
   ANALYTICS_EVENT_USER_REACTION = 40;
 
-  // next ID: 41
+  // next ID: 42
 }
 
 enum AnalyticsStatus {

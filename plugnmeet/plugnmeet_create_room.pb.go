@@ -1840,6 +1840,7 @@ type InsightsAITextChatFeatures struct {
 	AllowedUserIds         []string `protobuf:"bytes,4,rep,name=allowed_user_ids,json=allowedUserIds,proto3" json:"allowed_user_ids,omitempty"`
 	IsNotepadAiDisabled    bool     `protobuf:"varint,5,opt,name=is_notepad_ai_disabled,json=isNotepadAiDisabled,proto3" json:"is_notepad_ai_disabled,omitempty"`
 	IsWhiteboardAiDisabled bool     `protobuf:"varint,6,opt,name=is_whiteboard_ai_disabled,json=isWhiteboardAiDisabled,proto3" json:"is_whiteboard_ai_disabled,omitempty"`
+	IsPollAiDisabled       bool     `protobuf:"varint,7,opt,name=is_poll_ai_disabled,json=isPollAiDisabled,proto3" json:"is_poll_ai_disabled,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -1912,6 +1913,13 @@ func (x *InsightsAITextChatFeatures) GetIsNotepadAiDisabled() bool {
 func (x *InsightsAITextChatFeatures) GetIsWhiteboardAiDisabled() bool {
 	if x != nil {
 		return x.IsWhiteboardAiDisabled
+	}
+	return false
+}
+
+func (x *InsightsAITextChatFeatures) GetIsPollAiDisabled() bool {
+	if x != nil {
+		return x.IsPollAiDisabled
 	}
 	return false
 }
@@ -2325,7 +2333,7 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x15ai_text_chat_features\x18\x02 \x01(\v2%.plugnmeet.InsightsAITextChatFeaturesH\x00R\x12aiTextChatFeatures\x88\x01\x01\x12|\n" +
 	"\x1emeeting_summarization_features\x18\x03 \x01(\v21.plugnmeet.InsightsAIMeetingSummarizationFeaturesH\x01R\x1cmeetingSummarizationFeatures\x88\x01\x01B\x18\n" +
 	"\x16_ai_text_chat_featuresB!\n" +
-	"\x1f_meeting_summarization_features\"\xce\x02\n" +
+	"\x1f_meeting_summarization_features\"\x86\x03\n" +
 	"\x1aInsightsAITextChatFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12&\n" +
 	"\n" +
@@ -2333,7 +2341,8 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x13is_allowed_everyone\x18\x03 \x01(\bB\a\xbaH\x04j\x02\b\x00R\x11isAllowedEveryone\x122\n" +
 	"\x10allowed_user_ids\x18\x04 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x0eallowedUserIds\x12<\n" +
 	"\x16is_notepad_ai_disabled\x18\x05 \x01(\bB\a\xbaH\x04j\x02\b\x00R\x13isNotepadAiDisabled\x12B\n" +
-	"\x19is_whiteboard_ai_disabled\x18\x06 \x01(\bB\a\xbaH\x04j\x02\b\x00R\x16isWhiteboardAiDisabled\"\x9e\x01\n" +
+	"\x19is_whiteboard_ai_disabled\x18\x06 \x01(\bB\a\xbaH\x04j\x02\b\x00R\x16isWhiteboardAiDisabled\x126\n" +
+	"\x13is_poll_ai_disabled\x18\a \x01(\bB\a\xbaH\x04j\x02\b\x00R\x10isPollAiDisabled\"\x9e\x01\n" +
 	"&InsightsAIMeetingSummarizationFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x121\n" +
 	"\x14summarization_prompt\x18\x02 \x01(\tR\x13summarizationPrompt\x12&\n" +

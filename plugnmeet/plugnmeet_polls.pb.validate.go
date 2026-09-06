@@ -203,6 +203,14 @@ func (m *CreatePollReq) validate(all bool) error {
 
 	}
 
+	// no validation rules for IsAnonymous
+
+	// no validation rules for IsMultiple
+
+	// no validation rules for IsQuiz
+
+	// no validation rules for Duration
+
 	if len(errors) > 0 {
 		return CreatePollReqMultiError(errors)
 	}
@@ -306,6 +314,8 @@ func (m *CreatePollOptions) validate(all bool) error {
 	// no validation rules for Id
 
 	// no validation rules for Text
+
+	// no validation rules for IsCorrect
 
 	if len(errors) > 0 {
 		return CreatePollOptionsMultiError(errors)
@@ -457,6 +467,16 @@ func (m *PollInfo) validate(all bool) error {
 
 	// no validation rules for ClosedBy
 
+	// no validation rules for IsAnonymous
+
+	// no validation rules for IsMultiple
+
+	// no validation rules for IsQuiz
+
+	// no validation rules for ExpiresAt
+
+	// no validation rules for Duration
+
 	if len(errors) > 0 {
 		return PollInfoMultiError(errors)
 	}
@@ -564,8 +584,6 @@ func (m *SubmitPollResponseReq) validate(all bool) error {
 
 	// no validation rules for PollId
 
-	// no validation rules for SelectedOption
-
 	if len(errors) > 0 {
 		return SubmitPollResponseReqMultiError(errors)
 	}
@@ -645,6 +663,112 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SubmitPollResponseReqValidationError{}
+
+// Validate checks the field values on ReopenPollReq with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ReopenPollReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReopenPollReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ReopenPollReqMultiError, or
+// nil if none found.
+func (m *ReopenPollReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReopenPollReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomId
+
+	// no validation rules for UserId
+
+	// no validation rules for PollId
+
+	if len(errors) > 0 {
+		return ReopenPollReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReopenPollReqMultiError is an error wrapping multiple validation errors
+// returned by ReopenPollReq.ValidateAll() if the designated constraints
+// aren't met.
+type ReopenPollReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReopenPollReqMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReopenPollReqMultiError) AllErrors() []error { return m }
+
+// ReopenPollReqValidationError is the validation error returned by
+// ReopenPollReq.Validate if the designated constraints aren't met.
+type ReopenPollReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReopenPollReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReopenPollReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReopenPollReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReopenPollReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReopenPollReqValidationError) ErrorName() string { return "ReopenPollReqValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ReopenPollReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReopenPollReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReopenPollReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReopenPollReqValidationError{}
 
 // Validate checks the field values on ClosePollReq with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
@@ -779,6 +903,8 @@ func (m *PollResponsesResultOptions) validate(all bool) error {
 
 	// no validation rules for VoteCount
 
+	// no validation rules for IsCorrect
+
 	if len(errors) > 0 {
 		return PollResponsesResultOptionsMultiError(errors)
 	}
@@ -884,6 +1010,8 @@ func (m *PollResponsesResult) validate(all bool) error {
 	// no validation rules for Question
 
 	// no validation rules for TotalResponses
+
+	// no validation rules for TotalVotes
 
 	for idx, item := range m.GetOptions() {
 		_, _ = idx, item
@@ -1172,10 +1300,6 @@ func (m *PollResponse) validate(all bool) error {
 		// no validation rules for TotalResponses
 	}
 
-	if m.Voted != nil {
-		// no validation rules for Voted
-	}
-
 	if m.Stats != nil {
 
 		if all {
@@ -1248,6 +1372,10 @@ func (m *PollResponse) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if m.HasVoted != nil {
+		// no validation rules for HasVoted
 	}
 
 	if len(errors) > 0 {
