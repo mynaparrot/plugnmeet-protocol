@@ -21,6 +21,12 @@ message CreatePollReq {
   uint32 duration = 9;
 }
 
+message CreatePollRes {
+  bool status = 1;
+  string msg = 2;
+  string poll_id = 3;
+}
+
 message CreatePollOptions {
   uint32 id = 1;
   string text = 2;

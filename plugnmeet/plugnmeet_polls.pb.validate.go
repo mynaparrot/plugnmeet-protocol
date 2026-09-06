@@ -289,6 +289,112 @@ var _ interface {
 	ErrorName() string
 } = CreatePollReqValidationError{}
 
+// Validate checks the field values on CreatePollRes with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *CreatePollRes) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreatePollRes with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in CreatePollResMultiError, or
+// nil if none found.
+func (m *CreatePollRes) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreatePollRes) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	// no validation rules for Msg
+
+	// no validation rules for PollId
+
+	if len(errors) > 0 {
+		return CreatePollResMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreatePollResMultiError is an error wrapping multiple validation errors
+// returned by CreatePollRes.ValidateAll() if the designated constraints
+// aren't met.
+type CreatePollResMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreatePollResMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreatePollResMultiError) AllErrors() []error { return m }
+
+// CreatePollResValidationError is the validation error returned by
+// CreatePollRes.Validate if the designated constraints aren't met.
+type CreatePollResValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreatePollResValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreatePollResValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreatePollResValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreatePollResValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreatePollResValidationError) ErrorName() string { return "CreatePollResValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CreatePollResValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreatePollRes.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreatePollResValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreatePollResValidationError{}
+
 // Validate checks the field values on CreatePollOptions with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
