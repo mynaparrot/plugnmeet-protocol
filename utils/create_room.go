@@ -5,7 +5,34 @@ import (
 
 	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/reflect/protoreflect"
 )
+
+// mergeRoomFeatures clones the default features and applies the user's
+// explicitly set fields on top. Unlike proto.Merge, non-nil message fields
+// replace the default entirely, preserving their internal false values.
+func mergeRoomFeatures(user *plugnmeet.RoomCreateFeatures) *plugnmeet.RoomCreateFeatures {
+	result := proto.Clone(defaultRoomFeatures).(*plugnmeet.RoomCreateFeatures)
+	if user == nil {
+		return result
+	}
+
+	userFields := user.ProtoReflect()
+	resultFields := result.ProtoReflect()
+
+	userFields.Range(func(fd protoreflect.FieldDescriptor, v protoreflect.Value) bool {
+		if fd.Kind() == protoreflect.MessageKind && !fd.IsList() && !fd.IsMap() {
+			// Clone message fields to avoid aliasing with the caller's structs.
+			cloned := proto.Clone(v.Message().Interface())
+			resultFields.Set(fd, protoreflect.ValueOf(cloned.ProtoReflect()))
+		} else {
+			resultFields.Set(fd, v)
+		}
+		return true
+	})
+
+	return result
+}
 
 // PrepareDefaultRoomFeatures will initialize all the features and lock settings with default values
 // this ensure that none of the feature has nil values
@@ -24,13 +51,8 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 	}
 
 	// now with all room features
-	// First, we'll clone the default features to create a base.
-	newRf := proto.Clone(defaultRoomFeatures).(*plugnmeet.RoomCreateFeatures)
-	// Then, we'll merge the user's request on top of the defaults.
-	// This ensures user-defined values overwrite the defaults.
-	proto.Merge(newRf, r.Metadata.RoomFeatures)
-	// Finally, assign the merged features back to the request.
-	r.Metadata.RoomFeatures = newRf
+	// mergeRoomFeatures replaces if nil with default.
+	r.Metadata.RoomFeatures = mergeRoomFeatures(r.Metadata.RoomFeatures)
 	rf := r.Metadata.RoomFeatures
 
 	// reset everything if disabled
