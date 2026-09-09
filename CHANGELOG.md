@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.6.1](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.6.0...v1.6.1) (2026-09-08)
+
+
+### Bug Fixes
+
+* **breakout-rooms:** added protobuf definations ([#327](https://github.com/mynaparrot/plugnmeet-protocol/issues/327)) ([5e947d4](https://github.com/mynaparrot/plugnmeet-protocol/commit/5e947d495f87f17bbe517e30390ba0008de68d2f))
+* **polls:** added protobuf definations ([f57f4e3](https://github.com/mynaparrot/plugnmeet-protocol/commit/f57f4e399dc9772d47069b2b73e931b51efb9445))
+* **polls:** added protobuf definitions ([e5af805](https://github.com/mynaparrot/plugnmeet-protocol/commit/e5af8050821fa0cfc1cc5d8ceb8e9032270eae47))
+* replaced `proto.Merge` without own `mergeRoomFeatures` ([66ec166](https://github.com/mynaparrot/plugnmeet-protocol/commit/66ec1669abcd2952b11721297867871cc0d57a7d))
+
 ## [1.6.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.5.0...v1.6.0) (2026-08-31)
 
 
