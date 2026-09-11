@@ -171,6 +171,15 @@ message NatsUserMetadataUpdate {
   string metadata = 2;
 }
 
+message ChatMeta {
+  optional string reply_to_id = 1;
+  optional string reply_to_name = 2;
+  optional string reply_to_text = 3; // truncated plain-text snippet
+  optional int64 edited_at = 4;
+  bool is_deleted = 5;
+  optional string deleted_by = 6; // absent = self, set = admin userId
+}
+
 message ChatMessage {
   string id = 1;
   string from_name = 2;
@@ -182,6 +191,7 @@ message ChatMessage {
   bool from_admin = 8;
   optional string source_lang = 9;
   map<string, string> translations = 10;
+  optional ChatMeta meta = 11;
 }
 
 enum SessionDataType {

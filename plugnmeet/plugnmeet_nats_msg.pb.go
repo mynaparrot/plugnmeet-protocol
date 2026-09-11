@@ -1288,6 +1288,90 @@ func (x *NatsUserMetadataUpdate) GetMetadata() string {
 	return ""
 }
 
+type ChatMeta struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ReplyToId     *string                `protobuf:"bytes,1,opt,name=reply_to_id,json=replyToId,proto3,oneof" json:"reply_to_id,omitempty"`
+	ReplyToName   *string                `protobuf:"bytes,2,opt,name=reply_to_name,json=replyToName,proto3,oneof" json:"reply_to_name,omitempty"`
+	ReplyToText   *string                `protobuf:"bytes,3,opt,name=reply_to_text,json=replyToText,proto3,oneof" json:"reply_to_text,omitempty"` // truncated plain-text snippet
+	EditedAt      *int64                 `protobuf:"varint,4,opt,name=edited_at,json=editedAt,proto3,oneof" json:"edited_at,omitempty"`
+	IsDeleted     bool                   `protobuf:"varint,5,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
+	DeletedBy     *string                `protobuf:"bytes,6,opt,name=deleted_by,json=deletedBy,proto3,oneof" json:"deleted_by,omitempty"` // absent = self, set = admin userId
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChatMeta) Reset() {
+	*x = ChatMeta{}
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChatMeta) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChatMeta) ProtoMessage() {}
+
+func (x *ChatMeta) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChatMeta.ProtoReflect.Descriptor instead.
+func (*ChatMeta) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ChatMeta) GetReplyToId() string {
+	if x != nil && x.ReplyToId != nil {
+		return *x.ReplyToId
+	}
+	return ""
+}
+
+func (x *ChatMeta) GetReplyToName() string {
+	if x != nil && x.ReplyToName != nil {
+		return *x.ReplyToName
+	}
+	return ""
+}
+
+func (x *ChatMeta) GetReplyToText() string {
+	if x != nil && x.ReplyToText != nil {
+		return *x.ReplyToText
+	}
+	return ""
+}
+
+func (x *ChatMeta) GetEditedAt() int64 {
+	if x != nil && x.EditedAt != nil {
+		return *x.EditedAt
+	}
+	return 0
+}
+
+func (x *ChatMeta) GetIsDeleted() bool {
+	if x != nil {
+		return x.IsDeleted
+	}
+	return false
+}
+
+func (x *ChatMeta) GetDeletedBy() string {
+	if x != nil && x.DeletedBy != nil {
+		return *x.DeletedBy
+	}
+	return ""
+}
+
 type ChatMessage struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -1300,13 +1384,14 @@ type ChatMessage struct {
 	FromAdmin     bool                   `protobuf:"varint,8,opt,name=from_admin,json=fromAdmin,proto3" json:"from_admin,omitempty"`
 	SourceLang    *string                `protobuf:"bytes,9,opt,name=source_lang,json=sourceLang,proto3,oneof" json:"source_lang,omitempty"`
 	Translations  map[string]string      `protobuf:"bytes,10,rep,name=translations,proto3" json:"translations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Meta          *ChatMeta              `protobuf:"bytes,11,opt,name=meta,proto3,oneof" json:"meta,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ChatMessage) Reset() {
 	*x = ChatMessage{}
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[12]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1318,7 +1403,7 @@ func (x *ChatMessage) String() string {
 func (*ChatMessage) ProtoMessage() {}
 
 func (x *ChatMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[12]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1331,7 +1416,7 @@ func (x *ChatMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChatMessage.ProtoReflect.Descriptor instead.
 func (*ChatMessage) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{12}
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ChatMessage) GetId() string {
@@ -1404,6 +1489,13 @@ func (x *ChatMessage) GetTranslations() map[string]string {
 	return nil
 }
 
+func (x *ChatMessage) GetMeta() *ChatMeta {
+	if x != nil {
+		return x.Meta
+	}
+	return nil
+}
+
 type SessionDataHeader struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	DataType      SessionDataType        `protobuf:"varint,1,opt,name=data_type,json=dataType,proto3,enum=plugnmeet.SessionDataType" json:"data_type,omitempty"`
@@ -1416,7 +1508,7 @@ type SessionDataHeader struct {
 
 func (x *SessionDataHeader) Reset() {
 	*x = SessionDataHeader{}
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[13]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1428,7 +1520,7 @@ func (x *SessionDataHeader) String() string {
 func (*SessionDataHeader) ProtoMessage() {}
 
 func (x *SessionDataHeader) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_nats_msg_proto_msgTypes[13]
+	mi := &file_plugnmeet_nats_msg_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1441,7 +1533,7 @@ func (x *SessionDataHeader) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SessionDataHeader.ProtoReflect.Descriptor instead.
 func (*SessionDataHeader) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{13}
+	return file_plugnmeet_nats_msg_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *SessionDataHeader) GetDataType() SessionDataType {
@@ -1561,7 +1653,22 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"with_sound\x18\x05 \x01(\bR\twithSound\"M\n" +
 	"\x16NatsUserMetadataUpdate\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
-	"\bmetadata\x18\x02 \x01(\tR\bmetadata\"\xc4\x03\n" +
+	"\bmetadata\x18\x02 \x01(\tR\bmetadata\"\xb7\x02\n" +
+	"\bChatMeta\x12#\n" +
+	"\vreply_to_id\x18\x01 \x01(\tH\x00R\treplyToId\x88\x01\x01\x12'\n" +
+	"\rreply_to_name\x18\x02 \x01(\tH\x01R\vreplyToName\x88\x01\x01\x12'\n" +
+	"\rreply_to_text\x18\x03 \x01(\tH\x02R\vreplyToText\x88\x01\x01\x12 \n" +
+	"\tedited_at\x18\x04 \x01(\x03H\x03R\beditedAt\x88\x01\x01\x12\x1d\n" +
+	"\n" +
+	"is_deleted\x18\x05 \x01(\bR\tisDeleted\x12\"\n" +
+	"\n" +
+	"deleted_by\x18\x06 \x01(\tH\x04R\tdeletedBy\x88\x01\x01B\x0e\n" +
+	"\f_reply_to_idB\x10\n" +
+	"\x0e_reply_to_nameB\x10\n" +
+	"\x0e_reply_to_textB\f\n" +
+	"\n" +
+	"_edited_atB\r\n" +
+	"\v_deleted_by\"\xfb\x03\n" +
 	"\vChatMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfrom_name\x18\x02 \x01(\tR\bfromName\x12 \n" +
@@ -1578,12 +1685,14 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\vsource_lang\x18\t \x01(\tH\x01R\n" +
 	"sourceLang\x88\x01\x01\x12L\n" +
 	"\ftranslations\x18\n" +
-	" \x03(\v2(.plugnmeet.ChatMessage.TranslationsEntryR\ftranslations\x1a?\n" +
+	" \x03(\v2(.plugnmeet.ChatMessage.TranslationsEntryR\ftranslations\x12,\n" +
+	"\x04meta\x18\v \x01(\v2\x13.plugnmeet.ChatMetaH\x02R\x04meta\x88\x01\x01\x1a?\n" +
 	"\x11TranslationsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
 	"\v_to_user_idB\x0e\n" +
-	"\f_source_lang\"\xbd\x01\n" +
+	"\f_source_langB\a\n" +
+	"\x05_meta\"\xbd\x01\n" +
 	"\x11SessionDataHeader\x127\n" +
 	"\tdata_type\x18\x01 \x01(\x0e2\x1a.plugnmeet.SessionDataTypeR\bdataType\x12\x15\n" +
 	"\x03key\x18\x02 \x01(\tH\x00R\x03key\x88\x01\x01\x12\x12\n" +
@@ -1660,7 +1769,7 @@ func file_plugnmeet_nats_msg_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_nats_msg_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_plugnmeet_nats_msg_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_plugnmeet_nats_msg_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_plugnmeet_nats_msg_proto_goTypes = []any{
 	(NatsMsgServerToClientEvents)(0), // 0: plugnmeet.NatsMsgServerToClientEvents
 	(NatsMsgClientToServerEvents)(0), // 1: plugnmeet.NatsMsgClientToServerEvents
@@ -1679,9 +1788,10 @@ var file_plugnmeet_nats_msg_proto_goTypes = []any{
 	(*NatsInitialData)(nil),          // 14: plugnmeet.NatsInitialData
 	(*NatsSystemNotification)(nil),   // 15: plugnmeet.NatsSystemNotification
 	(*NatsUserMetadataUpdate)(nil),   // 16: plugnmeet.NatsUserMetadataUpdate
-	(*ChatMessage)(nil),              // 17: plugnmeet.ChatMessage
-	(*SessionDataHeader)(nil),        // 18: plugnmeet.SessionDataHeader
-	nil,                              // 19: plugnmeet.ChatMessage.TranslationsEntry
+	(*ChatMeta)(nil),                 // 17: plugnmeet.ChatMeta
+	(*ChatMessage)(nil),              // 18: plugnmeet.ChatMessage
+	(*SessionDataHeader)(nil),        // 19: plugnmeet.SessionDataHeader
+	nil,                              // 20: plugnmeet.ChatMessage.TranslationsEntry
 }
 var file_plugnmeet_nats_msg_proto_depIdxs = []int32{
 	0,  // 0: plugnmeet.NatsMsgServerToClient.event:type_name -> plugnmeet.NatsMsgServerToClientEvents
@@ -1692,13 +1802,14 @@ var file_plugnmeet_nats_msg_proto_depIdxs = []int32{
 	9,  // 5: plugnmeet.NatsInitialData.room:type_name -> plugnmeet.NatsKvRoomInfo
 	10, // 6: plugnmeet.NatsInitialData.local_user:type_name -> plugnmeet.NatsKvUserInfo
 	3,  // 7: plugnmeet.NatsSystemNotification.type:type_name -> plugnmeet.NatsSystemNotificationTypes
-	19, // 8: plugnmeet.ChatMessage.translations:type_name -> plugnmeet.ChatMessage.TranslationsEntry
-	4,  // 9: plugnmeet.SessionDataHeader.data_type:type_name -> plugnmeet.SessionDataType
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	20, // 8: plugnmeet.ChatMessage.translations:type_name -> plugnmeet.ChatMessage.TranslationsEntry
+	17, // 9: plugnmeet.ChatMessage.meta:type_name -> plugnmeet.ChatMeta
+	4,  // 10: plugnmeet.SessionDataHeader.data_type:type_name -> plugnmeet.SessionDataType
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_nats_msg_proto_init() }
@@ -1710,13 +1821,14 @@ func file_plugnmeet_nats_msg_proto_init() {
 	file_plugnmeet_nats_msg_proto_msgTypes[8].OneofWrappers = []any{}
 	file_plugnmeet_nats_msg_proto_msgTypes[12].OneofWrappers = []any{}
 	file_plugnmeet_nats_msg_proto_msgTypes[13].OneofWrappers = []any{}
+	file_plugnmeet_nats_msg_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_nats_msg_proto_rawDesc), len(file_plugnmeet_nats_msg_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   15,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
