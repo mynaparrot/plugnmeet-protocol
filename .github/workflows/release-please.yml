@@ -22,9 +22,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
       - name: Setup buf
-        uses: bufbuild/buf-setup-action@v1
+        uses: bufbuild/buf-action@v1
         with:
-          version: latest
+          setup_only: true
       - name: Setup go
         uses: actions/setup-go@v7
         with:
