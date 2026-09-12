@@ -37,7 +37,7 @@ jobs:
       - uses: pnpm/action-setup@v6
         name: Install pnpm
         with:
-          version: '11.25.0'
+          version: '12.4.1'
       - name: Build and publish
         run: |
           bash generate.sh
