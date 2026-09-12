@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.2](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.6.1...v1.6.2) (2026-09-12)
+
+
+### Bug Fixes
+
+* added `ChatMeta` definition ([16f3d2a](https://github.com/mynaparrot/plugnmeet-protocol/commit/16f3d2a34745440a5769440e1d9e7d5842e20029))
+* migration to `buf-action` ([1b5ea63](https://github.com/mynaparrot/plugnmeet-protocol/commit/1b5ea6383778b702f2180ab9b2a5ab9658b367d6))
+
 ## [1.6.1](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.6.0...v1.6.1) (2026-09-08)
 
 
