@@ -15,7 +15,7 @@ require (
 	github.com/nats-io/nkeys v0.4.16
 	github.com/sirupsen/logrus v1.10.2
 	google.golang.org/protobuf v1.36.12
-	mvdan.cc/sh/v3 v3.14.0
+	mvdan.cc/sh/v3 v3.14.1
 )
 
 require (
