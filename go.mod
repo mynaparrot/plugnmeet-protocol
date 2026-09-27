@@ -4,7 +4,7 @@ go 1.26.7
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.12-20260825204119-511051f7f437.2
-	github.com/DeRuina/timberjack v1.4.7
+	github.com/DeRuina/timberjack v1.4.8
 	github.com/gammazero/workerpool v1.2.1
 	github.com/go-jose/go-jose/v4 v4.1.5
 	github.com/gofiber/fiber/v3 v3.5.0
