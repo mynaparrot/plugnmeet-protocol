@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.3](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.6.2...v1.6.3) (2026-10-10)
+
+
+### Bug Fixes
+
+* **turn:** fallback now requires meaningful, measured evidence that the current connection is struggling, rather than simply waiting for a timer ([65a5b1f](https://github.com/mynaparrot/plugnmeet-protocol/commit/65a5b1f82b738f36f4e46d5ff752facb31e87e1d))
+
 ## [1.6.2](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.6.1...v1.6.2) (2026-09-12)
 
 
