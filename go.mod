@@ -5,7 +5,7 @@ go 1.26.7
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.12-20260825204119-511051f7f437.2
 	github.com/DeRuina/timberjack v1.4.7
-	github.com/gammazero/workerpool v1.2.1
+	github.com/gammazero/workerpool v1.3.0
 	github.com/go-jose/go-jose/v4 v4.1.5
 	github.com/gofiber/fiber/v3 v3.5.0
 	github.com/google/uuid v1.6.0
@@ -30,7 +30,7 @@ require (
 	github.com/dennwc/iters v1.2.2 // indirect
 	github.com/frostbyte73/core v0.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.10.1 // indirect
-	github.com/gammazero/deque v1.2.1 // indirect
+	github.com/gammazero/deque v1.2.2 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/gofiber/schema v1.8.3 // indirect
 	github.com/gofiber/utils/v2 v2.4.1 // indirect
