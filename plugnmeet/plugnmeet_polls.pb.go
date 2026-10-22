@@ -825,6 +825,129 @@ func (x *PollsStats) GetTotalRunning() uint64 {
 	return 0
 }
 
+type PollRespondent struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	OptionIds     []uint64               `protobuf:"varint,3,rep,packed,name=option_ids,json=optionIds,proto3" json:"option_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PollRespondent) Reset() {
+	*x = PollRespondent{}
+	mi := &file_plugnmeet_polls_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PollRespondent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PollRespondent) ProtoMessage() {}
+
+func (x *PollRespondent) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_polls_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PollRespondent.ProtoReflect.Descriptor instead.
+func (*PollRespondent) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_polls_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *PollRespondent) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *PollRespondent) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *PollRespondent) GetOptionIds() []uint64 {
+	if x != nil {
+		return x.OptionIds
+	}
+	return nil
+}
+
+// Per-poll responses detail: aggregate counts plus the full respondent list
+// (omitted entirely for anonymous polls — participation only is stored).
+type PollResponsesDetails struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	TotalRespondents uint64                 `protobuf:"varint,1,opt,name=total_respondents,json=totalRespondents,proto3" json:"total_respondents,omitempty"`
+	// aggregate counts only; respondents are delivered separately below
+	Options       []*PollResponsesResultOptions `protobuf:"bytes,2,rep,name=options,proto3" json:"options,omitempty"`
+	Respondents   []*PollRespondent             `protobuf:"bytes,3,rep,name=respondents,proto3" json:"respondents,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PollResponsesDetails) Reset() {
+	*x = PollResponsesDetails{}
+	mi := &file_plugnmeet_polls_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PollResponsesDetails) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PollResponsesDetails) ProtoMessage() {}
+
+func (x *PollResponsesDetails) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_polls_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PollResponsesDetails.ProtoReflect.Descriptor instead.
+func (*PollResponsesDetails) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_polls_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *PollResponsesDetails) GetTotalRespondents() uint64 {
+	if x != nil {
+		return x.TotalRespondents
+	}
+	return 0
+}
+
+func (x *PollResponsesDetails) GetOptions() []*PollResponsesResultOptions {
+	if x != nil {
+		return x.Options
+	}
+	return nil
+}
+
+func (x *PollResponsesDetails) GetRespondents() []*PollRespondent {
+	if x != nil {
+		return x.Respondents
+	}
+	return nil
+}
+
 type PollResponse struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	Status              bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
@@ -832,7 +955,7 @@ type PollResponse struct {
 	PollId              *string                `protobuf:"bytes,3,opt,name=poll_id,json=pollId,proto3,oneof" json:"poll_id,omitempty"`
 	TotalResponses      *uint64                `protobuf:"varint,4,opt,name=total_responses,json=totalResponses,proto3,oneof" json:"total_responses,omitempty"`
 	Voted               []uint64               `protobuf:"varint,5,rep,packed,name=voted,proto3" json:"voted,omitempty"`
-	Responses           map[string]string      `protobuf:"bytes,6,rep,name=responses,proto3" json:"responses,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	ResponsesDetails    *PollResponsesDetails  `protobuf:"bytes,6,opt,name=responses_details,json=responsesDetails,proto3,oneof" json:"responses_details,omitempty"`
 	Polls               []*PollInfo            `protobuf:"bytes,7,rep,name=polls,proto3" json:"polls,omitempty"`
 	Stats               *PollsStats            `protobuf:"bytes,8,opt,name=stats,proto3,oneof" json:"stats,omitempty"`
 	TotalPolls          *uint64                `protobuf:"varint,9,opt,name=total_polls,json=totalPolls,proto3,oneof" json:"total_polls,omitempty"`
@@ -845,7 +968,7 @@ type PollResponse struct {
 
 func (x *PollResponse) Reset() {
 	*x = PollResponse{}
-	mi := &file_plugnmeet_polls_proto_msgTypes[11]
+	mi := &file_plugnmeet_polls_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -857,7 +980,7 @@ func (x *PollResponse) String() string {
 func (*PollResponse) ProtoMessage() {}
 
 func (x *PollResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_polls_proto_msgTypes[11]
+	mi := &file_plugnmeet_polls_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -870,7 +993,7 @@ func (x *PollResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PollResponse.ProtoReflect.Descriptor instead.
 func (*PollResponse) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_polls_proto_rawDescGZIP(), []int{11}
+	return file_plugnmeet_polls_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *PollResponse) GetStatus() bool {
@@ -908,9 +1031,9 @@ func (x *PollResponse) GetVoted() []uint64 {
 	return nil
 }
 
-func (x *PollResponse) GetResponses() map[string]string {
+func (x *PollResponse) GetResponsesDetails() *PollResponsesDetails {
 	if x != nil {
-		return x.Responses
+		return x.ResponsesDetails
 	}
 	return nil
 }
@@ -1035,28 +1158,35 @@ const file_plugnmeet_polls_proto_rawDesc = "" +
 	"PollsStats\x12\x1f\n" +
 	"\vtotal_polls\x18\x01 \x01(\x04R\n" +
 	"totalPolls\x12#\n" +
-	"\rtotal_running\x18\x02 \x01(\x04R\ftotalRunning\"\xba\x05\n" +
+	"\rtotal_running\x18\x02 \x01(\x04R\ftotalRunning\"\\\n" +
+	"\x0ePollRespondent\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
+	"\n" +
+	"option_ids\x18\x03 \x03(\x04R\toptionIds\"\xc1\x01\n" +
+	"\x14PollResponsesDetails\x12+\n" +
+	"\x11total_respondents\x18\x01 \x01(\x04R\x10totalRespondents\x12?\n" +
+	"\aoptions\x18\x02 \x03(\v2%.plugnmeet.PollResponsesResultOptionsR\aoptions\x12;\n" +
+	"\vrespondents\x18\x03 \x03(\v2\x19.plugnmeet.PollRespondentR\vrespondents\"\x9f\x05\n" +
 	"\fPollResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x1c\n" +
 	"\apoll_id\x18\x03 \x01(\tH\x00R\x06pollId\x88\x01\x01\x12,\n" +
 	"\x0ftotal_responses\x18\x04 \x01(\x04H\x01R\x0etotalResponses\x88\x01\x01\x12\x14\n" +
-	"\x05voted\x18\x05 \x03(\x04R\x05voted\x12D\n" +
-	"\tresponses\x18\x06 \x03(\v2&.plugnmeet.PollResponse.ResponsesEntryR\tresponses\x12)\n" +
+	"\x05voted\x18\x05 \x03(\x04R\x05voted\x12Q\n" +
+	"\x11responses_details\x18\x06 \x01(\v2\x1f.plugnmeet.PollResponsesDetailsH\x02R\x10responsesDetails\x88\x01\x01\x12)\n" +
 	"\x05polls\x18\a \x03(\v2\x13.plugnmeet.PollInfoR\x05polls\x120\n" +
-	"\x05stats\x18\b \x01(\v2\x15.plugnmeet.PollsStatsH\x02R\x05stats\x88\x01\x01\x12$\n" +
-	"\vtotal_polls\x18\t \x01(\x04H\x03R\n" +
+	"\x05stats\x18\b \x01(\v2\x15.plugnmeet.PollsStatsH\x03R\x05stats\x88\x01\x01\x12$\n" +
+	"\vtotal_polls\x18\t \x01(\x04H\x04R\n" +
 	"totalPolls\x88\x01\x01\x12(\n" +
 	"\rtotal_running\x18\n" +
-	" \x01(\x04H\x04R\ftotalRunning\x88\x01\x01\x12W\n" +
-	"\x15poll_responses_result\x18\v \x01(\v2\x1e.plugnmeet.PollResponsesResultH\x05R\x13pollResponsesResult\x88\x01\x01\x12 \n" +
-	"\thas_voted\x18\f \x01(\bH\x06R\bhasVoted\x88\x01\x01\x1a<\n" +
-	"\x0eResponsesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\n" +
+	" \x01(\x04H\x05R\ftotalRunning\x88\x01\x01\x12W\n" +
+	"\x15poll_responses_result\x18\v \x01(\v2\x1e.plugnmeet.PollResponsesResultH\x06R\x13pollResponsesResult\x88\x01\x01\x12 \n" +
+	"\thas_voted\x18\f \x01(\bH\aR\bhasVoted\x88\x01\x01B\n" +
 	"\n" +
 	"\b_poll_idB\x12\n" +
-	"\x10_total_responsesB\b\n" +
+	"\x10_total_responsesB\x14\n" +
+	"\x12_responses_detailsB\b\n" +
 	"\x06_statsB\x0e\n" +
 	"\f_total_pollsB\x10\n" +
 	"\x0e_total_runningB\x18\n" +
@@ -1077,7 +1207,7 @@ func file_plugnmeet_polls_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_polls_proto_rawDescData
 }
 
-var file_plugnmeet_polls_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_plugnmeet_polls_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_plugnmeet_polls_proto_goTypes = []any{
 	(*ActivatePollsReq)(nil),           // 0: plugnmeet.ActivatePollsReq
 	(*CreatePollReq)(nil),              // 1: plugnmeet.CreatePollReq
@@ -1090,22 +1220,25 @@ var file_plugnmeet_polls_proto_goTypes = []any{
 	(*PollResponsesResultOptions)(nil), // 8: plugnmeet.PollResponsesResultOptions
 	(*PollResponsesResult)(nil),        // 9: plugnmeet.PollResponsesResult
 	(*PollsStats)(nil),                 // 10: plugnmeet.PollsStats
-	(*PollResponse)(nil),               // 11: plugnmeet.PollResponse
-	nil,                                // 12: plugnmeet.PollResponse.ResponsesEntry
+	(*PollRespondent)(nil),             // 11: plugnmeet.PollRespondent
+	(*PollResponsesDetails)(nil),       // 12: plugnmeet.PollResponsesDetails
+	(*PollResponse)(nil),               // 13: plugnmeet.PollResponse
 }
 var file_plugnmeet_polls_proto_depIdxs = []int32{
 	3,  // 0: plugnmeet.CreatePollReq.options:type_name -> plugnmeet.CreatePollOptions
 	3,  // 1: plugnmeet.PollInfo.options:type_name -> plugnmeet.CreatePollOptions
 	8,  // 2: plugnmeet.PollResponsesResult.options:type_name -> plugnmeet.PollResponsesResultOptions
-	12, // 3: plugnmeet.PollResponse.responses:type_name -> plugnmeet.PollResponse.ResponsesEntry
-	4,  // 4: plugnmeet.PollResponse.polls:type_name -> plugnmeet.PollInfo
-	10, // 5: plugnmeet.PollResponse.stats:type_name -> plugnmeet.PollsStats
-	9,  // 6: plugnmeet.PollResponse.poll_responses_result:type_name -> plugnmeet.PollResponsesResult
-	7,  // [7:7] is the sub-list for method output_type
-	7,  // [7:7] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	8,  // 3: plugnmeet.PollResponsesDetails.options:type_name -> plugnmeet.PollResponsesResultOptions
+	11, // 4: plugnmeet.PollResponsesDetails.respondents:type_name -> plugnmeet.PollRespondent
+	12, // 5: plugnmeet.PollResponse.responses_details:type_name -> plugnmeet.PollResponsesDetails
+	4,  // 6: plugnmeet.PollResponse.polls:type_name -> plugnmeet.PollInfo
+	10, // 7: plugnmeet.PollResponse.stats:type_name -> plugnmeet.PollsStats
+	9,  // 8: plugnmeet.PollResponse.poll_responses_result:type_name -> plugnmeet.PollResponsesResult
+	9,  // [9:9] is the sub-list for method output_type
+	9,  // [9:9] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_polls_proto_init() }
@@ -1113,14 +1246,14 @@ func file_plugnmeet_polls_proto_init() {
 	if File_plugnmeet_polls_proto != nil {
 		return
 	}
-	file_plugnmeet_polls_proto_msgTypes[11].OneofWrappers = []any{}
+	file_plugnmeet_polls_proto_msgTypes[13].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_polls_proto_rawDesc), len(file_plugnmeet_polls_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

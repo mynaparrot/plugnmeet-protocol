@@ -88,13 +88,28 @@ message PollsStats {
   uint64 total_running = 2;
 }
 
+message PollRespondent {
+  string user_id = 1;
+  string name = 2;
+  repeated uint64 option_ids = 3;
+}
+
+// Per-poll responses detail: aggregate counts plus the full respondent list
+// (omitted entirely for anonymous polls — participation only is stored).
+message PollResponsesDetails {
+  uint64 total_respondents = 1;
+  // aggregate counts only; respondents are delivered separately below
+  repeated PollResponsesResultOptions options = 2;
+  repeated PollRespondent respondents = 3;
+}
+
 message PollResponse {
   bool status = 1;
   string msg = 2;
   optional string poll_id = 3;
   optional uint64 total_responses = 4;
   repeated uint64 voted = 5;
-  map<string, string> responses = 6;
+  optional PollResponsesDetails responses_details = 6;
   repeated PollInfo polls = 7;
   optional PollsStats stats = 8;
   optional uint64 total_polls = 9;

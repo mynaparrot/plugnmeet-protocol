@@ -1336,6 +1336,282 @@ var _ interface {
 	ErrorName() string
 } = PollsStatsValidationError{}
 
+// Validate checks the field values on PollRespondent with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *PollRespondent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PollRespondent with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in PollRespondentMultiError,
+// or nil if none found.
+func (m *PollRespondent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PollRespondent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Name
+
+	if len(errors) > 0 {
+		return PollRespondentMultiError(errors)
+	}
+
+	return nil
+}
+
+// PollRespondentMultiError is an error wrapping multiple validation errors
+// returned by PollRespondent.ValidateAll() if the designated constraints
+// aren't met.
+type PollRespondentMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PollRespondentMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PollRespondentMultiError) AllErrors() []error { return m }
+
+// PollRespondentValidationError is the validation error returned by
+// PollRespondent.Validate if the designated constraints aren't met.
+type PollRespondentValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PollRespondentValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PollRespondentValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PollRespondentValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PollRespondentValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PollRespondentValidationError) ErrorName() string { return "PollRespondentValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PollRespondentValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPollRespondent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PollRespondentValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PollRespondentValidationError{}
+
+// Validate checks the field values on PollResponsesDetails with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PollResponsesDetails) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PollResponsesDetails with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PollResponsesDetailsMultiError, or nil if none found.
+func (m *PollResponsesDetails) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PollResponsesDetails) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TotalRespondents
+
+	for idx, item := range m.GetOptions() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PollResponsesDetailsValidationError{
+						field:  fmt.Sprintf("Options[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PollResponsesDetailsValidationError{
+						field:  fmt.Sprintf("Options[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PollResponsesDetailsValidationError{
+					field:  fmt.Sprintf("Options[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetRespondents() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PollResponsesDetailsValidationError{
+						field:  fmt.Sprintf("Respondents[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PollResponsesDetailsValidationError{
+						field:  fmt.Sprintf("Respondents[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PollResponsesDetailsValidationError{
+					field:  fmt.Sprintf("Respondents[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return PollResponsesDetailsMultiError(errors)
+	}
+
+	return nil
+}
+
+// PollResponsesDetailsMultiError is an error wrapping multiple validation
+// errors returned by PollResponsesDetails.ValidateAll() if the designated
+// constraints aren't met.
+type PollResponsesDetailsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PollResponsesDetailsMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PollResponsesDetailsMultiError) AllErrors() []error { return m }
+
+// PollResponsesDetailsValidationError is the validation error returned by
+// PollResponsesDetails.Validate if the designated constraints aren't met.
+type PollResponsesDetailsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PollResponsesDetailsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PollResponsesDetailsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PollResponsesDetailsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PollResponsesDetailsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PollResponsesDetailsValidationError) ErrorName() string {
+	return "PollResponsesDetailsValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PollResponsesDetailsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPollResponsesDetails.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PollResponsesDetailsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PollResponsesDetailsValidationError{}
+
 // Validate checks the field values on PollResponse with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -1361,8 +1637,6 @@ func (m *PollResponse) validate(all bool) error {
 	// no validation rules for Status
 
 	// no validation rules for Msg
-
-	// no validation rules for Responses
 
 	for idx, item := range m.GetPolls() {
 		_, _ = idx, item
@@ -1404,6 +1678,39 @@ func (m *PollResponse) validate(all bool) error {
 
 	if m.TotalResponses != nil {
 		// no validation rules for TotalResponses
+	}
+
+	if m.ResponsesDetails != nil {
+
+		if all {
+			switch v := interface{}(m.GetResponsesDetails()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PollResponseValidationError{
+						field:  "ResponsesDetails",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PollResponseValidationError{
+						field:  "ResponsesDetails",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetResponsesDetails()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PollResponseValidationError{
+					field:  "ResponsesDetails",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if m.Stats != nil {

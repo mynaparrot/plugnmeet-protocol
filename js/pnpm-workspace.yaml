@@ -4,3 +4,4 @@ allowBuilds:
   '@swc/core': true
   lmdb: false
   msgpackr-extract: false
+minimumReleaseAge: 0
