@@ -3,16 +3,17 @@
     "target": "ES2020",
     "module": "ES2020",
     "outDir": "dist",
+    "rootDir": "src",
     "lib": ["ES2020"],
     "declaration": true,
     "sourceMap": true,
     "strict": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
     "skipLibCheck": true /* Skip type checking of declaration files. */,
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   },
   "exclude": ["node_modules", "dist"],
-  "include": ["src/**/*"]
+  "include": ["src/index.ts"]
 }

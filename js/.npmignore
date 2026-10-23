@@ -2,6 +2,6 @@ tsconfig.json
 tsconfig-cjs.json
 tslint.json
 .DS_Store
-.parcel-cache
+vite.config.mts
 node_modules/
 src/
