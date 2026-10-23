@@ -83,6 +83,11 @@ message RoomArtifactMetadata {
     RoomArtifactCharacterCountUsage character_count_usage = 6;
   }
 
+  // to identify if artificial belongs to any breakout room
+  // which usually we merge into the main room
+  optional bool occurred_in_breakout_room = 7;
+  uint64 source_room_table_id = 8;
+
   // A field to link a file artifact back to its usage artifact.
   optional string reference_artifact_id = 10;
 }

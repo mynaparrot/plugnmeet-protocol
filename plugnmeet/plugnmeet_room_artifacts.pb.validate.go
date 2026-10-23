@@ -810,6 +810,8 @@ func (m *RoomArtifactMetadata) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for SourceRoomTableId
+
 	switch v := m.UsageDetails.(type) {
 	case *RoomArtifactMetadata_TokenUsage:
 		if v == nil {
@@ -936,6 +938,10 @@ func (m *RoomArtifactMetadata) validate(all bool) error {
 
 	default:
 		_ = v // ensures v is used
+	}
+
+	if m.OccurredInBreakoutRoom != nil {
+		// no validation rules for OccurredInBreakoutRoom
 	}
 
 	if m.ReferenceArtifactId != nil {

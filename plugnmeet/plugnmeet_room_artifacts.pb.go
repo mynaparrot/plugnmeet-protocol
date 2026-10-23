@@ -488,6 +488,10 @@ type RoomArtifactMetadata struct {
 	//	*RoomArtifactMetadata_DurationUsage
 	//	*RoomArtifactMetadata_CharacterCountUsage
 	UsageDetails isRoomArtifactMetadata_UsageDetails `protobuf_oneof:"usage_details"`
+	// to identify if artificial belongs to any breakout room
+	// which usually we merge into the main room
+	OccurredInBreakoutRoom *bool  `protobuf:"varint,7,opt,name=occurred_in_breakout_room,json=occurredInBreakoutRoom,proto3,oneof" json:"occurred_in_breakout_room,omitempty"`
+	SourceRoomTableId      uint64 `protobuf:"varint,8,opt,name=source_room_table_id,json=sourceRoomTableId,proto3" json:"source_room_table_id,omitempty"`
 	// A field to link a file artifact back to its usage artifact.
 	ReferenceArtifactId *string `protobuf:"bytes,10,opt,name=reference_artifact_id,json=referenceArtifactId,proto3,oneof" json:"reference_artifact_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
@@ -577,6 +581,20 @@ func (x *RoomArtifactMetadata) GetCharacterCountUsage() *RoomArtifactCharacterCo
 		}
 	}
 	return nil
+}
+
+func (x *RoomArtifactMetadata) GetOccurredInBreakoutRoom() bool {
+	if x != nil && x.OccurredInBreakoutRoom != nil {
+		return *x.OccurredInBreakoutRoom
+	}
+	return false
+}
+
+func (x *RoomArtifactMetadata) GetSourceRoomTableId() uint64 {
+	if x != nil {
+		return x.SourceRoomTableId
+	}
+	return 0
 }
 
 func (x *RoomArtifactMetadata) GetReferenceArtifactId() string {
@@ -714,7 +732,7 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\x0eBreakdownEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01B\"\n" +
-	" _total_characters_estimated_cost\"\xc1\x04\n" +
+	" _total_characters_estimated_cost\"\xd0\x05\n" +
 	"\x14RoomArtifactMetadata\x12<\n" +
 	"\tuser_info\x18\x01 \x01(\v2\x1f.plugnmeet.RoomArtifactUserInfoR\buserInfo\x12R\n" +
 	"\x11provider_job_info\x18\x02 \x01(\v2&.plugnmeet.RoomArtifactProviderJobInfoR\x0fproviderJobInfo\x12<\n" +
@@ -722,10 +740,13 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\vtoken_usage\x18\x04 \x01(\v2!.plugnmeet.RoomArtifactTokenUsageH\x00R\n" +
 	"tokenUsage\x12M\n" +
 	"\x0eduration_usage\x18\x05 \x01(\v2$.plugnmeet.RoomArtifactDurationUsageH\x00R\rdurationUsage\x12`\n" +
-	"\x15character_count_usage\x18\x06 \x01(\v2*.plugnmeet.RoomArtifactCharacterCountUsageH\x00R\x13characterCountUsage\x127\n" +
+	"\x15character_count_usage\x18\x06 \x01(\v2*.plugnmeet.RoomArtifactCharacterCountUsageH\x00R\x13characterCountUsage\x12>\n" +
+	"\x19occurred_in_breakout_room\x18\a \x01(\bH\x01R\x16occurredInBreakoutRoom\x88\x01\x01\x12/\n" +
+	"\x14source_room_table_id\x18\b \x01(\x04R\x11sourceRoomTableId\x127\n" +
 	"\x15reference_artifact_id\x18\n" +
-	" \x01(\tH\x01R\x13referenceArtifactId\x88\x01\x01B\x0f\n" +
-	"\rusage_detailsB\x18\n" +
+	" \x01(\tH\x02R\x13referenceArtifactId\x88\x01\x01B\x0f\n" +
+	"\rusage_detailsB\x1c\n" +
+	"\x1a_occurred_in_breakout_roomB\x18\n" +
 	"\x16_reference_artifact_id\"\xa9\x01\n" +
 	"\x18RoomArtifactWebhookEvent\x12/\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1b.plugnmeet.RoomArtifactTypeR\x04type\x12\x1f\n" +
