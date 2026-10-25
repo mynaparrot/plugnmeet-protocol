@@ -48,7 +48,8 @@ const (
 	NatsMsgServerToClientEvents_DELIVERY_PRIVATE_DATA       NatsMsgServerToClientEvents = 19
 	NatsMsgServerToClientEvents_PONG                        NatsMsgServerToClientEvents = 20
 	NatsMsgServerToClientEvents_SESSION_DATA_FETCH_RESPONSE NatsMsgServerToClientEvents = 21
-	NatsMsgServerToClientEvents_BREAKOUT_ROOM_USER_MOVED    NatsMsgServerToClientEvents = 22 //next ID: 24
+	NatsMsgServerToClientEvents_BREAKOUT_ROOM_USER_MOVED    NatsMsgServerToClientEvents = 22
+	NatsMsgServerToClientEvents_SESSION_DATA_SAVE_RESPONSE  NatsMsgServerToClientEvents = 24 //next ID: 25
 )
 
 // Enum value maps for NatsMsgServerToClientEvents.
@@ -78,6 +79,7 @@ var (
 		20: "PONG",
 		21: "SESSION_DATA_FETCH_RESPONSE",
 		22: "BREAKOUT_ROOM_USER_MOVED",
+		24: "SESSION_DATA_SAVE_RESPONSE",
 	}
 	NatsMsgServerToClientEvents_value = map[string]int32{
 		"RES_INITIAL_DATA":            0,
@@ -104,6 +106,7 @@ var (
 		"PONG":                        20,
 		"SESSION_DATA_FETCH_RESPONSE": 21,
 		"BREAKOUT_ROOM_USER_MOVED":    22,
+		"SESSION_DATA_SAVE_RESPONSE":  24,
 	}
 )
 
@@ -1502,6 +1505,8 @@ type SessionDataHeader struct {
 	Key           *string                `protobuf:"bytes,2,opt,name=key,proto3,oneof" json:"key,omitempty"`                                         // request: unset => all, set => one; response: always set
 	Last          bool                   `protobuf:"varint,3,opt,name=last,proto3" json:"last,omitempty"`                                            // response only: true on the final streamed entry
 	TargetRoomId  *string                `protobuf:"bytes,4,opt,name=target_room_id,json=targetRoomId,proto3,oneof" json:"target_room_id,omitempty"` // save only: empty/absent => save to own room; set => seed into target breakout child room
+	RequestId     *string                `protobuf:"bytes,5,opt,name=request_id,json=requestId,proto3,oneof" json:"request_id,omitempty"`            // save only: when set, the server acks with SESSION_DATA_SAVE_RESPONSE
+	Success       *bool                  `protobuf:"varint,6,opt,name=success,proto3,oneof" json:"success,omitempty"`                                // save response only: true when the data was stored
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1562,6 +1567,20 @@ func (x *SessionDataHeader) GetTargetRoomId() string {
 		return *x.TargetRoomId
 	}
 	return ""
+}
+
+func (x *SessionDataHeader) GetRequestId() string {
+	if x != nil && x.RequestId != nil {
+		return *x.RequestId
+	}
+	return ""
+}
+
+func (x *SessionDataHeader) GetSuccess() bool {
+	if x != nil && x.Success != nil {
+		return *x.Success
+	}
+	return false
 }
 
 var File_plugnmeet_nats_msg_proto protoreflect.FileDescriptor
@@ -1692,14 +1711,20 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
 	"\v_to_user_idB\x0e\n" +
 	"\f_source_langB\a\n" +
-	"\x05_meta\"\xbd\x01\n" +
+	"\x05_meta\"\x9b\x02\n" +
 	"\x11SessionDataHeader\x127\n" +
 	"\tdata_type\x18\x01 \x01(\x0e2\x1a.plugnmeet.SessionDataTypeR\bdataType\x12\x15\n" +
 	"\x03key\x18\x02 \x01(\tH\x00R\x03key\x88\x01\x01\x12\x12\n" +
 	"\x04last\x18\x03 \x01(\bR\x04last\x12)\n" +
-	"\x0etarget_room_id\x18\x04 \x01(\tH\x01R\ftargetRoomId\x88\x01\x01B\x06\n" +
+	"\x0etarget_room_id\x18\x04 \x01(\tH\x01R\ftargetRoomId\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"request_id\x18\x05 \x01(\tH\x02R\trequestId\x88\x01\x01\x12\x1d\n" +
+	"\asuccess\x18\x06 \x01(\bH\x03R\asuccess\x88\x01\x01B\x06\n" +
 	"\x04_keyB\x11\n" +
-	"\x0f_target_room_id*\xd8\x04\n" +
+	"\x0f_target_room_idB\r\n" +
+	"\v_request_idB\n" +
+	"\n" +
+	"\b_success*\xf8\x04\n" +
 	"\x1bNatsMsgServerToClientEvents\x12\x14\n" +
 	"\x10RES_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15RES_JOINED_USERS_LIST\x10\x01\x12\x19\n" +
@@ -1725,7 +1750,8 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x15DELIVERY_PRIVATE_DATA\x10\x13\x12\b\n" +
 	"\x04PONG\x10\x14\x12\x1f\n" +
 	"\x1bSESSION_DATA_FETCH_RESPONSE\x10\x15\x12\x1c\n" +
-	"\x18BREAKOUT_ROOM_USER_MOVED\x10\x16*\xdd\x02\n" +
+	"\x18BREAKOUT_ROOM_USER_MOVED\x10\x16\x12\x1e\n" +
+	"\x1aSESSION_DATA_SAVE_RESPONSE\x10\x18*\xdd\x02\n" +
 	"\x1bNatsMsgClientToServerEvents\x12\x14\n" +
 	"\x10REQ_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15REQ_MEDIA_SERVER_DATA\x10\x01\x12\x19\n" +

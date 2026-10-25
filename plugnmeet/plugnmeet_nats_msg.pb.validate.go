@@ -1797,6 +1797,14 @@ func (m *SessionDataHeader) validate(all bool) error {
 		// no validation rules for TargetRoomId
 	}
 
+	if m.RequestId != nil {
+		// no validation rules for RequestId
+	}
+
+	if m.Success != nil {
+		// no validation rules for Success
+	}
+
 	if len(errors) > 0 {
 		return SessionDataHeaderMultiError(errors)
 	}
