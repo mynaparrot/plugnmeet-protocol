@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.6.3](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.6.2...v1.6.3) (2026-10-28)
+
+
+### Bug Fixes
+
+* added new field ([aa5a0b6](https://github.com/mynaparrot/plugnmeet-protocol/commit/aa5a0b6dfe88a6b62502af13e1c110d1d27f2747))
+* added new PollResponsesDetails defination ([daa945e](https://github.com/mynaparrot/plugnmeet-protocol/commit/daa945e0167d85c382507ac7bbdad03bc8ea4531))
+* added seperate fields to mark for breakout room ([2debbc3](https://github.com/mynaparrot/plugnmeet-protocol/commit/2debbc32505fa761af071ae6a95f27842655b4cd))
+* bump proto + deps ([7233db3](https://github.com/mynaparrot/plugnmeet-protocol/commit/7233db3530435b23e5c00229bc409323b55349d4))
+* **deps:** update module github.com/nats-io/nats.go to v1.55.0 ([#340](https://github.com/mynaparrot/plugnmeet-protocol/issues/340)) ([7f539c8](https://github.com/mynaparrot/plugnmeet-protocol/commit/7f539c8040ce82496d86c639fe2802c817271d44))
+* **js:** add exports map for proper Node ESM/CJS resolution ([868fc7f](https://github.com/mynaparrot/plugnmeet-protocol/commit/868fc7fc8de71ce967a0e9f3294c7a2728817916))
+* **refactor:** migrate project to vite ([549cde8](https://github.com/mynaparrot/plugnmeet-protocol/commit/549cde89c6476239e6e69898dad0de5828cde100))
+* **turn:** fallback now requires meaningful, measured evidence that the current connection is struggling, rather than simply waiting for a timer ([65a5b1f](https://github.com/mynaparrot/plugnmeet-protocol/commit/65a5b1f82b738f36f4e46d5ff752facb31e87e1d))
+
 ## [1.6.2](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.6.1...v1.6.2) (2026-09-12)
 
 
