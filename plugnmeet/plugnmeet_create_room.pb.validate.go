@@ -832,6 +832,35 @@ func (m *RoomCreateFeatures) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetCountdownTimerFeatures()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RoomCreateFeaturesValidationError{
+					field:  "CountdownTimerFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RoomCreateFeaturesValidationError{
+					field:  "CountdownTimerFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCountdownTimerFeatures()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RoomCreateFeaturesValidationError{
+				field:  "CountdownTimerFeatures",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.AllowRtmp != nil {
 		// no validation rules for AllowRtmp
 	}
@@ -935,6 +964,122 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = RoomCreateFeaturesValidationError{}
+
+// Validate checks the field values on CountdownTimerFeatures with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CountdownTimerFeatures) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CountdownTimerFeatures with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CountdownTimerFeaturesMultiError, or nil if none found.
+func (m *CountdownTimerFeatures) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CountdownTimerFeatures) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsAllow
+
+	// no validation rules for IsActive
+
+	// no validation rules for Status
+
+	// no validation rules for DurationSeconds
+
+	// no validation rules for EndTime
+
+	// no validation rules for RemainingSeconds
+
+	// no validation rules for StartedBy
+
+	if len(errors) > 0 {
+		return CountdownTimerFeaturesMultiError(errors)
+	}
+
+	return nil
+}
+
+// CountdownTimerFeaturesMultiError is an error wrapping multiple validation
+// errors returned by CountdownTimerFeatures.ValidateAll() if the designated
+// constraints aren't met.
+type CountdownTimerFeaturesMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CountdownTimerFeaturesMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CountdownTimerFeaturesMultiError) AllErrors() []error { return m }
+
+// CountdownTimerFeaturesValidationError is the validation error returned by
+// CountdownTimerFeatures.Validate if the designated constraints aren't met.
+type CountdownTimerFeaturesValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CountdownTimerFeaturesValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CountdownTimerFeaturesValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CountdownTimerFeaturesValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CountdownTimerFeaturesValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CountdownTimerFeaturesValidationError) ErrorName() string {
+	return "CountdownTimerFeaturesValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CountdownTimerFeaturesValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCountdownTimerFeatures.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CountdownTimerFeaturesValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CountdownTimerFeaturesValidationError{}
 
 // Validate checks the field values on ChatFeatures with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
