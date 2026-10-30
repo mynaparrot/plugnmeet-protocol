@@ -52,8 +52,6 @@ message RoomCreateFeatures {
   bool allow_webcams = 1;
   bool mute_on_start = 2;
   bool allow_screen_share = 3;
-  // deprecated use external_broadcasting_features
-  optional bool allow_rtmp = 4 [deprecated = true];
   bool allow_view_other_webcams = 5;
   bool allow_view_other_users_list = 6;
   bool admin_only_webcams = 7;
