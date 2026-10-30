@@ -72,9 +72,10 @@ type AnalyticsEvents int32
 const (
 	AnalyticsEvents_ANALYTICS_EVENT_UNKNOWN AnalyticsEvents = 0
 	// room related
-	AnalyticsEvents_ANALYTICS_EVENT_ROOM_POLL_ADDED    AnalyticsEvents = 1
-	AnalyticsEvents_ANALYTICS_EVENT_ROOM_POLL_ENDED    AnalyticsEvents = 2
-	AnalyticsEvents_ANALYTICS_EVENT_ROOM_POLL_REOPENED AnalyticsEvents = 41
+	AnalyticsEvents_ANALYTICS_EVENT_ROOM_POLL_ADDED             AnalyticsEvents = 1
+	AnalyticsEvents_ANALYTICS_EVENT_ROOM_POLL_ENDED             AnalyticsEvents = 2
+	AnalyticsEvents_ANALYTICS_EVENT_ROOM_POLL_REOPENED          AnalyticsEvents = 41
+	AnalyticsEvents_ANALYTICS_EVENT_ROOM_COUNTDOWN_TIMER_STATUS AnalyticsEvents = 42
 	// user join will be room related
 	// after take record it will pass to user
 	AnalyticsEvents_ANALYTICS_EVENT_USER_JOINED AnalyticsEvents = 3
@@ -134,6 +135,7 @@ var (
 		1:  "ANALYTICS_EVENT_ROOM_POLL_ADDED",
 		2:  "ANALYTICS_EVENT_ROOM_POLL_ENDED",
 		41: "ANALYTICS_EVENT_ROOM_POLL_REOPENED",
+		42: "ANALYTICS_EVENT_ROOM_COUNTDOWN_TIMER_STATUS",
 		3:  "ANALYTICS_EVENT_USER_JOINED",
 		4:  "ANALYTICS_EVENT_ROOM_RECORDING_STATUS",
 		5:  "ANALYTICS_EVENT_ROOM_RTMP_STATUS",
@@ -178,6 +180,7 @@ var (
 		"ANALYTICS_EVENT_ROOM_POLL_ADDED":                                      1,
 		"ANALYTICS_EVENT_ROOM_POLL_ENDED":                                      2,
 		"ANALYTICS_EVENT_ROOM_POLL_REOPENED":                                   41,
+		"ANALYTICS_EVENT_ROOM_COUNTDOWN_TIMER_STATUS":                          42,
 		"ANALYTICS_EVENT_USER_JOINED":                                          3,
 		"ANALYTICS_EVENT_ROOM_RECORDING_STATUS":                                4,
 		"ANALYTICS_EVENT_ROOM_RTMP_STATUS":                                     5,
@@ -919,12 +922,13 @@ const file_plugnmeet_analytics_proto_rawDesc = "" +
 	"\v_ex_user_id*R\n" +
 	"\x12AnalyticsEventType\x12\x1d\n" +
 	"\x19ANALYTICS_EVENT_TYPE_ROOM\x10\x00\x12\x1d\n" +
-	"\x19ANALYTICS_EVENT_TYPE_USER\x10\x01*\xab\x0f\n" +
+	"\x19ANALYTICS_EVENT_TYPE_USER\x10\x01*\xdc\x0f\n" +
 	"\x0fAnalyticsEvents\x12\x1b\n" +
 	"\x17ANALYTICS_EVENT_UNKNOWN\x10\x00\x12#\n" +
 	"\x1fANALYTICS_EVENT_ROOM_POLL_ADDED\x10\x01\x12#\n" +
 	"\x1fANALYTICS_EVENT_ROOM_POLL_ENDED\x10\x02\x12&\n" +
-	"\"ANALYTICS_EVENT_ROOM_POLL_REOPENED\x10)\x12\x1f\n" +
+	"\"ANALYTICS_EVENT_ROOM_POLL_REOPENED\x10)\x12/\n" +
+	"+ANALYTICS_EVENT_ROOM_COUNTDOWN_TIMER_STATUS\x10*\x12\x1f\n" +
 	"\x1bANALYTICS_EVENT_USER_JOINED\x10\x03\x12)\n" +
 	"%ANALYTICS_EVENT_ROOM_RECORDING_STATUS\x10\x04\x12$\n" +
 	" ANALYTICS_EVENT_ROOM_RTMP_STATUS\x10\x05\x12&\n" +

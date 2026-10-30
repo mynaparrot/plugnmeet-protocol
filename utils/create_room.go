@@ -65,11 +65,6 @@ func PrepareDefaultRoomFeatures(r *plugnmeet.CreateRoomReq) {
 	if !rf.EndToEndEncryptionFeatures.IsEnabled {
 		rf.EndToEndEncryptionFeatures = &plugnmeet.EndToEndEncryptionFeatures{}
 	}
-
-	if rf.AllowRtmp != nil {
-		rf.ExternalBroadcastingFeatures.IsAllow = *rf.AllowRtmp
-		rf.ExternalBroadcastingFeatures.IsAllowRtmp = *rf.AllowRtmp
-	}
 	if !rf.ExternalBroadcastingFeatures.IsAllow {
 		rf.ExternalBroadcastingFeatures.IsAllowRtmp = false
 	}

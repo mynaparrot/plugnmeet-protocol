@@ -125,6 +125,23 @@ message ExternalDisplayLinkReq {
   string user_id = 5;
 }
 
+enum CountdownTimerTask {
+  CHANGE_STATUS = 0;
+  START_TIMER = 1;
+  PAUSE_TIMER = 2;
+  RESUME_TIMER = 3;
+  EXTEND_TIMER = 4;
+  STOP_TIMER = 5;
+}
+
+message CountdownTimerReq {
+  CountdownTimerTask task = 1;
+  optional bool is_active = 2;
+  optional uint32 duration_seconds = 3;
+  string room_id = 4;
+  string user_id = 5;
+}
+
 message ChangeSharedNotepadStatusReq {
   string room_id = 1;
   bool is_active = 2;

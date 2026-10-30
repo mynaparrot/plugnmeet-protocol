@@ -244,6 +244,64 @@ func (ExternalDisplayLinkTask) EnumDescriptor() ([]byte, []int) {
 	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{3}
 }
 
+type CountdownTimerTask int32
+
+const (
+	CountdownTimerTask_CHANGE_STATUS CountdownTimerTask = 0
+	CountdownTimerTask_START_TIMER   CountdownTimerTask = 1
+	CountdownTimerTask_PAUSE_TIMER   CountdownTimerTask = 2
+	CountdownTimerTask_RESUME_TIMER  CountdownTimerTask = 3
+	CountdownTimerTask_EXTEND_TIMER  CountdownTimerTask = 4
+	CountdownTimerTask_STOP_TIMER    CountdownTimerTask = 5
+)
+
+// Enum value maps for CountdownTimerTask.
+var (
+	CountdownTimerTask_name = map[int32]string{
+		0: "CHANGE_STATUS",
+		1: "START_TIMER",
+		2: "PAUSE_TIMER",
+		3: "RESUME_TIMER",
+		4: "EXTEND_TIMER",
+		5: "STOP_TIMER",
+	}
+	CountdownTimerTask_value = map[string]int32{
+		"CHANGE_STATUS": 0,
+		"START_TIMER":   1,
+		"PAUSE_TIMER":   2,
+		"RESUME_TIMER":  3,
+		"EXTEND_TIMER":  4,
+		"STOP_TIMER":    5,
+	}
+)
+
+func (x CountdownTimerTask) Enum() *CountdownTimerTask {
+	p := new(CountdownTimerTask)
+	*p = x
+	return p
+}
+
+func (x CountdownTimerTask) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CountdownTimerTask) Descriptor() protoreflect.EnumDescriptor {
+	return file_plugnmeet_common_api_proto_enumTypes[4].Descriptor()
+}
+
+func (CountdownTimerTask) Type() protoreflect.EnumType {
+	return &file_plugnmeet_common_api_proto_enumTypes[4]
+}
+
+func (x CountdownTimerTask) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use CountdownTimerTask.Descriptor instead.
+func (CountdownTimerTask) EnumDescriptor() ([]byte, []int) {
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{4}
+}
+
 type RoomUploadedFileType int32
 
 const (
@@ -283,11 +341,11 @@ func (x RoomUploadedFileType) String() string {
 }
 
 func (RoomUploadedFileType) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugnmeet_common_api_proto_enumTypes[4].Descriptor()
+	return file_plugnmeet_common_api_proto_enumTypes[5].Descriptor()
 }
 
 func (RoomUploadedFileType) Type() protoreflect.EnumType {
-	return &file_plugnmeet_common_api_proto_enumTypes[4]
+	return &file_plugnmeet_common_api_proto_enumTypes[5]
 }
 
 func (x RoomUploadedFileType) Number() protoreflect.EnumNumber {
@@ -296,7 +354,7 @@ func (x RoomUploadedFileType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RoomUploadedFileType.Descriptor instead.
 func (RoomUploadedFileType) EnumDescriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{4}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{5}
 }
 
 type CommonResponse struct {
@@ -1111,6 +1169,82 @@ func (x *ExternalDisplayLinkReq) GetUserId() string {
 	return ""
 }
 
+type CountdownTimerReq struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Task            CountdownTimerTask     `protobuf:"varint,1,opt,name=task,proto3,enum=plugnmeet.CountdownTimerTask" json:"task,omitempty"`
+	IsActive        *bool                  `protobuf:"varint,2,opt,name=is_active,json=isActive,proto3,oneof" json:"is_active,omitempty"`
+	DurationSeconds *uint32                `protobuf:"varint,3,opt,name=duration_seconds,json=durationSeconds,proto3,oneof" json:"duration_seconds,omitempty"`
+	RoomId          string                 `protobuf:"bytes,4,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	UserId          string                 `protobuf:"bytes,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *CountdownTimerReq) Reset() {
+	*x = CountdownTimerReq{}
+	mi := &file_plugnmeet_common_api_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CountdownTimerReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CountdownTimerReq) ProtoMessage() {}
+
+func (x *CountdownTimerReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_common_api_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CountdownTimerReq.ProtoReflect.Descriptor instead.
+func (*CountdownTimerReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *CountdownTimerReq) GetTask() CountdownTimerTask {
+	if x != nil {
+		return x.Task
+	}
+	return CountdownTimerTask_CHANGE_STATUS
+}
+
+func (x *CountdownTimerReq) GetIsActive() bool {
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
+	}
+	return false
+}
+
+func (x *CountdownTimerReq) GetDurationSeconds() uint32 {
+	if x != nil && x.DurationSeconds != nil {
+		return *x.DurationSeconds
+	}
+	return 0
+}
+
+func (x *CountdownTimerReq) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
+func (x *CountdownTimerReq) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
 type ChangeSharedNotepadStatusReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RoomId        string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
@@ -1121,7 +1255,7 @@ type ChangeSharedNotepadStatusReq struct {
 
 func (x *ChangeSharedNotepadStatusReq) Reset() {
 	*x = ChangeSharedNotepadStatusReq{}
-	mi := &file_plugnmeet_common_api_proto_msgTypes[11]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1133,7 +1267,7 @@ func (x *ChangeSharedNotepadStatusReq) String() string {
 func (*ChangeSharedNotepadStatusReq) ProtoMessage() {}
 
 func (x *ChangeSharedNotepadStatusReq) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_common_api_proto_msgTypes[11]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1146,7 +1280,7 @@ func (x *ChangeSharedNotepadStatusReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangeSharedNotepadStatusReq.ProtoReflect.Descriptor instead.
 func (*ChangeSharedNotepadStatusReq) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{11}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ChangeSharedNotepadStatusReq) GetRoomId() string {
@@ -1173,7 +1307,7 @@ type ApproveWaitingUsersReq struct {
 
 func (x *ApproveWaitingUsersReq) Reset() {
 	*x = ApproveWaitingUsersReq{}
-	mi := &file_plugnmeet_common_api_proto_msgTypes[12]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1185,7 +1319,7 @@ func (x *ApproveWaitingUsersReq) String() string {
 func (*ApproveWaitingUsersReq) ProtoMessage() {}
 
 func (x *ApproveWaitingUsersReq) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_common_api_proto_msgTypes[12]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1198,7 +1332,7 @@ func (x *ApproveWaitingUsersReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApproveWaitingUsersReq.ProtoReflect.Descriptor instead.
 func (*ApproveWaitingUsersReq) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{12}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ApproveWaitingUsersReq) GetRoomId() string {
@@ -1225,7 +1359,7 @@ type UpdateWaitingRoomMessageReq struct {
 
 func (x *UpdateWaitingRoomMessageReq) Reset() {
 	*x = UpdateWaitingRoomMessageReq{}
-	mi := &file_plugnmeet_common_api_proto_msgTypes[13]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1237,7 +1371,7 @@ func (x *UpdateWaitingRoomMessageReq) String() string {
 func (*UpdateWaitingRoomMessageReq) ProtoMessage() {}
 
 func (x *UpdateWaitingRoomMessageReq) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_common_api_proto_msgTypes[13]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1250,7 +1384,7 @@ func (x *UpdateWaitingRoomMessageReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateWaitingRoomMessageReq.ProtoReflect.Descriptor instead.
 func (*UpdateWaitingRoomMessageReq) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{13}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *UpdateWaitingRoomMessageReq) GetRoomId() string {
@@ -1281,7 +1415,7 @@ type UpdateUserLockSettingsReq struct {
 
 func (x *UpdateUserLockSettingsReq) Reset() {
 	*x = UpdateUserLockSettingsReq{}
-	mi := &file_plugnmeet_common_api_proto_msgTypes[14]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1293,7 +1427,7 @@ func (x *UpdateUserLockSettingsReq) String() string {
 func (*UpdateUserLockSettingsReq) ProtoMessage() {}
 
 func (x *UpdateUserLockSettingsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_common_api_proto_msgTypes[14]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1306,7 +1440,7 @@ func (x *UpdateUserLockSettingsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserLockSettingsReq.ProtoReflect.Descriptor instead.
 func (*UpdateUserLockSettingsReq) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{14}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *UpdateUserLockSettingsReq) GetRoomSid() string {
@@ -1363,7 +1497,7 @@ type UploadBase64EncodedDataReq struct {
 
 func (x *UploadBase64EncodedDataReq) Reset() {
 	*x = UploadBase64EncodedDataReq{}
-	mi := &file_plugnmeet_common_api_proto_msgTypes[15]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1375,7 +1509,7 @@ func (x *UploadBase64EncodedDataReq) String() string {
 func (*UploadBase64EncodedDataReq) ProtoMessage() {}
 
 func (x *UploadBase64EncodedDataReq) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_common_api_proto_msgTypes[15]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1388,7 +1522,7 @@ func (x *UploadBase64EncodedDataReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadBase64EncodedDataReq.ProtoReflect.Descriptor instead.
 func (*UploadBase64EncodedDataReq) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{15}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *UploadBase64EncodedDataReq) GetRoomId() string {
@@ -1433,7 +1567,7 @@ type UploadBase64EncodedDataRes struct {
 
 func (x *UploadBase64EncodedDataRes) Reset() {
 	*x = UploadBase64EncodedDataRes{}
-	mi := &file_plugnmeet_common_api_proto_msgTypes[16]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1445,7 +1579,7 @@ func (x *UploadBase64EncodedDataRes) String() string {
 func (*UploadBase64EncodedDataRes) ProtoMessage() {}
 
 func (x *UploadBase64EncodedDataRes) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_common_api_proto_msgTypes[16]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1458,7 +1592,7 @@ func (x *UploadBase64EncodedDataRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadBase64EncodedDataRes.ProtoReflect.Descriptor instead.
 func (*UploadBase64EncodedDataRes) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{16}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *UploadBase64EncodedDataRes) GetStatus() bool {
@@ -1517,7 +1651,7 @@ type UploadedFileMergeReq struct {
 
 func (x *UploadedFileMergeReq) Reset() {
 	*x = UploadedFileMergeReq{}
-	mi := &file_plugnmeet_common_api_proto_msgTypes[17]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1529,7 +1663,7 @@ func (x *UploadedFileMergeReq) String() string {
 func (*UploadedFileMergeReq) ProtoMessage() {}
 
 func (x *UploadedFileMergeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_common_api_proto_msgTypes[17]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1542,7 +1676,7 @@ func (x *UploadedFileMergeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadedFileMergeReq.ProtoReflect.Descriptor instead.
 func (*UploadedFileMergeReq) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{17}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *UploadedFileMergeReq) GetRoomSid() string {
@@ -1603,7 +1737,7 @@ type UploadedFileRes struct {
 
 func (x *UploadedFileRes) Reset() {
 	*x = UploadedFileRes{}
-	mi := &file_plugnmeet_common_api_proto_msgTypes[18]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1615,7 +1749,7 @@ func (x *UploadedFileRes) String() string {
 func (*UploadedFileRes) ProtoMessage() {}
 
 func (x *UploadedFileRes) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_common_api_proto_msgTypes[18]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1628,7 +1762,7 @@ func (x *UploadedFileRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadedFileRes.ProtoReflect.Descriptor instead.
 func (*UploadedFileRes) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{18}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *UploadedFileRes) GetStatus() bool {
@@ -1703,7 +1837,7 @@ type RoomUploadedFileMetadata struct {
 
 func (x *RoomUploadedFileMetadata) Reset() {
 	*x = RoomUploadedFileMetadata{}
-	mi := &file_plugnmeet_common_api_proto_msgTypes[19]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1715,7 +1849,7 @@ func (x *RoomUploadedFileMetadata) String() string {
 func (*RoomUploadedFileMetadata) ProtoMessage() {}
 
 func (x *RoomUploadedFileMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_common_api_proto_msgTypes[19]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1728,7 +1862,7 @@ func (x *RoomUploadedFileMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoomUploadedFileMetadata.ProtoReflect.Descriptor instead.
 func (*RoomUploadedFileMetadata) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{19}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *RoomUploadedFileMetadata) GetFileId() string {
@@ -1797,7 +1931,7 @@ type GetRoomUploadedFilesReq struct {
 
 func (x *GetRoomUploadedFilesReq) Reset() {
 	*x = GetRoomUploadedFilesReq{}
-	mi := &file_plugnmeet_common_api_proto_msgTypes[20]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1809,7 +1943,7 @@ func (x *GetRoomUploadedFilesReq) String() string {
 func (*GetRoomUploadedFilesReq) ProtoMessage() {}
 
 func (x *GetRoomUploadedFilesReq) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_common_api_proto_msgTypes[20]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1822,7 +1956,7 @@ func (x *GetRoomUploadedFilesReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRoomUploadedFilesReq.ProtoReflect.Descriptor instead.
 func (*GetRoomUploadedFilesReq) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{20}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GetRoomUploadedFilesReq) GetRoomId() string {
@@ -1850,7 +1984,7 @@ type GetRoomUploadedFilesRes struct {
 
 func (x *GetRoomUploadedFilesRes) Reset() {
 	*x = GetRoomUploadedFilesRes{}
-	mi := &file_plugnmeet_common_api_proto_msgTypes[21]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1862,7 +1996,7 @@ func (x *GetRoomUploadedFilesRes) String() string {
 func (*GetRoomUploadedFilesRes) ProtoMessage() {}
 
 func (x *GetRoomUploadedFilesRes) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_common_api_proto_msgTypes[21]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1875,7 +2009,7 @@ func (x *GetRoomUploadedFilesRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRoomUploadedFilesRes.ProtoReflect.Descriptor instead.
 func (*GetRoomUploadedFilesRes) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{21}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *GetRoomUploadedFilesRes) GetStatus() bool {
@@ -1909,7 +2043,7 @@ type EnableSipDialInReq struct {
 
 func (x *EnableSipDialInReq) Reset() {
 	*x = EnableSipDialInReq{}
-	mi := &file_plugnmeet_common_api_proto_msgTypes[22]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1921,7 +2055,7 @@ func (x *EnableSipDialInReq) String() string {
 func (*EnableSipDialInReq) ProtoMessage() {}
 
 func (x *EnableSipDialInReq) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_common_api_proto_msgTypes[22]
+	mi := &file_plugnmeet_common_api_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1934,7 +2068,7 @@ func (x *EnableSipDialInReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnableSipDialInReq.ProtoReflect.Descriptor instead.
 func (*EnableSipDialInReq) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{22}
+	return file_plugnmeet_common_api_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *EnableSipDialInReq) GetRoomId() string {
@@ -2039,7 +2173,16 @@ const file_plugnmeet_common_api_proto_rawDesc = "" +
 	"\x03url\x18\x02 \x01(\tH\x00R\x03url\x88\x01\x01\x12\x17\n" +
 	"\aroom_id\x18\x04 \x01(\tR\x06roomId\x12\x17\n" +
 	"\auser_id\x18\x05 \x01(\tR\x06userIdB\x06\n" +
-	"\x04_url\"T\n" +
+	"\x04_url\"\xed\x01\n" +
+	"\x11CountdownTimerReq\x121\n" +
+	"\x04task\x18\x01 \x01(\x0e2\x1d.plugnmeet.CountdownTimerTaskR\x04task\x12 \n" +
+	"\tis_active\x18\x02 \x01(\bH\x00R\bisActive\x88\x01\x01\x12.\n" +
+	"\x10duration_seconds\x18\x03 \x01(\rH\x01R\x0fdurationSeconds\x88\x01\x01\x12\x17\n" +
+	"\aroom_id\x18\x04 \x01(\tR\x06roomId\x12\x17\n" +
+	"\auser_id\x18\x05 \x01(\tR\x06userIdB\f\n" +
+	"\n" +
+	"_is_activeB\x13\n" +
+	"\x11_duration_seconds\"T\n" +
 	"\x1cChangeSharedNotepadStatusReq\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x1b\n" +
 	"\tis_active\x18\x02 \x01(\bR\bisActive\"J\n" +
@@ -2132,7 +2275,15 @@ const file_plugnmeet_common_api_proto_rawDesc = "" +
 	"\fEND_PLAYBACK\x10\x01*J\n" +
 	"\x17ExternalDisplayLinkTask\x12\x17\n" +
 	"\x13START_EXTERNAL_LINK\x10\x00\x12\x16\n" +
-	"\x12STOP_EXTERNAL_LINK\x10\x01*\x97\x01\n" +
+	"\x12STOP_EXTERNAL_LINK\x10\x01*}\n" +
+	"\x12CountdownTimerTask\x12\x11\n" +
+	"\rCHANGE_STATUS\x10\x00\x12\x0f\n" +
+	"\vSTART_TIMER\x10\x01\x12\x0f\n" +
+	"\vPAUSE_TIMER\x10\x02\x12\x10\n" +
+	"\fRESUME_TIMER\x10\x03\x12\x10\n" +
+	"\fEXTEND_TIMER\x10\x04\x12\x0e\n" +
+	"\n" +
+	"STOP_TIMER\x10\x05*\x97\x01\n" +
 	"\x14RoomUploadedFileType\x12\r\n" +
 	"\tCHAT_FILE\x10\x00\x12\x19\n" +
 	"\x15WHITEBOARD_IMAGE_FILE\x10\x01\x12\x1d\n" +
@@ -2153,60 +2304,63 @@ func file_plugnmeet_common_api_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_common_api_proto_rawDescData
 }
 
-var file_plugnmeet_common_api_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
+var file_plugnmeet_common_api_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
+var file_plugnmeet_common_api_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_plugnmeet_common_api_proto_goTypes = []any{
 	(StatusCode)(0),                      // 0: plugnmeet.StatusCode
 	(SwitchPresenterTask)(0),             // 1: plugnmeet.SwitchPresenterTask
 	(ExternalMediaPlayerTask)(0),         // 2: plugnmeet.ExternalMediaPlayerTask
 	(ExternalDisplayLinkTask)(0),         // 3: plugnmeet.ExternalDisplayLinkTask
-	(RoomUploadedFileType)(0),            // 4: plugnmeet.RoomUploadedFileType
-	(*CommonResponse)(nil),               // 5: plugnmeet.CommonResponse
-	(*VerifyTokenReq)(nil),               // 6: plugnmeet.VerifyTokenReq
-	(*VerifyTokenRes)(nil),               // 7: plugnmeet.VerifyTokenRes
-	(*MuteUnMuteTrackReq)(nil),           // 8: plugnmeet.MuteUnMuteTrackReq
-	(*RemoveParticipantReq)(nil),         // 9: plugnmeet.RemoveParticipantReq
-	(*DataMessageReq)(nil),               // 10: plugnmeet.DataMessageReq
-	(*RoomEndAPIReq)(nil),                // 11: plugnmeet.RoomEndAPIReq
-	(*ChangeVisibilityRes)(nil),          // 12: plugnmeet.ChangeVisibilityRes
-	(*SwitchPresenterReq)(nil),           // 13: plugnmeet.SwitchPresenterReq
-	(*ExternalMediaPlayerReq)(nil),       // 14: plugnmeet.ExternalMediaPlayerReq
-	(*ExternalDisplayLinkReq)(nil),       // 15: plugnmeet.ExternalDisplayLinkReq
-	(*ChangeSharedNotepadStatusReq)(nil), // 16: plugnmeet.ChangeSharedNotepadStatusReq
-	(*ApproveWaitingUsersReq)(nil),       // 17: plugnmeet.ApproveWaitingUsersReq
-	(*UpdateWaitingRoomMessageReq)(nil),  // 18: plugnmeet.UpdateWaitingRoomMessageReq
-	(*UpdateUserLockSettingsReq)(nil),    // 19: plugnmeet.UpdateUserLockSettingsReq
-	(*UploadBase64EncodedDataReq)(nil),   // 20: plugnmeet.UploadBase64EncodedDataReq
-	(*UploadBase64EncodedDataRes)(nil),   // 21: plugnmeet.UploadBase64EncodedDataRes
-	(*UploadedFileMergeReq)(nil),         // 22: plugnmeet.UploadedFileMergeReq
-	(*UploadedFileRes)(nil),              // 23: plugnmeet.UploadedFileRes
-	(*RoomUploadedFileMetadata)(nil),     // 24: plugnmeet.RoomUploadedFileMetadata
-	(*GetRoomUploadedFilesReq)(nil),      // 25: plugnmeet.GetRoomUploadedFilesReq
-	(*GetRoomUploadedFilesRes)(nil),      // 26: plugnmeet.GetRoomUploadedFilesRes
-	(*EnableSipDialInReq)(nil),           // 27: plugnmeet.EnableSipDialInReq
-	(*NatsSubjects)(nil),                 // 28: plugnmeet.NatsSubjects
-	(ClientType)(0),                      // 29: plugnmeet.ClientType
-	(DataMsgBodyType)(0),                 // 30: plugnmeet.DataMsgBodyType
+	(CountdownTimerTask)(0),              // 4: plugnmeet.CountdownTimerTask
+	(RoomUploadedFileType)(0),            // 5: plugnmeet.RoomUploadedFileType
+	(*CommonResponse)(nil),               // 6: plugnmeet.CommonResponse
+	(*VerifyTokenReq)(nil),               // 7: plugnmeet.VerifyTokenReq
+	(*VerifyTokenRes)(nil),               // 8: plugnmeet.VerifyTokenRes
+	(*MuteUnMuteTrackReq)(nil),           // 9: plugnmeet.MuteUnMuteTrackReq
+	(*RemoveParticipantReq)(nil),         // 10: plugnmeet.RemoveParticipantReq
+	(*DataMessageReq)(nil),               // 11: plugnmeet.DataMessageReq
+	(*RoomEndAPIReq)(nil),                // 12: plugnmeet.RoomEndAPIReq
+	(*ChangeVisibilityRes)(nil),          // 13: plugnmeet.ChangeVisibilityRes
+	(*SwitchPresenterReq)(nil),           // 14: plugnmeet.SwitchPresenterReq
+	(*ExternalMediaPlayerReq)(nil),       // 15: plugnmeet.ExternalMediaPlayerReq
+	(*ExternalDisplayLinkReq)(nil),       // 16: plugnmeet.ExternalDisplayLinkReq
+	(*CountdownTimerReq)(nil),            // 17: plugnmeet.CountdownTimerReq
+	(*ChangeSharedNotepadStatusReq)(nil), // 18: plugnmeet.ChangeSharedNotepadStatusReq
+	(*ApproveWaitingUsersReq)(nil),       // 19: plugnmeet.ApproveWaitingUsersReq
+	(*UpdateWaitingRoomMessageReq)(nil),  // 20: plugnmeet.UpdateWaitingRoomMessageReq
+	(*UpdateUserLockSettingsReq)(nil),    // 21: plugnmeet.UpdateUserLockSettingsReq
+	(*UploadBase64EncodedDataReq)(nil),   // 22: plugnmeet.UploadBase64EncodedDataReq
+	(*UploadBase64EncodedDataRes)(nil),   // 23: plugnmeet.UploadBase64EncodedDataRes
+	(*UploadedFileMergeReq)(nil),         // 24: plugnmeet.UploadedFileMergeReq
+	(*UploadedFileRes)(nil),              // 25: plugnmeet.UploadedFileRes
+	(*RoomUploadedFileMetadata)(nil),     // 26: plugnmeet.RoomUploadedFileMetadata
+	(*GetRoomUploadedFilesReq)(nil),      // 27: plugnmeet.GetRoomUploadedFilesReq
+	(*GetRoomUploadedFilesRes)(nil),      // 28: plugnmeet.GetRoomUploadedFilesRes
+	(*EnableSipDialInReq)(nil),           // 29: plugnmeet.EnableSipDialInReq
+	(*NatsSubjects)(nil),                 // 30: plugnmeet.NatsSubjects
+	(ClientType)(0),                      // 31: plugnmeet.ClientType
+	(DataMsgBodyType)(0),                 // 32: plugnmeet.DataMsgBodyType
 }
 var file_plugnmeet_common_api_proto_depIdxs = []int32{
 	0,  // 0: plugnmeet.CommonResponse.status_code:type_name -> plugnmeet.StatusCode
-	28, // 1: plugnmeet.VerifyTokenRes.nats_subjects:type_name -> plugnmeet.NatsSubjects
-	29, // 2: plugnmeet.VerifyTokenRes.client_type:type_name -> plugnmeet.ClientType
-	30, // 3: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
+	30, // 1: plugnmeet.VerifyTokenRes.nats_subjects:type_name -> plugnmeet.NatsSubjects
+	31, // 2: plugnmeet.VerifyTokenRes.client_type:type_name -> plugnmeet.ClientType
+	32, // 3: plugnmeet.DataMessageReq.msg_body_type:type_name -> plugnmeet.DataMsgBodyType
 	1,  // 4: plugnmeet.SwitchPresenterReq.task:type_name -> plugnmeet.SwitchPresenterTask
 	2,  // 5: plugnmeet.ExternalMediaPlayerReq.task:type_name -> plugnmeet.ExternalMediaPlayerTask
 	3,  // 6: plugnmeet.ExternalDisplayLinkReq.task:type_name -> plugnmeet.ExternalDisplayLinkTask
-	4,  // 7: plugnmeet.UploadBase64EncodedDataReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
-	4,  // 8: plugnmeet.UploadedFileMergeReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
-	4,  // 9: plugnmeet.UploadedFileRes.file_type:type_name -> plugnmeet.RoomUploadedFileType
-	4,  // 10: plugnmeet.RoomUploadedFileMetadata.file_type:type_name -> plugnmeet.RoomUploadedFileType
-	4,  // 11: plugnmeet.GetRoomUploadedFilesReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
-	24, // 12: plugnmeet.GetRoomUploadedFilesRes.files:type_name -> plugnmeet.RoomUploadedFileMetadata
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	4,  // 7: plugnmeet.CountdownTimerReq.task:type_name -> plugnmeet.CountdownTimerTask
+	5,  // 8: plugnmeet.UploadBase64EncodedDataReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
+	5,  // 9: plugnmeet.UploadedFileMergeReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
+	5,  // 10: plugnmeet.UploadedFileRes.file_type:type_name -> plugnmeet.RoomUploadedFileType
+	5,  // 11: plugnmeet.RoomUploadedFileMetadata.file_type:type_name -> plugnmeet.RoomUploadedFileType
+	5,  // 12: plugnmeet.GetRoomUploadedFilesReq.file_type:type_name -> plugnmeet.RoomUploadedFileType
+	26, // 13: plugnmeet.GetRoomUploadedFilesRes.files:type_name -> plugnmeet.RoomUploadedFileMetadata
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_common_api_proto_init() }
@@ -2221,14 +2375,15 @@ func file_plugnmeet_common_api_proto_init() {
 	file_plugnmeet_common_api_proto_msgTypes[7].OneofWrappers = []any{}
 	file_plugnmeet_common_api_proto_msgTypes[9].OneofWrappers = []any{}
 	file_plugnmeet_common_api_proto_msgTypes[10].OneofWrappers = []any{}
-	file_plugnmeet_common_api_proto_msgTypes[19].OneofWrappers = []any{}
+	file_plugnmeet_common_api_proto_msgTypes[11].OneofWrappers = []any{}
+	file_plugnmeet_common_api_proto_msgTypes[20].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_common_api_proto_rawDesc), len(file_plugnmeet_common_api_proto_rawDesc)),
-			NumEnums:      5,
-			NumMessages:   23,
+			NumEnums:      6,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

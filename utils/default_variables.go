@@ -82,6 +82,10 @@ var (
 		IsAllowRtmp: true,
 	}
 
+	defaultCountdownTimerFeatures = &plugnmeet.CountdownTimerFeatures{
+		IsAllow: true,
+	}
+
 	defaultRoomFeatures = &plugnmeet.RoomCreateFeatures{
 		AllowWebcams:                 true,
 		MuteOnStart:                  false,
@@ -107,6 +111,7 @@ var (
 		InsightsFeatures:             defaultInsightsFeatures,
 		SipDialInFeatures:            defaultSipDialInFeatures,
 		ExternalBroadcastingFeatures: defaultExternalBroadcastingFeatures,
+		CountdownTimerFeatures:       defaultCountdownTimerFeatures,
 	}
 
 	defaultLockSettings = &plugnmeet.LockSettings{
