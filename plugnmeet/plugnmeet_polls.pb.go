@@ -729,8 +729,6 @@ func (x *PollResponsesResultOptions) GetIsCorrect() bool {
 	return false
 }
 
-// PollTextAnswerResult is one aggregated free-text answer: the display text of
-// the first submission plus the number of matching (case-insensitive) answers.
 type PollTextAnswerResult struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Text          string                 `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
