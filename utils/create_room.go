@@ -22,9 +22,14 @@ func mergeRoomFeatures(user *plugnmeet.RoomCreateFeatures) *plugnmeet.RoomCreate
 
 	userFields.Range(func(fd protoreflect.FieldDescriptor, v protoreflect.Value) bool {
 		if fd.Kind() == protoreflect.MessageKind && !fd.IsList() && !fd.IsMap() {
-			// Clone message fields to avoid aliasing with the caller's structs.
-			cloned := proto.Clone(v.Message().Interface())
-			resultFields.Set(fd, protoreflect.ValueOf(cloned.ProtoReflect()))
+			// Clone message fields so that:
+			// - we don't alias the caller's structs
+			// - the user's explicit proto3 zero values (e.g. IsAllowCloud: false)
+			//   survive, which Range() would never report
+			cloned := proto.Clone(v.Message().Interface()).ProtoReflect()
+			// nested message fields the user left unset must never stay nil
+			fillUnsetMessageFields(cloned, resultFields.Get(fd).Message())
+			resultFields.Set(fd, protoreflect.ValueOf(cloned))
 		} else {
 			resultFields.Set(fd, v)
 		}
@@ -32,6 +37,47 @@ func mergeRoomFeatures(user *plugnmeet.RoomCreateFeatures) *plugnmeet.RoomCreate
 	})
 
 	return result
+}
+
+// fillUnsetMessageFields recursively makes sure that every nested message field
+// of msg is populated. Fields which the user has set are processed recursively
+// (using the matching default sub-message), while fields the user left unset are
+// taken from defaults. If defaults has no value for a field, a new empty message
+// is created so that no nested message field stays nil.
+func fillUnsetMessageFields(msg, defaults protoreflect.Message) {
+	fields := msg.Descriptor().Fields()
+	for i := 0; i < fields.Len(); i++ {
+		fd := fields.Get(i)
+		if fd.Kind() != protoreflect.MessageKind || fd.IsList() || fd.IsMap() {
+			continue
+		}
+
+		var defSub protoreflect.Message
+		if defaults != nil && defaults.IsValid() && defaults.Has(fd) {
+			defSub = defaults.Get(fd).Message()
+		}
+
+		if msg.Has(fd) {
+			// set by the user: keep its explicit zero values, but fill its own
+			// nested message fields
+			fillUnsetMessageFields(msg.Get(fd).Message(), defSub)
+			continue
+		}
+
+		if defSub != nil {
+			cloned := proto.Clone(defSub.Interface()).ProtoReflect()
+			msg.Set(fd, protoreflect.ValueOf(cloned))
+			continue
+		}
+
+		if fd.ContainingOneof() != nil {
+			// optional/oneof message field which neither the user nor the defaults
+			// set: keep it unset so we don't change its presence semantics
+			continue
+		}
+
+		msg.Set(fd, msg.NewField(fd))
+	}
 }
 
 // PrepareDefaultRoomFeatures will initialize all the features and lock settings with default values
@@ -108,13 +154,10 @@ func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhit
 			r.Metadata.RoomFeatures.RecordingFeatures.IsAllowCloud = false
 			r.Metadata.RoomFeatures.RecordingFeatures.EnableAutoCloudRecording = false
 
+			// nested insights features are always non-nil after PrepareDefaultRoomFeatures
 			insightsFeatures := r.Metadata.RoomFeatures.InsightsFeatures
-			if insightsFeatures.TranscriptionFeatures != nil {
-				insightsFeatures.TranscriptionFeatures.IsAllow = false
-			}
-			if insightsFeatures.AiFeatures != nil && insightsFeatures.AiFeatures.MeetingSummarizationFeatures != nil {
-				insightsFeatures.AiFeatures.MeetingSummarizationFeatures.IsAllow = false
-			}
+			insightsFeatures.TranscriptionFeatures.IsAllow = false
+			insightsFeatures.AiFeatures.MeetingSummarizationFeatures.IsAllow = false
 		} else {
 			// only generate key if nothing was delivered
 			if rf.EndToEndEncryptionFeatures.EncryptionKey == nil ||
@@ -128,29 +171,20 @@ func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhit
 		}
 	}
 
+	// nested insights features are always non-nil after PrepareDefaultRoomFeatures
 	if !rf.InsightsFeatures.IsAllow {
-		if rf.InsightsFeatures.TranscriptionFeatures != nil {
-			rf.InsightsFeatures.TranscriptionFeatures.IsAllow = false
-		}
-		if rf.InsightsFeatures.ChatTranslationFeatures != nil {
-			rf.InsightsFeatures.ChatTranslationFeatures.IsAllow = false
-		}
-		if rf.InsightsFeatures.AiFeatures != nil {
-			rf.InsightsFeatures.AiFeatures.IsAllow = false
-		}
+		rf.InsightsFeatures.TranscriptionFeatures.IsAllow = false
+		rf.InsightsFeatures.ChatTranslationFeatures.IsAllow = false
+		rf.InsightsFeatures.AiFeatures.IsAllow = false
 	}
 
-	if rf.InsightsFeatures.TranscriptionFeatures != nil && !rf.InsightsFeatures.TranscriptionFeatures.IsAllow {
+	if !rf.InsightsFeatures.TranscriptionFeatures.IsAllow {
 		rf.InsightsFeatures.TranscriptionFeatures.IsAllowTranslation = false
 	}
 
-	if rf.InsightsFeatures.AiFeatures != nil && !rf.InsightsFeatures.AiFeatures.IsAllow {
-		if rf.InsightsFeatures.AiFeatures.AiTextChatFeatures != nil {
-			rf.InsightsFeatures.AiFeatures.AiTextChatFeatures.IsAllow = false
-		}
-		if rf.InsightsFeatures.AiFeatures.MeetingSummarizationFeatures != nil {
-			rf.InsightsFeatures.AiFeatures.MeetingSummarizationFeatures.IsAllow = false
-		}
+	if !rf.InsightsFeatures.AiFeatures.IsAllow {
+		rf.InsightsFeatures.AiFeatures.AiTextChatFeatures.IsAllow = false
+		rf.InsightsFeatures.AiFeatures.MeetingSummarizationFeatures.IsAllow = false
 	}
 }
 
