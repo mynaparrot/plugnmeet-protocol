@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.7.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.6.3...v1.7.0) (2026-11-04)
+
+
+### Features
+
+* **countdown-timer:** host-controlled meeting countdown timer ([#341](https://github.com/mynaparrot/plugnmeet-protocol/issues/341)) ([0a3bbb0](https://github.com/mynaparrot/plugnmeet-protocol/commit/0a3bbb0b3f83111866bec1ef4741dd6938d86d1c))
+* **polls:** add text-answer poll fields and result types ([#343](https://github.com/mynaparrot/plugnmeet-protocol/issues/343)) ([aa000c3](https://github.com/mynaparrot/plugnmeet-protocol/commit/aa000c3b22179e8a872966ffd4591065bf379ade))
+
+
+### Bug Fixes
+
+* make `mergeRoomFeatures` recursively ([3566f2f](https://github.com/mynaparrot/plugnmeet-protocol/commit/3566f2ffd9412e14e35b968bfa8d513a6142900b))
+
 ## [1.6.3](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.6.2...v1.6.3) (2026-10-28)
 
 
