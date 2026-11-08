@@ -25,6 +25,42 @@ var op = protojson.MarshalOptions{
 	UseProtoNames:   true,
 }
 
+// StatusCodeToHTTPStatus maps a protocol StatusCode to the HTTP status of an API
+// response. The protocol enum stays transport agnostic: HTTP specific cases must
+// never be added as new StatusCode values, they are mapped here instead.
+func StatusCodeToHTTPStatus(code plugnmeet.StatusCode) int {
+	switch code {
+	case plugnmeet.StatusCode_SUCCESS:
+		return fiber.StatusOK
+	case plugnmeet.StatusCode_INVALID_PARAMETERS, plugnmeet.StatusCode_MISSING_REQUIRED_PARAMETER:
+		return fiber.StatusBadRequest
+	case plugnmeet.StatusCode_INVALID_TOKEN_OR_SIGNATURE, plugnmeet.StatusCode_INVALID_API_KEY:
+		// 401 for invalid credentials (token or API key), so clients know they
+		// can retry with renewed credentials.
+		return fiber.StatusUnauthorized
+	case plugnmeet.StatusCode_PERMISSION_DENIED,
+		plugnmeet.StatusCode_USER_BLOCKED, plugnmeet.StatusCode_USER_NOT_ACTIVE:
+		// 403 so clients do not try to renew a token that is not the problem.
+		return fiber.StatusForbidden
+	case plugnmeet.StatusCode_NOT_FOUND, plugnmeet.StatusCode_ROOM_NOT_FOUND,
+		plugnmeet.StatusCode_USER_NOT_FOUND:
+		return fiber.StatusNotFound
+	case plugnmeet.StatusCode_CONFLICT, plugnmeet.StatusCode_ROOM_NOT_ACTIVE:
+		return fiber.StatusConflict
+	default: // UNKNOWN_STATUS, INTERNAL_SERVER_ERROR and any future value
+		return fiber.StatusInternalServerError
+	}
+}
+
+// CommonErrorHTTPStatus returns the HTTP status for a failed response. The result
+// is always non-2xx, even when a success code was passed by mistake.
+func CommonErrorHTTPStatus(code plugnmeet.StatusCode) int {
+	if status := StatusCodeToHTTPStatus(code); status >= 400 {
+		return status
+	}
+	return fiber.StatusInternalServerError
+}
+
 func PrepareCommonWebhookNotifyEvent(event *livekit.WebhookEvent) *plugnmeet.CommonNotifyEvent {
 	return &plugnmeet.CommonNotifyEvent{
 		Event: &event.Event,
@@ -45,6 +81,9 @@ func PrepareCommonWebhookNotifyEvent(event *livekit.WebhookEvent) *plugnmeet.Com
 	}
 }
 
+// SendCommonProtobufResponse sends a CommonResponse as protobuf. It does not set
+// an HTTP status, so it is only meant for successful responses; failures must use
+// SendCommonErrorProtobufResponse.
 func SendCommonProtobufResponse(c fiber.Ctx, s bool, m string) error {
 	res := &plugnmeet.CommonResponse{
 		Status: s,
@@ -58,6 +97,22 @@ func SendCommonProtobufResponse(c fiber.Ctx, s bool, m string) error {
 	return c.Send(marshal)
 }
 
+// SendCommonErrorProtobufResponse sends a failed response as a protobuf
+// CommonResponse together with a non-2xx HTTP status derived from code.
+func SendCommonErrorProtobufResponse(c fiber.Ctx, msg string, code plugnmeet.StatusCode) error {
+	res := &plugnmeet.CommonResponse{
+		Status:     false,
+		Msg:        msg,
+		StatusCode: code,
+	}
+	marshal, err := proto.Marshal(res)
+	if err != nil {
+		return err
+	}
+	c.Set("Content-Type", "application/protobuf")
+	return c.Status(CommonErrorHTTPStatus(code)).Send(marshal)
+}
+
 func SendProtobufResponse(c fiber.Ctx, res proto.Message) error {
 	marshal, err := proto.Marshal(res)
 	if err != nil {
@@ -67,6 +122,9 @@ func SendProtobufResponse(c fiber.Ctx, res proto.Message) error {
 	return c.Send(marshal)
 }
 
+// SendCommonProtoJsonResponse sends a CommonResponse as protojson. It does not set
+// an HTTP status, so it is only meant for successful responses; failures must use
+// SendCommonErrorJsonResponse.
 func SendCommonProtoJsonResponse(c fiber.Ctx, s bool, m string, statusCode plugnmeet.StatusCode) error {
 	res := &plugnmeet.CommonResponse{
 		Status:     s,
@@ -79,6 +137,22 @@ func SendCommonProtoJsonResponse(c fiber.Ctx, s bool, m string, statusCode plugn
 	}
 	c.Set("Content-Type", "application/json")
 	return c.Send(marshal)
+}
+
+// SendCommonErrorJsonResponse sends a failed response as a protojson CommonResponse
+// together with a non-2xx HTTP status derived from code.
+func SendCommonErrorJsonResponse(c fiber.Ctx, msg string, code plugnmeet.StatusCode) error {
+	res := &plugnmeet.CommonResponse{
+		Status:     false,
+		Msg:        msg,
+		StatusCode: code,
+	}
+	marshal, err := op.Marshal(res)
+	if err != nil {
+		return err
+	}
+	c.Set("Content-Type", "application/json")
+	return c.Status(CommonErrorHTTPStatus(code)).Send(marshal)
 }
 
 func SendProtoJsonResponse(c fiber.Ctx, res proto.Message) error {
