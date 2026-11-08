@@ -6,13 +6,13 @@ require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.12-20260825204119-511051f7f437.2
 	github.com/DeRuina/timberjack v1.4.9
 	github.com/gammazero/workerpool v1.3.0
-	github.com/go-jose/go-jose/v4 v4.1.7
+	github.com/go-jose/go-jose/v4 v4.1.9
 	github.com/gofiber/fiber/v3 v3.6.1
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-retryablehttp v0.7.8
 	github.com/livekit/protocol v1.51.1-0.20260910121219-271d9cde3897
 	github.com/nats-io/nats.go v1.55.0
-	github.com/nats-io/nkeys v0.4.16
+	github.com/nats-io/nkeys v0.4.17
 	github.com/sirupsen/logrus v1.10.2
 	google.golang.org/protobuf v1.36.12
 	mvdan.cc/sh/v3 v3.14.1
