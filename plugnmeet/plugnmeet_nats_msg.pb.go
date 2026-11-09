@@ -152,7 +152,8 @@ const (
 	NatsMsgClientToServerEvents_REQ_ONLINE_USERS_LIST      NatsMsgClientToServerEvents = 9
 	NatsMsgClientToServerEvents_REQ_PRIVATE_DATA_DELIVERY  NatsMsgClientToServerEvents = 10
 	NatsMsgClientToServerEvents_SESSION_DATA_SAVE          NatsMsgClientToServerEvents = 11
-	NatsMsgClientToServerEvents_SESSION_DATA_FETCH_REQUEST NatsMsgClientToServerEvents = 12 //next ID: 13
+	NatsMsgClientToServerEvents_SESSION_DATA_FETCH_REQUEST NatsMsgClientToServerEvents = 12
+	NatsMsgClientToServerEvents_REQ_LEAVE_ROOM             NatsMsgClientToServerEvents = 13 //next ID: 14
 )
 
 // Enum value maps for NatsMsgClientToServerEvents.
@@ -171,6 +172,7 @@ var (
 		10: "REQ_PRIVATE_DATA_DELIVERY",
 		11: "SESSION_DATA_SAVE",
 		12: "SESSION_DATA_FETCH_REQUEST",
+		13: "REQ_LEAVE_ROOM",
 	}
 	NatsMsgClientToServerEvents_value = map[string]int32{
 		"REQ_INITIAL_DATA":           0,
@@ -186,6 +188,7 @@ var (
 		"REQ_PRIVATE_DATA_DELIVERY":  10,
 		"SESSION_DATA_SAVE":          11,
 		"SESSION_DATA_FETCH_REQUEST": 12,
+		"REQ_LEAVE_ROOM":             13,
 	}
 )
 
@@ -1751,7 +1754,7 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x04PONG\x10\x14\x12\x1f\n" +
 	"\x1bSESSION_DATA_FETCH_RESPONSE\x10\x15\x12\x1c\n" +
 	"\x18BREAKOUT_ROOM_USER_MOVED\x10\x16\x12\x1e\n" +
-	"\x1aSESSION_DATA_SAVE_RESPONSE\x10\x18*\xdd\x02\n" +
+	"\x1aSESSION_DATA_SAVE_RESPONSE\x10\x18*\xf1\x02\n" +
 	"\x1bNatsMsgClientToServerEvents\x12\x14\n" +
 	"\x10REQ_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15REQ_MEDIA_SERVER_DATA\x10\x01\x12\x19\n" +
@@ -1766,7 +1769,8 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x19REQ_PRIVATE_DATA_DELIVERY\x10\n" +
 	"\x12\x15\n" +
 	"\x11SESSION_DATA_SAVE\x10\v\x12\x1e\n" +
-	"\x1aSESSION_DATA_FETCH_REQUEST\x10\f*%\n" +
+	"\x1aSESSION_DATA_FETCH_REQUEST\x10\f\x12\x12\n" +
+	"\x0eREQ_LEAVE_ROOM\x10\r*%\n" +
 	"\n" +
 	"ClientType\x12\a\n" +
 	"\x03WEB\x10\x00\x12\x0e\n" +

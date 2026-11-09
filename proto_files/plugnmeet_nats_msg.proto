@@ -68,7 +68,8 @@ enum NatsMsgClientToServerEvents {
   REQ_PRIVATE_DATA_DELIVERY = 10;
   SESSION_DATA_SAVE          = 11;
   SESSION_DATA_FETCH_REQUEST = 12;
-  //next ID: 13
+  REQ_LEAVE_ROOM             = 13;
+  //next ID: 14
 }
 
 message PrivateDataDelivery {
