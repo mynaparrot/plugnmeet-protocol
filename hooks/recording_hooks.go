@@ -22,8 +22,9 @@ type RecordingHookData struct {
 	FileSize float32 `json:"file_size,omitempty"`
 
 	// Input paths for the script. Can be local file paths or remote storage URLs.
-	InputPath  string   `json:"input_path,omitempty"`  // Primary input path for single file tasks.
-	InputPaths []string `json:"input_paths,omitempty"` // Input paths for merge tasks.
+	InputPath          string   `json:"input_path,omitempty"`           // Primary input path for single file tasks.
+	InputPaths         []string `json:"input_paths,omitempty"`          // Input paths for merge tasks.
+	InputDirectoryPath string   `json:"input_directory_path,omitempty"` // Directory containing the raw input files.
 
 	// Fields below are typically set by the script as output, or can be passed along in a chain.
 	Error            string `json:"error,omitempty"`              // Error message from the script.

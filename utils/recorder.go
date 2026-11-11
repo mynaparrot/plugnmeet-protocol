@@ -1,11 +1,15 @@
 package utils
 
 import (
+	"fmt"
 	"strings"
+
+	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 )
 
 const (
-	TranscoderConsumerDurable = "transcoderWorker"
+	TranscodingQueueStreamName = "pnm-RecorderTranscoderJobs"
+	TranscoderConsumerDurable  = "transcoderWorker"
 	// RecorderKeyPrefix format: recorder_<recorderId>-FIELD_<field>
 	RecorderKeyPrefix = "recorder_"
 	// RecorderKeyFieldPrefix is the separator between the recorderId and the field.
@@ -19,6 +23,17 @@ type RecorderInfo struct {
 	LastPing        int64
 	TotalCores      int64
 	CpuScore        float64
+	Variant         plugnmeet.CloudRecordingVariants
+}
+
+// GetTranscodingJobSubject returns the NATS subject for a recording variant's transcoding jobs.
+func GetTranscodingJobSubject(streamName string, variant plugnmeet.CloudRecordingVariants) string {
+	return fmt.Sprintf("%s.%d", streamName, int32(variant))
+}
+
+// GetTranscoderConsumerDurable returns the durable consumer name for a recording variant.
+func GetTranscoderConsumerDurable(variant plugnmeet.CloudRecordingVariants) string {
+	return fmt.Sprintf("%s_%d", TranscoderConsumerDurable, int32(variant))
 }
 
 // FormatRecorderKey generates a key for a specific recorder's field within the consolidated bucket.

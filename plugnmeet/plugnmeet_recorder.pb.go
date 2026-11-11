@@ -96,6 +96,7 @@ const (
 	RecorderInfoKeys_RECORDER_INFO_TOTAL_CORES      RecorderInfoKeys = 2 // Total CPU cores
 	RecorderInfoKeys_RECORDER_INFO_CURRENT_PROGRESS RecorderInfoKeys = 3
 	RecorderInfoKeys_RECORDER_INFO_CPU_SCORE        RecorderInfoKeys = 4
+	RecorderInfoKeys_RECORDER_INFO_VARIANT          RecorderInfoKeys = 5
 )
 
 // Enum value maps for RecorderInfoKeys.
@@ -106,6 +107,7 @@ var (
 		2: "RECORDER_INFO_TOTAL_CORES",
 		3: "RECORDER_INFO_CURRENT_PROGRESS",
 		4: "RECORDER_INFO_CPU_SCORE",
+		5: "RECORDER_INFO_VARIANT",
 	}
 	RecorderInfoKeys_value = map[string]int32{
 		"RECORDER_INFO_MAX_LIMIT":        0,
@@ -113,6 +115,7 @@ var (
 		"RECORDER_INFO_TOTAL_CORES":      2,
 		"RECORDER_INFO_CURRENT_PROGRESS": 3,
 		"RECORDER_INFO_CPU_SCORE":        4,
+		"RECORDER_INFO_VARIANT":          5,
 	}
 )
 
@@ -190,18 +193,19 @@ func (CloudRecordingVariants) EnumDescriptor() ([]byte, []int) {
 }
 
 type PlugNmeetToRecorder struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	From          string                 `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
-	Task          RecordingTasks         `protobuf:"varint,2,opt,name=task,proto3,enum=plugnmeet.RecordingTasks" json:"task,omitempty"`
-	RoomTableId   int64                  `protobuf:"varint,3,opt,name=room_table_id,json=roomTableId,proto3" json:"room_table_id,omitempty"`
-	RoomId        string                 `protobuf:"bytes,4,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
-	RoomSid       string                 `protobuf:"bytes,5,opt,name=room_sid,json=roomSid,proto3" json:"room_sid,omitempty"`
-	RecordingId   string                 `protobuf:"bytes,6,opt,name=recording_id,json=recordingId,proto3" json:"recording_id,omitempty"`
-	RecorderId    string                 `protobuf:"bytes,7,opt,name=recorder_id,json=recorderId,proto3" json:"recorder_id,omitempty"`
-	AccessToken   string                 `protobuf:"bytes,8,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
-	RtmpUrl       *string                `protobuf:"bytes,9,opt,name=rtmp_url,json=rtmpUrl,proto3,oneof" json:"rtmp_url,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState  `protogen:"open.v1"`
+	From             string                  `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
+	Task             RecordingTasks          `protobuf:"varint,2,opt,name=task,proto3,enum=plugnmeet.RecordingTasks" json:"task,omitempty"`
+	RoomTableId      int64                   `protobuf:"varint,3,opt,name=room_table_id,json=roomTableId,proto3" json:"room_table_id,omitempty"`
+	RoomId           string                  `protobuf:"bytes,4,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	RoomSid          string                  `protobuf:"bytes,5,opt,name=room_sid,json=roomSid,proto3" json:"room_sid,omitempty"`
+	RecordingId      string                  `protobuf:"bytes,6,opt,name=recording_id,json=recordingId,proto3" json:"recording_id,omitempty"`
+	RecorderId       string                  `protobuf:"bytes,7,opt,name=recorder_id,json=recorderId,proto3" json:"recorder_id,omitempty"`
+	AccessToken      string                  `protobuf:"bytes,8,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	RtmpUrl          *string                 `protobuf:"bytes,9,opt,name=rtmp_url,json=rtmpUrl,proto3,oneof" json:"rtmp_url,omitempty"`
+	RecordingVariant *CloudRecordingVariants `protobuf:"varint,11,opt,name=recording_variant,json=recordingVariant,proto3,enum=plugnmeet.CloudRecordingVariants,oneof" json:"recording_variant,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *PlugNmeetToRecorder) Reset() {
@@ -295,6 +299,13 @@ func (x *PlugNmeetToRecorder) GetRtmpUrl() string {
 		return *x.RtmpUrl
 	}
 	return ""
+}
+
+func (x *PlugNmeetToRecorder) GetRecordingVariant() CloudRecordingVariants {
+	if x != nil && x.RecordingVariant != nil {
+		return *x.RecordingVariant
+	}
+	return CloudRecordingVariants_FULL_SCREEN_CLOUD_RECORDING
 }
 
 type RecorderToPlugNmeet struct {
@@ -664,7 +675,7 @@ var File_plugnmeet_recorder_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_recorder_proto_rawDesc = "" +
 	"\n" +
-	"\x18plugnmeet_recorder.proto\x12\tplugnmeet\"\xc4\x02\n" +
+	"\x18plugnmeet_recorder.proto\x12\tplugnmeet\"\xaf\x03\n" +
 	"\x13PlugNmeetToRecorder\x12\x12\n" +
 	"\x04from\x18\x01 \x01(\tR\x04from\x12-\n" +
 	"\x04task\x18\x02 \x01(\x0e2\x19.plugnmeet.RecordingTasksR\x04task\x12\"\n" +
@@ -675,8 +686,10 @@ const file_plugnmeet_recorder_proto_rawDesc = "" +
 	"\vrecorder_id\x18\a \x01(\tR\n" +
 	"recorderId\x12!\n" +
 	"\faccess_token\x18\b \x01(\tR\vaccessToken\x12\x1e\n" +
-	"\brtmp_url\x18\t \x01(\tH\x00R\artmpUrl\x88\x01\x01B\v\n" +
-	"\t_rtmp_url\"\xc3\x03\n" +
+	"\brtmp_url\x18\t \x01(\tH\x00R\artmpUrl\x88\x01\x01\x12S\n" +
+	"\x11recording_variant\x18\v \x01(\x0e2!.plugnmeet.CloudRecordingVariantsH\x01R\x10recordingVariant\x88\x01\x01B\v\n" +
+	"\t_rtmp_urlB\x14\n" +
+	"\x12_recording_variant\"\xc3\x03\n" +
 	"\x13RecorderToPlugNmeet\x12\x12\n" +
 	"\x04from\x18\x01 \x01(\tR\x04from\x12-\n" +
 	"\x04task\x18\x02 \x01(\x0e2\x19.plugnmeet.RecordingTasksR\x04task\x12\x16\n" +
@@ -720,13 +733,14 @@ const file_plugnmeet_recorder_proto_rawDesc = "" +
 	"\bEND_RTMP\x10\x05\x12\x17\n" +
 	"\x13RECORDING_PROCEEDED\x10\x06\x12\b\n" +
 	"\x04STOP\x10\a\x12\"\n" +
-	"\x1eRECORDING_TRANSCODING_FINISHED\x10\b*\xac\x01\n" +
+	"\x1eRECORDING_TRANSCODING_FINISHED\x10\b*\xc7\x01\n" +
 	"\x10RecorderInfoKeys\x12\x1b\n" +
 	"\x17RECORDER_INFO_MAX_LIMIT\x10\x00\x12\x1b\n" +
 	"\x17RECORDER_INFO_LAST_PING\x10\x01\x12\x1d\n" +
 	"\x19RECORDER_INFO_TOTAL_CORES\x10\x02\x12\"\n" +
 	"\x1eRECORDER_INFO_CURRENT_PROGRESS\x10\x03\x12\x1b\n" +
-	"\x17RECORDER_INFO_CPU_SCORE\x10\x04*Y\n" +
+	"\x17RECORDER_INFO_CPU_SCORE\x10\x04\x12\x19\n" +
+	"\x15RECORDER_INFO_VARIANT\x10\x05*Y\n" +
 	"\x16CloudRecordingVariants\x12\x1f\n" +
 	"\x1bFULL_SCREEN_CLOUD_RECORDING\x10\x00\x12\x1e\n" +
 	"\x1aMEDIA_ONLY_CLOUD_RECORDING\x10\x01B\x9f\x01\n" +
@@ -758,16 +772,17 @@ var file_plugnmeet_recorder_proto_goTypes = []any{
 }
 var file_plugnmeet_recorder_proto_depIdxs = []int32{
 	0, // 0: plugnmeet.PlugNmeetToRecorder.task:type_name -> plugnmeet.RecordingTasks
-	0, // 1: plugnmeet.RecorderToPlugNmeet.task:type_name -> plugnmeet.RecordingTasks
-	2, // 2: plugnmeet.RecorderToPlugNmeet.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
-	2, // 3: plugnmeet.TranscodingTaskPostRecording.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
-	5, // 4: plugnmeet.TranscodingTask.post_recording:type_name -> plugnmeet.TranscodingTaskPostRecording
-	6, // 5: plugnmeet.TranscodingTask.merge_recordings:type_name -> plugnmeet.TranscodingTaskMergeRecordings
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	2, // 1: plugnmeet.PlugNmeetToRecorder.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
+	0, // 2: plugnmeet.RecorderToPlugNmeet.task:type_name -> plugnmeet.RecordingTasks
+	2, // 3: plugnmeet.RecorderToPlugNmeet.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
+	2, // 4: plugnmeet.TranscodingTaskPostRecording.recording_variant:type_name -> plugnmeet.CloudRecordingVariants
+	5, // 5: plugnmeet.TranscodingTask.post_recording:type_name -> plugnmeet.TranscodingTaskPostRecording
+	6, // 6: plugnmeet.TranscodingTask.merge_recordings:type_name -> plugnmeet.TranscodingTaskMergeRecordings
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_recorder_proto_init() }

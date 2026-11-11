@@ -77,6 +77,10 @@ func (m *PlugNmeetToRecorder) validate(all bool) error {
 		// no validation rules for RtmpUrl
 	}
 
+	if m.RecordingVariant != nil {
+		// no validation rules for RecordingVariant
+	}
+
 	if len(errors) > 0 {
 		return PlugNmeetToRecorderMultiError(errors)
 	}
