@@ -4,17 +4,22 @@ go 1.27.3
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.12-20260825204119-511051f7f437.2
-	github.com/DeRuina/timberjack v1.4.9
+	github.com/DeRuina/timberjack v1.4.10
 	github.com/gammazero/workerpool v1.3.0
 	github.com/go-jose/go-jose/v4 v4.1.9
+	github.com/go-sql-driver/mysql v1.10.1
 	github.com/gofiber/fiber/v3 v3.6.1
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-retryablehttp v0.7.8
 	github.com/livekit/protocol v1.51.1-0.20260910121219-271d9cde3897
 	github.com/nats-io/nats.go v1.55.0
 	github.com/nats-io/nkeys v0.4.17
+	github.com/redis/go-redis/v9 v9.23.0
 	github.com/sirupsen/logrus v1.10.2
 	google.golang.org/protobuf v1.36.12
+	gorm.io/driver/mysql v1.6.0
+	gorm.io/gorm v1.31.2
+	gorm.io/plugin/dbresolver v1.6.2
 	mvdan.cc/sh/v3 v3.14.1
 )
 
@@ -23,6 +28,7 @@ require (
 	buf.build/go/protoyaml v0.7.0 // indirect
 	cel.dev/cel-go v0.32.0 // indirect
 	cel.dev/expr v0.25.3 // indirect
+	filippo.io/edwards25519 v1.2.0 // indirect
 	github.com/antlr4-go/antlr/v4 v4.13.1 // indirect
 	github.com/benbjohnson/clock v1.3.5 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -36,9 +42,11 @@ require (
 	github.com/gofiber/utils/v2 v2.6.2 // indirect
 	github.com/golang-jwt/jwt/v5 v5.3.1 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/jxskiss/base62 v1.1.0 // indirect
 	github.com/klauspost/compress v1.20.3 // indirect
-	github.com/klauspost/cpuid/v2 v2.3.0 // indirect
+	github.com/klauspost/cpuid/v2 v2.4.0 // indirect
 	github.com/lithammer/shortuuid/v4 v4.2.0 // indirect
 	github.com/livekit/mageutil v0.0.0-20250511045019-0f1ff63f7731 // indirect
 	github.com/livekit/psrpc v0.7.6 // indirect
@@ -70,7 +78,6 @@ require (
 	github.com/prometheus/common v0.70.1 // indirect
 	github.com/prometheus/procfs v0.21.1 // indirect
 	github.com/puzpuzpuz/xsync/v4 v4.5.0 // indirect
-	github.com/redis/go-redis/v9 v9.22.0 // indirect
 	github.com/tinylib/msgp v1.6.5 // indirect
 	github.com/twitchtv/twirp v8.1.3+incompatible // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
@@ -78,7 +85,7 @@ require (
 	github.com/wlynxg/anet v0.0.5 // indirect
 	github.com/zeebo/xxh3 v1.1.0 // indirect
 	go.opentelemetry.io/otel v1.45.0 // indirect
-	go.uber.org/atomic v1.11.0 // indirect
+	go.uber.org/atomic v1.12.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.28.0 // indirect
 	go.uber.org/zap/exp v0.3.0 // indirect
