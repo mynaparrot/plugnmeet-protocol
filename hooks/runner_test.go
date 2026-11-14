@@ -64,6 +64,62 @@ func testHook[T interface{ GetError() string }](
 	assert(t, res)
 }
 
+func TestRunHooksWithNilConfig(t *testing.T) {
+	var config *Config
+	log := testLog()
+	ctx := context.Background()
+
+	checks := []struct {
+		name string
+		run  func() (bool, error)
+	}{
+		{"UploadHook", func() (bool, error) {
+			res, err := config.RunUploadHook(&UploadHookData{}, log)
+			return res != nil, err
+		}},
+		{"DownloadHook", func() (bool, error) {
+			res, err := config.RunDownloadHook(ctx, &DownloadHookData{}, nil, 0, log)
+			return res != nil, err
+		}},
+		{"DeleteHook", func() (bool, error) {
+			res, err := config.RunDeleteHook(&DeleteHookData{}, log)
+			return res != nil, err
+		}},
+		{"ResumableUploadHook", func() (bool, error) {
+			res, err := config.RunResumableUploadHook(&ResumableUploadHookData{}, log)
+			return res != nil, err
+		}},
+		{"RoomEndHook", func() (bool, error) {
+			res, err := config.RunRoomEndHook(&RoomEndHookData{}, log)
+			return res != nil, err
+		}},
+		{"PostRecording", func() (bool, error) {
+			res, err := config.RunPostRecordingHook(&RecordingHookData{}, log)
+			return res != nil, err
+		}},
+		{"PreTranscoding", func() (bool, error) {
+			res, err := config.RunPreTranscodingHook(&RecordingHookData{}, log)
+			return res != nil, err
+		}},
+		{"PostTranscoding", func() (bool, error) {
+			res, err := config.RunPostTranscodingHook(&RecordingHookData{}, log)
+			return res != nil, err
+		}},
+	}
+
+	for _, check := range checks {
+		t.Run(check.name, func(t *testing.T) {
+			hasResult, err := check.run()
+			if err != nil {
+				t.Errorf("unexpected error: %v", err)
+			}
+			if hasResult {
+				t.Error("expected nil result")
+			}
+		})
+	}
+}
+
 func TestRunServerHooks(t *testing.T) {
 	t.Run("upload", func(t *testing.T) {
 		testHook(t, HookNameUpload,
