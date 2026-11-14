@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.7.0](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.6.3...v1.7.0) (2026-11-14)
+
+
+### Features
+
+* add shared connections package for database and Redis ([bd72d12](https://github.com/mynaparrot/plugnmeet-protocol/commit/bd72d12a00c68ed425604d6d7c32fa3015ca7f5a))
+* **countdown-timer:** host-controlled meeting countdown timer ([#341](https://github.com/mynaparrot/plugnmeet-protocol/issues/341)) ([0a3bbb0](https://github.com/mynaparrot/plugnmeet-protocol/commit/0a3bbb0b3f83111866bec1ef4741dd6938d86d1c))
+* moved hook implementation with initialize ([b90e503](https://github.com/mynaparrot/plugnmeet-protocol/commit/b90e50361c8c2cb30061111763b75887f1287737))
+* **polls:** add text-answer poll fields and result types ([#343](https://github.com/mynaparrot/plugnmeet-protocol/issues/343)) ([aa000c3](https://github.com/mynaparrot/plugnmeet-protocol/commit/aa000c3b22179e8a872966ffd4591065bf379ade))
+
+
+### Bug Fixes
+
+* added config nil checker ([9ec306b](https://github.com/mynaparrot/plugnmeet-protocol/commit/9ec306bdd182f45c94180ebfea35faeee70822f6))
+* added few helper methods ([0773a3f](https://github.com/mynaparrot/plugnmeet-protocol/commit/0773a3f898aaea81f35ba578b0024a62c06cb7d4))
+* added new `REQ_LEAVE_ROOM` event ([642a38d](https://github.com/mynaparrot/plugnmeet-protocol/commit/642a38db837d2b9c63c4b440953ce9a005105706))
+* added recorder variant store ([d96dd44](https://github.com/mynaparrot/plugnmeet-protocol/commit/d96dd4487b8ea22ecacb0ddcdca496031a0193f7))
+* make `mergeRoomFeatures` recursively ([3566f2f](https://github.com/mynaparrot/plugnmeet-protocol/commit/3566f2ffd9412e14e35b968bfa8d513a6142900b))
+
 ## [1.6.3](https://github.com/mynaparrot/plugnmeet-protocol/compare/v1.6.2...v1.6.3) (2026-10-28)
 
 
