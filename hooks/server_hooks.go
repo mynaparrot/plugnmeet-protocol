@@ -132,3 +132,14 @@ type RoomEndHookData struct {
 	Error string `json:"error,omitempty"`
 	Msg   string `json:"msg,omitempty"`
 }
+
+// GetError implements the error reporting contract used by the hook pipeline.
+func (d UploadHookData) GetError() string { return d.Error }
+
+func (d DownloadHookData) GetError() string { return d.Error }
+
+func (d DeleteHookData) GetError() string { return d.Error }
+
+func (d ResumableUploadHookData) GetError() string { return d.Error }
+
+func (d RoomEndHookData) GetError() string { return d.Error }

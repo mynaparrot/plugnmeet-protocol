@@ -32,3 +32,6 @@ type RecordingHookData struct {
 	ShouldCleanup    bool   `json:"should_cleanup,omitempty"`     // Flag for post-transcoding scripts to clean up dir.
 	SourceForCleanup string `json:"source_for_cleanup,omitempty"` // Original file path to clean up after transcoding.
 }
+
+// GetError implements the error reporting contract used by the hook pipeline.
+func (d RecordingHookData) GetError() string { return d.Error }

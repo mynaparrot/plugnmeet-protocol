@@ -28,7 +28,7 @@ type HookScriptConfig struct {
 	HookTimeout time.Duration `yaml:"hook_timeout"`
 }
 
-func ValidateHookScript(scriptFullCommand string, hookType string) error {
+func ValidateHookScript(scriptFullCommand string, hookType HookCategory) error {
 	if scriptFullCommand == "" {
 		return nil // Empty script string is valid (no script configured for this step)
 	}
