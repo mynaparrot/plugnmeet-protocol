@@ -250,6 +250,7 @@ message InsightsFeatures {
   optional InsightsTranscriptionFeatures transcription_features = 2;
   optional InsightsChatTranslationFeatures chat_translation_features = 3;
   optional InsightsAIFeatures ai_features = 4;
+  optional InsightsAIAgentFeatures ai_agent_features = 5;
 }
 
 message InsightsTranscriptionFeatures {
@@ -303,6 +304,12 @@ message InsightsAITextChatFeatures {
   bool is_notepad_ai_disabled = 5 [(buf.validate.field).bool.const = false];
   bool is_whiteboard_ai_disabled = 6 [(buf.validate.field).bool.const = false];
   bool is_poll_ai_disabled = 7 [(buf.validate.field).bool.const = false];
+
+  // external MCP servers available to AI text chat (same shape as AI agent)
+  map<string, ExternalMCPServerConfig> mcp_servers = 8 [(buf.validate.field).map = {
+    max_pairs: 2,
+    keys: {string: {min_len: 1, max_len: 64}}
+  }];
 }
 
 message InsightsAIMeetingSummarizationFeatures {
@@ -311,6 +318,79 @@ message InsightsAIMeetingSummarizationFeatures {
 
   // all internal usage fields
   bool is_enabled = 3 [(buf.validate.field).bool.const = false];
+}
+
+message InsightsAIAgentFeatures {
+  bool is_allow = 1; // master switch
+
+  // persona & curriculum (host-owned)
+  string system_prompt = 2; // required when is_allow
+  optional string previous_session_context = 3; // last session's summary
+  optional string agent_display_name = 4; // default: "AI Assistant"
+  optional string spoken_lang = 5; // BCP-47: learner's native/support language
+  optional string target_lang = 6; // BCP-47: language being learned (empty = no language-learning profile)
+
+  // behaviour
+  bool auto_join_on_first_participant = 7; // default false
+  bool allow_whiteboard_write = 8; // default true
+  bool allow_vision_capture = 9; // default true
+  uint32 vision_debounce_ms = 10; // default 1200, max 5000
+  uint32 vision_max_edge_px = 11; // default 1024, range 512..1600
+  bool allow_polls = 12; // default true
+  bool allow_chat_message = 13; // default true
+  bool allow_notepad_write = 14; // default true
+
+  // external knowledge & external MCP servers
+  bool allow_web_fetch = 15; // default false
+  repeated string allowed_knowledge_urls = 16 [(buf.validate.field).repeated.max_items = 32];
+  uint32 knowledge_cache_ttl_seconds = 17; // default 3600, range 60..86400
+  map<string, ExternalMCPServerConfig> mcp_servers = 18 [(buf.validate.field).map = {
+    max_pairs: 2,
+    keys: {string: {min_len: 1, max_len: 64}}
+  }];
+
+  // topic boundary & anti-drift (compiled into the server-owned envelope at session start)
+  string topic = 22; // required when is_allow
+  repeated string allowed_subtopics = 23 [(buf.validate.field).repeated.max_items = 64];
+  repeated string forbidden_topics = 24 [(buf.validate.field).repeated.max_items = 32];
+  bool strict_topic_enforcement = 25; // default true
+  uint32 topic_anchor_interval_turns = 26; // default 6, range 3..12
+
+  // cost & duration caps
+  uint32 max_session_seconds = 27 [(buf.validate.field).uint32 = {gte: 60, lte: 7200}];
+  uint32 max_audio_minutes = 28 [(buf.validate.field).uint32.lte = 240]; // 0 = server default
+
+  // delivery
+  optional string instruction_lang = 29; // language the agent explains in; empty -> spoken_lang
+  optional string voice = 30; // provider voice id; must be in server allow-list
+  optional float speaking_rate = 31 [(buf.validate.field).float = {gte: 0.5, lte: 2.0}];
+
+  // all internal usage fields (host may not set)
+  bool is_enabled = 19 [(buf.validate.field).bool.const = false];
+  repeated string allowed_participant_ids = 20 [(buf.validate.field).repeated = {max_items: 16, items: {string: {min_len: 1, max_len: 128}}}];
+  optional string active_session_id = 21 [(buf.validate.field).cel = {
+    id: "active_session_id_empty",
+    message: "active_session_id should not contain any value",
+    expression: "this.matches('^$')"
+  }];
+  bool auto_create_per_user_session = 32;
+  uint32 max_concurrent_sessions = 33 [(buf.validate.field).uint32.lte = 16];
+  // next ID: 34
+}
+
+message ExternalMCPServerConfig {
+  string url = 1 [(buf.validate.field).string.max_len = 1024];
+  map<string, string> headers = 2 [(buf.validate.field).map = {
+    max_pairs: 16,
+    keys: {string: {max_len: 128}},
+    values: {string: {max_len: 2048}}
+  }];
+  repeated string allowed_tools = 3 [(buf.validate.field).repeated = {
+    max_items: 8,
+    items: {string: {max_len: 128}}
+  }];
+  // optional owner hint: "shared", "text_chat", "ai_agent", ...
+  optional string scope = 4 [(buf.validate.field).string.max_len = 32];
 }
 
 message CountdownTimerFeatures {

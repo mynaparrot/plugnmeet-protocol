@@ -4,6 +4,8 @@ package plugnmeet;
 option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
 option php_namespace = "Mynaparrot\\PlugnmeetProto";
 
+import "buf/validate/validate.proto";
+
 message CreateBreakoutRoomsReq {
   string room_id = 1;
   string requested_user_id = 2;
@@ -15,6 +17,8 @@ message CreateBreakoutRoomsReq {
   bool share_notepad = 8;
   bool allow_return_to_main_room = 9;
   bool allow_self_select = 11;
+  bool enable_ai_agent = 12;
+  optional string ai_agent_context = 13 [(buf.validate.field).string.max_len = 2000];
 }
 
 message BreakoutRoom {
@@ -25,6 +29,8 @@ message BreakoutRoom {
   uint64 created = 5;
   repeated BreakoutRoomUser users = 6;
   string room_sid = 7;
+  optional string ai_agent_context = 8 [(buf.validate.field).string.max_len = 2000];
+  bool enable_ai_agent = 9;
 }
 
 message BreakoutRoomUser {

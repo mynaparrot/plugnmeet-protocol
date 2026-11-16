@@ -71,6 +71,9 @@ var (
 				IsAllow: true,
 			},
 		},
+		AiAgentFeatures: &plugnmeet.InsightsAIAgentFeatures{
+			IsAllow: false,
+		},
 	}
 
 	defaultSipDialInFeatures = &plugnmeet.SipDialInFeatures{

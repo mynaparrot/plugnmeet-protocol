@@ -103,6 +103,8 @@ func (m *CreateBreakoutRoomsReq) validate(all bool) error {
 
 	// no validation rules for AllowSelfSelect
 
+	// no validation rules for EnableAiAgent
+
 	if m.WelcomeMsg != nil {
 		// no validation rules for WelcomeMsg
 	}
@@ -171,6 +173,10 @@ func (m *CreateBreakoutRoomsReq) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if m.AiAgentContext != nil {
+		// no validation rules for AiAgentContext
 	}
 
 	if len(errors) > 0 {
@@ -320,6 +326,12 @@ func (m *BreakoutRoom) validate(all bool) error {
 	}
 
 	// no validation rules for RoomSid
+
+	// no validation rules for EnableAiAgent
+
+	if m.AiAgentContext != nil {
+		// no validation rules for AiAgentContext
+	}
 
 	if len(errors) > 0 {
 		return BreakoutRoomMultiError(errors)

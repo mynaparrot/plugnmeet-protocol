@@ -48,7 +48,9 @@ enum NatsMsgServerToClientEvents {
   SESSION_DATA_FETCH_RESPONSE = 21;
   BREAKOUT_ROOM_USER_MOVED = 22;
   SESSION_DATA_SAVE_RESPONSE = 24;
-  //next ID: 25
+  AI_AGENT_STATE = 25; // AIAgentStateMsg (public)
+  AI_AGENT_TOOL_CALL = 26; // AIAgentToolCallMsg (private, targeted)
+  //next ID: 27
 }
 
 enum NatsMsgClientToServerEvents {
@@ -69,7 +71,9 @@ enum NatsMsgClientToServerEvents {
   SESSION_DATA_SAVE          = 11;
   SESSION_DATA_FETCH_REQUEST = 12;
   REQ_LEAVE_ROOM             = 13;
-  //next ID: 14
+  AI_AGENT_TOOL_RESULT       = 14; // AIAgentToolResultMsg (client -> server)
+  AI_AGENT_WHITEBOARD_SCENE  = 15; // AIAgentWhiteboardSceneMsg (client -> server)
+  //next ID: 16
 }
 
 message PrivateDataDelivery {

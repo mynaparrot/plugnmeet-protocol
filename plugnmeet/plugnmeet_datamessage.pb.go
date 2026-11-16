@@ -50,6 +50,8 @@ const (
 	DataMsgBodyType_NOTEPAD_SYNC_RESPONSE            DataMsgBodyType = 22
 	DataMsgBodyType_NOTEPAD_UPDATE                   DataMsgBodyType = 23
 	DataMsgBodyType_NOTEPAD_AWARENESS                DataMsgBodyType = 24
+	// AI AGENT type
+	DataMsgBodyType_AI_AGENT_REMOTE_POINTER DataMsgBodyType = 25 // participant -> server: agent pointer/scene payload
 )
 
 // Enum value maps for DataMsgBodyType.
@@ -79,6 +81,7 @@ var (
 		22: "NOTEPAD_SYNC_RESPONSE",
 		23: "NOTEPAD_UPDATE",
 		24: "NOTEPAD_AWARENESS",
+		25: "AI_AGENT_REMOTE_POINTER",
 	}
 	DataMsgBodyType_value = map[string]int32{
 		"UNKNOWN":                          0,
@@ -105,6 +108,7 @@ var (
 		"NOTEPAD_SYNC_RESPONSE":            22,
 		"NOTEPAD_UPDATE":                   23,
 		"NOTEPAD_AWARENESS":                24,
+		"AI_AGENT_REMOTE_POINTER":          25,
 	}
 )
 
@@ -235,7 +239,7 @@ const file_plugnmeet_datamessage_proto_rawDesc = "" +
 	"\vbin_message\x18\x06 \x01(\fH\x01R\n" +
 	"binMessage\x88\x01\x01B\r\n" +
 	"\v_to_user_idB\x0e\n" +
-	"\f_bin_message*\xbf\x04\n" +
+	"\f_bin_message*\xdc\x04\n" +
 	"\x0fDataMsgBodyType\x12\v\n" +
 	"\aUNKNOWN\x10\x00\x12\x0f\n" +
 	"\vFILE_UPLOAD\x10\x01\x12\b\n" +
@@ -261,7 +265,8 @@ const file_plugnmeet_datamessage_proto_rawDesc = "" +
 	"\x14NOTEPAD_SYNC_REQUEST\x10\x15\x12\x19\n" +
 	"\x15NOTEPAD_SYNC_RESPONSE\x10\x16\x12\x12\n" +
 	"\x0eNOTEPAD_UPDATE\x10\x17\x12\x15\n" +
-	"\x11NOTEPAD_AWARENESS\x10\x18B\xa2\x01\n" +
+	"\x11NOTEPAD_AWARENESS\x10\x18\x12\x1b\n" +
+	"\x17AI_AGENT_REMOTE_POINTER\x10\x19B\xa2\x01\n" +
 	"\rcom.plugnmeetB\x19PlugnmeetDatamessageProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (

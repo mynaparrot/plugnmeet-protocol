@@ -49,7 +49,9 @@ const (
 	NatsMsgServerToClientEvents_PONG                        NatsMsgServerToClientEvents = 20
 	NatsMsgServerToClientEvents_SESSION_DATA_FETCH_RESPONSE NatsMsgServerToClientEvents = 21
 	NatsMsgServerToClientEvents_BREAKOUT_ROOM_USER_MOVED    NatsMsgServerToClientEvents = 22
-	NatsMsgServerToClientEvents_SESSION_DATA_SAVE_RESPONSE  NatsMsgServerToClientEvents = 24 //next ID: 25
+	NatsMsgServerToClientEvents_SESSION_DATA_SAVE_RESPONSE  NatsMsgServerToClientEvents = 24
+	NatsMsgServerToClientEvents_AI_AGENT_STATE              NatsMsgServerToClientEvents = 25 // AIAgentStateMsg (public)
+	NatsMsgServerToClientEvents_AI_AGENT_TOOL_CALL          NatsMsgServerToClientEvents = 26 // AIAgentToolCallMsg (private, targeted)
 )
 
 // Enum value maps for NatsMsgServerToClientEvents.
@@ -80,6 +82,8 @@ var (
 		21: "SESSION_DATA_FETCH_RESPONSE",
 		22: "BREAKOUT_ROOM_USER_MOVED",
 		24: "SESSION_DATA_SAVE_RESPONSE",
+		25: "AI_AGENT_STATE",
+		26: "AI_AGENT_TOOL_CALL",
 	}
 	NatsMsgServerToClientEvents_value = map[string]int32{
 		"RES_INITIAL_DATA":            0,
@@ -107,6 +111,8 @@ var (
 		"SESSION_DATA_FETCH_RESPONSE": 21,
 		"BREAKOUT_ROOM_USER_MOVED":    22,
 		"SESSION_DATA_SAVE_RESPONSE":  24,
+		"AI_AGENT_STATE":              25,
+		"AI_AGENT_TOOL_CALL":          26,
 	}
 )
 
@@ -153,7 +159,9 @@ const (
 	NatsMsgClientToServerEvents_REQ_PRIVATE_DATA_DELIVERY  NatsMsgClientToServerEvents = 10
 	NatsMsgClientToServerEvents_SESSION_DATA_SAVE          NatsMsgClientToServerEvents = 11
 	NatsMsgClientToServerEvents_SESSION_DATA_FETCH_REQUEST NatsMsgClientToServerEvents = 12
-	NatsMsgClientToServerEvents_REQ_LEAVE_ROOM             NatsMsgClientToServerEvents = 13 //next ID: 14
+	NatsMsgClientToServerEvents_REQ_LEAVE_ROOM             NatsMsgClientToServerEvents = 13
+	NatsMsgClientToServerEvents_AI_AGENT_TOOL_RESULT       NatsMsgClientToServerEvents = 14 // AIAgentToolResultMsg (client -> server)
+	NatsMsgClientToServerEvents_AI_AGENT_WHITEBOARD_SCENE  NatsMsgClientToServerEvents = 15 // AIAgentWhiteboardSceneMsg (client -> server)
 )
 
 // Enum value maps for NatsMsgClientToServerEvents.
@@ -173,6 +181,8 @@ var (
 		11: "SESSION_DATA_SAVE",
 		12: "SESSION_DATA_FETCH_REQUEST",
 		13: "REQ_LEAVE_ROOM",
+		14: "AI_AGENT_TOOL_RESULT",
+		15: "AI_AGENT_WHITEBOARD_SCENE",
 	}
 	NatsMsgClientToServerEvents_value = map[string]int32{
 		"REQ_INITIAL_DATA":           0,
@@ -189,6 +199,8 @@ var (
 		"SESSION_DATA_SAVE":          11,
 		"SESSION_DATA_FETCH_REQUEST": 12,
 		"REQ_LEAVE_ROOM":             13,
+		"AI_AGENT_TOOL_RESULT":       14,
+		"AI_AGENT_WHITEBOARD_SCENE":  15,
 	}
 )
 
@@ -1727,7 +1739,7 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x0f_target_room_idB\r\n" +
 	"\v_request_idB\n" +
 	"\n" +
-	"\b_success*\xf8\x04\n" +
+	"\b_success*\xa4\x05\n" +
 	"\x1bNatsMsgServerToClientEvents\x12\x14\n" +
 	"\x10RES_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15RES_JOINED_USERS_LIST\x10\x01\x12\x19\n" +
@@ -1754,7 +1766,9 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x04PONG\x10\x14\x12\x1f\n" +
 	"\x1bSESSION_DATA_FETCH_RESPONSE\x10\x15\x12\x1c\n" +
 	"\x18BREAKOUT_ROOM_USER_MOVED\x10\x16\x12\x1e\n" +
-	"\x1aSESSION_DATA_SAVE_RESPONSE\x10\x18*\xf1\x02\n" +
+	"\x1aSESSION_DATA_SAVE_RESPONSE\x10\x18\x12\x12\n" +
+	"\x0eAI_AGENT_STATE\x10\x19\x12\x16\n" +
+	"\x12AI_AGENT_TOOL_CALL\x10\x1a*\xaa\x03\n" +
 	"\x1bNatsMsgClientToServerEvents\x12\x14\n" +
 	"\x10REQ_INITIAL_DATA\x10\x00\x12\x19\n" +
 	"\x15REQ_MEDIA_SERVER_DATA\x10\x01\x12\x19\n" +
@@ -1770,7 +1784,9 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\x12\x15\n" +
 	"\x11SESSION_DATA_SAVE\x10\v\x12\x1e\n" +
 	"\x1aSESSION_DATA_FETCH_REQUEST\x10\f\x12\x12\n" +
-	"\x0eREQ_LEAVE_ROOM\x10\r*%\n" +
+	"\x0eREQ_LEAVE_ROOM\x10\r\x12\x18\n" +
+	"\x14AI_AGENT_TOOL_RESULT\x10\x0e\x12\x1d\n" +
+	"\x19AI_AGENT_WHITEBOARD_SCENE\x10\x0f*%\n" +
 	"\n" +
 	"ClientType\x12\a\n" +
 	"\x03WEB\x10\x00\x12\x0e\n" +

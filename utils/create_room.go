@@ -240,9 +240,11 @@ func SetDefaultRoomSettings(s *RoomDefaultSettings, r *plugnmeet.CreateRoomReq) 
 
 	// at present, we will allow max 16 rooms
 	var maxNum uint32 = 16
-	if s.MaxNumBreakoutRooms == nil {
-		s.MaxNumBreakoutRooms = &maxNum
-	} else if s.MaxNumBreakoutRooms != nil && *s.MaxParticipants > maxNum {
+	if s.MaxNumBreakoutRooms != nil && *s.MaxNumBreakoutRooms > 0 {
+		if *s.MaxNumBreakoutRooms > maxNum {
+			*s.MaxNumBreakoutRooms = maxNum
+		}
+	} else {
 		s.MaxNumBreakoutRooms = &maxNum
 	}
 

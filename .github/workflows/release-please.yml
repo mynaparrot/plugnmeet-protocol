@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - ai_agent
 
 permissions:
   id-token: write
@@ -15,6 +16,7 @@ jobs:
     steps:
       - uses: googleapis/release-please-action@v5
         id: release
+        if: ${{ github.ref_name == 'main' }}
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: release-please-config.json
@@ -42,21 +44,32 @@ jobs:
         run: |
           bash generate.sh
           cd js
-          
-          PUBLISH_TAG="latest" # Default tag for full releases
 
-          if [ ! ${{ steps.release.outputs.release_created }} ]; then
-            pnpm version prerelease --no-commit-hooks --no-git-tag-version
-            # push changes
+          if [ "${{ github.ref_name }}" = "ai_agent" ]; then
+            pnpm version prerelease --preid=ai-agent --no-commit-hooks --no-git-tag-version
             git config user.name github-actions
             git config user.email github-actions@github.com
             git add .
-            git commit -m "bump beta version"
+            git commit -m "chore: bump ai-agent version [skip ci]"
             git push
-          
-            PUBLISH_TAG="beta" # Override tag for prereleases
+
+            PUBLISH_TAG="ai_agent"
+          else
+            PUBLISH_TAG="latest" # Default tag for full releases
+
+            if [ ! ${{ steps.release.outputs.release_created }} ]; then
+              pnpm version prerelease --no-commit-hooks --no-git-tag-version
+              # push changes
+              git config user.name github-actions
+              git config user.email github-actions@github.com
+              git add .
+              git commit -m "bump beta version"
+              git push
+
+              PUBLISH_TAG="beta" # Override tag for prereleases
+            fi
           fi
-          
+
           bash generate.sh
           npm install -g npm@latest
           # Use the dynamic tag for publishing

@@ -7,6 +7,7 @@
 package plugnmeet
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -33,6 +34,8 @@ type CreateBreakoutRoomsReq struct {
 	ShareNotepad          bool                   `protobuf:"varint,8,opt,name=share_notepad,json=shareNotepad,proto3" json:"share_notepad,omitempty"`
 	AllowReturnToMainRoom bool                   `protobuf:"varint,9,opt,name=allow_return_to_main_room,json=allowReturnToMainRoom,proto3" json:"allow_return_to_main_room,omitempty"`
 	AllowSelfSelect       bool                   `protobuf:"varint,11,opt,name=allow_self_select,json=allowSelfSelect,proto3" json:"allow_self_select,omitempty"`
+	EnableAiAgent         bool                   `protobuf:"varint,12,opt,name=enable_ai_agent,json=enableAiAgent,proto3" json:"enable_ai_agent,omitempty"`
+	AiAgentContext        *string                `protobuf:"bytes,13,opt,name=ai_agent_context,json=aiAgentContext,proto3,oneof" json:"ai_agent_context,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -137,17 +140,33 @@ func (x *CreateBreakoutRoomsReq) GetAllowSelfSelect() bool {
 	return false
 }
 
+func (x *CreateBreakoutRoomsReq) GetEnableAiAgent() bool {
+	if x != nil {
+		return x.EnableAiAgent
+	}
+	return false
+}
+
+func (x *CreateBreakoutRoomsReq) GetAiAgentContext() string {
+	if x != nil && x.AiAgentContext != nil {
+		return *x.AiAgentContext
+	}
+	return ""
+}
+
 type BreakoutRoom struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	Duration      uint64                 `protobuf:"varint,3,opt,name=duration,proto3" json:"duration,omitempty"`
-	Started       bool                   `protobuf:"varint,4,opt,name=started,proto3" json:"started,omitempty"`
-	Created       uint64                 `protobuf:"varint,5,opt,name=created,proto3" json:"created,omitempty"`
-	Users         []*BreakoutRoomUser    `protobuf:"bytes,6,rep,name=users,proto3" json:"users,omitempty"`
-	RoomSid       string                 `protobuf:"bytes,7,opt,name=room_sid,json=roomSid,proto3" json:"room_sid,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Id             string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Title          string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Duration       uint64                 `protobuf:"varint,3,opt,name=duration,proto3" json:"duration,omitempty"`
+	Started        bool                   `protobuf:"varint,4,opt,name=started,proto3" json:"started,omitempty"`
+	Created        uint64                 `protobuf:"varint,5,opt,name=created,proto3" json:"created,omitempty"`
+	Users          []*BreakoutRoomUser    `protobuf:"bytes,6,rep,name=users,proto3" json:"users,omitempty"`
+	RoomSid        string                 `protobuf:"bytes,7,opt,name=room_sid,json=roomSid,proto3" json:"room_sid,omitempty"`
+	AiAgentContext *string                `protobuf:"bytes,8,opt,name=ai_agent_context,json=aiAgentContext,proto3,oneof" json:"ai_agent_context,omitempty"`
+	EnableAiAgent  bool                   `protobuf:"varint,9,opt,name=enable_ai_agent,json=enableAiAgent,proto3" json:"enable_ai_agent,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *BreakoutRoom) Reset() {
@@ -227,6 +246,20 @@ func (x *BreakoutRoom) GetRoomSid() string {
 		return x.RoomSid
 	}
 	return ""
+}
+
+func (x *BreakoutRoom) GetAiAgentContext() string {
+	if x != nil && x.AiAgentContext != nil {
+		return *x.AiAgentContext
+	}
+	return ""
+}
+
+func (x *BreakoutRoom) GetEnableAiAgent() bool {
+	if x != nil {
+		return x.EnableAiAgent
+	}
+	return false
 }
 
 type BreakoutRoomUser struct {
@@ -945,7 +978,7 @@ var File_plugnmeet_breakout_room_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"\n" +
-	"\x1dplugnmeet_breakout_room.proto\x12\tplugnmeet\"\x93\x04\n" +
+	"\x1dplugnmeet_breakout_room.proto\x12\tplugnmeet\x1a\x1bbuf/validate/validate.proto\"\x89\x05\n" +
 	"\x16CreateBreakoutRoomsReq\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12*\n" +
 	"\x11requested_user_id\x18\x02 \x01(\tR\x0frequestedUserId\x12\x1a\n" +
@@ -958,10 +991,13 @@ const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"poll_share\x18\a \x01(\v2\x14.plugnmeet.PollShareH\x02R\tpollShare\x88\x01\x01\x12#\n" +
 	"\rshare_notepad\x18\b \x01(\bR\fshareNotepad\x128\n" +
 	"\x19allow_return_to_main_room\x18\t \x01(\bR\x15allowReturnToMainRoom\x12*\n" +
-	"\x11allow_self_select\x18\v \x01(\bR\x0fallowSelfSelectB\x0e\n" +
+	"\x11allow_self_select\x18\v \x01(\bR\x0fallowSelfSelect\x12&\n" +
+	"\x0fenable_ai_agent\x18\f \x01(\bR\renableAiAgent\x127\n" +
+	"\x10ai_agent_context\x18\r \x01(\tB\b\xbaH\x05r\x03\x18\xd0\x0fH\x03R\x0eaiAgentContext\x88\x01\x01B\x0e\n" +
 	"\f_welcome_msgB\x13\n" +
 	"\x11_whiteboard_shareB\r\n" +
-	"\v_poll_share\"\xd2\x01\n" +
+	"\v_poll_shareB\x13\n" +
+	"\x11_ai_agent_context\"\xc8\x02\n" +
 	"\fBreakoutRoom\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x1a\n" +
@@ -969,7 +1005,10 @@ const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"\astarted\x18\x04 \x01(\bR\astarted\x12\x18\n" +
 	"\acreated\x18\x05 \x01(\x04R\acreated\x121\n" +
 	"\x05users\x18\x06 \x03(\v2\x1b.plugnmeet.BreakoutRoomUserR\x05users\x12\x19\n" +
-	"\broom_sid\x18\a \x01(\tR\aroomSid\"N\n" +
+	"\broom_sid\x18\a \x01(\tR\aroomSid\x127\n" +
+	"\x10ai_agent_context\x18\b \x01(\tB\b\xbaH\x05r\x03\x18\xd0\x0fH\x00R\x0eaiAgentContext\x88\x01\x01\x12&\n" +
+	"\x0fenable_ai_agent\x18\t \x01(\bR\renableAiAgentB\x13\n" +
+	"\x11_ai_agent_context\"N\n" +
 	"\x10BreakoutRoomUser\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
@@ -1072,6 +1111,7 @@ func file_plugnmeet_breakout_room_proto_init() {
 		return
 	}
 	file_plugnmeet_breakout_room_proto_msgTypes[0].OneofWrappers = []any{}
+	file_plugnmeet_breakout_room_proto_msgTypes[1].OneofWrappers = []any{}
 	file_plugnmeet_breakout_room_proto_msgTypes[9].OneofWrappers = []any{}
 	file_plugnmeet_breakout_room_proto_msgTypes[11].OneofWrappers = []any{}
 	type x struct{}

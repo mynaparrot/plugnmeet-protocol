@@ -31,6 +31,7 @@ const (
 	InsightsServiceType_INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT        InsightsServiceType = 4
 	InsightsServiceType_INSIGHTS_SERVICE_TYPE_CHAT_TRANSLATION    InsightsServiceType = 5
 	InsightsServiceType_INSIGHTS_SERVICE_TYPE_MEETING_SUMMARIZING InsightsServiceType = 6
+	InsightsServiceType_INSIGHTS_SERVICE_TYPE_AI_AGENT            InsightsServiceType = 7
 )
 
 // Enum value maps for InsightsServiceType.
@@ -43,6 +44,7 @@ var (
 		4: "INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT",
 		5: "INSIGHTS_SERVICE_TYPE_CHAT_TRANSLATION",
 		6: "INSIGHTS_SERVICE_TYPE_MEETING_SUMMARIZING",
+		7: "INSIGHTS_SERVICE_TYPE_AI_AGENT",
 	}
 	InsightsServiceType_value = map[string]int32{
 		"INSIGHTS_SERVICE_TYPE_UNSPECIFIED":         0,
@@ -52,6 +54,7 @@ var (
 		"INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT":        4,
 		"INSIGHTS_SERVICE_TYPE_CHAT_TRANSLATION":    5,
 		"INSIGHTS_SERVICE_TYPE_MEETING_SUMMARIZING": 6,
+		"INSIGHTS_SERVICE_TYPE_AI_AGENT":            7,
 	}
 )
 
@@ -138,6 +141,7 @@ const (
 	InsightsAIRequestSource_INSIGHTS_AI_REQUEST_SOURCE_NOTEPAD    InsightsAIRequestSource = 1
 	InsightsAIRequestSource_INSIGHTS_AI_REQUEST_SOURCE_WHITEBOARD InsightsAIRequestSource = 2
 	InsightsAIRequestSource_INSIGHTS_AI_REQUEST_SOURCE_POLL       InsightsAIRequestSource = 3
+	InsightsAIRequestSource_INSIGHTS_AI_REQUEST_SOURCE_AI_AGENT   InsightsAIRequestSource = 4 // AI-Agent-originated AI traffic
 )
 
 // Enum value maps for InsightsAIRequestSource.
@@ -147,12 +151,14 @@ var (
 		1: "INSIGHTS_AI_REQUEST_SOURCE_NOTEPAD",
 		2: "INSIGHTS_AI_REQUEST_SOURCE_WHITEBOARD",
 		3: "INSIGHTS_AI_REQUEST_SOURCE_POLL",
+		4: "INSIGHTS_AI_REQUEST_SOURCE_AI_AGENT",
 	}
 	InsightsAIRequestSource_value = map[string]int32{
 		"INSIGHTS_AI_REQUEST_SOURCE_CHAT":       0,
 		"INSIGHTS_AI_REQUEST_SOURCE_NOTEPAD":    1,
 		"INSIGHTS_AI_REQUEST_SOURCE_WHITEBOARD": 2,
 		"INSIGHTS_AI_REQUEST_SOURCE_POLL":       3,
+		"INSIGHTS_AI_REQUEST_SOURCE_AI_AGENT":   4,
 	}
 )
 
@@ -234,6 +240,74 @@ func (x InsightsAITextChatRole) Number() protoreflect.EnumNumber {
 // Deprecated: Use InsightsAITextChatRole.Descriptor instead.
 func (InsightsAITextChatRole) EnumDescriptor() ([]byte, []int) {
 	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{3}
+}
+
+// start AI Agent
+type AIAgentRuntimeState int32
+
+const (
+	AIAgentRuntimeState_AI_AGENT_RUNTIME_STATE_UNSPECIFIED  AIAgentRuntimeState = 0
+	AIAgentRuntimeState_AI_AGENT_RUNTIME_STATE_CONNECTING   AIAgentRuntimeState = 1
+	AIAgentRuntimeState_AI_AGENT_RUNTIME_STATE_LISTENING    AIAgentRuntimeState = 2
+	AIAgentRuntimeState_AI_AGENT_RUNTIME_STATE_THINKING     AIAgentRuntimeState = 3
+	AIAgentRuntimeState_AI_AGENT_RUNTIME_STATE_SPEAKING     AIAgentRuntimeState = 4
+	AIAgentRuntimeState_AI_AGENT_RUNTIME_STATE_DRAWING      AIAgentRuntimeState = 5
+	AIAgentRuntimeState_AI_AGENT_RUNTIME_STATE_PAUSED       AIAgentRuntimeState = 6
+	AIAgentRuntimeState_AI_AGENT_RUNTIME_STATE_RECONNECTING AIAgentRuntimeState = 7
+	AIAgentRuntimeState_AI_AGENT_RUNTIME_STATE_STOPPED      AIAgentRuntimeState = 8
+)
+
+// Enum value maps for AIAgentRuntimeState.
+var (
+	AIAgentRuntimeState_name = map[int32]string{
+		0: "AI_AGENT_RUNTIME_STATE_UNSPECIFIED",
+		1: "AI_AGENT_RUNTIME_STATE_CONNECTING",
+		2: "AI_AGENT_RUNTIME_STATE_LISTENING",
+		3: "AI_AGENT_RUNTIME_STATE_THINKING",
+		4: "AI_AGENT_RUNTIME_STATE_SPEAKING",
+		5: "AI_AGENT_RUNTIME_STATE_DRAWING",
+		6: "AI_AGENT_RUNTIME_STATE_PAUSED",
+		7: "AI_AGENT_RUNTIME_STATE_RECONNECTING",
+		8: "AI_AGENT_RUNTIME_STATE_STOPPED",
+	}
+	AIAgentRuntimeState_value = map[string]int32{
+		"AI_AGENT_RUNTIME_STATE_UNSPECIFIED":  0,
+		"AI_AGENT_RUNTIME_STATE_CONNECTING":   1,
+		"AI_AGENT_RUNTIME_STATE_LISTENING":    2,
+		"AI_AGENT_RUNTIME_STATE_THINKING":     3,
+		"AI_AGENT_RUNTIME_STATE_SPEAKING":     4,
+		"AI_AGENT_RUNTIME_STATE_DRAWING":      5,
+		"AI_AGENT_RUNTIME_STATE_PAUSED":       6,
+		"AI_AGENT_RUNTIME_STATE_RECONNECTING": 7,
+		"AI_AGENT_RUNTIME_STATE_STOPPED":      8,
+	}
+)
+
+func (x AIAgentRuntimeState) Enum() *AIAgentRuntimeState {
+	p := new(AIAgentRuntimeState)
+	*p = x
+	return p
+}
+
+func (x AIAgentRuntimeState) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AIAgentRuntimeState) Descriptor() protoreflect.EnumDescriptor {
+	return file_plugnmeet_insights_proto_enumTypes[4].Descriptor()
+}
+
+func (AIAgentRuntimeState) Type() protoreflect.EnumType {
+	return &file_plugnmeet_insights_proto_enumTypes[4]
+}
+
+func (x AIAgentRuntimeState) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AIAgentRuntimeState.Descriptor instead.
+func (AIAgentRuntimeState) EnumDescriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{4}
 }
 
 type InsightsSupportedLangInfo struct {
@@ -1272,6 +1346,752 @@ func (x *InsightsAIMeetingSummarizationConfigReq) GetSummarizationPrompt() strin
 	return ""
 }
 
+// host / moderator control requests
+type AIAgentStartReq struct {
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	SystemPrompt           *string                `protobuf:"bytes,1,opt,name=system_prompt,json=systemPrompt,proto3,oneof" json:"system_prompt,omitempty"`                                 // override; empty -> room features
+	PreviousSessionContext *string                `protobuf:"bytes,2,opt,name=previous_session_context,json=previousSessionContext,proto3,oneof" json:"previous_session_context,omitempty"` // override; empty -> room features
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *AIAgentStartReq) Reset() {
+	*x = AIAgentStartReq{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentStartReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentStartReq) ProtoMessage() {}
+
+func (x *AIAgentStartReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentStartReq.ProtoReflect.Descriptor instead.
+func (*AIAgentStartReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *AIAgentStartReq) GetSystemPrompt() string {
+	if x != nil && x.SystemPrompt != nil {
+		return *x.SystemPrompt
+	}
+	return ""
+}
+
+func (x *AIAgentStartReq) GetPreviousSessionContext() string {
+	if x != nil && x.PreviousSessionContext != nil {
+		return *x.PreviousSessionContext
+	}
+	return ""
+}
+
+type AIAgentStopReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Reason        *string                `protobuf:"bytes,1,opt,name=reason,proto3,oneof" json:"reason,omitempty"` // e.g. "host_stopped"
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AIAgentStopReq) Reset() {
+	*x = AIAgentStopReq{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentStopReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentStopReq) ProtoMessage() {}
+
+func (x *AIAgentStopReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentStopReq.ProtoReflect.Descriptor instead.
+func (*AIAgentStopReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *AIAgentStopReq) GetReason() string {
+	if x != nil && x.Reason != nil {
+		return *x.Reason
+	}
+	return ""
+}
+
+type AIAgentStatusReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AIAgentStatusReq) Reset() {
+	*x = AIAgentStatusReq{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentStatusReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentStatusReq) ProtoMessage() {}
+
+func (x *AIAgentStatusReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentStatusReq.ProtoReflect.Descriptor instead.
+func (*AIAgentStatusReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{17}
+}
+
+type AIAgentStatusRes struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	State         *AIAgentStateMsg       `protobuf:"bytes,3,opt,name=state,proto3,oneof" json:"state,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AIAgentStatusRes) Reset() {
+	*x = AIAgentStatusRes{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentStatusRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentStatusRes) ProtoMessage() {}
+
+func (x *AIAgentStatusRes) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentStatusRes.ProtoReflect.Descriptor instead.
+func (*AIAgentStatusRes) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *AIAgentStatusRes) GetStatus() bool {
+	if x != nil {
+		return x.Status
+	}
+	return false
+}
+
+func (x *AIAgentStatusRes) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *AIAgentStatusRes) GetState() *AIAgentStateMsg {
+	if x != nil {
+		return x.State
+	}
+	return nil
+}
+
+type AIAgentSendContextReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Text          string                 `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`           // external context injected into the live session
+	Source        *string                `protobuf:"bytes,2,opt,name=source,proto3,oneof" json:"source,omitempty"` // e.g. "lms" | "timer"
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AIAgentSendContextReq) Reset() {
+	*x = AIAgentSendContextReq{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentSendContextReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentSendContextReq) ProtoMessage() {}
+
+func (x *AIAgentSendContextReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentSendContextReq.ProtoReflect.Descriptor instead.
+func (*AIAgentSendContextReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *AIAgentSendContextReq) GetText() string {
+	if x != nil {
+		return x.Text
+	}
+	return ""
+}
+
+func (x *AIAgentSendContextReq) GetSource() string {
+	if x != nil && x.Source != nil {
+		return *x.Source
+	}
+	return ""
+}
+
+type AIAgentPauseReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AIAgentPauseReq) Reset() {
+	*x = AIAgentPauseReq{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentPauseReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentPauseReq) ProtoMessage() {}
+
+func (x *AIAgentPauseReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentPauseReq.ProtoReflect.Descriptor instead.
+func (*AIAgentPauseReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{20}
+}
+
+type AIAgentResumeReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AIAgentResumeReq) Reset() {
+	*x = AIAgentResumeReq{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentResumeReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentResumeReq) ProtoMessage() {}
+
+func (x *AIAgentResumeReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentResumeReq.ProtoReflect.Descriptor instead.
+func (*AIAgentResumeReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{21}
+}
+
+type AIAgentRedelegateReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TargetUserId  *string                `protobuf:"bytes,1,opt,name=target_user_id,json=targetUserId,proto3,oneof" json:"target_user_id,omitempty"` // empty -> server re-selects the delegate
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AIAgentRedelegateReq) Reset() {
+	*x = AIAgentRedelegateReq{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentRedelegateReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentRedelegateReq) ProtoMessage() {}
+
+func (x *AIAgentRedelegateReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentRedelegateReq.ProtoReflect.Descriptor instead.
+func (*AIAgentRedelegateReq) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *AIAgentRedelegateReq) GetTargetUserId() string {
+	if x != nil && x.TargetUserId != nil {
+		return *x.TargetUserId
+	}
+	return ""
+}
+
+// payloads exchanged with the room
+type AIAgentStateMsg struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	SessionId      string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	AgentUserId    string                 `protobuf:"bytes,2,opt,name=agent_user_id,json=agentUserId,proto3" json:"agent_user_id,omitempty"` // pnm_agent-ai_agent-<uuid>
+	AgentName      string                 `protobuf:"bytes,3,opt,name=agent_name,json=agentName,proto3" json:"agent_name,omitempty"`
+	State          AIAgentRuntimeState    `protobuf:"varint,4,opt,name=state,proto3,enum=plugnmeet.AIAgentRuntimeState" json:"state,omitempty"`
+	IsSpeaking     bool                   `protobuf:"varint,5,opt,name=is_speaking,json=isSpeaking,proto3" json:"is_speaking,omitempty"`
+	ToolInProgress string                 `protobuf:"bytes,6,opt,name=tool_in_progress,json=toolInProgress,proto3" json:"tool_in_progress,omitempty"`
+	StartedAt      int64                  `protobuf:"varint,7,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
+	Reason         string                 `protobuf:"bytes,8,opt,name=reason,proto3" json:"reason,omitempty"` // e.g. "budget" | "moderation" | "goaway" | "paused"
+	TraceId        string                 `protobuf:"bytes,9,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *AIAgentStateMsg) Reset() {
+	*x = AIAgentStateMsg{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentStateMsg) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentStateMsg) ProtoMessage() {}
+
+func (x *AIAgentStateMsg) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentStateMsg.ProtoReflect.Descriptor instead.
+func (*AIAgentStateMsg) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *AIAgentStateMsg) GetSessionId() string {
+	if x != nil {
+		return x.SessionId
+	}
+	return ""
+}
+
+func (x *AIAgentStateMsg) GetAgentUserId() string {
+	if x != nil {
+		return x.AgentUserId
+	}
+	return ""
+}
+
+func (x *AIAgentStateMsg) GetAgentName() string {
+	if x != nil {
+		return x.AgentName
+	}
+	return ""
+}
+
+func (x *AIAgentStateMsg) GetState() AIAgentRuntimeState {
+	if x != nil {
+		return x.State
+	}
+	return AIAgentRuntimeState_AI_AGENT_RUNTIME_STATE_UNSPECIFIED
+}
+
+func (x *AIAgentStateMsg) GetIsSpeaking() bool {
+	if x != nil {
+		return x.IsSpeaking
+	}
+	return false
+}
+
+func (x *AIAgentStateMsg) GetToolInProgress() string {
+	if x != nil {
+		return x.ToolInProgress
+	}
+	return ""
+}
+
+func (x *AIAgentStateMsg) GetStartedAt() int64 {
+	if x != nil {
+		return x.StartedAt
+	}
+	return 0
+}
+
+func (x *AIAgentStateMsg) GetReason() string {
+	if x != nil {
+		return x.Reason
+	}
+	return ""
+}
+
+func (x *AIAgentStateMsg) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
+type AIAgentToolCallMsg struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	SessionId      string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	CallId         string                 `protobuf:"bytes,2,opt,name=call_id,json=callId,proto3" json:"call_id,omitempty"` // provider call id, echoed back
+	ToolName       string                 `protobuf:"bytes,3,opt,name=tool_name,json=toolName,proto3" json:"tool_name,omitempty"`
+	ArgumentsJson  string                 `protobuf:"bytes,4,opt,name=arguments_json,json=argumentsJson,proto3" json:"arguments_json,omitempty"`       // model-emitted JSON, unmodified
+	TargetUserId   string                 `protobuf:"bytes,5,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id,omitempty"`        // who must execute
+	DeadlineUnixMs int64                  `protobuf:"varint,6,opt,name=deadline_unix_ms,json=deadlineUnixMs,proto3" json:"deadline_unix_ms,omitempty"` // server-side deadline
+	TraceId        string                 `protobuf:"bytes,7,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *AIAgentToolCallMsg) Reset() {
+	*x = AIAgentToolCallMsg{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentToolCallMsg) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentToolCallMsg) ProtoMessage() {}
+
+func (x *AIAgentToolCallMsg) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentToolCallMsg.ProtoReflect.Descriptor instead.
+func (*AIAgentToolCallMsg) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *AIAgentToolCallMsg) GetSessionId() string {
+	if x != nil {
+		return x.SessionId
+	}
+	return ""
+}
+
+func (x *AIAgentToolCallMsg) GetCallId() string {
+	if x != nil {
+		return x.CallId
+	}
+	return ""
+}
+
+func (x *AIAgentToolCallMsg) GetToolName() string {
+	if x != nil {
+		return x.ToolName
+	}
+	return ""
+}
+
+func (x *AIAgentToolCallMsg) GetArgumentsJson() string {
+	if x != nil {
+		return x.ArgumentsJson
+	}
+	return ""
+}
+
+func (x *AIAgentToolCallMsg) GetTargetUserId() string {
+	if x != nil {
+		return x.TargetUserId
+	}
+	return ""
+}
+
+func (x *AIAgentToolCallMsg) GetDeadlineUnixMs() int64 {
+	if x != nil {
+		return x.DeadlineUnixMs
+	}
+	return 0
+}
+
+func (x *AIAgentToolCallMsg) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
+type AIAgentToolResultMsg struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CallId        string                 `protobuf:"bytes,1,opt,name=call_id,json=callId,proto3" json:"call_id,omitempty"`
+	Ok            bool                   `protobuf:"varint,2,opt,name=ok,proto3" json:"ok,omitempty"`
+	ResultJson    string                 `protobuf:"bytes,3,opt,name=result_json,json=resultJson,proto3" json:"result_json,omitempty"` // executor payload (element ids + bbox, etc.)
+	Error         string                 `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	DurationMs    int64                  `protobuf:"varint,5,opt,name=duration_ms,json=durationMs,proto3" json:"duration_ms,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AIAgentToolResultMsg) Reset() {
+	*x = AIAgentToolResultMsg{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentToolResultMsg) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentToolResultMsg) ProtoMessage() {}
+
+func (x *AIAgentToolResultMsg) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentToolResultMsg.ProtoReflect.Descriptor instead.
+func (*AIAgentToolResultMsg) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *AIAgentToolResultMsg) GetCallId() string {
+	if x != nil {
+		return x.CallId
+	}
+	return ""
+}
+
+func (x *AIAgentToolResultMsg) GetOk() bool {
+	if x != nil {
+		return x.Ok
+	}
+	return false
+}
+
+func (x *AIAgentToolResultMsg) GetResultJson() string {
+	if x != nil {
+		return x.ResultJson
+	}
+	return ""
+}
+
+func (x *AIAgentToolResultMsg) GetError() string {
+	if x != nil {
+		return x.Error
+	}
+	return ""
+}
+
+func (x *AIAgentToolResultMsg) GetDurationMs() int64 {
+	if x != nil {
+		return x.DurationMs
+	}
+	return 0
+}
+
+type AIAgentWhiteboardSceneMsg struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	RoomId                string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	FileId                string                 `protobuf:"bytes,2,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
+	Page                  int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	Reason                string                 `protobuf:"bytes,4,opt,name=reason,proto3" json:"reason,omitempty"` // "participant_edit" | "tool_request" | "page_change" | "session_start"
+	WebpImage             []byte                 `protobuf:"bytes,5,opt,name=webp_image,json=webpImage,proto3" json:"webp_image,omitempty"`
+	SceneGraphJson        string                 `protobuf:"bytes,6,opt,name=scene_graph_json,json=sceneGraphJson,proto3" json:"scene_graph_json,omitempty"`
+	CapturedAtMs          int64                  `protobuf:"varint,7,opt,name=captured_at_ms,json=capturedAtMs,proto3" json:"captured_at_ms,omitempty"`
+	ParticipantElementIds []string               `protobuf:"bytes,8,rep,name=participant_element_ids,json=participantElementIds,proto3" json:"participant_element_ids,omitempty"`
+	AgentElementIds       []string               `protobuf:"bytes,9,rep,name=agent_element_ids,json=agentElementIds,proto3" json:"agent_element_ids,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *AIAgentWhiteboardSceneMsg) Reset() {
+	*x = AIAgentWhiteboardSceneMsg{}
+	mi := &file_plugnmeet_insights_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentWhiteboardSceneMsg) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentWhiteboardSceneMsg) ProtoMessage() {}
+
+func (x *AIAgentWhiteboardSceneMsg) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_insights_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentWhiteboardSceneMsg.ProtoReflect.Descriptor instead.
+func (*AIAgentWhiteboardSceneMsg) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_insights_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *AIAgentWhiteboardSceneMsg) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
+func (x *AIAgentWhiteboardSceneMsg) GetFileId() string {
+	if x != nil {
+		return x.FileId
+	}
+	return ""
+}
+
+func (x *AIAgentWhiteboardSceneMsg) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *AIAgentWhiteboardSceneMsg) GetReason() string {
+	if x != nil {
+		return x.Reason
+	}
+	return ""
+}
+
+func (x *AIAgentWhiteboardSceneMsg) GetWebpImage() []byte {
+	if x != nil {
+		return x.WebpImage
+	}
+	return nil
+}
+
+func (x *AIAgentWhiteboardSceneMsg) GetSceneGraphJson() string {
+	if x != nil {
+		return x.SceneGraphJson
+	}
+	return ""
+}
+
+func (x *AIAgentWhiteboardSceneMsg) GetCapturedAtMs() int64 {
+	if x != nil {
+		return x.CapturedAtMs
+	}
+	return 0
+}
+
+func (x *AIAgentWhiteboardSceneMsg) GetParticipantElementIds() []string {
+	if x != nil {
+		return x.ParticipantElementIds
+	}
+	return nil
+}
+
+func (x *AIAgentWhiteboardSceneMsg) GetAgentElementIds() []string {
+	if x != nil {
+		return x.AgentElementIds
+	}
+	return nil
+}
+
 var File_plugnmeet_insights_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_insights_proto_rawDesc = "" +
@@ -1380,7 +2200,72 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"'InsightsAIMeetingSummarizationConfigReq\x12\x1d\n" +
 	"\n" +
 	"is_enabled\x18\x01 \x01(\bR\tisEnabled\x121\n" +
-	"\x14summarization_prompt\x18\x03 \x01(\tR\x13summarizationPrompt*\xbb\x02\n" +
+	"\x14summarization_prompt\x18\x03 \x01(\tR\x13summarizationPrompt\"\xa9\x01\n" +
+	"\x0fAIAgentStartReq\x12(\n" +
+	"\rsystem_prompt\x18\x01 \x01(\tH\x00R\fsystemPrompt\x88\x01\x01\x12=\n" +
+	"\x18previous_session_context\x18\x02 \x01(\tH\x01R\x16previousSessionContext\x88\x01\x01B\x10\n" +
+	"\x0e_system_promptB\x1b\n" +
+	"\x19_previous_session_context\"8\n" +
+	"\x0eAIAgentStopReq\x12\x1b\n" +
+	"\x06reason\x18\x01 \x01(\tH\x00R\x06reason\x88\x01\x01B\t\n" +
+	"\a_reason\"\x12\n" +
+	"\x10AIAgentStatusReq\"}\n" +
+	"\x10AIAgentStatusRes\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x125\n" +
+	"\x05state\x18\x03 \x01(\v2\x1a.plugnmeet.AIAgentStateMsgH\x00R\x05state\x88\x01\x01B\b\n" +
+	"\x06_state\"S\n" +
+	"\x15AIAgentSendContextReq\x12\x12\n" +
+	"\x04text\x18\x01 \x01(\tR\x04text\x12\x1b\n" +
+	"\x06source\x18\x02 \x01(\tH\x00R\x06source\x88\x01\x01B\t\n" +
+	"\a_source\"\x11\n" +
+	"\x0fAIAgentPauseReq\"\x12\n" +
+	"\x10AIAgentResumeReq\"T\n" +
+	"\x14AIAgentRedelegateReq\x12)\n" +
+	"\x0etarget_user_id\x18\x01 \x01(\tH\x00R\ftargetUserId\x88\x01\x01B\x11\n" +
+	"\x0f_target_user_id\"\xc6\x02\n" +
+	"\x0fAIAgentStateMsg\x12\x1d\n" +
+	"\n" +
+	"session_id\x18\x01 \x01(\tR\tsessionId\x12\"\n" +
+	"\ragent_user_id\x18\x02 \x01(\tR\vagentUserId\x12\x1d\n" +
+	"\n" +
+	"agent_name\x18\x03 \x01(\tR\tagentName\x124\n" +
+	"\x05state\x18\x04 \x01(\x0e2\x1e.plugnmeet.AIAgentRuntimeStateR\x05state\x12\x1f\n" +
+	"\vis_speaking\x18\x05 \x01(\bR\n" +
+	"isSpeaking\x12(\n" +
+	"\x10tool_in_progress\x18\x06 \x01(\tR\x0etoolInProgress\x12\x1d\n" +
+	"\n" +
+	"started_at\x18\a \x01(\x03R\tstartedAt\x12\x16\n" +
+	"\x06reason\x18\b \x01(\tR\x06reason\x12\x19\n" +
+	"\btrace_id\x18\t \x01(\tR\atraceId\"\xfb\x01\n" +
+	"\x12AIAgentToolCallMsg\x12\x1d\n" +
+	"\n" +
+	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x17\n" +
+	"\acall_id\x18\x02 \x01(\tR\x06callId\x12\x1b\n" +
+	"\ttool_name\x18\x03 \x01(\tR\btoolName\x12%\n" +
+	"\x0earguments_json\x18\x04 \x01(\tR\rargumentsJson\x12$\n" +
+	"\x0etarget_user_id\x18\x05 \x01(\tR\ftargetUserId\x12(\n" +
+	"\x10deadline_unix_ms\x18\x06 \x01(\x03R\x0edeadlineUnixMs\x12\x19\n" +
+	"\btrace_id\x18\a \x01(\tR\atraceId\"\x97\x01\n" +
+	"\x14AIAgentToolResultMsg\x12\x17\n" +
+	"\acall_id\x18\x01 \x01(\tR\x06callId\x12\x0e\n" +
+	"\x02ok\x18\x02 \x01(\bR\x02ok\x12\x1f\n" +
+	"\vresult_json\x18\x03 \x01(\tR\n" +
+	"resultJson\x12\x14\n" +
+	"\x05error\x18\x04 \x01(\tR\x05error\x12\x1f\n" +
+	"\vduration_ms\x18\x05 \x01(\x03R\n" +
+	"durationMs\"\xcc\x02\n" +
+	"\x19AIAgentWhiteboardSceneMsg\x12\x17\n" +
+	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x17\n" +
+	"\afile_id\x18\x02 \x01(\tR\x06fileId\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x16\n" +
+	"\x06reason\x18\x04 \x01(\tR\x06reason\x12\x1d\n" +
+	"\n" +
+	"webp_image\x18\x05 \x01(\fR\twebpImage\x12(\n" +
+	"\x10scene_graph_json\x18\x06 \x01(\tR\x0esceneGraphJson\x12$\n" +
+	"\x0ecaptured_at_ms\x18\a \x01(\x03R\fcapturedAtMs\x126\n" +
+	"\x17participant_element_ids\x18\b \x03(\tR\x15participantElementIds\x12*\n" +
+	"\x11agent_element_ids\x18\t \x03(\tR\x0fagentElementIds*\xdf\x02\n" +
 	"\x13InsightsServiceType\x12%\n" +
 	"!INSIGHTS_SERVICE_TYPE_UNSPECIFIED\x10\x00\x12'\n" +
 	"#INSIGHTS_SERVICE_TYPE_TRANSCRIPTION\x10\x01\x12%\n" +
@@ -1388,21 +2273,33 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"&INSIGHTS_SERVICE_TYPE_SPEECH_SYNTHESIS\x10\x03\x12&\n" +
 	"\"INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT\x10\x04\x12*\n" +
 	"&INSIGHTS_SERVICE_TYPE_CHAT_TRANSLATION\x10\x05\x12-\n" +
-	")INSIGHTS_SERVICE_TYPE_MEETING_SUMMARIZING\x10\x06*}\n" +
+	")INSIGHTS_SERVICE_TYPE_MEETING_SUMMARIZING\x10\x06\x12\"\n" +
+	"\x1eINSIGHTS_SERVICE_TYPE_AI_AGENT\x10\a*}\n" +
 	"\x19InsightsUserSessionAction\x12#\n" +
 	"\x1fUSER_SESSION_ACTION_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19USER_SESSION_ACTION_START\x10\x01\x12\x1c\n" +
-	"\x18USER_SESSION_ACTION_STOP\x10\x02*\xb6\x01\n" +
+	"\x18USER_SESSION_ACTION_STOP\x10\x02*\xdf\x01\n" +
 	"\x17InsightsAIRequestSource\x12#\n" +
 	"\x1fINSIGHTS_AI_REQUEST_SOURCE_CHAT\x10\x00\x12&\n" +
 	"\"INSIGHTS_AI_REQUEST_SOURCE_NOTEPAD\x10\x01\x12)\n" +
 	"%INSIGHTS_AI_REQUEST_SOURCE_WHITEBOARD\x10\x02\x12#\n" +
-	"\x1fINSIGHTS_AI_REQUEST_SOURCE_POLL\x10\x03*\xb6\x01\n" +
+	"\x1fINSIGHTS_AI_REQUEST_SOURCE_POLL\x10\x03\x12'\n" +
+	"#INSIGHTS_AI_REQUEST_SOURCE_AI_AGENT\x10\x04*\xb6\x01\n" +
 	"\x16InsightsAITextChatRole\x12*\n" +
 	"&INSIGHTS_AI_TEXT_CHAT_ROLE_UNSPECIFIED\x10\x00\x12%\n" +
 	"!INSIGHTS_AI_TEXT_CHAT_ROLE_SYSTEM\x10\x01\x12#\n" +
 	"\x1fINSIGHTS_AI_TEXT_CHAT_ROLE_USER\x10\x02\x12$\n" +
-	" INSIGHTS_AI_TEXT_CHAT_ROLE_MODEL\x10\x03B\x9f\x01\n" +
+	" INSIGHTS_AI_TEXT_CHAT_ROLE_MODEL\x10\x03*\xe8\x02\n" +
+	"\x13AIAgentRuntimeState\x12&\n" +
+	"\"AI_AGENT_RUNTIME_STATE_UNSPECIFIED\x10\x00\x12%\n" +
+	"!AI_AGENT_RUNTIME_STATE_CONNECTING\x10\x01\x12$\n" +
+	" AI_AGENT_RUNTIME_STATE_LISTENING\x10\x02\x12#\n" +
+	"\x1fAI_AGENT_RUNTIME_STATE_THINKING\x10\x03\x12#\n" +
+	"\x1fAI_AGENT_RUNTIME_STATE_SPEAKING\x10\x04\x12\"\n" +
+	"\x1eAI_AGENT_RUNTIME_STATE_DRAWING\x10\x05\x12!\n" +
+	"\x1dAI_AGENT_RUNTIME_STATE_PAUSED\x10\x06\x12'\n" +
+	"#AI_AGENT_RUNTIME_STATE_RECONNECTING\x10\a\x12\"\n" +
+	"\x1eAI_AGENT_RUNTIME_STATE_STOPPED\x10\bB\x9f\x01\n" +
 	"\rcom.plugnmeetB\x16PlugnmeetInsightsProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -1417,47 +2314,62 @@ func file_plugnmeet_insights_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_insights_proto_rawDescData
 }
 
-var file_plugnmeet_insights_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_plugnmeet_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_plugnmeet_insights_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_plugnmeet_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
 var file_plugnmeet_insights_proto_goTypes = []any{
 	(InsightsServiceType)(0),                        // 0: plugnmeet.InsightsServiceType
 	(InsightsUserSessionAction)(0),                  // 1: plugnmeet.InsightsUserSessionAction
 	(InsightsAIRequestSource)(0),                    // 2: plugnmeet.InsightsAIRequestSource
 	(InsightsAITextChatRole)(0),                     // 3: plugnmeet.InsightsAITextChatRole
-	(*InsightsSupportedLangInfo)(nil),               // 4: plugnmeet.InsightsSupportedLangInfo
-	(*InsightsTranscriptionConfigReq)(nil),          // 5: plugnmeet.InsightsTranscriptionConfigReq
-	(*InsightsTranscriptionUserSessionReq)(nil),     // 6: plugnmeet.InsightsTranscriptionUserSessionReq
-	(*InsightsTranscriptionResult)(nil),             // 7: plugnmeet.InsightsTranscriptionResult
-	(*InsightsChatTranslationConfigReq)(nil),        // 8: plugnmeet.InsightsChatTranslationConfigReq
-	(*InsightsTranslateTextReq)(nil),                // 9: plugnmeet.InsightsTranslateTextReq
-	(*InsightsTextTranslationResult)(nil),           // 10: plugnmeet.InsightsTextTranslationResult
-	(*InsightsTranslateTextRes)(nil),                // 11: plugnmeet.InsightsTranslateTextRes
-	(*InsightsGetSupportedLanguagesReq)(nil),        // 12: plugnmeet.InsightsGetSupportedLanguagesReq
-	(*InsightsGetSupportedLanguagesRes)(nil),        // 13: plugnmeet.InsightsGetSupportedLanguagesRes
-	(*InsightsGetUserStatusRes)(nil),                // 14: plugnmeet.InsightsGetUserStatusRes
-	(*InsightsAITextChatContent)(nil),               // 15: plugnmeet.InsightsAITextChatContent
-	(*InsightsAITextChatStreamResult)(nil),          // 16: plugnmeet.InsightsAITextChatStreamResult
-	(*InsightsAITextChatConfigReq)(nil),             // 17: plugnmeet.InsightsAITextChatConfigReq
-	(*InsightsAIMeetingSummarizationConfigReq)(nil), // 18: plugnmeet.InsightsAIMeetingSummarizationConfigReq
-	nil, // 19: plugnmeet.InsightsTranscriptionResult.TranslationsEntry
-	nil, // 20: plugnmeet.InsightsTextTranslationResult.TranslationsEntry
+	(AIAgentRuntimeState)(0),                        // 4: plugnmeet.AIAgentRuntimeState
+	(*InsightsSupportedLangInfo)(nil),               // 5: plugnmeet.InsightsSupportedLangInfo
+	(*InsightsTranscriptionConfigReq)(nil),          // 6: plugnmeet.InsightsTranscriptionConfigReq
+	(*InsightsTranscriptionUserSessionReq)(nil),     // 7: plugnmeet.InsightsTranscriptionUserSessionReq
+	(*InsightsTranscriptionResult)(nil),             // 8: plugnmeet.InsightsTranscriptionResult
+	(*InsightsChatTranslationConfigReq)(nil),        // 9: plugnmeet.InsightsChatTranslationConfigReq
+	(*InsightsTranslateTextReq)(nil),                // 10: plugnmeet.InsightsTranslateTextReq
+	(*InsightsTextTranslationResult)(nil),           // 11: plugnmeet.InsightsTextTranslationResult
+	(*InsightsTranslateTextRes)(nil),                // 12: plugnmeet.InsightsTranslateTextRes
+	(*InsightsGetSupportedLanguagesReq)(nil),        // 13: plugnmeet.InsightsGetSupportedLanguagesReq
+	(*InsightsGetSupportedLanguagesRes)(nil),        // 14: plugnmeet.InsightsGetSupportedLanguagesRes
+	(*InsightsGetUserStatusRes)(nil),                // 15: plugnmeet.InsightsGetUserStatusRes
+	(*InsightsAITextChatContent)(nil),               // 16: plugnmeet.InsightsAITextChatContent
+	(*InsightsAITextChatStreamResult)(nil),          // 17: plugnmeet.InsightsAITextChatStreamResult
+	(*InsightsAITextChatConfigReq)(nil),             // 18: plugnmeet.InsightsAITextChatConfigReq
+	(*InsightsAIMeetingSummarizationConfigReq)(nil), // 19: plugnmeet.InsightsAIMeetingSummarizationConfigReq
+	(*AIAgentStartReq)(nil),                         // 20: plugnmeet.AIAgentStartReq
+	(*AIAgentStopReq)(nil),                          // 21: plugnmeet.AIAgentStopReq
+	(*AIAgentStatusReq)(nil),                        // 22: plugnmeet.AIAgentStatusReq
+	(*AIAgentStatusRes)(nil),                        // 23: plugnmeet.AIAgentStatusRes
+	(*AIAgentSendContextReq)(nil),                   // 24: plugnmeet.AIAgentSendContextReq
+	(*AIAgentPauseReq)(nil),                         // 25: plugnmeet.AIAgentPauseReq
+	(*AIAgentResumeReq)(nil),                        // 26: plugnmeet.AIAgentResumeReq
+	(*AIAgentRedelegateReq)(nil),                    // 27: plugnmeet.AIAgentRedelegateReq
+	(*AIAgentStateMsg)(nil),                         // 28: plugnmeet.AIAgentStateMsg
+	(*AIAgentToolCallMsg)(nil),                      // 29: plugnmeet.AIAgentToolCallMsg
+	(*AIAgentToolResultMsg)(nil),                    // 30: plugnmeet.AIAgentToolResultMsg
+	(*AIAgentWhiteboardSceneMsg)(nil),               // 31: plugnmeet.AIAgentWhiteboardSceneMsg
+	nil,                                             // 32: plugnmeet.InsightsTranscriptionResult.TranslationsEntry
+	nil,                                             // 33: plugnmeet.InsightsTextTranslationResult.TranslationsEntry
 }
 var file_plugnmeet_insights_proto_depIdxs = []int32{
 	1,  // 0: plugnmeet.InsightsTranscriptionUserSessionReq.action:type_name -> plugnmeet.InsightsUserSessionAction
-	19, // 1: plugnmeet.InsightsTranscriptionResult.translations:type_name -> plugnmeet.InsightsTranscriptionResult.TranslationsEntry
-	20, // 2: plugnmeet.InsightsTextTranslationResult.translations:type_name -> plugnmeet.InsightsTextTranslationResult.TranslationsEntry
-	10, // 3: plugnmeet.InsightsTranslateTextRes.result:type_name -> plugnmeet.InsightsTextTranslationResult
+	32, // 1: plugnmeet.InsightsTranscriptionResult.translations:type_name -> plugnmeet.InsightsTranscriptionResult.TranslationsEntry
+	33, // 2: plugnmeet.InsightsTextTranslationResult.translations:type_name -> plugnmeet.InsightsTextTranslationResult.TranslationsEntry
+	11, // 3: plugnmeet.InsightsTranslateTextRes.result:type_name -> plugnmeet.InsightsTextTranslationResult
 	0,  // 4: plugnmeet.InsightsGetSupportedLanguagesReq.service_type:type_name -> plugnmeet.InsightsServiceType
-	4,  // 5: plugnmeet.InsightsGetSupportedLanguagesRes.languages:type_name -> plugnmeet.InsightsSupportedLangInfo
+	5,  // 5: plugnmeet.InsightsGetSupportedLanguagesRes.languages:type_name -> plugnmeet.InsightsSupportedLangInfo
 	0,  // 6: plugnmeet.InsightsGetUserStatusRes.service_type:type_name -> plugnmeet.InsightsServiceType
 	3,  // 7: plugnmeet.InsightsAITextChatContent.role:type_name -> plugnmeet.InsightsAITextChatRole
 	2,  // 8: plugnmeet.InsightsAITextChatContent.request_from:type_name -> plugnmeet.InsightsAIRequestSource
 	2,  // 9: plugnmeet.InsightsAITextChatStreamResult.request_from:type_name -> plugnmeet.InsightsAIRequestSource
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	28, // 10: plugnmeet.AIAgentStatusRes.state:type_name -> plugnmeet.AIAgentStateMsg
+	4,  // 11: plugnmeet.AIAgentStateMsg.state:type_name -> plugnmeet.AIAgentRuntimeState
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_insights_proto_init() }
@@ -1472,13 +2384,18 @@ func file_plugnmeet_insights_proto_init() {
 	file_plugnmeet_insights_proto_msgTypes[10].OneofWrappers = []any{}
 	file_plugnmeet_insights_proto_msgTypes[11].OneofWrappers = []any{}
 	file_plugnmeet_insights_proto_msgTypes[12].OneofWrappers = []any{}
+	file_plugnmeet_insights_proto_msgTypes[15].OneofWrappers = []any{}
+	file_plugnmeet_insights_proto_msgTypes[16].OneofWrappers = []any{}
+	file_plugnmeet_insights_proto_msgTypes[18].OneofWrappers = []any{}
+	file_plugnmeet_insights_proto_msgTypes[19].OneofWrappers = []any{}
+	file_plugnmeet_insights_proto_msgTypes[22].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_insights_proto_rawDesc), len(file_plugnmeet_insights_proto_rawDesc)),
-			NumEnums:      4,
-			NumMessages:   17,
+			NumEnums:      5,
+			NumMessages:   29,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

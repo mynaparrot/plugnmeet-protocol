@@ -49,5 +49,8 @@ enum DataMsgBodyType {
   NOTEPAD_UPDATE = 23;
   NOTEPAD_AWARENESS = 24;
 
-  // next ID: 25
+  // AI AGENT type
+  AI_AGENT_REMOTE_POINTER = 25; // participant -> server: agent pointer/scene payload
+
+  // next ID: 26
 }

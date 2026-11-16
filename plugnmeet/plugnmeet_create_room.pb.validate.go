@@ -2740,6 +2740,39 @@ func (m *InsightsFeatures) validate(all bool) error {
 
 	}
 
+	if m.AiAgentFeatures != nil {
+
+		if all {
+			switch v := interface{}(m.GetAiAgentFeatures()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, InsightsFeaturesValidationError{
+						field:  "AiAgentFeatures",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, InsightsFeaturesValidationError{
+						field:  "AiAgentFeatures",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAiAgentFeatures()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return InsightsFeaturesValidationError{
+					field:  "AiAgentFeatures",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return InsightsFeaturesMultiError(errors)
 	}
@@ -3256,6 +3289,52 @@ func (m *InsightsAITextChatFeatures) validate(all bool) error {
 
 	// no validation rules for IsPollAiDisabled
 
+	{
+		sorted_keys := make([]string, len(m.GetMcpServers()))
+		i := 0
+		for key := range m.GetMcpServers() {
+			sorted_keys[i] = key
+			i++
+		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetMcpServers()[key]
+			_ = val
+
+			// no validation rules for McpServers[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, InsightsAITextChatFeaturesValidationError{
+							field:  fmt.Sprintf("McpServers[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, InsightsAITextChatFeaturesValidationError{
+							field:  fmt.Sprintf("McpServers[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return InsightsAITextChatFeaturesValidationError{
+						field:  fmt.Sprintf("McpServers[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
+	}
+
 	if len(errors) > 0 {
 		return InsightsAITextChatFeaturesMultiError(errors)
 	}
@@ -3447,6 +3526,336 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = InsightsAIMeetingSummarizationFeaturesValidationError{}
+
+// Validate checks the field values on InsightsAIAgentFeatures with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InsightsAIAgentFeatures) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InsightsAIAgentFeatures with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// InsightsAIAgentFeaturesMultiError, or nil if none found.
+func (m *InsightsAIAgentFeatures) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InsightsAIAgentFeatures) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsAllow
+
+	// no validation rules for SystemPrompt
+
+	// no validation rules for AutoJoinOnFirstParticipant
+
+	// no validation rules for AllowWhiteboardWrite
+
+	// no validation rules for AllowVisionCapture
+
+	// no validation rules for VisionDebounceMs
+
+	// no validation rules for VisionMaxEdgePx
+
+	// no validation rules for AllowPolls
+
+	// no validation rules for AllowChatMessage
+
+	// no validation rules for AllowNotepadWrite
+
+	// no validation rules for AllowWebFetch
+
+	// no validation rules for KnowledgeCacheTtlSeconds
+
+	{
+		sorted_keys := make([]string, len(m.GetMcpServers()))
+		i := 0
+		for key := range m.GetMcpServers() {
+			sorted_keys[i] = key
+			i++
+		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetMcpServers()[key]
+			_ = val
+
+			// no validation rules for McpServers[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, InsightsAIAgentFeaturesValidationError{
+							field:  fmt.Sprintf("McpServers[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, InsightsAIAgentFeaturesValidationError{
+							field:  fmt.Sprintf("McpServers[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return InsightsAIAgentFeaturesValidationError{
+						field:  fmt.Sprintf("McpServers[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
+	}
+
+	// no validation rules for Topic
+
+	// no validation rules for StrictTopicEnforcement
+
+	// no validation rules for TopicAnchorIntervalTurns
+
+	// no validation rules for MaxSessionSeconds
+
+	// no validation rules for MaxAudioMinutes
+
+	// no validation rules for IsEnabled
+
+	// no validation rules for AutoCreatePerUserSession
+
+	// no validation rules for MaxConcurrentSessions
+
+	if m.PreviousSessionContext != nil {
+		// no validation rules for PreviousSessionContext
+	}
+
+	if m.AgentDisplayName != nil {
+		// no validation rules for AgentDisplayName
+	}
+
+	if m.SpokenLang != nil {
+		// no validation rules for SpokenLang
+	}
+
+	if m.TargetLang != nil {
+		// no validation rules for TargetLang
+	}
+
+	if m.InstructionLang != nil {
+		// no validation rules for InstructionLang
+	}
+
+	if m.Voice != nil {
+		// no validation rules for Voice
+	}
+
+	if m.SpeakingRate != nil {
+		// no validation rules for SpeakingRate
+	}
+
+	if m.ActiveSessionId != nil {
+		// no validation rules for ActiveSessionId
+	}
+
+	if len(errors) > 0 {
+		return InsightsAIAgentFeaturesMultiError(errors)
+	}
+
+	return nil
+}
+
+// InsightsAIAgentFeaturesMultiError is an error wrapping multiple validation
+// errors returned by InsightsAIAgentFeatures.ValidateAll() if the designated
+// constraints aren't met.
+type InsightsAIAgentFeaturesMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InsightsAIAgentFeaturesMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InsightsAIAgentFeaturesMultiError) AllErrors() []error { return m }
+
+// InsightsAIAgentFeaturesValidationError is the validation error returned by
+// InsightsAIAgentFeatures.Validate if the designated constraints aren't met.
+type InsightsAIAgentFeaturesValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InsightsAIAgentFeaturesValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InsightsAIAgentFeaturesValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InsightsAIAgentFeaturesValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InsightsAIAgentFeaturesValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InsightsAIAgentFeaturesValidationError) ErrorName() string {
+	return "InsightsAIAgentFeaturesValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InsightsAIAgentFeaturesValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInsightsAIAgentFeatures.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InsightsAIAgentFeaturesValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InsightsAIAgentFeaturesValidationError{}
+
+// Validate checks the field values on ExternalMCPServerConfig with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ExternalMCPServerConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ExternalMCPServerConfig with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ExternalMCPServerConfigMultiError, or nil if none found.
+func (m *ExternalMCPServerConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ExternalMCPServerConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Url
+
+	// no validation rules for Headers
+
+	if m.Scope != nil {
+		// no validation rules for Scope
+	}
+
+	if len(errors) > 0 {
+		return ExternalMCPServerConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// ExternalMCPServerConfigMultiError is an error wrapping multiple validation
+// errors returned by ExternalMCPServerConfig.ValidateAll() if the designated
+// constraints aren't met.
+type ExternalMCPServerConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ExternalMCPServerConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ExternalMCPServerConfigMultiError) AllErrors() []error { return m }
+
+// ExternalMCPServerConfigValidationError is the validation error returned by
+// ExternalMCPServerConfig.Validate if the designated constraints aren't met.
+type ExternalMCPServerConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExternalMCPServerConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExternalMCPServerConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExternalMCPServerConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExternalMCPServerConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExternalMCPServerConfigValidationError) ErrorName() string {
+	return "ExternalMCPServerConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ExternalMCPServerConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExternalMCPServerConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExternalMCPServerConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExternalMCPServerConfigValidationError{}
 
 // Validate checks the field values on CountdownTimerFeatures with the rules
 // defined in the proto definition for this message. If any rules are

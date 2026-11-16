@@ -12,6 +12,7 @@ enum InsightsServiceType {
   INSIGHTS_SERVICE_TYPE_AI_TEXT_CHAT = 4;
   INSIGHTS_SERVICE_TYPE_CHAT_TRANSLATION = 5;
   INSIGHTS_SERVICE_TYPE_MEETING_SUMMARIZING = 6;
+  INSIGHTS_SERVICE_TYPE_AI_AGENT = 7;
 }
 
 enum InsightsUserSessionAction {
@@ -102,6 +103,7 @@ enum InsightsAIRequestSource {
   INSIGHTS_AI_REQUEST_SOURCE_NOTEPAD = 1;
   INSIGHTS_AI_REQUEST_SOURCE_WHITEBOARD = 2;
   INSIGHTS_AI_REQUEST_SOURCE_POLL = 3;
+  INSIGHTS_AI_REQUEST_SOURCE_AI_AGENT = 4; // AI-Agent-originated AI traffic
 }
 
 // start AI Text Chat
@@ -144,3 +146,91 @@ message InsightsAIMeetingSummarizationConfigReq {
   bool is_enabled = 1;
   string summarization_prompt = 3;
 }
+
+// start AI Agent
+enum AIAgentRuntimeState {
+  AI_AGENT_RUNTIME_STATE_UNSPECIFIED = 0;
+  AI_AGENT_RUNTIME_STATE_CONNECTING = 1;
+  AI_AGENT_RUNTIME_STATE_LISTENING = 2;
+  AI_AGENT_RUNTIME_STATE_THINKING = 3;
+  AI_AGENT_RUNTIME_STATE_SPEAKING = 4;
+  AI_AGENT_RUNTIME_STATE_DRAWING = 5;
+  AI_AGENT_RUNTIME_STATE_PAUSED = 6;
+  AI_AGENT_RUNTIME_STATE_RECONNECTING = 7;
+  AI_AGENT_RUNTIME_STATE_STOPPED = 8;
+}
+
+// host / moderator control requests
+message AIAgentStartReq {
+  optional string system_prompt = 1; // override; empty -> room features
+  optional string previous_session_context = 2; // override; empty -> room features
+}
+
+message AIAgentStopReq {
+  optional string reason = 1; // e.g. "host_stopped"
+}
+
+message AIAgentStatusReq {}
+
+message AIAgentStatusRes {
+  bool status = 1;
+  string msg = 2;
+  optional AIAgentStateMsg state = 3;
+}
+
+message AIAgentSendContextReq {
+  string text = 1; // external context injected into the live session
+  optional string source = 2; // e.g. "lms" | "timer"
+}
+
+message AIAgentPauseReq {}
+
+message AIAgentResumeReq {}
+
+message AIAgentRedelegateReq {
+  optional string target_user_id = 1; // empty -> server re-selects the delegate
+}
+
+// payloads exchanged with the room
+message AIAgentStateMsg {
+  string session_id = 1;
+  string agent_user_id = 2; // pnm_agent-ai_agent-<uuid>
+  string agent_name = 3;
+  AIAgentRuntimeState state = 4;
+  bool is_speaking = 5;
+  string tool_in_progress = 6;
+  int64 started_at = 7;
+  string reason = 8; // e.g. "budget" | "moderation" | "goaway" | "paused"
+  string trace_id = 9;
+}
+
+message AIAgentToolCallMsg {
+  string session_id = 1;
+  string call_id = 2; // provider call id, echoed back
+  string tool_name = 3;
+  string arguments_json = 4; // model-emitted JSON, unmodified
+  string target_user_id = 5; // who must execute
+  int64 deadline_unix_ms = 6; // server-side deadline
+  string trace_id = 7;
+}
+
+message AIAgentToolResultMsg {
+  string call_id = 1;
+  bool ok = 2;
+  string result_json = 3; // executor payload (element ids + bbox, etc.)
+  string error = 4;
+  int64 duration_ms = 5;
+}
+
+message AIAgentWhiteboardSceneMsg {
+  string room_id = 1;
+  string file_id = 2;
+  int32 page = 3;
+  string reason = 4; // "participant_edit" | "tool_request" | "page_change" | "session_start"
+  bytes webp_image = 5;
+  string scene_graph_json = 6;
+  int64 captured_at_ms = 7;
+  repeated string participant_element_ids = 8;
+  repeated string agent_element_ids = 9;
+}
+// end AI Agent
