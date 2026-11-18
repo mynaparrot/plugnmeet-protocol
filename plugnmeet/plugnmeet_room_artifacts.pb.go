@@ -216,9 +216,12 @@ func (x *RoomArtifactProviderJobInfo) GetFileName() string {
 
 // UserInfo contains details about the user associated with an artifact.
 type RoomArtifactUserInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Name          *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	UserId   string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Name     *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	ExUserId *string                `protobuf:"bytes,3,opt,name=ex_user_id,json=exUserId,proto3,oneof" json:"ex_user_id,omitempty"`
+	// extra_data carries the user's custom metadata as a JSON object.
+	ExtraData     *string `protobuf:"bytes,4,opt,name=extra_data,json=extraData,proto3,oneof" json:"extra_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -263,6 +266,20 @@ func (x *RoomArtifactUserInfo) GetUserId() string {
 func (x *RoomArtifactUserInfo) GetName() string {
 	if x != nil && x.Name != nil {
 		return *x.Name
+	}
+	return ""
+}
+
+func (x *RoomArtifactUserInfo) GetExUserId() string {
+	if x != nil && x.ExUserId != nil {
+		return *x.ExUserId
+	}
+	return ""
+}
+
+func (x *RoomArtifactUserInfo) GetExtraData() string {
+	if x != nil && x.ExtraData != nil {
+		return *x.ExtraData
 	}
 	return ""
 }
@@ -696,6 +713,706 @@ func (x *RoomArtifactWebhookEvent) GetMetadata() *RoomArtifactMetadata {
 	return nil
 }
 
+// AI agent session summary contract for the AI_AGENT_SESSION_SUMMARY artifact.
+type AIAgentSessionSummary struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// summary_source is "llm" when a model refined the summary, "local_fallback"
+	// when it was derived from telemetry only.
+	SummarySource string `protobuf:"bytes,1,opt,name=summary_source,json=summarySource,proto3" json:"summary_source,omitempty"`
+	GeneratedAt   string `protobuf:"bytes,2,opt,name=generated_at,json=generatedAt,proto3" json:"generated_at,omitempty"`
+	// the learner of the 1-on-1 session; always present
+	UserInfo          *RoomArtifactUserInfo            `protobuf:"bytes,3,opt,name=user_info,json=userInfo,proto3" json:"user_info,omitempty"`
+	Session           *AIAgentSummarySession           `protobuf:"bytes,4,opt,name=session,proto3" json:"session,omitempty"`
+	Evaluation        *AIAgentSummaryEvaluation        `protobuf:"bytes,5,opt,name=evaluation,proto3" json:"evaluation,omitempty"`
+	QuizEvaluation    *AIAgentSummaryQuizEvaluation    `protobuf:"bytes,6,opt,name=quiz_evaluation,json=quizEvaluation,proto3" json:"quiz_evaluation,omitempty"`
+	ProgressLog       []*AIAgentSummaryProgressEntry   `protobuf:"bytes,7,rep,name=progress_log,json=progressLog,proto3" json:"progress_log,omitempty"`
+	WorkspaceActivity *AIAgentSummaryWorkspaceActivity `protobuf:"bytes,8,opt,name=workspace_activity,json=workspaceActivity,proto3" json:"workspace_activity,omitempty"`
+	Continuation      *AIAgentSummaryContinuation      `protobuf:"bytes,9,opt,name=continuation,proto3" json:"continuation,omitempty"`
+	NarrativeSummary  string                           `protobuf:"bytes,10,opt,name=narrative_summary,json=narrativeSummary,proto3" json:"narrative_summary,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *AIAgentSessionSummary) Reset() {
+	*x = AIAgentSessionSummary{}
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentSessionSummary) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentSessionSummary) ProtoMessage() {}
+
+func (x *AIAgentSessionSummary) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentSessionSummary.ProtoReflect.Descriptor instead.
+func (*AIAgentSessionSummary) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_room_artifacts_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *AIAgentSessionSummary) GetSummarySource() string {
+	if x != nil {
+		return x.SummarySource
+	}
+	return ""
+}
+
+func (x *AIAgentSessionSummary) GetGeneratedAt() string {
+	if x != nil {
+		return x.GeneratedAt
+	}
+	return ""
+}
+
+func (x *AIAgentSessionSummary) GetUserInfo() *RoomArtifactUserInfo {
+	if x != nil {
+		return x.UserInfo
+	}
+	return nil
+}
+
+func (x *AIAgentSessionSummary) GetSession() *AIAgentSummarySession {
+	if x != nil {
+		return x.Session
+	}
+	return nil
+}
+
+func (x *AIAgentSessionSummary) GetEvaluation() *AIAgentSummaryEvaluation {
+	if x != nil {
+		return x.Evaluation
+	}
+	return nil
+}
+
+func (x *AIAgentSessionSummary) GetQuizEvaluation() *AIAgentSummaryQuizEvaluation {
+	if x != nil {
+		return x.QuizEvaluation
+	}
+	return nil
+}
+
+func (x *AIAgentSessionSummary) GetProgressLog() []*AIAgentSummaryProgressEntry {
+	if x != nil {
+		return x.ProgressLog
+	}
+	return nil
+}
+
+func (x *AIAgentSessionSummary) GetWorkspaceActivity() *AIAgentSummaryWorkspaceActivity {
+	if x != nil {
+		return x.WorkspaceActivity
+	}
+	return nil
+}
+
+func (x *AIAgentSessionSummary) GetContinuation() *AIAgentSummaryContinuation {
+	if x != nil {
+		return x.Continuation
+	}
+	return nil
+}
+
+func (x *AIAgentSessionSummary) GetNarrativeSummary() string {
+	if x != nil {
+		return x.NarrativeSummary
+	}
+	return ""
+}
+
+type AIAgentSummarySession struct {
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	RoomId                 string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	RoomSid                string                 `protobuf:"bytes,2,opt,name=room_sid,json=roomSid,proto3" json:"room_sid,omitempty"`
+	SessionId              string                 `protobuf:"bytes,3,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	AgentDisplayName       string                 `protobuf:"bytes,4,opt,name=agent_display_name,json=agentDisplayName,proto3" json:"agent_display_name,omitempty"`
+	Topic                  string                 `protobuf:"bytes,5,opt,name=topic,proto3" json:"topic,omitempty"`
+	AllowedSubtopics       []string               `protobuf:"bytes,6,rep,name=allowed_subtopics,json=allowedSubtopics,proto3" json:"allowed_subtopics,omitempty"`
+	StartedAt              int64                  `protobuf:"varint,7,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
+	EndedAt                int64                  `protobuf:"varint,8,opt,name=ended_at,json=endedAt,proto3" json:"ended_at,omitempty"`
+	DurationSeconds        int64                  `protobuf:"varint,9,opt,name=duration_seconds,json=durationSeconds,proto3" json:"duration_seconds,omitempty"`
+	EndReason              string                 `protobuf:"bytes,10,opt,name=end_reason,json=endReason,proto3" json:"end_reason,omitempty"`
+	OffTopicRedirectsCount int32                  `protobuf:"varint,11,opt,name=off_topic_redirects_count,json=offTopicRedirectsCount,proto3" json:"off_topic_redirects_count,omitempty"`
+	TurnsCount             int32                  `protobuf:"varint,12,opt,name=turns_count,json=turnsCount,proto3" json:"turns_count,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *AIAgentSummarySession) Reset() {
+	*x = AIAgentSummarySession{}
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentSummarySession) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentSummarySession) ProtoMessage() {}
+
+func (x *AIAgentSummarySession) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentSummarySession.ProtoReflect.Descriptor instead.
+func (*AIAgentSummarySession) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_room_artifacts_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *AIAgentSummarySession) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
+func (x *AIAgentSummarySession) GetRoomSid() string {
+	if x != nil {
+		return x.RoomSid
+	}
+	return ""
+}
+
+func (x *AIAgentSummarySession) GetSessionId() string {
+	if x != nil {
+		return x.SessionId
+	}
+	return ""
+}
+
+func (x *AIAgentSummarySession) GetAgentDisplayName() string {
+	if x != nil {
+		return x.AgentDisplayName
+	}
+	return ""
+}
+
+func (x *AIAgentSummarySession) GetTopic() string {
+	if x != nil {
+		return x.Topic
+	}
+	return ""
+}
+
+func (x *AIAgentSummarySession) GetAllowedSubtopics() []string {
+	if x != nil {
+		return x.AllowedSubtopics
+	}
+	return nil
+}
+
+func (x *AIAgentSummarySession) GetStartedAt() int64 {
+	if x != nil {
+		return x.StartedAt
+	}
+	return 0
+}
+
+func (x *AIAgentSummarySession) GetEndedAt() int64 {
+	if x != nil {
+		return x.EndedAt
+	}
+	return 0
+}
+
+func (x *AIAgentSummarySession) GetDurationSeconds() int64 {
+	if x != nil {
+		return x.DurationSeconds
+	}
+	return 0
+}
+
+func (x *AIAgentSummarySession) GetEndReason() string {
+	if x != nil {
+		return x.EndReason
+	}
+	return ""
+}
+
+func (x *AIAgentSummarySession) GetOffTopicRedirectsCount() int32 {
+	if x != nil {
+		return x.OffTopicRedirectsCount
+	}
+	return 0
+}
+
+func (x *AIAgentSummarySession) GetTurnsCount() int32 {
+	if x != nil {
+		return x.TurnsCount
+	}
+	return 0
+}
+
+type AIAgentSummaryEvaluation struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	OverallScore         int32                  `protobuf:"varint,1,opt,name=overall_score,json=overallScore,proto3" json:"overall_score,omitempty"`
+	MasteryLevel         string                 `protobuf:"bytes,2,opt,name=mastery_level,json=masteryLevel,proto3" json:"mastery_level,omitempty"`
+	ParticipationLevel   string                 `protobuf:"bytes,3,opt,name=participation_level,json=participationLevel,proto3" json:"participation_level,omitempty"`
+	ConceptsMastered     []string               `protobuf:"bytes,4,rep,name=concepts_mastered,json=conceptsMastered,proto3" json:"concepts_mastered,omitempty"`
+	ConceptsPracticed    []string               `protobuf:"bytes,5,rep,name=concepts_practiced,json=conceptsPracticed,proto3" json:"concepts_practiced,omitempty"`
+	StruggledWith        []string               `protobuf:"bytes,6,rep,name=struggled_with,json=struggledWith,proto3" json:"struggled_with,omitempty"`
+	VocabularyOrKeyTerms []string               `protobuf:"bytes,7,rep,name=vocabulary_or_key_terms,json=vocabularyOrKeyTerms,proto3" json:"vocabulary_or_key_terms,omitempty"`
+	RubricNotes          string                 `protobuf:"bytes,8,opt,name=rubric_notes,json=rubricNotes,proto3" json:"rubric_notes,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *AIAgentSummaryEvaluation) Reset() {
+	*x = AIAgentSummaryEvaluation{}
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentSummaryEvaluation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentSummaryEvaluation) ProtoMessage() {}
+
+func (x *AIAgentSummaryEvaluation) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentSummaryEvaluation.ProtoReflect.Descriptor instead.
+func (*AIAgentSummaryEvaluation) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_room_artifacts_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *AIAgentSummaryEvaluation) GetOverallScore() int32 {
+	if x != nil {
+		return x.OverallScore
+	}
+	return 0
+}
+
+func (x *AIAgentSummaryEvaluation) GetMasteryLevel() string {
+	if x != nil {
+		return x.MasteryLevel
+	}
+	return ""
+}
+
+func (x *AIAgentSummaryEvaluation) GetParticipationLevel() string {
+	if x != nil {
+		return x.ParticipationLevel
+	}
+	return ""
+}
+
+func (x *AIAgentSummaryEvaluation) GetConceptsMastered() []string {
+	if x != nil {
+		return x.ConceptsMastered
+	}
+	return nil
+}
+
+func (x *AIAgentSummaryEvaluation) GetConceptsPracticed() []string {
+	if x != nil {
+		return x.ConceptsPracticed
+	}
+	return nil
+}
+
+func (x *AIAgentSummaryEvaluation) GetStruggledWith() []string {
+	if x != nil {
+		return x.StruggledWith
+	}
+	return nil
+}
+
+func (x *AIAgentSummaryEvaluation) GetVocabularyOrKeyTerms() []string {
+	if x != nil {
+		return x.VocabularyOrKeyTerms
+	}
+	return nil
+}
+
+func (x *AIAgentSummaryEvaluation) GetRubricNotes() string {
+	if x != nil {
+		return x.RubricNotes
+	}
+	return ""
+}
+
+type AIAgentSummaryQuizEvaluation struct {
+	state            protoimpl.MessageState        `protogen:"open.v1"`
+	TotalQuizzes     int32                         `protobuf:"varint,1,opt,name=total_quizzes,json=totalQuizzes,proto3" json:"total_quizzes,omitempty"`
+	TotalResponses   int32                         `protobuf:"varint,2,opt,name=total_responses,json=totalResponses,proto3" json:"total_responses,omitempty"`
+	CorrectResponses int32                         `protobuf:"varint,3,opt,name=correct_responses,json=correctResponses,proto3" json:"correct_responses,omitempty"`
+	AccuracyPercent  int32                         `protobuf:"varint,4,opt,name=accuracy_percent,json=accuracyPercent,proto3" json:"accuracy_percent,omitempty"`
+	Questions        []*AIAgentSummaryQuizQuestion `protobuf:"bytes,5,rep,name=questions,proto3" json:"questions,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *AIAgentSummaryQuizEvaluation) Reset() {
+	*x = AIAgentSummaryQuizEvaluation{}
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentSummaryQuizEvaluation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentSummaryQuizEvaluation) ProtoMessage() {}
+
+func (x *AIAgentSummaryQuizEvaluation) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentSummaryQuizEvaluation.ProtoReflect.Descriptor instead.
+func (*AIAgentSummaryQuizEvaluation) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_room_artifacts_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *AIAgentSummaryQuizEvaluation) GetTotalQuizzes() int32 {
+	if x != nil {
+		return x.TotalQuizzes
+	}
+	return 0
+}
+
+func (x *AIAgentSummaryQuizEvaluation) GetTotalResponses() int32 {
+	if x != nil {
+		return x.TotalResponses
+	}
+	return 0
+}
+
+func (x *AIAgentSummaryQuizEvaluation) GetCorrectResponses() int32 {
+	if x != nil {
+		return x.CorrectResponses
+	}
+	return 0
+}
+
+func (x *AIAgentSummaryQuizEvaluation) GetAccuracyPercent() int32 {
+	if x != nil {
+		return x.AccuracyPercent
+	}
+	return 0
+}
+
+func (x *AIAgentSummaryQuizEvaluation) GetQuestions() []*AIAgentSummaryQuizQuestion {
+	if x != nil {
+		return x.Questions
+	}
+	return nil
+}
+
+type AIAgentSummaryQuizQuestion struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PollId        string                 `protobuf:"bytes,1,opt,name=poll_id,json=pollId,proto3" json:"poll_id,omitempty"`
+	Question      string                 `protobuf:"bytes,2,opt,name=question,proto3" json:"question,omitempty"`
+	CorrectOption string                 `protobuf:"bytes,3,opt,name=correct_option,json=correctOption,proto3" json:"correct_option,omitempty"`
+	TotalVotes    uint64                 `protobuf:"varint,4,opt,name=total_votes,json=totalVotes,proto3" json:"total_votes,omitempty"`
+	CorrectVotes  uint64                 `protobuf:"varint,5,opt,name=correct_votes,json=correctVotes,proto3" json:"correct_votes,omitempty"`
+	Passed        bool                   `protobuf:"varint,6,opt,name=passed,proto3" json:"passed,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AIAgentSummaryQuizQuestion) Reset() {
+	*x = AIAgentSummaryQuizQuestion{}
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentSummaryQuizQuestion) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentSummaryQuizQuestion) ProtoMessage() {}
+
+func (x *AIAgentSummaryQuizQuestion) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentSummaryQuizQuestion.ProtoReflect.Descriptor instead.
+func (*AIAgentSummaryQuizQuestion) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_room_artifacts_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *AIAgentSummaryQuizQuestion) GetPollId() string {
+	if x != nil {
+		return x.PollId
+	}
+	return ""
+}
+
+func (x *AIAgentSummaryQuizQuestion) GetQuestion() string {
+	if x != nil {
+		return x.Question
+	}
+	return ""
+}
+
+func (x *AIAgentSummaryQuizQuestion) GetCorrectOption() string {
+	if x != nil {
+		return x.CorrectOption
+	}
+	return ""
+}
+
+func (x *AIAgentSummaryQuizQuestion) GetTotalVotes() uint64 {
+	if x != nil {
+		return x.TotalVotes
+	}
+	return 0
+}
+
+func (x *AIAgentSummaryQuizQuestion) GetCorrectVotes() uint64 {
+	if x != nil {
+		return x.CorrectVotes
+	}
+	return 0
+}
+
+func (x *AIAgentSummaryQuizQuestion) GetPassed() bool {
+	if x != nil {
+		return x.Passed
+	}
+	return false
+}
+
+type AIAgentSummaryProgressEntry struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Concept       string                 `protobuf:"bytes,1,opt,name=concept,proto3" json:"concept,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Notes         *string                `protobuf:"bytes,3,opt,name=notes,proto3,oneof" json:"notes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AIAgentSummaryProgressEntry) Reset() {
+	*x = AIAgentSummaryProgressEntry{}
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentSummaryProgressEntry) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentSummaryProgressEntry) ProtoMessage() {}
+
+func (x *AIAgentSummaryProgressEntry) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentSummaryProgressEntry.ProtoReflect.Descriptor instead.
+func (*AIAgentSummaryProgressEntry) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_room_artifacts_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *AIAgentSummaryProgressEntry) GetConcept() string {
+	if x != nil {
+		return x.Concept
+	}
+	return ""
+}
+
+func (x *AIAgentSummaryProgressEntry) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *AIAgentSummaryProgressEntry) GetNotes() string {
+	if x != nil && x.Notes != nil {
+		return *x.Notes
+	}
+	return ""
+}
+
+type AIAgentSummaryWorkspaceActivity struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	ToolsUsed      map[string]int32       `protobuf:"bytes,1,rep,name=tools_used,json=toolsUsed,proto3" json:"tools_used,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	WhiteboardUsed bool                   `protobuf:"varint,2,opt,name=whiteboard_used,json=whiteboardUsed,proto3" json:"whiteboard_used,omitempty"`
+	NotepadUsed    bool                   `protobuf:"varint,3,opt,name=notepad_used,json=notepadUsed,proto3" json:"notepad_used,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *AIAgentSummaryWorkspaceActivity) Reset() {
+	*x = AIAgentSummaryWorkspaceActivity{}
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentSummaryWorkspaceActivity) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentSummaryWorkspaceActivity) ProtoMessage() {}
+
+func (x *AIAgentSummaryWorkspaceActivity) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentSummaryWorkspaceActivity.ProtoReflect.Descriptor instead.
+func (*AIAgentSummaryWorkspaceActivity) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_room_artifacts_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *AIAgentSummaryWorkspaceActivity) GetToolsUsed() map[string]int32 {
+	if x != nil {
+		return x.ToolsUsed
+	}
+	return nil
+}
+
+func (x *AIAgentSummaryWorkspaceActivity) GetWhiteboardUsed() bool {
+	if x != nil {
+		return x.WhiteboardUsed
+	}
+	return false
+}
+
+func (x *AIAgentSummaryWorkspaceActivity) GetNotepadUsed() bool {
+	if x != nil {
+		return x.NotepadUsed
+	}
+	return false
+}
+
+type AIAgentSummaryContinuation struct {
+	state                        protoimpl.MessageState `protogen:"open.v1"`
+	NextSessionFocus             string                 `protobuf:"bytes,1,opt,name=next_session_focus,json=nextSessionFocus,proto3" json:"next_session_focus,omitempty"`
+	RecommendedWarmUp            string                 `protobuf:"bytes,2,opt,name=recommended_warm_up,json=recommendedWarmUp,proto3" json:"recommended_warm_up,omitempty"`
+	UnfinishedSubtopics          []string               `protobuf:"bytes,3,rep,name=unfinished_subtopics,json=unfinishedSubtopics,proto3" json:"unfinished_subtopics,omitempty"`
+	PreviousSessionContextPrompt string                 `protobuf:"bytes,4,opt,name=previous_session_context_prompt,json=previousSessionContextPrompt,proto3" json:"previous_session_context_prompt,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
+}
+
+func (x *AIAgentSummaryContinuation) Reset() {
+	*x = AIAgentSummaryContinuation{}
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIAgentSummaryContinuation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIAgentSummaryContinuation) ProtoMessage() {}
+
+func (x *AIAgentSummaryContinuation) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_room_artifacts_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIAgentSummaryContinuation.ProtoReflect.Descriptor instead.
+func (*AIAgentSummaryContinuation) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_room_artifacts_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *AIAgentSummaryContinuation) GetNextSessionFocus() string {
+	if x != nil {
+		return x.NextSessionFocus
+	}
+	return ""
+}
+
+func (x *AIAgentSummaryContinuation) GetRecommendedWarmUp() string {
+	if x != nil {
+		return x.RecommendedWarmUp
+	}
+	return ""
+}
+
+func (x *AIAgentSummaryContinuation) GetUnfinishedSubtopics() []string {
+	if x != nil {
+		return x.UnfinishedSubtopics
+	}
+	return nil
+}
+
+func (x *AIAgentSummaryContinuation) GetPreviousSessionContextPrompt() string {
+	if x != nil {
+		return x.PreviousSessionContextPrompt
+	}
+	return ""
+}
+
 var File_plugnmeet_room_artifacts_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
@@ -707,11 +1424,17 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\tmime_type\x18\x03 \x01(\tR\bmimeType\"Q\n" +
 	"\x1bRoomArtifactProviderJobInfo\x12\x15\n" +
 	"\x06job_id\x18\x01 \x01(\tR\x05jobId\x12\x1b\n" +
-	"\tfile_name\x18\x02 \x01(\tR\bfileName\"Q\n" +
+	"\tfile_name\x18\x02 \x01(\tR\bfileName\"\xb6\x01\n" +
 	"\x14RoomArtifactUserInfo\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x17\n" +
-	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01B\a\n" +
-	"\x05_name\"\xd9\x04\n" +
+	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12!\n" +
+	"\n" +
+	"ex_user_id\x18\x03 \x01(\tH\x01R\bexUserId\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"extra_data\x18\x04 \x01(\tH\x02R\textraData\x88\x01\x01B\a\n" +
+	"\x05_nameB\r\n" +
+	"\v_ex_user_idB\r\n" +
+	"\v_extra_data\"\xd9\x04\n" +
 	"\x16RoomArtifactTokenUsage\x12#\n" +
 	"\rprompt_tokens\x18\x01 \x01(\rR\fpromptTokens\x12+\n" +
 	"\x11completion_tokens\x18\x02 \x01(\rR\x10completionTokens\x12!\n" +
@@ -761,7 +1484,80 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\x04type\x18\x01 \x01(\x0e2\x1b.plugnmeet.RoomArtifactTypeR\x04type\x12\x1f\n" +
 	"\vartifact_id\x18\x02 \x01(\tR\n" +
 	"artifactId\x12;\n" +
-	"\bmetadata\x18\x03 \x01(\v2\x1f.plugnmeet.RoomArtifactMetadataR\bmetadata*\xf8\x02\n" +
+	"\bmetadata\x18\x03 \x01(\v2\x1f.plugnmeet.RoomArtifactMetadataR\bmetadata\"\x90\x05\n" +
+	"\x15AIAgentSessionSummary\x12%\n" +
+	"\x0esummary_source\x18\x01 \x01(\tR\rsummarySource\x12!\n" +
+	"\fgenerated_at\x18\x02 \x01(\tR\vgeneratedAt\x12<\n" +
+	"\tuser_info\x18\x03 \x01(\v2\x1f.plugnmeet.RoomArtifactUserInfoR\buserInfo\x12:\n" +
+	"\asession\x18\x04 \x01(\v2 .plugnmeet.AIAgentSummarySessionR\asession\x12C\n" +
+	"\n" +
+	"evaluation\x18\x05 \x01(\v2#.plugnmeet.AIAgentSummaryEvaluationR\n" +
+	"evaluation\x12P\n" +
+	"\x0fquiz_evaluation\x18\x06 \x01(\v2'.plugnmeet.AIAgentSummaryQuizEvaluationR\x0equizEvaluation\x12I\n" +
+	"\fprogress_log\x18\a \x03(\v2&.plugnmeet.AIAgentSummaryProgressEntryR\vprogressLog\x12Y\n" +
+	"\x12workspace_activity\x18\b \x01(\v2*.plugnmeet.AIAgentSummaryWorkspaceActivityR\x11workspaceActivity\x12I\n" +
+	"\fcontinuation\x18\t \x01(\v2%.plugnmeet.AIAgentSummaryContinuationR\fcontinuation\x12+\n" +
+	"\x11narrative_summary\x18\n" +
+	" \x01(\tR\x10narrativeSummary\"\xbb\x03\n" +
+	"\x15AIAgentSummarySession\x12\x17\n" +
+	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x19\n" +
+	"\broom_sid\x18\x02 \x01(\tR\aroomSid\x12\x1d\n" +
+	"\n" +
+	"session_id\x18\x03 \x01(\tR\tsessionId\x12,\n" +
+	"\x12agent_display_name\x18\x04 \x01(\tR\x10agentDisplayName\x12\x14\n" +
+	"\x05topic\x18\x05 \x01(\tR\x05topic\x12+\n" +
+	"\x11allowed_subtopics\x18\x06 \x03(\tR\x10allowedSubtopics\x12\x1d\n" +
+	"\n" +
+	"started_at\x18\a \x01(\x03R\tstartedAt\x12\x19\n" +
+	"\bended_at\x18\b \x01(\x03R\aendedAt\x12)\n" +
+	"\x10duration_seconds\x18\t \x01(\x03R\x0fdurationSeconds\x12\x1d\n" +
+	"\n" +
+	"end_reason\x18\n" +
+	" \x01(\tR\tendReason\x129\n" +
+	"\x19off_topic_redirects_count\x18\v \x01(\x05R\x16offTopicRedirectsCount\x12\x1f\n" +
+	"\vturns_count\x18\f \x01(\x05R\n" +
+	"turnsCount\"\xf2\x02\n" +
+	"\x18AIAgentSummaryEvaluation\x12#\n" +
+	"\roverall_score\x18\x01 \x01(\x05R\foverallScore\x12#\n" +
+	"\rmastery_level\x18\x02 \x01(\tR\fmasteryLevel\x12/\n" +
+	"\x13participation_level\x18\x03 \x01(\tR\x12participationLevel\x12+\n" +
+	"\x11concepts_mastered\x18\x04 \x03(\tR\x10conceptsMastered\x12-\n" +
+	"\x12concepts_practiced\x18\x05 \x03(\tR\x11conceptsPracticed\x12%\n" +
+	"\x0estruggled_with\x18\x06 \x03(\tR\rstruggledWith\x125\n" +
+	"\x17vocabulary_or_key_terms\x18\a \x03(\tR\x14vocabularyOrKeyTerms\x12!\n" +
+	"\frubric_notes\x18\b \x01(\tR\vrubricNotes\"\x89\x02\n" +
+	"\x1cAIAgentSummaryQuizEvaluation\x12#\n" +
+	"\rtotal_quizzes\x18\x01 \x01(\x05R\ftotalQuizzes\x12'\n" +
+	"\x0ftotal_responses\x18\x02 \x01(\x05R\x0etotalResponses\x12+\n" +
+	"\x11correct_responses\x18\x03 \x01(\x05R\x10correctResponses\x12)\n" +
+	"\x10accuracy_percent\x18\x04 \x01(\x05R\x0faccuracyPercent\x12C\n" +
+	"\tquestions\x18\x05 \x03(\v2%.plugnmeet.AIAgentSummaryQuizQuestionR\tquestions\"\xd6\x01\n" +
+	"\x1aAIAgentSummaryQuizQuestion\x12\x17\n" +
+	"\apoll_id\x18\x01 \x01(\tR\x06pollId\x12\x1a\n" +
+	"\bquestion\x18\x02 \x01(\tR\bquestion\x12%\n" +
+	"\x0ecorrect_option\x18\x03 \x01(\tR\rcorrectOption\x12\x1f\n" +
+	"\vtotal_votes\x18\x04 \x01(\x04R\n" +
+	"totalVotes\x12#\n" +
+	"\rcorrect_votes\x18\x05 \x01(\x04R\fcorrectVotes\x12\x16\n" +
+	"\x06passed\x18\x06 \x01(\bR\x06passed\"t\n" +
+	"\x1bAIAgentSummaryProgressEntry\x12\x18\n" +
+	"\aconcept\x18\x01 \x01(\tR\aconcept\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x12\x19\n" +
+	"\x05notes\x18\x03 \x01(\tH\x00R\x05notes\x88\x01\x01B\b\n" +
+	"\x06_notes\"\x85\x02\n" +
+	"\x1fAIAgentSummaryWorkspaceActivity\x12X\n" +
+	"\n" +
+	"tools_used\x18\x01 \x03(\v29.plugnmeet.AIAgentSummaryWorkspaceActivity.ToolsUsedEntryR\ttoolsUsed\x12'\n" +
+	"\x0fwhiteboard_used\x18\x02 \x01(\bR\x0ewhiteboardUsed\x12!\n" +
+	"\fnotepad_used\x18\x03 \x01(\bR\vnotepadUsed\x1a<\n" +
+	"\x0eToolsUsedEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"\xf4\x01\n" +
+	"\x1aAIAgentSummaryContinuation\x12,\n" +
+	"\x12next_session_focus\x18\x01 \x01(\tR\x10nextSessionFocus\x12.\n" +
+	"\x13recommended_warm_up\x18\x02 \x01(\tR\x11recommendedWarmUp\x121\n" +
+	"\x14unfinished_subtopics\x18\x03 \x03(\tR\x13unfinishedSubtopics\x12E\n" +
+	"\x1fprevious_session_context_prompt\x18\x04 \x01(\tR\x1cpreviousSessionContextPrompt*\xf8\x02\n" +
 	"\x10RoomArtifactType\x12\x14\n" +
 	"\x10UNKNOWN_ARTIFACT\x10\x00\x12\x15\n" +
 	"\x11MEETING_ANALYTICS\x10\x01\x12\x13\n" +
@@ -792,7 +1588,7 @@ func file_plugnmeet_room_artifacts_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_room_artifacts_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_plugnmeet_room_artifacts_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_plugnmeet_room_artifacts_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_plugnmeet_room_artifacts_proto_goTypes = []any{
 	(RoomArtifactType)(0),                   // 0: plugnmeet.RoomArtifactType
 	(*RoomArtifactFileInfo)(nil),            // 1: plugnmeet.RoomArtifactFileInfo
@@ -803,14 +1599,23 @@ var file_plugnmeet_room_artifacts_proto_goTypes = []any{
 	(*RoomArtifactCharacterCountUsage)(nil), // 6: plugnmeet.RoomArtifactCharacterCountUsage
 	(*RoomArtifactMetadata)(nil),            // 7: plugnmeet.RoomArtifactMetadata
 	(*RoomArtifactWebhookEvent)(nil),        // 8: plugnmeet.RoomArtifactWebhookEvent
-	nil,                                     // 9: plugnmeet.RoomArtifactTokenUsage.BreakdownEntry
-	nil,                                     // 10: plugnmeet.RoomArtifactDurationUsage.BreakdownEntry
-	nil,                                     // 11: plugnmeet.RoomArtifactCharacterCountUsage.BreakdownEntry
+	(*AIAgentSessionSummary)(nil),           // 9: plugnmeet.AIAgentSessionSummary
+	(*AIAgentSummarySession)(nil),           // 10: plugnmeet.AIAgentSummarySession
+	(*AIAgentSummaryEvaluation)(nil),        // 11: plugnmeet.AIAgentSummaryEvaluation
+	(*AIAgentSummaryQuizEvaluation)(nil),    // 12: plugnmeet.AIAgentSummaryQuizEvaluation
+	(*AIAgentSummaryQuizQuestion)(nil),      // 13: plugnmeet.AIAgentSummaryQuizQuestion
+	(*AIAgentSummaryProgressEntry)(nil),     // 14: plugnmeet.AIAgentSummaryProgressEntry
+	(*AIAgentSummaryWorkspaceActivity)(nil), // 15: plugnmeet.AIAgentSummaryWorkspaceActivity
+	(*AIAgentSummaryContinuation)(nil),      // 16: plugnmeet.AIAgentSummaryContinuation
+	nil,                                     // 17: plugnmeet.RoomArtifactTokenUsage.BreakdownEntry
+	nil,                                     // 18: plugnmeet.RoomArtifactDurationUsage.BreakdownEntry
+	nil,                                     // 19: plugnmeet.RoomArtifactCharacterCountUsage.BreakdownEntry
+	nil,                                     // 20: plugnmeet.AIAgentSummaryWorkspaceActivity.ToolsUsedEntry
 }
 var file_plugnmeet_room_artifacts_proto_depIdxs = []int32{
-	9,  // 0: plugnmeet.RoomArtifactTokenUsage.breakdown:type_name -> plugnmeet.RoomArtifactTokenUsage.BreakdownEntry
-	10, // 1: plugnmeet.RoomArtifactDurationUsage.breakdown:type_name -> plugnmeet.RoomArtifactDurationUsage.BreakdownEntry
-	11, // 2: plugnmeet.RoomArtifactCharacterCountUsage.breakdown:type_name -> plugnmeet.RoomArtifactCharacterCountUsage.BreakdownEntry
+	17, // 0: plugnmeet.RoomArtifactTokenUsage.breakdown:type_name -> plugnmeet.RoomArtifactTokenUsage.BreakdownEntry
+	18, // 1: plugnmeet.RoomArtifactDurationUsage.breakdown:type_name -> plugnmeet.RoomArtifactDurationUsage.BreakdownEntry
+	19, // 2: plugnmeet.RoomArtifactCharacterCountUsage.breakdown:type_name -> plugnmeet.RoomArtifactCharacterCountUsage.BreakdownEntry
 	3,  // 3: plugnmeet.RoomArtifactMetadata.user_info:type_name -> plugnmeet.RoomArtifactUserInfo
 	2,  // 4: plugnmeet.RoomArtifactMetadata.provider_job_info:type_name -> plugnmeet.RoomArtifactProviderJobInfo
 	1,  // 5: plugnmeet.RoomArtifactMetadata.file_info:type_name -> plugnmeet.RoomArtifactFileInfo
@@ -819,11 +1624,20 @@ var file_plugnmeet_room_artifacts_proto_depIdxs = []int32{
 	6,  // 8: plugnmeet.RoomArtifactMetadata.character_count_usage:type_name -> plugnmeet.RoomArtifactCharacterCountUsage
 	0,  // 9: plugnmeet.RoomArtifactWebhookEvent.type:type_name -> plugnmeet.RoomArtifactType
 	7,  // 10: plugnmeet.RoomArtifactWebhookEvent.metadata:type_name -> plugnmeet.RoomArtifactMetadata
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	3,  // 11: plugnmeet.AIAgentSessionSummary.user_info:type_name -> plugnmeet.RoomArtifactUserInfo
+	10, // 12: plugnmeet.AIAgentSessionSummary.session:type_name -> plugnmeet.AIAgentSummarySession
+	11, // 13: plugnmeet.AIAgentSessionSummary.evaluation:type_name -> plugnmeet.AIAgentSummaryEvaluation
+	12, // 14: plugnmeet.AIAgentSessionSummary.quiz_evaluation:type_name -> plugnmeet.AIAgentSummaryQuizEvaluation
+	14, // 15: plugnmeet.AIAgentSessionSummary.progress_log:type_name -> plugnmeet.AIAgentSummaryProgressEntry
+	15, // 16: plugnmeet.AIAgentSessionSummary.workspace_activity:type_name -> plugnmeet.AIAgentSummaryWorkspaceActivity
+	16, // 17: plugnmeet.AIAgentSessionSummary.continuation:type_name -> plugnmeet.AIAgentSummaryContinuation
+	13, // 18: plugnmeet.AIAgentSummaryQuizEvaluation.questions:type_name -> plugnmeet.AIAgentSummaryQuizQuestion
+	20, // 19: plugnmeet.AIAgentSummaryWorkspaceActivity.tools_used:type_name -> plugnmeet.AIAgentSummaryWorkspaceActivity.ToolsUsedEntry
+	20, // [20:20] is the sub-list for method output_type
+	20, // [20:20] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_room_artifacts_proto_init() }
@@ -840,13 +1654,14 @@ func file_plugnmeet_room_artifacts_proto_init() {
 		(*RoomArtifactMetadata_DurationUsage)(nil),
 		(*RoomArtifactMetadata_CharacterCountUsage)(nil),
 	}
+	file_plugnmeet_room_artifacts_proto_msgTypes[13].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_room_artifacts_proto_rawDesc), len(file_plugnmeet_room_artifacts_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   11,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -41,6 +41,9 @@ message RoomArtifactProviderJobInfo {
 message RoomArtifactUserInfo {
   string user_id = 1;
   optional string name = 2;
+  optional string ex_user_id = 3;
+  // extra_data carries the user's custom metadata as a JSON object.
+  optional string extra_data = 4;
 }
 
 message RoomArtifactTokenUsage {
@@ -101,4 +104,83 @@ message RoomArtifactWebhookEvent {
   RoomArtifactType type = 1;
   string artifact_id = 2;
   RoomArtifactMetadata metadata = 3;
+}
+
+// AI agent session summary contract for the AI_AGENT_SESSION_SUMMARY artifact.
+message AIAgentSessionSummary {
+  // summary_source is "llm" when a model refined the summary, "local_fallback"
+  // when it was derived from telemetry only.
+  string summary_source = 1;
+  string generated_at = 2;
+  // the learner of the 1-on-1 session; always present
+  RoomArtifactUserInfo user_info = 3;
+  AIAgentSummarySession session = 4;
+  AIAgentSummaryEvaluation evaluation = 5;
+  AIAgentSummaryQuizEvaluation quiz_evaluation = 6;
+  repeated AIAgentSummaryProgressEntry progress_log = 7;
+  AIAgentSummaryWorkspaceActivity workspace_activity = 8;
+  AIAgentSummaryContinuation continuation = 9;
+  string narrative_summary = 10;
+}
+
+message AIAgentSummarySession {
+  string room_id = 1;
+  string room_sid = 2;
+  string session_id = 3;
+  string agent_display_name = 4;
+  string topic = 5;
+  repeated string allowed_subtopics = 6;
+  int64 started_at = 7;
+  int64 ended_at = 8;
+  int64 duration_seconds = 9;
+  string end_reason = 10;
+  int32 off_topic_redirects_count = 11;
+  int32 turns_count = 12;
+}
+
+message AIAgentSummaryEvaluation {
+  int32 overall_score = 1;
+  string mastery_level = 2;
+  string participation_level = 3;
+  repeated string concepts_mastered = 4;
+  repeated string concepts_practiced = 5;
+  repeated string struggled_with = 6;
+  repeated string vocabulary_or_key_terms = 7;
+  string rubric_notes = 8;
+}
+
+message AIAgentSummaryQuizEvaluation {
+  int32 total_quizzes = 1;
+  int32 total_responses = 2;
+  int32 correct_responses = 3;
+  int32 accuracy_percent = 4;
+  repeated AIAgentSummaryQuizQuestion questions = 5;
+}
+
+message AIAgentSummaryQuizQuestion {
+  string poll_id = 1;
+  string question = 2;
+  string correct_option = 3;
+  uint64 total_votes = 4;
+  uint64 correct_votes = 5;
+  bool passed = 6;
+}
+
+message AIAgentSummaryProgressEntry {
+  string concept = 1;
+  string status = 2;
+  optional string notes = 3;
+}
+
+message AIAgentSummaryWorkspaceActivity {
+  map<string, int32> tools_used = 1;
+  bool whiteboard_used = 2;
+  bool notepad_used = 3;
+}
+
+message AIAgentSummaryContinuation {
+  string next_session_focus = 1;
+  string recommended_warm_up = 2;
+  repeated string unfinished_subtopics = 3;
+  string previous_session_context_prompt = 4;
 }
