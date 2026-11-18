@@ -158,6 +158,7 @@ func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhit
 			insightsFeatures := r.Metadata.RoomFeatures.InsightsFeatures
 			insightsFeatures.TranscriptionFeatures.IsAllow = false
 			insightsFeatures.AiFeatures.MeetingSummarizationFeatures.IsAllow = false
+			insightsFeatures.AiAgentFeatures.IsAllow = false
 		} else {
 			// only generate key if nothing was delivered
 			if rf.EndToEndEncryptionFeatures.EncryptionKey == nil ||
@@ -176,6 +177,7 @@ func SetCreateRoomDefaultValues(r *plugnmeet.CreateRoomReq, maxSize, maxSizeWhit
 		rf.InsightsFeatures.TranscriptionFeatures.IsAllow = false
 		rf.InsightsFeatures.ChatTranslationFeatures.IsAllow = false
 		rf.InsightsFeatures.AiFeatures.IsAllow = false
+		rf.InsightsFeatures.AiAgentFeatures.IsAllow = false
 	}
 
 	if !rf.InsightsFeatures.TranscriptionFeatures.IsAllow {

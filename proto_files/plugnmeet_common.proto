@@ -29,6 +29,8 @@ message NotifyEventRoom {
   repeated livekit.Codec enabled_codecs = 6;
   optional string metadata = 7;
   optional uint32 num_participants = 8;
+  optional bool is_breakout_room = 9;
+  optional string breakout_room_id = 10;
 }
 
 message RecordingInfoEvent {

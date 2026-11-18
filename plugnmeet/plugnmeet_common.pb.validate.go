@@ -464,6 +464,14 @@ func (m *NotifyEventRoom) validate(all bool) error {
 		// no validation rules for NumParticipants
 	}
 
+	if m.IsBreakoutRoom != nil {
+		// no validation rules for IsBreakoutRoom
+	}
+
+	if m.BreakoutRoomId != nil {
+		// no validation rules for BreakoutRoomId
+	}
+
 	if len(errors) > 0 {
 		return NotifyEventRoomMultiError(errors)
 	}

@@ -148,6 +148,8 @@ type NotifyEventRoom struct {
 	EnabledCodecs   []*livekit.Codec       `protobuf:"bytes,6,rep,name=enabled_codecs,json=enabledCodecs,proto3" json:"enabled_codecs,omitempty"`
 	Metadata        *string                `protobuf:"bytes,7,opt,name=metadata,proto3,oneof" json:"metadata,omitempty"`
 	NumParticipants *uint32                `protobuf:"varint,8,opt,name=num_participants,json=numParticipants,proto3,oneof" json:"num_participants,omitempty"`
+	IsBreakoutRoom  *bool                  `protobuf:"varint,9,opt,name=is_breakout_room,json=isBreakoutRoom,proto3,oneof" json:"is_breakout_room,omitempty"`
+	BreakoutRoomId  *string                `protobuf:"bytes,10,opt,name=breakout_room_id,json=breakoutRoomId,proto3,oneof" json:"breakout_room_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -236,6 +238,20 @@ func (x *NotifyEventRoom) GetNumParticipants() uint32 {
 		return *x.NumParticipants
 	}
 	return 0
+}
+
+func (x *NotifyEventRoom) GetIsBreakoutRoom() bool {
+	if x != nil && x.IsBreakoutRoom != nil {
+		return *x.IsBreakoutRoom
+	}
+	return false
+}
+
+func (x *NotifyEventRoom) GetBreakoutRoomId() string {
+	if x != nil && x.BreakoutRoomId != nil {
+		return *x.BreakoutRoomId
+	}
+	return ""
 }
 
 type RecordingInfoEvent struct {
@@ -438,7 +454,7 @@ const file_plugnmeet_common_proto_rawDesc = "" +
 	"_analyticsB\x10\n" +
 	"\x0e_room_artifactB\x05\n" +
 	"\x03_idB\r\n" +
-	"\v_created_at\"\xc1\x03\n" +
+	"\v_created_at\"\xc9\x04\n" +
 	"\x0fNotifyEventRoom\x12\x15\n" +
 	"\x03sid\x18\x01 \x01(\tH\x00R\x03sid\x88\x01\x01\x12\x1c\n" +
 	"\aroom_id\x18\x02 \x01(\tH\x01R\x06roomId\x88\x01\x01\x12(\n" +
@@ -447,7 +463,10 @@ const file_plugnmeet_common_proto_rawDesc = "" +
 	"\rcreation_time\x18\x05 \x01(\x04H\x04R\fcreationTime\x88\x01\x01\x125\n" +
 	"\x0eenabled_codecs\x18\x06 \x03(\v2\x0e.livekit.CodecR\renabledCodecs\x12\x1f\n" +
 	"\bmetadata\x18\a \x01(\tH\x05R\bmetadata\x88\x01\x01\x12.\n" +
-	"\x10num_participants\x18\b \x01(\rH\x06R\x0fnumParticipants\x88\x01\x01B\x06\n" +
+	"\x10num_participants\x18\b \x01(\rH\x06R\x0fnumParticipants\x88\x01\x01\x12-\n" +
+	"\x10is_breakout_room\x18\t \x01(\bH\aR\x0eisBreakoutRoom\x88\x01\x01\x12-\n" +
+	"\x10breakout_room_id\x18\n" +
+	" \x01(\tH\bR\x0ebreakoutRoomId\x88\x01\x01B\x06\n" +
 	"\x04_sidB\n" +
 	"\n" +
 	"\b_room_idB\x10\n" +
@@ -455,7 +474,9 @@ const file_plugnmeet_common_proto_rawDesc = "" +
 	"\x11_max_participantsB\x10\n" +
 	"\x0e_creation_timeB\v\n" +
 	"\t_metadataB\x13\n" +
-	"\x11_num_participants\"\xd5\x01\n" +
+	"\x11_num_participantsB\x13\n" +
+	"\x11_is_breakout_roomB\x13\n" +
+	"\x11_breakout_room_id\"\xd5\x01\n" +
 	"\x12RecordingInfoEvent\x12\x1b\n" +
 	"\trecord_id\x18\x01 \x01(\tR\brecordId\x12\x1f\n" +
 	"\vrecorder_id\x18\x02 \x01(\tR\n" +
