@@ -31,6 +31,7 @@ message BreakoutRoom {
   string room_sid = 7;
   optional string ai_agent_context = 8 [(buf.validate.field).string.max_len = 2000];
   bool enable_ai_agent = 9;
+  bool ai_agent_joined = 10;
 }
 
 message BreakoutRoomUser {

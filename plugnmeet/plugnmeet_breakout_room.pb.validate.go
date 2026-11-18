@@ -329,6 +329,8 @@ func (m *BreakoutRoom) validate(all bool) error {
 
 	// no validation rules for EnableAiAgent
 
+	// no validation rules for AiAgentJoined
+
 	if m.AiAgentContext != nil {
 		// no validation rules for AiAgentContext
 	}

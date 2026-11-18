@@ -1,0 +1,178 @@
+syntax = "proto3";
+package plugnmeet;
+
+option go_package = "github.com/mynaparrot/plugnmeet-protocol/plugnmeet";
+option php_namespace = "Mynaparrot\\PlugnmeetProto";
+
+import "buf/validate/validate.proto";
+
+message InsightsFeatures {
+  bool is_allow = 1; // Allow/disallow all insights features for this room
+  optional InsightsTranscriptionFeatures transcription_features = 2;
+  optional InsightsChatTranslationFeatures chat_translation_features = 3;
+  optional InsightsAIFeatures ai_features = 4;
+  optional InsightsAIAgentFeatures ai_agent_features = 5;
+}
+
+message InsightsTranscriptionFeatures {
+  bool is_allow = 1;
+  bool is_allow_translation = 2;
+  bool is_allow_speech_synthesis = 3;
+
+  // all internal usage fields
+  bool is_enabled = 4 [(buf.validate.field).bool.const = false];
+  repeated string allowed_spoken_langs = 5 [(buf.validate.field).repeated.max_items = 0];
+  repeated string allowed_speech_users = 6 [(buf.validate.field).repeated.max_items = 0];
+
+  bool is_enabled_translation = 7 [(buf.validate.field).bool.const = false];
+  int32 max_selected_trans_langs = 8 [(buf.validate.field).int32.const = 0];
+  repeated string allowed_trans_langs = 9 [(buf.validate.field).repeated.max_items = 0];
+  optional string default_subtitle_lang = 10 [(buf.validate.field).cel = {
+    id: "default_subtitle_lang_format",
+    message: "default_subtitle_lang should not contain any value",
+    expression: "this.matches('^$')"
+  }];
+  bool is_enabled_speech_synthesis = 11 [(buf.validate.field).bool.const = false];
+}
+
+message InsightsChatTranslationFeatures {
+  bool is_allow = 1;
+
+  // all internal usage fields
+  bool is_enabled = 2 [(buf.validate.field).bool.const = false];
+  repeated string allowed_trans_langs = 3 [(buf.validate.field).repeated.max_items = 0];
+  int32 max_selected_trans_langs = 4 [(buf.validate.field).int32.const = 0];
+  optional string default_lang = 5 [(buf.validate.field).cel = {
+    id: "default_lang_format",
+    message: "default_lang should not contain any value",
+    expression: "this.matches('^$')"
+  }];
+}
+
+message InsightsAIFeatures {
+  bool is_allow = 1;
+  optional InsightsAITextChatFeatures ai_text_chat_features = 2;
+  optional InsightsAIMeetingSummarizationFeatures meeting_summarization_features = 3;
+}
+
+message InsightsAITextChatFeatures {
+  bool is_allow = 1;
+
+  // all internal usage fields
+  bool is_enabled = 2 [(buf.validate.field).bool.const = false];
+  bool is_allowed_everyone = 3 [(buf.validate.field).bool.const = false];
+  repeated string allowed_user_ids = 4 [(buf.validate.field).repeated.max_items = 0];
+  bool is_notepad_ai_disabled = 5 [(buf.validate.field).bool.const = false];
+  bool is_whiteboard_ai_disabled = 6 [(buf.validate.field).bool.const = false];
+  bool is_poll_ai_disabled = 7 [(buf.validate.field).bool.const = false];
+
+  // external MCP servers available to AI text chat (same shape as AI agent)
+  map<string, ExternalMCPServerConfig> mcp_servers = 8 [(buf.validate.field).map = {
+    max_pairs: 2,
+    keys: {string: {min_len: 1, max_len: 64}}
+  }];
+}
+
+message InsightsAIMeetingSummarizationFeatures {
+  bool is_allow = 1;
+  string summarization_prompt = 2;
+
+  // all internal usage fields
+  bool is_enabled = 3 [(buf.validate.field).bool.const = false];
+}
+
+// ExternalMCPServerScope describes the owner/consumer of an external MCP
+// server configuration. It mirrors the free-form `scope` hint of
+// ExternalMCPServerConfig.
+enum ExternalMCPServerScope {
+  EXTERNAL_MCP_SERVER_SCOPE_UNSPECIFIED = 0;
+  EXTERNAL_MCP_SERVER_SCOPE_SHARED = 1;
+  EXTERNAL_MCP_SERVER_SCOPE_TEXT_CHAT = 2;
+  EXTERNAL_MCP_SERVER_SCOPE_AI_AGENT = 3;
+}
+
+message ExternalMCPServerConfig {
+  string url = 1 [(buf.validate.field).string.max_len = 1024];
+  map<string, string> headers = 2 [(buf.validate.field).map = {
+    max_pairs: 16,
+    keys: {string: {max_len: 128}},
+    values: {string: {max_len: 2048}}
+  }];
+  repeated string allowed_tools = 3 [(buf.validate.field).repeated = {
+    max_items: 8,
+    items: {string: {max_len: 128}}
+  }];
+  // optional owner hint: "shared", "text_chat", "ai_agent", ...
+  optional string scope = 4 [(buf.validate.field).string.max_len = 32];
+}
+
+enum AIAgentSessionMode {
+  AI_AGENT_SESSION_MODE_NORMAL_ROOM = 0;
+  AI_AGENT_SESSION_MODE_CONTROLLED_USERS = 1;
+  AI_AGENT_SESSION_MODE_OPEN_PER_USER = 2;
+}
+
+message AIAgentAutoSessionConfig {
+  repeated string allowed_participant_ids = 1 [(buf.validate.field).repeated = {
+    max_items: 32,
+    items: {string: {min_len: 1, max_len: 128}}
+  }];
+  // only usable when session_mode = AI_AGENT_SESSION_MODE_OPEN_PER_USER
+  uint32 max_concurrent_sessions = 2 [(buf.validate.field).uint32.lte = 16];
+  optional bool auto_start_agent = 3;
+}
+
+message InsightsAIAgentFeatures {
+  bool is_allow = 1; // master switch
+
+  // session mode & automatic 1-on-1 session routing
+  AIAgentSessionMode session_mode = 2;
+  optional AIAgentAutoSessionConfig auto_session_config = 3;
+
+  // persona, curriculum & topic boundary (host-owned)
+  optional string agent_display_name = 4; // default: "AI Assistant"
+  string system_prompt = 5; // required when is_allow
+  optional string previous_session_context = 6; // last session's summary
+  string topic = 7; // required when is_allow
+  repeated string allowed_subtopics = 8 [(buf.validate.field).repeated.max_items = 64];
+  repeated string forbidden_topics = 9 [(buf.validate.field).repeated.max_items = 32];
+  bool strict_topic_enforcement = 10; // default true
+  uint32 topic_anchor_interval_turns = 11; // default 6, range 3..12
+
+  // language & voice delivery
+  optional string spoken_lang = 12; // BCP-47: learner's native/support language
+  optional string target_lang = 13; // BCP-47: language being learned (empty = no language-learning profile)
+  optional string instruction_lang = 14; // language the agent explains in; empty -> spoken_lang
+  optional string voice = 15; // provider voice id; must be in server allow-list
+  optional float speaking_rate = 16 [(buf.validate.field).float = {gte: 0.5, lte: 2.0}];
+
+  // workspace & tool capabilities
+  bool allow_whiteboard_write = 17; // default true
+  bool allow_vision_capture = 18; // default true
+  uint32 vision_debounce_ms = 19; // default 1200, max 5000
+  uint32 vision_max_edge_px = 20; // default 1024, range 512..1600
+  bool allow_polls = 21; // default true
+  bool allow_chat_message = 22; // default true
+  bool allow_notepad_write = 23; // default true
+
+  // external knowledge & external MCP servers
+  bool allow_web_fetch = 24; // default false
+  repeated string allowed_knowledge_urls = 25 [(buf.validate.field).repeated.max_items = 32];
+  uint32 knowledge_cache_ttl_seconds = 26; // default 3600, range 60..86400
+  map<string, ExternalMCPServerConfig> mcp_servers = 27 [(buf.validate.field).map = {
+    max_pairs: 2,
+    keys: {string: {min_len: 1, max_len: 64}}
+  }];
+
+  // cost & duration caps
+  uint32 max_session_seconds = 28 [(buf.validate.field).uint32 = {gte: 60, lte: 7200}];
+  uint32 max_audio_minutes = 29 [(buf.validate.field).uint32.lte = 240]; // 0 = server default
+
+  // all internal usage fields (host may not set)
+  bool is_enabled = 30 [(buf.validate.field).bool.const = false];
+  optional string active_session_id = 31 [(buf.validate.field).cel = {
+    id: "active_session_id_empty",
+    message: "active_session_id should not contain any value",
+    expression: "this.matches('^$')"
+  }];
+}

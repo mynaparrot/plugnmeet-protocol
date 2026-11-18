@@ -1497,883 +1497,6 @@ func (x *SipDialInFeatures) GetDispatchRuleId() string {
 	return ""
 }
 
-type InsightsFeatures struct {
-	state                   protoimpl.MessageState           `protogen:"open.v1"`
-	IsAllow                 bool                             `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"` // Allow/disallow all insights features for this room
-	TranscriptionFeatures   *InsightsTranscriptionFeatures   `protobuf:"bytes,2,opt,name=transcription_features,json=transcriptionFeatures,proto3,oneof" json:"transcription_features,omitempty"`
-	ChatTranslationFeatures *InsightsChatTranslationFeatures `protobuf:"bytes,3,opt,name=chat_translation_features,json=chatTranslationFeatures,proto3,oneof" json:"chat_translation_features,omitempty"`
-	AiFeatures              *InsightsAIFeatures              `protobuf:"bytes,4,opt,name=ai_features,json=aiFeatures,proto3,oneof" json:"ai_features,omitempty"`
-	AiAgentFeatures         *InsightsAIAgentFeatures         `protobuf:"bytes,5,opt,name=ai_agent_features,json=aiAgentFeatures,proto3,oneof" json:"ai_agent_features,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
-}
-
-func (x *InsightsFeatures) Reset() {
-	*x = InsightsFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InsightsFeatures) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InsightsFeatures) ProtoMessage() {}
-
-func (x *InsightsFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InsightsFeatures.ProtoReflect.Descriptor instead.
-func (*InsightsFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{17}
-}
-
-func (x *InsightsFeatures) GetIsAllow() bool {
-	if x != nil {
-		return x.IsAllow
-	}
-	return false
-}
-
-func (x *InsightsFeatures) GetTranscriptionFeatures() *InsightsTranscriptionFeatures {
-	if x != nil {
-		return x.TranscriptionFeatures
-	}
-	return nil
-}
-
-func (x *InsightsFeatures) GetChatTranslationFeatures() *InsightsChatTranslationFeatures {
-	if x != nil {
-		return x.ChatTranslationFeatures
-	}
-	return nil
-}
-
-func (x *InsightsFeatures) GetAiFeatures() *InsightsAIFeatures {
-	if x != nil {
-		return x.AiFeatures
-	}
-	return nil
-}
-
-func (x *InsightsFeatures) GetAiAgentFeatures() *InsightsAIAgentFeatures {
-	if x != nil {
-		return x.AiAgentFeatures
-	}
-	return nil
-}
-
-type InsightsTranscriptionFeatures struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	IsAllow                bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
-	IsAllowTranslation     bool                   `protobuf:"varint,2,opt,name=is_allow_translation,json=isAllowTranslation,proto3" json:"is_allow_translation,omitempty"`
-	IsAllowSpeechSynthesis bool                   `protobuf:"varint,3,opt,name=is_allow_speech_synthesis,json=isAllowSpeechSynthesis,proto3" json:"is_allow_speech_synthesis,omitempty"`
-	// all internal usage fields
-	IsEnabled                bool     `protobuf:"varint,4,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
-	AllowedSpokenLangs       []string `protobuf:"bytes,5,rep,name=allowed_spoken_langs,json=allowedSpokenLangs,proto3" json:"allowed_spoken_langs,omitempty"`
-	AllowedSpeechUsers       []string `protobuf:"bytes,6,rep,name=allowed_speech_users,json=allowedSpeechUsers,proto3" json:"allowed_speech_users,omitempty"`
-	IsEnabledTranslation     bool     `protobuf:"varint,7,opt,name=is_enabled_translation,json=isEnabledTranslation,proto3" json:"is_enabled_translation,omitempty"`
-	MaxSelectedTransLangs    int32    `protobuf:"varint,8,opt,name=max_selected_trans_langs,json=maxSelectedTransLangs,proto3" json:"max_selected_trans_langs,omitempty"`
-	AllowedTransLangs        []string `protobuf:"bytes,9,rep,name=allowed_trans_langs,json=allowedTransLangs,proto3" json:"allowed_trans_langs,omitempty"`
-	DefaultSubtitleLang      *string  `protobuf:"bytes,10,opt,name=default_subtitle_lang,json=defaultSubtitleLang,proto3,oneof" json:"default_subtitle_lang,omitempty"`
-	IsEnabledSpeechSynthesis bool     `protobuf:"varint,11,opt,name=is_enabled_speech_synthesis,json=isEnabledSpeechSynthesis,proto3" json:"is_enabled_speech_synthesis,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
-}
-
-func (x *InsightsTranscriptionFeatures) Reset() {
-	*x = InsightsTranscriptionFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[18]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InsightsTranscriptionFeatures) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InsightsTranscriptionFeatures) ProtoMessage() {}
-
-func (x *InsightsTranscriptionFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[18]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InsightsTranscriptionFeatures.ProtoReflect.Descriptor instead.
-func (*InsightsTranscriptionFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{18}
-}
-
-func (x *InsightsTranscriptionFeatures) GetIsAllow() bool {
-	if x != nil {
-		return x.IsAllow
-	}
-	return false
-}
-
-func (x *InsightsTranscriptionFeatures) GetIsAllowTranslation() bool {
-	if x != nil {
-		return x.IsAllowTranslation
-	}
-	return false
-}
-
-func (x *InsightsTranscriptionFeatures) GetIsAllowSpeechSynthesis() bool {
-	if x != nil {
-		return x.IsAllowSpeechSynthesis
-	}
-	return false
-}
-
-func (x *InsightsTranscriptionFeatures) GetIsEnabled() bool {
-	if x != nil {
-		return x.IsEnabled
-	}
-	return false
-}
-
-func (x *InsightsTranscriptionFeatures) GetAllowedSpokenLangs() []string {
-	if x != nil {
-		return x.AllowedSpokenLangs
-	}
-	return nil
-}
-
-func (x *InsightsTranscriptionFeatures) GetAllowedSpeechUsers() []string {
-	if x != nil {
-		return x.AllowedSpeechUsers
-	}
-	return nil
-}
-
-func (x *InsightsTranscriptionFeatures) GetIsEnabledTranslation() bool {
-	if x != nil {
-		return x.IsEnabledTranslation
-	}
-	return false
-}
-
-func (x *InsightsTranscriptionFeatures) GetMaxSelectedTransLangs() int32 {
-	if x != nil {
-		return x.MaxSelectedTransLangs
-	}
-	return 0
-}
-
-func (x *InsightsTranscriptionFeatures) GetAllowedTransLangs() []string {
-	if x != nil {
-		return x.AllowedTransLangs
-	}
-	return nil
-}
-
-func (x *InsightsTranscriptionFeatures) GetDefaultSubtitleLang() string {
-	if x != nil && x.DefaultSubtitleLang != nil {
-		return *x.DefaultSubtitleLang
-	}
-	return ""
-}
-
-func (x *InsightsTranscriptionFeatures) GetIsEnabledSpeechSynthesis() bool {
-	if x != nil {
-		return x.IsEnabledSpeechSynthesis
-	}
-	return false
-}
-
-type InsightsChatTranslationFeatures struct {
-	state   protoimpl.MessageState `protogen:"open.v1"`
-	IsAllow bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
-	// all internal usage fields
-	IsEnabled             bool     `protobuf:"varint,2,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
-	AllowedTransLangs     []string `protobuf:"bytes,3,rep,name=allowed_trans_langs,json=allowedTransLangs,proto3" json:"allowed_trans_langs,omitempty"`
-	MaxSelectedTransLangs int32    `protobuf:"varint,4,opt,name=max_selected_trans_langs,json=maxSelectedTransLangs,proto3" json:"max_selected_trans_langs,omitempty"`
-	DefaultLang           *string  `protobuf:"bytes,5,opt,name=default_lang,json=defaultLang,proto3,oneof" json:"default_lang,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *InsightsChatTranslationFeatures) Reset() {
-	*x = InsightsChatTranslationFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[19]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InsightsChatTranslationFeatures) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InsightsChatTranslationFeatures) ProtoMessage() {}
-
-func (x *InsightsChatTranslationFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[19]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InsightsChatTranslationFeatures.ProtoReflect.Descriptor instead.
-func (*InsightsChatTranslationFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{19}
-}
-
-func (x *InsightsChatTranslationFeatures) GetIsAllow() bool {
-	if x != nil {
-		return x.IsAllow
-	}
-	return false
-}
-
-func (x *InsightsChatTranslationFeatures) GetIsEnabled() bool {
-	if x != nil {
-		return x.IsEnabled
-	}
-	return false
-}
-
-func (x *InsightsChatTranslationFeatures) GetAllowedTransLangs() []string {
-	if x != nil {
-		return x.AllowedTransLangs
-	}
-	return nil
-}
-
-func (x *InsightsChatTranslationFeatures) GetMaxSelectedTransLangs() int32 {
-	if x != nil {
-		return x.MaxSelectedTransLangs
-	}
-	return 0
-}
-
-func (x *InsightsChatTranslationFeatures) GetDefaultLang() string {
-	if x != nil && x.DefaultLang != nil {
-		return *x.DefaultLang
-	}
-	return ""
-}
-
-type InsightsAIFeatures struct {
-	state                        protoimpl.MessageState                  `protogen:"open.v1"`
-	IsAllow                      bool                                    `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
-	AiTextChatFeatures           *InsightsAITextChatFeatures             `protobuf:"bytes,2,opt,name=ai_text_chat_features,json=aiTextChatFeatures,proto3,oneof" json:"ai_text_chat_features,omitempty"`
-	MeetingSummarizationFeatures *InsightsAIMeetingSummarizationFeatures `protobuf:"bytes,3,opt,name=meeting_summarization_features,json=meetingSummarizationFeatures,proto3,oneof" json:"meeting_summarization_features,omitempty"`
-	unknownFields                protoimpl.UnknownFields
-	sizeCache                    protoimpl.SizeCache
-}
-
-func (x *InsightsAIFeatures) Reset() {
-	*x = InsightsAIFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[20]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InsightsAIFeatures) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InsightsAIFeatures) ProtoMessage() {}
-
-func (x *InsightsAIFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[20]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InsightsAIFeatures.ProtoReflect.Descriptor instead.
-func (*InsightsAIFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{20}
-}
-
-func (x *InsightsAIFeatures) GetIsAllow() bool {
-	if x != nil {
-		return x.IsAllow
-	}
-	return false
-}
-
-func (x *InsightsAIFeatures) GetAiTextChatFeatures() *InsightsAITextChatFeatures {
-	if x != nil {
-		return x.AiTextChatFeatures
-	}
-	return nil
-}
-
-func (x *InsightsAIFeatures) GetMeetingSummarizationFeatures() *InsightsAIMeetingSummarizationFeatures {
-	if x != nil {
-		return x.MeetingSummarizationFeatures
-	}
-	return nil
-}
-
-type InsightsAITextChatFeatures struct {
-	state   protoimpl.MessageState `protogen:"open.v1"`
-	IsAllow bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
-	// all internal usage fields
-	IsEnabled              bool     `protobuf:"varint,2,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
-	IsAllowedEveryone      bool     `protobuf:"varint,3,opt,name=is_allowed_everyone,json=isAllowedEveryone,proto3" json:"is_allowed_everyone,omitempty"`
-	AllowedUserIds         []string `protobuf:"bytes,4,rep,name=allowed_user_ids,json=allowedUserIds,proto3" json:"allowed_user_ids,omitempty"`
-	IsNotepadAiDisabled    bool     `protobuf:"varint,5,opt,name=is_notepad_ai_disabled,json=isNotepadAiDisabled,proto3" json:"is_notepad_ai_disabled,omitempty"`
-	IsWhiteboardAiDisabled bool     `protobuf:"varint,6,opt,name=is_whiteboard_ai_disabled,json=isWhiteboardAiDisabled,proto3" json:"is_whiteboard_ai_disabled,omitempty"`
-	IsPollAiDisabled       bool     `protobuf:"varint,7,opt,name=is_poll_ai_disabled,json=isPollAiDisabled,proto3" json:"is_poll_ai_disabled,omitempty"`
-	// external MCP servers available to AI text chat (same shape as AI agent)
-	McpServers    map[string]*ExternalMCPServerConfig `protobuf:"bytes,8,rep,name=mcp_servers,json=mcpServers,proto3" json:"mcp_servers,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InsightsAITextChatFeatures) Reset() {
-	*x = InsightsAITextChatFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[21]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InsightsAITextChatFeatures) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InsightsAITextChatFeatures) ProtoMessage() {}
-
-func (x *InsightsAITextChatFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[21]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InsightsAITextChatFeatures.ProtoReflect.Descriptor instead.
-func (*InsightsAITextChatFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{21}
-}
-
-func (x *InsightsAITextChatFeatures) GetIsAllow() bool {
-	if x != nil {
-		return x.IsAllow
-	}
-	return false
-}
-
-func (x *InsightsAITextChatFeatures) GetIsEnabled() bool {
-	if x != nil {
-		return x.IsEnabled
-	}
-	return false
-}
-
-func (x *InsightsAITextChatFeatures) GetIsAllowedEveryone() bool {
-	if x != nil {
-		return x.IsAllowedEveryone
-	}
-	return false
-}
-
-func (x *InsightsAITextChatFeatures) GetAllowedUserIds() []string {
-	if x != nil {
-		return x.AllowedUserIds
-	}
-	return nil
-}
-
-func (x *InsightsAITextChatFeatures) GetIsNotepadAiDisabled() bool {
-	if x != nil {
-		return x.IsNotepadAiDisabled
-	}
-	return false
-}
-
-func (x *InsightsAITextChatFeatures) GetIsWhiteboardAiDisabled() bool {
-	if x != nil {
-		return x.IsWhiteboardAiDisabled
-	}
-	return false
-}
-
-func (x *InsightsAITextChatFeatures) GetIsPollAiDisabled() bool {
-	if x != nil {
-		return x.IsPollAiDisabled
-	}
-	return false
-}
-
-func (x *InsightsAITextChatFeatures) GetMcpServers() map[string]*ExternalMCPServerConfig {
-	if x != nil {
-		return x.McpServers
-	}
-	return nil
-}
-
-type InsightsAIMeetingSummarizationFeatures struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	IsAllow             bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
-	SummarizationPrompt string                 `protobuf:"bytes,2,opt,name=summarization_prompt,json=summarizationPrompt,proto3" json:"summarization_prompt,omitempty"`
-	// all internal usage fields
-	IsEnabled     bool `protobuf:"varint,3,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InsightsAIMeetingSummarizationFeatures) Reset() {
-	*x = InsightsAIMeetingSummarizationFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[22]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InsightsAIMeetingSummarizationFeatures) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InsightsAIMeetingSummarizationFeatures) ProtoMessage() {}
-
-func (x *InsightsAIMeetingSummarizationFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[22]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InsightsAIMeetingSummarizationFeatures.ProtoReflect.Descriptor instead.
-func (*InsightsAIMeetingSummarizationFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{22}
-}
-
-func (x *InsightsAIMeetingSummarizationFeatures) GetIsAllow() bool {
-	if x != nil {
-		return x.IsAllow
-	}
-	return false
-}
-
-func (x *InsightsAIMeetingSummarizationFeatures) GetSummarizationPrompt() string {
-	if x != nil {
-		return x.SummarizationPrompt
-	}
-	return ""
-}
-
-func (x *InsightsAIMeetingSummarizationFeatures) GetIsEnabled() bool {
-	if x != nil {
-		return x.IsEnabled
-	}
-	return false
-}
-
-type InsightsAIAgentFeatures struct {
-	state   protoimpl.MessageState `protogen:"open.v1"`
-	IsAllow bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"` // master switch
-	// persona & curriculum (host-owned)
-	SystemPrompt           string  `protobuf:"bytes,2,opt,name=system_prompt,json=systemPrompt,proto3" json:"system_prompt,omitempty"`                                       // required when is_allow
-	PreviousSessionContext *string `protobuf:"bytes,3,opt,name=previous_session_context,json=previousSessionContext,proto3,oneof" json:"previous_session_context,omitempty"` // last session's summary
-	AgentDisplayName       *string `protobuf:"bytes,4,opt,name=agent_display_name,json=agentDisplayName,proto3,oneof" json:"agent_display_name,omitempty"`                   // default: "AI Assistant"
-	SpokenLang             *string `protobuf:"bytes,5,opt,name=spoken_lang,json=spokenLang,proto3,oneof" json:"spoken_lang,omitempty"`                                       // BCP-47: learner's native/support language
-	TargetLang             *string `protobuf:"bytes,6,opt,name=target_lang,json=targetLang,proto3,oneof" json:"target_lang,omitempty"`                                       // BCP-47: language being learned (empty = no language-learning profile)
-	// behaviour
-	AutoJoinOnFirstParticipant bool   `protobuf:"varint,7,opt,name=auto_join_on_first_participant,json=autoJoinOnFirstParticipant,proto3" json:"auto_join_on_first_participant,omitempty"` // default false
-	AllowWhiteboardWrite       bool   `protobuf:"varint,8,opt,name=allow_whiteboard_write,json=allowWhiteboardWrite,proto3" json:"allow_whiteboard_write,omitempty"`                       // default true
-	AllowVisionCapture         bool   `protobuf:"varint,9,opt,name=allow_vision_capture,json=allowVisionCapture,proto3" json:"allow_vision_capture,omitempty"`                             // default true
-	VisionDebounceMs           uint32 `protobuf:"varint,10,opt,name=vision_debounce_ms,json=visionDebounceMs,proto3" json:"vision_debounce_ms,omitempty"`                                  // default 1200, max 5000
-	VisionMaxEdgePx            uint32 `protobuf:"varint,11,opt,name=vision_max_edge_px,json=visionMaxEdgePx,proto3" json:"vision_max_edge_px,omitempty"`                                   // default 1024, range 512..1600
-	AllowPolls                 bool   `protobuf:"varint,12,opt,name=allow_polls,json=allowPolls,proto3" json:"allow_polls,omitempty"`                                                      // default true
-	AllowChatMessage           bool   `protobuf:"varint,13,opt,name=allow_chat_message,json=allowChatMessage,proto3" json:"allow_chat_message,omitempty"`                                  // default true
-	AllowNotepadWrite          bool   `protobuf:"varint,14,opt,name=allow_notepad_write,json=allowNotepadWrite,proto3" json:"allow_notepad_write,omitempty"`                               // default true
-	// external knowledge & external MCP servers
-	AllowWebFetch            bool                                `protobuf:"varint,15,opt,name=allow_web_fetch,json=allowWebFetch,proto3" json:"allow_web_fetch,omitempty"` // default false
-	AllowedKnowledgeUrls     []string                            `protobuf:"bytes,16,rep,name=allowed_knowledge_urls,json=allowedKnowledgeUrls,proto3" json:"allowed_knowledge_urls,omitempty"`
-	KnowledgeCacheTtlSeconds uint32                              `protobuf:"varint,17,opt,name=knowledge_cache_ttl_seconds,json=knowledgeCacheTtlSeconds,proto3" json:"knowledge_cache_ttl_seconds,omitempty"` // default 3600, range 60..86400
-	McpServers               map[string]*ExternalMCPServerConfig `protobuf:"bytes,18,rep,name=mcp_servers,json=mcpServers,proto3" json:"mcp_servers,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// topic boundary & anti-drift (compiled into the server-owned envelope at session start)
-	Topic                    string   `protobuf:"bytes,22,opt,name=topic,proto3" json:"topic,omitempty"` // required when is_allow
-	AllowedSubtopics         []string `protobuf:"bytes,23,rep,name=allowed_subtopics,json=allowedSubtopics,proto3" json:"allowed_subtopics,omitempty"`
-	ForbiddenTopics          []string `protobuf:"bytes,24,rep,name=forbidden_topics,json=forbiddenTopics,proto3" json:"forbidden_topics,omitempty"`
-	StrictTopicEnforcement   bool     `protobuf:"varint,25,opt,name=strict_topic_enforcement,json=strictTopicEnforcement,proto3" json:"strict_topic_enforcement,omitempty"`         // default true
-	TopicAnchorIntervalTurns uint32   `protobuf:"varint,26,opt,name=topic_anchor_interval_turns,json=topicAnchorIntervalTurns,proto3" json:"topic_anchor_interval_turns,omitempty"` // default 6, range 3..12
-	// cost & duration caps
-	MaxSessionSeconds uint32 `protobuf:"varint,27,opt,name=max_session_seconds,json=maxSessionSeconds,proto3" json:"max_session_seconds,omitempty"`
-	MaxAudioMinutes   uint32 `protobuf:"varint,28,opt,name=max_audio_minutes,json=maxAudioMinutes,proto3" json:"max_audio_minutes,omitempty"` // 0 = server default
-	// delivery
-	InstructionLang *string  `protobuf:"bytes,29,opt,name=instruction_lang,json=instructionLang,proto3,oneof" json:"instruction_lang,omitempty"` // language the agent explains in; empty -> spoken_lang
-	Voice           *string  `protobuf:"bytes,30,opt,name=voice,proto3,oneof" json:"voice,omitempty"`                                            // provider voice id; must be in server allow-list
-	SpeakingRate    *float32 `protobuf:"fixed32,31,opt,name=speaking_rate,json=speakingRate,proto3,oneof" json:"speaking_rate,omitempty"`
-	// all internal usage fields (host may not set)
-	IsEnabled                bool     `protobuf:"varint,19,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
-	AllowedParticipantIds    []string `protobuf:"bytes,20,rep,name=allowed_participant_ids,json=allowedParticipantIds,proto3" json:"allowed_participant_ids,omitempty"`
-	ActiveSessionId          *string  `protobuf:"bytes,21,opt,name=active_session_id,json=activeSessionId,proto3,oneof" json:"active_session_id,omitempty"`
-	AutoCreatePerUserSession bool     `protobuf:"varint,32,opt,name=auto_create_per_user_session,json=autoCreatePerUserSession,proto3" json:"auto_create_per_user_session,omitempty"`
-	MaxConcurrentSessions    uint32   `protobuf:"varint,33,opt,name=max_concurrent_sessions,json=maxConcurrentSessions,proto3" json:"max_concurrent_sessions,omitempty"` // next ID: 34
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
-}
-
-func (x *InsightsAIAgentFeatures) Reset() {
-	*x = InsightsAIAgentFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[23]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InsightsAIAgentFeatures) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InsightsAIAgentFeatures) ProtoMessage() {}
-
-func (x *InsightsAIAgentFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[23]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InsightsAIAgentFeatures.ProtoReflect.Descriptor instead.
-func (*InsightsAIAgentFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{23}
-}
-
-func (x *InsightsAIAgentFeatures) GetIsAllow() bool {
-	if x != nil {
-		return x.IsAllow
-	}
-	return false
-}
-
-func (x *InsightsAIAgentFeatures) GetSystemPrompt() string {
-	if x != nil {
-		return x.SystemPrompt
-	}
-	return ""
-}
-
-func (x *InsightsAIAgentFeatures) GetPreviousSessionContext() string {
-	if x != nil && x.PreviousSessionContext != nil {
-		return *x.PreviousSessionContext
-	}
-	return ""
-}
-
-func (x *InsightsAIAgentFeatures) GetAgentDisplayName() string {
-	if x != nil && x.AgentDisplayName != nil {
-		return *x.AgentDisplayName
-	}
-	return ""
-}
-
-func (x *InsightsAIAgentFeatures) GetSpokenLang() string {
-	if x != nil && x.SpokenLang != nil {
-		return *x.SpokenLang
-	}
-	return ""
-}
-
-func (x *InsightsAIAgentFeatures) GetTargetLang() string {
-	if x != nil && x.TargetLang != nil {
-		return *x.TargetLang
-	}
-	return ""
-}
-
-func (x *InsightsAIAgentFeatures) GetAutoJoinOnFirstParticipant() bool {
-	if x != nil {
-		return x.AutoJoinOnFirstParticipant
-	}
-	return false
-}
-
-func (x *InsightsAIAgentFeatures) GetAllowWhiteboardWrite() bool {
-	if x != nil {
-		return x.AllowWhiteboardWrite
-	}
-	return false
-}
-
-func (x *InsightsAIAgentFeatures) GetAllowVisionCapture() bool {
-	if x != nil {
-		return x.AllowVisionCapture
-	}
-	return false
-}
-
-func (x *InsightsAIAgentFeatures) GetVisionDebounceMs() uint32 {
-	if x != nil {
-		return x.VisionDebounceMs
-	}
-	return 0
-}
-
-func (x *InsightsAIAgentFeatures) GetVisionMaxEdgePx() uint32 {
-	if x != nil {
-		return x.VisionMaxEdgePx
-	}
-	return 0
-}
-
-func (x *InsightsAIAgentFeatures) GetAllowPolls() bool {
-	if x != nil {
-		return x.AllowPolls
-	}
-	return false
-}
-
-func (x *InsightsAIAgentFeatures) GetAllowChatMessage() bool {
-	if x != nil {
-		return x.AllowChatMessage
-	}
-	return false
-}
-
-func (x *InsightsAIAgentFeatures) GetAllowNotepadWrite() bool {
-	if x != nil {
-		return x.AllowNotepadWrite
-	}
-	return false
-}
-
-func (x *InsightsAIAgentFeatures) GetAllowWebFetch() bool {
-	if x != nil {
-		return x.AllowWebFetch
-	}
-	return false
-}
-
-func (x *InsightsAIAgentFeatures) GetAllowedKnowledgeUrls() []string {
-	if x != nil {
-		return x.AllowedKnowledgeUrls
-	}
-	return nil
-}
-
-func (x *InsightsAIAgentFeatures) GetKnowledgeCacheTtlSeconds() uint32 {
-	if x != nil {
-		return x.KnowledgeCacheTtlSeconds
-	}
-	return 0
-}
-
-func (x *InsightsAIAgentFeatures) GetMcpServers() map[string]*ExternalMCPServerConfig {
-	if x != nil {
-		return x.McpServers
-	}
-	return nil
-}
-
-func (x *InsightsAIAgentFeatures) GetTopic() string {
-	if x != nil {
-		return x.Topic
-	}
-	return ""
-}
-
-func (x *InsightsAIAgentFeatures) GetAllowedSubtopics() []string {
-	if x != nil {
-		return x.AllowedSubtopics
-	}
-	return nil
-}
-
-func (x *InsightsAIAgentFeatures) GetForbiddenTopics() []string {
-	if x != nil {
-		return x.ForbiddenTopics
-	}
-	return nil
-}
-
-func (x *InsightsAIAgentFeatures) GetStrictTopicEnforcement() bool {
-	if x != nil {
-		return x.StrictTopicEnforcement
-	}
-	return false
-}
-
-func (x *InsightsAIAgentFeatures) GetTopicAnchorIntervalTurns() uint32 {
-	if x != nil {
-		return x.TopicAnchorIntervalTurns
-	}
-	return 0
-}
-
-func (x *InsightsAIAgentFeatures) GetMaxSessionSeconds() uint32 {
-	if x != nil {
-		return x.MaxSessionSeconds
-	}
-	return 0
-}
-
-func (x *InsightsAIAgentFeatures) GetMaxAudioMinutes() uint32 {
-	if x != nil {
-		return x.MaxAudioMinutes
-	}
-	return 0
-}
-
-func (x *InsightsAIAgentFeatures) GetInstructionLang() string {
-	if x != nil && x.InstructionLang != nil {
-		return *x.InstructionLang
-	}
-	return ""
-}
-
-func (x *InsightsAIAgentFeatures) GetVoice() string {
-	if x != nil && x.Voice != nil {
-		return *x.Voice
-	}
-	return ""
-}
-
-func (x *InsightsAIAgentFeatures) GetSpeakingRate() float32 {
-	if x != nil && x.SpeakingRate != nil {
-		return *x.SpeakingRate
-	}
-	return 0
-}
-
-func (x *InsightsAIAgentFeatures) GetIsEnabled() bool {
-	if x != nil {
-		return x.IsEnabled
-	}
-	return false
-}
-
-func (x *InsightsAIAgentFeatures) GetAllowedParticipantIds() []string {
-	if x != nil {
-		return x.AllowedParticipantIds
-	}
-	return nil
-}
-
-func (x *InsightsAIAgentFeatures) GetActiveSessionId() string {
-	if x != nil && x.ActiveSessionId != nil {
-		return *x.ActiveSessionId
-	}
-	return ""
-}
-
-func (x *InsightsAIAgentFeatures) GetAutoCreatePerUserSession() bool {
-	if x != nil {
-		return x.AutoCreatePerUserSession
-	}
-	return false
-}
-
-func (x *InsightsAIAgentFeatures) GetMaxConcurrentSessions() uint32 {
-	if x != nil {
-		return x.MaxConcurrentSessions
-	}
-	return 0
-}
-
-type ExternalMCPServerConfig struct {
-	state        protoimpl.MessageState `protogen:"open.v1"`
-	Url          string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	Headers      map[string]string      `protobuf:"bytes,2,rep,name=headers,proto3" json:"headers,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	AllowedTools []string               `protobuf:"bytes,3,rep,name=allowed_tools,json=allowedTools,proto3" json:"allowed_tools,omitempty"`
-	// optional owner hint: "shared", "text_chat", "ai_agent", ...
-	Scope         *string `protobuf:"bytes,4,opt,name=scope,proto3,oneof" json:"scope,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ExternalMCPServerConfig) Reset() {
-	*x = ExternalMCPServerConfig{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[24]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ExternalMCPServerConfig) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ExternalMCPServerConfig) ProtoMessage() {}
-
-func (x *ExternalMCPServerConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[24]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ExternalMCPServerConfig.ProtoReflect.Descriptor instead.
-func (*ExternalMCPServerConfig) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{24}
-}
-
-func (x *ExternalMCPServerConfig) GetUrl() string {
-	if x != nil {
-		return x.Url
-	}
-	return ""
-}
-
-func (x *ExternalMCPServerConfig) GetHeaders() map[string]string {
-	if x != nil {
-		return x.Headers
-	}
-	return nil
-}
-
-func (x *ExternalMCPServerConfig) GetAllowedTools() []string {
-	if x != nil {
-		return x.AllowedTools
-	}
-	return nil
-}
-
-func (x *ExternalMCPServerConfig) GetScope() string {
-	if x != nil && x.Scope != nil {
-		return *x.Scope
-	}
-	return ""
-}
-
 type CountdownTimerFeatures struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	IsAllow          bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
@@ -2389,7 +1512,7 @@ type CountdownTimerFeatures struct {
 
 func (x *CountdownTimerFeatures) Reset() {
 	*x = CountdownTimerFeatures{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[25]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2401,7 +1524,7 @@ func (x *CountdownTimerFeatures) String() string {
 func (*CountdownTimerFeatures) ProtoMessage() {}
 
 func (x *CountdownTimerFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[25]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2414,7 +1537,7 @@ func (x *CountdownTimerFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountdownTimerFeatures.ProtoReflect.Descriptor instead.
 func (*CountdownTimerFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{25}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *CountdownTimerFeatures) GetIsAllow() bool {
@@ -2476,7 +1599,7 @@ type CopyrightConf struct {
 
 func (x *CopyrightConf) Reset() {
 	*x = CopyrightConf{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[26]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2488,7 +1611,7 @@ func (x *CopyrightConf) String() string {
 func (*CopyrightConf) ProtoMessage() {}
 
 func (x *CopyrightConf) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[26]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2501,7 +1624,7 @@ func (x *CopyrightConf) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CopyrightConf.ProtoReflect.Descriptor instead.
 func (*CopyrightConf) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{26}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *CopyrightConf) GetDisplay() bool {
@@ -2530,7 +1653,7 @@ type CreateRoomRes struct {
 
 func (x *CreateRoomRes) Reset() {
 	*x = CreateRoomRes{}
-	mi := &file_plugnmeet_create_room_proto_msgTypes[27]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2542,7 +1665,7 @@ func (x *CreateRoomRes) String() string {
 func (*CreateRoomRes) ProtoMessage() {}
 
 func (x *CreateRoomRes) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_proto_msgTypes[27]
+	mi := &file_plugnmeet_create_room_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2555,7 +1678,7 @@ func (x *CreateRoomRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateRoomRes.ProtoReflect.Descriptor instead.
 func (*CreateRoomRes) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{27}
+	return file_plugnmeet_create_room_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *CreateRoomRes) GetStatus() bool {
@@ -2590,7 +1713,7 @@ var File_plugnmeet_create_room_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\n" +
-	"\x1bplugnmeet_create_room.proto\x12\tplugnmeet\x1a\x19plugnmeet_gen_token.proto\x1a\x1bbuf/validate/validate.proto\x1a\x17plugnmeet_ingress.proto\x1a\x19plugnmeet_auth_room.proto\x1a\x1aplugnmeet_common_api.proto\x1a\x19plugnmeet_recording.proto\"\xfd\x02\n" +
+	"\x1bplugnmeet_create_room.proto\x12\tplugnmeet\x1a\x19plugnmeet_gen_token.proto\x1a\x1bbuf/validate/validate.proto\x1a\x17plugnmeet_ingress.proto\x1a\x19plugnmeet_auth_room.proto\x1a\x1aplugnmeet_common_api.proto\x1a\x19plugnmeet_recording.proto\x1a$plugnmeet_create_room_insights.proto\"\xfd\x02\n" +
 	"\rCreateRoomReq\x12\x9b\x01\n" +
 	"\aroom_id\x18\x01 \x01(\tB\x81\x01\xbaH~\xba\x01{\n" +
 	"\x0eroom_id_format\x12Groom_id should only contain ASCII letters (a-z A-Z), digits (0-9) or -_\x1a this.matches('^[a-zA-Z0-9-_]+$')R\x06roomId\x121\n" +
@@ -2772,134 +1895,7 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x10dispatch_rule_id\x18\a \x01(\tBb\xbaH_\xba\x01\\\n" +
 	"\x17dispatch_rule_id_format\x12-dispatch_rule_id should not contain any value\x1a\x12this.matches('^$')H\x01R\x0edispatchRuleId\x88\x01\x01B\x06\n" +
 	"\x04_pinB\x13\n" +
-	"\x11_dispatch_rule_id\"\xf9\x03\n" +
-	"\x10InsightsFeatures\x12\x19\n" +
-	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12d\n" +
-	"\x16transcription_features\x18\x02 \x01(\v2(.plugnmeet.InsightsTranscriptionFeaturesH\x00R\x15transcriptionFeatures\x88\x01\x01\x12k\n" +
-	"\x19chat_translation_features\x18\x03 \x01(\v2*.plugnmeet.InsightsChatTranslationFeaturesH\x01R\x17chatTranslationFeatures\x88\x01\x01\x12C\n" +
-	"\vai_features\x18\x04 \x01(\v2\x1d.plugnmeet.InsightsAIFeaturesH\x02R\n" +
-	"aiFeatures\x88\x01\x01\x12S\n" +
-	"\x11ai_agent_features\x18\x05 \x01(\v2\".plugnmeet.InsightsAIAgentFeaturesH\x03R\x0faiAgentFeatures\x88\x01\x01B\x19\n" +
-	"\x17_transcription_featuresB\x1c\n" +
-	"\x1a_chat_translation_featuresB\x0e\n" +
-	"\f_ai_featuresB\x14\n" +
-	"\x12_ai_agent_features\"\x8c\x06\n" +
-	"\x1dInsightsTranscriptionFeatures\x12\x19\n" +
-	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x120\n" +
-	"\x14is_allow_translation\x18\x02 \x01(\bR\x12isAllowTranslation\x129\n" +
-	"\x19is_allow_speech_synthesis\x18\x03 \x01(\bR\x16isAllowSpeechSynthesis\x12&\n" +
-	"\n" +
-	"is_enabled\x18\x04 \x01(\bB\a\xbaH\x04j\x02\b\x00R\tisEnabled\x12:\n" +
-	"\x14allowed_spoken_langs\x18\x05 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x12allowedSpokenLangs\x12:\n" +
-	"\x14allowed_speech_users\x18\x06 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x12allowedSpeechUsers\x12=\n" +
-	"\x16is_enabled_translation\x18\a \x01(\bB\a\xbaH\x04j\x02\b\x00R\x14isEnabledTranslation\x12@\n" +
-	"\x18max_selected_trans_langs\x18\b \x01(\x05B\a\xbaH\x04\x1a\x02\b\x00R\x15maxSelectedTransLangs\x128\n" +
-	"\x13allowed_trans_langs\x18\t \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x11allowedTransLangs\x12\xa5\x01\n" +
-	"\x15default_subtitle_lang\x18\n" +
-	" \x01(\tBl\xbaHi\xba\x01f\n" +
-	"\x1cdefault_subtitle_lang_format\x122default_subtitle_lang should not contain any value\x1a\x12this.matches('^$')H\x00R\x13defaultSubtitleLang\x88\x01\x01\x12F\n" +
-	"\x1bis_enabled_speech_synthesis\x18\v \x01(\bB\a\xbaH\x04j\x02\b\x00R\x18isEnabledSpeechSynthesisB\x18\n" +
-	"\x16_default_subtitle_lang\"\xf6\x02\n" +
-	"\x1fInsightsChatTranslationFeatures\x12\x19\n" +
-	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12&\n" +
-	"\n" +
-	"is_enabled\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\tisEnabled\x128\n" +
-	"\x13allowed_trans_langs\x18\x03 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x11allowedTransLangs\x12@\n" +
-	"\x18max_selected_trans_langs\x18\x04 \x01(\x05B\a\xbaH\x04\x1a\x02\b\x00R\x15maxSelectedTransLangs\x12\x82\x01\n" +
-	"\fdefault_lang\x18\x05 \x01(\tBZ\xbaHW\xba\x01T\n" +
-	"\x13default_lang_format\x12)default_lang should not contain any value\x1a\x12this.matches('^$')H\x00R\vdefaultLang\x88\x01\x01B\x0f\n" +
-	"\r_default_lang\"\xc9\x02\n" +
-	"\x12InsightsAIFeatures\x12\x19\n" +
-	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12]\n" +
-	"\x15ai_text_chat_features\x18\x02 \x01(\v2%.plugnmeet.InsightsAITextChatFeaturesH\x00R\x12aiTextChatFeatures\x88\x01\x01\x12|\n" +
-	"\x1emeeting_summarization_features\x18\x03 \x01(\v21.plugnmeet.InsightsAIMeetingSummarizationFeaturesH\x01R\x1cmeetingSummarizationFeatures\x88\x01\x01B\x18\n" +
-	"\x16_ai_text_chat_featuresB!\n" +
-	"\x1f_meeting_summarization_features\"\xd3\x04\n" +
-	"\x1aInsightsAITextChatFeatures\x12\x19\n" +
-	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12&\n" +
-	"\n" +
-	"is_enabled\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\tisEnabled\x127\n" +
-	"\x13is_allowed_everyone\x18\x03 \x01(\bB\a\xbaH\x04j\x02\b\x00R\x11isAllowedEveryone\x122\n" +
-	"\x10allowed_user_ids\x18\x04 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x00R\x0eallowedUserIds\x12<\n" +
-	"\x16is_notepad_ai_disabled\x18\x05 \x01(\bB\a\xbaH\x04j\x02\b\x00R\x13isNotepadAiDisabled\x12B\n" +
-	"\x19is_whiteboard_ai_disabled\x18\x06 \x01(\bB\a\xbaH\x04j\x02\b\x00R\x16isWhiteboardAiDisabled\x126\n" +
-	"\x13is_poll_ai_disabled\x18\a \x01(\bB\a\xbaH\x04j\x02\b\x00R\x10isPollAiDisabled\x12h\n" +
-	"\vmcp_servers\x18\b \x03(\v25.plugnmeet.InsightsAITextChatFeatures.McpServersEntryB\x10\xbaH\r\x9a\x01\n" +
-	"\x10\x02\"\x06r\x04\x10\x01\x18@R\n" +
-	"mcpServers\x1aa\n" +
-	"\x0fMcpServersEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x128\n" +
-	"\x05value\x18\x02 \x01(\v2\".plugnmeet.ExternalMCPServerConfigR\x05value:\x028\x01\"\x9e\x01\n" +
-	"&InsightsAIMeetingSummarizationFeatures\x12\x19\n" +
-	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x121\n" +
-	"\x14summarization_prompt\x18\x02 \x01(\tR\x13summarizationPrompt\x12&\n" +
-	"\n" +
-	"is_enabled\x18\x03 \x01(\bB\a\xbaH\x04j\x02\b\x00R\tisEnabled\"\xa7\x10\n" +
-	"\x17InsightsAIAgentFeatures\x12\x19\n" +
-	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12#\n" +
-	"\rsystem_prompt\x18\x02 \x01(\tR\fsystemPrompt\x12=\n" +
-	"\x18previous_session_context\x18\x03 \x01(\tH\x00R\x16previousSessionContext\x88\x01\x01\x121\n" +
-	"\x12agent_display_name\x18\x04 \x01(\tH\x01R\x10agentDisplayName\x88\x01\x01\x12$\n" +
-	"\vspoken_lang\x18\x05 \x01(\tH\x02R\n" +
-	"spokenLang\x88\x01\x01\x12$\n" +
-	"\vtarget_lang\x18\x06 \x01(\tH\x03R\n" +
-	"targetLang\x88\x01\x01\x12B\n" +
-	"\x1eauto_join_on_first_participant\x18\a \x01(\bR\x1aautoJoinOnFirstParticipant\x124\n" +
-	"\x16allow_whiteboard_write\x18\b \x01(\bR\x14allowWhiteboardWrite\x120\n" +
-	"\x14allow_vision_capture\x18\t \x01(\bR\x12allowVisionCapture\x12,\n" +
-	"\x12vision_debounce_ms\x18\n" +
-	" \x01(\rR\x10visionDebounceMs\x12+\n" +
-	"\x12vision_max_edge_px\x18\v \x01(\rR\x0fvisionMaxEdgePx\x12\x1f\n" +
-	"\vallow_polls\x18\f \x01(\bR\n" +
-	"allowPolls\x12,\n" +
-	"\x12allow_chat_message\x18\r \x01(\bR\x10allowChatMessage\x12.\n" +
-	"\x13allow_notepad_write\x18\x0e \x01(\bR\x11allowNotepadWrite\x12&\n" +
-	"\x0fallow_web_fetch\x18\x0f \x01(\bR\rallowWebFetch\x12>\n" +
-	"\x16allowed_knowledge_urls\x18\x10 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10 R\x14allowedKnowledgeUrls\x12=\n" +
-	"\x1bknowledge_cache_ttl_seconds\x18\x11 \x01(\rR\x18knowledgeCacheTtlSeconds\x12e\n" +
-	"\vmcp_servers\x18\x12 \x03(\v22.plugnmeet.InsightsAIAgentFeatures.McpServersEntryB\x10\xbaH\r\x9a\x01\n" +
-	"\x10\x02\"\x06r\x04\x10\x01\x18@R\n" +
-	"mcpServers\x12\x14\n" +
-	"\x05topic\x18\x16 \x01(\tR\x05topic\x125\n" +
-	"\x11allowed_subtopics\x18\x17 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10@R\x10allowedSubtopics\x123\n" +
-	"\x10forbidden_topics\x18\x18 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10 R\x0fforbiddenTopics\x128\n" +
-	"\x18strict_topic_enforcement\x18\x19 \x01(\bR\x16strictTopicEnforcement\x12=\n" +
-	"\x1btopic_anchor_interval_turns\x18\x1a \x01(\rR\x18topicAnchorIntervalTurns\x12:\n" +
-	"\x13max_session_seconds\x18\x1b \x01(\rB\n" +
-	"\xbaH\a*\x05\x18\xa08(<R\x11maxSessionSeconds\x124\n" +
-	"\x11max_audio_minutes\x18\x1c \x01(\rB\b\xbaH\x05*\x03\x18\xf0\x01R\x0fmaxAudioMinutes\x12.\n" +
-	"\x10instruction_lang\x18\x1d \x01(\tH\x04R\x0finstructionLang\x88\x01\x01\x12\x19\n" +
-	"\x05voice\x18\x1e \x01(\tH\x05R\x05voice\x88\x01\x01\x129\n" +
-	"\rspeaking_rate\x18\x1f \x01(\x02B\x0f\xbaH\f\n" +
-	"\n" +
-	"\x1d\x00\x00\x00@-\x00\x00\x00?H\x06R\fspeakingRate\x88\x01\x01\x12&\n" +
-	"\n" +
-	"is_enabled\x18\x13 \x01(\bB\a\xbaH\x04j\x02\b\x00R\tisEnabled\x12I\n" +
-	"\x17allowed_participant_ids\x18\x14 \x03(\tB\x11\xbaH\x0e\x92\x01\v\x10\x10\"\ar\x05\x10\x01\x18\x80\x01R\x15allowedParticipantIds\x12\x94\x01\n" +
-	"\x11active_session_id\x18\x15 \x01(\tBc\xbaH`\xba\x01]\n" +
-	"\x17active_session_id_empty\x12.active_session_id should not contain any value\x1a\x12this.matches('^$')H\aR\x0factiveSessionId\x88\x01\x01\x12>\n" +
-	"\x1cauto_create_per_user_session\x18  \x01(\bR\x18autoCreatePerUserSession\x12?\n" +
-	"\x17max_concurrent_sessions\x18! \x01(\rB\a\xbaH\x04*\x02\x18\x10R\x15maxConcurrentSessions\x1aa\n" +
-	"\x0fMcpServersEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x128\n" +
-	"\x05value\x18\x02 \x01(\v2\".plugnmeet.ExternalMCPServerConfigR\x05value:\x028\x01B\x1b\n" +
-	"\x19_previous_session_contextB\x15\n" +
-	"\x13_agent_display_nameB\x0e\n" +
-	"\f_spoken_langB\x0e\n" +
-	"\f_target_langB\x13\n" +
-	"\x11_instruction_langB\b\n" +
-	"\x06_voiceB\x10\n" +
-	"\x0e_speaking_rateB\x14\n" +
-	"\x12_active_session_id\"\xb8\x02\n" +
-	"\x17ExternalMCPServerConfig\x12\x1a\n" +
-	"\x03url\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x18\x80\bR\x03url\x12a\n" +
-	"\aheaders\x18\x02 \x03(\v2/.plugnmeet.ExternalMCPServerConfig.HeadersEntryB\x16\xbaH\x13\x9a\x01\x10\x10\x10\"\x05r\x03\x18\x80\x01*\x05r\x03\x18\x80\x10R\aheaders\x124\n" +
-	"\rallowed_tools\x18\x03 \x03(\tB\x0f\xbaH\f\x92\x01\t\x10\b\"\x05r\x03\x18\x80\x01R\fallowedTools\x12\"\n" +
-	"\x05scope\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x18 H\x00R\x05scope\x88\x01\x01\x1a:\n" +
-	"\fHeadersEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
-	"\x06_scope\"\xc4\x03\n" +
+	"\x11_dispatch_rule_id\"\xc4\x03\n" +
 	"\x16CountdownTimerFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12$\n" +
 	"\tis_active\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisActive\x12e\n" +
@@ -2934,52 +1930,42 @@ func file_plugnmeet_create_room_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_create_room_proto_rawDescData
 }
 
-var file_plugnmeet_create_room_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
+var file_plugnmeet_create_room_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_plugnmeet_create_room_proto_goTypes = []any{
-	(*CreateRoomReq)(nil),                          // 0: plugnmeet.CreateRoomReq
-	(*RoomMetadata)(nil),                           // 1: plugnmeet.RoomMetadata
-	(*RoomCreateFeatures)(nil),                     // 2: plugnmeet.RoomCreateFeatures
-	(*ChatFeatures)(nil),                           // 3: plugnmeet.ChatFeatures
-	(*SharedNotePadFeatures)(nil),                  // 4: plugnmeet.SharedNotePadFeatures
-	(*WhiteboardFeatures)(nil),                     // 5: plugnmeet.WhiteboardFeatures
-	(*ExternalMediaPlayerFeatures)(nil),            // 6: plugnmeet.ExternalMediaPlayerFeatures
-	(*WaitingRoomFeatures)(nil),                    // 7: plugnmeet.WaitingRoomFeatures
-	(*PreassignedBreakoutRoom)(nil),                // 8: plugnmeet.PreassignedBreakoutRoom
-	(*BreakoutRoomFeatures)(nil),                   // 9: plugnmeet.BreakoutRoomFeatures
-	(*DisplayExternalLinkFeatures)(nil),            // 10: plugnmeet.DisplayExternalLinkFeatures
-	(*ExternalBroadcastingFeatures)(nil),           // 11: plugnmeet.ExternalBroadcastingFeatures
-	(*RecordingFeatures)(nil),                      // 12: plugnmeet.RecordingFeatures
-	(*IngressFeatures)(nil),                        // 13: plugnmeet.IngressFeatures
-	(*EndToEndEncryptionFeatures)(nil),             // 14: plugnmeet.EndToEndEncryptionFeatures
-	(*PollsFeatures)(nil),                          // 15: plugnmeet.PollsFeatures
-	(*SipDialInFeatures)(nil),                      // 16: plugnmeet.SipDialInFeatures
-	(*InsightsFeatures)(nil),                       // 17: plugnmeet.InsightsFeatures
-	(*InsightsTranscriptionFeatures)(nil),          // 18: plugnmeet.InsightsTranscriptionFeatures
-	(*InsightsChatTranslationFeatures)(nil),        // 19: plugnmeet.InsightsChatTranslationFeatures
-	(*InsightsAIFeatures)(nil),                     // 20: plugnmeet.InsightsAIFeatures
-	(*InsightsAITextChatFeatures)(nil),             // 21: plugnmeet.InsightsAITextChatFeatures
-	(*InsightsAIMeetingSummarizationFeatures)(nil), // 22: plugnmeet.InsightsAIMeetingSummarizationFeatures
-	(*InsightsAIAgentFeatures)(nil),                // 23: plugnmeet.InsightsAIAgentFeatures
-	(*ExternalMCPServerConfig)(nil),                // 24: plugnmeet.ExternalMCPServerConfig
-	(*CountdownTimerFeatures)(nil),                 // 25: plugnmeet.CountdownTimerFeatures
-	(*CopyrightConf)(nil),                          // 26: plugnmeet.CopyrightConf
-	(*CreateRoomRes)(nil),                          // 27: plugnmeet.CreateRoomRes
-	nil,                                            // 28: plugnmeet.RoomMetadata.ExtraDataEntry
-	nil,                                            // 29: plugnmeet.InsightsAITextChatFeatures.McpServersEntry
-	nil,                                            // 30: plugnmeet.InsightsAIAgentFeatures.McpServersEntry
-	nil,                                            // 31: plugnmeet.ExternalMCPServerConfig.HeadersEntry
-	(*LockSettings)(nil),                           // 32: plugnmeet.LockSettings
-	(*RecorderBotOptions)(nil),                     // 33: plugnmeet.RecorderBotOptions
-	(IngressInput)(0),                              // 34: plugnmeet.IngressInput
-	(StatusCode)(0),                                // 35: plugnmeet.StatusCode
-	(*ActiveRoomInfo)(nil),                         // 36: plugnmeet.ActiveRoomInfo
+	(*CreateRoomReq)(nil),                // 0: plugnmeet.CreateRoomReq
+	(*RoomMetadata)(nil),                 // 1: plugnmeet.RoomMetadata
+	(*RoomCreateFeatures)(nil),           // 2: plugnmeet.RoomCreateFeatures
+	(*ChatFeatures)(nil),                 // 3: plugnmeet.ChatFeatures
+	(*SharedNotePadFeatures)(nil),        // 4: plugnmeet.SharedNotePadFeatures
+	(*WhiteboardFeatures)(nil),           // 5: plugnmeet.WhiteboardFeatures
+	(*ExternalMediaPlayerFeatures)(nil),  // 6: plugnmeet.ExternalMediaPlayerFeatures
+	(*WaitingRoomFeatures)(nil),          // 7: plugnmeet.WaitingRoomFeatures
+	(*PreassignedBreakoutRoom)(nil),      // 8: plugnmeet.PreassignedBreakoutRoom
+	(*BreakoutRoomFeatures)(nil),         // 9: plugnmeet.BreakoutRoomFeatures
+	(*DisplayExternalLinkFeatures)(nil),  // 10: plugnmeet.DisplayExternalLinkFeatures
+	(*ExternalBroadcastingFeatures)(nil), // 11: plugnmeet.ExternalBroadcastingFeatures
+	(*RecordingFeatures)(nil),            // 12: plugnmeet.RecordingFeatures
+	(*IngressFeatures)(nil),              // 13: plugnmeet.IngressFeatures
+	(*EndToEndEncryptionFeatures)(nil),   // 14: plugnmeet.EndToEndEncryptionFeatures
+	(*PollsFeatures)(nil),                // 15: plugnmeet.PollsFeatures
+	(*SipDialInFeatures)(nil),            // 16: plugnmeet.SipDialInFeatures
+	(*CountdownTimerFeatures)(nil),       // 17: plugnmeet.CountdownTimerFeatures
+	(*CopyrightConf)(nil),                // 18: plugnmeet.CopyrightConf
+	(*CreateRoomRes)(nil),                // 19: plugnmeet.CreateRoomRes
+	nil,                                  // 20: plugnmeet.RoomMetadata.ExtraDataEntry
+	(*LockSettings)(nil),                 // 21: plugnmeet.LockSettings
+	(*InsightsFeatures)(nil),             // 22: plugnmeet.InsightsFeatures
+	(*RecorderBotOptions)(nil),           // 23: plugnmeet.RecorderBotOptions
+	(IngressInput)(0),                    // 24: plugnmeet.IngressInput
+	(StatusCode)(0),                      // 25: plugnmeet.StatusCode
+	(*ActiveRoomInfo)(nil),               // 26: plugnmeet.ActiveRoomInfo
 }
 var file_plugnmeet_create_room_proto_depIdxs = []int32{
 	1,  // 0: plugnmeet.CreateRoomReq.metadata:type_name -> plugnmeet.RoomMetadata
 	2,  // 1: plugnmeet.RoomMetadata.room_features:type_name -> plugnmeet.RoomCreateFeatures
-	32, // 2: plugnmeet.RoomMetadata.default_lock_settings:type_name -> plugnmeet.LockSettings
-	26, // 3: plugnmeet.RoomMetadata.copyright_conf:type_name -> plugnmeet.CopyrightConf
-	28, // 4: plugnmeet.RoomMetadata.extra_data:type_name -> plugnmeet.RoomMetadata.ExtraDataEntry
+	21, // 2: plugnmeet.RoomMetadata.default_lock_settings:type_name -> plugnmeet.LockSettings
+	18, // 3: plugnmeet.RoomMetadata.copyright_conf:type_name -> plugnmeet.CopyrightConf
+	20, // 4: plugnmeet.RoomMetadata.extra_data:type_name -> plugnmeet.RoomMetadata.ExtraDataEntry
 	12, // 5: plugnmeet.RoomCreateFeatures.recording_features:type_name -> plugnmeet.RecordingFeatures
 	3,  // 6: plugnmeet.RoomCreateFeatures.chat_features:type_name -> plugnmeet.ChatFeatures
 	4,  // 7: plugnmeet.RoomCreateFeatures.shared_note_pad_features:type_name -> plugnmeet.SharedNotePadFeatures
@@ -2991,32 +1977,21 @@ var file_plugnmeet_create_room_proto_depIdxs = []int32{
 	13, // 13: plugnmeet.RoomCreateFeatures.ingress_features:type_name -> plugnmeet.IngressFeatures
 	14, // 14: plugnmeet.RoomCreateFeatures.end_to_end_encryption_features:type_name -> plugnmeet.EndToEndEncryptionFeatures
 	15, // 15: plugnmeet.RoomCreateFeatures.polls_features:type_name -> plugnmeet.PollsFeatures
-	17, // 16: plugnmeet.RoomCreateFeatures.insights_features:type_name -> plugnmeet.InsightsFeatures
+	22, // 16: plugnmeet.RoomCreateFeatures.insights_features:type_name -> plugnmeet.InsightsFeatures
 	16, // 17: plugnmeet.RoomCreateFeatures.sip_dial_in_features:type_name -> plugnmeet.SipDialInFeatures
 	11, // 18: plugnmeet.RoomCreateFeatures.external_broadcasting_features:type_name -> plugnmeet.ExternalBroadcastingFeatures
-	25, // 19: plugnmeet.RoomCreateFeatures.countdown_timer_features:type_name -> plugnmeet.CountdownTimerFeatures
+	17, // 19: plugnmeet.RoomCreateFeatures.countdown_timer_features:type_name -> plugnmeet.CountdownTimerFeatures
 	8,  // 20: plugnmeet.BreakoutRoomFeatures.preassigned_rooms:type_name -> plugnmeet.PreassignedBreakoutRoom
-	33, // 21: plugnmeet.ExternalBroadcastingFeatures.recorder_bot_options:type_name -> plugnmeet.RecorderBotOptions
-	33, // 22: plugnmeet.RecordingFeatures.recorder_bot_options:type_name -> plugnmeet.RecorderBotOptions
-	34, // 23: plugnmeet.IngressFeatures.input_type:type_name -> plugnmeet.IngressInput
-	18, // 24: plugnmeet.InsightsFeatures.transcription_features:type_name -> plugnmeet.InsightsTranscriptionFeatures
-	19, // 25: plugnmeet.InsightsFeatures.chat_translation_features:type_name -> plugnmeet.InsightsChatTranslationFeatures
-	20, // 26: plugnmeet.InsightsFeatures.ai_features:type_name -> plugnmeet.InsightsAIFeatures
-	23, // 27: plugnmeet.InsightsFeatures.ai_agent_features:type_name -> plugnmeet.InsightsAIAgentFeatures
-	21, // 28: plugnmeet.InsightsAIFeatures.ai_text_chat_features:type_name -> plugnmeet.InsightsAITextChatFeatures
-	22, // 29: plugnmeet.InsightsAIFeatures.meeting_summarization_features:type_name -> plugnmeet.InsightsAIMeetingSummarizationFeatures
-	29, // 30: plugnmeet.InsightsAITextChatFeatures.mcp_servers:type_name -> plugnmeet.InsightsAITextChatFeatures.McpServersEntry
-	30, // 31: plugnmeet.InsightsAIAgentFeatures.mcp_servers:type_name -> plugnmeet.InsightsAIAgentFeatures.McpServersEntry
-	31, // 32: plugnmeet.ExternalMCPServerConfig.headers:type_name -> plugnmeet.ExternalMCPServerConfig.HeadersEntry
-	35, // 33: plugnmeet.CreateRoomRes.status_code:type_name -> plugnmeet.StatusCode
-	36, // 34: plugnmeet.CreateRoomRes.room_info:type_name -> plugnmeet.ActiveRoomInfo
-	24, // 35: plugnmeet.InsightsAITextChatFeatures.McpServersEntry.value:type_name -> plugnmeet.ExternalMCPServerConfig
-	24, // 36: plugnmeet.InsightsAIAgentFeatures.McpServersEntry.value:type_name -> plugnmeet.ExternalMCPServerConfig
-	37, // [37:37] is the sub-list for method output_type
-	37, // [37:37] is the sub-list for method input_type
-	37, // [37:37] is the sub-list for extension type_name
-	37, // [37:37] is the sub-list for extension extendee
-	0,  // [0:37] is the sub-list for field type_name
+	23, // 21: plugnmeet.ExternalBroadcastingFeatures.recorder_bot_options:type_name -> plugnmeet.RecorderBotOptions
+	23, // 22: plugnmeet.RecordingFeatures.recorder_bot_options:type_name -> plugnmeet.RecorderBotOptions
+	24, // 23: plugnmeet.IngressFeatures.input_type:type_name -> plugnmeet.IngressInput
+	25, // 24: plugnmeet.CreateRoomRes.status_code:type_name -> plugnmeet.StatusCode
+	26, // 25: plugnmeet.CreateRoomRes.room_info:type_name -> plugnmeet.ActiveRoomInfo
+	26, // [26:26] is the sub-list for method output_type
+	26, // [26:26] is the sub-list for method input_type
+	26, // [26:26] is the sub-list for extension type_name
+	26, // [26:26] is the sub-list for extension extendee
+	0,  // [0:26] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_create_room_proto_init() }
@@ -3029,6 +2004,7 @@ func file_plugnmeet_create_room_proto_init() {
 	file_plugnmeet_auth_room_proto_init()
 	file_plugnmeet_common_api_proto_init()
 	file_plugnmeet_recording_proto_init()
+	file_plugnmeet_create_room_insights_proto_init()
 	file_plugnmeet_create_room_proto_msgTypes[0].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[1].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[2].OneofWrappers = []any{}
@@ -3040,19 +2016,13 @@ func file_plugnmeet_create_room_proto_init() {
 	file_plugnmeet_create_room_proto_msgTypes[12].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[14].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[16].OneofWrappers = []any{}
-	file_plugnmeet_create_room_proto_msgTypes[17].OneofWrappers = []any{}
-	file_plugnmeet_create_room_proto_msgTypes[18].OneofWrappers = []any{}
-	file_plugnmeet_create_room_proto_msgTypes[19].OneofWrappers = []any{}
-	file_plugnmeet_create_room_proto_msgTypes[20].OneofWrappers = []any{}
-	file_plugnmeet_create_room_proto_msgTypes[23].OneofWrappers = []any{}
-	file_plugnmeet_create_room_proto_msgTypes[24].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_create_room_proto_rawDesc), len(file_plugnmeet_create_room_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   32,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

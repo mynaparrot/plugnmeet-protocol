@@ -165,6 +165,7 @@ type BreakoutRoom struct {
 	RoomSid        string                 `protobuf:"bytes,7,opt,name=room_sid,json=roomSid,proto3" json:"room_sid,omitempty"`
 	AiAgentContext *string                `protobuf:"bytes,8,opt,name=ai_agent_context,json=aiAgentContext,proto3,oneof" json:"ai_agent_context,omitempty"`
 	EnableAiAgent  bool                   `protobuf:"varint,9,opt,name=enable_ai_agent,json=enableAiAgent,proto3" json:"enable_ai_agent,omitempty"`
+	AiAgentJoined  bool                   `protobuf:"varint,10,opt,name=ai_agent_joined,json=aiAgentJoined,proto3" json:"ai_agent_joined,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -258,6 +259,13 @@ func (x *BreakoutRoom) GetAiAgentContext() string {
 func (x *BreakoutRoom) GetEnableAiAgent() bool {
 	if x != nil {
 		return x.EnableAiAgent
+	}
+	return false
+}
+
+func (x *BreakoutRoom) GetAiAgentJoined() bool {
+	if x != nil {
+		return x.AiAgentJoined
 	}
 	return false
 }
@@ -997,7 +1005,7 @@ const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"\f_welcome_msgB\x13\n" +
 	"\x11_whiteboard_shareB\r\n" +
 	"\v_poll_shareB\x13\n" +
-	"\x11_ai_agent_context\"\xc8\x02\n" +
+	"\x11_ai_agent_context\"\xf0\x02\n" +
 	"\fBreakoutRoom\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x1a\n" +
@@ -1007,7 +1015,9 @@ const file_plugnmeet_breakout_room_proto_rawDesc = "" +
 	"\x05users\x18\x06 \x03(\v2\x1b.plugnmeet.BreakoutRoomUserR\x05users\x12\x19\n" +
 	"\broom_sid\x18\a \x01(\tR\aroomSid\x127\n" +
 	"\x10ai_agent_context\x18\b \x01(\tB\b\xbaH\x05r\x03\x18\xd0\x0fH\x00R\x0eaiAgentContext\x88\x01\x01\x12&\n" +
-	"\x0fenable_ai_agent\x18\t \x01(\bR\renableAiAgentB\x13\n" +
+	"\x0fenable_ai_agent\x18\t \x01(\bR\renableAiAgent\x12&\n" +
+	"\x0fai_agent_joined\x18\n" +
+	" \x01(\bR\raiAgentJoinedB\x13\n" +
 	"\x11_ai_agent_context\"N\n" +
 	"\x10BreakoutRoomUser\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +

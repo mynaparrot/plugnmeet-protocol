@@ -6,6 +6,7 @@ export * from "./gen/plugnmeet_breakout_room_pb";
 export * from "./gen/plugnmeet_common_api_pb";
 export * from "./gen/plugnmeet_common_pb";
 export * from "./gen/plugnmeet_create_room_pb";
+export * from "./gen/plugnmeet_create_room_insights_pb";
 export * from "./gen/plugnmeet_datamessage_pb";
 export * from "./gen/plugnmeet_gen_token_pb";
 export * from "./gen/plugnmeet_ingress_pb";
