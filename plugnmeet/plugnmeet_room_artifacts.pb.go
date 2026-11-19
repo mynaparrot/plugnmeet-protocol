@@ -729,9 +729,10 @@ type AIAgentSessionSummary struct {
 	WorkspaceActivity *AIAgentSummaryWorkspaceActivity `protobuf:"bytes,8,opt,name=workspace_activity,json=workspaceActivity,proto3" json:"workspace_activity,omitempty"`
 	Continuation      *AIAgentSummaryContinuation      `protobuf:"bytes,9,opt,name=continuation,proto3" json:"continuation,omitempty"`
 	NarrativeSummary  string                           `protobuf:"bytes,10,opt,name=narrative_summary,json=narrativeSummary,proto3" json:"narrative_summary,omitempty"`
-	Usage             []*RoomArtifactTokenUsage        `protobuf:"bytes,11,rep,name=usage,proto3" json:"usage,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// usage is keyed by role: "session", "delegation" or "summary".
+	Usage         map[string]*RoomArtifactTokenUsage `protobuf:"bytes,11,rep,name=usage,proto3" json:"usage,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AIAgentSessionSummary) Reset() {
@@ -834,7 +835,7 @@ func (x *AIAgentSessionSummary) GetNarrativeSummary() string {
 	return ""
 }
 
-func (x *AIAgentSessionSummary) GetUsage() []*RoomArtifactTokenUsage {
+func (x *AIAgentSessionSummary) GetUsage() map[string]*RoomArtifactTokenUsage {
 	if x != nil {
 		return x.Usage
 	}
@@ -1492,7 +1493,7 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\x04type\x18\x01 \x01(\x0e2\x1b.plugnmeet.RoomArtifactTypeR\x04type\x12\x1f\n" +
 	"\vartifact_id\x18\x02 \x01(\tR\n" +
 	"artifactId\x12;\n" +
-	"\bmetadata\x18\x03 \x01(\v2\x1f.plugnmeet.RoomArtifactMetadataR\bmetadata\"\xc9\x05\n" +
+	"\bmetadata\x18\x03 \x01(\v2\x1f.plugnmeet.RoomArtifactMetadataR\bmetadata\"\xb0\x06\n" +
 	"\x15AIAgentSessionSummary\x12%\n" +
 	"\x0esummary_source\x18\x01 \x01(\tR\rsummarySource\x12!\n" +
 	"\fgenerated_at\x18\x02 \x01(\tR\vgeneratedAt\x12<\n" +
@@ -1506,8 +1507,12 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\x12workspace_activity\x18\b \x01(\v2*.plugnmeet.AIAgentSummaryWorkspaceActivityR\x11workspaceActivity\x12I\n" +
 	"\fcontinuation\x18\t \x01(\v2%.plugnmeet.AIAgentSummaryContinuationR\fcontinuation\x12+\n" +
 	"\x11narrative_summary\x18\n" +
-	" \x01(\tR\x10narrativeSummary\x127\n" +
-	"\x05usage\x18\v \x03(\v2!.plugnmeet.RoomArtifactTokenUsageR\x05usage\"\xbb\x03\n" +
+	" \x01(\tR\x10narrativeSummary\x12A\n" +
+	"\x05usage\x18\v \x03(\v2+.plugnmeet.AIAgentSessionSummary.UsageEntryR\x05usage\x1a[\n" +
+	"\n" +
+	"UsageEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x127\n" +
+	"\x05value\x18\x02 \x01(\v2!.plugnmeet.RoomArtifactTokenUsageR\x05value:\x028\x01\"\xbb\x03\n" +
 	"\x15AIAgentSummarySession\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x19\n" +
 	"\broom_sid\x18\x02 \x01(\tR\aroomSid\x12\x1d\n" +
@@ -1597,7 +1602,7 @@ func file_plugnmeet_room_artifacts_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_room_artifacts_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_plugnmeet_room_artifacts_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_plugnmeet_room_artifacts_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_plugnmeet_room_artifacts_proto_goTypes = []any{
 	(RoomArtifactType)(0),                   // 0: plugnmeet.RoomArtifactType
 	(*RoomArtifactFileInfo)(nil),            // 1: plugnmeet.RoomArtifactFileInfo
@@ -1619,7 +1624,8 @@ var file_plugnmeet_room_artifacts_proto_goTypes = []any{
 	nil,                                     // 17: plugnmeet.RoomArtifactTokenUsage.BreakdownEntry
 	nil,                                     // 18: plugnmeet.RoomArtifactDurationUsage.BreakdownEntry
 	nil,                                     // 19: plugnmeet.RoomArtifactCharacterCountUsage.BreakdownEntry
-	nil,                                     // 20: plugnmeet.AIAgentSummaryWorkspaceActivity.ToolsUsedEntry
+	nil,                                     // 20: plugnmeet.AIAgentSessionSummary.UsageEntry
+	nil,                                     // 21: plugnmeet.AIAgentSummaryWorkspaceActivity.ToolsUsedEntry
 }
 var file_plugnmeet_room_artifacts_proto_depIdxs = []int32{
 	17, // 0: plugnmeet.RoomArtifactTokenUsage.breakdown:type_name -> plugnmeet.RoomArtifactTokenUsage.BreakdownEntry
@@ -1640,14 +1646,15 @@ var file_plugnmeet_room_artifacts_proto_depIdxs = []int32{
 	14, // 15: plugnmeet.AIAgentSessionSummary.progress_log:type_name -> plugnmeet.AIAgentSummaryProgressEntry
 	15, // 16: plugnmeet.AIAgentSessionSummary.workspace_activity:type_name -> plugnmeet.AIAgentSummaryWorkspaceActivity
 	16, // 17: plugnmeet.AIAgentSessionSummary.continuation:type_name -> plugnmeet.AIAgentSummaryContinuation
-	4,  // 18: plugnmeet.AIAgentSessionSummary.usage:type_name -> plugnmeet.RoomArtifactTokenUsage
+	20, // 18: plugnmeet.AIAgentSessionSummary.usage:type_name -> plugnmeet.AIAgentSessionSummary.UsageEntry
 	13, // 19: plugnmeet.AIAgentSummaryQuizEvaluation.questions:type_name -> plugnmeet.AIAgentSummaryQuizQuestion
-	20, // 20: plugnmeet.AIAgentSummaryWorkspaceActivity.tools_used:type_name -> plugnmeet.AIAgentSummaryWorkspaceActivity.ToolsUsedEntry
-	21, // [21:21] is the sub-list for method output_type
-	21, // [21:21] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	21, // 20: plugnmeet.AIAgentSummaryWorkspaceActivity.tools_used:type_name -> plugnmeet.AIAgentSummaryWorkspaceActivity.ToolsUsedEntry
+	4,  // 21: plugnmeet.AIAgentSessionSummary.UsageEntry.value:type_name -> plugnmeet.RoomArtifactTokenUsage
+	22, // [22:22] is the sub-list for method output_type
+	22, // [22:22] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_room_artifacts_proto_init() }
@@ -1671,7 +1678,7 @@ func file_plugnmeet_room_artifacts_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_room_artifacts_proto_rawDesc), len(file_plugnmeet_room_artifacts_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   20,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

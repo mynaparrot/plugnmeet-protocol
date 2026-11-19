@@ -1407,38 +1407,50 @@ func (m *AIAgentSessionSummary) validate(all bool) error {
 
 	// no validation rules for NarrativeSummary
 
-	for idx, item := range m.GetUsage() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, AIAgentSessionSummaryValidationError{
-						field:  fmt.Sprintf("Usage[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, AIAgentSessionSummaryValidationError{
-						field:  fmt.Sprintf("Usage[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return AIAgentSessionSummaryValidationError{
-					field:  fmt.Sprintf("Usage[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
+	{
+		sorted_keys := make([]string, len(m.GetUsage()))
+		i := 0
+		for key := range m.GetUsage() {
+			sorted_keys[i] = key
+			i++
 		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetUsage()[key]
+			_ = val
 
+			// no validation rules for Usage[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, AIAgentSessionSummaryValidationError{
+							field:  fmt.Sprintf("Usage[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, AIAgentSessionSummaryValidationError{
+							field:  fmt.Sprintf("Usage[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return AIAgentSessionSummaryValidationError{
+						field:  fmt.Sprintf("Usage[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
 	}
 
 	if len(errors) > 0 {
