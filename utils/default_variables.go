@@ -2,6 +2,11 @@ package utils
 
 import "github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 
+const (
+	BreakoutRoomMaxCap              uint32 = 16
+	AIAgentMaxConcurrentSessionsCap uint32 = 16
+)
+
 var (
 	defaultRecordingFeatures = &plugnmeet.RecordingFeatures{
 		IsAllow:                  true,

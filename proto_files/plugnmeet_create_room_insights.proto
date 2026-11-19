@@ -118,7 +118,7 @@ message AIAgentAutoSessionConfig {
     items: {string: {min_len: 1, max_len: 128}}
   }];
   // only usable when session_mode = AI_AGENT_SESSION_MODE_OPEN_PER_USER
-  uint32 max_concurrent_sessions = 2 [(buf.validate.field).uint32.lte = 16];
+  uint32 max_concurrent_sessions = 2;
   optional bool auto_start_agent = 3;
 }
 

@@ -121,6 +121,7 @@ message AIAgentSessionSummary {
   AIAgentSummaryWorkspaceActivity workspace_activity = 8;
   AIAgentSummaryContinuation continuation = 9;
   string narrative_summary = 10;
+  repeated RoomArtifactTokenUsage usage = 11;
 }
 
 message AIAgentSummarySession {

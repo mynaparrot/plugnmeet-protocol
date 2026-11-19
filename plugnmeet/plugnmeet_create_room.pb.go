@@ -909,16 +909,17 @@ func (x *PreassignedBreakoutRoom) GetRoomId() string {
 }
 
 type BreakoutRoomFeatures struct {
-	state   protoimpl.MessageState `protogen:"open.v1"`
-	IsAllow bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
+	state                 protoimpl.MessageState     `protogen:"open.v1"`
+	IsAllow               bool                       `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"`
+	AllowedNumberRooms    uint32                     `protobuf:"varint,2,opt,name=allowed_number_rooms,json=allowedNumberRooms,proto3" json:"allowed_number_rooms,omitempty"`
+	AllowReturnToMainRoom bool                       `protobuf:"varint,3,opt,name=allow_return_to_main_room,json=allowReturnToMainRoom,proto3" json:"allow_return_to_main_room,omitempty"`
+	AllowSelfSelect       bool                       `protobuf:"varint,4,opt,name=allow_self_select,json=allowSelfSelect,proto3" json:"allow_self_select,omitempty"`
+	PreassignedRooms      []*PreassignedBreakoutRoom `protobuf:"bytes,5,rep,name=preassigned_rooms,json=preassignedRooms,proto3" json:"preassigned_rooms,omitempty"`
 	// internal usage field
-	IsActive              bool                       `protobuf:"varint,2,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
-	AllowedNumberRooms    uint32                     `protobuf:"varint,3,opt,name=allowed_number_rooms,json=allowedNumberRooms,proto3" json:"allowed_number_rooms,omitempty"`
-	AllowReturnToMainRoom bool                       `protobuf:"varint,4,opt,name=allow_return_to_main_room,json=allowReturnToMainRoom,proto3" json:"allow_return_to_main_room,omitempty"`
-	AllowSelfSelect       bool                       `protobuf:"varint,5,opt,name=allow_self_select,json=allowSelfSelect,proto3" json:"allow_self_select,omitempty"`
-	PreassignedRooms      []*PreassignedBreakoutRoom `protobuf:"bytes,6,rep,name=preassigned_rooms,json=preassignedRooms,proto3" json:"preassigned_rooms,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	IsActive           bool `protobuf:"varint,6,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	IsPerUserAiSession bool `protobuf:"varint,7,opt,name=is_per_user_ai_session,json=isPerUserAiSession,proto3" json:"is_per_user_ai_session,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *BreakoutRoomFeatures) Reset() {
@@ -958,13 +959,6 @@ func (x *BreakoutRoomFeatures) GetIsAllow() bool {
 	return false
 }
 
-func (x *BreakoutRoomFeatures) GetIsActive() bool {
-	if x != nil {
-		return x.IsActive
-	}
-	return false
-}
-
 func (x *BreakoutRoomFeatures) GetAllowedNumberRooms() uint32 {
 	if x != nil {
 		return x.AllowedNumberRooms
@@ -991,6 +985,20 @@ func (x *BreakoutRoomFeatures) GetPreassignedRooms() []*PreassignedBreakoutRoom 
 		return x.PreassignedRooms
 	}
 	return nil
+}
+
+func (x *BreakoutRoomFeatures) GetIsActive() bool {
+	if x != nil {
+		return x.IsActive
+	}
+	return false
+}
+
+func (x *BreakoutRoomFeatures) GetIsPerUserAiSession() bool {
+	if x != nil {
+		return x.IsPerUserAiSession
+	}
+	return false
 }
 
 type DisplayExternalLinkFeatures struct {
@@ -1832,14 +1840,15 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x05title\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05title\x12\x19\n" +
 	"\buser_ids\x18\x02 \x03(\tR\auserIds\x12u\n" +
 	"\aroom_id\x18\x03 \x01(\tB\\\xbaHY\xba\x01V\n" +
-	"\x1apreassigned_room_id_format\x12$room_id should not contain any value\x1a\x12this.matches('^$')R\x06roomId\"\xea\x03\n" +
+	"\x1apreassigned_room_id_format\x12$room_id should not contain any value\x1a\x12this.matches('^$')R\x06roomId\"\xa7\x04\n" +
 	"\x14BreakoutRoomFeatures\x12\x19\n" +
-	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12$\n" +
-	"\tis_active\x18\x02 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisActive\x120\n" +
-	"\x14allowed_number_rooms\x18\x03 \x01(\rR\x12allowedNumberRooms\x128\n" +
-	"\x19allow_return_to_main_room\x18\x04 \x01(\bR\x15allowReturnToMainRoom\x12*\n" +
-	"\x11allow_self_select\x18\x05 \x01(\bR\x0fallowSelfSelect\x12O\n" +
-	"\x11preassigned_rooms\x18\x06 \x03(\v2\".plugnmeet.PreassignedBreakoutRoomR\x10preassignedRooms:\xa7\x01\xbaH\xa3\x01\x1a\xa0\x01\n" +
+	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x120\n" +
+	"\x14allowed_number_rooms\x18\x02 \x01(\rR\x12allowedNumberRooms\x128\n" +
+	"\x19allow_return_to_main_room\x18\x03 \x01(\bR\x15allowReturnToMainRoom\x12*\n" +
+	"\x11allow_self_select\x18\x04 \x01(\bR\x0fallowSelfSelect\x12O\n" +
+	"\x11preassigned_rooms\x18\x05 \x03(\v2\".plugnmeet.PreassignedBreakoutRoomR\x10preassignedRooms\x12$\n" +
+	"\tis_active\x18\x06 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisActive\x12;\n" +
+	"\x16is_per_user_ai_session\x18\a \x01(\bB\a\xbaH\x04j\x02\b\x00R\x12isPerUserAiSession:\xa7\x01\xbaH\xa3\x01\x1a\xa0\x01\n" +
 	"&breakout_preassigned_requires_is_allow\x12Apreassigned_rooms requires breakout_room_features.is_allow = true\x1a3this.preassigned_rooms.size() == 0 || this.is_allow\"\xb0\x01\n" +
 	"\x1bDisplayExternalLinkFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12$\n" +

@@ -729,6 +729,7 @@ type AIAgentSessionSummary struct {
 	WorkspaceActivity *AIAgentSummaryWorkspaceActivity `protobuf:"bytes,8,opt,name=workspace_activity,json=workspaceActivity,proto3" json:"workspace_activity,omitempty"`
 	Continuation      *AIAgentSummaryContinuation      `protobuf:"bytes,9,opt,name=continuation,proto3" json:"continuation,omitempty"`
 	NarrativeSummary  string                           `protobuf:"bytes,10,opt,name=narrative_summary,json=narrativeSummary,proto3" json:"narrative_summary,omitempty"`
+	Usage             []*RoomArtifactTokenUsage        `protobuf:"bytes,11,rep,name=usage,proto3" json:"usage,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -831,6 +832,13 @@ func (x *AIAgentSessionSummary) GetNarrativeSummary() string {
 		return x.NarrativeSummary
 	}
 	return ""
+}
+
+func (x *AIAgentSessionSummary) GetUsage() []*RoomArtifactTokenUsage {
+	if x != nil {
+		return x.Usage
+	}
+	return nil
 }
 
 type AIAgentSummarySession struct {
@@ -1484,7 +1492,7 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\x04type\x18\x01 \x01(\x0e2\x1b.plugnmeet.RoomArtifactTypeR\x04type\x12\x1f\n" +
 	"\vartifact_id\x18\x02 \x01(\tR\n" +
 	"artifactId\x12;\n" +
-	"\bmetadata\x18\x03 \x01(\v2\x1f.plugnmeet.RoomArtifactMetadataR\bmetadata\"\x90\x05\n" +
+	"\bmetadata\x18\x03 \x01(\v2\x1f.plugnmeet.RoomArtifactMetadataR\bmetadata\"\xc9\x05\n" +
 	"\x15AIAgentSessionSummary\x12%\n" +
 	"\x0esummary_source\x18\x01 \x01(\tR\rsummarySource\x12!\n" +
 	"\fgenerated_at\x18\x02 \x01(\tR\vgeneratedAt\x12<\n" +
@@ -1498,7 +1506,8 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\x12workspace_activity\x18\b \x01(\v2*.plugnmeet.AIAgentSummaryWorkspaceActivityR\x11workspaceActivity\x12I\n" +
 	"\fcontinuation\x18\t \x01(\v2%.plugnmeet.AIAgentSummaryContinuationR\fcontinuation\x12+\n" +
 	"\x11narrative_summary\x18\n" +
-	" \x01(\tR\x10narrativeSummary\"\xbb\x03\n" +
+	" \x01(\tR\x10narrativeSummary\x127\n" +
+	"\x05usage\x18\v \x03(\v2!.plugnmeet.RoomArtifactTokenUsageR\x05usage\"\xbb\x03\n" +
 	"\x15AIAgentSummarySession\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x19\n" +
 	"\broom_sid\x18\x02 \x01(\tR\aroomSid\x12\x1d\n" +
@@ -1631,13 +1640,14 @@ var file_plugnmeet_room_artifacts_proto_depIdxs = []int32{
 	14, // 15: plugnmeet.AIAgentSessionSummary.progress_log:type_name -> plugnmeet.AIAgentSummaryProgressEntry
 	15, // 16: plugnmeet.AIAgentSessionSummary.workspace_activity:type_name -> plugnmeet.AIAgentSummaryWorkspaceActivity
 	16, // 17: plugnmeet.AIAgentSessionSummary.continuation:type_name -> plugnmeet.AIAgentSummaryContinuation
-	13, // 18: plugnmeet.AIAgentSummaryQuizEvaluation.questions:type_name -> plugnmeet.AIAgentSummaryQuizQuestion
-	20, // 19: plugnmeet.AIAgentSummaryWorkspaceActivity.tools_used:type_name -> plugnmeet.AIAgentSummaryWorkspaceActivity.ToolsUsedEntry
-	20, // [20:20] is the sub-list for method output_type
-	20, // [20:20] is the sub-list for method input_type
-	20, // [20:20] is the sub-list for extension type_name
-	20, // [20:20] is the sub-list for extension extendee
-	0,  // [0:20] is the sub-list for field type_name
+	4,  // 18: plugnmeet.AIAgentSessionSummary.usage:type_name -> plugnmeet.RoomArtifactTokenUsage
+	13, // 19: plugnmeet.AIAgentSummaryQuizEvaluation.questions:type_name -> plugnmeet.AIAgentSummaryQuizQuestion
+	20, // 20: plugnmeet.AIAgentSummaryWorkspaceActivity.tools_used:type_name -> plugnmeet.AIAgentSummaryWorkspaceActivity.ToolsUsedEntry
+	21, // [21:21] is the sub-list for method output_type
+	21, // [21:21] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_room_artifacts_proto_init() }

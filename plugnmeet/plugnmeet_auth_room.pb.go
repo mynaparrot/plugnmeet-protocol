@@ -492,9 +492,10 @@ func (x *IsRoomActiveRes) GetIsActive() bool {
 }
 
 type ActiveRoomWithParticipant struct {
-	state            protoimpl.MessageState     `protogen:"open.v1"`
-	RoomInfo         *ActiveRoomInfo            `protobuf:"bytes,3,opt,name=room_info,json=roomInfo,proto3,oneof" json:"room_info,omitempty"`
-	ParticipantsInfo []*livekit.ParticipantInfo `protobuf:"bytes,4,rep,name=participants_info,json=participantsInfo,proto3" json:"participants_info,omitempty"`
+	state            protoimpl.MessageState       `protogen:"open.v1"`
+	RoomInfo         *ActiveRoomInfo              `protobuf:"bytes,3,opt,name=room_info,json=roomInfo,proto3,oneof" json:"room_info,omitempty"`
+	ParticipantsInfo []*livekit.ParticipantInfo   `protobuf:"bytes,4,rep,name=participants_info,json=participantsInfo,proto3" json:"participants_info,omitempty"`
+	BreakoutRooms    []*ActiveRoomWithParticipant `protobuf:"bytes,5,rep,name=breakout_rooms,json=breakoutRooms,proto3" json:"breakout_rooms,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -539,6 +540,13 @@ func (x *ActiveRoomWithParticipant) GetRoomInfo() *ActiveRoomInfo {
 func (x *ActiveRoomWithParticipant) GetParticipantsInfo() []*livekit.ParticipantInfo {
 	if x != nil {
 		return x.ParticipantsInfo
+	}
+	return nil
+}
+
+func (x *ActiveRoomWithParticipant) GetBreakoutRooms() []*ActiveRoomWithParticipant {
+	if x != nil {
+		return x.BreakoutRooms
 	}
 	return nil
 }
@@ -1354,10 +1362,11 @@ const file_plugnmeet_auth_room_proto_rawDesc = "" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
 	"statusCode\x12\x1b\n" +
-	"\tis_active\x18\x04 \x01(\bR\bisActive\"\xad\x01\n" +
+	"\tis_active\x18\x04 \x01(\bR\bisActive\"\xfa\x01\n" +
 	"\x19ActiveRoomWithParticipant\x12;\n" +
 	"\troom_info\x18\x03 \x01(\v2\x19.plugnmeet.ActiveRoomInfoH\x00R\broomInfo\x88\x01\x01\x12E\n" +
-	"\x11participants_info\x18\x04 \x03(\v2\x18.livekit.ParticipantInfoR\x10participantsInfoB\f\n" +
+	"\x11participants_info\x18\x04 \x03(\v2\x18.livekit.ParticipantInfoR\x10participantsInfo\x12K\n" +
+	"\x0ebreakout_rooms\x18\x05 \x03(\v2$.plugnmeet.ActiveRoomWithParticipantR\rbreakoutRoomsB\f\n" +
 	"\n" +
 	"_room_info\"\xb2\x01\n" +
 	"\x14GetActiveRoomInfoRes\x12\x16\n" +
@@ -1478,22 +1487,23 @@ var file_plugnmeet_auth_room_proto_depIdxs = []int32{
 	18, // 4: plugnmeet.IsRoomActiveRes.status_code:type_name -> plugnmeet.StatusCode
 	2,  // 5: plugnmeet.ActiveRoomWithParticipant.room_info:type_name -> plugnmeet.ActiveRoomInfo
 	19, // 6: plugnmeet.ActiveRoomWithParticipant.participants_info:type_name -> livekit.ParticipantInfo
-	18, // 7: plugnmeet.GetActiveRoomInfoRes.status_code:type_name -> plugnmeet.StatusCode
-	7,  // 8: plugnmeet.GetActiveRoomInfoRes.room:type_name -> plugnmeet.ActiveRoomWithParticipant
-	18, // 9: plugnmeet.GetActiveRoomsInfoRes.status_code:type_name -> plugnmeet.StatusCode
-	7,  // 10: plugnmeet.GetActiveRoomsInfoRes.rooms:type_name -> plugnmeet.ActiveRoomWithParticipant
-	10, // 11: plugnmeet.FetchPastRoomsResult.rooms_list:type_name -> plugnmeet.PastRoomInfo
-	18, // 12: plugnmeet.FetchPastRoomsRes.status_code:type_name -> plugnmeet.StatusCode
-	12, // 13: plugnmeet.FetchPastRoomsRes.result:type_name -> plugnmeet.FetchPastRoomsResult
-	18, // 14: plugnmeet.GetClientFilesRes.status_code:type_name -> plugnmeet.StatusCode
-	16, // 15: plugnmeet.BroadcastToRoomReq.chat_msg:type_name -> plugnmeet.BroadcastToRoomChatMessage
-	17, // 16: plugnmeet.BroadcastToRoomReq.notification_msg:type_name -> plugnmeet.BroadcastToRoomNotificationMsg
-	20, // 17: plugnmeet.BroadcastToRoomNotificationMsg.type:type_name -> plugnmeet.NatsSystemNotificationTypes
-	18, // [18:18] is the sub-list for method output_type
-	18, // [18:18] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	7,  // 7: plugnmeet.ActiveRoomWithParticipant.breakout_rooms:type_name -> plugnmeet.ActiveRoomWithParticipant
+	18, // 8: plugnmeet.GetActiveRoomInfoRes.status_code:type_name -> plugnmeet.StatusCode
+	7,  // 9: plugnmeet.GetActiveRoomInfoRes.room:type_name -> plugnmeet.ActiveRoomWithParticipant
+	18, // 10: plugnmeet.GetActiveRoomsInfoRes.status_code:type_name -> plugnmeet.StatusCode
+	7,  // 11: plugnmeet.GetActiveRoomsInfoRes.rooms:type_name -> plugnmeet.ActiveRoomWithParticipant
+	10, // 12: plugnmeet.FetchPastRoomsResult.rooms_list:type_name -> plugnmeet.PastRoomInfo
+	18, // 13: plugnmeet.FetchPastRoomsRes.status_code:type_name -> plugnmeet.StatusCode
+	12, // 14: plugnmeet.FetchPastRoomsRes.result:type_name -> plugnmeet.FetchPastRoomsResult
+	18, // 15: plugnmeet.GetClientFilesRes.status_code:type_name -> plugnmeet.StatusCode
+	16, // 16: plugnmeet.BroadcastToRoomReq.chat_msg:type_name -> plugnmeet.BroadcastToRoomChatMessage
+	17, // 17: plugnmeet.BroadcastToRoomReq.notification_msg:type_name -> plugnmeet.BroadcastToRoomNotificationMsg
+	20, // 18: plugnmeet.BroadcastToRoomNotificationMsg.type:type_name -> plugnmeet.NatsSystemNotificationTypes
+	19, // [19:19] is the sub-list for method output_type
+	19, // [19:19] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_auth_room_proto_init() }

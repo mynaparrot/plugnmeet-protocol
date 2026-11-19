@@ -60,6 +60,7 @@ message IsRoomActiveRes {
 message ActiveRoomWithParticipant {
   optional ActiveRoomInfo room_info = 3;
   repeated livekit.ParticipantInfo participants_info = 4;
+  repeated ActiveRoomWithParticipant breakout_rooms = 5;
 }
 
 message GetActiveRoomInfoRes {

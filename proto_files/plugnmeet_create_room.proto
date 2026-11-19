@@ -165,12 +165,14 @@ message BreakoutRoomFeatures {
   };
 
   bool is_allow = 1;
+  uint32 allowed_number_rooms = 2;
+  bool allow_return_to_main_room = 3;
+  bool allow_self_select = 4;
+  repeated PreassignedBreakoutRoom preassigned_rooms = 5;
+
   // internal usage field
-  bool is_active = 2 [(buf.validate.field).bool.const = false];
-  uint32 allowed_number_rooms = 3;
-  bool allow_return_to_main_room = 4;
-  bool allow_self_select = 5;
-  repeated PreassignedBreakoutRoom preassigned_rooms = 6;
+  bool is_active = 6 [(buf.validate.field).bool.const = false];
+  bool is_per_user_ai_session = 7 [(buf.validate.field).bool.const = false];
 }
 
 message DisplayExternalLinkFeatures {

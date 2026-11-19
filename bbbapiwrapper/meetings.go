@@ -86,7 +86,6 @@ func ConvertActiveRoomInfoToBBBMeetingInfo(r *plugnmeet.ActiveRoomWithParticipan
 		CreateDate:            time.Unix(rInfo.CreationTime, 0).Format(time.RFC1123),
 		Running:               true,
 		StartTime:             rInfo.CreationTime * 1000,
-		ParticipantCount:      int64(len(r.ParticipantsInfo)),
 		Duration:              uint32(time.Now().UTC().Unix() - rInfo.CreationTime),
 		ListenerCount:         0,
 		VideoCount:            0,
@@ -96,10 +95,6 @@ func ConvertActiveRoomInfoToBBBMeetingInfo(r *plugnmeet.ActiveRoomWithParticipan
 
 	if rInfo.IsRecording > 0 {
 		res.Recording = true
-	}
-
-	if res.ParticipantCount > 0 {
-		res.HasUserJoined = true
 	}
 
 	// we'll need to
@@ -120,23 +115,20 @@ func ConvertActiveRoomInfoToBBBMeetingInfo(r *plugnmeet.ActiveRoomWithParticipan
 		}
 	}
 
+	participants := participantsWithBreakoutRooms(r)
 	var attendees []Attendee
-	for _, p := range r.ParticipantsInfo {
+	for _, p := range participants {
 		a := Attendee{
 			UserID:   p.Identity,
 			FullName: p.Name,
 			Role:     "VIEWER",
 		}
-		m := new(plugnmeet.UserMetadata)
-		err := protojson.Unmarshal([]byte(p.Metadata), m)
-		if err != nil {
-			attendees = append(attendees, a)
-			continue
-		}
-		a.IsPresenter = m.IsPresenter
-		if m.IsAdmin {
-			a.Role = "MODERATOR"
-			res.ModeratorCount++
+		if m := new(plugnmeet.UserMetadata); protojson.Unmarshal([]byte(p.Metadata), m) == nil {
+			a.IsPresenter = m.IsPresenter
+			if m.IsAdmin {
+				a.Role = "MODERATOR"
+				res.ModeratorCount++
+			}
 		}
 
 		if len(p.GetTracks()) > 0 {
@@ -161,5 +153,36 @@ func ConvertActiveRoomInfoToBBBMeetingInfo(r *plugnmeet.ActiveRoomWithParticipan
 		res.AttendeesInfo.Attendees = attendees
 	}
 
+	res.ParticipantCount = int64(len(participants))
+	res.HasUserJoined = res.ParticipantCount > 0
+
 	return &res
+}
+
+// participantsWithBreakoutRooms returns the main room participants plus those of
+// its breakout rooms, de-duplicated by identity.
+func participantsWithBreakoutRooms(r *plugnmeet.ActiveRoomWithParticipant) []*livekit.ParticipantInfo {
+	participants := make([]*livekit.ParticipantInfo, 0, len(r.ParticipantsInfo))
+	seen := make(map[string]struct{}, len(r.ParticipantsInfo))
+
+	add := func(p *livekit.ParticipantInfo) {
+		if p.Identity != "" {
+			if _, ok := seen[p.Identity]; ok {
+				return
+			}
+			seen[p.Identity] = struct{}{}
+		}
+		participants = append(participants, p)
+	}
+
+	for _, p := range r.ParticipantsInfo {
+		add(p)
+	}
+	for _, br := range r.BreakoutRooms {
+		for _, p := range br.GetParticipantsInfo() {
+			add(p)
+		}
+	}
+
+	return participants
 }

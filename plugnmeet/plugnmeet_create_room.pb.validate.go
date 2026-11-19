@@ -1651,8 +1651,6 @@ func (m *BreakoutRoomFeatures) validate(all bool) error {
 
 	// no validation rules for IsAllow
 
-	// no validation rules for IsActive
-
 	// no validation rules for AllowedNumberRooms
 
 	// no validation rules for AllowReturnToMainRoom
@@ -1692,6 +1690,10 @@ func (m *BreakoutRoomFeatures) validate(all bool) error {
 		}
 
 	}
+
+	// no validation rules for IsActive
+
+	// no validation rules for IsPerUserAiSession
 
 	if len(errors) > 0 {
 		return BreakoutRoomFeaturesMultiError(errors)

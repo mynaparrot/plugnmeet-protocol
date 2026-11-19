@@ -1123,10 +1123,10 @@ const file_plugnmeet_create_room_insights_proto_rawDesc = "" +
 	"\fHeadersEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
-	"\x06_scope\"\xea\x01\n" +
+	"\x06_scope\"\xe1\x01\n" +
 	"\x18AIAgentAutoSessionConfig\x12I\n" +
-	"\x17allowed_participant_ids\x18\x01 \x03(\tB\x11\xbaH\x0e\x92\x01\v\x10 \"\ar\x05\x10\x01\x18\x80\x01R\x15allowedParticipantIds\x12?\n" +
-	"\x17max_concurrent_sessions\x18\x02 \x01(\rB\a\xbaH\x04*\x02\x18\x10R\x15maxConcurrentSessions\x12-\n" +
+	"\x17allowed_participant_ids\x18\x01 \x03(\tB\x11\xbaH\x0e\x92\x01\v\x10 \"\ar\x05\x10\x01\x18\x80\x01R\x15allowedParticipantIds\x126\n" +
+	"\x17max_concurrent_sessions\x18\x02 \x01(\rR\x15maxConcurrentSessions\x12-\n" +
 	"\x10auto_start_agent\x18\x03 \x01(\bH\x00R\x0eautoStartAgent\x88\x01\x01B\x13\n" +
 	"\x11_auto_start_agent\"\xcb\x0f\n" +
 	"\x17InsightsAIAgentFeatures\x12\x19\n" +
