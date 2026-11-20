@@ -757,6 +757,110 @@ func (x *AIAgentAutoSessionConfig) GetAutoStartAgent() bool {
 	return false
 }
 
+// InsightsAIAgentCustomProvider carries a host-supplied AI provider and API key
+// for the room's AI agent (BYOK / custom endpoint). It is accepted only during
+// room creation, stripped before room metadata is stored in NATS or broadcast
+// to participants, and kept exclusively in server-side Redis for the lifetime
+// of the room.
+type InsightsAIAgentCustomProvider struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Provider type: "google" or "openai".
+	Provider string `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`
+	// Secret API key for the provider.
+	ApiKey string `protobuf:"bytes,2,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+	// Optional HTTPS base URL for self-hosted or gateway endpoints.
+	Endpoint *string `protobuf:"bytes,3,opt,name=endpoint,proto3,oneof" json:"endpoint,omitempty"`
+	// Optional HTTP header name used to send the API key (defaults to
+	// provider standard, e.g. "Authorization" with Bearer token or "x-goog-api-key").
+	AuthHeader *string `protobuf:"bytes,4,opt,name=auth_header,json=authHeader,proto3,oneof" json:"auth_header,omitempty"`
+	// Optional model overrides; when omitted, server defaults for the selected
+	// provider are used.
+	RealtimeModel   *string `protobuf:"bytes,5,opt,name=realtime_model,json=realtimeModel,proto3,oneof" json:"realtime_model,omitempty"`
+	DelegationModel *string `protobuf:"bytes,6,opt,name=delegation_model,json=delegationModel,proto3,oneof" json:"delegation_model,omitempty"`
+	SummarizeModel  *string `protobuf:"bytes,7,opt,name=summarize_model,json=summarizeModel,proto3,oneof" json:"summarize_model,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *InsightsAIAgentCustomProvider) Reset() {
+	*x = InsightsAIAgentCustomProvider{}
+	mi := &file_plugnmeet_create_room_insights_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InsightsAIAgentCustomProvider) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InsightsAIAgentCustomProvider) ProtoMessage() {}
+
+func (x *InsightsAIAgentCustomProvider) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_create_room_insights_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InsightsAIAgentCustomProvider.ProtoReflect.Descriptor instead.
+func (*InsightsAIAgentCustomProvider) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_create_room_insights_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *InsightsAIAgentCustomProvider) GetProvider() string {
+	if x != nil {
+		return x.Provider
+	}
+	return ""
+}
+
+func (x *InsightsAIAgentCustomProvider) GetApiKey() string {
+	if x != nil {
+		return x.ApiKey
+	}
+	return ""
+}
+
+func (x *InsightsAIAgentCustomProvider) GetEndpoint() string {
+	if x != nil && x.Endpoint != nil {
+		return *x.Endpoint
+	}
+	return ""
+}
+
+func (x *InsightsAIAgentCustomProvider) GetAuthHeader() string {
+	if x != nil && x.AuthHeader != nil {
+		return *x.AuthHeader
+	}
+	return ""
+}
+
+func (x *InsightsAIAgentCustomProvider) GetRealtimeModel() string {
+	if x != nil && x.RealtimeModel != nil {
+		return *x.RealtimeModel
+	}
+	return ""
+}
+
+func (x *InsightsAIAgentCustomProvider) GetDelegationModel() string {
+	if x != nil && x.DelegationModel != nil {
+		return *x.DelegationModel
+	}
+	return ""
+}
+
+func (x *InsightsAIAgentCustomProvider) GetSummarizeModel() string {
+	if x != nil && x.SummarizeModel != nil {
+		return *x.SummarizeModel
+	}
+	return ""
+}
+
 type InsightsAIAgentFeatures struct {
 	state   protoimpl.MessageState `protogen:"open.v1"`
 	IsAllow bool                   `protobuf:"varint,1,opt,name=is_allow,json=isAllow,proto3" json:"is_allow,omitempty"` // master switch
@@ -797,13 +901,16 @@ type InsightsAIAgentFeatures struct {
 	// all internal usage fields (host may not set)
 	IsEnabled       bool    `protobuf:"varint,30,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
 	ActiveSessionId *string `protobuf:"bytes,31,opt,name=active_session_id,json=activeSessionId,proto3,oneof" json:"active_session_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Optional host-supplied provider credentials and endpoint overrides.
+	// Accepted on room creation and stripped before metadata is published.
+	CustomProvider *InsightsAIAgentCustomProvider `protobuf:"bytes,32,opt,name=custom_provider,json=customProvider,proto3,oneof" json:"custom_provider,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *InsightsAIAgentFeatures) Reset() {
 	*x = InsightsAIAgentFeatures{}
-	mi := &file_plugnmeet_create_room_insights_proto_msgTypes[8]
+	mi := &file_plugnmeet_create_room_insights_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -815,7 +922,7 @@ func (x *InsightsAIAgentFeatures) String() string {
 func (*InsightsAIAgentFeatures) ProtoMessage() {}
 
 func (x *InsightsAIAgentFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_create_room_insights_proto_msgTypes[8]
+	mi := &file_plugnmeet_create_room_insights_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -828,7 +935,7 @@ func (x *InsightsAIAgentFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsightsAIAgentFeatures.ProtoReflect.Descriptor instead.
 func (*InsightsAIAgentFeatures) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_create_room_insights_proto_rawDescGZIP(), []int{8}
+	return file_plugnmeet_create_room_insights_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *InsightsAIAgentFeatures) GetIsAllow() bool {
@@ -1048,6 +1155,13 @@ func (x *InsightsAIAgentFeatures) GetActiveSessionId() string {
 	return ""
 }
 
+func (x *InsightsAIAgentFeatures) GetCustomProvider() *InsightsAIAgentCustomProvider {
+	if x != nil {
+		return x.CustomProvider
+	}
+	return nil
+}
+
 var File_plugnmeet_create_room_insights_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_create_room_insights_proto_rawDesc = "" +
@@ -1128,7 +1242,23 @@ const file_plugnmeet_create_room_insights_proto_rawDesc = "" +
 	"\x17allowed_participant_ids\x18\x01 \x03(\tB\x11\xbaH\x0e\x92\x01\v\x10 \"\ar\x05\x10\x01\x18\x80\x01R\x15allowedParticipantIds\x126\n" +
 	"\x17max_concurrent_sessions\x18\x02 \x01(\rR\x15maxConcurrentSessions\x12-\n" +
 	"\x10auto_start_agent\x18\x03 \x01(\bH\x00R\x0eautoStartAgent\x88\x01\x01B\x13\n" +
-	"\x11_auto_start_agent\"\xcb\x0f\n" +
+	"\x11_auto_start_agent\"\xbb\x04\n" +
+	"\x1dInsightsAIAgentCustomProvider\x12\x98\x01\n" +
+	"\bprovider\x18\x01 \x01(\tB|\xbaHy\xba\x01v\n" +
+	" ai_agent_custom_provider_allowed\x12,provider must be either 'google' or 'openai'\x1a$this == 'google' || this == 'openai'R\bprovider\x12#\n" +
+	"\aapi_key\x18\x02 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\x80\x04R\x06apiKey\x12)\n" +
+	"\bendpoint\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x18\x80\x04H\x00R\bendpoint\x88\x01\x01\x12.\n" +
+	"\vauth_header\x18\x04 \x01(\tB\b\xbaH\x05r\x03\x18\x80\x01H\x01R\n" +
+	"authHeader\x88\x01\x01\x124\n" +
+	"\x0erealtime_model\x18\x05 \x01(\tB\b\xbaH\x05r\x03\x18\x80\x01H\x02R\rrealtimeModel\x88\x01\x01\x128\n" +
+	"\x10delegation_model\x18\x06 \x01(\tB\b\xbaH\x05r\x03\x18\x80\x01H\x03R\x0fdelegationModel\x88\x01\x01\x126\n" +
+	"\x0fsummarize_model\x18\a \x01(\tB\b\xbaH\x05r\x03\x18\x80\x01H\x04R\x0esummarizeModel\x88\x01\x01B\v\n" +
+	"\t_endpointB\x0e\n" +
+	"\f_auth_headerB\x11\n" +
+	"\x0f_realtime_modelB\x13\n" +
+	"\x11_delegation_modelB\x12\n" +
+	"\x10_summarize_model\"\xb7\x10\n" +
 	"\x17InsightsAIAgentFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12@\n" +
 	"\fsession_mode\x18\x02 \x01(\x0e2\x1d.plugnmeet.AIAgentSessionModeR\vsessionMode\x12X\n" +
@@ -1171,7 +1301,8 @@ const file_plugnmeet_create_room_insights_proto_rawDesc = "" +
 	"\n" +
 	"is_enabled\x18\x1e \x01(\bB\a\xbaH\x04j\x02\b\x00R\tisEnabled\x12\x94\x01\n" +
 	"\x11active_session_id\x18\x1f \x01(\tBc\xbaH`\xba\x01]\n" +
-	"\x17active_session_id_empty\x12.active_session_id should not contain any value\x1a\x12this.matches('^$')H\bR\x0factiveSessionId\x88\x01\x01\x1aa\n" +
+	"\x17active_session_id_empty\x12.active_session_id should not contain any value\x1a\x12this.matches('^$')H\bR\x0factiveSessionId\x88\x01\x01\x12V\n" +
+	"\x0fcustom_provider\x18  \x01(\v2(.plugnmeet.InsightsAIAgentCustomProviderH\tR\x0ecustomProvider\x88\x01\x01\x1aa\n" +
 	"\x0fMcpServersEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x128\n" +
 	"\x05value\x18\x02 \x01(\v2\".plugnmeet.ExternalMCPServerConfigR\x05value:\x028\x01B\x16\n" +
@@ -1183,7 +1314,8 @@ const file_plugnmeet_create_room_insights_proto_rawDesc = "" +
 	"\x11_instruction_langB\b\n" +
 	"\x06_voiceB\x10\n" +
 	"\x0e_speaking_rateB\x14\n" +
-	"\x12_active_session_id*\xba\x01\n" +
+	"\x12_active_session_idB\x12\n" +
+	"\x10_custom_provider*\xba\x01\n" +
 	"\x16ExternalMCPServerScope\x12)\n" +
 	"%EXTERNAL_MCP_SERVER_SCOPE_UNSPECIFIED\x10\x00\x12$\n" +
 	" EXTERNAL_MCP_SERVER_SCOPE_SHARED\x10\x01\x12'\n" +
@@ -1208,7 +1340,7 @@ func file_plugnmeet_create_room_insights_proto_rawDescGZIP() []byte {
 }
 
 var file_plugnmeet_create_room_insights_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_plugnmeet_create_room_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_plugnmeet_create_room_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_plugnmeet_create_room_insights_proto_goTypes = []any{
 	(ExternalMCPServerScope)(0),                    // 0: plugnmeet.ExternalMCPServerScope
 	(AIAgentSessionMode)(0),                        // 1: plugnmeet.AIAgentSessionMode
@@ -1220,30 +1352,32 @@ var file_plugnmeet_create_room_insights_proto_goTypes = []any{
 	(*InsightsAIMeetingSummarizationFeatures)(nil), // 7: plugnmeet.InsightsAIMeetingSummarizationFeatures
 	(*ExternalMCPServerConfig)(nil),                // 8: plugnmeet.ExternalMCPServerConfig
 	(*AIAgentAutoSessionConfig)(nil),               // 9: plugnmeet.AIAgentAutoSessionConfig
-	(*InsightsAIAgentFeatures)(nil),                // 10: plugnmeet.InsightsAIAgentFeatures
-	nil,                                            // 11: plugnmeet.InsightsAITextChatFeatures.McpServersEntry
-	nil,                                            // 12: plugnmeet.ExternalMCPServerConfig.HeadersEntry
-	nil,                                            // 13: plugnmeet.InsightsAIAgentFeatures.McpServersEntry
+	(*InsightsAIAgentCustomProvider)(nil),          // 10: plugnmeet.InsightsAIAgentCustomProvider
+	(*InsightsAIAgentFeatures)(nil),                // 11: plugnmeet.InsightsAIAgentFeatures
+	nil,                                            // 12: plugnmeet.InsightsAITextChatFeatures.McpServersEntry
+	nil,                                            // 13: plugnmeet.ExternalMCPServerConfig.HeadersEntry
+	nil,                                            // 14: plugnmeet.InsightsAIAgentFeatures.McpServersEntry
 }
 var file_plugnmeet_create_room_insights_proto_depIdxs = []int32{
 	3,  // 0: plugnmeet.InsightsFeatures.transcription_features:type_name -> plugnmeet.InsightsTranscriptionFeatures
 	4,  // 1: plugnmeet.InsightsFeatures.chat_translation_features:type_name -> plugnmeet.InsightsChatTranslationFeatures
 	5,  // 2: plugnmeet.InsightsFeatures.ai_features:type_name -> plugnmeet.InsightsAIFeatures
-	10, // 3: plugnmeet.InsightsFeatures.ai_agent_features:type_name -> plugnmeet.InsightsAIAgentFeatures
+	11, // 3: plugnmeet.InsightsFeatures.ai_agent_features:type_name -> plugnmeet.InsightsAIAgentFeatures
 	6,  // 4: plugnmeet.InsightsAIFeatures.ai_text_chat_features:type_name -> plugnmeet.InsightsAITextChatFeatures
 	7,  // 5: plugnmeet.InsightsAIFeatures.meeting_summarization_features:type_name -> plugnmeet.InsightsAIMeetingSummarizationFeatures
-	11, // 6: plugnmeet.InsightsAITextChatFeatures.mcp_servers:type_name -> plugnmeet.InsightsAITextChatFeatures.McpServersEntry
-	12, // 7: plugnmeet.ExternalMCPServerConfig.headers:type_name -> plugnmeet.ExternalMCPServerConfig.HeadersEntry
+	12, // 6: plugnmeet.InsightsAITextChatFeatures.mcp_servers:type_name -> plugnmeet.InsightsAITextChatFeatures.McpServersEntry
+	13, // 7: plugnmeet.ExternalMCPServerConfig.headers:type_name -> plugnmeet.ExternalMCPServerConfig.HeadersEntry
 	1,  // 8: plugnmeet.InsightsAIAgentFeatures.session_mode:type_name -> plugnmeet.AIAgentSessionMode
 	9,  // 9: plugnmeet.InsightsAIAgentFeatures.auto_session_config:type_name -> plugnmeet.AIAgentAutoSessionConfig
-	13, // 10: plugnmeet.InsightsAIAgentFeatures.mcp_servers:type_name -> plugnmeet.InsightsAIAgentFeatures.McpServersEntry
-	8,  // 11: plugnmeet.InsightsAITextChatFeatures.McpServersEntry.value:type_name -> plugnmeet.ExternalMCPServerConfig
-	8,  // 12: plugnmeet.InsightsAIAgentFeatures.McpServersEntry.value:type_name -> plugnmeet.ExternalMCPServerConfig
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	14, // 10: plugnmeet.InsightsAIAgentFeatures.mcp_servers:type_name -> plugnmeet.InsightsAIAgentFeatures.McpServersEntry
+	10, // 11: plugnmeet.InsightsAIAgentFeatures.custom_provider:type_name -> plugnmeet.InsightsAIAgentCustomProvider
+	8,  // 12: plugnmeet.InsightsAITextChatFeatures.McpServersEntry.value:type_name -> plugnmeet.ExternalMCPServerConfig
+	8,  // 13: plugnmeet.InsightsAIAgentFeatures.McpServersEntry.value:type_name -> plugnmeet.ExternalMCPServerConfig
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_create_room_insights_proto_init() }
@@ -1258,13 +1392,14 @@ func file_plugnmeet_create_room_insights_proto_init() {
 	file_plugnmeet_create_room_insights_proto_msgTypes[6].OneofWrappers = []any{}
 	file_plugnmeet_create_room_insights_proto_msgTypes[7].OneofWrappers = []any{}
 	file_plugnmeet_create_room_insights_proto_msgTypes[8].OneofWrappers = []any{}
+	file_plugnmeet_create_room_insights_proto_msgTypes[9].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_create_room_insights_proto_rawDesc), len(file_plugnmeet_create_room_insights_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   12,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -122,6 +122,35 @@ message AIAgentAutoSessionConfig {
   optional bool auto_start_agent = 3;
 }
 
+// InsightsAIAgentCustomProvider carries a host-supplied AI provider and API key
+// for the room's AI agent (BYOK / custom endpoint). It is accepted only during
+// room creation, stripped before room metadata is stored in NATS or broadcast
+// to participants, and kept exclusively in server-side Redis for the lifetime
+// of the room.
+message InsightsAIAgentCustomProvider {
+  // Provider type: "google" or "openai".
+  string provider = 1 [(buf.validate.field).cel = {
+    id: "ai_agent_custom_provider_allowed"
+    message: "provider must be either 'google' or 'openai'"
+    expression: "this == 'google' || this == 'openai'"
+  }];
+  // Secret API key for the provider.
+  string api_key = 2 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 512
+  }];
+  // Optional HTTPS base URL for self-hosted or gateway endpoints.
+  optional string endpoint = 3 [(buf.validate.field).string.max_len = 512];
+  // Optional HTTP header name used to send the API key (defaults to
+  // provider standard, e.g. "Authorization" with Bearer token or "x-goog-api-key").
+  optional string auth_header = 4 [(buf.validate.field).string.max_len = 128];
+  // Optional model overrides; when omitted, server defaults for the selected
+  // provider are used.
+  optional string realtime_model = 5 [(buf.validate.field).string.max_len = 128];
+  optional string delegation_model = 6 [(buf.validate.field).string.max_len = 128];
+  optional string summarize_model = 7 [(buf.validate.field).string.max_len = 128];
+}
+
 message InsightsAIAgentFeatures {
   bool is_allow = 1; // master switch
 
@@ -175,4 +204,8 @@ message InsightsAIAgentFeatures {
     message: "active_session_id should not contain any value",
     expression: "this.matches('^$')"
   }];
+
+  // Optional host-supplied provider credentials and endpoint overrides.
+  // Accepted on room creation and stripped before metadata is published.
+  optional InsightsAIAgentCustomProvider custom_provider = 32;
 }

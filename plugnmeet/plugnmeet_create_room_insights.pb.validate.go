@@ -1163,6 +1163,133 @@ var _ interface {
 	ErrorName() string
 } = AIAgentAutoSessionConfigValidationError{}
 
+// Validate checks the field values on InsightsAIAgentCustomProvider with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InsightsAIAgentCustomProvider) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InsightsAIAgentCustomProvider with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// InsightsAIAgentCustomProviderMultiError, or nil if none found.
+func (m *InsightsAIAgentCustomProvider) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InsightsAIAgentCustomProvider) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Provider
+
+	// no validation rules for ApiKey
+
+	if m.Endpoint != nil {
+		// no validation rules for Endpoint
+	}
+
+	if m.AuthHeader != nil {
+		// no validation rules for AuthHeader
+	}
+
+	if m.RealtimeModel != nil {
+		// no validation rules for RealtimeModel
+	}
+
+	if m.DelegationModel != nil {
+		// no validation rules for DelegationModel
+	}
+
+	if m.SummarizeModel != nil {
+		// no validation rules for SummarizeModel
+	}
+
+	if len(errors) > 0 {
+		return InsightsAIAgentCustomProviderMultiError(errors)
+	}
+
+	return nil
+}
+
+// InsightsAIAgentCustomProviderMultiError is an error wrapping multiple
+// validation errors returned by InsightsAIAgentCustomProvider.ValidateAll()
+// if the designated constraints aren't met.
+type InsightsAIAgentCustomProviderMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InsightsAIAgentCustomProviderMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InsightsAIAgentCustomProviderMultiError) AllErrors() []error { return m }
+
+// InsightsAIAgentCustomProviderValidationError is the validation error
+// returned by InsightsAIAgentCustomProvider.Validate if the designated
+// constraints aren't met.
+type InsightsAIAgentCustomProviderValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InsightsAIAgentCustomProviderValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InsightsAIAgentCustomProviderValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InsightsAIAgentCustomProviderValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InsightsAIAgentCustomProviderValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InsightsAIAgentCustomProviderValidationError) ErrorName() string {
+	return "InsightsAIAgentCustomProviderValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InsightsAIAgentCustomProviderValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInsightsAIAgentCustomProvider.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InsightsAIAgentCustomProviderValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InsightsAIAgentCustomProviderValidationError{}
+
 // Validate checks the field values on InsightsAIAgentFeatures with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -1330,6 +1457,39 @@ func (m *InsightsAIAgentFeatures) validate(all bool) error {
 
 	if m.ActiveSessionId != nil {
 		// no validation rules for ActiveSessionId
+	}
+
+	if m.CustomProvider != nil {
+
+		if all {
+			switch v := interface{}(m.GetCustomProvider()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, InsightsAIAgentFeaturesValidationError{
+						field:  "CustomProvider",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, InsightsAIAgentFeaturesValidationError{
+						field:  "CustomProvider",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetCustomProvider()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return InsightsAIAgentFeaturesValidationError{
+					field:  "CustomProvider",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if len(errors) > 0 {
