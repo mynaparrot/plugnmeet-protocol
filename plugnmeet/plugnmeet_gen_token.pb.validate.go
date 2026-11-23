@@ -516,6 +516,10 @@ func (m *UserMetadata) validate(all bool) error {
 		// no validation rules for ExUserId
 	}
 
+	if m.PreviousSessionContext != nil {
+		// no validation rules for PreviousSessionContext
+	}
+
 	if len(errors) > 0 {
 		return UserMetadataMultiError(errors)
 	}

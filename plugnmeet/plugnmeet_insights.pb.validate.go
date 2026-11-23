@@ -1803,10 +1803,6 @@ func (m *AIAgentStartReq) validate(all bool) error {
 		// no validation rules for SystemPrompt
 	}
 
-	if m.PreviousSessionContext != nil {
-		// no validation rules for PreviousSessionContext
-	}
-
 	if len(errors) > 0 {
 		return AIAgentStartReqMultiError(errors)
 	}

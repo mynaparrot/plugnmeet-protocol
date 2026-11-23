@@ -868,42 +868,41 @@ type InsightsAIAgentFeatures struct {
 	SessionMode       AIAgentSessionMode        `protobuf:"varint,2,opt,name=session_mode,json=sessionMode,proto3,enum=plugnmeet.AIAgentSessionMode" json:"session_mode,omitempty"`
 	AutoSessionConfig *AIAgentAutoSessionConfig `protobuf:"bytes,3,opt,name=auto_session_config,json=autoSessionConfig,proto3,oneof" json:"auto_session_config,omitempty"`
 	// persona, curriculum & topic boundary (host-owned)
-	AgentDisplayName         *string  `protobuf:"bytes,4,opt,name=agent_display_name,json=agentDisplayName,proto3,oneof" json:"agent_display_name,omitempty"`                   // default: "AI Assistant"
-	SystemPrompt             string   `protobuf:"bytes,5,opt,name=system_prompt,json=systemPrompt,proto3" json:"system_prompt,omitempty"`                                       // required when is_allow
-	PreviousSessionContext   *string  `protobuf:"bytes,6,opt,name=previous_session_context,json=previousSessionContext,proto3,oneof" json:"previous_session_context,omitempty"` // last session's summary
-	Topic                    string   `protobuf:"bytes,7,opt,name=topic,proto3" json:"topic,omitempty"`                                                                         // required when is_allow
-	AllowedSubtopics         []string `protobuf:"bytes,8,rep,name=allowed_subtopics,json=allowedSubtopics,proto3" json:"allowed_subtopics,omitempty"`
-	ForbiddenTopics          []string `protobuf:"bytes,9,rep,name=forbidden_topics,json=forbiddenTopics,proto3" json:"forbidden_topics,omitempty"`
-	StrictTopicEnforcement   bool     `protobuf:"varint,10,opt,name=strict_topic_enforcement,json=strictTopicEnforcement,proto3" json:"strict_topic_enforcement,omitempty"`         // default true
-	TopicAnchorIntervalTurns uint32   `protobuf:"varint,11,opt,name=topic_anchor_interval_turns,json=topicAnchorIntervalTurns,proto3" json:"topic_anchor_interval_turns,omitempty"` // default 6, range 3..12
+	AgentDisplayName         *string  `protobuf:"bytes,4,opt,name=agent_display_name,json=agentDisplayName,proto3,oneof" json:"agent_display_name,omitempty"` // default: "AI Assistant"
+	SystemPrompt             string   `protobuf:"bytes,5,opt,name=system_prompt,json=systemPrompt,proto3" json:"system_prompt,omitempty"`                     // required when is_allow
+	Topic                    string   `protobuf:"bytes,6,opt,name=topic,proto3" json:"topic,omitempty"`                                                       // required when is_allow
+	AllowedSubtopics         []string `protobuf:"bytes,7,rep,name=allowed_subtopics,json=allowedSubtopics,proto3" json:"allowed_subtopics,omitempty"`
+	ForbiddenTopics          []string `protobuf:"bytes,8,rep,name=forbidden_topics,json=forbiddenTopics,proto3" json:"forbidden_topics,omitempty"`
+	StrictTopicEnforcement   bool     `protobuf:"varint,9,opt,name=strict_topic_enforcement,json=strictTopicEnforcement,proto3" json:"strict_topic_enforcement,omitempty"`          // default true
+	TopicAnchorIntervalTurns uint32   `protobuf:"varint,10,opt,name=topic_anchor_interval_turns,json=topicAnchorIntervalTurns,proto3" json:"topic_anchor_interval_turns,omitempty"` // default 6, range 3..12
 	// language & voice delivery
-	SpokenLang      *string  `protobuf:"bytes,12,opt,name=spoken_lang,json=spokenLang,proto3,oneof" json:"spoken_lang,omitempty"`                // BCP-47: learner's native/support language
-	TargetLang      *string  `protobuf:"bytes,13,opt,name=target_lang,json=targetLang,proto3,oneof" json:"target_lang,omitempty"`                // BCP-47: language being learned (empty = no language-learning profile)
-	InstructionLang *string  `protobuf:"bytes,14,opt,name=instruction_lang,json=instructionLang,proto3,oneof" json:"instruction_lang,omitempty"` // language the agent explains in; empty -> spoken_lang
-	Voice           *string  `protobuf:"bytes,15,opt,name=voice,proto3,oneof" json:"voice,omitempty"`                                            // provider voice id; must be in server allow-list
-	SpeakingRate    *float32 `protobuf:"fixed32,16,opt,name=speaking_rate,json=speakingRate,proto3,oneof" json:"speaking_rate,omitempty"`
+	SpokenLang      *string  `protobuf:"bytes,11,opt,name=spoken_lang,json=spokenLang,proto3,oneof" json:"spoken_lang,omitempty"`                // BCP-47: learner's native/support language
+	TargetLang      *string  `protobuf:"bytes,12,opt,name=target_lang,json=targetLang,proto3,oneof" json:"target_lang,omitempty"`                // BCP-47: language being learned (empty = no language-learning profile)
+	InstructionLang *string  `protobuf:"bytes,13,opt,name=instruction_lang,json=instructionLang,proto3,oneof" json:"instruction_lang,omitempty"` // language the agent explains in; empty -> spoken_lang
+	Voice           *string  `protobuf:"bytes,14,opt,name=voice,proto3,oneof" json:"voice,omitempty"`                                            // provider voice id; must be in server allow-list
+	SpeakingRate    *float32 `protobuf:"fixed32,15,opt,name=speaking_rate,json=speakingRate,proto3,oneof" json:"speaking_rate,omitempty"`
 	// workspace & tool capabilities
-	AllowWhiteboardWrite bool   `protobuf:"varint,17,opt,name=allow_whiteboard_write,json=allowWhiteboardWrite,proto3" json:"allow_whiteboard_write,omitempty"` // default true
-	AllowVisionCapture   bool   `protobuf:"varint,18,opt,name=allow_vision_capture,json=allowVisionCapture,proto3" json:"allow_vision_capture,omitempty"`       // default true
-	VisionDebounceMs     uint32 `protobuf:"varint,19,opt,name=vision_debounce_ms,json=visionDebounceMs,proto3" json:"vision_debounce_ms,omitempty"`             // default 1200, max 5000
-	VisionMaxEdgePx      uint32 `protobuf:"varint,20,opt,name=vision_max_edge_px,json=visionMaxEdgePx,proto3" json:"vision_max_edge_px,omitempty"`              // default 1024, range 512..1600
-	AllowPolls           bool   `protobuf:"varint,21,opt,name=allow_polls,json=allowPolls,proto3" json:"allow_polls,omitempty"`                                 // default true
-	AllowChatMessage     bool   `protobuf:"varint,22,opt,name=allow_chat_message,json=allowChatMessage,proto3" json:"allow_chat_message,omitempty"`             // default true
-	AllowNotepadWrite    bool   `protobuf:"varint,23,opt,name=allow_notepad_write,json=allowNotepadWrite,proto3" json:"allow_notepad_write,omitempty"`          // default true
+	AllowWhiteboardWrite bool   `protobuf:"varint,16,opt,name=allow_whiteboard_write,json=allowWhiteboardWrite,proto3" json:"allow_whiteboard_write,omitempty"` // default true
+	AllowVisionCapture   bool   `protobuf:"varint,17,opt,name=allow_vision_capture,json=allowVisionCapture,proto3" json:"allow_vision_capture,omitempty"`       // default true
+	VisionDebounceMs     uint32 `protobuf:"varint,18,opt,name=vision_debounce_ms,json=visionDebounceMs,proto3" json:"vision_debounce_ms,omitempty"`             // default 1200, max 5000
+	VisionMaxEdgePx      uint32 `protobuf:"varint,19,opt,name=vision_max_edge_px,json=visionMaxEdgePx,proto3" json:"vision_max_edge_px,omitempty"`              // default 1024, range 512..1600
+	AllowPolls           bool   `protobuf:"varint,20,opt,name=allow_polls,json=allowPolls,proto3" json:"allow_polls,omitempty"`                                 // default true
+	AllowChatMessage     bool   `protobuf:"varint,21,opt,name=allow_chat_message,json=allowChatMessage,proto3" json:"allow_chat_message,omitempty"`             // default true
+	AllowNotepadWrite    bool   `protobuf:"varint,22,opt,name=allow_notepad_write,json=allowNotepadWrite,proto3" json:"allow_notepad_write,omitempty"`          // default true
 	// external knowledge & external MCP servers
-	AllowWebFetch            bool                                `protobuf:"varint,24,opt,name=allow_web_fetch,json=allowWebFetch,proto3" json:"allow_web_fetch,omitempty"` // default false
-	AllowedKnowledgeUrls     []string                            `protobuf:"bytes,25,rep,name=allowed_knowledge_urls,json=allowedKnowledgeUrls,proto3" json:"allowed_knowledge_urls,omitempty"`
-	KnowledgeCacheTtlSeconds uint32                              `protobuf:"varint,26,opt,name=knowledge_cache_ttl_seconds,json=knowledgeCacheTtlSeconds,proto3" json:"knowledge_cache_ttl_seconds,omitempty"` // default 3600, range 60..86400
-	McpServers               map[string]*ExternalMCPServerConfig `protobuf:"bytes,27,rep,name=mcp_servers,json=mcpServers,proto3" json:"mcp_servers,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	AllowWebFetch            bool                                `protobuf:"varint,23,opt,name=allow_web_fetch,json=allowWebFetch,proto3" json:"allow_web_fetch,omitempty"` // default false
+	AllowedKnowledgeUrls     []string                            `protobuf:"bytes,24,rep,name=allowed_knowledge_urls,json=allowedKnowledgeUrls,proto3" json:"allowed_knowledge_urls,omitempty"`
+	KnowledgeCacheTtlSeconds uint32                              `protobuf:"varint,25,opt,name=knowledge_cache_ttl_seconds,json=knowledgeCacheTtlSeconds,proto3" json:"knowledge_cache_ttl_seconds,omitempty"` // default 3600, range 60..86400
+	McpServers               map[string]*ExternalMCPServerConfig `protobuf:"bytes,26,rep,name=mcp_servers,json=mcpServers,proto3" json:"mcp_servers,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// cost & duration caps
-	MaxSessionSeconds uint32 `protobuf:"varint,28,opt,name=max_session_seconds,json=maxSessionSeconds,proto3" json:"max_session_seconds,omitempty"`
-	MaxAudioMinutes   uint32 `protobuf:"varint,29,opt,name=max_audio_minutes,json=maxAudioMinutes,proto3" json:"max_audio_minutes,omitempty"` // 0 = server default
+	MaxSessionSeconds uint32 `protobuf:"varint,27,opt,name=max_session_seconds,json=maxSessionSeconds,proto3" json:"max_session_seconds,omitempty"`
+	MaxAudioMinutes   uint32 `protobuf:"varint,28,opt,name=max_audio_minutes,json=maxAudioMinutes,proto3" json:"max_audio_minutes,omitempty"` // 0 = server default
 	// all internal usage fields (host may not set)
-	IsEnabled       bool    `protobuf:"varint,30,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
-	ActiveSessionId *string `protobuf:"bytes,31,opt,name=active_session_id,json=activeSessionId,proto3,oneof" json:"active_session_id,omitempty"`
+	IsEnabled       bool    `protobuf:"varint,29,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
+	ActiveSessionId *string `protobuf:"bytes,30,opt,name=active_session_id,json=activeSessionId,proto3,oneof" json:"active_session_id,omitempty"`
 	// Optional host-supplied provider credentials and endpoint overrides.
 	// Accepted on room creation and stripped before metadata is published.
-	CustomProvider *InsightsAIAgentCustomProvider `protobuf:"bytes,32,opt,name=custom_provider,json=customProvider,proto3,oneof" json:"custom_provider,omitempty"`
+	CustomProvider *InsightsAIAgentCustomProvider `protobuf:"bytes,31,opt,name=custom_provider,json=customProvider,proto3,oneof" json:"custom_provider,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -969,13 +968,6 @@ func (x *InsightsAIAgentFeatures) GetAgentDisplayName() string {
 func (x *InsightsAIAgentFeatures) GetSystemPrompt() string {
 	if x != nil {
 		return x.SystemPrompt
-	}
-	return ""
-}
-
-func (x *InsightsAIAgentFeatures) GetPreviousSessionContext() string {
-	if x != nil && x.PreviousSessionContext != nil {
-		return *x.PreviousSessionContext
 	}
 	return ""
 }
@@ -1258,57 +1250,55 @@ const file_plugnmeet_create_room_insights_proto_rawDesc = "" +
 	"\f_auth_headerB\x11\n" +
 	"\x0f_realtime_modelB\x13\n" +
 	"\x11_delegation_modelB\x12\n" +
-	"\x10_summarize_model\"\xb7\x10\n" +
+	"\x10_summarize_model\"\xdb\x0f\n" +
 	"\x17InsightsAIAgentFeatures\x12\x19\n" +
 	"\bis_allow\x18\x01 \x01(\bR\aisAllow\x12@\n" +
 	"\fsession_mode\x18\x02 \x01(\x0e2\x1d.plugnmeet.AIAgentSessionModeR\vsessionMode\x12X\n" +
 	"\x13auto_session_config\x18\x03 \x01(\v2#.plugnmeet.AIAgentAutoSessionConfigH\x00R\x11autoSessionConfig\x88\x01\x01\x121\n" +
 	"\x12agent_display_name\x18\x04 \x01(\tH\x01R\x10agentDisplayName\x88\x01\x01\x12#\n" +
-	"\rsystem_prompt\x18\x05 \x01(\tR\fsystemPrompt\x12=\n" +
-	"\x18previous_session_context\x18\x06 \x01(\tH\x02R\x16previousSessionContext\x88\x01\x01\x12\x14\n" +
-	"\x05topic\x18\a \x01(\tR\x05topic\x125\n" +
-	"\x11allowed_subtopics\x18\b \x03(\tB\b\xbaH\x05\x92\x01\x02\x10@R\x10allowedSubtopics\x123\n" +
-	"\x10forbidden_topics\x18\t \x03(\tB\b\xbaH\x05\x92\x01\x02\x10 R\x0fforbiddenTopics\x128\n" +
-	"\x18strict_topic_enforcement\x18\n" +
-	" \x01(\bR\x16strictTopicEnforcement\x12=\n" +
-	"\x1btopic_anchor_interval_turns\x18\v \x01(\rR\x18topicAnchorIntervalTurns\x12$\n" +
-	"\vspoken_lang\x18\f \x01(\tH\x03R\n" +
+	"\rsystem_prompt\x18\x05 \x01(\tR\fsystemPrompt\x12\x14\n" +
+	"\x05topic\x18\x06 \x01(\tR\x05topic\x125\n" +
+	"\x11allowed_subtopics\x18\a \x03(\tB\b\xbaH\x05\x92\x01\x02\x10@R\x10allowedSubtopics\x123\n" +
+	"\x10forbidden_topics\x18\b \x03(\tB\b\xbaH\x05\x92\x01\x02\x10 R\x0fforbiddenTopics\x128\n" +
+	"\x18strict_topic_enforcement\x18\t \x01(\bR\x16strictTopicEnforcement\x12=\n" +
+	"\x1btopic_anchor_interval_turns\x18\n" +
+	" \x01(\rR\x18topicAnchorIntervalTurns\x12$\n" +
+	"\vspoken_lang\x18\v \x01(\tH\x02R\n" +
 	"spokenLang\x88\x01\x01\x12$\n" +
-	"\vtarget_lang\x18\r \x01(\tH\x04R\n" +
+	"\vtarget_lang\x18\f \x01(\tH\x03R\n" +
 	"targetLang\x88\x01\x01\x12.\n" +
-	"\x10instruction_lang\x18\x0e \x01(\tH\x05R\x0finstructionLang\x88\x01\x01\x12\x19\n" +
-	"\x05voice\x18\x0f \x01(\tH\x06R\x05voice\x88\x01\x01\x129\n" +
-	"\rspeaking_rate\x18\x10 \x01(\x02B\x0f\xbaH\f\n" +
+	"\x10instruction_lang\x18\r \x01(\tH\x04R\x0finstructionLang\x88\x01\x01\x12\x19\n" +
+	"\x05voice\x18\x0e \x01(\tH\x05R\x05voice\x88\x01\x01\x129\n" +
+	"\rspeaking_rate\x18\x0f \x01(\x02B\x0f\xbaH\f\n" +
 	"\n" +
-	"\x1d\x00\x00\x00@-\x00\x00\x00?H\aR\fspeakingRate\x88\x01\x01\x124\n" +
-	"\x16allow_whiteboard_write\x18\x11 \x01(\bR\x14allowWhiteboardWrite\x120\n" +
-	"\x14allow_vision_capture\x18\x12 \x01(\bR\x12allowVisionCapture\x12,\n" +
-	"\x12vision_debounce_ms\x18\x13 \x01(\rR\x10visionDebounceMs\x12+\n" +
-	"\x12vision_max_edge_px\x18\x14 \x01(\rR\x0fvisionMaxEdgePx\x12\x1f\n" +
-	"\vallow_polls\x18\x15 \x01(\bR\n" +
+	"\x1d\x00\x00\x00@-\x00\x00\x00?H\x06R\fspeakingRate\x88\x01\x01\x124\n" +
+	"\x16allow_whiteboard_write\x18\x10 \x01(\bR\x14allowWhiteboardWrite\x120\n" +
+	"\x14allow_vision_capture\x18\x11 \x01(\bR\x12allowVisionCapture\x12,\n" +
+	"\x12vision_debounce_ms\x18\x12 \x01(\rR\x10visionDebounceMs\x12+\n" +
+	"\x12vision_max_edge_px\x18\x13 \x01(\rR\x0fvisionMaxEdgePx\x12\x1f\n" +
+	"\vallow_polls\x18\x14 \x01(\bR\n" +
 	"allowPolls\x12,\n" +
-	"\x12allow_chat_message\x18\x16 \x01(\bR\x10allowChatMessage\x12.\n" +
-	"\x13allow_notepad_write\x18\x17 \x01(\bR\x11allowNotepadWrite\x12&\n" +
-	"\x0fallow_web_fetch\x18\x18 \x01(\bR\rallowWebFetch\x12>\n" +
-	"\x16allowed_knowledge_urls\x18\x19 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10 R\x14allowedKnowledgeUrls\x12=\n" +
-	"\x1bknowledge_cache_ttl_seconds\x18\x1a \x01(\rR\x18knowledgeCacheTtlSeconds\x12e\n" +
-	"\vmcp_servers\x18\x1b \x03(\v22.plugnmeet.InsightsAIAgentFeatures.McpServersEntryB\x10\xbaH\r\x9a\x01\n" +
+	"\x12allow_chat_message\x18\x15 \x01(\bR\x10allowChatMessage\x12.\n" +
+	"\x13allow_notepad_write\x18\x16 \x01(\bR\x11allowNotepadWrite\x12&\n" +
+	"\x0fallow_web_fetch\x18\x17 \x01(\bR\rallowWebFetch\x12>\n" +
+	"\x16allowed_knowledge_urls\x18\x18 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10 R\x14allowedKnowledgeUrls\x12=\n" +
+	"\x1bknowledge_cache_ttl_seconds\x18\x19 \x01(\rR\x18knowledgeCacheTtlSeconds\x12e\n" +
+	"\vmcp_servers\x18\x1a \x03(\v22.plugnmeet.InsightsAIAgentFeatures.McpServersEntryB\x10\xbaH\r\x9a\x01\n" +
 	"\x10\x02\"\x06r\x04\x10\x01\x18@R\n" +
 	"mcpServers\x12:\n" +
-	"\x13max_session_seconds\x18\x1c \x01(\rB\n" +
+	"\x13max_session_seconds\x18\x1b \x01(\rB\n" +
 	"\xbaH\a*\x05\x18\xa08(<R\x11maxSessionSeconds\x124\n" +
-	"\x11max_audio_minutes\x18\x1d \x01(\rB\b\xbaH\x05*\x03\x18\xf0\x01R\x0fmaxAudioMinutes\x12&\n" +
+	"\x11max_audio_minutes\x18\x1c \x01(\rB\b\xbaH\x05*\x03\x18\xf0\x01R\x0fmaxAudioMinutes\x12&\n" +
 	"\n" +
-	"is_enabled\x18\x1e \x01(\bB\a\xbaH\x04j\x02\b\x00R\tisEnabled\x12\x94\x01\n" +
-	"\x11active_session_id\x18\x1f \x01(\tBc\xbaH`\xba\x01]\n" +
-	"\x17active_session_id_empty\x12.active_session_id should not contain any value\x1a\x12this.matches('^$')H\bR\x0factiveSessionId\x88\x01\x01\x12V\n" +
-	"\x0fcustom_provider\x18  \x01(\v2(.plugnmeet.InsightsAIAgentCustomProviderH\tR\x0ecustomProvider\x88\x01\x01\x1aa\n" +
+	"is_enabled\x18\x1d \x01(\bB\a\xbaH\x04j\x02\b\x00R\tisEnabled\x12\x94\x01\n" +
+	"\x11active_session_id\x18\x1e \x01(\tBc\xbaH`\xba\x01]\n" +
+	"\x17active_session_id_empty\x12.active_session_id should not contain any value\x1a\x12this.matches('^$')H\aR\x0factiveSessionId\x88\x01\x01\x12V\n" +
+	"\x0fcustom_provider\x18\x1f \x01(\v2(.plugnmeet.InsightsAIAgentCustomProviderH\bR\x0ecustomProvider\x88\x01\x01\x1aa\n" +
 	"\x0fMcpServersEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x128\n" +
 	"\x05value\x18\x02 \x01(\v2\".plugnmeet.ExternalMCPServerConfigR\x05value:\x028\x01B\x16\n" +
 	"\x14_auto_session_configB\x15\n" +
-	"\x13_agent_display_nameB\x1b\n" +
-	"\x19_previous_session_contextB\x0e\n" +
+	"\x13_agent_display_nameB\x0e\n" +
 	"\f_spoken_langB\x0e\n" +
 	"\f_target_langB\x13\n" +
 	"\x11_instruction_langB\b\n" +

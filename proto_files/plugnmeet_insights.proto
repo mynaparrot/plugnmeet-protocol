@@ -163,7 +163,6 @@ enum AIAgentRuntimeState {
 // host / moderator control requests
 message AIAgentStartReq {
   optional string system_prompt = 1; // override; empty -> room features
-  optional string previous_session_context = 2; // override; empty -> room features
 }
 
 message AIAgentStopReq {

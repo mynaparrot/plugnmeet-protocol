@@ -1348,11 +1348,10 @@ func (x *InsightsAIMeetingSummarizationConfigReq) GetSummarizationPrompt() strin
 
 // host / moderator control requests
 type AIAgentStartReq struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	SystemPrompt           *string                `protobuf:"bytes,1,opt,name=system_prompt,json=systemPrompt,proto3,oneof" json:"system_prompt,omitempty"`                                 // override; empty -> room features
-	PreviousSessionContext *string                `protobuf:"bytes,2,opt,name=previous_session_context,json=previousSessionContext,proto3,oneof" json:"previous_session_context,omitempty"` // override; empty -> room features
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SystemPrompt  *string                `protobuf:"bytes,1,opt,name=system_prompt,json=systemPrompt,proto3,oneof" json:"system_prompt,omitempty"` // override; empty -> room features
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AIAgentStartReq) Reset() {
@@ -1388,13 +1387,6 @@ func (*AIAgentStartReq) Descriptor() ([]byte, []int) {
 func (x *AIAgentStartReq) GetSystemPrompt() string {
 	if x != nil && x.SystemPrompt != nil {
 		return *x.SystemPrompt
-	}
-	return ""
-}
-
-func (x *AIAgentStartReq) GetPreviousSessionContext() string {
-	if x != nil && x.PreviousSessionContext != nil {
-		return *x.PreviousSessionContext
 	}
 	return ""
 }
@@ -2200,12 +2192,10 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"'InsightsAIMeetingSummarizationConfigReq\x12\x1d\n" +
 	"\n" +
 	"is_enabled\x18\x01 \x01(\bR\tisEnabled\x121\n" +
-	"\x14summarization_prompt\x18\x03 \x01(\tR\x13summarizationPrompt\"\xa9\x01\n" +
+	"\x14summarization_prompt\x18\x03 \x01(\tR\x13summarizationPrompt\"M\n" +
 	"\x0fAIAgentStartReq\x12(\n" +
-	"\rsystem_prompt\x18\x01 \x01(\tH\x00R\fsystemPrompt\x88\x01\x01\x12=\n" +
-	"\x18previous_session_context\x18\x02 \x01(\tH\x01R\x16previousSessionContext\x88\x01\x01B\x10\n" +
-	"\x0e_system_promptB\x1b\n" +
-	"\x19_previous_session_context\"8\n" +
+	"\rsystem_prompt\x18\x01 \x01(\tH\x00R\fsystemPrompt\x88\x01\x01B\x10\n" +
+	"\x0e_system_prompt\"8\n" +
 	"\x0eAIAgentStopReq\x12\x1b\n" +
 	"\x06reason\x18\x01 \x01(\tH\x00R\x06reason\x88\x01\x01B\t\n" +
 	"\a_reason\"\x12\n" +

@@ -226,9 +226,10 @@ type UserMetadata struct {
 	MetadataId *string           `protobuf:"bytes,9,opt,name=metadata_id,json=metadataId,proto3,oneof" json:"metadata_id,omitempty"`
 	ExtraData  map[string]string `protobuf:"bytes,10,rep,name=extra_data,json=extraData,proto3" json:"extra_data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// if remain empty then will use value from user_id
-	ExUserId      *string `protobuf:"bytes,11,opt,name=ex_user_id,json=exUserId,proto3,oneof" json:"ex_user_id,omitempty"` // Next ID: 12
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	ExUserId               *string `protobuf:"bytes,11,opt,name=ex_user_id,json=exUserId,proto3,oneof" json:"ex_user_id,omitempty"`
+	PreviousSessionContext *string `protobuf:"bytes,12,opt,name=previous_session_context,json=previousSessionContext,proto3,oneof" json:"previous_session_context,omitempty"` // Next ID: 13
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *UserMetadata) Reset() {
@@ -334,6 +335,13 @@ func (x *UserMetadata) GetExtraData() map[string]string {
 func (x *UserMetadata) GetExUserId() string {
 	if x != nil && x.ExUserId != nil {
 		return *x.ExUserId
+	}
+	return ""
+}
+
+func (x *UserMetadata) GetPreviousSessionContext() string {
+	if x != nil && x.PreviousSessionContext != nil {
+		return *x.PreviousSessionContext
 	}
 	return ""
 }
@@ -741,7 +749,7 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"clientType\"\\\n" +
 	"\x0eUserRaisedHand\x12$\n" +
 	"\tis_raised\x18\x01 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisRaised\x12$\n" +
-	"\traised_at\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02\b\x00R\braisedAt\"\x86\x06\n" +
+	"\traised_at\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02\b\x00R\braisedAt\"\xec\x06\n" +
 	"\fUserMetadata\x12.\n" +
 	"\vprofile_pic\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x00R\n" +
 	"profilePic\x88\x01\x01\x12\x19\n" +
@@ -760,7 +768,8 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"extra_data\x18\n" +
 	" \x03(\v2&.plugnmeet.UserMetadata.ExtraDataEntryR\textraData\x12!\n" +
 	"\n" +
-	"ex_user_id\x18\v \x01(\tH\x04R\bexUserId\x88\x01\x01\x1a<\n" +
+	"ex_user_id\x18\v \x01(\tH\x04R\bexUserId\x88\x01\x01\x12G\n" +
+	"\x18previous_session_context\x18\f \x01(\tB\b\xbaH\x05r\x03\x18\xd0\x0fH\x05R\x16previousSessionContext\x88\x01\x01\x1a<\n" +
 	"\x0eExtraDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
@@ -768,7 +777,8 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"\x0e_record_webcamB\x11\n" +
 	"\x0f_preferred_langB\x0e\n" +
 	"\f_metadata_idB\r\n" +
-	"\v_ex_user_id\"\xcc\x01\n" +
+	"\v_ex_user_idB\x1b\n" +
+	"\x19_previous_session_context\"\xcc\x01\n" +
 	"\x14PlugNmeetTokenClaims\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x17\n" +

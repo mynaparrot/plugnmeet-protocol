@@ -1431,10 +1431,6 @@ func (m *InsightsAIAgentFeatures) validate(all bool) error {
 		// no validation rules for AgentDisplayName
 	}
 
-	if m.PreviousSessionContext != nil {
-		// no validation rules for PreviousSessionContext
-	}
-
 	if m.SpokenLang != nil {
 		// no validation rules for SpokenLang
 	}
