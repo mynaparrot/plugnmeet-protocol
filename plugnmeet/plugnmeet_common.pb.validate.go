@@ -468,8 +468,12 @@ func (m *NotifyEventRoom) validate(all bool) error {
 		// no validation rules for IsBreakoutRoom
 	}
 
-	if m.BreakoutRoomId != nil {
-		// no validation rules for BreakoutRoomId
+	if m.ParentRoomId != nil {
+		// no validation rules for ParentRoomId
+	}
+
+	if m.ParentRoomSid != nil {
+		// no validation rules for ParentRoomSid
 	}
 
 	if len(errors) > 0 {

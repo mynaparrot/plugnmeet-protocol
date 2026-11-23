@@ -30,7 +30,8 @@ message NotifyEventRoom {
   optional string metadata = 7;
   optional uint32 num_participants = 8;
   optional bool is_breakout_room = 9;
-  optional string breakout_room_id = 10;
+  optional string parent_room_id = 10;
+  optional string parent_room_sid = 11;
 }
 
 message RecordingInfoEvent {
