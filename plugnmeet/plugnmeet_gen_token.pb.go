@@ -211,6 +211,76 @@ func (x *UserRaisedHand) GetRaisedAt() int64 {
 	return 0
 }
 
+// Managed by the server; clients must leave it empty.
+type WaitingQueueInfo struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Position             uint32                 `protobuf:"varint,1,opt,name=position,proto3" json:"position,omitempty"`
+	TotalWaiting         uint32                 `protobuf:"varint,2,opt,name=total_waiting,json=totalWaiting,proto3" json:"total_waiting,omitempty"`
+	EstimatedWaitSeconds uint64                 `protobuf:"varint,3,opt,name=estimated_wait_seconds,json=estimatedWaitSeconds,proto3" json:"estimated_wait_seconds,omitempty"`
+	// Unix timestamp (in milliseconds)
+	EstimatedTurnAt int64 `protobuf:"varint,4,opt,name=estimated_turn_at,json=estimatedTurnAt,proto3" json:"estimated_turn_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *WaitingQueueInfo) Reset() {
+	*x = WaitingQueueInfo{}
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WaitingQueueInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WaitingQueueInfo) ProtoMessage() {}
+
+func (x *WaitingQueueInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WaitingQueueInfo.ProtoReflect.Descriptor instead.
+func (*WaitingQueueInfo) Descriptor() ([]byte, []int) {
+	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *WaitingQueueInfo) GetPosition() uint32 {
+	if x != nil {
+		return x.Position
+	}
+	return 0
+}
+
+func (x *WaitingQueueInfo) GetTotalWaiting() uint32 {
+	if x != nil {
+		return x.TotalWaiting
+	}
+	return 0
+}
+
+func (x *WaitingQueueInfo) GetEstimatedWaitSeconds() uint64 {
+	if x != nil {
+		return x.EstimatedWaitSeconds
+	}
+	return 0
+}
+
+func (x *WaitingQueueInfo) GetEstimatedTurnAt() int64 {
+	if x != nil {
+		return x.EstimatedTurnAt
+	}
+	return 0
+}
+
 type UserMetadata struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
 	ProfilePic   *string                `protobuf:"bytes,1,opt,name=profile_pic,json=profilePic,proto3,oneof" json:"profile_pic,omitempty"`
@@ -227,14 +297,16 @@ type UserMetadata struct {
 	ExtraData  map[string]string `protobuf:"bytes,10,rep,name=extra_data,json=extraData,proto3" json:"extra_data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// if remain empty then will use value from user_id
 	ExUserId               *string `protobuf:"bytes,11,opt,name=ex_user_id,json=exUserId,proto3,oneof" json:"ex_user_id,omitempty"`
-	PreviousSessionContext *string `protobuf:"bytes,12,opt,name=previous_session_context,json=previousSessionContext,proto3,oneof" json:"previous_session_context,omitempty"` // Next ID: 13
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	PreviousSessionContext *string `protobuf:"bytes,12,opt,name=previous_session_context,json=previousSessionContext,proto3,oneof" json:"previous_session_context,omitempty"`
+	// This field is managed by the server and cannot be set by clients.
+	WaitingQueueInfo *WaitingQueueInfo `protobuf:"bytes,13,opt,name=waiting_queue_info,json=waitingQueueInfo,proto3,oneof" json:"waiting_queue_info,omitempty"` // Next ID: 14
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *UserMetadata) Reset() {
 	*x = UserMetadata{}
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[3]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -246,7 +318,7 @@ func (x *UserMetadata) String() string {
 func (*UserMetadata) ProtoMessage() {}
 
 func (x *UserMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[3]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -259,7 +331,7 @@ func (x *UserMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserMetadata.ProtoReflect.Descriptor instead.
 func (*UserMetadata) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{3}
+	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *UserMetadata) GetProfilePic() string {
@@ -346,6 +418,13 @@ func (x *UserMetadata) GetPreviousSessionContext() string {
 	return ""
 }
 
+func (x *UserMetadata) GetWaitingQueueInfo() *WaitingQueueInfo {
+	if x != nil {
+		return x.WaitingQueueInfo
+	}
+	return nil
+}
+
 type PlugNmeetTokenClaims struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -360,7 +439,7 @@ type PlugNmeetTokenClaims struct {
 
 func (x *PlugNmeetTokenClaims) Reset() {
 	*x = PlugNmeetTokenClaims{}
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[4]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -372,7 +451,7 @@ func (x *PlugNmeetTokenClaims) String() string {
 func (*PlugNmeetTokenClaims) ProtoMessage() {}
 
 func (x *PlugNmeetTokenClaims) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[4]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -385,7 +464,7 @@ func (x *PlugNmeetTokenClaims) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlugNmeetTokenClaims.ProtoReflect.Descriptor instead.
 func (*PlugNmeetTokenClaims) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{4}
+	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *PlugNmeetTokenClaims) GetName() string {
@@ -448,7 +527,7 @@ type LockSettings struct {
 
 func (x *LockSettings) Reset() {
 	*x = LockSettings{}
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[5]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -460,7 +539,7 @@ func (x *LockSettings) String() string {
 func (*LockSettings) ProtoMessage() {}
 
 func (x *LockSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[5]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -473,7 +552,7 @@ func (x *LockSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LockSettings.ProtoReflect.Descriptor instead.
 func (*LockSettings) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{5}
+	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *LockSettings) GetLockMicrophone() bool {
@@ -558,7 +637,7 @@ type GenerateTokenRes struct {
 
 func (x *GenerateTokenRes) Reset() {
 	*x = GenerateTokenRes{}
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[6]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -570,7 +649,7 @@ func (x *GenerateTokenRes) String() string {
 func (*GenerateTokenRes) ProtoMessage() {}
 
 func (x *GenerateTokenRes) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[6]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -583,7 +662,7 @@ func (x *GenerateTokenRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateTokenRes.ProtoReflect.Descriptor instead.
 func (*GenerateTokenRes) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{6}
+	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GenerateTokenRes) GetStatus() bool {
@@ -632,7 +711,7 @@ type CustomDesignParams struct {
 
 func (x *CustomDesignParams) Reset() {
 	*x = CustomDesignParams{}
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[7]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -644,7 +723,7 @@ func (x *CustomDesignParams) String() string {
 func (*CustomDesignParams) ProtoMessage() {}
 
 func (x *CustomDesignParams) ProtoReflect() protoreflect.Message {
-	mi := &file_plugnmeet_gen_token_proto_msgTypes[7]
+	mi := &file_plugnmeet_gen_token_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -657,7 +736,7 @@ func (x *CustomDesignParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomDesignParams.ProtoReflect.Descriptor instead.
 func (*CustomDesignParams) Descriptor() ([]byte, []int) {
-	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{7}
+	return file_plugnmeet_gen_token_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CustomDesignParams) GetPrimaryColor() string {
@@ -749,7 +828,12 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"clientType\"\\\n" +
 	"\x0eUserRaisedHand\x12$\n" +
 	"\tis_raised\x18\x01 \x01(\bB\a\xbaH\x04j\x02\b\x00R\bisRaised\x12$\n" +
-	"\traised_at\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02\b\x00R\braisedAt\"\xec\x06\n" +
+	"\traised_at\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02\b\x00R\braisedAt\"\xd9\x01\n" +
+	"\x10WaitingQueueInfo\x12#\n" +
+	"\bposition\x18\x01 \x01(\rB\a\xbaH\x04*\x02\b\x00R\bposition\x12,\n" +
+	"\rtotal_waiting\x18\x02 \x01(\rB\a\xbaH\x04*\x02\b\x00R\ftotalWaiting\x12=\n" +
+	"\x16estimated_wait_seconds\x18\x03 \x01(\x04B\a\xbaH\x042\x02\b\x00R\x14estimatedWaitSeconds\x123\n" +
+	"\x11estimated_turn_at\x18\x04 \x01(\x03B\a\xbaH\x04\"\x02\b\x00R\x0festimatedTurnAt\"\xd3\a\n" +
 	"\fUserMetadata\x12.\n" +
 	"\vprofile_pic\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x00R\n" +
 	"profilePic\x88\x01\x01\x12\x19\n" +
@@ -769,7 +853,8 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	" \x03(\v2&.plugnmeet.UserMetadata.ExtraDataEntryR\textraData\x12!\n" +
 	"\n" +
 	"ex_user_id\x18\v \x01(\tH\x04R\bexUserId\x88\x01\x01\x12G\n" +
-	"\x18previous_session_context\x18\f \x01(\tB\b\xbaH\x05r\x03\x18\xd0\x0fH\x05R\x16previousSessionContext\x88\x01\x01\x1a<\n" +
+	"\x18previous_session_context\x18\f \x01(\tB\b\xbaH\x05r\x03\x18\xd0\x0fH\x05R\x16previousSessionContext\x88\x01\x01\x12N\n" +
+	"\x12waiting_queue_info\x18\r \x01(\v2\x1b.plugnmeet.WaitingQueueInfoH\x06R\x10waitingQueueInfo\x88\x01\x01\x1a<\n" +
 	"\x0eExtraDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
@@ -778,7 +863,8 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"\x0f_preferred_langB\x0e\n" +
 	"\f_metadata_idB\r\n" +
 	"\v_ex_user_idB\x1b\n" +
-	"\x19_previous_session_context\"\xcc\x01\n" +
+	"\x19_previous_session_contextB\x15\n" +
+	"\x13_waiting_queue_info\"\xcc\x01\n" +
 	"\x14PlugNmeetTokenClaims\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x17\n" +
@@ -855,34 +941,36 @@ func file_plugnmeet_gen_token_proto_rawDescGZIP() []byte {
 	return file_plugnmeet_gen_token_proto_rawDescData
 }
 
-var file_plugnmeet_gen_token_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_plugnmeet_gen_token_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_plugnmeet_gen_token_proto_goTypes = []any{
 	(*GenerateTokenReq)(nil),     // 0: plugnmeet.GenerateTokenReq
 	(*UserInfo)(nil),             // 1: plugnmeet.UserInfo
 	(*UserRaisedHand)(nil),       // 2: plugnmeet.UserRaisedHand
-	(*UserMetadata)(nil),         // 3: plugnmeet.UserMetadata
-	(*PlugNmeetTokenClaims)(nil), // 4: plugnmeet.PlugNmeetTokenClaims
-	(*LockSettings)(nil),         // 5: plugnmeet.LockSettings
-	(*GenerateTokenRes)(nil),     // 6: plugnmeet.GenerateTokenRes
-	(*CustomDesignParams)(nil),   // 7: plugnmeet.CustomDesignParams
-	nil,                          // 8: plugnmeet.UserMetadata.ExtraDataEntry
-	(ClientType)(0),              // 9: plugnmeet.ClientType
-	(StatusCode)(0),              // 10: plugnmeet.StatusCode
+	(*WaitingQueueInfo)(nil),     // 3: plugnmeet.WaitingQueueInfo
+	(*UserMetadata)(nil),         // 4: plugnmeet.UserMetadata
+	(*PlugNmeetTokenClaims)(nil), // 5: plugnmeet.PlugNmeetTokenClaims
+	(*LockSettings)(nil),         // 6: plugnmeet.LockSettings
+	(*GenerateTokenRes)(nil),     // 7: plugnmeet.GenerateTokenRes
+	(*CustomDesignParams)(nil),   // 8: plugnmeet.CustomDesignParams
+	nil,                          // 9: plugnmeet.UserMetadata.ExtraDataEntry
+	(ClientType)(0),              // 10: plugnmeet.ClientType
+	(StatusCode)(0),              // 11: plugnmeet.StatusCode
 }
 var file_plugnmeet_gen_token_proto_depIdxs = []int32{
 	1,  // 0: plugnmeet.GenerateTokenReq.user_info:type_name -> plugnmeet.UserInfo
-	3,  // 1: plugnmeet.UserInfo.user_metadata:type_name -> plugnmeet.UserMetadata
-	9,  // 2: plugnmeet.UserInfo.client_type:type_name -> plugnmeet.ClientType
+	4,  // 1: plugnmeet.UserInfo.user_metadata:type_name -> plugnmeet.UserMetadata
+	10, // 2: plugnmeet.UserInfo.client_type:type_name -> plugnmeet.ClientType
 	2,  // 3: plugnmeet.UserMetadata.raised_hand:type_name -> plugnmeet.UserRaisedHand
-	5,  // 4: plugnmeet.UserMetadata.lock_settings:type_name -> plugnmeet.LockSettings
-	8,  // 5: plugnmeet.UserMetadata.extra_data:type_name -> plugnmeet.UserMetadata.ExtraDataEntry
-	9,  // 6: plugnmeet.PlugNmeetTokenClaims.client_type:type_name -> plugnmeet.ClientType
-	10, // 7: plugnmeet.GenerateTokenRes.status_code:type_name -> plugnmeet.StatusCode
-	8,  // [8:8] is the sub-list for method output_type
-	8,  // [8:8] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	6,  // 4: plugnmeet.UserMetadata.lock_settings:type_name -> plugnmeet.LockSettings
+	9,  // 5: plugnmeet.UserMetadata.extra_data:type_name -> plugnmeet.UserMetadata.ExtraDataEntry
+	3,  // 6: plugnmeet.UserMetadata.waiting_queue_info:type_name -> plugnmeet.WaitingQueueInfo
+	10, // 7: plugnmeet.PlugNmeetTokenClaims.client_type:type_name -> plugnmeet.ClientType
+	11, // 8: plugnmeet.GenerateTokenRes.status_code:type_name -> plugnmeet.StatusCode
+	9,  // [9:9] is the sub-list for method output_type
+	9,  // [9:9] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_gen_token_proto_init() }
@@ -892,17 +980,17 @@ func file_plugnmeet_gen_token_proto_init() {
 	}
 	file_plugnmeet_common_api_proto_init()
 	file_plugnmeet_nats_msg_proto_init()
-	file_plugnmeet_gen_token_proto_msgTypes[3].OneofWrappers = []any{}
-	file_plugnmeet_gen_token_proto_msgTypes[5].OneofWrappers = []any{}
+	file_plugnmeet_gen_token_proto_msgTypes[4].OneofWrappers = []any{}
 	file_plugnmeet_gen_token_proto_msgTypes[6].OneofWrappers = []any{}
 	file_plugnmeet_gen_token_proto_msgTypes[7].OneofWrappers = []any{}
+	file_plugnmeet_gen_token_proto_msgTypes[8].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_plugnmeet_gen_token_proto_rawDesc), len(file_plugnmeet_gen_token_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

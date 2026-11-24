@@ -408,6 +408,114 @@ var _ interface {
 	ErrorName() string
 } = UserRaisedHandValidationError{}
 
+// Validate checks the field values on WaitingQueueInfo with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *WaitingQueueInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on WaitingQueueInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// WaitingQueueInfoMultiError, or nil if none found.
+func (m *WaitingQueueInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *WaitingQueueInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Position
+
+	// no validation rules for TotalWaiting
+
+	// no validation rules for EstimatedWaitSeconds
+
+	// no validation rules for EstimatedTurnAt
+
+	if len(errors) > 0 {
+		return WaitingQueueInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// WaitingQueueInfoMultiError is an error wrapping multiple validation errors
+// returned by WaitingQueueInfo.ValidateAll() if the designated constraints
+// aren't met.
+type WaitingQueueInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m WaitingQueueInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m WaitingQueueInfoMultiError) AllErrors() []error { return m }
+
+// WaitingQueueInfoValidationError is the validation error returned by
+// WaitingQueueInfo.Validate if the designated constraints aren't met.
+type WaitingQueueInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WaitingQueueInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WaitingQueueInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WaitingQueueInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WaitingQueueInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WaitingQueueInfoValidationError) ErrorName() string { return "WaitingQueueInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e WaitingQueueInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWaitingQueueInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WaitingQueueInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WaitingQueueInfoValidationError{}
+
 // Validate checks the field values on UserMetadata with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -518,6 +626,39 @@ func (m *UserMetadata) validate(all bool) error {
 
 	if m.PreviousSessionContext != nil {
 		// no validation rules for PreviousSessionContext
+	}
+
+	if m.WaitingQueueInfo != nil {
+
+		if all {
+			switch v := interface{}(m.GetWaitingQueueInfo()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UserMetadataValidationError{
+						field:  "WaitingQueueInfo",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UserMetadataValidationError{
+						field:  "WaitingQueueInfo",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetWaitingQueueInfo()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UserMetadataValidationError{
+					field:  "WaitingQueueInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if len(errors) > 0 {

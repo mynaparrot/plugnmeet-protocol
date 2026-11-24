@@ -32,6 +32,15 @@ message UserRaisedHand {
   int64 raised_at = 2 [(buf.validate.field).int64.const = 0];
 }
 
+// Managed by the server; clients must leave it empty.
+message WaitingQueueInfo {
+  uint32 position = 1 [(buf.validate.field).uint32.const = 0];
+  uint32 total_waiting = 2 [(buf.validate.field).uint32.const = 0];
+  uint64 estimated_wait_seconds = 3 [(buf.validate.field).uint64.const = 0];
+  // Unix timestamp (in milliseconds)
+  int64 estimated_turn_at = 4 [(buf.validate.field).int64.const = 0];
+}
+
 message UserMetadata {
   optional string profile_pic = 1 [(buf.validate.field).string.uri = true];
   bool is_admin = 2;
@@ -52,7 +61,9 @@ message UserMetadata {
   // if remain empty then will use value from user_id
   optional string ex_user_id = 11;
   optional string previous_session_context = 12 [(buf.validate.field).string.max_len = 2000];
-  // Next ID: 13
+  // This field is managed by the server and cannot be set by clients.
+  optional WaitingQueueInfo waiting_queue_info = 13;
+  // Next ID: 14
 }
 
 message PlugNmeetTokenClaims {
