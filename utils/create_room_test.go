@@ -247,3 +247,95 @@ func TestPrepareDefaultRoomFeaturesKeepsInsightsEnabled(t *testing.T) {
 		t.Fatalf("TranscriptionFeatures.IsAllow should come from defaults")
 	}
 }
+
+func TestMergeRoomFeaturesKeepsExplicitTopLevelFalse(t *testing.T) {
+	rf := mergeRoomFeatures(&plugnmeet.RoomCreateFeatures{
+		AllowWebcams:            false,
+		AllowScreenShare:        false,
+		AllowViewOtherWebcams:   false,
+		AllowViewOtherUsersList: false,
+		EnableAnalytics:         false,
+	})
+
+	if rf.AllowWebcams {
+		t.Fatalf("AllowWebcams should stay false, got true from defaults")
+	}
+	if rf.AllowScreenShare {
+		t.Fatalf("AllowScreenShare should stay false, got true from defaults")
+	}
+	if rf.AllowViewOtherWebcams {
+		t.Fatalf("AllowViewOtherWebcams should stay false, got true from defaults")
+	}
+	if rf.AllowViewOtherUsersList {
+		t.Fatalf("AllowViewOtherUsersList should stay false, got true from defaults")
+	}
+	if rf.EnableAnalytics {
+		t.Fatalf("EnableAnalytics should stay false, got true from defaults")
+	}
+	assertInsightsNotNil(t, rf)
+}
+
+func TestPrepareDefaultRoomFeaturesKeepsExplicitTopLevelFalse(t *testing.T) {
+	r := &plugnmeet.CreateRoomReq{
+		Metadata: &plugnmeet.RoomMetadata{
+			RoomFeatures: &plugnmeet.RoomCreateFeatures{
+				AllowWebcams:            false,
+				AllowScreenShare:        false,
+				AllowViewOtherWebcams:   false,
+				AllowViewOtherUsersList: false,
+				EnableAnalytics:         false,
+			},
+		},
+	}
+
+	PrepareDefaultRoomFeatures(r)
+	rf := r.Metadata.RoomFeatures
+
+	if rf.AllowWebcams {
+		t.Fatalf("AllowWebcams should stay false, got true from defaults")
+	}
+	if rf.AllowScreenShare {
+		t.Fatalf("AllowScreenShare should stay false, got true from defaults")
+	}
+	if rf.AllowViewOtherWebcams {
+		t.Fatalf("AllowViewOtherWebcams should stay false, got true from defaults")
+	}
+	if rf.AllowViewOtherUsersList {
+		t.Fatalf("AllowViewOtherUsersList should stay false, got true from defaults")
+	}
+	if rf.EnableAnalytics {
+		t.Fatalf("EnableAnalytics should stay false, got true from defaults")
+	}
+}
+
+func TestMergeRoomFeaturesFillsUnsetOptionalBools(t *testing.T) {
+	rf := mergeRoomFeatures(&plugnmeet.RoomCreateFeatures{})
+
+	if rf.AllowVirtualBg == nil || !*rf.AllowVirtualBg {
+		t.Fatalf("AllowVirtualBg should come from defaults as true")
+	}
+	if rf.AllowRaiseHand == nil || !*rf.AllowRaiseHand {
+		t.Fatalf("AllowRaiseHand should come from defaults as true")
+	}
+	if rf.AllowReactions == nil || !*rf.AllowReactions {
+		t.Fatalf("AllowReactions should come from defaults as true")
+	}
+}
+
+func TestMergeRoomFeaturesKeepsExplicitOptionalFalse(t *testing.T) {
+	rf := mergeRoomFeatures(&plugnmeet.RoomCreateFeatures{
+		AllowVirtualBg: new(false),
+		AllowRaiseHand: new(false),
+		AllowReactions: new(false),
+	})
+
+	if rf.AllowVirtualBg == nil || *rf.AllowVirtualBg {
+		t.Fatalf("explicit AllowVirtualBg=false should be preserved")
+	}
+	if rf.AllowRaiseHand == nil || *rf.AllowRaiseHand {
+		t.Fatalf("explicit AllowRaiseHand=false should be preserved")
+	}
+	if rf.AllowReactions == nil || *rf.AllowReactions {
+		t.Fatalf("explicit AllowReactions=false should be preserved")
+	}
+}

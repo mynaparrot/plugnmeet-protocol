@@ -8,75 +8,67 @@ import (
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
-// mergeRoomFeatures clones the default features and applies the user's
-// explicitly set fields on top. Unlike proto.Merge, non-nil message fields
-// replace the default entirely, preserving their internal false values.
+// mergeRoomFeatures clones the user's features and fills only the fields they left unset from the defaults.
+// Non-presence scalars keep the caller's exact value (including false), while unset optional scalars and
+// message fields are populated from defaultRoomFeatures.
 func mergeRoomFeatures(user *plugnmeet.RoomCreateFeatures) *plugnmeet.RoomCreateFeatures {
-	result := proto.Clone(defaultRoomFeatures).(*plugnmeet.RoomCreateFeatures)
 	if user == nil {
-		return result
+		return proto.Clone(defaultRoomFeatures).(*plugnmeet.RoomCreateFeatures)
 	}
 
-	userFields := user.ProtoReflect()
-	resultFields := result.ProtoReflect()
-
-	userFields.Range(func(fd protoreflect.FieldDescriptor, v protoreflect.Value) bool {
-		if fd.Kind() == protoreflect.MessageKind && !fd.IsList() && !fd.IsMap() {
-			// Clone message fields so that:
-			// - we don't alias the caller's structs
-			// - the user's explicit proto3 zero values (e.g. IsAllowCloud: false)
-			//   survive, which Range() would never report
-			cloned := proto.Clone(v.Message().Interface()).ProtoReflect()
-			// nested message fields the user left unset must never stay nil
-			fillUnsetMessageFields(cloned, resultFields.Get(fd).Message())
-			resultFields.Set(fd, protoreflect.ValueOf(cloned))
-		} else {
-			resultFields.Set(fd, v)
-		}
-		return true
-	})
-
+	result := proto.Clone(user).(*plugnmeet.RoomCreateFeatures)
+	fillUnsetFields(result.ProtoReflect(), defaultRoomFeatures.ProtoReflect())
 	return result
 }
 
-// fillUnsetMessageFields recursively makes sure that every nested message field
-// of msg is populated. Fields which the user has set are processed recursively
-// (using the matching default sub-message), while fields the user left unset are
-// taken from defaults. If defaults has no value for a field, a new empty message
-// is created so that no nested message field stays nil.
-func fillUnsetMessageFields(msg, defaults protoreflect.Message) {
+// fillUnsetFields recursively populates the fields msg left unset from defaults. Fields the user set are
+// processed recursively, keeping their explicit zero values. Message fields without defaults are still created empty
+// so no nested message stays nil, except optional/oneof fields which keep their absence.
+func fillUnsetFields(msg, defaults protoreflect.Message) {
 	fields := msg.Descriptor().Fields()
 	for i := 0; i < fields.Len(); i++ {
 		fd := fields.Get(i)
-		if fd.Kind() != protoreflect.MessageKind || fd.IsList() || fd.IsMap() {
+		if fd.IsList() || fd.IsMap() {
 			continue
 		}
 
-		var defSub protoreflect.Message
-		if defaults != nil && defaults.IsValid() && defaults.Has(fd) {
-			defSub = defaults.Get(fd).Message()
+		hasDefault := defaults != nil && defaults.IsValid() && defaults.Has(fd)
+		var defVal protoreflect.Value
+		if hasDefault {
+			defVal = defaults.Get(fd)
 		}
 
-		if msg.Has(fd) {
-			// set by the user: keep its explicit zero values, but fill its own
-			// nested message fields
-			fillUnsetMessageFields(msg.Get(fd).Message(), defSub)
+		if fd.Kind() == protoreflect.MessageKind {
+			if msg.Has(fd) {
+				var defSub protoreflect.Message
+				if hasDefault {
+					defSub = defVal.Message()
+				}
+				// set by the user: keep its explicit zero values, but fill its own unset fields
+				fillUnsetFields(msg.Get(fd).Message(), defSub)
+				continue
+			}
+
+			if hasDefault {
+				cloned := proto.Clone(defVal.Message().Interface()).ProtoReflect()
+				msg.Set(fd, protoreflect.ValueOf(cloned))
+				continue
+			}
+
+			if fd.ContainingOneof() != nil {
+				// optional/oneof message field which neither the user nor the defaults
+				// set: keep it unset so we don't change its presence semantics
+				continue
+			}
+
+			msg.Set(fd, msg.NewField(fd))
 			continue
 		}
 
-		if defSub != nil {
-			cloned := proto.Clone(defSub.Interface()).ProtoReflect()
-			msg.Set(fd, protoreflect.ValueOf(cloned))
-			continue
+		// presence-tracked scalars (proto3 optional) can be told apart, so only unset ones take the default value
+		if hasDefault && fd.HasPresence() && !msg.Has(fd) {
+			msg.Set(fd, defVal)
 		}
-
-		if fd.ContainingOneof() != nil {
-			// optional/oneof message field which neither the user nor the defaults
-			// set: keep it unset so we don't change its presence semantics
-			continue
-		}
-
-		msg.Set(fd, msg.NewField(fd))
 	}
 }
 
