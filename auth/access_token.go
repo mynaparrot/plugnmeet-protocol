@@ -46,9 +46,16 @@ func GenerateLivekitAccessToken(apiKey, secret string, tokenValidity time.Durati
 	// (identity [userId]-native). Tag the participant with an attribute so
 	// webhook handlers can identify the twin without relying on the identity
 	// suffix alone. This attribute is NOT part of the plugNmeet JWT claims.
+	//
+	// lk.publish_on_behalf is the attribute livekit-agents reads from the JWT to
+	// learn which participant it publishes on behalf of; avatar workers built on
+	// AvatarRunner/DataStreamAudioReceiver use it to resolve the sender identity
+	// of the agent, and DataStreamAudioReceiver.start() blocks (then times out)
+	// without it.
 	if originalUserId != "" {
 		at.SetAttributes(map[string]string{
-			"original_user_id": originalUserId,
+			"original_user_id":     originalUserId,
+			"lk.publish_on_behalf": originalUserId,
 		})
 	}
 
