@@ -151,60 +151,95 @@ message InsightsAIAgentCustomProvider {
   optional string summarize_model = 7 [(buf.validate.field).string.max_len = 128];
 }
 
+message InsightsAIAgentAvatarConfig {
+  bool is_enabled = 1;
+  // Optional avatar provider: "beyond_presence", "anam", or "simli".
+  // When omitted, the server-configured default avatar_provider is used.
+  optional string provider = 2 [(buf.validate.field).string.max_len = 64];
+  // Optional provider-specific avatar / face ID.
+  // When omitted, the server-configured default avatar_id is used.
+  optional string avatar_id = 3 [(buf.validate.field).string.max_len = 256];
+  // Optional cap on billable avatar video minutes for this room.
+  optional uint32 max_avatar_minutes = 4 [(buf.validate.field).uint32.lte = 240];
+  // Optional BYOK secret API key for the avatar provider; stripped before
+  // room metadata is stored in NATS and kept exclusively in server-side Redis.
+  optional string api_key = 5 [(buf.validate.field).string.max_len = 512];
+  // Optional HTTPS base URL for self-hosted or custom gateway avatar endpoints.
+  optional string endpoint = 6 [(buf.validate.field).string.max_len = 512];
+  // Optional HTTP header name used to send the API key (defaults to the
+  // provider's standard header, e.g. "x-api-key" or "Authorization").
+  optional string auth_header = 7 [(buf.validate.field).string.max_len = 128];
+}
+
+message InsightsAIAgentActivityRules {
+  // Minimum number of whiteboard drawings/diagrams the agent must create during the session.
+  uint32 min_whiteboard_drawings = 1 [(buf.validate.field).uint32.lte = 20];
+  // Minimum number of quizzes/polls the agent must run during the session (one at a time).
+  uint32 min_quizzes = 2 [(buf.validate.field).uint32.lte = 20];
+  // Minimum number of structured shared-notepad entries the agent must write.
+  uint32 min_notepad_entries = 3 [(buf.validate.field).uint32.lte = 20];
+  // Minimum number of hands-on participant exercises (unlocking whiteboard/notepad for learner practice).
+  uint32 min_participant_exercises = 4 [(buf.validate.field).uint32.lte = 20];
+  // Optional ordered list of mandatory milestones or activities the agent must complete.
+  repeated string required_milestones = 5 [(buf.validate.field).repeated.max_items = 16];
+}
+
 message InsightsAIAgentFeatures {
   bool is_allow = 1; // master switch
 
   // session mode & automatic 1-on-1 session routing
   AIAgentSessionMode session_mode = 2;
   optional AIAgentAutoSessionConfig auto_session_config = 3;
+  optional InsightsAIAgentAvatarConfig avatar = 4;
 
   // persona, curriculum & topic boundary (host-owned)
-  optional string agent_display_name = 4; // default: "AI Assistant"
-  string system_prompt = 5; // required when is_allow
-  string topic = 6; // required when is_allow
-  repeated string allowed_subtopics = 7 [(buf.validate.field).repeated.max_items = 64];
-  repeated string forbidden_topics = 8 [(buf.validate.field).repeated.max_items = 32];
-  bool strict_topic_enforcement = 9; // default true
-  uint32 topic_anchor_interval_turns = 10; // default 6, range 3..12
+  optional string agent_display_name = 5; // default: "AI Assistant"
+  string system_prompt = 6; // required when is_allow
+  string topic = 7; // required when is_allow
+  repeated string allowed_subtopics = 8 [(buf.validate.field).repeated.max_items = 64];
+  repeated string forbidden_topics = 9 [(buf.validate.field).repeated.max_items = 32];
+  bool strict_topic_enforcement = 10; // default true
+  uint32 topic_anchor_interval_turns = 11; // default 6, range 3..12
+  optional InsightsAIAgentActivityRules activity_rules = 12;
 
   // language & voice delivery
-  optional string spoken_lang = 11; // BCP-47: learner's native/support language
-  optional string target_lang = 12; // BCP-47: language being learned (empty = no language-learning profile)
-  optional string instruction_lang = 13; // language the agent explains in; empty -> spoken_lang
-  optional string voice = 14; // provider voice id; must be in server allow-list
-  optional float speaking_rate = 15 [(buf.validate.field).float = {gte: 0.5, lte: 2.0}];
+  optional string spoken_lang = 13; // BCP-47: learner's native/support language
+  optional string target_lang = 14; // BCP-47: language being learned (empty = no language-learning profile)
+  optional string instruction_lang = 15; // language the agent explains in; empty -> spoken_lang
+  optional string voice = 16; // provider voice id; must be in server allow-list
+  optional float speaking_rate = 17 [(buf.validate.field).float = {gte: 0.5, lte: 2.0}];
 
   // workspace & tool capabilities
-  bool allow_whiteboard_write = 16; // default true
-  bool allow_vision_capture = 17; // default true
-  uint32 vision_debounce_ms = 18; // default 1200, max 5000
-  uint32 vision_max_edge_px = 19; // default 1024, range 512..1600
-  bool allow_polls = 20; // default true
-  bool allow_chat_message = 21; // default true
-  bool allow_notepad_write = 22; // default true
+  bool allow_whiteboard_write = 18; // default true
+  bool allow_vision_capture = 19; // default true
+  uint32 vision_debounce_ms = 20; // default 1200, max 5000
+  uint32 vision_max_edge_px = 21; // default 1024, range 512..1600
+  bool allow_polls = 22; // default true
+  bool allow_chat_message = 23; // default true
+  bool allow_notepad_write = 24; // default true
 
   // external knowledge & external MCP servers
-  bool allow_web_fetch = 23; // default false
-  repeated string allowed_knowledge_urls = 24 [(buf.validate.field).repeated.max_items = 32];
-  uint32 knowledge_cache_ttl_seconds = 25; // default 3600, range 60..86400
-  map<string, ExternalMCPServerConfig> mcp_servers = 26 [(buf.validate.field).map = {
+  bool allow_web_fetch = 25; // default false
+  repeated string allowed_knowledge_urls = 26 [(buf.validate.field).repeated.max_items = 32];
+  uint32 knowledge_cache_ttl_seconds = 27; // default 3600, range 60..86400
+  map<string, ExternalMCPServerConfig> mcp_servers = 28 [(buf.validate.field).map = {
     max_pairs: 2,
     keys: {string: {min_len: 1, max_len: 64}}
   }];
 
   // cost & duration caps
-  uint32 max_session_seconds = 27 [(buf.validate.field).uint32 = {gte: 60, lte: 7200}];
-  uint32 max_audio_minutes = 28 [(buf.validate.field).uint32.lte = 240]; // 0 = server default
-
-  // all internal usage fields (host may not set)
-  bool is_enabled = 29 [(buf.validate.field).bool.const = false];
-  optional string active_session_id = 30 [(buf.validate.field).cel = {
-    id: "active_session_id_empty",
-    message: "active_session_id should not contain any value",
-    expression: "this.matches('^$')"
-  }];
+  uint32 max_session_seconds = 29 [(buf.validate.field).uint32 = {gte: 60, lte: 7200}];
+  uint32 max_audio_minutes = 30 [(buf.validate.field).uint32.lte = 240]; // 0 = server default
 
   // Optional host-supplied provider credentials and endpoint overrides.
   // Accepted on room creation and stripped before metadata is published.
   optional InsightsAIAgentCustomProvider custom_provider = 31;
+
+  // all internal usage fields (host may not set)
+  bool is_enabled = 32 [(buf.validate.field).bool.const = false];
+  optional string active_session_id = 33 [(buf.validate.field).cel = {
+    id: "active_session_id_empty",
+    message: "active_session_id should not contain any value",
+    expression: "this.matches('^$')"
+  }];
 }

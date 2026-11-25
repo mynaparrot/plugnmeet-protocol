@@ -22,6 +22,7 @@ enum RoomArtifactType {
   AI_AGENT_USAGE = 10;
   AI_AGENT_SESSION_SUMMARY = 11;
   AI_AGENT_TRANSCRIPT = 12;
+  AI_AGENT_AVATAR_USAGE = 13;
 }
 
 // FileInfo contains details about a generated file artifact.
@@ -123,6 +124,8 @@ message AIAgentSessionSummary {
   string narrative_summary = 10;
   // usage is keyed by role: "session", "delegation" or "summary".
   map<string, RoomArtifactTokenUsage> usage = 11;
+  // avatar_usage records the realtime video avatar duration and cost when an avatar was used.
+  optional RoomArtifactDurationUsage avatar_usage = 12;
 }
 
 message AIAgentSummarySession {

@@ -201,6 +201,7 @@ message AIAgentStateMsg {
   int64 started_at = 7;
   string reason = 8; // e.g. "budget" | "moderation" | "goaway" | "paused"
   string trace_id = 9;
+  optional string avatar_provider = 10;
 }
 
 message AIAgentToolCallMsg {

@@ -1711,6 +1711,7 @@ type AIAgentStateMsg struct {
 	StartedAt      int64                  `protobuf:"varint,7,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
 	Reason         string                 `protobuf:"bytes,8,opt,name=reason,proto3" json:"reason,omitempty"` // e.g. "budget" | "moderation" | "goaway" | "paused"
 	TraceId        string                 `protobuf:"bytes,9,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
+	AvatarProvider *string                `protobuf:"bytes,10,opt,name=avatar_provider,json=avatarProvider,proto3,oneof" json:"avatar_provider,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1804,6 +1805,13 @@ func (x *AIAgentStateMsg) GetReason() string {
 func (x *AIAgentStateMsg) GetTraceId() string {
 	if x != nil {
 		return x.TraceId
+	}
+	return ""
+}
+
+func (x *AIAgentStateMsg) GetAvatarProvider() string {
+	if x != nil && x.AvatarProvider != nil {
+		return *x.AvatarProvider
 	}
 	return ""
 }
@@ -2213,7 +2221,7 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"\x10AIAgentResumeReq\"T\n" +
 	"\x14AIAgentRedelegateReq\x12)\n" +
 	"\x0etarget_user_id\x18\x01 \x01(\tH\x00R\ftargetUserId\x88\x01\x01B\x11\n" +
-	"\x0f_target_user_id\"\xc6\x02\n" +
+	"\x0f_target_user_id\"\x88\x03\n" +
 	"\x0fAIAgentStateMsg\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\"\n" +
@@ -2227,7 +2235,10 @@ const file_plugnmeet_insights_proto_rawDesc = "" +
 	"\n" +
 	"started_at\x18\a \x01(\x03R\tstartedAt\x12\x16\n" +
 	"\x06reason\x18\b \x01(\tR\x06reason\x12\x19\n" +
-	"\btrace_id\x18\t \x01(\tR\atraceId\"\xfb\x01\n" +
+	"\btrace_id\x18\t \x01(\tR\atraceId\x12,\n" +
+	"\x0favatar_provider\x18\n" +
+	" \x01(\tH\x00R\x0eavatarProvider\x88\x01\x01B\x12\n" +
+	"\x10_avatar_provider\"\xfb\x01\n" +
 	"\x12AIAgentToolCallMsg\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x17\n" +
@@ -2379,6 +2390,7 @@ func file_plugnmeet_insights_proto_init() {
 	file_plugnmeet_insights_proto_msgTypes[18].OneofWrappers = []any{}
 	file_plugnmeet_insights_proto_msgTypes[19].OneofWrappers = []any{}
 	file_plugnmeet_insights_proto_msgTypes[22].OneofWrappers = []any{}
+	file_plugnmeet_insights_proto_msgTypes[23].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

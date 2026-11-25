@@ -37,6 +37,7 @@ const (
 	RoomArtifactType_AI_AGENT_USAGE                   RoomArtifactType = 10
 	RoomArtifactType_AI_AGENT_SESSION_SUMMARY         RoomArtifactType = 11
 	RoomArtifactType_AI_AGENT_TRANSCRIPT              RoomArtifactType = 12
+	RoomArtifactType_AI_AGENT_AVATAR_USAGE            RoomArtifactType = 13
 )
 
 // Enum value maps for RoomArtifactType.
@@ -55,6 +56,7 @@ var (
 		10: "AI_AGENT_USAGE",
 		11: "AI_AGENT_SESSION_SUMMARY",
 		12: "AI_AGENT_TRANSCRIPT",
+		13: "AI_AGENT_AVATAR_USAGE",
 	}
 	RoomArtifactType_value = map[string]int32{
 		"UNKNOWN_ARTIFACT":                 0,
@@ -70,6 +72,7 @@ var (
 		"AI_AGENT_USAGE":                   10,
 		"AI_AGENT_SESSION_SUMMARY":         11,
 		"AI_AGENT_TRANSCRIPT":              12,
+		"AI_AGENT_AVATAR_USAGE":            13,
 	}
 )
 
@@ -730,7 +733,9 @@ type AIAgentSessionSummary struct {
 	Continuation      *AIAgentSummaryContinuation      `protobuf:"bytes,9,opt,name=continuation,proto3" json:"continuation,omitempty"`
 	NarrativeSummary  string                           `protobuf:"bytes,10,opt,name=narrative_summary,json=narrativeSummary,proto3" json:"narrative_summary,omitempty"`
 	// usage is keyed by role: "session", "delegation" or "summary".
-	Usage         map[string]*RoomArtifactTokenUsage `protobuf:"bytes,11,rep,name=usage,proto3" json:"usage,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Usage map[string]*RoomArtifactTokenUsage `protobuf:"bytes,11,rep,name=usage,proto3" json:"usage,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// avatar_usage records the realtime video avatar duration and cost when an avatar was used.
+	AvatarUsage   *RoomArtifactDurationUsage `protobuf:"bytes,12,opt,name=avatar_usage,json=avatarUsage,proto3,oneof" json:"avatar_usage,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -838,6 +843,13 @@ func (x *AIAgentSessionSummary) GetNarrativeSummary() string {
 func (x *AIAgentSessionSummary) GetUsage() map[string]*RoomArtifactTokenUsage {
 	if x != nil {
 		return x.Usage
+	}
+	return nil
+}
+
+func (x *AIAgentSessionSummary) GetAvatarUsage() *RoomArtifactDurationUsage {
+	if x != nil {
+		return x.AvatarUsage
 	}
 	return nil
 }
@@ -1493,7 +1505,7 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\x04type\x18\x01 \x01(\x0e2\x1b.plugnmeet.RoomArtifactTypeR\x04type\x12\x1f\n" +
 	"\vartifact_id\x18\x02 \x01(\tR\n" +
 	"artifactId\x12;\n" +
-	"\bmetadata\x18\x03 \x01(\v2\x1f.plugnmeet.RoomArtifactMetadataR\bmetadata\"\xb0\x06\n" +
+	"\bmetadata\x18\x03 \x01(\v2\x1f.plugnmeet.RoomArtifactMetadataR\bmetadata\"\x8f\a\n" +
 	"\x15AIAgentSessionSummary\x12%\n" +
 	"\x0esummary_source\x18\x01 \x01(\tR\rsummarySource\x12!\n" +
 	"\fgenerated_at\x18\x02 \x01(\tR\vgeneratedAt\x12<\n" +
@@ -1508,11 +1520,13 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\fcontinuation\x18\t \x01(\v2%.plugnmeet.AIAgentSummaryContinuationR\fcontinuation\x12+\n" +
 	"\x11narrative_summary\x18\n" +
 	" \x01(\tR\x10narrativeSummary\x12A\n" +
-	"\x05usage\x18\v \x03(\v2+.plugnmeet.AIAgentSessionSummary.UsageEntryR\x05usage\x1a[\n" +
+	"\x05usage\x18\v \x03(\v2+.plugnmeet.AIAgentSessionSummary.UsageEntryR\x05usage\x12L\n" +
+	"\favatar_usage\x18\f \x01(\v2$.plugnmeet.RoomArtifactDurationUsageH\x00R\vavatarUsage\x88\x01\x01\x1a[\n" +
 	"\n" +
 	"UsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x127\n" +
-	"\x05value\x18\x02 \x01(\v2!.plugnmeet.RoomArtifactTokenUsageR\x05value:\x028\x01\"\xbb\x03\n" +
+	"\x05value\x18\x02 \x01(\v2!.plugnmeet.RoomArtifactTokenUsageR\x05value:\x028\x01B\x0f\n" +
+	"\r_avatar_usage\"\xbb\x03\n" +
 	"\x15AIAgentSummarySession\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x19\n" +
 	"\broom_sid\x18\x02 \x01(\tR\aroomSid\x12\x1d\n" +
@@ -1571,7 +1585,7 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\x12next_session_focus\x18\x01 \x01(\tR\x10nextSessionFocus\x12.\n" +
 	"\x13recommended_warm_up\x18\x02 \x01(\tR\x11recommendedWarmUp\x121\n" +
 	"\x14unfinished_subtopics\x18\x03 \x03(\tR\x13unfinishedSubtopics\x12E\n" +
-	"\x1fprevious_session_context_prompt\x18\x04 \x01(\tR\x1cpreviousSessionContextPrompt*\xf8\x02\n" +
+	"\x1fprevious_session_context_prompt\x18\x04 \x01(\tR\x1cpreviousSessionContextPrompt*\x93\x03\n" +
 	"\x10RoomArtifactType\x12\x14\n" +
 	"\x10UNKNOWN_ARTIFACT\x10\x00\x12\x15\n" +
 	"\x11MEETING_ANALYTICS\x10\x01\x12\x13\n" +
@@ -1586,7 +1600,8 @@ const file_plugnmeet_room_artifacts_proto_rawDesc = "" +
 	"\x0eAI_AGENT_USAGE\x10\n" +
 	"\x12\x1c\n" +
 	"\x18AI_AGENT_SESSION_SUMMARY\x10\v\x12\x17\n" +
-	"\x13AI_AGENT_TRANSCRIPT\x10\fB\xa4\x01\n" +
+	"\x13AI_AGENT_TRANSCRIPT\x10\f\x12\x19\n" +
+	"\x15AI_AGENT_AVATAR_USAGE\x10\rB\xa4\x01\n" +
 	"\rcom.plugnmeetB\x1bPlugnmeetRoomArtifactsProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -1647,14 +1662,15 @@ var file_plugnmeet_room_artifacts_proto_depIdxs = []int32{
 	15, // 16: plugnmeet.AIAgentSessionSummary.workspace_activity:type_name -> plugnmeet.AIAgentSummaryWorkspaceActivity
 	16, // 17: plugnmeet.AIAgentSessionSummary.continuation:type_name -> plugnmeet.AIAgentSummaryContinuation
 	20, // 18: plugnmeet.AIAgentSessionSummary.usage:type_name -> plugnmeet.AIAgentSessionSummary.UsageEntry
-	13, // 19: plugnmeet.AIAgentSummaryQuizEvaluation.questions:type_name -> plugnmeet.AIAgentSummaryQuizQuestion
-	21, // 20: plugnmeet.AIAgentSummaryWorkspaceActivity.tools_used:type_name -> plugnmeet.AIAgentSummaryWorkspaceActivity.ToolsUsedEntry
-	4,  // 21: plugnmeet.AIAgentSessionSummary.UsageEntry.value:type_name -> plugnmeet.RoomArtifactTokenUsage
-	22, // [22:22] is the sub-list for method output_type
-	22, // [22:22] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	5,  // 19: plugnmeet.AIAgentSessionSummary.avatar_usage:type_name -> plugnmeet.RoomArtifactDurationUsage
+	13, // 20: plugnmeet.AIAgentSummaryQuizEvaluation.questions:type_name -> plugnmeet.AIAgentSummaryQuizQuestion
+	21, // 21: plugnmeet.AIAgentSummaryWorkspaceActivity.tools_used:type_name -> plugnmeet.AIAgentSummaryWorkspaceActivity.ToolsUsedEntry
+	4,  // 22: plugnmeet.AIAgentSessionSummary.UsageEntry.value:type_name -> plugnmeet.RoomArtifactTokenUsage
+	23, // [23:23] is the sub-list for method output_type
+	23, // [23:23] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_plugnmeet_room_artifacts_proto_init() }
@@ -1671,6 +1687,7 @@ func file_plugnmeet_room_artifacts_proto_init() {
 		(*RoomArtifactMetadata_DurationUsage)(nil),
 		(*RoomArtifactMetadata_CharacterCountUsage)(nil),
 	}
+	file_plugnmeet_room_artifacts_proto_msgTypes[8].OneofWrappers = []any{}
 	file_plugnmeet_room_artifacts_proto_msgTypes[13].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

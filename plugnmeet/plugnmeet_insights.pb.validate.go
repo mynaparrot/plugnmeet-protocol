@@ -2676,6 +2676,10 @@ func (m *AIAgentStateMsg) validate(all bool) error {
 
 	// no validation rules for TraceId
 
+	if m.AvatarProvider != nil {
+		// no validation rules for AvatarProvider
+	}
+
 	if len(errors) > 0 {
 		return AIAgentStateMsgMultiError(errors)
 	}

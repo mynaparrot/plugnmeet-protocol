@@ -1290,6 +1290,246 @@ var _ interface {
 	ErrorName() string
 } = InsightsAIAgentCustomProviderValidationError{}
 
+// Validate checks the field values on InsightsAIAgentAvatarConfig with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InsightsAIAgentAvatarConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InsightsAIAgentAvatarConfig with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// InsightsAIAgentAvatarConfigMultiError, or nil if none found.
+func (m *InsightsAIAgentAvatarConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InsightsAIAgentAvatarConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsEnabled
+
+	if m.Provider != nil {
+		// no validation rules for Provider
+	}
+
+	if m.AvatarId != nil {
+		// no validation rules for AvatarId
+	}
+
+	if m.MaxAvatarMinutes != nil {
+		// no validation rules for MaxAvatarMinutes
+	}
+
+	if m.ApiKey != nil {
+		// no validation rules for ApiKey
+	}
+
+	if m.Endpoint != nil {
+		// no validation rules for Endpoint
+	}
+
+	if m.AuthHeader != nil {
+		// no validation rules for AuthHeader
+	}
+
+	if len(errors) > 0 {
+		return InsightsAIAgentAvatarConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// InsightsAIAgentAvatarConfigMultiError is an error wrapping multiple
+// validation errors returned by InsightsAIAgentAvatarConfig.ValidateAll() if
+// the designated constraints aren't met.
+type InsightsAIAgentAvatarConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InsightsAIAgentAvatarConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InsightsAIAgentAvatarConfigMultiError) AllErrors() []error { return m }
+
+// InsightsAIAgentAvatarConfigValidationError is the validation error returned
+// by InsightsAIAgentAvatarConfig.Validate if the designated constraints
+// aren't met.
+type InsightsAIAgentAvatarConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InsightsAIAgentAvatarConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InsightsAIAgentAvatarConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InsightsAIAgentAvatarConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InsightsAIAgentAvatarConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InsightsAIAgentAvatarConfigValidationError) ErrorName() string {
+	return "InsightsAIAgentAvatarConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InsightsAIAgentAvatarConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInsightsAIAgentAvatarConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InsightsAIAgentAvatarConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InsightsAIAgentAvatarConfigValidationError{}
+
+// Validate checks the field values on InsightsAIAgentActivityRules with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InsightsAIAgentActivityRules) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InsightsAIAgentActivityRules with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// InsightsAIAgentActivityRulesMultiError, or nil if none found.
+func (m *InsightsAIAgentActivityRules) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InsightsAIAgentActivityRules) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for MinWhiteboardDrawings
+
+	// no validation rules for MinQuizzes
+
+	// no validation rules for MinNotepadEntries
+
+	// no validation rules for MinParticipantExercises
+
+	if len(errors) > 0 {
+		return InsightsAIAgentActivityRulesMultiError(errors)
+	}
+
+	return nil
+}
+
+// InsightsAIAgentActivityRulesMultiError is an error wrapping multiple
+// validation errors returned by InsightsAIAgentActivityRules.ValidateAll() if
+// the designated constraints aren't met.
+type InsightsAIAgentActivityRulesMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InsightsAIAgentActivityRulesMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InsightsAIAgentActivityRulesMultiError) AllErrors() []error { return m }
+
+// InsightsAIAgentActivityRulesValidationError is the validation error returned
+// by InsightsAIAgentActivityRules.Validate if the designated constraints
+// aren't met.
+type InsightsAIAgentActivityRulesValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InsightsAIAgentActivityRulesValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InsightsAIAgentActivityRulesValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InsightsAIAgentActivityRulesValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InsightsAIAgentActivityRulesValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InsightsAIAgentActivityRulesValidationError) ErrorName() string {
+	return "InsightsAIAgentActivityRulesValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InsightsAIAgentActivityRulesValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInsightsAIAgentActivityRules.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InsightsAIAgentActivityRulesValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InsightsAIAgentActivityRulesValidationError{}
+
 // Validate checks the field values on InsightsAIAgentFeatures with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -1427,8 +1667,74 @@ func (m *InsightsAIAgentFeatures) validate(all bool) error {
 
 	}
 
+	if m.Avatar != nil {
+
+		if all {
+			switch v := interface{}(m.GetAvatar()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, InsightsAIAgentFeaturesValidationError{
+						field:  "Avatar",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, InsightsAIAgentFeaturesValidationError{
+						field:  "Avatar",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAvatar()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return InsightsAIAgentFeaturesValidationError{
+					field:  "Avatar",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if m.AgentDisplayName != nil {
 		// no validation rules for AgentDisplayName
+	}
+
+	if m.ActivityRules != nil {
+
+		if all {
+			switch v := interface{}(m.GetActivityRules()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, InsightsAIAgentFeaturesValidationError{
+						field:  "ActivityRules",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, InsightsAIAgentFeaturesValidationError{
+						field:  "ActivityRules",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetActivityRules()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return InsightsAIAgentFeaturesValidationError{
+					field:  "ActivityRules",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if m.SpokenLang != nil {
@@ -1449,10 +1755,6 @@ func (m *InsightsAIAgentFeatures) validate(all bool) error {
 
 	if m.SpeakingRate != nil {
 		// no validation rules for SpeakingRate
-	}
-
-	if m.ActiveSessionId != nil {
-		// no validation rules for ActiveSessionId
 	}
 
 	if m.CustomProvider != nil {
@@ -1486,6 +1788,10 @@ func (m *InsightsAIAgentFeatures) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if m.ActiveSessionId != nil {
+		// no validation rules for ActiveSessionId
 	}
 
 	if len(errors) > 0 {
