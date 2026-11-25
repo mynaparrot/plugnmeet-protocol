@@ -55,7 +55,7 @@ func TestSendCommonErrorResponses(t *testing.T) {
 		return SendCommonErrorProtobufResponse(c, "notifications.room-not-active", plugnmeet.StatusCode_ROOM_NOT_ACTIVE)
 	})
 	app.Get("/json", func(c fiber.Ctx) error {
-		return SendCommonErrorJsonResponse(c, "notifications.room-not-found", plugnmeet.StatusCode_ROOM_NOT_FOUND)
+		return SendCommonErrorJsonResponse(c, "notifications.room-not-found", plugnmeet.StatusCode_ROOM_NOT_FOUND, "")
 	})
 	app.Get("/success-code", func(c fiber.Ctx) error {
 		// a success code must never produce a 2xx error response
@@ -134,4 +134,42 @@ func readBody(t *testing.T, res *http.Response) []byte {
 		t.Fatalf("reading body failed: %v", err)
 	}
 	return body
+}
+
+func TestSendCommonJsonMsgKey(t *testing.T) {
+	app := fiber.New()
+	app.Get("/with-key", func(c fiber.Ctx) error {
+		return SendCommonProtoJsonResponse(c, true, "room created", plugnmeet.StatusCode_SUCCESS, "room.created")
+	})
+	app.Get("/empty-key", func(c fiber.Ctx) error {
+		return SendCommonErrorJsonResponse(c, "notifications.room-not-found", plugnmeet.StatusCode_ROOM_NOT_FOUND, "")
+	})
+
+	tests := []struct {
+		path    string
+		wantKey string
+	}{
+		{"/with-key", "room.created"},
+		{"/empty-key", ""},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.path, func(t *testing.T) {
+			res, err := app.Test(httptest.NewRequest(fiber.MethodGet, tt.path, nil))
+			if err != nil {
+				t.Fatalf("request failed: %v", err)
+			}
+
+			var body plugnmeet.CommonResponse
+			if err := protojson.Unmarshal(readBody(t, res), &body); err != nil {
+				t.Fatalf("unmarshal failed: %v", err)
+			}
+			if body.GetMsgKey() != tt.wantKey {
+				t.Errorf("msg key = %q, want %q", body.GetMsgKey(), tt.wantKey)
+			}
+			if tt.wantKey == "" && body.MsgKey != nil {
+				t.Errorf("msg key should be unset, got %q", *body.MsgKey)
+			}
+		})
+	}
 }

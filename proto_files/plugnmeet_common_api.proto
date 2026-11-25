@@ -29,6 +29,7 @@ message CommonResponse {
   bool status = 1;
   string msg = 2;
   StatusCode status_code = 3;
+  optional string msg_key = 4;
 }
 
 message VerifyTokenReq {

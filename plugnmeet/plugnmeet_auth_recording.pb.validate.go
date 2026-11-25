@@ -495,6 +495,10 @@ func (m *FetchRecordingsRes) validate(all bool) error {
 		}
 	}
 
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
+
 	if len(errors) > 0 {
 		return FetchRecordingsResMultiError(errors)
 	}
@@ -763,6 +767,10 @@ func (m *RecordingInfoRes) validate(all bool) error {
 		}
 	}
 
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
+
 	if len(errors) > 0 {
 		return RecordingInfoResMultiError(errors)
 	}
@@ -972,6 +980,10 @@ func (m *DeleteRecordingRes) validate(all bool) error {
 	// no validation rules for Msg
 
 	// no validation rules for StatusCode
+
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
 
 	if len(errors) > 0 {
 		return DeleteRecordingResMultiError(errors)
@@ -1187,6 +1199,10 @@ func (m *GetDownloadTokenRes) validate(all bool) error {
 
 	if m.Token != nil {
 		// no validation rules for Token
+	}
+
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
 	}
 
 	if len(errors) > 0 {
@@ -1429,6 +1445,10 @@ func (m *UpdateRecordingMetadataRes) validate(all bool) error {
 	// no validation rules for Msg
 
 	// no validation rules for StatusCode
+
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
 
 	if len(errors) > 0 {
 		return UpdateRecordingMetadataResMultiError(errors)

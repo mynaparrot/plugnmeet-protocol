@@ -631,6 +631,7 @@ type GenerateTokenRes struct {
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	Token         *string                `protobuf:"bytes,4,opt,name=token,proto3,oneof" json:"token,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,5,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -689,6 +690,13 @@ func (x *GenerateTokenRes) GetStatusCode() StatusCode {
 func (x *GenerateTokenRes) GetToken() string {
 	if x != nil && x.Token != nil {
 		return *x.Token
+	}
+	return ""
+}
+
+func (x *GenerateTokenRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
 	}
 	return ""
 }
@@ -896,14 +904,17 @@ const file_plugnmeet_gen_token_proto_rawDesc = "" +
 	"\x12_lock_private_chatB\x12\n" +
 	"\x10_lock_whiteboardB\x16\n" +
 	"\x14_lock_shared_notepadB\x11\n" +
-	"\x0f_lock_reactions\"\x99\x01\n" +
+	"\x0f_lock_reactions\"\xc3\x01\n" +
 	"\x10GenerateTokenRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
 	"statusCode\x12\x19\n" +
-	"\x05token\x18\x04 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
-	"\x06_token\"\xa7\x05\n" +
+	"\x05token\x18\x04 \x01(\tH\x00R\x05token\x88\x01\x01\x12\x1c\n" +
+	"\amsg_key\x18\x05 \x01(\tH\x01R\x06msgKey\x88\x01\x01B\b\n" +
+	"\x06_tokenB\n" +
+	"\n" +
+	"\b_msg_key\"\xa7\x05\n" +
 	"\x12CustomDesignParams\x12(\n" +
 	"\rprimary_color\x18\x01 \x01(\tH\x00R\fprimaryColor\x88\x01\x01\x12,\n" +
 	"\x0fsecondary_color\x18\x02 \x01(\tH\x01R\x0esecondaryColor\x88\x01\x01\x12.\n" +

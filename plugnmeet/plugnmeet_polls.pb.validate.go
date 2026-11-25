@@ -319,6 +319,10 @@ func (m *CreatePollRes) validate(all bool) error {
 
 	// no validation rules for PollId
 
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
+
 	if len(errors) > 0 {
 		return CreatePollResMultiError(errors)
 	}

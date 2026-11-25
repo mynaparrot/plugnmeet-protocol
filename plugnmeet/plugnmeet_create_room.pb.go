@@ -1655,6 +1655,7 @@ type CreateRoomRes struct {
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	RoomInfo      *ActiveRoomInfo        `protobuf:"bytes,4,opt,name=room_info,json=roomInfo,proto3" json:"room_info,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,5,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1715,6 +1716,13 @@ func (x *CreateRoomRes) GetRoomInfo() *ActiveRoomInfo {
 		return x.RoomInfo
 	}
 	return nil
+}
+
+func (x *CreateRoomRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
 }
 
 var File_plugnmeet_create_room_proto protoreflect.FileDescriptor
@@ -1918,13 +1926,16 @@ const file_plugnmeet_create_room_proto_rawDesc = "" +
 	"\x10started_by_empty\x12'started_by should not contain any value\x1a\x12this.matches('^$')R\tstartedBy\"=\n" +
 	"\rCopyrightConf\x12\x18\n" +
 	"\adisplay\x18\x01 \x01(\bR\adisplay\x12\x12\n" +
-	"\x04text\x18\x03 \x01(\tR\x04text\"\xa9\x01\n" +
+	"\x04text\x18\x03 \x01(\tR\x04text\"\xd3\x01\n" +
 	"\rCreateRoomRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
 	"statusCode\x126\n" +
-	"\troom_info\x18\x04 \x01(\v2\x19.plugnmeet.ActiveRoomInfoR\broomInfoB\xa1\x01\n" +
+	"\troom_info\x18\x04 \x01(\v2\x19.plugnmeet.ActiveRoomInfoR\broomInfo\x12\x1c\n" +
+	"\amsg_key\x18\x05 \x01(\tH\x00R\x06msgKey\x88\x01\x01B\n" +
+	"\n" +
+	"\b_msg_keyB\xa1\x01\n" +
 	"\rcom.plugnmeetB\x18PlugnmeetCreateRoomProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -2025,6 +2036,7 @@ func file_plugnmeet_create_room_proto_init() {
 	file_plugnmeet_create_room_proto_msgTypes[12].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[14].OneofWrappers = []any{}
 	file_plugnmeet_create_room_proto_msgTypes[16].OneofWrappers = []any{}
+	file_plugnmeet_create_room_proto_msgTypes[19].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

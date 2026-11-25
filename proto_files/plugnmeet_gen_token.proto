@@ -93,6 +93,7 @@ message GenerateTokenRes {
   string msg = 2;
   StatusCode status_code = 3;
   optional string token = 4;
+  optional string msg_key = 5;
 }
 
 message CustomDesignParams {

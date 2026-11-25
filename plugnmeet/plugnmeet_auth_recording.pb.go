@@ -281,6 +281,7 @@ type FetchRecordingsRes struct {
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	Result        *FetchRecordingsResult `protobuf:"bytes,4,opt,name=result,proto3" json:"result,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,5,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -343,6 +344,13 @@ func (x *FetchRecordingsRes) GetResult() *FetchRecordingsResult {
 	return nil
 }
 
+func (x *FetchRecordingsRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
+}
+
 type RecordingInfoReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RecordId      string                 `protobuf:"bytes,1,opt,name=record_id,json=recordId,proto3" json:"record_id,omitempty"`
@@ -394,6 +402,7 @@ type RecordingInfoRes struct {
 	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	RecordingInfo *RecordingInfo         `protobuf:"bytes,4,opt,name=recording_info,json=recordingInfo,proto3" json:"recording_info,omitempty"`
 	RoomInfo      *PastRoomInfo          `protobuf:"bytes,5,opt,name=room_info,json=roomInfo,proto3" json:"room_info,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,6,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -463,6 +472,13 @@ func (x *RecordingInfoRes) GetRoomInfo() *PastRoomInfo {
 	return nil
 }
 
+func (x *RecordingInfoRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
+}
+
 type DeleteRecordingReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RecordId      string                 `protobuf:"bytes,1,opt,name=record_id,json=recordId,proto3" json:"record_id,omitempty"`
@@ -512,6 +528,7 @@ type DeleteRecordingRes struct {
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,4,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -567,6 +584,13 @@ func (x *DeleteRecordingRes) GetStatusCode() StatusCode {
 	return StatusCode_UNKNOWN_STATUS
 }
 
+func (x *DeleteRecordingRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
+}
+
 type GetDownloadTokenReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RecordId      string                 `protobuf:"bytes,1,opt,name=record_id,json=recordId,proto3" json:"record_id,omitempty"`
@@ -617,6 +641,7 @@ type GetDownloadTokenRes struct {
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	Token         *string                `protobuf:"bytes,4,opt,name=token,proto3,oneof" json:"token,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,5,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -679,6 +704,13 @@ func (x *GetDownloadTokenRes) GetToken() string {
 	return ""
 }
 
+func (x *GetDownloadTokenRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
+}
+
 type UpdateRecordingMetadataReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RecordId      string                 `protobuf:"bytes,1,opt,name=record_id,json=recordId,proto3" json:"record_id,omitempty"`
@@ -736,6 +768,7 @@ type UpdateRecordingMetadataRes struct {
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,4,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -789,6 +822,13 @@ func (x *UpdateRecordingMetadataRes) GetStatusCode() StatusCode {
 		return x.StatusCode
 	}
 	return StatusCode_UNKNOWN_STATUS
+}
+
+func (x *UpdateRecordingMetadataRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
 }
 
 type MergeRecordingsByRoomSession struct {
@@ -1012,46 +1052,61 @@ const file_plugnmeet_auth_recording_proto_rawDesc = "" +
 	"\x04from\x18\x02 \x01(\rR\x04from\x12\x14\n" +
 	"\x05limit\x18\x03 \x01(\rR\x05limit\x12\x19\n" +
 	"\border_by\x18\x04 \x01(\tR\aorderBy\x12A\n" +
-	"\x0frecordings_list\x18\x05 \x03(\v2\x18.plugnmeet.RecordingInfoR\x0erecordingsList\"\xb0\x01\n" +
+	"\x0frecordings_list\x18\x05 \x03(\v2\x18.plugnmeet.RecordingInfoR\x0erecordingsList\"\xda\x01\n" +
 	"\x12FetchRecordingsRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
 	"statusCode\x128\n" +
-	"\x06result\x18\x04 \x01(\v2 .plugnmeet.FetchRecordingsResultR\x06result\"7\n" +
+	"\x06result\x18\x04 \x01(\v2 .plugnmeet.FetchRecordingsResultR\x06result\x12\x1c\n" +
+	"\amsg_key\x18\x05 \x01(\tH\x00R\x06msgKey\x88\x01\x01B\n" +
+	"\n" +
+	"\b_msg_key\"7\n" +
 	"\x10RecordingInfoReq\x12#\n" +
-	"\trecord_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\brecordId\"\xeb\x01\n" +
+	"\trecord_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\brecordId\"\x95\x02\n" +
 	"\x10RecordingInfoRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
 	"statusCode\x12?\n" +
 	"\x0erecording_info\x18\x04 \x01(\v2\x18.plugnmeet.RecordingInfoR\rrecordingInfo\x124\n" +
-	"\troom_info\x18\x05 \x01(\v2\x17.plugnmeet.PastRoomInfoR\broomInfo\"9\n" +
+	"\troom_info\x18\x05 \x01(\v2\x17.plugnmeet.PastRoomInfoR\broomInfo\x12\x1c\n" +
+	"\amsg_key\x18\x06 \x01(\tH\x00R\x06msgKey\x88\x01\x01B\n" +
+	"\n" +
+	"\b_msg_key\"9\n" +
 	"\x12DeleteRecordingReq\x12#\n" +
-	"\trecord_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\brecordId\"v\n" +
+	"\trecord_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\brecordId\"\xa0\x01\n" +
 	"\x12DeleteRecordingRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
-	"statusCode\":\n" +
+	"statusCode\x12\x1c\n" +
+	"\amsg_key\x18\x04 \x01(\tH\x00R\x06msgKey\x88\x01\x01B\n" +
+	"\n" +
+	"\b_msg_key\":\n" +
 	"\x13GetDownloadTokenReq\x12#\n" +
-	"\trecord_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\brecordId\"\x9c\x01\n" +
+	"\trecord_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\brecordId\"\xc6\x01\n" +
 	"\x13GetDownloadTokenRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
 	"statusCode\x12\x19\n" +
-	"\x05token\x18\x04 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
-	"\x06_token\"{\n" +
+	"\x05token\x18\x04 \x01(\tH\x00R\x05token\x88\x01\x01\x12\x1c\n" +
+	"\amsg_key\x18\x05 \x01(\tH\x01R\x06msgKey\x88\x01\x01B\b\n" +
+	"\x06_tokenB\n" +
+	"\n" +
+	"\b_msg_key\"{\n" +
 	"\x1aUpdateRecordingMetadataReq\x12#\n" +
 	"\trecord_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\brecordId\x128\n" +
-	"\bmetadata\x18\x02 \x01(\v2\x1c.plugnmeet.RecordingMetadataR\bmetadata\"~\n" +
+	"\bmetadata\x18\x02 \x01(\v2\x1c.plugnmeet.RecordingMetadataR\bmetadata\"\xa8\x01\n" +
 	"\x1aUpdateRecordingMetadataRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
-	"statusCode\"u\n" +
+	"statusCode\x12\x1c\n" +
+	"\amsg_key\x18\x04 \x01(\tH\x00R\x06msgKey\x88\x01\x01B\n" +
+	"\n" +
+	"\b_msg_key\"u\n" +
 	"\x1cMergeRecordingsByRoomSession\x12!\n" +
 	"\broom_sid\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\aroomSid\x122\n" +
 	"\x15exclude_recording_ids\x18\x02 \x03(\tR\x13excludeRecordingIds\"f\n" +
@@ -1132,7 +1187,11 @@ func file_plugnmeet_auth_recording_proto_init() {
 	file_plugnmeet_common_api_proto_init()
 	file_plugnmeet_auth_recording_proto_msgTypes[0].OneofWrappers = []any{}
 	file_plugnmeet_auth_recording_proto_msgTypes[1].OneofWrappers = []any{}
+	file_plugnmeet_auth_recording_proto_msgTypes[3].OneofWrappers = []any{}
+	file_plugnmeet_auth_recording_proto_msgTypes[5].OneofWrappers = []any{}
+	file_plugnmeet_auth_recording_proto_msgTypes[7].OneofWrappers = []any{}
 	file_plugnmeet_auth_recording_proto_msgTypes[9].OneofWrappers = []any{}
+	file_plugnmeet_auth_recording_proto_msgTypes[11].OneofWrappers = []any{}
 	file_plugnmeet_auth_recording_proto_msgTypes[14].OneofWrappers = []any{
 		(*MergeRecordingsReq_BySession)(nil),
 		(*MergeRecordingsReq_ByIds)(nil),

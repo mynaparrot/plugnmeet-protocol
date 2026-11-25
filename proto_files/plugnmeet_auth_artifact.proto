@@ -45,6 +45,7 @@ message FetchArtifactsRes {
   string msg = 2;
   StatusCode status_code = 3;
   FetchArtifactsResult result = 4;
+  optional string msg_key = 5;
 }
 
 // Request to get a download token for an artifact
@@ -58,6 +59,7 @@ message GetArtifactDownloadTokenRes {
   string msg = 2;
   StatusCode status_code = 3;
   optional string token = 4;
+  optional string msg_key = 5;
 }
 
 // Request to delete an artifact
@@ -70,6 +72,7 @@ message DeleteArtifactRes {
   bool status = 1;
   string msg = 2;
   StatusCode status_code = 3;
+  optional string msg_key = 4;
 }
 
 message ArtifactInfoReq {
@@ -82,4 +85,5 @@ message ArtifactInfoRes {
   StatusCode status_code = 3;
   optional ArtifactInfo artifact_info = 4;
   optional PastRoomInfo room_info = 5;
+  optional string msg_key = 6;
 }

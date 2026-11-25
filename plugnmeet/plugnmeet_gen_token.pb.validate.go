@@ -1023,6 +1023,10 @@ func (m *GenerateTokenRes) validate(all bool) error {
 		// no validation rules for Token
 	}
 
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
+
 	if len(errors) > 0 {
 		return GenerateTokenResMultiError(errors)
 	}

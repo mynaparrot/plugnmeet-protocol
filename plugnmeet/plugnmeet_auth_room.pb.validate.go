@@ -567,6 +567,10 @@ func (m *RoomEndRes) validate(all bool) error {
 
 	// no validation rules for StatusCode
 
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
+
 	if len(errors) > 0 {
 		return RoomEndResMultiError(errors)
 	}
@@ -775,6 +779,10 @@ func (m *IsRoomActiveRes) validate(all bool) error {
 	// no validation rules for StatusCode
 
 	// no validation rules for IsActive
+
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
 
 	if len(errors) > 0 {
 		return IsRoomActiveResMultiError(errors)
@@ -1114,6 +1122,10 @@ func (m *GetActiveRoomInfoRes) validate(all bool) error {
 		}
 	}
 
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
+
 	if len(errors) > 0 {
 		return GetActiveRoomInfoResMultiError(errors)
 	}
@@ -1254,6 +1266,10 @@ func (m *GetActiveRoomsInfoRes) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
 	}
 
 	if len(errors) > 0 {
@@ -1762,6 +1778,10 @@ func (m *FetchPastRoomsRes) validate(all bool) error {
 		}
 	}
 
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
+
 	if len(errors) > 0 {
 		return FetchPastRoomsResMultiError(errors)
 	}
@@ -1872,6 +1892,10 @@ func (m *GetClientFilesRes) validate(all bool) error {
 
 	if m.StaticAssetsPath != nil {
 		// no validation rules for StaticAssetsPath
+	}
+
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
 	}
 
 	if len(errors) > 0 {

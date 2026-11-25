@@ -276,4 +276,5 @@ message CreateRoomRes {
   string msg = 2;
   StatusCode status_code = 3;
   ActiveRoomInfo room_info = 4;
+  optional string msg_key = 5;
 }

@@ -492,6 +492,10 @@ func (m *FetchArtifactsRes) validate(all bool) error {
 		}
 	}
 
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
+
 	if len(errors) > 0 {
 		return FetchArtifactsResMultiError(errors)
 	}
@@ -709,6 +713,10 @@ func (m *GetArtifactDownloadTokenRes) validate(all bool) error {
 		// no validation rules for Token
 	}
 
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
+
 	if len(errors) > 0 {
 		return GetArtifactDownloadTokenResMultiError(errors)
 	}
@@ -921,6 +929,10 @@ func (m *DeleteArtifactRes) validate(all bool) error {
 	// no validation rules for Msg
 
 	// no validation rules for StatusCode
+
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
 
 	if len(errors) > 0 {
 		return DeleteArtifactResMultiError(errors)
@@ -1196,6 +1208,10 @@ func (m *ArtifactInfoRes) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
 	}
 
 	if len(errors) > 0 {

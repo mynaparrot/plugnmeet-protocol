@@ -362,6 +362,7 @@ type CommonResponse struct {
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,4,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -415,6 +416,13 @@ func (x *CommonResponse) GetStatusCode() StatusCode {
 		return x.StatusCode
 	}
 	return StatusCode_UNKNOWN_STATUS
+}
+
+func (x *CommonResponse) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
 }
 
 type VerifyTokenReq struct {
@@ -2089,12 +2097,15 @@ var File_plugnmeet_common_api_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_common_api_proto_rawDesc = "" +
 	"\n" +
-	"\x1aplugnmeet_common_api.proto\x12\tplugnmeet\x1a\x1bplugnmeet_datamessage.proto\x1a\x18plugnmeet_nats_msg.proto\"r\n" +
+	"\x1aplugnmeet_common_api.proto\x12\tplugnmeet\x1a\x1bplugnmeet_datamessage.proto\x1a\x18plugnmeet_nats_msg.proto\"\x9c\x01\n" +
 	"\x0eCommonResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
-	"statusCode\"L\n" +
+	"statusCode\x12\x1c\n" +
+	"\amsg_key\x18\x04 \x01(\tH\x00R\x06msgKey\x88\x01\x01B\n" +
+	"\n" +
+	"\b_msg_key\"L\n" +
 	"\x0eVerifyTokenReq\x12(\n" +
 	"\ris_production\x18\x01 \x01(\bH\x00R\fisProduction\x88\x01\x01B\x10\n" +
 	"\x0e_is_production\"\xe5\x04\n" +
@@ -2370,6 +2381,7 @@ func file_plugnmeet_common_api_proto_init() {
 	}
 	file_plugnmeet_datamessage_proto_init()
 	file_plugnmeet_nats_msg_proto_init()
+	file_plugnmeet_common_api_proto_msgTypes[0].OneofWrappers = []any{}
 	file_plugnmeet_common_api_proto_msgTypes[1].OneofWrappers = []any{}
 	file_plugnmeet_common_api_proto_msgTypes[2].OneofWrappers = []any{}
 	file_plugnmeet_common_api_proto_msgTypes[7].OneofWrappers = []any{}

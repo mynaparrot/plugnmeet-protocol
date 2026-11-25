@@ -324,6 +324,7 @@ type RoomEndRes struct {
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,4,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -379,6 +380,13 @@ func (x *RoomEndRes) GetStatusCode() StatusCode {
 	return StatusCode_UNKNOWN_STATUS
 }
 
+func (x *RoomEndRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
+}
+
 type IsRoomActiveReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RoomId        string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
@@ -429,6 +437,7 @@ type IsRoomActiveRes struct {
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	IsActive      bool                   `protobuf:"varint,4,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,5,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -489,6 +498,13 @@ func (x *IsRoomActiveRes) GetIsActive() bool {
 		return x.IsActive
 	}
 	return false
+}
+
+func (x *IsRoomActiveRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
 }
 
 type ActiveRoomWithParticipant struct {
@@ -557,6 +573,7 @@ type GetActiveRoomInfoRes struct {
 	Msg           string                     `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	StatusCode    StatusCode                 `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	Room          *ActiveRoomWithParticipant `protobuf:"bytes,4,opt,name=room,proto3" json:"room,omitempty"`
+	MsgKey        *string                    `protobuf:"bytes,5,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -619,12 +636,20 @@ func (x *GetActiveRoomInfoRes) GetRoom() *ActiveRoomWithParticipant {
 	return nil
 }
 
+func (x *GetActiveRoomInfoRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
+}
+
 type GetActiveRoomsInfoRes struct {
 	state         protoimpl.MessageState       `protogen:"open.v1"`
 	Status        bool                         `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                       `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	StatusCode    StatusCode                   `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	Rooms         []*ActiveRoomWithParticipant `protobuf:"bytes,4,rep,name=rooms,proto3" json:"rooms,omitempty"`
+	MsgKey        *string                      `protobuf:"bytes,5,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -685,6 +710,13 @@ func (x *GetActiveRoomsInfoRes) GetRooms() []*ActiveRoomWithParticipant {
 		return x.Rooms
 	}
 	return nil
+}
+
+func (x *GetActiveRoomsInfoRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
 }
 
 type PastRoomInfo struct {
@@ -937,6 +969,7 @@ type FetchPastRoomsRes struct {
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	Result        *FetchPastRoomsResult  `protobuf:"bytes,4,opt,name=result,proto3" json:"result,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,5,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -999,6 +1032,13 @@ func (x *FetchPastRoomsRes) GetResult() *FetchPastRoomsResult {
 	return nil
 }
 
+func (x *FetchPastRoomsRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
+}
+
 type GetClientFilesRes struct {
 	state      protoimpl.MessageState `protogen:"open.v1"`
 	Status     bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
@@ -1011,6 +1051,7 @@ type GetClientFilesRes struct {
 	CssFiles         []string `protobuf:"bytes,6,rep,name=css_files,json=cssFiles,proto3" json:"css_files,omitempty"`
 	JsFiles          []string `protobuf:"bytes,7,rep,name=js_files,json=jsFiles,proto3" json:"js_files,omitempty"`
 	StaticAssetsPath *string  `protobuf:"bytes,8,opt,name=static_assets_path,json=staticAssetsPath,proto3,oneof" json:"static_assets_path,omitempty"`
+	MsgKey           *string  `protobuf:"bytes,9,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1099,6 +1140,13 @@ func (x *GetClientFilesRes) GetJsFiles() []string {
 func (x *GetClientFilesRes) GetStaticAssetsPath() string {
 	if x != nil && x.StaticAssetsPath != nil {
 		return *x.StaticAssetsPath
+	}
+	return ""
+}
+
+func (x *GetClientFilesRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
 	}
 	return ""
 }
@@ -1348,39 +1396,51 @@ const file_plugnmeet_auth_room_proto_rawDesc = "" +
 	"\bmetadata\x18\f \x01(\tR\bmetadata\"-\n" +
 	"\n" +
 	"RoomEndReq\x12\x1f\n" +
-	"\aroom_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x06roomId\"n\n" +
+	"\aroom_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x06roomId\"\x98\x01\n" +
 	"\n" +
 	"RoomEndRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
-	"statusCode\"2\n" +
+	"statusCode\x12\x1c\n" +
+	"\amsg_key\x18\x04 \x01(\tH\x00R\x06msgKey\x88\x01\x01B\n" +
+	"\n" +
+	"\b_msg_key\"2\n" +
 	"\x0fIsRoomActiveReq\x12\x1f\n" +
-	"\aroom_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x06roomId\"\x90\x01\n" +
+	"\aroom_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x06roomId\"\xba\x01\n" +
 	"\x0fIsRoomActiveRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
 	"statusCode\x12\x1b\n" +
-	"\tis_active\x18\x04 \x01(\bR\bisActive\"\xfa\x01\n" +
+	"\tis_active\x18\x04 \x01(\bR\bisActive\x12\x1c\n" +
+	"\amsg_key\x18\x05 \x01(\tH\x00R\x06msgKey\x88\x01\x01B\n" +
+	"\n" +
+	"\b_msg_key\"\xfa\x01\n" +
 	"\x19ActiveRoomWithParticipant\x12;\n" +
 	"\troom_info\x18\x03 \x01(\v2\x19.plugnmeet.ActiveRoomInfoH\x00R\broomInfo\x88\x01\x01\x12E\n" +
 	"\x11participants_info\x18\x04 \x03(\v2\x18.livekit.ParticipantInfoR\x10participantsInfo\x12K\n" +
 	"\x0ebreakout_rooms\x18\x05 \x03(\v2$.plugnmeet.ActiveRoomWithParticipantR\rbreakoutRoomsB\f\n" +
 	"\n" +
-	"_room_info\"\xb2\x01\n" +
+	"_room_info\"\xdc\x01\n" +
 	"\x14GetActiveRoomInfoRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
 	"statusCode\x128\n" +
-	"\x04room\x18\x04 \x01(\v2$.plugnmeet.ActiveRoomWithParticipantR\x04room\"\xb5\x01\n" +
+	"\x04room\x18\x04 \x01(\v2$.plugnmeet.ActiveRoomWithParticipantR\x04room\x12\x1c\n" +
+	"\amsg_key\x18\x05 \x01(\tH\x00R\x06msgKey\x88\x01\x01B\n" +
+	"\n" +
+	"\b_msg_key\"\xdf\x01\n" +
 	"\x15GetActiveRoomsInfoRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
 	"statusCode\x12:\n" +
-	"\x05rooms\x18\x04 \x03(\v2$.plugnmeet.ActiveRoomWithParticipantR\x05rooms\"\xaa\x02\n" +
+	"\x05rooms\x18\x04 \x03(\v2$.plugnmeet.ActiveRoomWithParticipantR\x05rooms\x12\x1c\n" +
+	"\amsg_key\x18\x05 \x01(\tH\x00R\x06msgKey\x88\x01\x01B\n" +
+	"\n" +
+	"\b_msg_key\"\xaa\x02\n" +
 	"\fPastRoomInfo\x12\x1d\n" +
 	"\n" +
 	"room_title\x18\x01 \x01(\tR\troomTitle\x12\x17\n" +
@@ -1405,13 +1465,16 @@ const file_plugnmeet_auth_room_proto_rawDesc = "" +
 	"\x05limit\x18\x03 \x01(\rR\x05limit\x12\x19\n" +
 	"\border_by\x18\x04 \x01(\tR\aorderBy\x126\n" +
 	"\n" +
-	"rooms_list\x18\x05 \x03(\v2\x17.plugnmeet.PastRoomInfoR\troomsList\"\xae\x01\n" +
+	"rooms_list\x18\x05 \x03(\v2\x17.plugnmeet.PastRoomInfoR\troomsList\"\xd8\x01\n" +
 	"\x11FetchPastRoomsRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
 	"statusCode\x127\n" +
-	"\x06result\x18\x04 \x01(\v2\x1f.plugnmeet.FetchPastRoomsResultR\x06result\"\xa1\x02\n" +
+	"\x06result\x18\x04 \x01(\v2\x1f.plugnmeet.FetchPastRoomsResultR\x06result\x12\x1c\n" +
+	"\amsg_key\x18\x05 \x01(\tH\x00R\x06msgKey\x88\x01\x01B\n" +
+	"\n" +
+	"\b_msg_key\"\xcb\x02\n" +
 	"\x11GetClientFilesRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
@@ -1421,8 +1484,11 @@ const file_plugnmeet_auth_room_proto_rawDesc = "" +
 	"\x02js\x18\x05 \x03(\tB\x02\x18\x01R\x02js\x12\x1b\n" +
 	"\tcss_files\x18\x06 \x03(\tR\bcssFiles\x12\x19\n" +
 	"\bjs_files\x18\a \x03(\tR\ajsFiles\x121\n" +
-	"\x12static_assets_path\x18\b \x01(\tH\x00R\x10staticAssetsPath\x88\x01\x01B\x15\n" +
-	"\x13_static_assets_path\"\xd9\x02\n" +
+	"\x12static_assets_path\x18\b \x01(\tH\x00R\x10staticAssetsPath\x88\x01\x01\x12\x1c\n" +
+	"\amsg_key\x18\t \x01(\tH\x01R\x06msgKey\x88\x01\x01B\x15\n" +
+	"\x13_static_assets_pathB\n" +
+	"\n" +
+	"\b_msg_key\"\xd9\x02\n" +
 	"\x12BroadcastToRoomReq\x12\x1f\n" +
 	"\aroom_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x06roomId\x12$\n" +
 	"\x0eonly_to_admins\x18\x02 \x01(\bR\fonlyToAdmins\x12!\n" +
@@ -1514,8 +1580,13 @@ func file_plugnmeet_auth_room_proto_init() {
 	file_plugnmeet_common_api_proto_init()
 	file_plugnmeet_nats_msg_proto_init()
 	file_plugnmeet_auth_room_proto_msgTypes[1].OneofWrappers = []any{}
+	file_plugnmeet_auth_room_proto_msgTypes[4].OneofWrappers = []any{}
+	file_plugnmeet_auth_room_proto_msgTypes[6].OneofWrappers = []any{}
 	file_plugnmeet_auth_room_proto_msgTypes[7].OneofWrappers = []any{}
+	file_plugnmeet_auth_room_proto_msgTypes[8].OneofWrappers = []any{}
+	file_plugnmeet_auth_room_proto_msgTypes[9].OneofWrappers = []any{}
 	file_plugnmeet_auth_room_proto_msgTypes[10].OneofWrappers = []any{}
+	file_plugnmeet_auth_room_proto_msgTypes[13].OneofWrappers = []any{}
 	file_plugnmeet_auth_room_proto_msgTypes[14].OneofWrappers = []any{}
 	file_plugnmeet_auth_room_proto_msgTypes[15].OneofWrappers = []any{
 		(*BroadcastToRoomReq_ChatMsg)(nil),

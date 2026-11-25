@@ -35,6 +35,7 @@ message FetchAnalyticsRes{
   string msg = 2;
   StatusCode status_code = 3;
   FetchAnalyticsResult result = 4;
+  optional string msg_key = 5;
 }
 
 message DeleteAnalyticsReq {
@@ -45,6 +46,7 @@ message DeleteAnalyticsRes {
   bool status = 1;
   string msg = 2;
   StatusCode status_code = 3;
+  optional string msg_key = 4;
 }
 
 message GetAnalyticsDownloadTokenReq {
@@ -56,4 +58,5 @@ message GetAnalyticsDownloadTokenRes {
   string msg = 2;
   StatusCode status_code = 3;
   optional string token = 4;
+  optional string msg_key = 5;
 }

@@ -42,6 +42,7 @@ message FetchRecordingsRes{
   string msg = 2;
   StatusCode status_code = 3;
   FetchRecordingsResult result = 4;
+  optional string msg_key = 5;
 }
 
 message RecordingInfoReq {
@@ -54,6 +55,7 @@ message RecordingInfoRes {
   StatusCode status_code = 3;
   RecordingInfo recording_info = 4;
   PastRoomInfo room_info = 5;
+  optional string msg_key = 6;
 }
 
 message DeleteRecordingReq {
@@ -64,6 +66,7 @@ message DeleteRecordingRes {
   bool status = 1;
   string msg = 2;
   StatusCode status_code = 3;
+  optional string msg_key = 4;
 }
 
 message GetDownloadTokenReq {
@@ -75,6 +78,7 @@ message GetDownloadTokenRes {
   string msg = 2;
   StatusCode status_code = 3;
   optional string token = 4;
+  optional string msg_key = 5;
 }
 
 message UpdateRecordingMetadataReq {
@@ -86,6 +90,7 @@ message UpdateRecordingMetadataRes {
   bool status = 1;
   string msg = 2;
   StatusCode status_code = 3;
+  optional string msg_key = 4;
 }
 
 message MergeRecordingsByRoomSession {

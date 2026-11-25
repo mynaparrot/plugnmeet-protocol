@@ -194,6 +194,7 @@ type CreatePollRes struct {
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	PollId        string                 `protobuf:"bytes,3,opt,name=poll_id,json=pollId,proto3" json:"poll_id,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,4,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -245,6 +246,13 @@ func (x *CreatePollRes) GetMsg() string {
 func (x *CreatePollRes) GetPollId() string {
 	if x != nil {
 		return x.PollId
+	}
+	return ""
+}
+
+func (x *CreatePollRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
 	}
 	return ""
 }
@@ -1208,11 +1216,14 @@ const file_plugnmeet_polls_proto_rawDesc = "" +
 	"\ais_quiz\x18\b \x01(\bR\x06isQuiz\x12\x1a\n" +
 	"\bduration\x18\t \x01(\rR\bduration\x12$\n" +
 	"\x0eis_text_answer\x18\n" +
-	" \x01(\bR\fisTextAnswer\"R\n" +
+	" \x01(\bR\fisTextAnswer\"|\n" +
 	"\rCreatePollRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x17\n" +
-	"\apoll_id\x18\x03 \x01(\tR\x06pollId\"V\n" +
+	"\apoll_id\x18\x03 \x01(\tR\x06pollId\x12\x1c\n" +
+	"\amsg_key\x18\x04 \x01(\tH\x00R\x06msgKey\x88\x01\x01B\n" +
+	"\n" +
+	"\b_msg_key\"V\n" +
 	"\x11CreatePollOptions\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\rR\x02id\x12\x12\n" +
 	"\x04text\x18\x02 \x01(\tR\x04text\x12\x1d\n" +
@@ -1372,6 +1383,7 @@ func file_plugnmeet_polls_proto_init() {
 	if File_plugnmeet_polls_proto != nil {
 		return
 	}
+	file_plugnmeet_polls_proto_msgTypes[2].OneofWrappers = []any{}
 	file_plugnmeet_polls_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

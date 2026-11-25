@@ -122,14 +122,17 @@ func SendProtobufResponse(c fiber.Ctx, res proto.Message) error {
 	return c.Send(marshal)
 }
 
-// SendCommonProtoJsonResponse sends a CommonResponse as protojson. It does not set
-// an HTTP status, so it is only meant for successful responses; failures must use
-// SendCommonErrorJsonResponse.
-func SendCommonProtoJsonResponse(c fiber.Ctx, s bool, m string, statusCode plugnmeet.StatusCode) error {
+// SendCommonProtoJsonResponse sends a CommonResponse as protojson. msgKey is an optional i18n key, omitted from the
+// response when empty. It does not set an HTTP status, so it is only meant for successful responses;
+// failures must use SendCommonErrorJsonResponse.
+func SendCommonProtoJsonResponse(c fiber.Ctx, s bool, m string, statusCode plugnmeet.StatusCode, msgKey string) error {
 	res := &plugnmeet.CommonResponse{
 		Status:     s,
 		Msg:        m,
 		StatusCode: statusCode,
+	}
+	if msgKey != "" {
+		res.MsgKey = &msgKey
 	}
 	marshal, err := op.Marshal(res)
 	if err != nil {
@@ -139,13 +142,16 @@ func SendCommonProtoJsonResponse(c fiber.Ctx, s bool, m string, statusCode plugn
 	return c.Send(marshal)
 }
 
-// SendCommonErrorJsonResponse sends a failed response as a protojson CommonResponse
-// together with a non-2xx HTTP status derived from code.
-func SendCommonErrorJsonResponse(c fiber.Ctx, msg string, code plugnmeet.StatusCode) error {
+// SendCommonErrorJsonResponse sends a failed response as a protojson CommonResponse together with a non-2xx HTTP status
+// derived from code. msgKey is an optional i18n key, omitted from the response when empty.
+func SendCommonErrorJsonResponse(c fiber.Ctx, msg string, code plugnmeet.StatusCode, msgKey string) error {
 	res := &plugnmeet.CommonResponse{
 		Status:     false,
 		Msg:        msg,
 		StatusCode: code,
+	}
+	if msgKey != "" {
+		res.MsgKey = &msgKey
 	}
 	marshal, err := op.Marshal(res)
 	if err != nil {

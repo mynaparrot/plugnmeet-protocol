@@ -454,6 +454,10 @@ func (m *FetchAnalyticsRes) validate(all bool) error {
 		}
 	}
 
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
+
 	if len(errors) > 0 {
 		return FetchAnalyticsResMultiError(errors)
 	}
@@ -665,6 +669,10 @@ func (m *DeleteAnalyticsRes) validate(all bool) error {
 	// no validation rules for Msg
 
 	// no validation rules for StatusCode
+
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
 
 	if len(errors) > 0 {
 		return DeleteAnalyticsResMultiError(errors)
@@ -881,6 +889,10 @@ func (m *GetAnalyticsDownloadTokenRes) validate(all bool) error {
 
 	if m.Token != nil {
 		// no validation rules for Token
+	}
+
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
 	}
 
 	if len(errors) > 0 {

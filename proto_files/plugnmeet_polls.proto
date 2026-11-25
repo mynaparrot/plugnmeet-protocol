@@ -26,6 +26,7 @@ message CreatePollRes {
   bool status = 1;
   string msg = 2;
   string poll_id = 3;
+  optional string msg_key = 4;
 }
 
 message CreatePollOptions {

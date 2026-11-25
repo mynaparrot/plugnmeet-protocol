@@ -2896,6 +2896,10 @@ func (m *CreateRoomRes) validate(all bool) error {
 		}
 	}
 
+	if m.MsgKey != nil {
+		// no validation rules for MsgKey
+	}
+
 	if len(errors) > 0 {
 		return CreateRoomResMultiError(errors)
 	}

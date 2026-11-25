@@ -277,6 +277,7 @@ type FetchArtifactsRes struct {
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	Result        *FetchArtifactsResult  `protobuf:"bytes,4,opt,name=result,proto3" json:"result,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,5,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -339,6 +340,13 @@ func (x *FetchArtifactsRes) GetResult() *FetchArtifactsResult {
 	return nil
 }
 
+func (x *FetchArtifactsRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
+}
+
 // Request to get a download token for an artifact
 type GetArtifactDownloadTokenReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -391,6 +399,7 @@ type GetArtifactDownloadTokenRes struct {
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	Token         *string                `protobuf:"bytes,4,opt,name=token,proto3,oneof" json:"token,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,5,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -453,6 +462,13 @@ func (x *GetArtifactDownloadTokenRes) GetToken() string {
 	return ""
 }
 
+func (x *GetArtifactDownloadTokenRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
+}
+
 // Request to delete an artifact
 type DeleteArtifactReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -504,6 +520,7 @@ type DeleteArtifactRes struct {
 	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,4,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -559,6 +576,13 @@ func (x *DeleteArtifactRes) GetStatusCode() StatusCode {
 	return StatusCode_UNKNOWN_STATUS
 }
 
+func (x *DeleteArtifactRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
+}
+
 type ArtifactInfoReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ArtifactId    string                 `protobuf:"bytes,1,opt,name=artifact_id,json=artifactId,proto3" json:"artifact_id,omitempty"`
@@ -610,6 +634,7 @@ type ArtifactInfoRes struct {
 	StatusCode    StatusCode             `protobuf:"varint,3,opt,name=status_code,json=statusCode,proto3,enum=plugnmeet.StatusCode" json:"status_code,omitempty"`
 	ArtifactInfo  *ArtifactInfo          `protobuf:"bytes,4,opt,name=artifact_info,json=artifactInfo,proto3,oneof" json:"artifact_info,omitempty"`
 	RoomInfo      *PastRoomInfo          `protobuf:"bytes,5,opt,name=room_info,json=roomInfo,proto3,oneof" json:"room_info,omitempty"`
+	MsgKey        *string                `protobuf:"bytes,6,opt,name=msg_key,json=msgKey,proto3,oneof" json:"msg_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -679,6 +704,13 @@ func (x *ArtifactInfoRes) GetRoomInfo() *PastRoomInfo {
 	return nil
 }
 
+func (x *ArtifactInfoRes) GetMsgKey() string {
+	if x != nil && x.MsgKey != nil {
+		return *x.MsgKey
+	}
+	return ""
+}
+
 var File_plugnmeet_auth_artifact_proto protoreflect.FileDescriptor
 
 const file_plugnmeet_auth_artifact_proto_rawDesc = "" +
@@ -707,44 +739,56 @@ const file_plugnmeet_auth_artifact_proto_rawDesc = "" +
 	"\border_by\x18\x04 \x01(\tR\aorderBy\x124\n" +
 	"\x04type\x18\x05 \x01(\x0e2\x1b.plugnmeet.RoomArtifactTypeH\x00R\x04type\x88\x01\x01\x12>\n" +
 	"\x0eartifacts_list\x18\x06 \x03(\v2\x17.plugnmeet.ArtifactInfoR\rartifactsListB\a\n" +
-	"\x05_type\"\xae\x01\n" +
+	"\x05_type\"\xd8\x01\n" +
 	"\x11FetchArtifactsRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
 	"statusCode\x127\n" +
-	"\x06result\x18\x04 \x01(\v2\x1f.plugnmeet.FetchArtifactsResultR\x06result\"F\n" +
+	"\x06result\x18\x04 \x01(\v2\x1f.plugnmeet.FetchArtifactsResultR\x06result\x12\x1c\n" +
+	"\amsg_key\x18\x05 \x01(\tH\x00R\x06msgKey\x88\x01\x01B\n" +
+	"\n" +
+	"\b_msg_key\"F\n" +
 	"\x1bGetArtifactDownloadTokenReq\x12'\n" +
 	"\vartifact_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\n" +
-	"artifactId\"\xa4\x01\n" +
+	"artifactId\"\xce\x01\n" +
 	"\x1bGetArtifactDownloadTokenRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
 	"statusCode\x12\x19\n" +
-	"\x05token\x18\x04 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
-	"\x06_token\"<\n" +
+	"\x05token\x18\x04 \x01(\tH\x00R\x05token\x88\x01\x01\x12\x1c\n" +
+	"\amsg_key\x18\x05 \x01(\tH\x01R\x06msgKey\x88\x01\x01B\b\n" +
+	"\x06_tokenB\n" +
+	"\n" +
+	"\b_msg_key\"<\n" +
 	"\x11DeleteArtifactReq\x12'\n" +
 	"\vartifact_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\n" +
-	"artifactId\"u\n" +
+	"artifactId\"\x9f\x01\n" +
 	"\x11DeleteArtifactRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
-	"statusCode\":\n" +
+	"statusCode\x12\x1c\n" +
+	"\amsg_key\x18\x04 \x01(\tH\x00R\x06msgKey\x88\x01\x01B\n" +
+	"\n" +
+	"\b_msg_key\":\n" +
 	"\x0fArtifactInfoReq\x12'\n" +
 	"\vartifact_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\n" +
-	"artifactId\"\x91\x02\n" +
+	"artifactId\"\xbb\x02\n" +
 	"\x0fArtifactInfoRes\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\bR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
 	"\vstatus_code\x18\x03 \x01(\x0e2\x15.plugnmeet.StatusCodeR\n" +
 	"statusCode\x12A\n" +
 	"\rartifact_info\x18\x04 \x01(\v2\x17.plugnmeet.ArtifactInfoH\x00R\fartifactInfo\x88\x01\x01\x129\n" +
-	"\troom_info\x18\x05 \x01(\v2\x17.plugnmeet.PastRoomInfoH\x01R\broomInfo\x88\x01\x01B\x10\n" +
+	"\troom_info\x18\x05 \x01(\v2\x17.plugnmeet.PastRoomInfoH\x01R\broomInfo\x88\x01\x01\x12\x1c\n" +
+	"\amsg_key\x18\x06 \x01(\tH\x02R\x06msgKey\x88\x01\x01B\x10\n" +
 	"\x0e_artifact_infoB\f\n" +
 	"\n" +
-	"_room_infoB\xa3\x01\n" +
+	"_room_infoB\n" +
+	"\n" +
+	"\b_msg_keyB\xa3\x01\n" +
 	"\rcom.plugnmeetB\x1aPlugnmeetAuthArtifactProtoP\x01Z2github.com/mynaparrot/plugnmeet-protocol/plugnmeet\xa2\x02\x03PXX\xaa\x02\tPlugnmeet\xca\x02\tPlugnmeet\xe2\x02\x15Plugnmeet\\GPBMetadata\xea\x02\tPlugnmeetb\x06proto3"
 
 var (
@@ -806,7 +850,9 @@ func file_plugnmeet_auth_artifact_proto_init() {
 	file_plugnmeet_common_api_proto_init()
 	file_plugnmeet_auth_artifact_proto_msgTypes[0].OneofWrappers = []any{}
 	file_plugnmeet_auth_artifact_proto_msgTypes[2].OneofWrappers = []any{}
+	file_plugnmeet_auth_artifact_proto_msgTypes[3].OneofWrappers = []any{}
 	file_plugnmeet_auth_artifact_proto_msgTypes[5].OneofWrappers = []any{}
+	file_plugnmeet_auth_artifact_proto_msgTypes[7].OneofWrappers = []any{}
 	file_plugnmeet_auth_artifact_proto_msgTypes[9].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
