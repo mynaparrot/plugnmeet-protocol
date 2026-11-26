@@ -1,11 +1,13 @@
 package auth
 
 import (
+	"strings"
 	"time"
 
 	"github.com/go-jose/go-jose/v4"
 	"github.com/go-jose/go-jose/v4/jwt"
 	"github.com/livekit/protocol/auth"
+	"github.com/livekit/protocol/livekit"
 	"github.com/mynaparrot/plugnmeet-protocol/plugnmeet"
 )
 
@@ -42,16 +44,23 @@ func GenerateLivekitAccessToken(apiKey, secret string, tokenValidity time.Durati
 		SetName(c.Name).
 		SetValidFor(tokenValidity)
 
-	// If originalUserId is not empty we are minting a token for the native twin
-	// (identity [userId]-native). Tag the participant with an attribute so
-	// webhook handlers can identify the twin without relying on the identity
+	// Agent participants (the insights room agents, e.g. pnm_agent-ai_agent-<uuid>) have to join LiveKit with kind AGENT.
+	// Agent SDK workers such as livekit-agents' DataStreamAudioReceiver wait for a remote participant of kind
+	// PARTICIPANT_KIND_AGENT and time out when none joins.
+	// The twin token is minted with the twin identity, but names the agent in originalUserId, so both have to be checked.
+	switch {
+	case strings.HasPrefix(c.UserId, "pnm_agent-"),
+		strings.HasPrefix(originalUserId, "pnm_agent-"):
+		at.SetKind(livekit.ParticipantInfo_AGENT)
+	}
+
+	// If originalUserId is not empty we are minting a token for the native twin (identity [userId]-native).
+	// Tag the participant with an attribute so webhook handlers can identify the twin without relying on the identity
 	// suffix alone. This attribute is NOT part of the plugNmeet JWT claims.
 	//
-	// lk.publish_on_behalf is the attribute livekit-agents reads from the JWT to
-	// learn which participant it publishes on behalf of; avatar workers built on
-	// AvatarRunner/DataStreamAudioReceiver use it to resolve the sender identity
-	// of the agent, and DataStreamAudioReceiver.start() blocks (then times out)
-	// without it.
+	// lk.publish_on_behalf is the attribute livekit-agents reads from the JWT to learn which participant it publishes
+	// on behalf of; avatar workers built on AvatarRunner/DataStreamAudioReceiver use it to resolve the sender identity
+	// of the agent, and DataStreamAudioReceiver.start() blocks (then times out) without it.
 	if originalUserId != "" {
 		at.SetAttributes(map[string]string{
 			"original_user_id":     originalUserId,
