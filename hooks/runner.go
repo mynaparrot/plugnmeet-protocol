@@ -116,6 +116,16 @@ func (c *Config) RunRoomEndHook(req *RoomEndHookData, log *logrus.Entry) (*RoomE
 	return runPipeline(c.hookManager, c.RoomEndHook, req, log, HookNameRoomEnd)
 }
 
+// RunExternalUrlHook executes the pipeline for external URL hooks.
+// Returns nil if no external URL hook is configured.
+func (c *Config) RunExternalUrlHook(req *ExternalUrlHookData, log *logrus.Entry) (*ExternalUrlHookData, error) {
+	if c == nil {
+		return nil, nil
+	}
+
+	return runPipeline(c.hookManager, c.ExternalUrlHook, req, log, HookNameExternalUrl)
+}
+
 // RunPostRecordingHook executes the pipeline for post recording hooks.
 // Returns nil if no post recording hook is configured.
 func (c *Config) RunPostRecordingHook(req *RecordingHookData, log *logrus.Entry) (*RecordingHookData, error) {

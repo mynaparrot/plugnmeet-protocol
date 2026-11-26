@@ -51,9 +51,15 @@ func TestConfigHasHookGetters(t *testing.T) {
 	if nilConfig.HasUploadHook() {
 		t.Error("nil config must not report hooks")
 	}
+	if nilConfig.HasExternalUrlHook() {
+		t.Error("nil config must not report external url hooks")
+	}
 
 	config := &Config{
 		UploadHook: &HookScriptConfig{
+			Scripts: []HookScript{{Script: "/bin/true", IsOneShot: true}},
+		},
+		ExternalUrlHook: &HookScriptConfig{
 			Scripts: []HookScript{{Script: "/bin/true", IsOneShot: true}},
 		},
 		// Configured but without scripts.
@@ -70,6 +76,7 @@ func TestConfigHasHookGetters(t *testing.T) {
 		{"DeleteHook", config.HasDeleteHook, false},
 		{"ResumableUploadHook", config.HasResumableUploadHook, false},
 		{"RoomEndHook", config.HasRoomEndHook, false},
+		{"ExternalUrlHook", config.HasExternalUrlHook, true},
 		{"PostRecording", config.HasPostRecording, false},
 		{"PreTranscoding", config.HasPreTranscoding, false},
 		{"PostTranscoding", config.HasPostTranscoding, false},

@@ -19,6 +19,7 @@ const (
 	HookNameDelete          HookCategory = "delete_hook"
 	HookNameResumableUpload HookCategory = "resumable_upload_hook"
 	HookNameRoomEnd         HookCategory = "room_end_hook"
+	HookNameExternalUrl     HookCategory = "external_url_hook"
 
 	HookNamePostRecording   HookCategory = "post_recording"
 	HookNamePreTranscoding  HookCategory = "pre_transcoding"
@@ -33,6 +34,7 @@ type Config struct {
 	DeleteHook          *HookScriptConfig `yaml:"delete_hook"`
 	ResumableUploadHook *HookScriptConfig `yaml:"resumable_upload_hook"`
 	RoomEndHook         *HookScriptConfig `yaml:"room_end_hook"`
+	ExternalUrlHook     *HookScriptConfig `yaml:"external_url_hook"`
 
 	PostRecording   *HookScriptConfig `yaml:"post_recording"`
 	PreTranscoding  *HookScriptConfig `yaml:"pre_transcoding"`
@@ -131,6 +133,7 @@ func (c *Config) HasDownloadHook() bool        { return c != nil && hasScripts(c
 func (c *Config) HasDeleteHook() bool          { return c != nil && hasScripts(c.DeleteHook) }
 func (c *Config) HasResumableUploadHook() bool { return c != nil && hasScripts(c.ResumableUploadHook) }
 func (c *Config) HasRoomEndHook() bool         { return c != nil && hasScripts(c.RoomEndHook) }
+func (c *Config) HasExternalUrlHook() bool     { return c != nil && hasScripts(c.ExternalUrlHook) }
 func (c *Config) HasPostRecording() bool       { return c != nil && hasScripts(c.PostRecording) }
 func (c *Config) HasPreTranscoding() bool      { return c != nil && hasScripts(c.PreTranscoding) }
 func (c *Config) HasPostTranscoding() bool     { return c != nil && hasScripts(c.PostTranscoding) }

@@ -133,6 +133,55 @@ type RoomEndHookData struct {
 	Msg   string `json:"msg,omitempty"`
 }
 
+// ExternalUrlHookType identifies the kind of external URL being resolved.
+type ExternalUrlHookType string
+
+const (
+	ExternalUrlHookTypeKnowledge ExternalUrlHookType = "knowledge"
+	ExternalUrlHookTypeMCP       ExternalUrlHookType = "mcp"
+)
+
+type ExternalUrlHookAction string
+
+const (
+	// ExternalUrlHookActionAllowFetch indicates the hook validated (and optionally rewrote TargetUrl) and
+	// allows the server to connect to the URL.
+	ExternalUrlHookActionAllowFetch ExternalUrlHookAction = "allow_fetch"
+	// ExternalUrlHookActionProvideContent indicates the hook fetched/rendered the document itself and
+	// returned Content, so the server makes no network request.
+	ExternalUrlHookActionProvideContent ExternalUrlHookAction = "provide_content"
+)
+
+// ExternalUrlHookStage identifies when the external URL hook runs.
+type ExternalUrlHookStage string
+
+const (
+	// ExternalUrlHookStageValidate runs during room creation to validate a URL
+	// (e.g. against an allow-list or threat-intelligence service) before the room is created.
+	ExternalUrlHookStageValidate ExternalUrlHookStage = "validate"
+	// ExternalUrlHookStageFetch runs at runtime when the agent or MCP client
+	// connects to or fetches content from the URL.
+	ExternalUrlHookStageFetch ExternalUrlHookStage = "fetch"
+)
+
+// ExternalUrlHookData is used for validating, proxying, or fetching external knowledge and MCP URLs via a hook pipeline.
+type ExternalUrlHookData struct {
+	Stage       ExternalUrlHookStage `json:"stage"`
+	Type        ExternalUrlHookType  `json:"type"`
+	RoomId      string               `json:"room_id"`
+	RoomSid     string               `json:"room_sid,omitempty"`
+	Url         string               `json:"url"`
+	ServerKey   string               `json:"server_key,omitempty"`
+	AllowedUrls []string             `json:"allowed_urls,omitempty"`
+
+	// --- Fields set by the script as output ---
+	Error     string                `json:"error,omitempty"`
+	Action    ExternalUrlHookAction `json:"action,omitempty"`
+	TargetUrl string                `json:"target_url,omitempty"`
+	Content   string                `json:"content,omitempty"`
+	MimeType  string                `json:"mime_type,omitempty"`
+}
+
 // GetError implements the error reporting contract used by the hook pipeline.
 func (d UploadHookData) GetError() string { return d.Error }
 
@@ -143,3 +192,5 @@ func (d DeleteHookData) GetError() string { return d.Error }
 func (d ResumableUploadHookData) GetError() string { return d.Error }
 
 func (d RoomEndHookData) GetError() string { return d.Error }
+
+func (d ExternalUrlHookData) GetError() string { return d.Error }

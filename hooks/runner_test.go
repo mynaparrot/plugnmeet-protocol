@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/sirupsen/logrus"
@@ -91,6 +92,10 @@ func TestRunHooksWithNilConfig(t *testing.T) {
 		}},
 		{"RoomEndHook", func() (bool, error) {
 			res, err := config.RunRoomEndHook(&RoomEndHookData{}, log)
+			return res != nil, err
+		}},
+		{"ExternalUrlHook", func() (bool, error) {
+			res, err := config.RunExternalUrlHook(&ExternalUrlHookData{}, log)
 			return res != nil, err
 		}},
 		{"PostRecording", func() (bool, error) {
@@ -226,6 +231,140 @@ func TestRunServerHooks(t *testing.T) {
 				}
 			})
 	})
+
+	t.Run("external_url_provide_content", func(t *testing.T) {
+		testHook(t, HookNameExternalUrl,
+			`{"action":"provide_content","content":"# Meeting notes","mime_type":"text/markdown"}`,
+			func(c *Config) *HookScriptConfig { c.ExternalUrlHook = &HookScriptConfig{}; return c.ExternalUrlHook },
+			func(c *Config) (*ExternalUrlHookData, error) {
+				return c.RunExternalUrlHook(&ExternalUrlHookData{
+					Stage:  ExternalUrlHookStageValidate,
+					Type:   ExternalUrlHookTypeKnowledge,
+					RoomId: "room01",
+					Url:    "https://example.com/notes",
+				}, testLog())
+			},
+			func(t *testing.T, res *ExternalUrlHookData) {
+				if res.Action != ExternalUrlHookActionProvideContent {
+					t.Errorf("unexpected action: %s", res.Action)
+				}
+				if res.Content != "# Meeting notes" {
+					t.Errorf("unexpected content: %s", res.Content)
+				}
+				if res.MimeType != "text/markdown" {
+					t.Errorf("unexpected mime type: %s", res.MimeType)
+				}
+			})
+	})
+
+	t.Run("external_url_allow_fetch", func(t *testing.T) {
+		testHook(t, HookNameExternalUrl,
+			`{"action":"allow_fetch","target_url":"https://cdn.example.com/mcp"}`,
+			func(c *Config) *HookScriptConfig { c.ExternalUrlHook = &HookScriptConfig{}; return c.ExternalUrlHook },
+			func(c *Config) (*ExternalUrlHookData, error) {
+				return c.RunExternalUrlHook(&ExternalUrlHookData{
+					Stage:     ExternalUrlHookStageFetch,
+					Type:      ExternalUrlHookTypeMCP,
+					RoomId:    "room01",
+					Url:       "https://mcp.example.com",
+					ServerKey: "server-key",
+					AllowedUrls: []string{
+						"https://cdn.example.com",
+					},
+				}, testLog())
+			},
+			func(t *testing.T, res *ExternalUrlHookData) {
+				if res.Action != ExternalUrlHookActionAllowFetch {
+					t.Errorf("unexpected action: %s", res.Action)
+				}
+				if res.TargetUrl != "https://cdn.example.com/mcp" {
+					t.Errorf("unexpected target url: %s", res.TargetUrl)
+				}
+			})
+	})
+}
+
+func TestRunExternalUrlHookScriptError(t *testing.T) {
+	root := t.TempDir()
+	script := writeHookScript(t, root, `{"error":"url not allowed"}`)
+
+	config := &Config{
+		ExternalUrlHook: &HookScriptConfig{
+			Scripts: []HookScript{{Script: script, IsOneShot: true}},
+		},
+	}
+	if err := config.Initialize(context.Background(), InitOptions{
+		RootWorkingDir: root,
+		Logger:         logrus.New(),
+	}, Category{Name: HookNameExternalUrl, Config: config.ExternalUrlHook}); err != nil {
+		t.Fatal(err)
+	}
+
+	res, err := config.RunExternalUrlHook(&ExternalUrlHookData{
+		Type:   ExternalUrlHookTypeKnowledge,
+		RoomId: "room01",
+		Url:    "https://blocked.example.com",
+	}, testLog())
+	if err == nil {
+		t.Fatal("expected error from hook script, got nil")
+	}
+	if res != nil {
+		t.Errorf("expected nil result, got %+v", res)
+	}
+}
+
+// TestRunExternalUrlHookStageRoundTrip verifies the stage is both sent to the
+// hook script and decoded back from its response.
+func TestRunExternalUrlHookStageRoundTrip(t *testing.T) {
+	for _, stage := range []ExternalUrlHookStage{ExternalUrlHookStageValidate, ExternalUrlHookStageFetch} {
+		t.Run(string(stage), func(t *testing.T) {
+			root := t.TempDir()
+			requestFile := filepath.Join(root, "request.json")
+			script := filepath.Join(root, "hook.sh")
+			content := "#!/bin/sh\ncat > " + requestFile +
+				"\necho '{\"action\":\"allow_fetch\",\"stage\":\"" + string(stage) + "\"}'\n"
+			if err := os.WriteFile(script, []byte(content), 0755); err != nil {
+				t.Fatal(err)
+			}
+
+			config := &Config{
+				ExternalUrlHook: &HookScriptConfig{
+					Scripts: []HookScript{{Script: script, IsOneShot: true}},
+				},
+			}
+			if err := config.Initialize(context.Background(), InitOptions{
+				RootWorkingDir: root,
+				Logger:         logrus.New(),
+			}, Category{Name: HookNameExternalUrl, Config: config.ExternalUrlHook}); err != nil {
+				t.Fatal(err)
+			}
+
+			res, err := config.RunExternalUrlHook(&ExternalUrlHookData{
+				Stage:  stage,
+				Type:   ExternalUrlHookTypeKnowledge,
+				RoomId: "room01",
+				Url:    "https://example.com/notes",
+			}, testLog())
+			if err != nil {
+				t.Fatalf("unexpected error: %v", err)
+			}
+
+			raw, err := os.ReadFile(requestFile)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if !strings.Contains(string(raw), `"stage":"`+string(stage)+`"`) {
+				t.Errorf("stage not sent to hook script: %s", raw)
+			}
+
+			if res == nil {
+				t.Fatal("expected hook result, got nil")
+			}
+			if res.Stage != stage {
+				t.Errorf("unexpected stage in hook result: %s", res.Stage)
+			}
+		})
+	}
 }
 
 func TestRunRecordingHooks(t *testing.T) {
