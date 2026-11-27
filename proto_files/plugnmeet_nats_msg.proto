@@ -184,6 +184,7 @@ message ChatMeta {
   optional int64 edited_at = 4;
   bool is_deleted = 5;
   optional string deleted_by = 6; // absent = self, set = admin userId
+  bool is_ai_generated = 7;
 }
 
 message ChatMessage {

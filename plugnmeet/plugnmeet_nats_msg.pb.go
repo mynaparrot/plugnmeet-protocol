@@ -1314,6 +1314,7 @@ type ChatMeta struct {
 	EditedAt      *int64                 `protobuf:"varint,4,opt,name=edited_at,json=editedAt,proto3,oneof" json:"edited_at,omitempty"`
 	IsDeleted     bool                   `protobuf:"varint,5,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
 	DeletedBy     *string                `protobuf:"bytes,6,opt,name=deleted_by,json=deletedBy,proto3,oneof" json:"deleted_by,omitempty"` // absent = self, set = admin userId
+	IsAiGenerated bool                   `protobuf:"varint,7,opt,name=is_ai_generated,json=isAiGenerated,proto3" json:"is_ai_generated,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1388,6 +1389,13 @@ func (x *ChatMeta) GetDeletedBy() string {
 		return *x.DeletedBy
 	}
 	return ""
+}
+
+func (x *ChatMeta) GetIsAiGenerated() bool {
+	if x != nil {
+		return x.IsAiGenerated
+	}
+	return false
 }
 
 type ChatMessage struct {
@@ -1687,7 +1695,7 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"with_sound\x18\x05 \x01(\bR\twithSound\"M\n" +
 	"\x16NatsUserMetadataUpdate\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
-	"\bmetadata\x18\x02 \x01(\tR\bmetadata\"\xb7\x02\n" +
+	"\bmetadata\x18\x02 \x01(\tR\bmetadata\"\xdf\x02\n" +
 	"\bChatMeta\x12#\n" +
 	"\vreply_to_id\x18\x01 \x01(\tH\x00R\treplyToId\x88\x01\x01\x12'\n" +
 	"\rreply_to_name\x18\x02 \x01(\tH\x01R\vreplyToName\x88\x01\x01\x12'\n" +
@@ -1696,7 +1704,8 @@ const file_plugnmeet_nats_msg_proto_rawDesc = "" +
 	"\n" +
 	"is_deleted\x18\x05 \x01(\bR\tisDeleted\x12\"\n" +
 	"\n" +
-	"deleted_by\x18\x06 \x01(\tH\x04R\tdeletedBy\x88\x01\x01B\x0e\n" +
+	"deleted_by\x18\x06 \x01(\tH\x04R\tdeletedBy\x88\x01\x01\x12&\n" +
+	"\x0fis_ai_generated\x18\a \x01(\bR\risAiGeneratedB\x0e\n" +
 	"\f_reply_to_idB\x10\n" +
 	"\x0e_reply_to_nameB\x10\n" +
 	"\x0e_reply_to_textB\f\n" +

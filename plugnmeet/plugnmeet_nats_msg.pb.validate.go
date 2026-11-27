@@ -1510,6 +1510,8 @@ func (m *ChatMeta) validate(all bool) error {
 
 	// no validation rules for IsDeleted
 
+	// no validation rules for IsAiGenerated
+
 	if m.ReplyToId != nil {
 		// no validation rules for ReplyToId
 	}
