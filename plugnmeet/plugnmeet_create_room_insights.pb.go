@@ -864,10 +864,11 @@ func (x *InsightsAIAgentCustomProvider) GetSummarizeModel() string {
 type InsightsAIAgentAvatarConfig struct {
 	state     protoimpl.MessageState `protogen:"open.v1"`
 	IsEnabled bool                   `protobuf:"varint,1,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
-	// Optional avatar provider: "beyond_presence", "anam", or "simli".
+	// Optional avatar provider: "beyond_presence", "anam", "simli", or "tavus".
 	// When omitted, the server-configured default avatar_provider is used.
 	Provider *string `protobuf:"bytes,2,opt,name=provider,proto3,oneof" json:"provider,omitempty"`
-	// Optional provider-specific avatar / face ID.
+	// Optional provider-specific avatar / face ID. For Tavus it is "<face_id>"
+	// or "<face_id>/<pal_id>".
 	// When omitted, the server-configured default avatar_id is used.
 	AvatarId *string `protobuf:"bytes,3,opt,name=avatar_id,json=avatarId,proto3,oneof" json:"avatar_id,omitempty"`
 	// Optional cap on billable avatar video minutes for this room.

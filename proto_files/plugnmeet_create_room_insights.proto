@@ -153,10 +153,11 @@ message InsightsAIAgentCustomProvider {
 
 message InsightsAIAgentAvatarConfig {
   bool is_enabled = 1;
-  // Optional avatar provider: "beyond_presence", "anam", or "simli".
+  // Optional avatar provider: "beyond_presence", "anam", "simli", or "tavus".
   // When omitted, the server-configured default avatar_provider is used.
   optional string provider = 2 [(buf.validate.field).string.max_len = 64];
-  // Optional provider-specific avatar / face ID.
+  // Optional provider-specific avatar / face ID. For Tavus it is "<face_id>"
+  // or "<face_id>/<pal_id>".
   // When omitted, the server-configured default avatar_id is used.
   optional string avatar_id = 3 [(buf.validate.field).string.max_len = 256];
   // Optional cap on billable avatar video minutes for this room.
